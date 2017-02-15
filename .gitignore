@@ -1,0 +1,38 @@
+# this is a list of things to ignore for git 
+#Ignore Everything 
+# in order to not ignore something, put [!<fileName>]
+# in ordert o not ignore everything put [!*]
+
+
+aclocal/
+icons/
+include/
+tmva/
+config/
+lib/ 
+bin/ 
+emacs/ 
+LICENSE
+cint/ 
+etc/
+macros/
+README/
+tutorials/
+cmake/
+fonts/
+man/ 
+README.md
+Uninstall.exe*
+mincerData/
+staff.root 
+ZeroBias2015.p2634.PeriodJ.root
+geom/ 
+test/ 
+ZeroBias2016.13Runs.root
+ExpressMuons2016.12runs.root
+merged.user.jschouwe.all.physics_Main.KFMETtree_17032016_t0pro19_v2_output.root
+#But not this file:
+
+
+#Even if they are in subdirectories 
+
