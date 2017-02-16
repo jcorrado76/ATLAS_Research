@@ -39,10 +39,11 @@ int plotACut(TString& alg, double bound){
 
 	//variables take on values of alg
 	Float_t passed_hist_met, reference_hist_met;
-
+	int passrndmVal;
 	//Get addresses of variables
 	tree->SetBranchAddress(passed_hist_name, &passed_hist_met);
 	tree->SetBranchAddress(reference_hist_name, &reference_hist_met);
+	tree->SetBranchAddress("passrndm", &passrndmVal);
 
 	//Initial TH1F object
 	TH1F *cut = new TH1F(passed_hist_name, passed_hist_full_param1, nbins, metMin, metMax);
@@ -65,12 +66,15 @@ int plotACut(TString& alg, double bound){
 	{
 		//get the first entry; after adding, get next entry
 		tree->GetEntry(j);
-		//If the passed_hist_met is above a certain value, add the reference_hist_met from the corresponding entry 
-		if (passed_hist_met > cutValue)
+		if (passrndmVal == 1)
 		{
+			//If the passed_hist_met is above a certain value, add the reference_hist_met from the corresponding entry 
+			if (passed_hist_met > cutValue)
+			{
 
-			cut->Fill(passed_hist_met);
-			teff->Fill(true, reference_hist_met);
+				cut->Fill(passed_hist_met);
+				teff->Fill(true, reference_hist_met);
+			}
 		}
 	}
 	//Int_t entriesPassed = cut->GetEntries();
