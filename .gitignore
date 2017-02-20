@@ -5,8 +5,9 @@
 
 *
 !myMacros/
-!atlasresearchMyVers/
+!atlasresearchMyVers
 !pictures/
+!*.c
 
 
 #Even if they are in subdirectories 

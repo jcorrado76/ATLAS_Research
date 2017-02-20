@@ -1,8 +1,9 @@
-int determineThresh(TString& alg, double initialGuess = 50.) {
+int determineThresh(TString& alg) {
 	//ROOT FileName
 	TString fileName = "../myData/ZeroBias2016.13Runs.root";
 
 	TString nameArray[6] = { "metl1","metcell","metmht","mettopocl","mettopoclps","mettopoclpuc" };
+
 
 
 	//Passed hist parameters
@@ -50,40 +51,23 @@ int determineThresh(TString& alg, double initialGuess = 50.) {
 	//# of entries
 	int nentries = tree->GetEntries();
 
-	double condition = (10 * *(-4))*nentries;
+	Float_t condition = nentries * (10 * * (-4));
 
-	for (Long64_t j = 0; j < nentries; j++)
-	{
-		//get the first entry; after adding, get next entry
-		tree->GetEntry(j);
-		//If the passed_hist_met is above a certain value, add the reference_hist_met from the corresponding entry 
-		if (passed_hist_met > initialGuess)
-		{
-			cut->Fill(passed_hist_met);
-		}
-	}
 
-	int eventsKept  = cut->GetEntries();
-
-	while (eventsKept < condition)
-	{
-		initialGuess = initialGuess +  2.0;
 		for (Long64_t j = 0; j < nentries; j++)
 		{
 			//get the first entry; after adding, get next entry
 			tree->GetEntry(j);
-			//If the passed_hist_met is above a certain value, add the reference_hist_met from the corresponding entry 
-			if (passed_hist_met > initialGuess)
+			if (passrndm == 1)
 			{
-				cut->Fill(passed_hist_met);
+				//If the passed_hist_met is above a certain value, add the reference_hist_met from the corresponding entry 
+				if (passed_hist_met > initialGuess)
+				{
+					cut->Fill(passed_hist_met);
+				}
 			}
 		}
 		eventsKept = cut->GetEntries();
-	}
-
-	std::cout << "Cut to keep 10^(-4) events:  " << initialGuess << std::endl;
-
-	
 
 	cut->Draw();
 
