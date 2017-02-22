@@ -59,7 +59,7 @@ int plotACut(TString& alg, double bound){
 	TF1 * myFit = new TF1("myFit", "gaus(0)", 50, 200);
 
 
-	std::cout << "Number of entries " << nentries << std::endl;
+	std::cout << "Number of entries before making passrndm cut and before cutting on cutvalue " << nentries << std::endl;
 
 	
 	for (Long64_t j = 0; j < nentries; j++)
@@ -77,6 +77,8 @@ int plotACut(TString& alg, double bound){
 			}
 		}
 	}
+	TH1* cumu = cut->GetCumulative();
+
 	//Int_t entriesPassed = cut->GetEntries();
 	//Double_t ratioPassed = entriesPassed / nentries;
 	//std::cout << "Ratio of events kept: " << ratioPassed << std::endl;
@@ -85,12 +87,15 @@ int plotACut(TString& alg, double bound){
 	//Double_t firstParam = 1 / (sqrt(2 * TMath::Pi()) * thirParam);
 	//myFit = cut->Fit("gaus");
 
+
+
 	//TCanvas *c = new TCanvas;
 	////c->Divide(1, 2)
 	////c->cd(1);
-	////myFit->Draw();
-	////c->cd(2);
 	cut->Draw();
+	////c->cd(2);
+	//cumu->Draw();
+	std::cout << "Number of entries kept: " << cut->GetEntries() << std::endl;
 
 	
 	
