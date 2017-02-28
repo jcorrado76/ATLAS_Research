@@ -1,13 +1,9 @@
-int determineThresh(TString& alg) {
+Double_t determineThresh(TString& alg) {
 	
 	
 	
 	//ROOT data FileName
 	TString fileName = "../myData/ZeroBias2016.13Runs.root";
-	//create an array containing names of all algorithms so i can parse over them
-	TString nameArray[6] = { "metl1","metcell","metmht","mettopocl","mettopoclps","mettopoclpuc" };
-
-
 
 	//algorithm of interest name
 	TString passed_hist_name = alg;
@@ -54,16 +50,10 @@ int determineThresh(TString& alg) {
 	TH1F *cut = new TH1F(passed_hist_name, passed_hist_full_param1, nbins, metMin, metMax);
 	TH1F *target = new TH1F("cumu", "cumu", nbins, metMin, metMax);
 
-
-
-
 	//# of entries
 	int nentries = tree->GetEntries();
 
-	Float_t condition = nentries * (10 * * (-4));
-
-
-
+	//fill hist with passrndm events 
 	for (Long64_t k = 0; k < nentries; k++)
 	{
 		//get the first entry; after adding, get next entry
@@ -76,11 +66,12 @@ int determineThresh(TString& alg) {
 	}
 
 	//number of entries after applying passrndm
-	nentries = cut->GetEntries();
-Float_t thresh;
+	Int_t passrndmEntries = cut->GetEntries();
+	Double_t  thresh;
 
-//define a range for the number of entries to be within 
-Float_t epsilon = 100.0;
+
+Float_t condition = (1e-4);
+Float_t keep = condition * passrndmEntries;
 
 //generate the cumulative right tail sum hist
 for (int t = nbins; t >= 0 ; t--)
@@ -94,28 +85,16 @@ for (int t = nbins; t >= 0 ; t--)
 	target->SetBinContent(t, summ );
 }
 
-Float_t condition = (10e-4);
-
-Float_t keep = (10e-4) * nentries;
-
+//find the thresh value to keep 
 for (int t = nbins; t >=0 ; t--)
 {
 	//std::cout << "Number of entries in bin" << t << " " << target->GetBinContent(t) << std::endl;
-	if (abs(target->GetBinContent(t) - (keep)) < epsilon)
+	if ((abs(target->GetBinContent(t) - (keep) > 0 )!= (abs(target->GetBinContent(t+1) - (keep)) > 0 )))
 	{
 		thresh = target->GetBinCenter(t);
-		std::cout << "Entered set thresh" << std::endl;
 	}
 }
-
-std::cout << "number of entries in after passrndm flag : " << nentries << std::endl;
-std::cout << "Number of entries to keep " << keep << std::endl;
-
-//TH1* cumu = cut->GetCumulative();
-//	target->Draw();
-
-
-
+std::cout << "10^(-4) Entries after passrndm: " << keep << std::endl;
 std::cout << "The threshold for " << passed_hist_name << " to keep " << keep << " events is: " <<  thresh << std::endl;
-	return 0;
+	return thresh;
 }

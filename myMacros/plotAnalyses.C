@@ -7,7 +7,7 @@
 
 
 	//ROOT FileName
-	TString fileName = "ZeroBias2015.p2634.PeriodJ.root";
+	TString fileName = "../myData/ZeroBias2015.p2634.PeriodJ.root";
 
 	//Open ROOT file 
 	TFile * 2016Data = TFile::Open(fileName, "READ");

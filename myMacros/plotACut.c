@@ -40,6 +40,7 @@ int plotACut(TString& alg, double bound){
 	//variables take on values of alg
 	Float_t passed_hist_met, reference_hist_met;
 	int passrndmVal;
+
 	//Get addresses of variables
 	tree->SetBranchAddress(passed_hist_name, &passed_hist_met);
 	tree->SetBranchAddress(reference_hist_name, &reference_hist_met);
@@ -51,17 +52,9 @@ int plotACut(TString& alg, double bound){
 	//Initialize TEfficiency Object
 	TEfficiency *teff = new TEfficiency(teff_name, teff_title, nbins, metMin, metMax);
 
-	//Fill hist and effiency with entries
-	bool pass = false;
-	//# of entries
 	int nentries = tree->GetEntries();
-	
-	TF1 * myFit = new TF1("myFit", "gaus(0)", 50, 200);
 
-
-	std::cout << "Number of entries before making passrndm cut and before cutting on cutvalue " << nentries << std::endl;
-
-	
+	//fill the cut hist and teff hist 
 	for (Long64_t j = 0; j < nentries; j++)
 	{
 		//get the first entry; after adding, get next entry
@@ -71,34 +64,18 @@ int plotACut(TString& alg, double bound){
 			//If the passed_hist_met is above a certain value, add the reference_hist_met from the corresponding entry 
 			if (passed_hist_met > cutValue)
 			{
-
 				cut->Fill(passed_hist_met);
-				teff->Fill(true, reference_hist_met);
 			}
+			teff->Fill((passed_hist_met > cutValue),reference_hist_met);
 		}
 	}
-	TH1* cumu = cut->GetCumulative();
 
-	//Int_t entriesPassed = cut->GetEntries();
-	//Double_t ratioPassed = entriesPassed / nentries;
-	//std::cout << "Ratio of events kept: " << ratioPassed << std::endl;
-	//Double_t secParam = cut->GetMean();
-	//Double_t thirParam = cut->GetRMS();
-	//Double_t firstParam = 1 / (sqrt(2 * TMath::Pi()) * thirParam);
-	//myFit = cut->Fit("gaus");
-
-
-
-	//TCanvas *c = new TCanvas;
-	////c->Divide(1, 2)
-	////c->cd(1);
+	TCanvas *c = new TCanvas;
+	c->Divide(1, 2);
+	c->cd(1);
 	cut->Draw();
-	////c->cd(2);
-	//cumu->Draw();
+	c->cd(2);
+	teff->Draw();
 	std::cout << "Number of entries kept: " << cut->GetEntries() << std::endl;
-
-	
-	
-	//teff->Draw();
 	return 0;
 }
