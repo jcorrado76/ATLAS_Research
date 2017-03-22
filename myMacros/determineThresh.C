@@ -85,7 +85,8 @@ for (int t = nbins; t >= 0 ; t--)
 	target->SetBinContent(t, summ );
 }
 
-//find the thresh value to keep 
+//find the thresh value to keep
+std::cout << "Determining threshold to keep 10e-4 events in zerobias data" << std::endl;
 for (int t = nbins; t >=0 ; t--)
 {
 	//std::cout << "Number of entries in bin" << t << " " << target->GetBinContent(t) << std::endl;
@@ -94,7 +95,7 @@ for (int t = nbins; t >=0 ; t--)
 		thresh = target->GetBinCenter(t);
 	}
 }
-std::cout << "10^(-4) Entries after passrndm: " << keep << std::endl;
-std::cout << "The threshold for " << passed_hist_name << " to keep " << keep << " events is: " <<  thresh << std::endl;
+//std::cout << "10^(-4) Entries after passrndm: " << keep << std::endl;
+//std::cout << "The threshold for " << passed_hist_name << " to keep " << keep << " events is: " <<  thresh << std::endl;
 	return thresh;
 }

@@ -1,6 +1,14 @@
-int plotACut(TString& alg, double bound){
+int plotACut(TString& alg, double bound, TString& data = "zerobias"){
 	//ROOT FileName
-	TString fileName = "../myData/ZeroBias2016.13Runs.root";
+	if (data == "zerobias")
+	{
+		TString fileName = "../myData/ZeroBias2016.13Runs.root";
+	}
+	else if (data == "muon")
+	{
+		TString fileName = "../myData/ExpressMuons2016.12runs.root";
+	}
+	
 
 	TString nameArray[6] = { "metl1","metcell","metmht","mettopocl","mettopoclps","mettopoclpuc" };
 
@@ -39,13 +47,13 @@ int plotACut(TString& alg, double bound){
 
 	//variables take on values of alg
 	Float_t passed_hist_met, reference_hist_met;
-	int passrndmVal;
+	int passrndmVal,passmuon;
 
 	//Get addresses of variables
 	tree->SetBranchAddress(passed_hist_name, &passed_hist_met);
 	tree->SetBranchAddress(reference_hist_name, &reference_hist_met);
 	tree->SetBranchAddress("passrndm", &passrndmVal);
-
+	tree->SetBranchAddress("passmu24med", &passmuon);
 	//Initial TH1F object
 	TH1F *cut = new TH1F(passed_hist_name, passed_hist_full_param1, nbins, metMin, metMax);
 
@@ -55,18 +63,40 @@ int plotACut(TString& alg, double bound){
 	int nentries = tree->GetEntries();
 
 	//fill the cut hist and teff hist 
-	for (Long64_t j = 0; j < nentries; j++)
+	if (data == "zerobias")
 	{
-		//get the first entry; after adding, get next entry
-		tree->GetEntry(j);
-		if (passrndmVal == 1)
+		std::cout << "filling histogram using zerobias data" << std::endl;
+		for (Long64_t j = 0; j < nentries; j++)
 		{
-			//If the passed_hist_met is above a certain value, add the reference_hist_met from the corresponding entry 
-			if (passed_hist_met > cutValue)
+			//get the first entry; after adding, get next entry
+			tree->GetEntry(j);
+			if (passrndmVal == 1)
 			{
-				cut->Fill(passed_hist_met);
+				//If the passed_hist_met is above a certain value, add the reference_hist_met from the corresponding entry 
+				if (passed_hist_met > cutValue)
+				{
+					cut->Fill(passed_hist_met);
+				}
+				teff->Fill((passed_hist_met > cutValue), reference_hist_met);
 			}
-			teff->Fill((passed_hist_met > cutValue),reference_hist_met);
+		}
+	}
+	if (data == "muon")
+	{
+		std::cout << "filling histogram using muon data" << std::endl;
+		for (Long64_t j = 0; j < nentries; j++)
+		{
+			//get the first entry; after adding, get next entry
+			tree->GetEntry(j);
+			if (passmuon == 1)
+			{
+				//If the passed_hist_met is above a certain value, add the reference_hist_met from the corresponding entry 
+				if (passed_hist_met > cutValue)
+				{
+					cut->Fill(passed_hist_met);
+				}
+				teff->Fill((passed_hist_met > cutValue), reference_hist_met);
+			}
 		}
 	}
 
@@ -76,6 +106,16 @@ int plotACut(TString& alg, double bound){
 	cut->Draw();
 	c->cd(2);
 	teff->Draw();
-	std::cout << "Number of entries kept: " << cut->GetEntries() << std::endl;
+	TString cutVal = Form("%f", cutValue);
+	if (data == "zerobias")
+	{	
+
+		std::cout << "Number of entries from zerobias data kept using a " + cutVal +  "GeV cut and passrndm flag: " << cut->GetEntries() << std::endl;
+	}
+	if (data == "muon")
+	{
+		std::cout << "Number of entries from muon data kept using a " + cutVal + "GeV cut and passmu24med flag: " << cut->GetEntries() << std::endl;
+	}
+	
 	return 0;
 }
