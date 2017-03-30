@@ -14,7 +14,7 @@ Double_t determineThresh(TString& alg) {
 	TString reference_hist_title = "METOFFRECAL";
 
 	//Histogram parameters
-	int nbins = 250;
+	int nbins = 60;
 	Double_t metMin = 0.0;
 	Double_t metMax = 200.0;
 

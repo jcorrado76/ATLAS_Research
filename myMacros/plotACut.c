@@ -8,52 +8,38 @@ int plotACut(TString& alg, double bound, TString& data = "zerobias"){
 	{
 		TString fileName = "../myData/ExpressMuons2016.12runs.root";
 	}
-	
-
-	TString nameArray[6] = { "metl1","metcell","metmht","mettopocl","mettopoclps","mettopoclpuc" };
 
 
 	//Passed hist parameters
 	TString passed_hist_name = alg;
 	TString passed_hist_title = alg;
-
-	//Reference hist parameters 
 	TString reference_hist_name = "metoffrecal";
 	TString reference_hist_title = "METOFFRECAL";
-
-	//Histogram parameters
-	int nbins = 250;
+	int nbins = 60;
 	Double_t metMin = 0.0;
-	Double_t metMax = 200.0;
-
-	//Histogram Axis labels 
+	Double_t metMax = 400.0;
 	TString xaxis = "MET [GeV]";
 	TString yaxis = "Events";
-
 	TString teff_name, teff_title;
-
-	//cut value; GeV
+	teff_name = "TEfficiency for " + alg + " versus Offline MET";
+	teff_title = teff_name+"; Offline MET; Ratio of Passed to Offline MET";
 	Float_t cutValue = bound;
-
-	//Reference Hist Labels
 	TString reference_hist_full_param = (reference_hist_title + " HIST;" + xaxis + ";" + yaxis);
-
-	//Calculate Full Hist Params
 	TString passed_hist_full_param1 = (passed_hist_title + Form(" > %.2f", cutValue) + " HIST; " + xaxis + ";" + yaxis);
-
-	//Open ROOT file 
 	TFile * 2016Data = TFile::Open(fileName, "READ");
-
-
-	//variables take on values of alg
 	Float_t passed_hist_met, reference_hist_met;
 	int passrndmVal,passmuon;
 
-	//Get addresses of variables
+
 	tree->SetBranchAddress(passed_hist_name, &passed_hist_met);
 	tree->SetBranchAddress(reference_hist_name, &reference_hist_met);
 	tree->SetBranchAddress("passrndm", &passrndmVal);
-	tree->SetBranchAddress("passmu24med", &passmuon);
+	if (data == "muon")
+	{
+		tree->SetBranchAddress("passmu24med", &passmuon);	
+	}
+	
+	
 	//Initial TH1F object
 	TH1F *cut = new TH1F(passed_hist_name, passed_hist_full_param1, nbins, metMin, metMax);
 
@@ -107,14 +93,17 @@ int plotACut(TString& alg, double bound, TString& data = "zerobias"){
 	c->cd(2);
 	teff->Draw();
 	TString cutVal = Form("%f", cutValue);
+	Int_t kept = (Float_t) cut->GetEntries();
+	Float_t fraction = (Float_t) kept / (Float_t) nentries;
 	if (data == "zerobias")
 	{	
-
 		std::cout << "Number of entries from zerobias data kept using a " + cutVal +  "GeV cut and passrndm flag: " << cut->GetEntries() << std::endl;
+		std::cout << "Fraction of zerobias events kept: " << fraction << std::endl;
 	}
 	if (data == "muon")
 	{
 		std::cout << "Number of entries from muon data kept using a " + cutVal + "GeV cut and passmu24med flag: " << cut->GetEntries() << std::endl;
+		std::cout << "Fraction of muon events kept: " << fraction << std::endl;
 	}
 	
 	return 0;

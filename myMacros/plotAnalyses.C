@@ -145,17 +145,5 @@
 		scatterPlot->Write();
 		f.Close();
 	}
-	/*FOR LATER (Drawing n graphs):
-	TGraph *g[10];
-	Double_t x[10] = { 0,1,2,3,4,5,6,7,8,9 };
-	Double_t y[10] = { 1,2,3,4,5,6,4,3,2,1 };
-	TMultiGraph *mg = new TMultiGraph();
-	for (int i = 0; i<10; i++) {
-	g[i] = new TGraph(10, x, y);
-	y[i] = y[i] + 1;
-	mg->Add(g[i]);
-	}
-	mg->Draw("AL");
-	===================================================================================================*/
 }
 
