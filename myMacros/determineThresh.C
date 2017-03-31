@@ -3,7 +3,7 @@ Double_t determineThresh(TString& alg) {
 	
 	
 	//ROOT data FileName
-	TString fileName = "../myData/ZeroBias2016.13Runs.root";
+	TString fileName = "../myData/ZeroBias2016new.13Runs.root";
 
 	//algorithm of interest name
 	TString passed_hist_name = alg;

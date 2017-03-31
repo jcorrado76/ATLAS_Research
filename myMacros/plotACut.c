@@ -2,11 +2,11 @@ int plotACut(TString& alg, double bound, TString& data = "zerobias"){
 	//ROOT FileName
 	if (data == "zerobias")
 	{
-		TString fileName = "../myData/ZeroBias2016.13Runs.root";
+		TString fileName = "../myData/ZeroBias2016new.13Runs.root";
 	}
 	else if (data == "muon")
 	{
-		TString fileName = "../myData/ExpressMuons2016.12runs.root";
+		TString fileName = "../myData/ExpressMuons2016newanalysis.11runs.root";
 	}
 
 
