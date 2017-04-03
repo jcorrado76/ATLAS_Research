@@ -1,4 +1,4 @@
-int plotEfficiency(TString& alg, Double_t cut,TString& signalFile){
+int plotEfficiency(TString& alg, Double_t cut,TString& signalFile = "ExpressMuons2016newanalysis.11runs.root"){
 
 	/*
 	Joseph Corrado plotEffiency.c
@@ -52,12 +52,12 @@ int plotEfficiency(TString& alg, Double_t cut,TString& signalFile){
 		teff_title = passed_hist_title + " / " + reference_hist_title + " Efficiency" + ";" + xaxis + ";" + " Efficiency";
 
 		//containers for 1st entry of met 
-		Float_t passed_hist_met, reference_hist_met;
+		Float_t passed_hist_met, metoffrecal;
 
 
 		//Get addresses of variables
 		tree->SetBranchAddress(passed_hist_name, &passed_hist_met);
-		tree->SetBranchAddress(reference_hist_name, &reference_hist_met);
+		tree->SetBranchAddress("metoffrecal", &metoffrecal);
 
 
 		//Initialize TH1F objects
@@ -73,7 +73,7 @@ int plotEfficiency(TString& alg, Double_t cut,TString& signalFile){
 		{
 			tree->GetEntry(i);
 			//Fill TEfficiency 
-			teff->Fill(passed_hist > cut, reference_hist_met);
+			teff->Fill(passed_hist > cut, metoffrecal);
 		}
 
 		//Divide canvas into pads

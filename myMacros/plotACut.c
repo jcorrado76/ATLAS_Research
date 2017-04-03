@@ -32,7 +32,7 @@ int plotACut(TString& alg, double bound, TString& data = "zerobias"){
 
 
 	tree->SetBranchAddress(passed_hist_name, &passed_hist_met);
-	tree->SetBranchAddress(reference_hist_name, &reference_hist_met);
+	tree->SetBranchAddress("metoffrecal", &reference_hist_met);
 	tree->SetBranchAddress("passrndm", &passrndmVal);
 	if (data == "muon")
 	{

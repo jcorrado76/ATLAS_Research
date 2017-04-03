@@ -1,11 +1,11 @@
 {
 	std::cout << "Displays tefficiency curves for all algorithms on muon data using zero bias threshold" << std::endl;
 	//TString fileName = "../myData/ExpressMuons2016newanalysis.11runs.root";
-	TString fileName = "../myData/ExpressMuons2016.12runs.root";
+	TString fileName = "../myData/ExpressMuons2016newanalysis.11runs.root";
 	TFile * 2016Data = TFile::Open(fileName, "READ");
 	int nbins = 60;
 	Double_t metMin = 0.0;
-	Double_t metMax = 400.0;
+	Double_t metMax = 700.0;
 	
 	TString teff_name1, teff_title1;
 	TString teff_name2, teff_title2;
@@ -52,6 +52,7 @@
 	teff_name5 = name;
 	teff_name6 = name;
 
+	TString ylabel = "Efficiency";
 	TString xlabel1 = "metoffrecal";
 	teff_title1 = teff_name1 + ";" + xlabel1 + ";" + ylabel + ";";
 	teff_title2 = teff_name2 + ";" + xlabel1 + ";" + ylabel + ";";
@@ -61,7 +62,7 @@
 	teff_title6 = teff_name6 + ";" + xlabel1 + ";" + ylabel + ";";
 
 	TString xlabel2 = "MET No Mu";
-	TString ylabel = "Efficiency";
+	
 	teff_title11 = teff_name1 + ";" + xlabel2 + ";" + ylabel + ";";
 	teff_title22 = teff_name2 + ";" + xlabel2 + ";" + ylabel + ";";
 	teff_title33 = teff_name3 + ";" + xlabel2 + ";" + ylabel + ";";
@@ -123,27 +124,26 @@
 
 	for (Long64_t j = 0; j < nentries; j++)
 	{
-		Float_t metnomux = mexoffrecal - mexofflineMuon;
-		Float_t metnomuy = meyoffrecal - meyofflineMuon;
-		Float_t referenceVal1 = offrecal;
-		Float_t referenceVal2 = TMath::Power((TMath::Power(metnomux, 2.0) + TMath::Power(metnomuy, 2.0)),0.5); //calculate correct offline value (no mu MET)
+		Float_t mexnomu = mexoffrecal - mexofflineMuon;
+		Float_t meynomu = meyoffrecal - meyofflineMuon;
+		Float_t metnomu = TMath::Power((TMath::Power(mexnomu, 2.0) + TMath::Power(meynomu, 2.0)),0.5); //calculate correct offline value (no mu MET)
 		tree->GetEntry(j);
 
 		if (passmuon == 1)
 		{
-			teff1->Fill((passed_hist_met1 > cutValue1), referenceVal1);
-			teff2->Fill((passed_hist_met2 > cutValue2), referenceVal1);
-			teff3->Fill((passed_hist_met3 > cutValue3), referenceVal1);
-			teff4->Fill((passed_hist_met4 > cutValue4), referenceVal1);
-			teff5->Fill((passed_hist_met5 > cutValue5), referenceVal1);
-			teff6->Fill((passed_hist_met6 > cutValue6), referenceVal1);
+			teff1->Fill((passed_hist_met1 > cutValue1), offrecal);
+			teff2->Fill((passed_hist_met2 > cutValue2), offrecal);
+			teff3->Fill((passed_hist_met3 > cutValue3), offrecal);
+			teff4->Fill((passed_hist_met4 > cutValue4), offrecal);
+			teff5->Fill((passed_hist_met5 > cutValue5), offrecal);
+			teff6->Fill((passed_hist_met6 > cutValue6), offrecal);
 
-			teff11->Fill((passed_hist_met1 > cutValue1), referenceVal2);
-			teff22->Fill((passed_hist_met2 > cutValue2), referenceVal2);
-			teff33->Fill((passed_hist_met3 > cutValue3), referenceVal2);
-			teff44->Fill((passed_hist_met4 > cutValue4), referenceVal2);
-			teff55->Fill((passed_hist_met5 > cutValue5), referenceVal2);
-			teff66->Fill((passed_hist_met6 > cutValue6), referenceVal2);
+			teff11->Fill((passed_hist_met1 > cutValue1), metnomu);
+			teff22->Fill((passed_hist_met2 > cutValue2), metnomu);
+			teff33->Fill((passed_hist_met3 > cutValue3), metnomu);
+			teff44->Fill((passed_hist_met4 > cutValue4), metnomu);
+			teff55->Fill((passed_hist_met5 > cutValue5), metnomu);
+			teff66->Fill((passed_hist_met6 > cutValue6), metnomu);
 		}
 	}
 
@@ -199,6 +199,32 @@
 	teff66->Draw("same");
 	leg2->Draw("same");
 	
+	TEfficiency* efficiencies[12] = { teff1 ,teff2 ,teff3 ,teff4 ,teff5 ,teff6 ,teff11,teff22,teff33,teff44,teff55,teff66 };
+
+
+	TString singleFileName = "Single_File";
+	TString fileExt = ".pdf";
+	TString targetDirectory("../pictures/");
+
+	TString fullPath(targetDirectory + singleFileName + fileExt);
+
+	myCanv->Print(fullPath + "[");
+	for (int m = 0; m < 12; m++)
+	{
+		//generate canvas name each iteration
+		sprintf(canvname, "canv%d", m);
+		//reassign canvas to new name
+		myCanv = new TCanvas(canvname, "");
+		//put the fit onto the new canvas
+		efficiencies[i]->Draw();
+		//write the new canvas to file 
+		myCanv->Print(fullPath);
+	}
+	//close the file ;suppress printing
+	myCanv->Print(fullPath + "]");
+
+
+
 	c1->Draw();
 
 	
