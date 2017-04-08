@@ -1,101 +1,183 @@
-Double_t determineThresh(TString& alg) {
-	
-	
-	
-	//ROOT data FileName
+Double_t determineThresh() 
+{
+	/* determine zerobias thresholds for all algorithms*/
 	TString fileName = "../myData/ZeroBias2016new.13Runs.root";
-
-	//algorithm of interest name
-	TString passed_hist_name = alg;
-	TString passed_hist_title = alg;
-
-	//Reference hist parameters 
-	TString reference_hist_name = "metoffrecal";
-	TString reference_hist_title = "METOFFRECAL";
-
-	//Histogram parameters
+	TFile * 2016Data = TFile::Open(fileName, "READ");
+	
 	int nbins = 60;
 	Double_t metMin = 0.0;
-	Double_t metMax = 200.0;
+	Double_t metMax = 500.0;
 
-	//Histogram Axis labels 
-	TString xaxis = "MET [GeV]";
+	TH1F *metl1Hist = new TH1F("metl1", "metl1", nbins, metMin, metMax);
+	TH1F *metcellHist = new TH1F("metcell", "metcell", nbins, metMin, metMax);
+	TH1F *metmhtHist = new TH1F("metmht", "metmht", nbins, metMin, metMax);
+	TH1F *mettopoclHist = new TH1F("mettopocl", "mettopocl", nbins, metMin, metMax);
+	TH1F *mettopoclpsHist = new TH1F("mettopoclps", "mettopoclps", nbins, metMin, metMax);
+	TH1F *mettopoclpucHist = new TH1F("mettopoclpuc", "mettopoclpuc", nbins, metMin, metMax);
+
+	TString xlabel = "MET [GeV]";
 	TString yaxis = "Events";
 
-	TString teff_name, teff_title;
-
-	//Reference Hist Labels
-	TString reference_hist_full_param = (reference_hist_title + " HIST;" + xaxis + ";" + yaxis);
-
-	//Calculate Full Hist Params
-	TString passed_hist_full_param1 = (passed_hist_title  + " HIST; " + xaxis + ";" + yaxis);
-	
-
-	//Open ROOT file 
-	TFile * 2016Data = TFile::Open(fileName, "READ");
-
-
-	//variables take on values of alg
-	Float_t passed_hist_met, reference_hist_met;
-
+	Float_t metl1, metcell , metmht , mettopocl , mettopoclps , mettopoclpuc , metoffrecal;
 	Int_t passrndm;
 
-	//Get addresses of variables
-	tree->SetBranchAddress(passed_hist_name, &passed_hist_met);
-	tree->SetBranchAddress(reference_hist_name, &reference_hist_met);
+	tree->SetBranchAddress("metl1", &metl1);
+	tree->SetBranchAddress("metcell", &metcell);
+	tree->SetBranchAddress("metmht", &metmht);
+	tree->SetBranchAddress("mettopocl", &mettopocl);
+	tree->SetBranchAddress("mettopoclps", &mettopoclps);
+	tree->SetBranchAddress("mettopoclpuc", &mettopoclpuc);
+	tree->SetBranchAddress("metoffrecal", &metoffrecal);
 	tree->SetBranchAddress("passrndm", &passrndm);
 
+	TH1F *metl1target = new TH1F("cumu1", "cumu", nbins, metMin, metMax);
+	TH1F *metcelltarget = new TH1F("cumu2", "cumu", nbins, metMin, metMax);
+	TH1F *metmhttarget = new TH1F("cumu3", "cumu", nbins, metMin, metMax);
+	TH1F *mettopocltarget = new TH1F("cumu4", "cumu", nbins, metMin, metMax);
+	TH1F *mettopoclpstarget = new TH1F("cumu5", "cumu", nbins, metMin, metMax);
+	TH1F *mettopoclpuctarget = new TH1F("cumu6", "cumu", nbins, metMin, metMax);
 
-	//Initial TH1F object
-	TH1F *cut = new TH1F(passed_hist_name, passed_hist_full_param1, nbins, metMin, metMax);
-	TH1F *target = new TH1F("cumu", "cumu", nbins, metMin, metMax);
-
-	//# of entries
 	int nentries = tree->GetEntries();
-
-	//fill hist with passrndm events 
 	for (Long64_t k = 0; k < nentries; k++)
 	{
-		//get the first entry; after adding, get next entry
 		tree->GetEntry(k);
-		//maintain passrndm is true 
-		if (passrndm == 1)
+		if (passrndm > 0.1)
 		{
-			cut->Fill(passed_hist_met);
+			metl1Hist->Fill(metl1);
+			metcellHist->Fill(metcell);
+			metmhtHist->Fill(metmht);
+			mettopoclHist->Fill(mettopocl);
+			mettopoclpsHist->Fill(mettopoclps);
+			mettopoclpucHist->Fill(mettopoclpuc);
 		}
 	}
 
-	//number of entries after applying passrndm
-	Int_t passrndmEntries = cut->GetEntries();
-	Double_t  thresh;
+	Int_t metl1entries = metl1Hist->GetEntries();
+	Int_t metcellentries = metcellHist->GetEntries();
+	Int_t metmhtentries = metmhtHist->GetEntries();
+	Int_t mettopoclentries = mettopoclHist->GetEntries();
+	Int_t mettopoclpsentries = mettopoclpsHist->GetEntries();
+	Int_t mettopoclpucentries = mettopoclpucHist->GetEntries();
 
+	Float_t  metl1thresh , metcellthresh , metmhtthresh , mettopoclthresh , mettopoclpsthresh , mettopoclpucthresh;
+	Float_t condition = (1e-4);
 
-Float_t condition = (1e-4);
-Float_t keep = condition * passrndmEntries;
+	Float_t metl1keep = condition * metl1entries;
+	Float_t metcellkeep = condition * metcellentries;
+	Float_t metmhtkeep = condition * metmhtentries;
+	Float_t mettopoclkeep = condition * mettopoclentries;
+	Float_t mettopoclpskeep = condition * mettopoclpsentries;
+	Float_t mettopoclpuckeep = condition * mettopoclpucentries;
 
+std::cout << "Determining threshold to keep 10e-4 events in zerobias data" << std::endl;
 //generate the cumulative right tail sum hist
 for (int t = nbins; t >= 0 ; t--)
 {
-	Float_t summ = 0;
+	Float_t summ1 = 0;
 
 	for (int i = t ; i <= nbins ; i++)
 	{
-		summ += cut->GetBinContent(i);
+		summ1 += metl1Hist->GetBinContent(i);
 	}
-	target->SetBinContent(t, summ );
+	metl1target->SetBinContent(t, summ1 );
 }
-
-//find the thresh value to keep
-std::cout << "Determining threshold to keep 10e-4 events in zerobias data" << std::endl;
 for (int t = nbins; t >=0 ; t--)
 {
-	//std::cout << "Number of entries in bin" << t << " " << target->GetBinContent(t) << std::endl;
-	if ((abs(target->GetBinContent(t) - (keep) > 0 )!= (abs(target->GetBinContent(t+1) - (keep)) > 0 )))
+	if ((abs(metl1target->GetBinContent(t) - (metl1keep) > 0 )!= (abs(metl1target->GetBinContent(t+1) - (metl1keep)) > 0 )))
 	{
-		thresh = target->GetBinCenter(t);
+		metl1thresh = metl1target->GetBinCenter(t);
 	}
 }
-//std::cout << "10^(-4) Entries after passrndm: " << keep << std::endl;
-//std::cout << "The threshold for " << passed_hist_name << " to keep " << keep << " events is: " <<  thresh << std::endl;
-	return thresh;
+for (int t = nbins; t >= 0; t--)
+{
+	Float_t summ2 = 0;
+
+	for (int i = t; i <= nbins; i++)
+	{
+		summ2 += metcellHist->GetBinContent(i);
+	}
+	metcelltarget->SetBinContent(t, summ2);
+}
+for (int t = nbins; t >= 0; t--)
+{
+	if ((abs(metcelltarget->GetBinContent(t) - (metcellkeep) > 0) != (abs(metcelltarget->GetBinContent(t + 1) - (metcellkeep)) > 0)))
+	{
+		metcellthresh = metcelltarget->GetBinCenter(t);
+	}
+}
+for (int t = nbins; t >= 0; t--)
+{
+	Float_t summ3 = 0;
+
+	for (int i = t; i <= nbins; i++)
+	{
+		summ3 += metmhtHist->GetBinContent(i);
+	}
+	metmhttarget->SetBinContent(t, summ3);
+}
+for (int t = nbins; t >= 0; t--)
+{
+	if ((abs(metmhttarget->GetBinContent(t) - (metmhtkeep) > 0) != (abs(metmhttarget->GetBinContent(t + 1) - (metmhtkeep)) > 0)))
+	{
+		metmhtthresh = metmhttarget->GetBinCenter(t);
+	}
+}
+for (int t = nbins; t >= 0; t--)
+{
+	Float_t summ4 = 0;
+
+	for (int i = t; i <= nbins; i++)
+	{
+		summ4 += mettopoclHist->GetBinContent(i);
+	}
+	mettopocltarget->SetBinContent(t, summ4);
+}
+for (int t = nbins; t >= 0; t--)
+{
+	if ((abs(mettopocltarget->GetBinContent(t) - (mettopoclkeep) > 0) != (abs(mettopocltarget->GetBinContent(t + 1) - (mettopoclkeep)) > 0)))
+	{
+		mettopoclthresh = mettopocltarget->GetBinCenter(t);
+	}
+}
+for (int t = nbins; t >= 0; t--)
+{
+	Float_t summ5 = 0;
+
+	for (int i = t; i <= nbins; i++)
+	{
+		summ5 += mettopoclpsHist->GetBinContent(i);
+	}
+	mettopoclpstarget->SetBinContent(t, summ5);
+}
+for (int t = nbins; t >= 0; t--)
+{
+	if ((abs(mettopoclpstarget->GetBinContent(t) - (mettopoclpskeep) > 0) != (abs(mettopoclpstarget->GetBinContent(t + 1) - (mettopoclpskeep)) > 0)))
+	{
+		mettopoclpsthresh = mettopoclpstarget->GetBinCenter(t);
+	}
+}
+for (int t = nbins; t >= 0; t--)
+{
+	Float_t summ6 = 0;
+
+	for (int i = t; i <= nbins; i++)
+	{
+		summ6 += mettopoclpucHist->GetBinContent(i);
+	}
+	mettopoclpuctarget->SetBinContent(t, summ6);
+}
+for (int t = nbins; t >= 0; t--)
+{
+	if ((abs(mettopoclpuctarget->GetBinContent(t) - (mettopoclpuckeep) > 0) != (abs(mettopoclpuctarget->GetBinContent(t + 1) - (mettopoclpuckeep)) > 0)))
+	{
+		mettopoclpucthresh = mettopoclpuctarget->GetBinCenter(t);
+	}
+}
+	
+std::cout << "Threshold for metl1: " << metl1thresh << std::endl;
+std::cout << "Threshold for metcell: " << metcellthresh << std::endl;
+std::cout << "Threshold for metmht: " << metmhtthresh << std::endl;
+std::cout << "Threshold for mettopocl: " << mettopoclthresh << std::endl;
+std::cout << "Threshold for mettopoclps: " << mettopoclpsthresh << std::endl;
+std::cout << "Threshold for mettopoclpuc: " << mettopoclpucthresh << std::endl;
 }

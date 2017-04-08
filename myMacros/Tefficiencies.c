@@ -1,6 +1,8 @@
 {
-	std::cout << "Displays tefficiency curves for all algorithms on muon data using zero bias threshold" << std::endl;
-	//TString fileName = "../myData/ExpressMuons2016newanalysis.11runs.root";
+	#include <string>
+	#include <iostream>
+	#include <cstdlib>
+
 	TString fileName = "../myData/ExpressMuons2016newanalysis.11runs.root";
 	TFile * 2016Data = TFile::Open(fileName, "READ");
 	int nbins = 60;
@@ -18,7 +20,8 @@
 
 	//these are zero bias thresholds 
 	Float_t cutValue1 = 45.0;
-	Float_t cutValue2 = 62.0;
+	Float_t cutValue2 = 1.0;
+	//Float_t cutValue2 = 62.0;
 	Float_t cutValue3 = 128.0;
 	Float_t cutValue4 = 132.0;
 	Float_t cutValue5 = 118.0;
@@ -103,12 +106,14 @@
 
 	
 
-	int passmuon;
+	Int_t passmuon , passcleancuts , recalbroke;
 	int nentries = tree->GetEntries();
 
 	std::cout << "Creating TEfficiencies..." << std::endl;
 
 	tree->SetBranchAddress("passmu24med", &passmuon);
+	tree->SetBranchAddress("passcleancuts", &passcleancuts);
+	tree->SetBranchAddress("recalbroke", &recalbroke);
 
 	tree->SetBranchAddress("mexoffrecal", &mexoffrecal);
 	tree->SetBranchAddress("meyoffrecal", &meyoffrecal);
@@ -117,33 +122,59 @@
 	tree->SetBranchAddress("meyoffrecalmuon", &meyoffrecalMuon);
 	tree->SetBranchAddress("metoffrecalmuon", &metoffrecalmuon);
 
+
+	TH2F* metl1 = new TH2F("metl1","metl1",nbins,metMin,metMax, nbins, metMin, metMax);
+	TH2F* metcell = new TH2F("metcell","metcell", nbins, metMin, metMax, nbins, metMin, metMax);
+	TH2F* metmht = new TH2F("metmht","metmht", nbins, metMin, metMax, nbins, metMin, metMax);
+	TH2F* mettopocl = new TH2F("mettopocl","mettopocl", nbins, metMin, metMax, nbins, metMin, metMax);
+	TH2F* mettopoclps = new TH2F("mettopoclps","mettopoclps", nbins, metMin, metMax, nbins, metMin, metMax);
+	TH2F* mettopoclpuc = new TH2F("mettopoclpuc","mettopoclpuc", nbins, metMin, metMax, nbins, metMin, metMax);
+	TH2F* offrecal = new TH2F("offrecal","offrecal", nbins, metMin, metMax, nbins, metMin, metMax);
+
 	for (Long64_t j = 0; j < nentries; j++)
 	{
 		Float_t mexnomu = mexoffrecal - mexoffrecalMuon;
 		Float_t meynomu = meyoffrecal - meyoffrecalMuon;
 
-		Float_t metnomu = TMath::Power((TMath::Power(mexnomu, 2.0) + TMath::Power(meynomu, 2.0)),0.5); //calculate correct offline value (no mu MET)
+		Float_t metnomu = sqrt((mexnomu*mexnomu) + (meynomu*meynomu)); //calculate correct offline value (no mu MET)
 		tree->GetEntry(j);
-
-		if (passmuon == 1)
+		bool pass;
+		if (passmuon > 0.1  )
 		{
-			teff1->Fill((passed_hist_met1 > cutValue1), metoffrecal);
+			if (passed_hist_met1 > cutValue1)
+			{
+				pass = true;
+			}
+			else {
+				pass = false;
+			}
+			//teff1->Fill((passed_hist_met1 > cutValue1), metoffrecal);
+			teff1->Fill(pass, metoffrecal);
 			teff2->Fill((passed_hist_met2 > cutValue2), metoffrecal);
 			teff3->Fill((passed_hist_met3 > cutValue3), metoffrecal);
 			teff4->Fill((passed_hist_met4 > cutValue4), metoffrecal);
 			teff5->Fill((passed_hist_met5 > cutValue5), metoffrecal);
 			teff6->Fill((passed_hist_met6 > cutValue6), metoffrecal);
 
-			teff11->Fill((passed_hist_met1 > cutValue1), metoffrecalmuon);
-			teff22->Fill((passed_hist_met2 > cutValue2), metoffrecalmuon);
-			teff33->Fill((passed_hist_met3 > cutValue3), metoffrecalmuon);
-			teff44->Fill((passed_hist_met4 > cutValue4), metoffrecalmuon);
-			teff55->Fill((passed_hist_met5 > cutValue5), metoffrecalmuon);
-			teff66->Fill((passed_hist_met6 > cutValue6), metoffrecalmuon);
+			teff11->Fill((passed_hist_met1 > cutValue1), metnomu);
+			teff22->Fill((passed_hist_met2 > cutValue2), metnomu);
+			teff33->Fill((passed_hist_met3 > cutValue3), metnomu);
+			teff44->Fill((passed_hist_met4 > cutValue4), metnomu);
+			teff55->Fill((passed_hist_met5 > cutValue5), metnomu);
+			teff66->Fill((passed_hist_met6 > cutValue6), metnomu);
 		
+			metl1->Fill(metoffrecal,passed_hist_met1);
+			metcell->Fill(metoffrecal,passed_hist_met2);
+			metmht->Fill(metoffrecal,passed_hist_met3);
+			mettopocl->Fill(metoffrecal,passed_hist_met4);
+			mettopoclps->Fill(metoffrecal,passed_hist_met5);
+			mettopoclpuc->Fill(metoffrecal,passed_hist_met6);
+			offrecal->Fill(metoffrecal,metoffrecal);
 		}
 	}
 
+
+	//DRAWING===========================================================================
 	TCanvas* c1 = new TCanvas("TEfficiencies",title = "TEfficiencies");
 	c1->Divide(2);
 	c1->cd(1);
@@ -158,7 +189,6 @@
 	leg1->AddEntry(teff5, alg5, "L");
 	leg1->AddEntry(teff6, alg6, "L");
 	leg1->SetTextSize(0.05);
-
 	teff1->Draw();
 	teff2->SetLineColor(kBlue);
 	teff2->Draw("same");
@@ -171,8 +201,6 @@
 	teff6->SetLineColor(kOrange);
 	teff6->Draw("same");
 	leg1->Draw("same");
-
-
 	c1->cd(2);
 	TLegend* leg2 = new TLegend(0.25, 0.5, 0.15, 0.15);
 	TLegend* leg = new TLegend(0.25, 0.5, 0.15, 0.15);
@@ -186,7 +214,6 @@
 	leg2->AddEntry(teff55, alg5, "L");
 	leg2->AddEntry(teff66, alg6, "L");
 	leg2->SetTextSize(0.05);
-
 	teff11->Draw();
 	teff22->SetLineColor(kBlue);
 	teff22->Draw("same");
@@ -199,10 +226,79 @@
 	teff66->SetLineColor(kOrange);
 	teff66->Draw("same");
 	leg2->Draw("same");
+//--------------------------------------------------------------------
+	TCanvas* metl1Scatter = new TCanvas("metl1", title = "metl1");
+	metl1->Draw();
+	TCanvas* metcellScatter = new TCanvas("metcell", title = "metcell");
+	metcell->Draw();
+	TCanvas* metmhtScatter = new TCanvas("metmht", title = "metmht");
+	metmht->Draw();
+	TCanvas* mettopoclScatter = new TCanvas("mettopocl", title = "mettopocl");
+	mettopocl->Draw();
+	TCanvas* mettopoclpsScatter = new TCanvas("mettopoclps", title = "mettopoclps");
+	mettopoclps->Draw();
+	TCanvas* mettopoclpucScatter = new TCanvas("mettopoclpuc", title = "mettopoclpuc");
+	mettopoclpuc->Draw();
+	TCanvas* offrecalScatter = new TCanvas("offrecal", title = "offrecal");
+	offrecal->Draw();
+
+
+	TCanvas* scatter[12] = { metl1Scatter ,metcellScatter ,metmhtScatter ,mettopoclScatter ,mettopoclpsScatter ,mettopoclpucScatter ,offrecalScatter};
+
+	//TString path = "../pictures/tefficiencies/Tefficiencies.pdf";
+	TString path = "../pictures/ScatterTest.pdf";
+	TString scatter("");
+	TCanvas* scatterCanv = new TCanvas(scatter, "");
+	scatterCanv.Print(path + "[");
+	for (int m = 0; m < 12; m++)
+	{
+		scatter[m]->Draw();
+		scatterCanv->Print(path);
+	}
+	scatterCanv.Print(path + "]");
+
+
+
+
 
 	TEfficiency* efficiencies[12] = { teff1 ,teff2 ,teff3 ,teff4 ,teff5 ,teff6 ,teff11,teff22,teff33,teff44,teff55,teff66 };
-
+	
+	
+	ifstream inFile;
 	TString path = "../pictures/tefficiencies/Tefficiencies.pdf";
+	inFile.open(path);
+
+	char response,response2;
+	if (!inFile.fail()) // if it doesn't fail, the file exists
+	{
+		std::cout << "A file by that path already exists.\n" 
+			<< "Do you want to continue and overwrite it\n"
+			<< " with the new data (y or n): ";
+
+		std::cin >> response;
+
+		if (std::tolower(response) == 'n')
+		{
+			std::cout << "The existing file will not be overwritten."
+				<< "Do you want to append copy number to file namme?"
+			std::cin >> response2;
+			if (std::tolower(response2) == 'y')
+			{
+				char appendage;
+				std::cout << "Enter string to append:\n"
+				std::cin >> appendage;
+				path = path + appendage;
+				std::cout << "New path successfully generated" << std::endl;
+			}
+			else
+			{
+				std::cout << "Exiting" << std::endl;
+				std::exit(1);
+			}
+		}
+	}
+
+	
 	TString canvname("");
 	TCanvas* teffCanv = new TCanvas(canvname, "");
 	teffCanv.Print(path+"[");
@@ -212,8 +308,4 @@
 		teffCanv->Print(path);
 	}
 	teffCanv.Print(path + "]");
-
-
-
-	
 }
