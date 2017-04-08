@@ -1,4 +1,4 @@
-Float_t determineThresh()
+Int_t determineThresh()
 {
 	/* determine zerobias thresholds for all algorithms*/
 	TString fileName = "../myData/ZeroBias2016new.13Runs.root";
@@ -39,9 +39,9 @@ Float_t determineThresh()
 	TH1F *mettopoclpstarget = new TH1F("cumu5", "cumu", nbins, metMin, metMax);
 	TH1F *mettopoclpuctarget = new TH1F("cumu6", "cumu", nbins, metMin, metMax);
 
-	std::cout << "Determining threshold to keep 10e-4 events in zerobias data" << std::endl;
+	std::cout << "Determining threshold to keep 10e-4 events in zerobias data after passing rndm" << std::endl;
 
-	//generate histograms 
+	//fill cut histograms (only pass rndm)
 	int nentries = tree->GetEntries();
 	for (Long64_t k = 0; k < nentries; k++)
 	{
@@ -56,7 +56,6 @@ Float_t determineThresh()
 			mettopoclpucHist->Fill(mettopoclpuc);
 		}
 	}
-
 
 	//figure out how many entries muon flag keeps 
 	Int_t metl1entries = metl1Hist->GetEntries();
