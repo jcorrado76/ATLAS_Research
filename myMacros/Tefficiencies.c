@@ -141,15 +141,7 @@
 		bool pass;
 		if (passmuon > 0.1  )
 		{
-			if (passed_hist_met1 > cutValue1)
-			{
-				pass = true;
-			}
-			else {
-				pass = false;
-			}
-			//teff1->Fill((passed_hist_met1 > cutValue1), metoffrecal);
-			teff1->Fill(pass, metoffrecal);
+			teff1->Fill((passed_hist_met1 > cutValue1), metoffrecal);
 			teff2->Fill((passed_hist_met2 > cutValue2), metoffrecal);
 			teff3->Fill((passed_hist_met3 > cutValue3), metoffrecal);
 			teff4->Fill((passed_hist_met4 > cutValue4), metoffrecal);
