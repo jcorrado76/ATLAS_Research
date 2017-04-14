@@ -8,12 +8,12 @@ Int_t determineThresh()
 	Double_t metMin = 0.0;
 	Double_t metMax = 500.0;
 
-	//initialize cut histograms to pass muon flag on to see how many events it keeps 
-	TH1F *metl1Hist = new TH1F("metl1", "metl1", nbins, metMin, metMax);
-	TH1F *metcellHist = new TH1F("metcell", "metcell", nbins, metMin, metMax);
-	TH1F *metmhtHist = new TH1F("metmht", "metmht", nbins, metMin, metMax);
-	TH1F *mettopoclHist = new TH1F("mettopocl", "mettopocl", nbins, metMin, metMax);
-	TH1F *mettopoclpsHist = new TH1F("mettopoclps", "mettopoclps", nbins, metMin, metMax);
+	//initialize cut histograms to pass muon flag on to see how many events it keeps
+	TH1F *metl1Hist        = new TH1F("metl1", "metl1", nbins, metMin, metMax);
+	TH1F *metcellHist      = new TH1F("metcell", "metcell", nbins, metMin, metMax);
+	TH1F *metmhtHist       = new TH1F("metmht", "metmht", nbins, metMin, metMax);
+	TH1F *mettopoclHist    = new TH1F("mettopocl", "mettopocl", nbins, metMin, metMax);
+	TH1F *mettopoclpsHist  = new TH1F("mettopoclps", "mettopoclps", nbins, metMin, metMax);
 	TH1F *mettopoclpucHist = new TH1F("mettopoclpuc", "mettopoclpuc", nbins, metMin, metMax);
 
 	TString xlabel = "MET [GeV]";
@@ -31,23 +31,26 @@ Int_t determineThresh()
 	tree->SetBranchAddress("metoffrecal", &metoffrecal);
 	tree->SetBranchAddress("passrndm", &passrndm);
 
-	//initialize histograms for right cumulative sum 
-	TH1F *metl1target = new TH1F("cumu1", "cumu", nbins, metMin, metMax);
-	TH1F *metcelltarget = new TH1F("cumu2", "cumu", nbins, metMin, metMax);
-	TH1F *metmhttarget = new TH1F("cumu3", "cumu", nbins, metMin, metMax);
-	TH1F *mettopocltarget = new TH1F("cumu4", "cumu", nbins, metMin, metMax);
-	TH1F *mettopoclpstarget = new TH1F("cumu5", "cumu", nbins, metMin, metMax);
+	//initialize histograms for right cumulative sum
+	TH1F *metl1target        = new TH1F("cumu1", "cumu", nbins, metMin, metMax);
+	TH1F *metcelltarget      = new TH1F("cumu2", "cumu", nbins, metMin, metMax);
+	TH1F *metmhttarget       = new TH1F("cumu3", "cumu", nbins, metMin, metMax);
+	TH1F *mettopocltarget    = new TH1F("cumu4", "cumu", nbins, metMin, metMax);
+	TH1F *mettopoclpstarget  = new TH1F("cumu5", "cumu", nbins, metMin, metMax);
 	TH1F *mettopoclpuctarget = new TH1F("cumu6", "cumu", nbins, metMin, metMax);
 
 	std::cout << "Determining threshold to keep 10e-4 events in zerobias data after passing rndm" << std::endl;
 
 	//fill cut histograms (only pass rndm)
 	int nentries = tree->GetEntries();
+	Int_t numRndm =0;
 	for (Long64_t k = 0; k < nentries; k++)
 	{
 		tree->GetEntry(k);
 		if (passrndm > 0.1)
 		{
+			numRndm++;
+			rndmHist->Fill()
 			metl1Hist->Fill(metl1);
 			metcellHist->Fill(metcell);
 			metmhtHist->Fill(metmht);
@@ -57,24 +60,40 @@ Int_t determineThresh()
 		}
 	}
 
-	//figure out how many entries muon flag keeps 
-	Int_t metl1entries = metl1Hist->GetEntries();
-	Int_t metcellentries = metcellHist->GetEntries();
-	Int_t metmhtentries = metmhtHist->GetEntries();
-	Int_t mettopoclentries = mettopoclHist->GetEntries();
-	Int_t mettopoclpsentries = mettopoclpsHist->GetEntries();
+	//figure out how many entries passrndm flag keeps
+	//these are all the same numbers!!!
+	/*
+	Int_t metl1entries        = metl1Hist->GetEntries();
+	Int_t metcellentries      = metcellHist->GetEntries();
+	Int_t metmhtentries       = metmhtHist->GetEntries();
+	Int_t mettopoclentries    = mettopoclHist->GetEntries();
+	Int_t mettopoclpsentries  = mettopoclpsHist->GetEntries();
 	Int_t mettopoclpucentries = mettopoclpucHist->GetEntries();
+*/
+
+
+
+	Int_t rndmKeep = rndmHist->GetEntries();
+
 
 	Float_t  metl1thresh, metcellthresh, metmhtthresh, mettopoclthresh, mettopoclpsthresh, mettopoclpucthresh;
 	Float_t condition = (1e-4);
 
 	// if i use nentries the thresholds are lower by c. 5GeV; if I use cut->GetEntries after passing rndm, the thresholds become slightly higher
-	Float_t metl1keep = condition * metl1entries;
-	Float_t metcellkeep = condition * metcellentries;
-	Float_t metmhtkeep = condition * metmhtentries;
-	Float_t mettopoclkeep = condition * mettopoclentries;
-	Float_t mettopoclpskeep = condition * mettopoclpsentries;
+	Float_t metl1keep        = condition * metl1entries;
+	Float_t metcellkeep      = condition * metcellentries;
+	Float_t metmhtkeep       = condition * metmhtentries;
+	Float_t mettopoclkeep    = condition * mettopoclentries;
+	Float_t mettopoclpskeep  = condition * mettopoclpsentries;
 	Float_t mettopoclpuckeep = condition * mettopoclpucentries;
+
+	std::cout << metl1keep <<std::endl;
+	std::cout << metcellkeep <<std::endl;
+	std::cout << metmhtkeep <<std::endl;
+	std::cout << mettopoclkeep<<std::endl;
+	std::cout << mettopoclpskeep <<std::endl;
+	std::cout << mettopoclpuckeep <<std::endl;
+
 
 	/*
 	Float_t metl1keep = condition * nentries;
@@ -85,7 +104,7 @@ Int_t determineThresh()
 	Float_t mettopoclpuckeep = condition * nentries;
 	*/
 
-	
+
 	//generate the cumulative right tail sum hist
 	for (int t = nbins; t >= 0; t--)
 	{
