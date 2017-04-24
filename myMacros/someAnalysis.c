@@ -30,12 +30,5 @@ Int_t someAnalysis()
   std::cout << "Number of passrndm entries: " << numRndm << std::endl;
   std::cout << "Ratio of passrndm to nentries: " << ratio << std::endl;
   myHist->Draw();
-  /*
-  std::cout<< "Mean of hist: " <<   myHist->GetMean() << std::endl;
-  std::cout << "Variance of Hist: " << myHist->GetRMS() << std::endl;
-
-  Double_t thresh = ROOT::Math::normal_quantile_c(1.e-4,2.743105904);
-  std::cout << "Tentative threshold: " << thresh + 12.9278 << std::endl;
-  */
 
 }

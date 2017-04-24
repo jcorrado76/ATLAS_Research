@@ -5,7 +5,7 @@
 	int nbins = 60;
 	Double_t metMin = 0.0;
 	Double_t metMax = 400.0;
-	
+
 	TString teff_name1, teff_title1;
 	TString teff_name2, teff_title2;
 	TString teff_name3, teff_title3;
@@ -15,7 +15,7 @@
 	TString xaxis = "MET [GeV]";
 	TString yaxis = "Events";
 
-	
+
 	Float_t cutValue1 = 0.0;
 	Float_t cutValue2 = 0.0;
 	Float_t cutValue3 = 0.0;
@@ -91,9 +91,9 @@
 	//metx off - metx mu
 
 
-	
+
 	//need to replace this with the METNoMu
-	//need to define all the variables for METNoMu and compute it inside the loop 
+	//need to define all the variables for METNoMu and compute it inside the loop
 	TString reference_hist_name = "metoffrecal";
 	TString reference_hist_full_param = (reference_hist_name + " HIST;" + xaxis + ";" + yaxis);
 
@@ -109,8 +109,7 @@
 	{
 		Float_t metnomux = mexoffrecal - mexofflineMuon;
 		Float_t metnomuy = meyoffrecal - meyofflineMuon;
-		Float_t referenceVal = TMath::Power((TMath::Power(metnomux, 2.0) + TMath::Power(metnomuy, 2.0)),0.5); //calculate correct offline value (no mu MET)
-
+		Float_t referenceVal = sqrt(((metnomux) * (metnomux)) +((metnomuy)*(metnomuy)));
 		tree->GetEntry(j);
 		if (passmuon == 1)
 		{
@@ -122,7 +121,7 @@
 			teff6->Fill((passed_hist_met6 > cutValue6), referenceVal);
 		}
 	}
-	TCanvas* c1 = new TCanvas("TEfficiencies","TEfficiencies");
+
 	teff1->Draw();
 	teff2->Draw();
 	teff3->Draw();
@@ -130,5 +129,4 @@
 	teff5->Draw();
 	teff6->Draw();
 
-	c1->Draw();
 }
