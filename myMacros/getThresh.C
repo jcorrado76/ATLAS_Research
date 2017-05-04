@@ -1,5 +1,8 @@
 Int_t getThresh(Float_t frac = 0.003105)
 {
+  /* all this program does it determine the amount of events kept from each of the algorithms individuallly, and then when we use both in conjunction
+  so you have to run this multiple times and guess and check to find the common proportion that keeps 10^-4 individually, and 10^-4 when kept together
+  this program returns a threshold to keep a given fraction of right end events */
   TString fileName = "../myData/ZeroBias2016new.13Runs.root";
   TFile * 2016Data = TFile::Open(fileName, "READ");
   Int_t nentries = tree->GetEntries();
@@ -8,7 +11,8 @@ Int_t getThresh(Float_t frac = 0.003105)
 	Double_t metMax = 500.0;
   std::cout <<"Fraction to Keep Individually: " << frac << std::endl;
   std::cout << "Number of entries in the tree: " << nentries << std::endl;
-
+  // fraction so metell and metmht keep 10^-4 individually and approx 10^-4 together 
+  Float_t firstFrac =0.003105;
   Float_t fracA = frac;
   Float_t fracB = frac;
 
@@ -25,10 +29,6 @@ Int_t getThresh(Float_t frac = 0.003105)
   TH1F *metcelltarget = new TH1F("cumu2", "cumu", nbins, metMin, metMax);
   TH1F *metmhttarget = new TH1F("cumu3", "cumu", nbins, metMin, metMax);
 
-
-
-
-
   for (Int_t i = 0 ; i < nentries ; i++)
   {
     tree->GetEntry(i);
@@ -39,12 +39,6 @@ Int_t getThresh(Float_t frac = 0.003105)
 			metmhtHist->Fill(metmht);
     }
   }
-
-
-/*  Float_t epsilon = 5.0;
-  Int_t count = 0;
-  while ( count - 423 > epsilon ||  count - 423 < -epsilon)
-  {*/
     std::cout << "Number of entries that pass rndm: " << numRndm << std::endl;
     Float_t numKeepA = numRndm * fracA;
     Float_t numKeepB = numRndm * fracB;
