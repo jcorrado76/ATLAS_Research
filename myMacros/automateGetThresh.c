@@ -1,23 +1,21 @@
-Int_t getThresh()
+Int_t automateGetThresh()
 {
-  ''' given some fraction for algorithm a to keep, this program determines the threshold of the algorithm a to keep that fraction
-  and then determines the threshold of algorithm b to keep the same fraction'''
+  /* given some fraction for algorithm a to keep, this program determines the threshold of the algorithm a to keep that fraction
+  and then determines the threshold of algorithm b to keep the same fraction*/
 
 
   //fraction so metcell and metmht together keep 1-^-4
   Float_t firstFrac = 0.003105;
-
+  Float_t frac = firstFrac;
   TString fileName = "../myData/ZeroBias2016new.13Runs.root";
   TFile * 2016Data = TFile::Open(fileName, "READ");
   Int_t nentries = tree->GetEntries();
   Int_t nbins = 60;
 	Double_t metMin = 0.0;
 	Double_t metMax = 500.0;
-  std::cout <<"Fraction to Keep Individually: " << frac << std::endl;
-  std::cout << "Number of entries in the tree: " << nentries << std::endl;
-
   Int_t passrndm, numRndm = 0;
   Float_t metcell,metmht;
+  std::cout << "Number of entries in the tree: " << nentries << std::endl;
 
   tree->SetBranchAddress("metcell",&metcell);
   tree->SetBranchAddress("metmht",&metmht);
@@ -26,8 +24,8 @@ Int_t getThresh()
   TH1F* combinedAlgHist = new TH1F("Combined Hist" , "Combined Hist"  , nbins, metMin, metMax);
   TH1F* metcellHist = new TH1F("metcell", "metcell", nbins, metMin, metMax);
   TH1F* metmhtHist = new TH1F("metmht", "metmht", nbins, metMin, metMax);
-  TH1F *metcelltarget = new TH1F("cumu2", "cumu", nbins, metMin, metMax);
-  TH1F *metmhttarget = new TH1F("cumu3", "cumu", nbins, metMin, metMax);
+  TH1F *metcelltarget = new TH1F("cumu2", "cumu", nbins, metMin, metMax); //used to generate cumulative right tail sums
+  TH1F *metmhttarget = new TH1F("cumu3", "cumu", nbins, metMin, metMax); //used to generate cumulative right tail sums
 
   //fill with passrndm
   for (Int_t i = 0 ; i < nentries ; i++)
@@ -41,8 +39,9 @@ Int_t getThresh()
     }
   }
 
-  Float_t numbToKeep = numRndm * frac
+  Float_t numbToKeep = numRndm * frac // how many events is 10^(-4) of passrndm
   //=============================================================================
+  //determine threshold to keep 10^(-4) events for just algorithm A
   std::cout << "Determining threshold for metcell..." << std::endl;
   for (int t = nbins; t >= 0; t--)
   {
@@ -63,6 +62,7 @@ Int_t getThresh()
   }
   std::cout << "Threshold for metcell: " << metcellthresh << std::endl;
   //===================================================================================
+  //determine threshold to keep 10^(-4) events for just algorithm B
   std::cout << "Determining threshold for metmht..." << std::endl;
   for (Int_t t = nbins; t >= 0 ; t--)
   {
@@ -83,15 +83,15 @@ Int_t getThresh()
   }
   std::cout << "Threshold for metmht: " << metmhtthresh << std::endl;
   //=================================================================================
+  //all this does is print determine how many events are kept from combined algorithm and prints it
   std::cout << "Determining Ratio Kept from Combined Algorithm..." << std::endl;
-
-  Int_t count,countA,countB = 0 ;
+  Int_t countC,countA,countB = 0 ;
   for (Int_t k = 0 ; k < nentries; k++)
   {
     tree->GetEntry(k);
     if ((passrndm > 0.1) && (metmht > metmhtthresh) && (metcell > metcellthresh))
     {
-      count++;
+      countC++;
     }
     if((passrndm > 0.1) && metcell > metcellthresh)
     {
@@ -104,8 +104,13 @@ Int_t getThresh()
   }
   std::cout << "Number of events kept after only metcell: " << countA << std::endl;
   std::cout << "Number of events kept after only metmht: " << countB << std::endl;
-  std::cout << "Number of events kept after combined alg: " << count << std::endl;
-  Float_t fraction = (Float_t) count / (Float_t) numRndm;
-  std::cout << "Fraction of Events kept after combined alg: " << fraction << std::endl;
-//}
+  std::cout << "Number of events kept after combined alg: " << countC << std::endl;
+  Float_t fractionC = (Float_t) countC / (Float_t) numRndm;
+  Float_t fractionA = (Float_t) countA / (Float_t) numRndm;
+  Float_t fractionB = (Float_t) countB / (Float_t) numRndm;
+  std::cout << "Fraction of Events kept after combined alg: " << fractionC << std::endl;
+  std::cout << "Fraction of Events kept after alg A: " << fractionA << std::endl;
+  std::cout << "Fraction of Events kept after alg B: " << fractionB << std::endl;
+
 return(0);
+}
