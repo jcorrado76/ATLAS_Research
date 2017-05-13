@@ -1,7 +1,10 @@
 Int_t sameFracGetCombinedFrac()
 {
   /* given some fraction for algorithm a to keep, this program determines the threshold of the algorithm a to keep that fraction
-  and then determines the threshold of algorithm b to keep the same fraction*/
+  and then determines the threshold of algorithm b to keep the same fraction
+  This program generates the line that goes from the origin. It is the equiFraction kept line.
+  The combined fraction kept is not constant, just the relationship between the fractions kept individually 
+  */
   //fraction so metcell and metmht together keep 1-^-4
   //Float_t firstFrac = 0.003105;
 
@@ -9,7 +12,7 @@ Int_t sameFracGetCombinedFrac()
   TString fileName = "../myData/ZeroBias2016new.13Runs.root";
   TFile * 2016Data = TFile::Open(fileName, "READ");
   Int_t nentries = tree->GetEntries();
-  Int_t nbins = 60;
+  Int_t nbins = 200;
 	Double_t metMin = 0.0;
 	Double_t metMax = 500.0;
   Int_t passrndm, numRndm = 0;
@@ -39,11 +42,11 @@ Int_t sameFracGetCombinedFrac()
   }
 
   Float_t numbToKeep = (Float_t) (numRndm*frac); // how many events is the coresponding fraction of passrndm
-  Float_t AthreshArray[20] = [];
-  Float_t BthreshArray[20] = [];
-  Float_t combinedFracArray[20] = [];
+  Float_t AthreshArray[20];
+  Float_t BthreshArray[20];
+  Float_t combinedFracArray[20];
 
-  for (Int_t i = 0 ; i < 20 ; i++)
+  for (Int_t j = 0 ; j < 20 ; j++)
   {
       //=============================================================================
       //determine threshold to keep 10^(-4) events for just algorithm A
@@ -116,10 +119,11 @@ Int_t sameFracGetCombinedFrac()
       std::cout << "Fraction of Events kept after combined alg: " << fractionC << std::endl;
       std::cout << "Fraction of Events kept after alg A: " << fractionA << std::endl;
       std::cout << "Fraction of Events kept after alg B: " << fractionB << std::endl;
-      AthreshArray[i] = metcellthresh;
-      BthreshArray[i] = metmhtthresh;
-      combinedFracArray[i] = fractionC;
-      numbToKeep = numbToKeep + 10;
+      std::cout << "Current index of iteration: " << j << std::endl;
+      AthreshArray[j] = metcellthresh;
+      BthreshArray[j] = metmhtthresh;
+      combinedFracArray[j] = fractionC;
+      numbToKeep = numbToKeep + 10; //this starts at 10^(-4) and works toward origin by decreasing threshold to increase number kept on each iteration
 }
 
 return(0);
