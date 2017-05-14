@@ -1,84 +1,64 @@
-int plotEfficiency(TString& alg, Double_t cut,TString& signalFile = "ExpressMuons2016newanalysis.11runs.root"){
+Int_t plotEfficiency(TString& algName, Double_t cut,TString& signalFile = "ExpressMuons2016newanalysis.11runs.root")
+{
 
 	/*
 	Joseph Corrado plotEffiency.c
 	Plots effiencies of various ATLAS algorithms versus the MET OFFLINE RECAL algorithm
 	*/
 
-
-	//ROOT FileName
 	TString fileName = "../myData/" + signalFile;
-
-	//Open ROOT file 
 	TFile * 2016Data = TFile::Open(fileName, "READ");
 
-	//Passed hist parameters
-	TString passed_hist_name = alg;
-	TString passed_hist_title = alg;
-
-	//Reference hist parameters 
-	TString reference_hist_name = "metoffrecal";
-	TString reference_hist_title = "METOFFRECAL";
-
-	//Histogram parameters
-	int nbins = 50;
+	Int_t nbins = 100;
 	Double_t metMin = 0.0;
-	Double_t metMax = 100.0;
-
-	//Scatter Plot Parameters
-	int nscatterBinsx = nbins;
-	int nscatterBinsy = nbins;
-	int scatterxmin = -5.0;
-	int scatterxmax = 160.0;
-	int scatterymin = -5.0;
-	int scatterymax = 100.0;
-
-	//Histogram Axis labels 
-	TString xaxis = "MET [GeV]";
-	TString yaxis = "Events";
+	Double_t metMax = 500.0;
 
 //========================================================================================================================
-	//make these plots for all the algorithms in the array 
+		TString teff_name = algName + " vs metoffrecal";
+		teff_title = teff_name + " Efficiency ; GeV ; Efficiency";
 
+		Float_t algorithmMET, offrecal_met, offrecal_mex, offrecal_mey, offrecalmuon_mex, offrecalmuon_mey,metoffrecal;
+		Int_t passrndm,passmuon,cleanCutsFlag, recalBrokeFlag;
 
-
-		//Calculate Full Hist Params
-		TString passed_hist_full_param = (passed_hist_title + " HIST; " + xaxis + ";" + yaxis);
-		TString reference_hist_full_param = (reference_hist_title + " HIST;" + xaxis + ";" + yaxis);
-
-		//TEfficiency Labels
-		TString teff_title;
-		TString teff_name = passed_hist_name + " vs " + reference_hist_name;
-		teff_title = passed_hist_title + " / " + reference_hist_title + " Efficiency" + ";" + xaxis + ";" + " Efficiency";
-
-		//containers for 1st entry of met 
-		Float_t passed_hist_met, metoffrecal;
-
-
-		//Get addresses of variables
-		tree->SetBranchAddress(passed_hist_name, &passed_hist_met);
+		tree->SetBranchAddress(algName, &algorithmMET);
 		tree->SetBranchAddress("metoffrecal", &metoffrecal);
+		tree->SetBranchAddress("passrndm", &passrndm);
+		tree->SetBranchAddress("passmu24med", &passmuon);
+		tree->SetBranchAddress("passcleancuts", &cleanCutsFlag); // get cleancuts flag
+		tree->SetBranchAddress("recalbroke", &recalBrokeFlag); // get recalbroke flag
+		tree->SetBranchAddress("metoffrecal", &offrecal_met);
+		tree->SetBranchAddress("mexoffrecal", &offrecal_mex);
+		tree->SetBranchAddress("meyoffrecal", &offrecal_mey);
+		tree->SetBranchAddress("mexoffrecalmuon", &offrecalmuon_mex);
+		tree->SetBranchAddress("meyoffrecalmuon", &offrecalmuon_mey);
 
-
-		//Initialize TH1F objects
-		TH1F *reference_hist = new TH1F(reference_hist_name, reference_hist_full_param, nbins, metMin, metMax);
-		TH1F *passed_hist = new TH1F(passed_hist_name, passed_hist_full_param, nbins, metMin, metMax);
-
-		//Initialize TEfficiency Object 
+		TH1F *algHist     = new TH1F(algName,algName, nbins, metMin, metMax);
 		TEfficiency *teff = new TEfficiency(teff_name, teff_title, nbins, metMin, metMax);
+		Int_t nentries    = tree->GetEntries();
 
-		//# of entries
-		int nentries = tree->GetEntries();
 		for (Int_t i = 0; i < nentries; i++)
 		{
 			tree->GetEntry(i);
-			//Fill TEfficiency 
-			teff->Fill(passed_hist > cut, metoffrecal);
+			if ( passmuon > 0.1 )
+			{
+				Float_t metnomu = sqrt(((offrecal_mex - offrecalmuon_mex) * (offrecal_mex - offrecalmuon_mex)) +
+					((offrecal_mey - offrecalmuon_mey)*(offrecal_mey - offrecalmuon_mey))); //compute metnomu
+
+				algHist->Fill(algorithmMET);
+				teff->Fill(algorithmMET > cut, metnomu);
+			}
 		}
 
-		//Divide canvas into pads
-		TCanvas *plotCanvas = new TCanvas();
+		TCanvas *c1 = new TCanvas("TEfficiency Canvas", "TEfficiency Canvas");
+		c1->Divide(2);
+
+		c1->cd(1);
 		teff->Draw();
+
+		c1->cd(2);
+		algHist->Draw();
+
+		c1->Draw();
+
 		return(0);
 	}
-

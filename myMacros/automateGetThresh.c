@@ -1,12 +1,12 @@
-Int_t automateGetThresh()
+Int_t automateGetThresh(Float_t frac = 0.003105)
 {
-  /* given some fraction for algorithm a to keep, this program determines the threshold of the algorithm a to keep that fraction
-  and then determines the threshold of algorithm b to keep the same fraction*/
+  /*
+  This program takes in a certain fraction for two algorithms to keep individually, and then computes what fraction of events
+  is kept when both of the algorithms are used at those thresholds
+  */
 
 
   //fraction so metcell and metmht together keep 1-^-4
-  Float_t firstFrac = 0.003105;
-  Float_t frac = firstFrac;
   TString fileName = "../myData/ZeroBias2016new.13Runs.root";
   TFile * 2016Data = TFile::Open(fileName, "READ");
   Int_t nentries = tree->GetEntries();

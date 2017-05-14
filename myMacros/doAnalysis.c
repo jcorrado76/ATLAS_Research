@@ -1,9 +1,9 @@
-int doAnalysis(TString& alg, Float_t thresh) 
+int doAnalysis(TString& alg, Float_t thresh)
 {
 	/*  This macro will apply the cut to muon new analysis data. Then it will calculated the efficiency of an algorithm using this cut,
-	while filling tefficiency with offrecalnomu data. It will plot tefficiencies, histograms, histogram with cut, scatter and send 
+	while filling tefficiency with offrecalnomu data. It will plot tefficiencies, histograms, histogram with cut, scatter and send
 	the graphs to desktop*/
-	
+
 	TString fileName = "../myData/ExpressMuons2016newanalysis.11runs.root";
 	TFile * 2016Data = TFile::Open(fileName, "READ");
 
@@ -22,7 +22,7 @@ int doAnalysis(TString& alg, Float_t thresh)
 	//SET BRANCH ADDRESSES +==============================================================================
 	Float_t algMet, offrecal_met, offrecal_mex, offrecal_mey, offrecalmuon_mex, offrecalmuon_mey;
 	Int_t passmuonFlag, cleanCutsFlag, recalBrokeFlag;
-	tree->SetBranchAddress("passmu24med", &passmuonFlag); // get first pass moun flag 
+	tree->SetBranchAddress("passmu24med", &passmuonFlag); // get first pass moun flag
 	tree->SetBranchAddress("passcleancuts", &cleanCutsFlag); // get cleancuts flag
 	tree->SetBranchAddress("recalbroke", &recalBrokeFlag); // get recalbroke flag
 	tree->SetBranchAddress("metoffrecal", &offrecal_met);
@@ -30,7 +30,7 @@ int doAnalysis(TString& alg, Float_t thresh)
 	tree->SetBranchAddress("meyoffrecal", &offrecal_mey);
 	tree->SetBranchAddress("mexoffrecalmuon", &offrecalmuon_mex);
 	tree->SetBranchAddress("meyoffrecalmuon", &offrecalmuon_mey);
-	tree->SetBranchAddress(alg, &algMet); // get first alg met 
+	tree->SetBranchAddress(alg, &algMet); // get first alg met
 
 
 
@@ -40,7 +40,7 @@ int doAnalysis(TString& alg, Float_t thresh)
 	TH2F *scatter = new TH2F(alg+" Scatter Plot", alg+" Scatter Plot", nbins, metMin, metMax, nbins, metMin, metMax);
 
 	TString cutAlgHistoParam = (alg + Form(" > %.2f", thresh) + " HIST; " + xlabel + ";" + ylabel);
-	
+
 	//BIG LOOP +============================================================
 	for (Int_t k = 0; k < nentries; k++)
 	{
@@ -53,6 +53,7 @@ int doAnalysis(TString& alg, Float_t thresh)
 			}
 			Float_t metnomu = sqrt(((offrecal_mex - offrecalmuon_mex) * (offrecal_mex - offrecalmuon_mex)) +
 				((offrecal_mey - offrecalmuon_mey)*(offrecal_mey - offrecalmuon_mey))); //compute metnomu
+				
 			teff->Fill((algMet > thresh), metnomu); // fill tefficiency
 			scatter->Fill(algMet, metnomu); //fill scatter plot
 		}
@@ -70,5 +71,5 @@ int doAnalysis(TString& alg, Float_t thresh)
 
 	plots->cd(3);
 	cut->Draw();
-	
+
 }
