@@ -1,11 +1,10 @@
-Int_t sameFracGetCombinedFrac()
+Int_t sameFracGetCombinedFrac(TString& algA, TString& algB)
 {
-  /* given some fraction for algorithm a to keep, this program determines the threshold of the algorithm a to keep that fraction
-  and then determines the threshold of algorithm b to keep the same fraction
+  /*
   This program generates the line that goes from the origin. It is the equiFraction kept line.
-  The combined fraction kept is not constant, just the relationship between the fractions kept individually 
+  The combined fraction kept is not constant, just the relationship between the fractions kept individually
   */
-  //fraction so metcell and metmht together keep 1-^-4
+  //fraction so metcell and metmht together keep 10^-4
   //Float_t firstFrac = 0.003105;
 
   Float_t frac = 0.003105; // keeping this fraction for metcell and mht individually keeps 10^(-4) when combined
@@ -16,11 +15,11 @@ Int_t sameFracGetCombinedFrac()
 	Double_t metMin = 0.0;
 	Double_t metMax = 500.0;
   Int_t passrndm, numRndm = 0;
-  Float_t metcell,metmht;
+  Float_t algAMET,algBMET;
   std::cout << "Number of entries in the tree: " << nentries << std::endl;
 
-  tree->SetBranchAddress("metcell",&metcell);
-  tree->SetBranchAddress("metmht",&metmht);
+  tree->SetBranchAddress(algA,&algAMET);
+  tree->SetBranchAddress(algB,&algBMET);
   tree->SetBranchAddress("passrndm",&passrndm);
 
   TH1F *combinedAlgHist = new TH1F("Combined Hist" , "Combined Hist"  , nbins, metMin, metMax);
