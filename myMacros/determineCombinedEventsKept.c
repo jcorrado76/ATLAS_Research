@@ -16,17 +16,20 @@ Int_t determineCombinedEventsKept(TString& algA, Float_t threshA, TString& algB,
   tree->SetBranchAddress(algA,&algAMET);
   tree->SetBranchAddress(algB,&algBMET);
 
-  Int_t counter =0;
+  Int_t counter = 0;
 
   for (Int_t i  = 0 ; i < nentries ;i++)
   {
     tree->GetEntry(i);
-    if (passrndm > 0.1 && algAMET > threshA && algBMET > threshB)
+    if ((passrndm > 0.1) && (algAMET > threshA) && (algBMET > threshB))
     {
       counter++;
     }
   }
 
 std::cout << "Combined alg kept: " << counter << " events" << std::endl;
+
+return(0);
+
 
 }

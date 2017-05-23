@@ -16,9 +16,9 @@ muonFile->GetObject("tree",myTree);
 
 std::cout << "Data being used to compute algorithm efficiency: " << path << std::endl;
 Int_t nentries = myTree->GetEntries();
-Int_t nbins = 60;
+Int_t nbins = 50;
 Double_t metMin = 0.0;
-Double_t metMax = 500.0;
+Double_t metMax = 250.0;
 Int_t passrndm, numPassMuon,passmuon,cleanCutsFlag,recalBrokeFlag;
 Float_t algAMET,algBMET,metoffrecal,offrecal_met,offrecal_mex,offrecal_mey,offrecalmuon_mex,offrecalmuon_mey;
 
@@ -48,9 +48,9 @@ TString cstring = "TEfficiency using " + algA + " at thresh " + Form(" %.2f", al
 TString astring = algA + " TEfficiency at thresh of " + Form(" %.2f", algAThresh);
 TString bstring = algB + " TEfficiency at thresh of " + Form(" %.2f", algBThresh);
 
-TEfficiency* Ateff  = new TEfficiency(astring , astring, nbins, metMin, metMax);
-TEfficiency* Bteff  = new TEfficiency(bstring , bstring, nbins, metMin, metMax);
-TEfficiency* Cteff  = new TEfficiency(cstring, cstring, nbins, metMin, metMax);
+TEfficiency* Ateff  = new TEfficiency(astring , "Efficiency", nbins, metMin, metMax);
+TEfficiency* Bteff  = new TEfficiency(bstring , "Efficiency", nbins, metMin, metMax);
+TEfficiency* Cteff  = new TEfficiency(cstring,  "Efficiency", nbins, metMin, metMax);
 
 
 for (Int_t j = 0 ; j < nentries ; j++)
@@ -68,15 +68,17 @@ for (Int_t j = 0 ; j < nentries ; j++)
 }
 
 TCanvas* c1 = new TCanvas("Efficiency Canvas", "Efficiency Canvas");
-c1->Divide(3);
-c1->cd(1);
 Ateff->Draw();
-
-c1->cd(2);
-Bteff->Draw();
-
-c1->cd(3);
-Cteff->Draw();
+Ateff->SetLineColor(kBlue);
+Bteff->Draw("same");
+Bteff->SetLineColor(kGreen);
+Cteff->Draw("same");
+Cteff->SetLineColor(kRed);
+TLegend *legend = new TLegend(.1,.7,.48,.9);
+legend->AddEntry(Ateff, astring);
+legend->AddEntry(Bteff, bstring);
+legend->AddEntry(Cteff, cstring);
+legend->Draw();
 
 TString path = "./TEfficienciesPics/" + algA + "and" + algB + "efficiencies.pdf";
 

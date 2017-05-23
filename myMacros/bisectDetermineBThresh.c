@@ -1,4 +1,4 @@
-Int_t automateGetThresh(TString& algA = "metcell", TString& algB = "metmht" , Float_t frac = 0.003105)
+Int_t bisectDetermineBThresh(TString& algA = "metcell", TString& algB = "metmht" , Float_t Afrac = 0.003105)
 {
   /*
   Given a fraction of algAMET to keep individually, determines the fraction of algBMET in order to keep 10^(-4)
@@ -12,12 +12,12 @@ cout << "Entered automateGetThresh" << endl;
   TString fileName = "../myData/ZeroBias2016new.13Runs.root";
   TFile * 2016Data = TFile::Open(fileName, "READ");
   Int_t nentries = tree->GetEntries();
-  Int_t nbins = 60;
+  Int_t nbins = 100;
 	Double_t metMin = 0.0;
-	Double_t metMax = 300.0;
+	Double_t metMax = 500.0;
   Int_t passrndm, numRndm = 0;
   Float_t algAMET,algBMET;
-  std::cout << "Number of entries in the tree: " << nentries << std::endl;
+  std::cout << "nentries: " << nentries << std::endl;
   Float_t CONDITION = 10.0**(-4.0);
   tree->SetBranchAddress(algA,&algAMET);
   tree->SetBranchAddress(algB,&algBMET);
@@ -29,9 +29,7 @@ cout << "Entered automateGetThresh" << endl;
   TH1F *algAtarget = new TH1F("cumu2", "cumu", nbins, metMin, metMax); //used to generate cumulative right tail sums
   TH1F *algBtarget = new TH1F("cumu3", "cumu", nbins, metMin, metMax); //used to generate cumulative right tail sums
 
- cout << "Have loaded all parameters and initialized histograms" << endl;
-
- cout << "Filling the algorithm histograms with passrndm events" << endl;
+ cout << "Determining passrndm..." << endl;
   //fill with passrndm
   for (Int_t i = 0 ; i < nentries ; i++)
   {
@@ -45,11 +43,12 @@ cout << "Entered automateGetThresh" << endl;
   }
 
   Float_t combinedNumbToKeep = CONDITION * numRndm;
-  std::cout << "Number of events that passed rndm: " << numRndm << std::endl;
-  std::cout << "10^(-4) times the  number of events that passed rndm: " << combinedNumbToKeep << std::endl;
-  Float_t numbAToKeep = (Float_t) numRndm * frac; // determine how many events the specified fraction for A corresponds to
-  Float_t numbBToKeep = (CONDITION * numRndm) - numbAToKeep; //determine how many events are left for B
-  std::cout << "Target number of events for A to keep individually, keeping fraction " << frac << ": " << numbAToKeep << std::endl;
+  std::cout << "numRndm: " << numRndm << std::endl;
+  std::cout << "10^(-4) events: " << combinedNumbToKeep << std::endl;
+  Float_t numbAToKeep = (Float_t) numRndm * Afrac; // determine how many events the specified fraction for A corresponds to
+  Float_t numbBToKeep = combinedNumbToKeep - numbAToKeep; //determine how many events are left for B
+  std::cout << "numbAToKeep: "<< numbAToKeep << std::endl;
+  std::cout << "numbBToKeep: "<< numbBToKeep << std::endl;
   //=============================================================================
   //determine threshold to keep 10^(-4) events for just algorithm A
   cout << "Determining threshold for algorithm A to keep the input fraction of events individually" << endl;
@@ -80,7 +79,9 @@ cout << "Entered automateGetThresh" << endl;
   //using together keeps total 10^(-4)
 
   std::cout << "Entering bisection" << std::endl;
-
+  std::cout << "Lower Bound: " << lwrbnd << std::endl;
+  std::cout << "Upper Bound: " << uprbnd << std::endl;
+  std::cout << "Epsilon: " << eps << std::endl;
   Int_t j = 0 ;
   Int_t imax = 30;
   Float_t x1,x2,x3;
