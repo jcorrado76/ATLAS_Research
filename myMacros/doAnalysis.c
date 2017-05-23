@@ -3,8 +3,10 @@ int doAnalysis(TString& alg, Float_t thresh)
 	/*  This macro will apply the cut to muon new analysis data. Then it will calculated the efficiency of an algorithm using this cut,
 	while filling tefficiency with offrecalnomu data. It will plot tefficiencies, histograms, histogram with cut, scatter and send
 	the graphs to desktop*/
-
 	TString fileName = "../myData/ExpressMuons2016newanalysis.11runs.root";
+	std::cout << "Plots a scatter plot, a histogram with the cut, and the tefficiency for an algorithm at the given threshold." << '\n'
+						<< "Using file " << fileName << ", and computing metnomu for corrections" << std::endl;
+
 	TFile * 2016Data = TFile::Open(fileName, "READ");
 
 	Int_t nentries = tree->GetEntries();
@@ -53,7 +55,7 @@ int doAnalysis(TString& alg, Float_t thresh)
 			}
 			Float_t metnomu = sqrt(((offrecal_mex - offrecalmuon_mex) * (offrecal_mex - offrecalmuon_mex)) +
 				((offrecal_mey - offrecalmuon_mey)*(offrecal_mey - offrecalmuon_mey))); //compute metnomu
-				
+
 			teff->Fill((algMet > thresh), metnomu); // fill tefficiency
 			scatter->Fill(algMet, metnomu); //fill scatter plot
 		}

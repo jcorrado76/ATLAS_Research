@@ -1,4 +1,4 @@
-Int_t determineCombinedEventsKept(TString& algA, Float_t threshA, TString& algB, Float_t threshB)
+Int_t determineZeroBiasFractionKept(TString& algA, Float_t threshA, TString& algB, Float_t threshB)
 {
   std::cout << "Determining how many zero bias events kept when using combined algorithm of " << algA << " at: " << threshA << " and "
   << algB << " at: " << threshB << std::endl;

@@ -14,7 +14,7 @@ cout << "Entered automateGetThresh" << endl;
   Int_t nentries = tree->GetEntries();
   Int_t nbins = 60;
 	Double_t metMin = 0.0;
-	Double_t metMax = 500.0;
+	Double_t metMax = 300.0;
   Int_t passrndm, numRndm = 0;
   Float_t algAMET,algBMET;
   std::cout << "Number of entries in the tree: " << nentries << std::endl;
