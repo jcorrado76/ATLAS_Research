@@ -1,10 +1,11 @@
-Int_t determineThresh(TString& all = "y", Float_t frac = (1.e-4))
+Float_t determineThresh(TString& all = "y", Float_t frac = (1.e-4))
 {
 	using namespace std;
 	/* determine zerobias thresholds for all algorithms*/
 	TString fileName = "../myData/ZeroBias2016new.13Runs.root";
+	std::cout << "Entering determineThresh.c for " << all << std::endl;
 	std::cout << "Determining thresholds using data: " << fileName << std::endl;
-	TFile * 2016Data = TFile::Open(fileName, "READ");
+	TFile *myFile = TFile::Open(fileName, "READ");
 
 	Int_t nbins = 60;
 	Double_t metMin = 0.0;
@@ -219,7 +220,7 @@ Int_t determineThresh(TString& all = "y", Float_t frac = (1.e-4))
 
 
 std::cout << frac << " times the number of entries in the tree: " << frac * numRndm << std::endl;
-
-	return(indeterminatethresh);
+myFile.Close();
+return(indeterminatethresh);
 
 }

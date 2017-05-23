@@ -4,10 +4,10 @@ int doAnalysis(TString& alg, Float_t thresh)
 	while filling tefficiency with offrecalnomu data. It will plot tefficiencies, histograms, histogram with cut, scatter and send
 	the graphs to desktop*/
 	TString fileName = "../myData/ExpressMuons2016newanalysis.11runs.root";
-	std::cout << "Plots a scatter plot, a histogram with the cut, and the tefficiency for an algorithm at the given threshold." << '\n'
-						<< "Using file " << fileName << ", and computing metnomu for corrections" << std::endl;
+	std::cout << "Plots a scatter plot, a histogram with the cut, and the tefficiency for " << alg << " at using a threshold of " << thresh
+	<< '\n'<< "Using file " << fileName << ", and computing metnomu for corrections" << std::endl;
 
-	TFile * 2016Data = TFile::Open(fileName, "READ");
+	TFile *2016Data = TFile::Open(fileName, "READ");
 
 	Int_t nentries = tree->GetEntries();
 
