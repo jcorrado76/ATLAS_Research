@@ -4,7 +4,7 @@ Float_t determineCombinedEventsKept(TString& algA, Float_t threshA, TString& alg
   << algB << " at: " << threshB << std::endl;
   TString fileName = "../myData/ZeroBias2016new.13Runs.root";
 	TFile * 2016Data = TFile::Open(fileName, "READ");
-	Int_t nbins = 60;
+	Int_t nbins = 100;
 	Double_t metMin = 0.0;
 	Double_t metMax = 500.0;
   Int_t nentries = tree->GetEntries();

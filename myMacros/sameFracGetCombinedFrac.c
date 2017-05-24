@@ -10,7 +10,7 @@ such that they keep the same fraction individually" << std::endl;
   TString fileName = "../myData/ZeroBias2016new.13Runs.root";
   TFile * 2016Data = TFile::Open(fileName, "READ");
   Int_t nentries = tree->GetEntries();
-  Int_t nbins = 60;
+  Int_t nbins = 100;
 	Double_t metMin = 0.0;
 	Double_t metMax = 250.0;
   Int_t passrndm, numRndm = 0;
@@ -46,25 +46,25 @@ std::cout << "numCombined to keep: " << numRndm * CONDITION << std::endl;
 
   Float_t lwrbnd = CONDITION;
   Float_t uprbnd = 0.005;
-  Float_t eps = 0.0005;
+  Float_t eps = 0.00025;
   //guess a value of B thresh, then run bisection until converge on thresh such that at fixed thresh of A,
   //using together keeps total 10^(-4)
 
   Float_t acthresh,bcthresh;
 
   std::cout << "Entering bisection to determine individual fractions" << std::endl;
-  std::cout << "Lower Bound: " << lwrbnd << " events" << std::endl;
-  std::cout << "Midpoint: " << (lwrbnd+uprbnd)/2. << " events " << std::endl;
-  std::cout << "Upper Bound: " << uprbnd << " events" << std::endl;
+  std::cout << "Lower Bound: " << lwrbnd << std::endl;
+  std::cout << "Midpoint: " << (lwrbnd+uprbnd)/2. << std::endl;
+  std::cout << "Upper Bound: " << uprbnd << std::endl;
   std::cout << "Epsilon: " << eps << std::endl;
   Int_t j = 0 ;
   Int_t imax = 30;
   Float_t x1,x3; //thresholds of individual algorithms
   Float_t f1,f2,f3 = 0; //number of events kept
-  Float_t currentWidth;
   x1 = lwrbnd;
   x3 = uprbnd;
   Float_t initialGuess = ( x1 + x3 ) / 2.0;
+  Float_t currentWidth = x3-x1;
 
   //determine how many events kept using the determined thresholds
   std::cout << "Determining the number of events kept at the endpoints of the interval and at midpoint..." << std::endl;
@@ -192,12 +192,13 @@ std::cout << "numCombined to keep: " << numRndm * CONDITION << std::endl;
 
   for ( j = 1 ; j <= imax ; j++)
   {
+    std::cout << "Current width of interval: " << currentWidth << std::endl;
     if (currentWidth < eps)
     {
       std::cout << "\nA root at x = " <<  initialGuess << " was found within epsilon "
            << "in " << j << " iterations" << std::endl;
+      std::cout << "The number of combined events kept is  " << f2*numRndm << std::endl;
       std::cout << "The fraction of combined events kept is  " << f2 << std::endl;
-
       return(0);
     }
     std::cout << "Inside iteration number: " << j << std::endl;
@@ -207,9 +208,7 @@ std::cout << "numCombined to keep: " << numRndm * CONDITION << std::endl;
       currentWidth = (initialGuess - x1) / 2.0;
       f3 = f2;
       x3 = initialGuess;
-
     }
-
     else //root is in right half of  interval
     {
       std::cout << "Root is to the right of " << initialGuess << std::endl;
@@ -224,8 +223,8 @@ std::cout << "numCombined to keep: " << numRndm * CONDITION << std::endl;
     {
       std::cout << "\nA root at x = " <<  initialGuess << " was found within epsilon "
            << "in " << j << " iterations" << std::endl;
+      std::cout << "The number of combined events kept is  " << f2*numRndm << std::endl;
       std::cout << "The fraction of combined events kept is  " << f2 << std::endl;
-
       return(0);
     }
     else
@@ -273,7 +272,7 @@ std::cout << "numCombined to keep: " << numRndm * CONDITION << std::endl;
         std::cout << "f2: " << f2 << std::endl;
 
     }
-    cout << "Fraction of combined events kept at " << initialGuess << ": " << f2 << endl;
+    std::cout << "Fraction of combined events kept at " << initialGuess << ": " << f2 << std::endl;
   }
 
 return(f2);

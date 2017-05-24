@@ -11,7 +11,7 @@ Int_t determineSameFracThresh(TString& algA, TString algB, Float_t frac = (1.e-4
 	std::cout << "Determining thresholds using data: " << fileName << std::endl;
 	TFile *myFile = TFile::Open(fileName, "READ");
 
-	Int_t nbins = 60;
+	Int_t nbins = 100;
 	Double_t metMin = 0.0;
 	Double_t metMax = 500.0;
 
