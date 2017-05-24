@@ -1,129 +1,280 @@
-Int_t sameFracGetCombinedFrac(TString& algA, TString& algB)
+Float_t sameFracGetCombinedFrac(TString& algA, TString& algB)
 {
-  /*
-  This program generates the line that goes from the origin. It is the equiFraction kept line.
-  The combined fraction kept is not constant, just the relationship between the fractions kept individually
-  */
-  //fraction so metcell and metmht together keep 10^-4
-  //Float_t firstFrac = 0.003105;
+//this program finds the point on the equifraction line extending from the origin in alg fraction space, where
+//height above point is 10^(-4)
+// this program will bisect to determine the fraction both algs need to keep in order to keep 10^(-4) combined
 
-  Float_t frac = 0.003105; // keeping this fraction for metcell and mht individually keeps 10^(-4) when combined
+std::cout << "Will return the combined frac to yield 2 thresholds for the algorithms to keep 10^(-4) zero bias events combined
+such that they keep the same fraction individually" << std::endl;
+
   TString fileName = "../myData/ZeroBias2016new.13Runs.root";
   TFile * 2016Data = TFile::Open(fileName, "READ");
   Int_t nentries = tree->GetEntries();
-  Int_t nbins = 200;
+  Int_t nbins = 60;
 	Double_t metMin = 0.0;
-	Double_t metMax = 500.0;
+	Double_t metMax = 250.0;
   Int_t passrndm, numRndm = 0;
   Float_t algAMET,algBMET;
-  std::cout << "Number of entries in the tree: " << nentries << std::endl;
+  Float_t algAMETx1thresh,algBMETx1thresh;
+  Float_t algAMETx2thresh,algBMETx2thresh;
+  Float_t algAMETx3thresh,algBMETx3thresh;
+  Float_t CONDITION = 1.0*10**(-4.0);
+  TString xlabel = "MET [GeV]";
+  TString yaxis = "Events";
+  Int_t counter1 = 0;
+  Int_t counter2 = 0;
+  Int_t counter3 = 0;
+
+
+std::cout << "nentries: " << nentries << std::endl;
 
   tree->SetBranchAddress(algA,&algAMET);
   tree->SetBranchAddress(algB,&algBMET);
   tree->SetBranchAddress("passrndm",&passrndm);
 
-  TH1F *combinedAlgHist = new TH1F("Combined Hist" , "Combined Hist"  , nbins, metMin, metMax);
-  TH1F *metcellHist = new TH1F("metcell", "metcell", nbins, metMin, metMax);
-  TH1F *metmhtHist = new TH1F("metmht", "metmht", nbins, metMin, metMax);
-  TH1F *metcelltarget = new TH1F("cumu2", "cumu", nbins, metMin, metMax); //used to generate cumulative right tail sums
-  TH1F *metmhttarget = new TH1F("cumu3", "cumu", nbins, metMin, metMax); //used to generate cumulative right tail sums
-
-  //fill with passrndm
-  for (Int_t i = 0 ; i < nentries ; i++)
+  Int_t numRndm =0;
+  for (Long64_t k = 0; k < nentries; k++)
   {
-    tree->GetEntry(i);
+    tree->GetEntry(k);
     if (passrndm > 0.1)
     {
       numRndm++;
-      metcellHist->Fill(metcell);
-			metmhtHist->Fill(metmht);
     }
   }
 
-  Float_t numbToKeep = (Float_t) (numRndm*frac); // how many events is the coresponding fraction of passrndm
-  Float_t AthreshArray[20];
-  Float_t BthreshArray[20];
-  Float_t combinedFracArray[20];
+std::cout << "numCombined to keep: " << numRndm * CONDITION << std::endl;
 
-  for (Int_t j = 0 ; j < 20 ; j++)
+  Float_t lwrbnd = CONDITION;
+  Float_t uprbnd = 0.005;
+  Float_t eps = 0.0005;
+  //guess a value of B thresh, then run bisection until converge on thresh such that at fixed thresh of A,
+  //using together keeps total 10^(-4)
+
+  Float_t acthresh,bcthresh;
+
+  std::cout << "Entering bisection to determine individual fractions" << std::endl;
+  std::cout << "Lower Bound: " << lwrbnd << " events" << std::endl;
+  std::cout << "Midpoint: " << (lwrbnd+uprbnd)/2. << " events " << std::endl;
+  std::cout << "Upper Bound: " << uprbnd << " events" << std::endl;
+  std::cout << "Epsilon: " << eps << std::endl;
+  Int_t j = 0 ;
+  Int_t imax = 30;
+  Float_t x1,x3; //thresholds of individual algorithms
+  Float_t f1,f2,f3 = 0; //number of events kept
+  Float_t currentWidth;
+  x1 = lwrbnd;
+  x3 = uprbnd;
+  Float_t initialGuess = ( x1 + x3 ) / 2.0;
+
+  //determine how many events kept using the determined thresholds
+  std::cout << "Determining the number of events kept at the endpoints of the interval and at midpoint..." << std::endl;
+
+  TH1F *algAMETHist = new TH1F(algA, algA, nbins, metMin, metMax);
+  TH1F *algBMETHist = new TH1F(algB, algB, nbins, metMin, metMax);
+
+  //initialize histograms for right cumulative sum
+  TH1F *algAMETtarget = new TH1F("cumu1", "cumu", nbins, metMin, metMax);
+  TH1F *algBMETtarget = new TH1F("cumu2", "cumu", nbins, metMin, metMax);
+
+  //generate the cumulative right tail sum hist
+    for (Long64_t k = 0; k < nentries; k++)
+    {
+      tree->GetEntry(k);
+      if (passrndm > 0.1)
+      {
+        algAMETHist->Fill(algAMET);
+        algBMETHist->Fill(algBMET);
+      }
+    }
+
+    std::cout << "numRndm: " << numRndm << std::endl;
+    Float_t numKeepx1 = numRndm * x1;
+    std::cout << "numKeepx1: " << numKeepx1 << std::endl;
+    Float_t numKeepx2 = numRndm * initialGuess;
+    std::cout << "numKeepx2: " << numKeepx2 << std::endl;
+    Float_t numKeepx3 = numRndm * x3;
+    std::cout << "numKeepx3: " << numKeepx3 << std::endl;
+
+//Determine thresholds
+    for (Int_t t = nbins; t >= 0; t--) //AX1 Thresh
+    {
+      Float_t summ1 = 0;
+
+      for (Int_t i = t; i <= nbins; i++)
+      {
+        summ1 += algAMETHist->GetBinContent(i);
+      }
+      algAMETtarget->SetBinContent(t, summ1);
+    }
+    for (Int_t t = nbins; t >= 0; t--)
+    {
+      if ((abs(algAMETtarget->GetBinContent(t) - (numKeepx1) > 0) != (abs(algAMETtarget->GetBinContent(t + 1) - (numKeepx1)) > 0)))
+      {
+        algAMETx1thresh = algAMETtarget->GetBinCenter(t);
+      }
+    }
+    for (Int_t t = nbins; t >= 0; t--) //BX1 Thresh
+    {
+      summ1 = 0;
+
+      for (Int_t i = t; i <= nbins; i++)
+      {
+        summ1 += algBMETHist->GetBinContent(i);
+      }
+      algBMETtarget->SetBinContent(t, summ1);
+    }
+    for (Int_t t = nbins; t >= 0; t--)
+    {
+      if ((abs(algBMETtarget->GetBinContent(t) - (numKeepx1) > 0) != (abs(algBMETtarget->GetBinContent(t + 1) - (numKeepx1)) > 0)))
+      {
+        algBMETx1thresh = algBMETtarget->GetBinCenter(t);
+      }
+    }
+    //=======================================================================================
+    for (Int_t t = nbins; t >= 0; t--) //AX2 Thresh
+    {
+      if ((abs(algAMETtarget->GetBinContent(t) - (numKeepx2) > 0) != (abs(algAMETtarget->GetBinContent(t + 1) - (numKeepx2)) > 0)))
+      {
+        algAMETx2thresh = algAMETtarget->GetBinCenter(t);
+      }
+    }
+    for (Int_t t = nbins; t >= 0; t--) //BX2 Thresh
+    {
+      if ((abs(algBMETtarget->GetBinContent(t) - (numKeepx2) > 0) != (abs(algBMETtarget->GetBinContent(t + 1) - (numKeepx2)) > 0)))
+      {
+        algBMETx2thresh = algBMETtarget->GetBinCenter(t);
+      }
+    }
+    //======================================================================================
+    for (Int_t t = nbins; t >= 0; t--) //AX3 Thresh
+    {
+      if ((abs(algAMETtarget->GetBinContent(t) - (numKeepx3) > 0) != (abs(algAMETtarget->GetBinContent(t + 1) - (numKeepx3)) > 0)))
+      {
+        algAMETx3thresh = algAMETtarget->GetBinCenter(t);
+      }
+    }
+    for (Int_t t = nbins; t >= 0; t--) //BX3 Thresh
+    {
+      if ((abs(algBMETtarget->GetBinContent(t) - (numKeepx3) > 0) != (abs(algBMETtarget->GetBinContent(t + 1) - (numKeepx3)) > 0)))
+      {
+        algBMETx3thresh = algBMETtarget->GetBinCenter(t);
+      }
+    }
+    //=============================================================================================
+    for (Int_t i  = 0 ; i < nentries ;i++) //determine events kept at each threshold
+    {
+      tree->GetEntry(i);
+      if ((passrndm > 0.1) && (algAMET > algAMETx1thresh) && (algBMET > algBMETx1thresh))
+      {
+        counter1++;
+      }
+      if ((passrndm > 0.1) && (algAMET > algAMETx2thresh) && (algBMET > algBMETx2thresh))
+      {
+        counter2++;
+      }
+      if ((passrndm > 0.1) && (algAMET > algAMETx3thresh) && (algBMET > algBMETx3thresh))
+      {
+        counter3++;
+      }
+    }
+
+    std::cout << "At x1 = " << x1 << " Combined alg kept: " << counter1 << " events" << std::endl;
+    f1 = (Float_t) counter1 / (Float_t) numRndm;
+    std::cout << "f1: " << f1 << std::endl;
+
+    std::cout << "At x2 = " << initialGuess << " Combined alg kept: " << counter2 << " events" << std::endl;
+    f2 = (Float_t) counter2 / (Float_t) numRndm;
+    std::cout << "f2: " << f2 << std::endl;
+
+    std::cout << "At x3 = " << x3 << " Combined alg kept: " << counter3 << " events" << std::endl;
+    f3 = (Float_t) counter3 / (Float_t) numRndm;
+    std::cout << "f3: " << f3 << std::endl;
+
+  for ( j = 1 ; j <= imax ; j++)
   {
-      //=============================================================================
-      //determine threshold to keep 10^(-4) events for just algorithm A
-      std::cout << "Determining threshold for metcell..." << std::endl;
-      for (int t = nbins; t >= 0; t--)
-      {
-        Float_t summ2 = 0;
+    if (currentWidth < eps)
+    {
+      std::cout << "\nA root at x = " <<  initialGuess << " was found within epsilon "
+           << "in " << j << " iterations" << std::endl;
+      std::cout << "The fraction of combined events kept is  " << f2 << std::endl;
 
-        for (int i = t; i <= nbins; i++)
-        {
-          summ2 += metcellHist->GetBinContent(i);
-        }
-        metcelltarget->SetBinContent(t, summ2);
-      }
-      for (int t = nbins; t >= 0; t--)
-      {
-        if ((abs(metcelltarget->GetBinContent(t) - (numbToKeep) > 0) != (abs(metcelltarget->GetBinContent(t + 1) - (numbToKeep)) > 0)))
-        {
-          Float_t metcellthresh = metcelltarget->GetBinCenter(t);
-        }
-      }
-      std::cout << "Threshold for metcell: " << metcellthresh << std::endl;
-      //===================================================================================
-      //determine threshold to keep 10^(-4) events for just algorithm B
-      std::cout << "Determining threshold for metmht..." << std::endl;
-      for (Int_t t = nbins; t >= 0 ; t--)
-      {
-        Float_t summ3 = 0;
+      return(0);
+    }
+    std::cout << "Inside iteration number: " << j << std::endl;
+    if ( (f1-CONDITION)*(f2-CONDITION) < 0 ) //root is in left half of interval
+    {
+      std::cout << "Root is to the left of " << initialGuess << std::endl;
+      currentWidth = (initialGuess - x1) / 2.0;
+      f3 = f2;
+      x3 = initialGuess;
 
-        for (int i = t; i <= nbins; i++)
-        {
-          summ3 += metmhtHist->GetBinContent(i);
-        }
-        metmhttarget->SetBinContent(t, summ3);
-      }
-      for (int t = nbins; t >= 0; t--)
-      {
-        if ((abs(metmhttarget->GetBinContent(t) - (numbToKeep) > 0) != (abs(metmhttarget->GetBinContent(t + 1) - (numbToKeep)) > 0)))
-        {
-          Float_t metmhtthresh = metmhttarget->GetBinCenter(t);
-        }
-      }
-      std::cout << "Threshold for metmht: " << metmhtthresh << std::endl;
-      //=================================================================================
-      //all this does is print determine how many events are kept from combined algorithm and prints it
-      std::cout << "Determining Ratio Kept from Combined Algorithm..." << std::endl;
-      Int_t countC,countA,countB = 0 ;
-      for (Int_t k = 0 ; k < nentries; k++)
-      {
-        tree->GetEntry(k);
-        if ((passrndm > 0.1) && (metmht > metmhtthresh) && (metcell > metcellthresh))
-        {
-          countC++;
-        }
-        if((passrndm > 0.1) && metcell > metcellthresh)
-        {
-          countA++;
-        }
-        if((passrndm > 0.1) && metmht>metmhtthresh)
-        {
-          countB++;
-        }
-      }
-      std::cout << "Number of events kept after only metcell: " << countA << std::endl;
-      std::cout << "Number of events kept after only metmht: " << countB << std::endl;
-      std::cout << "Number of events kept after combined alg: " << countC << std::endl;
-      Float_t fractionC = (Float_t) countC / (Float_t) numRndm;
-      Float_t fractionA = (Float_t) countA / (Float_t) numRndm;
-      Float_t fractionB = (Float_t) countB / (Float_t) numRndm;
-      std::cout << "Fraction of Events kept after combined alg: " << fractionC << std::endl;
-      std::cout << "Fraction of Events kept after alg A: " << fractionA << std::endl;
-      std::cout << "Fraction of Events kept after alg B: " << fractionB << std::endl;
-      std::cout << "Current index of iteration: " << j << std::endl;
-      AthreshArray[j] = metcellthresh;
-      BthreshArray[j] = metmhtthresh;
-      combinedFracArray[j] = fractionC;
-      numbToKeep = numbToKeep + 10; //this starts at 10^(-4) and works toward origin by decreasing threshold to increase number kept on each iteration
-}
+    }
 
-return(0);
+    else //root is in right half of  interval
+    {
+      std::cout << "Root is to the right of " << initialGuess << std::endl;
+      currentWidth = (x3 - initialGuess) / 2.0;
+      f1 = f2;
+      x1 = initialGuess;
+    }
+
+    std::cout << "Current width of interval: " << currentWidth << std::endl;
+
+    if (currentWidth < eps)
+    {
+      std::cout << "\nA root at x = " <<  initialGuess << " was found within epsilon "
+           << "in " << j << " iterations" << std::endl;
+      std::cout << "The fraction of combined events kept is  " << f2 << std::endl;
+
+      return(0);
+    }
+    else
+    {
+      std::cout << "No root found, continuing bisection... " << std::endl;
+      std::cout << "Fraction of combined events kept at individual frac, " << initialGuess << ": " << f2 << std::endl;
+      initialGuess = ( x1 + x3 ) / 2.0;
+      cout << "New Guess: " << initialGuess << endl;
+      k = 0;
+
+      numKeepx2 = numRndm * initialGuess;
+
+        for (Int_t t = nbins; t >= 0; t--)
+        {
+          if ((abs(algAMETtarget->GetBinContent(t) - (numKeepx2) > 0) != (abs(algAMETtarget->GetBinContent(t + 1) - (numKeepx2)) > 0)))
+          {
+            algAMETx2thresh = algAMETtarget->GetBinCenter(t);
+          }
+        }
+
+        for (Int_t t = nbins; t >= 0; t--)
+        {
+          if ((abs(algBMETtarget->GetBinContent(t) - (numKeepx2) > 0) != (abs(algBMETtarget->GetBinContent(t + 1) - (numKeepx2)) > 0)))
+          {
+            algBMETx2thresh = algBMETtarget->GetBinCenter(t);
+          }
+        }
+
+        std::cout << "Alg A Thresh: " << algAMETx2thresh << std::endl;
+        std::cout << "Alg B Thresh: " << algBMETx2thresh << std::endl;
+
+        counter2 = 0;
+
+        for (Int_t i  = 0 ; i < nentries ;i++)
+        {
+          tree->GetEntry(i);
+          if ((passrndm > 0.1) && (algAMET > algAMETx2thresh) && (algBMET > algBMETx2thresh))
+          {
+            counter2++;
+          }
+        }
+
+        std::cout << "Combined alg kept: " << counter2 << " events" << std::endl;
+        f2 = (Float_t) counter2 / (Float_t) numRndm;
+        std::cout << "f2: " << f2 << std::endl;
+
+    }
+    cout << "Fraction of combined events kept at " << initialGuess << ": " << f2 << endl;
+  }
+
+return(f2);
 }

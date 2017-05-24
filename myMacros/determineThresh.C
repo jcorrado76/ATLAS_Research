@@ -219,7 +219,7 @@ Float_t determineThresh(TString& all = "y", Float_t frac = (1.e-4))
 	}
 
 
-std::cout << frac << " times the number of entries in the tree: " << frac * numRndm << std::endl;
+std::cout << "num events: " << frac * numRndm << std::endl;
 myFile.Close();
 return(indeterminatethresh);
 

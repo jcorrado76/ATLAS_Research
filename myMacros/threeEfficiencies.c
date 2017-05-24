@@ -20,7 +20,7 @@ Int_t nbins = 50;
 Double_t metMin = 0.0;
 Double_t metMax = 250.0;
 Int_t passrndm, numPassMuon,passmuon,cleanCutsFlag,recalBrokeFlag;
-Float_t algAMET,algBMET,metoffrecal,offrecal_met,offrecal_mex,offrecal_mey,offrecalmuon_mex,offrecalmuon_mey;
+Float_t algAMET,algBMET,metoffrecal,offrecal_met,offrecal_mex,offrecal_mey,offrecalmuon_mex,offrecalmuon_mey,acthresh,bcthresh;
 
 myTree->SetBranchAddress(algA,&algAMET);
 myTree->SetBranchAddress(algB,&algBMET);
@@ -40,11 +40,23 @@ Float_t algAThresh = (Float_t) gROOT->ProcessLine(argc);
 argc = ".x determineThresh.c(\"" + algB + "\")";
 Float_t algBThresh = (Float_t) gROOT->ProcessLine(argc);
 
+//same frac individually, together keep 10^(-4) thresholds
+gROOT->ProcessLine(".L sameFracGetCombinedFrac.c");
+argc = ".x sameFracGetCombinedFrac(\"" + algA + "\",\"" + algB + "\")";
+Float_t combinedFrac = gROOT->ProcessLine(argc);
+
+argc = ".x determineThresh.c(\"" + algA + "\"," + combinedFrac + ")";
+Float_t acthresh = (Float_t) gROOT->ProcessLine(argc);
+argc = ".x determineThresh.c(\"" + algB + "\"," + combinedFrac + ")";
+Float_t bcthresh = (Float_t) gROOT->ProcessLine(argc);
+
 std::cout << "Threshold to keep 10^(-4) events for " << algA << ": " << algAThresh << std::endl;
 std::cout << "Threshold to keep 10^(-4) events for " << algB << ": " << algBThresh << std::endl;
+std::cout << "Thresholds to keep 10^(-4) events respectively for: " << algA << " and " << algB << ": " << acthresh << " and " << bcthresh
+<<std::endl;
 
-TString cstring = "TEfficiency using " + algA + " at thresh " + Form(" %.2f", algAThresh) + " and " + algB +
-" at thresh " + Form(" %.2f", algBThresh);
+TString cstring = "TEfficiency using " + algA + " at thresh " + Form(" %.2f", acthresh) + " and " + algB +
+" at thresh " + Form(" %.2f", bcthresh);
 TString astring = algA + " TEfficiency at thresh of " + Form(" %.2f", algAThresh);
 TString bstring = algB + " TEfficiency at thresh of " + Form(" %.2f", algBThresh);
 
@@ -63,7 +75,7 @@ for (Int_t j = 0 ; j < nentries ; j++)
         ((offrecal_mey - offrecalmuon_mey)*(offrecal_mey - offrecalmuon_mey))); //compute metnomu
         Ateff->Fill(algAMET > algAThresh, metnomu);
         Bteff->Fill(algBMET > algBThresh, metnomu);
-        Cteff->Fill(((algAMET > algAThresh) && (algBMET > algBThresh) ), metnomu);
+        Cteff->Fill(((algAMET > acthresh) && (algBMET > bcthresh) ), metnomu);
     }
 }
 
