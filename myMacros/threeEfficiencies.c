@@ -40,10 +40,19 @@ Float_t algAThresh = (Float_t) gROOT->ProcessLine(argc);
 argc = ".x determineThresh.c(\"" + algB + "\")";
 Float_t algBThresh = (Float_t) gROOT->ProcessLine(argc);
 
+std::cout << "Returned to threeEfficiencies.c" << std::endl;
+std::cout << "algAThresh: " << algAThresh << std::endl;
+std::cout << "algBThresh: " << algBThresh << std::endl;
+
+
 //same frac individually, together keep 10^(-4) thresholds
 gROOT->ProcessLine(".L sameFracGetCombinedFrac.c");
-argc = ".x sameFracGetCombinedFrac(\"" + algA + "\",\"" + algB + "\")";
+argc = ".x sameFracGetCombinedFrac.c(\"" + algA + "\",\"" + algB + "\")";
 Float_t combinedFrac = gROOT->ProcessLine(argc);
+
+std::cout << "Returned to threeEfficiencies.c" << std::endl;
+std::cout << "CombinedFrac to keep: " << combinedFrac << std::endl;
+
 
 argc = ".x determineThresh.c(\"" + algA + "\"," + combinedFrac + ")";
 Float_t acthresh = (Float_t) gROOT->ProcessLine(argc);
