@@ -1,5 +1,6 @@
 Float_t determineThresh(TString& all = "y", Float_t frac = (1.e-4))
 {
+	gROOT->ProcessLine("gROOT->Reset();");
 	using namespace std;
 	/* determine zerobias thresholds for all algorithms*/
 	TString fileName = "../myData/ZeroBias2016new.13Runs.root";
@@ -56,7 +57,7 @@ Float_t determineThresh(TString& all = "y", Float_t frac = (1.e-4))
 	if (all == "y")
 	{
 		std::cout << "Determining thresholds for all algorithms..." << std::endl;
-		Int_t numRndm =0;
+		Int_t numRndm = 0;
 		for (Long64_t k = 0; k < nentries; k++)
 		{
 			tree->GetEntry(k);

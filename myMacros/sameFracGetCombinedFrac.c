@@ -7,8 +7,8 @@ Float_t sameFracGetCombinedFrac(TString& algA, TString& algB)
 std::cout << "Will return the combined frac to yield 2 thresholds for the algorithms to keep 10^(-4) zero bias events combined
 such that they keep the same fraction individually" << std::endl;
 
-  TString fileName = "../myData/ZeroBias2016new.13Runs.root";
-  TFile * 2016Data = TFile::Open(fileName, "READ");
+  TString myfileName = "../myData/ZeroBias2016new.13Runs.root";
+  TFile * 2016Data = TFile::Open(myfileName, "READ");
   Int_t nentries = tree->GetEntries();
   Int_t nbins = 400;
 	Double_t metMin = 0.0;
@@ -50,8 +50,6 @@ std::cout << "numCombined to keep: " << numRndm * CONDITION << std::endl;
   //guess a value of B thresh, then run bisection until converge on thresh such that at fixed thresh of A,
   //using together keeps total 10^(-4)
 
-  Float_t acthresh,bcthresh;
-
   std::cout << "Entering bisection to determine individual fractions" << std::endl;
   std::cout << "Lower Bound: " << lwrbnd << std::endl;
   std::cout << "Midpoint: " << (lwrbnd+uprbnd)/2. << std::endl;
@@ -64,7 +62,6 @@ std::cout << "numCombined to keep: " << numRndm * CONDITION << std::endl;
   x1 = lwrbnd;
   x3 = uprbnd;
   Float_t initialGuess = ( x1 + x3 ) / 2.0;
-  Float_t currentWidth = x3-x1;
 
   //determine how many events kept using the determined thresholds
   std::cout << "Determining the number of events kept at the endpoints of the interval and at midpoint..." << std::endl;
@@ -76,7 +73,6 @@ std::cout << "numCombined to keep: " << numRndm * CONDITION << std::endl;
   TH1F *algAMETtarget = new TH1F("cumu1", "cumu", nbins, metMin, metMax);
   TH1F *algBMETtarget = new TH1F("cumu2", "cumu", nbins, metMin, metMax);
 
-  //generate the cumulative right tail sum hist
     for (Long64_t k = 0; k < nentries; k++)
     {
       tree->GetEntry(k);
@@ -200,20 +196,18 @@ std::cout << "numCombined to keep: " << numRndm * CONDITION << std::endl;
            << "in " << j << " iterations" << std::endl;
       std::cout << "The number of combined events kept is  " << f2*numRndm << std::endl;
       std::cout << "The fraction of combined events kept is  " << f2 << std::endl;
-      return(0);
+      return(f2);
     }
     std::cout << "Inside iteration number: " << j << std::endl;
     if ( (f1-CONDITION)*(f2-CONDITION) < 0 ) //root is in left half of interval
     {
       std::cout << "Root is to the left of " << initialGuess << std::endl;
-      currentWidth = (initialGuess - x1) / 2.0;
       f3 = f2;
       x3 = initialGuess;
     }
     else //root is in right half of  interval
     {
       std::cout << "Root is to the right of " << initialGuess << std::endl;
-      currentWidth = (x3 - initialGuess) / 2.0;
       f1 = f2;
       x1 = initialGuess;
     }
