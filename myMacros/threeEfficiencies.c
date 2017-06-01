@@ -6,7 +6,6 @@ Int_t threeEfficiencies(TString& algA , TString& algB)
   TEFFICIENCY ALG b AT 10^(-4)
   TEFFICIENCY ALG c AT 10^(-4)
   */
-
 TString fileName = "ExpressMuons2016newanalysis.11runs.root";
 Float_t frac = (Float_t) 10.0**(-4.0);
 TString path = "../myData/"+fileName;
@@ -22,8 +21,6 @@ Double_t muonMetMax = 250.0;
 Int_t passrndm, numPassMuon,passmuon,cleanCutsFlag,recalBrokeFlag;
 Float_t algAMET,algBMET,metoffrecal,offrecal_met,offrecal_mex,offrecal_mey,offrecalmuon_mex,offrecalmuon_mey,acthresh,bcthresh;
 
-myMuonTree->SetBranchAddress(algA,&algAMET);
-myMuonTree->SetBranchAddress(algB,&algBMET);
 myMuonTree->SetBranchAddress("passmu24med", &passmuon); // get first pass moun flag
 myMuonTree->SetBranchAddress("passcleancuts", &cleanCutsFlag); // get cleancuts flag
 myMuonTree->SetBranchAddress("recalbroke", &recalBrokeFlag); // get recalbroke flag
@@ -33,20 +30,22 @@ myMuonTree->SetBranchAddress("meyoffrecal", &offrecal_mey);
 myMuonTree->SetBranchAddress("mexoffrecalmuon", &offrecalmuon_mex);
 myMuonTree->SetBranchAddress("meyoffrecalmuon", &offrecalmuon_mey);
 
-gSystem->CompileMacro("determineThresh.C");
+
+gROOT->ProcessLine(".L determineThresh.c");
+TString argc;
+argc = ".x determineThresh.c(\"" + algA + "\")";
+Float_t algAThresh = (Float_t) gROOT->ProcessLine(argc);
+argc = ".x determineThresh.c(\"" + algB + "\")";
+Float_t algBThresh = (Float_t) gROOT->ProcessLine(argc);
+
 /*
+gSystem->CompileMacro("determineThresh.C");
 TString argc;
 argc = ".x determineThresh.c(\"" + algA + "\")";
 Float_t algAThresh = (Float_t) gROOT->ProcessLine(argc);
 argc = ".x determineThresh.c(\"" + algB + "\")";
 Float_t algBThresh = (Float_t) gROOT->ProcessLine(argc);
 */
-TString argc;
-argc = "determineThresh(\"" + algA + "\")";
-Float_t algAThresh = (Float_t) gROOT->ProcessLine(argc);
-argc = "determineThresh(\"" + algB + "\")";
-Float_t algBThresh = (Float_t) gROOT->ProcessLine(argc);
-
 
 
 
@@ -57,16 +56,23 @@ std::cout << "algBThresh: " << algBThresh << std::endl;
 std::cout << "Will return the combined frac to yield 2 thresholds for the algorithms to keep 10^(-4) zero bias events combined
 such that they keep the same fraction individually" << std::endl;
 
+//having troule opening this second file and using it
+
   TString myfileName = "../myData/ZeroBias2016new.13Runs.root";
   TFile * myData = TFile::Open(myfileName, "READ");
   TTree* myTree = NULL;
   myData->GetObject("tree",myTree);
-  Int_t nentries = tree->GetEntries();
+  Int_t nentries = myTree->GetEntries();
   Int_t nbins = 400;
+
 	Double_t metMin = 0.0;
 	Double_t metMax = 250.0;
-  Int_t passrndm, numRndm = 0;
-  Float_t algAMET,algBMET;
+
+  myTree->SetBranchAddress("passrndm", &passrndm); // get pass rndm flag
+  myTree->SetBranchAddress(algA,&algAMET);
+  myTree->SetBranchAddress(algB,&algBMET);
+  //passrndm keeps coming up as zero after I loop through all nentries
+  Int_t numRndm = 0;
   Float_t algAMETx1thresh,algBMETx1thresh;
   Float_t algAMETx2thresh,algBMETx2thresh;
   Float_t algAMETx3thresh,algBMETx3thresh;
@@ -88,7 +94,6 @@ such that they keep the same fraction individually" << std::endl;
     myTree->GetEntry(k);
     if (passrndm > 0.1)
     {
-      std::cout << "incrementing numRndm" << std::endl;
       numRndm++;
       algAMETHist->Fill(algAMET);
       algBMETHist->Fill(algBMET);
@@ -185,7 +190,8 @@ such that they keep the same fraction individually" << std::endl;
   //=============================================================================================
   for (Int_t i  = 0 ; i < nentries ;i++) //determine events kept at each threshold
   {
-    tree->GetEntry(i);
+    myTree->GetEntry(i);
+
     if ((passrndm > 0.1) && (algAMET > algAMETx1thresh) && (algBMET > algBMETx1thresh))
     {
       counter1++;
@@ -275,7 +281,7 @@ such that they keep the same fraction individually" << std::endl;
 
       for (Int_t i  = 0 ; i < nentries ;i++)
       {
-        tree->GetEntry(i);
+        myTree->GetEntry(i);
         if ((passrndm > 0.1) && (algAMET > algAMETx2thresh) && (algBMET > algBMETx2thresh))
         {
           counter2++;
@@ -306,6 +312,10 @@ TString bstring = algB + " TEfficiency at thresh of " + Form(" %.2f", algBThresh
 TEfficiency* Ateff  = new TEfficiency(astring , "Efficiency", muonNbins, muonMetMin, muonMetMax);
 TEfficiency* Bteff  = new TEfficiency(bstring , "Efficiency", muonNbins, muonMetMin, muonMetMax);
 TEfficiency* Cteff  = new TEfficiency(cstring,  "Efficiency", muonNbins, muonMetMin, muonMetMax);
+
+//DRAW TEFFICIENCIES USING THE MUON DATA
+myMuonTree->SetBranchAddress(algA,&algAMET);
+myMuonTree->SetBranchAddress(algB,&algBMET);
 
 for (Int_t j = 0 ; j < nentries ; j++)
 {

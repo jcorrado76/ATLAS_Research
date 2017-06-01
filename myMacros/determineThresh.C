@@ -52,8 +52,7 @@ Float_t determineThresh(TString& all = "y", Float_t frac = (1.e-4))
 	std::cout << "Number of entries in the tree: " << nentries << std::endl;
 	Float_t  metl1thresh, metcellthresh, metmhtthresh, mettopoclthresh, mettopoclpsthresh, mettopoclpucthresh,indeterminatethresh;
 
-
-	//generate the cumulative right tail sum hist
+	//compute and display thresholds for all algorithms
 	if (all == "y")
 	{
 		std::cout << "Determining thresholds for all algorithms..." << std::endl;
@@ -183,6 +182,9 @@ Float_t determineThresh(TString& all = "y", Float_t frac = (1.e-4))
 		std::cout << "Threshold for mettopoclps: " << mettopoclpsthresh << std::endl;
 		std::cout << "Threshold for mettopoclpuc: " << mettopoclpucthresh << std::endl;
 	}
+
+
+// user only wants to compute threshold for one of the algorithms
 
 	if (all != "y")
 	{
