@@ -314,8 +314,8 @@ TEfficiency* Bteff  = new TEfficiency(bstring , "Efficiency", muonNbins, muonMet
 TEfficiency* Cteff  = new TEfficiency(cstring,  "Efficiency", muonNbins, muonMetMin, muonMetMax);
 
 //DRAW TEFFICIENCIES USING THE MUON DATA
-myMuonTree->SetBranchAddress(algA,&algAMET);
-myMuonTree->SetBranchAddress(algB,&algBMET);
+myTree->SetBranchAddress(algA,&algAMET);
+myTree->SetBranchAddress(algB,&algBMET);
 
 for (Int_t j = 0 ; j < nentries ; j++)
 {
