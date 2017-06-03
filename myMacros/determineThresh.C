@@ -3,8 +3,7 @@ Float_t determineThresh(TString& all = "y", Float_t frac = (1.e-4))
 	gROOT->ProcessLine("gROOT->Reset();");
 	using namespace std;
 	TString fileName = "../myData/ZeroBias2016new.13Runs.root";
-	std::cout << "Entering determineThresh.c for " << all << std::endl;
-	std::cout << "Determining thresholds using data: " << fileName << std::endl;
+	std::cout << "DATAFILE: " << fileName << std::endl;
 	TFile *myFile = TFile::Open(fileName, "READ");
 	Int_t nentries = tree->GetEntries();
 	Int_t nbins = 400;
@@ -24,15 +23,7 @@ Float_t determineThresh(TString& all = "y", Float_t frac = (1.e-4))
 	TH1F *indeterminateHist = new TH1F(all, all, nbins, metMin, metMax);
 	TString xlabel = "MET [GeV]";
 	TString yaxis = "Events";
-	tree->SetBranchAddress("metl1", &metl1);
-	tree->SetBranchAddress("metcell", &metcell);
-	tree->SetBranchAddress("metmht", &metmht);
-	tree->SetBranchAddress("mettopocl", &mettopocl);
-	tree->SetBranchAddress("mettopoclps", &mettopoclps);
-	tree->SetBranchAddress("mettopoclpuc", &mettopoclpuc);
-	tree->SetBranchAddress("metoffrecal", &metoffrecal);
 	tree->SetBranchAddress("passrndm", &passrndm);
-	tree->SetBranchAddress(all,&indeterminate);
 	TH1F *metl1target         = new TH1F("cumu1", "cumu", nbins, metMin, metMax);;
 	TH1F *metcelltarget       = new TH1F("cumu2", "cumu", nbins, metMin, metMax);
 	TH1F *metmhttarget        = new TH1F("cumu3", "cumu", nbins, metMin, metMax);
@@ -40,12 +31,19 @@ Float_t determineThresh(TString& all = "y", Float_t frac = (1.e-4))
 	TH1F *mettopoclpstarget   = new TH1F("cumu5", "cumu", nbins, metMin, metMax);
 	TH1F *mettopoclpuctarget  = new TH1F("cumu6", "cumu", nbins, metMin, metMax);
 	TH1F *indeterminatetarget = new TH1F("cumu7", "cumu", nbins, metMin, metMax);
-	std::cout << "Determining threshold to keep " << frac << " events in zerobias data after passing rndm" << std::endl;
-	std::cout << "Number of entries in the tree: " << nentries << std::endl;
+	std::cout << "FRACTION: " << frac << std::endl;
+	std::cout << "NENTRIES: " << nentries << std::endl;
 
 	if (all == "y")
 	{
-		std::cout << "Determining thresholds for all algorithms..." << std::endl;
+		tree->SetBranchAddress("metl1", &metl1);
+		tree->SetBranchAddress("metcell", &metcell);
+		tree->SetBranchAddress("metmht", &metmht);
+		tree->SetBranchAddress("mettopocl", &mettopocl);
+		tree->SetBranchAddress("mettopoclps", &mettopoclps);
+		tree->SetBranchAddress("mettopoclpuc", &mettopoclpuc);
+		tree->SetBranchAddress("metoffrecal", &metoffrecal);
+		std::cout << "ALL ALGORITHMS SELECTED..." << std::endl;
 		for (Int_t k = 0; k < nentries; k++)
 		{
 			tree->GetEntry(k);
@@ -61,36 +59,30 @@ Float_t determineThresh(TString& all = "y", Float_t frac = (1.e-4))
 			}
 		}
 		Float_t numKeep = numRndm * frac;
-
 		computeTarget(metl1Hist,metl1target,nbins);
 		metl1thresh = computeThresh(metl1target, numKeep, nbins);
-
 		computeTarget(metcellHist,metcelltarget,nbins);
 		metcellthresh = computeThresh(metcelltarget, numKeep, nbins);
-
 		computeTarget(metmhtHist,metmhttarget,nbins);
 		metmhtthresh = computeThresh(metmhttarget, numKeep, nbins);
-
 		computeTarget(mettopoclHist,mettopocltarget,nbins);
 		mettopoclthresh = computeThresh(mettopocltarget, numKeep, nbins);
-
 		computeTarget(mettopoclpsHist,mettopoclpstarget,nbins);
 		mettopoclpsthresh = computeThresh(mettopoclpstarget, numKeep, nbins);
-
 		computeTarget(mettopoclpucHist,mettopoclpuctarget,nbins);
 		mettopoclpucthresh = computeThresh(mettopoclpuctarget, numKeep, nbins);
-		
-		std::cout << "Threshold for metl1: " << metl1thresh << std::endl;
-		std::cout << "Threshold for metcell: " << metcellthresh << std::endl;
-		std::cout << "Threshold for metmht: " << metmhtthresh << std::endl;
-		std::cout << "Threshold for mettopocl: " << mettopoclthresh << std::endl;
-		std::cout << "Threshold for mettopoclps: " << mettopoclpsthresh << std::endl;
-		std::cout << "Threshold for mettopoclpuc: " << mettopoclpucthresh << std::endl;
+		std::cout << "METL1 THRESHOLD: " << metl1thresh << std::endl;
+		std::cout << "METCELL THRESHOLD: " << metcellthresh << std::endl;
+		std::cout << "METMHT THRESHOLD: " << metmhtthresh << std::endl;
+		std::cout << "METTOPOCL THRESHOLD: " << mettopoclthresh << std::endl;
+		std::cout << "METTOPOCLPS THRESHOLD: " << mettopoclpsthresh << std::endl;
+		std::cout << "METTOPOCLPUC THRESHOLD: " << mettopoclpucthresh << std::endl;
 	}
 
 	if (all != "y") //only compute thresh for one alg
 	{
-		std::cout << "Determining threshold for " << all << "..." << std::endl;
+		tree->SetBranchAddress(all,&indeterminate);
+		std::cout << all << " SELECTED..." << std::endl;
 		for (Int_t k = 0; k < nentries; k++)
 		{
 			tree->GetEntry(k);
@@ -103,14 +95,14 @@ Float_t determineThresh(TString& all = "y", Float_t frac = (1.e-4))
 		computeTarget(indeterminateHist,indeterminatetarget,nbins);
 		Float_t numKeep = numRndm * frac;
 		indeterminatethresh = computeThresh(indeterminatetarget, numKeep, nbins);
-		std::cout << "Threshold for " << all << ": " << indeterminatethresh << std::endl;
+		std::cout << all << " THRESHOLD: " << indeterminatethresh << std::endl;
 	}
 
-std::cout << "num events: " << frac * numRndm << std::endl;
+std::cout << "EVENTS KEPT: " << frac * numRndm << std::endl;
 myFile.Close();
 return(indeterminatethresh);
 }
-
+//HELPER FUNCTIONS
 TH1F* computeTarget(TH1F* hist , TH1F* target, Int_t nbins)
 {
 	for (Int_t t = nbins; t >= 0; t--)
