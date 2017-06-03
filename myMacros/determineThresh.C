@@ -1,7 +1,8 @@
 Float_t determineThresh(TString& all = "y", Float_t frac = (1.e-4))
 {
-	gROOT->ProcessLine("gROOT->Reset();");
+	#include <string>
 	using namespace std;
+	gROOT->ProcessLine("gROOT->Reset();");
 	TString fileName = "../myData/ZeroBias2016new.13Runs.root";
 	std::cout << "DATAFILE: " << fileName << std::endl;
 	TFile *myFile = TFile::Open(fileName, "READ");
@@ -77,6 +78,18 @@ Float_t determineThresh(TString& all = "y", Float_t frac = (1.e-4))
 		std::cout << "METTOPOCL THRESHOLD: " << mettopoclthresh << std::endl;
 		std::cout << "METTOPOCLPS THRESHOLD: " << mettopoclpsthresh << std::endl;
 		std::cout << "METTOPOCLPUC THRESHOLD: " << mettopoclpucthresh << std::endl;
+/*
+		std::ofstream log_file("DetermineThreshLog.txt", std::ios_base::out | std::ios_base::app );
+		log_file << "Accessed: " << currentDateTime() << std::endl;
+		log_file << "DATAFILE: " << fileName << "\tFRACTION: " << frac << std::endl;
+		log_file << "NBINS: " << nbins << "NUMRNDM:" << numRndm << std::endl;
+		log_file << "METL1 THRESH: " << metl1thresh << std::endl;
+		log_file << "METCELL THRESH: " << metcellthresh << std::endl;
+		log_file << "METMHT THRESH: "<< metmhtthresh << std::endl;
+		log_file << "METTOPOCL THRESH: " << mettopoclthresh << std::endl;
+		log_file << "METTOPOCLPS THRESH: " << mettopoclpsthresh << std::endl;
+		log_file << "METTOPOCLPUC THRESH: " << mettopoclpucthresh << std::endl;
+		log_file << "\n" << std::endl;*/
 	}
 
 	if (all != "y") //only compute thresh for one alg
@@ -96,11 +109,18 @@ Float_t determineThresh(TString& all = "y", Float_t frac = (1.e-4))
 		Float_t numKeep = numRndm * frac;
 		indeterminatethresh = computeThresh(indeterminatetarget, numKeep, nbins);
 		std::cout << all << " THRESHOLD: " << indeterminatethresh << std::endl;
+/*
+		std::ofstream log_file("DetermineThreshLog.txt", std::ios_base::out | std::ios_base::app );
+		log_file << "Accessed: " << currentDateTime() << std::endl;
+		log_file << "DATAFILE: " << fileName << "\tFRACTION: " << frac << std::endl;
+		log_file << "NBINS: " << nbins << "NUMRNDM:" << numRndm << std::endl;
+		log_file << "ALG: " << all << "THRESH: " << indeterminatethresh << std::endl;
+		log_file << "\n" << std::endl;
+*/
 	}
-
-std::cout << "EVENTS KEPT: " << frac * numRndm << std::endl;
-myFile.Close();
-return(indeterminatethresh);
+	std::cout << "EVENTS KEPT: " << frac * numRndm << std::endl;
+	myFile.Close();
+	return(indeterminatethresh);
 }
 
 
@@ -127,3 +147,14 @@ Float_t computeThresh(TH1F* target, Float_t numKeep, Int_t nbins)
 	}
 	return(thresh);
 }
+/*
+std::string currentDateTime()
+{
+    time_t     now = time(0);
+    struct tm  tstruct;
+    char       buf[80];
+    tstruct = *localtime(&now);
+    strftime(buf, sizeof(buf), "%Y-%m-%d.%X", &tstruct);
+    return buf;
+}
+*/
