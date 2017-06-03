@@ -64,93 +64,22 @@ Float_t determineThresh(TString& all = "y", Float_t frac = (1.e-4))
 
 		computeTarget(metl1Hist,metl1target,nbins);
 		metl1thresh = computeThresh(metl1target, numKeep, nbins);
+
+		computeTarget(metcellHist,metcelltarget,nbins);
+		metcellthresh = computeThresh(metcelltarget, numKeep, nbins);
+
+		computeTarget(metmhtHist,metmhttarget,nbins);
+		metmhtthresh = computeThresh(metmhttarget, numKeep, nbins);
+
+		computeTarget(mettopoclHist,mettopocltarget,nbins);
+		mettopoclthresh = computeThresh(mettopocltarget, numKeep, nbins);
+
+		computeTarget(mettopoclpsHist,mettopoclpstarget,nbins);
+		mettopoclpsthresh = computeThresh(mettopoclpstarget, numKeep, nbins);
+
+		computeTarget(mettopoclpucHist,mettopoclpuctarget,nbins);
+		mettopoclpucthresh = computeThresh(mettopoclpuctarget, numKeep, nbins);
 		
-
-		for (Int_t t = nbins; t >= 0; t--)
-		{
-			Float_t summ2 = 0;
-
-			for (Int_t i = t; i <= nbins; i++)
-			{
-				summ2 += metcellHist->GetBinContent(i);
-			}
-			metcelltarget->SetBinContent(t, summ2);
-		}
-		for (Int_t t = nbins; t >= 0; t--)
-		{
-			if ((abs(metcelltarget->GetBinContent(t) - (numKeep) > 0) != (abs(metcelltarget->GetBinContent(t + 1) - (numKeep)) > 0)))
-			{
-				metcellthresh = metcelltarget->GetBinCenter(t);
-			}
-		}
-		for (Int_t t = nbins; t >= 0; t--)
-		{
-			Float_t summ3 = 0;
-
-			for (Int_t i = t; i <= nbins; i++)
-			{
-				summ3 += metmhtHist->GetBinContent(i);
-			}
-			metmhttarget->SetBinContent(t, summ3);
-		}
-		for (Int_t t = nbins; t >= 0; t--)
-		{
-			if ((abs(metmhttarget->GetBinContent(t) - (numKeep) > 0) != (abs(metmhttarget->GetBinContent(t + 1) - (numKeep)) > 0)))
-			{
-				metmhtthresh = metmhttarget->GetBinCenter(t);
-			}
-		}
-		for (Int_t t = nbins; t >= 0; t--)
-		{
-			Float_t summ4 = 0;
-
-			for (Int_t i = t; i <= nbins; i++)
-			{
-				summ4 += mettopoclHist->GetBinContent(i);
-			}
-			mettopocltarget->SetBinContent(t, summ4);
-		}
-		for (Int_t t = nbins; t >= 0; t--)
-		{
-			if ((abs(mettopocltarget->GetBinContent(t) - (numKeep) > 0) != (abs(mettopocltarget->GetBinContent(t + 1) - (numKeep)) > 0)))
-			{
-				mettopoclthresh = mettopocltarget->GetBinCenter(t);
-			}
-		}
-		for (Int_t t = nbins; t >= 0; t--)
-		{
-			Float_t summ5 = 0;
-
-			for (Int_t i = t; i <= nbins; i++)
-			{
-				summ5 += mettopoclpsHist->GetBinContent(i);
-			}
-			mettopoclpstarget->SetBinContent(t, summ5);
-		}
-		for (Int_t t = nbins; t >= 0; t--)
-		{
-			if ((abs(mettopoclpstarget->GetBinContent(t) - (numKeep) > 0) != (abs(mettopoclpstarget->GetBinContent(t + 1) - (numKeep)) > 0)))
-			{
-				mettopoclpsthresh = mettopoclpstarget->GetBinCenter(t);
-			}
-		}
-		for (Int_t t = nbins; t >= 0; t--)
-		{
-			Float_t summ6 = 0;
-
-			for (Int_t i = t; i <= nbins; i++)
-			{
-				summ6 += mettopoclpucHist->GetBinContent(i);
-			}
-			mettopoclpuctarget->SetBinContent(t, summ6);
-		}
-		for (Int_t t = nbins; t >= 0; t--)
-		{
-			if ((abs(mettopoclpuctarget->GetBinContent(t) - (numKeep) > 0) != (abs(mettopoclpuctarget->GetBinContent(t + 1) - (numKeep)) > 0)))
-			{
-				mettopoclpucthresh = mettopoclpuctarget->GetBinCenter(t);
-			}
-		}
 		std::cout << "Threshold for metl1: " << metl1thresh << std::endl;
 		std::cout << "Threshold for metcell: " << metcellthresh << std::endl;
 		std::cout << "Threshold for metmht: " << metmhtthresh << std::endl;
