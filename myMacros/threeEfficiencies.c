@@ -15,22 +15,23 @@ TTree* myMuonTree = NULL;
 muonFile->GetObject("tree",myMuonTree);
 
 std::cout << "Data being used to compute algorithm efficiency: " << path << std::endl;
-Int_t nentries = myMuonTree->GetEntries();
+Int_t muonNentries = myMuonTree->GetEntries();
 Int_t muonNbins = 50;
 Double_t muonMetMin = 0.0;
 Double_t muonMetMax = 250.0;
 Int_t passrndm, numPassMuon,passmuon,cleanCutsFlag,recalBrokeFlag;
 Float_t algAMET,algBMET,metoffrecal,offrecal_met,offrecal_mex,offrecal_mey,offrecalmuon_mex,offrecalmuon_mey,acthresh,bcthresh;
 
-myMuonTree->SetBranchAddress("passmu24med", &passmuon); // get first pass moun flag
-myMuonTree->SetBranchAddress("passcleancuts", &cleanCutsFlag); // get cleancuts flag
-myMuonTree->SetBranchAddress("recalbroke", &recalBrokeFlag); // get recalbroke flag
+myMuonTree->SetBranchAddress("passmu24med", &passmuon);
+myMuonTree->SetBranchAddress("passcleancuts", &cleanCutsFlag);
+myMuonTree->SetBranchAddress("recalbroke", &recalBrokeFlag);
 myMuonTree->SetBranchAddress("metoffrecal", &offrecal_met);
 myMuonTree->SetBranchAddress("mexoffrecal", &offrecal_mex);
 myMuonTree->SetBranchAddress("meyoffrecal", &offrecal_mey);
 myMuonTree->SetBranchAddress("mexoffrecalmuon", &offrecalmuon_mex);
 myMuonTree->SetBranchAddress("meyoffrecalmuon", &offrecalmuon_mey);
 
+std::cout << "MuonNentries: " << muonNentries << std::endl;
 
 gROOT->ProcessLine(".L determineThresh.c");
 TString argc;
@@ -151,10 +152,6 @@ such that they keep the same fraction individually" << std::endl;
   f3 = (Float_t) counter3 / (Float_t) numRndm;
   std::cout << "f3: " << f3 << std::endl;
 
-  std::cout << numRndm * CONDITION - counter2 << std::endl;
-  std::cout << eps << std::endl;
-  std::cout << j << std::endl;
-
   while ( (abs( numRndm * CONDITION - counter2) > eps)  && ( j <= imax ) )
   {
     j++;
@@ -190,7 +187,6 @@ such that they keep the same fraction individually" << std::endl;
     std::cout << "Counter2: " << counter2 << std::endl;
     f2 = (Float_t) counter2 / (Float_t) numRndm;
     std::cout << "f2: " << f2 << std::endl;
-    std::cout << "Fraction of combined events kept at " << initialGuess << ": " << f2 << std::endl;
     std::cout << "Condition: " << abs(numRndm * CONDITION - counter2) << " > " << eps << std::endl;
   }
   if (abs(counter2-(numRndm*CONDITION)) < eps)
@@ -221,15 +217,11 @@ TEfficiency* Ateff  = new TEfficiency(astring , "Efficiency", muonNbins, muonMet
 TEfficiency* Bteff  = new TEfficiency(bstring , "Efficiency", muonNbins, muonMetMin, muonMetMax);
 TEfficiency* Cteff  = new TEfficiency(cstring,  "Efficiency", muonNbins, muonMetMin, muonMetMax);
 
-//DRAW TEFFICIENCIES USING THE MUON DATA
 myTree->SetBranchAddress(algA,&algAMET);
 myTree->SetBranchAddress(algB,&algBMET);
-
-
-
-for (Int_t k = 0 ; k < nentries ; k++)
+for (Int_t l = 0 ; l < nentries ; l++)
 {
-    myMuonTree->GetEntry(k);
+    myMuonTree->GetEntry(l);
     //CLEANCUTS AND RECALBROKE
     if (passmuon > 0.1 && cleanCutsFlag > 0.1 && recalBrokeFlag < 0.1)
     {

@@ -9,8 +9,10 @@ Float_t determineCombinedEventsKept(TString& algA, Float_t threshA, TString& alg
 	Double_t metMax = 500.0;
   Int_t nentries = tree->GetEntries();
   Float_t algAMET, algBMET;
-  Int_t passrndm;
+  Int_t passrndm,cleanCutsFlag,recalBrokeFlag;
 
+  tree->SetBranchAddress("passcleancuts", &cleanCutsFlag);
+  tree->SetBranchAddress("recalbroke", &recalBrokeFlag);
   tree->SetBranchAddress("passrndm",&passrndm);
   tree->SetBranchAddress(algA,&algAMET);
   tree->SetBranchAddress(algB,&algBMET);
@@ -24,7 +26,7 @@ Float_t determineCombinedEventsKept(TString& algA, Float_t threshA, TString& alg
     {
       numRndm++;
     }
-    if ((passrndm > 0.1) && (algAMET > threshA) && (algBMET > threshB))
+    if ((passrndm > 0.1) && (cleanCutsFlag > 0.1) && (recalBrokeFlag > 0.1) && (algAMET > threshA) && (algBMET > threshB))
     {
       counter++;
     }
