@@ -217,8 +217,8 @@ TEfficiency* Ateff  = new TEfficiency(astring , "Efficiency", muonNbins, muonMet
 TEfficiency* Bteff  = new TEfficiency(bstring , "Efficiency", muonNbins, muonMetMin, muonMetMax);
 TEfficiency* Cteff  = new TEfficiency(cstring,  "Efficiency", muonNbins, muonMetMin, muonMetMax);
 
-myTree->SetBranchAddress(algA,&algAMET);
-myTree->SetBranchAddress(algB,&algBMET);
+myMuonTree->SetBranchAddress(algA,&algAMET);
+myMuonTree->SetBranchAddress(algB,&algBMET);
 for (Int_t l = 0 ; l < nentries ; l++)
 {
     myMuonTree->GetEntry(l);
