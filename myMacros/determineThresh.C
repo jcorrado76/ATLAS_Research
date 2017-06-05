@@ -1,8 +1,9 @@
 Float_t determineThresh(TString& all = "y", Float_t frac = (1.e-4))
 {
 	#include <string>
-	using namespace std;
 	gROOT->ProcessLine("gROOT->Reset();");
+	using namespace std;
+	std::cout << "Entering determineThresh.c" << std::endl;
 	TString fileName = "../myData/ZeroBias2016new.13Runs.root";
 	std::cout << "DATAFILE: " << fileName << std::endl;
 	TFile *myFile = TFile::Open(fileName, "READ");
@@ -15,28 +16,26 @@ Float_t determineThresh(TString& all = "y", Float_t frac = (1.e-4))
 	Float_t metl1, metcell, metmht, mettopocl, mettopoclps, mettopoclpuc, metoffrecal,indeterminate,
 	metl1thresh, metcellthresh, metmhtthresh, mettopoclthresh, mettopoclpsthresh, mettopoclpucthresh,
 	indeterminatethresh,rightHandSum;
-	TH1F *metl1Hist         = new TH1F("metl1", "metl1", nbins, metMin, metMax);;
-	TH1F *metcellHist       = new TH1F("metcell", "metcell", nbins, metMin, metMax);
-	TH1F *metmhtHist        = new TH1F("metmht", "metmht", nbins, metMin, metMax);
-	TH1F *mettopoclHist     = new TH1F("mettopocl", "mettopocl", nbins, metMin, metMax);
-	TH1F *mettopoclpsHist   = new TH1F("mettopoclps", "mettopoclps", nbins, metMin, metMax);
-	TH1F *mettopoclpucHist  = new TH1F("mettopoclpuc", "mettopoclpuc", nbins, metMin, metMax);
-	TH1F *indeterminateHist = new TH1F(all, all, nbins, metMin, metMax);
 	TString xlabel = "MET [GeV]";
 	TString yaxis = "Events";
 	tree->SetBranchAddress("passrndm", &passrndm);
-	TH1F *metl1target         = new TH1F("cumu1", "cumu", nbins, metMin, metMax);;
-	TH1F *metcelltarget       = new TH1F("cumu2", "cumu", nbins, metMin, metMax);
-	TH1F *metmhttarget        = new TH1F("cumu3", "cumu", nbins, metMin, metMax);
-	TH1F *mettopocltarget     = new TH1F("cumu4", "cumu", nbins, metMin, metMax);
-	TH1F *mettopoclpstarget   = new TH1F("cumu5", "cumu", nbins, metMin, metMax);
-	TH1F *mettopoclpuctarget  = new TH1F("cumu6", "cumu", nbins, metMin, metMax);
-	TH1F *indeterminatetarget = new TH1F("cumu7", "cumu", nbins, metMin, metMax);
 	std::cout << "FRACTION: " << frac << std::endl;
 	std::cout << "NENTRIES: " << nentries << std::endl;
 
 	if (all == "y")
 	{
+		TH1F *metl1Hist         = new TH1F("metl1", "metl1", nbins, metMin, metMax);;
+		TH1F *metcellHist       = new TH1F("metcell", "metcell", nbins, metMin, metMax);
+		TH1F *metmhtHist        = new TH1F("metmht", "metmht", nbins, metMin, metMax);
+		TH1F *mettopoclHist     = new TH1F("mettopocl", "mettopocl", nbins, metMin, metMax);
+		TH1F *mettopoclpsHist   = new TH1F("mettopoclps", "mettopoclps", nbins, metMin, metMax);
+		TH1F *mettopoclpucHist  = new TH1F("mettopoclpuc", "mettopoclpuc", nbins, metMin, metMax);
+		TH1F *metl1target         = new TH1F("cumu1", "cumu", nbins, metMin, metMax);;
+		TH1F *metcelltarget       = new TH1F("cumu2", "cumu", nbins, metMin, metMax);
+		TH1F *metmhttarget        = new TH1F("cumu3", "cumu", nbins, metMin, metMax);
+		TH1F *mettopocltarget     = new TH1F("cumu4", "cumu", nbins, metMin, metMax);
+		TH1F *mettopoclpstarget   = new TH1F("cumu5", "cumu", nbins, metMin, metMax);
+		TH1F *mettopoclpuctarget  = new TH1F("cumu6", "cumu", nbins, metMin, metMax);
 		tree->SetBranchAddress("metl1", &metl1);
 		tree->SetBranchAddress("metcell", &metcell);
 		tree->SetBranchAddress("metmht", &metmht);
@@ -94,6 +93,8 @@ Float_t determineThresh(TString& all = "y", Float_t frac = (1.e-4))
 
 	if (all != "y") //only compute thresh for one alg
 	{
+		TH1F *indeterminateHist = new TH1F(all, all, nbins, metMin, metMax);
+		TH1F *indeterminatetarget = new TH1F("cumu7", "cumu", nbins, metMin, metMax);
 		tree->SetBranchAddress(all,&indeterminate);
 		std::cout << all << " SELECTED..." << std::endl;
 		for (Int_t k = 0; k < nentries; k++)
