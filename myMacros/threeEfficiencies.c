@@ -38,17 +38,6 @@ Float_t algAThresh = (Float_t) gROOT->ProcessLine(argc);
 argc = ".x determineThresh.c(\"" + algB + "\")";
 Float_t algBThresh = (Float_t) gROOT->ProcessLine(argc);
 
-/*
-gSystem->CompileMacro("determineThresh.C");
-TString argc;
-argc = ".x determineThresh.c(\"" + algA + "\")";
-Float_t algAThresh = (Float_t) gROOT->ProcessLine(argc);
-argc = ".x determineThresh.c(\"" + algB + "\")";
-Float_t algBThresh = (Float_t) gROOT->ProcessLine(argc);
-*/
-
-
-
 std::cout << "Returned to threeEfficiencies.c" << std::endl;
 std::cout << "algAThresh: " << algAThresh << std::endl;
 std::cout << "algBThresh: " << algBThresh << std::endl;
@@ -351,5 +340,28 @@ c1.Print(path);
 return(0);
 
 
+}
 
+//HELPER FUNCTIONS
+TH1F* computeTarget(TH1F* hist , TH1F* target, Int_t nbins)
+{
+	for (Int_t t = nbins; t >= 0; t--)
+	{
+		Float_t rightHandSum = hist->Integral(t,nbins); //compute t'th target bin
+		target->SetBinContent(t, rightHandSum);
+	}
+	return(target);
+}
+
+Float_t computeThresh(TH1F* target, Float_t numKeep, Int_t nbins)
+{
+	Float_t thresh;
+	for (Int_t t = nbins; t >= 0; t--)
+	{
+		if ((abs(target->GetBinContent(t) - (numKeep) > 0) != (abs(target->GetBinContent(t + 1) - (numKeep)) > 0)))
+		{
+			thresh = target->GetBinCenter(t);
+		}
+	}
+	return(thresh);
 }

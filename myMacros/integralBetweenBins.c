@@ -3,8 +3,6 @@
 This code will find the integral between two x values of the histogram
 instead of bin numbers
 */
-
-
 //find bin number for a given value of x
 int bin = h->GetXAxis()->FindBin(x);
 
