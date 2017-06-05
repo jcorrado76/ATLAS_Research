@@ -1,9 +1,11 @@
-Float_t determineCombinedEventsKept(TString& algA, Float_t threshA, TString& algB, Float_t threshB)
+Float_t determineCombinedEventsKept(TString& algA, Float_t threshA, TString& algB, Float_t threshB, TString& fileName = "ZeroBias2016new.13Runs.root")
 {
+  gROOT->ProcessLine("gROOT->Reset();");
   std::cout << "Determining fraction of zero bias events kept when using combined algorithm of " << algA << " at: " << threshA << " and "
   << algB << " at: " << threshB << std::endl;
-  TString fileName = "../myData/ZeroBias2016new.13Runs.root";
-	TFile * 2016Data = TFile::Open(fileName, "READ");
+
+  TString path = "../myData/"+fileName;
+	TFile * 2016Data = TFile::Open(path, "READ");
 	Int_t nbins = 400;
 	Double_t metMin = 0.0;
 	Double_t metMax = 500.0;
@@ -35,7 +37,7 @@ Float_t frac = (Float_t) counter / (Float_t) numRndm;
 std::cout << "Fraction of passrndm events: " << frac << std::endl;
 
 
-return(frac);
+return(counter);
 
 
 }

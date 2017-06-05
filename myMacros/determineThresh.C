@@ -1,10 +1,10 @@
-Float_t determineThresh(TString& all = "y", Float_t frac = (1.e-4))
+Float_t determineThresh(TString& all = "y", Float_t frac = (1.e-4),TString& dataFile = "ZeroBias2016new.13Runs.root")
 {
 	#include <string>
 	gROOT->ProcessLine("gROOT->Reset();");
 	using namespace std;
 	std::cout << "Entering determineThresh.c" << std::endl;
-	TString fileName = "../myData/ZeroBias2016new.13Runs.root";
+	TString fileName = "../myData/" + dataFile;
 	std::cout << "DATAFILE: " << fileName << std::endl;
 	TFile *myFile = TFile::Open(fileName, "READ");
 	Int_t nentries = tree->GetEntries();

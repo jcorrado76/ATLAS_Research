@@ -6,10 +6,12 @@ Int_t threeEfficiencies(TString& algA , TString& algB)
   TEFFICIENCY ALG b AT 10^(-4)
   TEFFICIENCY ALG c AT 10^(-4)
   */
+
 gROOT->ProcessLine("gROOT->Reset();");
-TString fileName = "ExpressMuons2016newanalysis.11runs.root";
-Float_t frac = (Float_t) 10.0**(-4.0);
-TString path = "../myData/"+fileName;
+TString muonFilename = "ExpressMuons2016newanalysis.11runs.root";
+TString myFileName = "ZeroBias2016new.13Runs.root";
+Float_t frac = (Float_t) 1e-4;
+TString path = "../myData/"+muonFilename;
 TFile * muonFile = TFile::Open(path, "READ");
 TTree* myMuonTree = NULL;
 muonFile->GetObject("tree",myMuonTree);
@@ -17,6 +19,7 @@ muonFile->GetObject("tree",myMuonTree);
 std::cout << "Data being used to compute algorithm efficiency: " << path << std::endl;
 Int_t muonNentries = myMuonTree->GetEntries();
 Int_t muonNbins = 50;
+Int_t nbins = 400;
 Double_t muonMetMin = 0.0;
 Double_t muonMetMax = 250.0;
 Int_t passrndm, numPassMuon,passmuon,cleanCutsFlag,recalBrokeFlag;
@@ -33,26 +36,12 @@ myMuonTree->SetBranchAddress("meyoffrecalmuon", &offrecalmuon_mey);
 
 std::cout << "MuonNentries: " << muonNentries << std::endl;
 
-gROOT->ProcessLine(".L determineThresh.c");
-TString argc;
-argc = ".x determineThresh.c(\"" + algA + "\")";
-Float_t algAThresh = (Float_t) gROOT->ProcessLine(argc);
-argc = ".x determineThresh.c(\"" + algB + "\")";
-Float_t algBThresh = (Float_t) gROOT->ProcessLine(argc);
-
-std::cout << "Returned to threeEfficiencies.c" << std::endl;
-std::cout << "algAThresh: " << algAThresh << std::endl;
-std::cout << "algBThresh: " << algBThresh << std::endl;
-//===============================================================================================
-std::cout << "Will return the combined frac to yield 2 thresholds for the algorithms to keep 10^(-4) zero bias events combined
-such that they keep the same fraction individually" << std::endl;
-
-  TString myfileName = "../myData/ZeroBias2016new.13Runs.root";
-  TFile * myData = TFile::Open(myfileName, "READ");
+  TString path = "../myData/"+ myFileName;
+  TFile * myData = TFile::Open(path, "READ");
   TTree* myTree = NULL;
   myData->GetObject("tree",myTree);
   Int_t nentries = myTree->GetEntries();
-  Int_t nbins = 400;
+
   Int_t numRndm = 0;
   Int_t counter1 = 0;
   Int_t counter2 = 0;
@@ -73,6 +62,17 @@ such that they keep the same fraction individually" << std::endl;
   TH1F *algBMETHist = new TH1F(algB, algB, nbins, metMin, metMax);
   TH1F *algAMETtarget = new TH1F("cumu1", "cumu", nbins, metMin, metMax);
   TH1F *algBMETtarget = new TH1F("cumu2", "cumu", nbins, metMin, metMax);
+
+  gROOT->ProcessLine(".L determineThresh.c");
+  TString argc;
+  argc = ".x determineThresh.c(\"" + algA + "\"," + Form("%.7f",CONDITION) + ",\"" + myFileName + "\")";
+  Float_t algAThresh = (Float_t) gROOT->ProcessLine(argc);
+  argc = ".x determineThresh.c(\"" + algB + "\"," + Form("%.7f",CONDITION) + ",\"" + myFileName + "\")";
+  Float_t algBThresh = (Float_t) gROOT->ProcessLine(argc);
+
+  std::cout << "Returned to threeEfficiencies.c" << std::endl;
+  std::cout << "algAThresh: " << algAThresh << std::endl;
+  std::cout << "algBThresh: " << algBThresh << std::endl;
 
   Int_t numRndm =0 ;
   for (Int_t k = 0; k < nentries; k++) //determine numRndm and fill histograms
@@ -105,7 +105,7 @@ such that they keep the same fraction individually" << std::endl;
   x1 = lwrbnd;
   x3 = uprbnd;
   Float_t initialGuess = ( x1 + x3 ) / 2.0;
-
+  Float_t firstGuess = initialGuess;
   Float_t numKeepx1 = numRndm * x1;
   Float_t numKeepx2 = numRndm * initialGuess;
   Float_t numKeepx3 = numRndm * x3;
@@ -148,9 +148,33 @@ such that they keep the same fraction individually" << std::endl;
   f2 = (Float_t) counter2 / (Float_t) numRndm;
   std::cout << "f2: " << f2 << std::endl;
 
+Float_t firstOutput = f2;
+Float_t initialNumbEvents = counter2;
+
   std::cout << "At x3 = " << x3 << " counter3: " << counter3 << " events" << std::endl;
   f3 = (Float_t) counter3 / (Float_t) numRndm;
   std::cout << "f3: " << f3 << std::endl;
+
+  Float_t inputArray[100];
+  Float_t outputArray[100];
+  Float_t numEventsArray[100];
+  Float_t thresholdAarray[100];
+  Float_t thresholdBarray[100];
+inputArray[0] = x1;
+inputArray[1] = initialGuess;
+inputArray[2] = x3;
+outputArray[0] = f1;
+outputArray[1] = f2;
+outputArray[2] = f3;
+numEventsArray[0] = counter1;
+numEventsArray[1] = counter2;
+numEventsArray[2] = counter3;
+thresholdAarray[0] = algAMETx1thresh;
+thresholdAarray[1] = algAMETx2thresh;
+thresholdAarray[2] = algAMETx3thresh;
+thresholdBarray[0] = algBMETx1thresh;
+thresholdBarray[1] = algBMETx2thresh;
+thresholdBarray[2] = algBMETx3thresh;
 
   while ( (abs( numRndm * CONDITION - counter2) > eps)  && ( j <= imax ) )
   {
@@ -169,10 +193,14 @@ such that they keep the same fraction individually" << std::endl;
       x1 = initialGuess;
     }
     initialGuess = ( x1 + x3 ) / 2.0;
+    inputArray[j+2] = initialGuess;
     std::cout << "New Guess: " << initialGuess << std::endl;
     numKeepx2 = numRndm * initialGuess;
     algAMETx2thresh = computeThresh(algAMETtarget, numKeepx2, nbins);
     algBMETx2thresh = computeThresh(algBMETtarget, numKeepx2, nbins);
+    thresholdAarray[j+2] = algAMETx2thresh;
+    thresholdBarray[j+2] = algBMETx2thresh;
+
     counter2 = 0;
     for (Int_t i  = 0 ; i < nentries ;i++)
     {
@@ -188,6 +216,7 @@ such that they keep the same fraction individually" << std::endl;
     f2 = (Float_t) counter2 / (Float_t) numRndm;
     std::cout << "f2: " << f2 << std::endl;
     std::cout << "Condition: " << abs(numRndm * CONDITION - counter2) << " > " << eps << std::endl;
+    outputArray[j+2] = f2;
   }
   if (abs(counter2-(numRndm*CONDITION)) < eps)
   {
@@ -199,11 +228,6 @@ such that they keep the same fraction individually" << std::endl;
   else{
     std::cout << "No root found; max iterations exceeded" << std::endl;
   }
-
-
-//===================================================================================================================
-std::cout << "Threshold to keep 10^(-4) events for " << algA << ": " << algAThresh << std::endl;
-std::cout << "Threshold to keep 10^(-4) events for " << algB << ": " << algBThresh << std::endl;
 
 acthresh = algAMETx2thresh;
 bcthresh = algBMETx2thresh;
@@ -233,6 +257,15 @@ for (Int_t l = 0 ; l < nentries ; l++)
     }
 }
 
+std::cout << "Running an external check macro to verify number of events kept at fraction
+determined by the bisection algorithm..." << std::endl;
+std::cout << "ENTERING determineCombinedEventsKept.c" <<std::endl;
+gROOT->ProcessLine(".L determineCombinedEventsKept.c");
+TString argc;
+argc = ".x determineCombinedEventsKept.c(\"" + algA + "\","+Form("%.7f",acthresh)+",\""+algB+"\","+Form("%.7f",bcthresh)+",\""
+        +myFileName+ "\")";
+Float_t eventsCombined = (Float_t) gROOT->ProcessLine(argc);
+
 TCanvas* c1 = new TCanvas("Efficiency Canvas", "Efficiency Canvas");
 Ateff->Draw();
 Ateff->SetLineColor(kBlue);
@@ -247,6 +280,41 @@ legend->AddEntry(Cteff, cstring);
 legend->Draw();
 TString path = "./TEfficienciesPics/_" + algA + "_and_" + algB + "_efficiencies.pdf";
 c1.Print(path);
+
+logfileName = "./TEfficienciesPics/_" + algA + "_and_" + algB + "_efficiencies.txt"
+
+ofstream logFile;
+logFile.open(logfileName);
+logFile << "Algorithms: " << algA << "\t" << algB  << std::endl;;
+logFile << "ZEROBIAS DATAFILE: " << myFileName << std::endl;
+logFile << "Zerboias Nentries: " << nentries << std::endl;
+logFile << "MUON DATAFILE: " << muonFilename << std::endl;
+logFile << "Muon nentries: " << muonNentries << std::endl;
+logFIle << "Nbins: " << nbins << "\t METMIN: " << metMin << "\t METMAX: " << metMax << std::endl;
+logFile << "Fraction to keep for bisection: " << frac << std::endl;
+logFile << "Threshold for " + algA + " to keep fraction by itself: " << algAThresh << std::endl;
+logFile << "Threshold for " + algB + " to keep fraction by itself: " << algBThresh << std::endl;
+logFile << "Epsilon tolerance for bisection accuracy: " << eps << std::endl;
+logFile << "Bisection Information: " << std::endl;
+logFile << "Iteration: " << "Individual Fraction: \t" << "Output Combined Fraction Kept \t" << "Number Events Kept \t" <<
+<< "Threshold for " + algA + '\t' << "Threshold for " + algB +'\t' << std::endl;
+logFile << "x1" << x1 << f1 << counter1 << std::endl;
+logFile << "x3" << x3 << f3 << counter3 << std::endl;
+logFile << "x2" << firstGuess << firstOutput << initialNumbEvents << std::endl;
+for (int m = 1; m < j+3 ; m++)
+{
+  logFile << Form("I%d",m) << inputArray[m+2] << outputArray[m+2] << numEventsArray[m+2] <<
+  <<thresholdAarray[m+2] << thresholdBarray[m+2] << std::endl;
+}
+
+logFile << "Number of combined events determined by verification macro 'determineCombinedEventsKept.c': " << eventsCombined << std::endl;
+
+logFile.close();
+
+
+
+
+
 return(0);
 }
 
