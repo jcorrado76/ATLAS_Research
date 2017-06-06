@@ -163,12 +163,12 @@ outputArray[1] = f3;
 numEventsArray[0] = counter1;
 numEventsArray[2] = counter2;
 numEventsArray[1] = counter3;
-thresholdAarray[0] = algAMETx1thresh;
-thresholdAarray[2] = algAMETx2thresh;
-thresholdAarray[1] = algAMETx3thresh;
-thresholdBarray[0] = algBMETx1thresh;
-thresholdBarray[2] = algBMETx2thresh;
-thresholdBarray[1] = algBMETx3thresh;
+thresholdAarray[0] = (Float_t) algAMETx1thresh;
+thresholdAarray[2] = (Float_t) algAMETx2thresh;
+thresholdAarray[1] = (Float_t) algAMETx3thresh;
+thresholdBarray[0] = (Float_t) algBMETx1thresh;
+thresholdBarray[2] = (Float_t) algBMETx2thresh;
+thresholdBarray[1] = (Float_t) algBMETx3thresh;
 
 //OLD CONDITION: While ((abs( numRndm * frac - counter2) > eps))
 
@@ -199,8 +199,8 @@ do{
     numKeepx2 = numRndm * initialGuess;
     algAMETx2thresh = computeThresh(algAMETtarget, numKeepx2, nbins);
     algBMETx2thresh = computeThresh(algBMETtarget, numKeepx2, nbins);
-    thresholdAarray[j+2] = algAMETx2thresh;
-    thresholdBarray[j+2] = algBMETx2thresh;
+    thresholdAarray[j+2] = (Float_t) algAMETx2thresh;
+    thresholdBarray[j+2] = (Float_t) algBMETx2thresh;
 
     counter2 = 0;
     for (Int_t i  = 0 ; i < nentries ;i++)
@@ -220,8 +220,8 @@ do{
     std::cout << "Condition: " << abs(numRndm * frac - counter2) << " > " << eps << std::endl;
     outputArray[j+2] = f2;
 
-    algAThreshDiff = thresholdAarray[j+2] - thresholdAarray[j+1];
-    algBThreshDiff = thresholdBarray[j+2] - thresholdBarray[j+1];
+    (Float_t) algAThreshDiff = (Float_t) thresholdAarray[j+2] - (Float_t) thresholdAarray[j+1];
+    (Float_t) algBThreshDiff = (Float_t) thresholdBarray[j+2] - (Float_t) thresholdBarray[j+1];
 
     std::cout << "algAThreshDiff: " << abs(algAThreshDiff) << std::endl;
     std::cout << "algBThreshDiff: " << abs(algBThreshDiff) << std::endl;
