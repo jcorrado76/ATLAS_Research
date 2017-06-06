@@ -223,8 +223,8 @@ do{
     algAThreshDiff = thresholdAarray[j+2] - thresholdAarray[j+1];
     algBThreshDiff = thresholdBarray[j+2] - thresholdBarray[j+1];
 
-    std::cout << "algAThreshDiff: " << algAThreshDiff << std::endl;
-    std::cout << "algBThreshDiff: " << algBThreshDiff << std::endl;
+    std::cout << "algAThreshDiff: " << abs(algAThreshDiff) << std::endl;
+    std::cout << "algBThreshDiff: " << abs(algBThreshDiff) << std::endl;
     std::cout << "binWidth: " << binWidth << std::endl;
 
 std::cout << "algA current threshold: " << thresholdAarray[j+2] << std::endl;
@@ -233,7 +233,7 @@ std::cout << "algA previous threshold: " << thresholdAarray[j+1] << std::endl;
 std::cout << "algB previous threshold: " << thresholdBarray[j+1] << std::endl;
 
 
-  }while ( (algAThreshDiff > binWidth) || (algBThreshDiff > binWidth) && ( j <= imax ) );
+  }while ( (abs(algAThreshDiff) > binWidth) || (abs(algBThreshDiff) > binWidth) && ( j <= imax ) );
 
 //first condition: abs(counter2-(numRndm*frac)) <= eps ||
   if (abs(algAThreshDiff) <= binWidth || abs(algBThreshDiff) <= binWidth)
