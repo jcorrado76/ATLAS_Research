@@ -223,14 +223,14 @@ do{
     (Float_t) algAThreshDiff = (Float_t) thresholdAarray[j+2] - (Float_t) thresholdAarray[j+1];
     (Float_t) algBThreshDiff = (Float_t) thresholdBarray[j+2] - (Float_t) thresholdBarray[j+1];
 
-    std::cout << "algAThreshDiff: " << abs(algAThreshDiff) << std::endl;
-    std::cout << "algBThreshDiff: " << abs(algBThreshDiff) << std::endl;
+    std::cout << "algAThreshDiff: " << Form("%.7f",abs(algAThreshDiff)) << std::endl;
+    std::cout << "algBThreshDiff: " << Form("%.7f",abs(algBThreshDiff)) << std::endl;
     std::cout << "binWidth: " << binWidth << std::endl;
 
-std::cout << "algA current threshold: " << thresholdAarray[j+2] << std::endl;
-std::cout << "algB current threshold: " << thresholdBarray[j+2] << std::endl;
-std::cout << "algA previous threshold: " << thresholdAarray[j+1] << std::endl;
-std::cout << "algB previous threshold: " << thresholdBarray[j+1] << std::endl;
+std::cout << "algA current threshold: " << Form("%.7f",thresholdAarray[j+2]) << std::endl;
+std::cout << "algB current threshold: " << Form("%.7f",thresholdBarray[j+2]) << std::endl;
+std::cout << "algA previous threshold: " << Form("%.7f",thresholdAarray[j+1]) << std::endl;
+std::cout << "algB previous threshold: " << Form("%.7f",thresholdBarray[j+1]) << std::endl;
 
 
   }while ( (abs(algAThreshDiff) > binWidth) || (abs(algBThreshDiff) > binWidth) && ( j <= imax ) );
