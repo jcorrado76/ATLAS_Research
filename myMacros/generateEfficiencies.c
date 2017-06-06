@@ -1,4 +1,4 @@
-Int_t generateEfficiencies()
+Int_t generateEfficiencies(TString& zeroBiasfileName = "ZeroBias2016R307195R311481Runs56.root",TString& muonFilename = "PhysicsMain2016.Muons.R3073065R311481Runs9.root")
 {
   /*
    This program should just call threeefficiencies.c for all of the 15 combinations of algorithms
@@ -11,7 +11,7 @@ Int_t generateEfficiencies()
   {
     for (Int_t j = i+1 ; j < 6 ; j++)
     {
-      argc = ".x threeEfficiencies.c(\"" + algArray[i] + "\",\"" + algArray[j] + "\")";
+      argc = ".x threeEfficiencies.c(\"" + algArray[i] + "\",\"" + algArray[j] + "\",\""+zeroBiasfileName+"\",\""+muonFilename+"\")";
       gROOT->ProcessLine(argc);
     }
   }
