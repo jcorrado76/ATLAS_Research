@@ -49,6 +49,7 @@ void writeFile()
     << "\t\t\t" << Form("%.7f",numEventsArray[m+2]) << "\t\t" << Form("%.7f",thresholdAarray[m+2]) << "\t\t" <<
     Form("%.7f",thresholdBarray[m+2]) << "\r\n";
   }
+  logFile << (gROOT->ProcessLine("gROOT->Time()")); 
 
 
   logFile.close();

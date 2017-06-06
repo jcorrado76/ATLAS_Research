@@ -1,4 +1,4 @@
- Int_t threeEfficiencies(TString& algA , TString& algB)
+ Int_t threeEfficiencies(TString& algA , TString& algB, TString& myFileName = "ZeroBias2016R307195R311481Runs56.root",TString& muonFilename = "PhysicsMain2016.Muons.R3073065R311481Runs9.root")
 {
   /*
   Makes TEFFICIENCY Plots ONCE
@@ -9,15 +9,12 @@
 
 gROOT->ProcessLine("gROOT->Reset();");
 gROOT->ProcessLine("gROOT->Time();");
-TString muonFilename = "ExpressMuons2016newanalysis.11runs.root";
-TString myFileName = "ZeroBias2016new.13Runs.root";
 Float_t frac = (Float_t) 1e-4;
 TString path = "../myData/"+muonFilename;
 TFile * muonFile = TFile::Open(path, "READ");
 TTree* myMuonTree = NULL;
 muonFile->GetObject("tree",myMuonTree);
-
-std::cout << "Data being used to compute algorithm efficiency: " << path << std::endl;
+std::cout << "Muon Data being used to compute algorithm efficiency: " << path << std::endl;
 Int_t muonNentries = myMuonTree->GetEntries();
 Int_t muonNbins = 50;
 Int_t nbins = 400;
@@ -32,7 +29,8 @@ Double_t metMax = 250.0;
 Int_t passrndm, numPassMuon,passmuon,cleanCutsFlag,recalBrokeFlag;
 Float_t algAMET,algBMET,metoffrecal,offrecal_met,offrecal_mex,offrecal_mey,offrecalmuon_mex,offrecalmuon_mey,acthresh,bcthresh;
 
-myMuonTree->SetBranchAddress("passmu24med", &passmuon);
+//myMuonTree->SetBranchAddress("passmu24med", &passmuon);
+myMuonTree->SetBranchAddress("passmu26med", &passmuon);
 myMuonTree->SetBranchAddress("passcleancuts", &cleanCutsFlag);
 myMuonTree->SetBranchAddress("recalbroke", &recalBrokeFlag);
 myMuonTree->SetBranchAddress("metoffrecal", &offrecal_met);
@@ -98,8 +96,6 @@ std::cout << "MuonNentries: " << muonNentries << std::endl;
   std::cout << "Midpoint: " << (lwrbnd+uprbnd)/2. << std::endl;
   std::cout << "Upper Bound: " << uprbnd << std::endl;
   std::cout << "Epsilon: " << eps << std::endl;
-  Int_t j = 0 ;
-  Int_t imax = 30;
   Float_t x1,x3; //thresholds of individual algorithms
   Float_t f1,f2,f3 = 0; //number of events kept
   x1 = lwrbnd;
@@ -159,23 +155,30 @@ std::cout << "MuonNentries: " << muonNentries << std::endl;
   Float_t thresholdBarray[100];
 
 inputArray[0] = x1;
-inputArray[1] = initialGuess;
-inputArray[2] = x3;
+inputArray[2] = initialGuess;
+inputArray[1] = x3;
 outputArray[0] = f1;
-outputArray[1] = f2;
-outputArray[2] = f3;
+outputArray[2] = f2;
+outputArray[1] = f3;
 numEventsArray[0] = counter1;
-numEventsArray[1] = counter2;
-numEventsArray[2] = counter3;
-thresholdAarray[0] = algAMETx1thresh;
-thresholdAarray[1] = algAMETx2thresh;
-thresholdAarray[2] = algAMETx3thresh;
-thresholdBarray[0] = algBMETx1thresh;
-thresholdBarray[1] = algBMETx2thresh;
-thresholdBarray[2] = algBMETx3thresh;
+numEventsArray[2] = counter2;
+numEventsArray[1] = counter3;
+thresholdAarray[0] = (Float_t) algAMETx1thresh;
+thresholdAarray[2] = (Float_t) algAMETx2thresh;
+thresholdAarray[1] = (Float_t) algAMETx3thresh;
+thresholdBarray[0] = (Float_t) algBMETx1thresh;
+thresholdBarray[2] = (Float_t) algBMETx2thresh;
+thresholdBarray[1] = (Float_t) algBMETx3thresh;
 
-  while ( (abs( numRndm * frac - counter2) > eps)  && ( j <= imax ) )
-  {
+//OLD CONDITION: While ((abs( numRndm * frac - counter2) > eps))
+
+Int_t j = 0 ;
+Int_t imax = 30;
+Float_t binWidth = (metMax - metMin)/ nbins;
+Float_t algAThreshDiff;
+Float_t algBThreshDiff;
+
+do{
     j++;
     std::cout << "Inside iteration number: " << j << std::endl;
     if ( (f1-frac)*(f2-frac) < 0 ) //root is in left half of interval
@@ -196,8 +199,8 @@ thresholdBarray[2] = algBMETx3thresh;
     numKeepx2 = numRndm * initialGuess;
     algAMETx2thresh = computeThresh(algAMETtarget, numKeepx2, nbins);
     algBMETx2thresh = computeThresh(algBMETtarget, numKeepx2, nbins);
-    thresholdAarray[j+2] = algAMETx2thresh;
-    thresholdBarray[j+2] = algBMETx2thresh;
+    thresholdAarray[j+2] = (Float_t) algAMETx2thresh;
+    thresholdBarray[j+2] = (Float_t) algBMETx2thresh;
 
     counter2 = 0;
     for (Int_t i  = 0 ; i < nentries ;i++)
@@ -216,10 +219,25 @@ thresholdBarray[2] = algBMETx3thresh;
     std::cout << "f2: " << f2 << std::endl;
     std::cout << "Condition: " << abs(numRndm * frac - counter2) << " > " << eps << std::endl;
     outputArray[j+2] = f2;
-  }
-  if (abs(counter2-(numRndm*frac)) < eps)
+
+    (Float_t) algAThreshDiff = (Float_t) thresholdAarray[j+2] - (Float_t) thresholdAarray[j+1];
+    (Float_t) algBThreshDiff = (Float_t) thresholdBarray[j+2] - (Float_t) thresholdBarray[j+1];
+
+    algAThreshDiff = abs(algAThreshDiff);
+    algBThreshDiff = abs(algBThreshDiff);
+
+  std::cout << "algA current threshold: " << Form("%.7f",thresholdAarray[j+2]) << std::endl;
+  std::cout << "algA previous threshold: " << Form("%.7f",thresholdAarray[j+1]) << std::endl;
+  std::cout << "algB current threshold: " << Form("%.7f",thresholdBarray[j+2]) << std::endl;
+  std::cout << "algB previous threshold: " << Form("%.7f",thresholdBarray[j+1]) << std::endl;
+  std::cout << "binWidth: " << binWidth << std::endl;
+
+  }while ( (abs(algAThreshDiff) > binWidth) || (abs(algBThreshDiff) > binWidth) && ( j <= imax ) );
+
+//first condition: abs(counter2-(numRndm*frac)) <= eps ||
+  if (abs(algAThreshDiff) <= binWidth || abs(algBThreshDiff) <= binWidth)
   {
-    std::cout << "\nA root at x = " <<  initialGuess << " was found to within " + eps + " events"
+    std::cout << "\nA root at x = " <<  initialGuess << " was found to within one bin: " + binWidth + " GeV"
               << "in " << j << " iterations" << std::endl;
     std::cout << "The number of combined events kept is  " << f2 * numRndm << std::endl;
     std::cout << "The fraction of combined events kept is  " << f2 << std::endl;
@@ -301,9 +319,9 @@ logFile << "Iteration Number : " << "\tIndividual Fraction: \t" << "Combined Fra
 "Threshold for " + algA + '\t' << "Threshold for " + algB +'\t' << "\r\n";
 logFile << "x1\t\t\t" << inputArray[0] << "\t\t\t" << outputArray[0] << "\t\t\t" << numEventsArray[0] << "\t\t\t" <<
 algAMETx1thresh << "\t\t\t" << algBMETx1thresh << "\r\n";
-logFile << "x2\t\t\t" << inputArray[1] << "\t\t\t" << outputArray[1] << "\t\t\t" << numEventsArray[1] << "\t\t\t" <<
+logFile << "x2\t\t\t" << inputArray[2] << "\t\t\t" << outputArray[2] << "\t\t\t" << numEventsArray[2] << "\t\t\t" <<
 algAMETx2thresh << "\t\t\t" << algBMETx2thresh <<"\r\n";
-logFile << "x3\t\t\t" << inputArray[2] << "\t\t\t" << outputArray[2] << "\t\t\t" << numEventsArray[2] << "\t\t\t" <<
+logFile << "x3\t\t\t" << inputArray[1] << "\t\t\t" << outputArray[1] << "\t\t\t" << numEventsArray[1] << "\t\t\t" <<
 algAMETx3thresh << "\t\t\t" << algBMETx3thresh <<"\r\n";
 for (int m = 1; m < j+1 ; m++)
 {
@@ -311,7 +329,8 @@ for (int m = 1; m < j+1 ; m++)
   << "\t\t\t" << Form("%.7f",numEventsArray[m+2]) << "\t\t" << Form("%.7f",thresholdAarray[m+2]) << "\t\t" <<
   Form("%.7f",thresholdBarray[m+2]) << "\r\n";
 }
-logFile << "Number of combined events kept, as determined by verification macro 'determineCombinedEventsKept.c': " << eventsCombined << "\r\n";
+logFile << "Number of combined events kept, as determined by verification macro 'determineCombinedEventsKept.c': "
+<< eventsCombined << "\r\n";
 logFile.close();
 return(0);
 }
