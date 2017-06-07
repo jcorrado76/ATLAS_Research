@@ -232,7 +232,7 @@ do{
   std::cout << "algB previous threshold: " << Form("%.7f",thresholdBarray[j+1]) << std::endl;
   std::cout << "binWidth: " << binWidth << std::endl;
 
-  }while ( (abs(algAThreshDiff) > binWidth) || (abs(algBThreshDiff) > binWidth) && ( j <= imax ) );
+}while ( (abs(algAThreshDiff) > binWidth) && (abs(algBThreshDiff) > binWidth) && ( j <= imax ) );
 
 //first condition: abs(counter2-(numRndm*frac)) <= eps ||
   if (abs(algAThreshDiff) <= binWidth || abs(algBThreshDiff) <= binWidth)
