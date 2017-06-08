@@ -1,4 +1,4 @@
- Int_t threeEfficiencies(TString& algA , TString& algB, TString& myFileName = "ZeroBias2016R307195R311481Runs56.root",TString& muonFilename = "PhysicsMain2016.Muons.R3073065R311481Runs9.root")
+ Int_t threeEfficiencies(TString& algA , TString& algB, Float_t metl1thresh = 30.0, Float_t frac = 1e-4,TString& myFileName = "ZeroBias2016R307195R311481Runs56.root",TString& muonFilename = "PhysicsMain2016.Muons.R3073065R311481Runs9.root")
 {
   /*
   Makes TEFFICIENCY Plots ONCE
@@ -9,7 +9,6 @@
 
 gROOT->ProcessLine("gROOT->Reset();");
 gROOT->ProcessLine("gROOT->Time();");
-Float_t frac = (Float_t) 1e-4;
 TString path = "../myData/"+muonFilename;
 TFile * muonFile = TFile::Open(path, "READ");
 TTree* myMuonTree = NULL;
@@ -29,7 +28,6 @@ Double_t metMax = 250.0;
 Int_t passrndm, numPassMuon,passmuon,cleanCutsFlag,recalBrokeFlag;
 Float_t algAMET,algBMET,metoffrecal,offrecal_met,offrecal_mex,offrecal_mey,offrecalmuon_mex,offrecalmuon_mey,
 metl1thresh, acthresh,bcthresh,metl1;
-metl1thresh = 40.0;
 
 //myMuonTree->SetBranchAddress("passmu24med", &passmuon);
 myMuonTree->SetBranchAddress("passmu26med", &passmuon);
@@ -92,7 +90,7 @@ std::cout << "MuonNentries: " << muonNentries << std::endl;
   std::cout << "frac " << frac << std::endl;
   std::cout << "numCombined to keep: " << numRndm * frac << std::endl;
   Float_t lwrbnd = frac;
-  Float_t uprbnd = 0.07;
+  Float_t uprbnd = 0.1;
   Float_t eps = 25.0;
 
   std::cout << "Entering bisection to determine individual fractions" << std::endl;
