@@ -29,7 +29,7 @@ Double_t metMax = 250.0;
 Int_t passrndm, numPassMuon,passmuon,cleanCutsFlag,recalBrokeFlag;
 Float_t algAMET,algBMET,metoffrecal,offrecal_met,offrecal_mex,offrecal_mey,offrecalmuon_mex,offrecalmuon_mey,
 metl1thresh, acthresh,bcthresh,metl1;
-metl1thresh = 30.0;
+metl1thresh = 40.0;
 
 //myMuonTree->SetBranchAddress("passmu24med", &passmuon);
 myMuonTree->SetBranchAddress("passmu26med", &passmuon);
@@ -92,7 +92,7 @@ std::cout << "MuonNentries: " << muonNentries << std::endl;
   std::cout << "frac " << frac << std::endl;
   std::cout << "numCombined to keep: " << numRndm * frac << std::endl;
   Float_t lwrbnd = frac;
-  Float_t uprbnd = 0.005;
+  Float_t uprbnd = 0.07;
   Float_t eps = 25.0;
 
   std::cout << "Entering bisection to determine individual fractions" << std::endl;
