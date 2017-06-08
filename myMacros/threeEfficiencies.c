@@ -27,7 +27,9 @@ Int_t counter3 = 0;
 Double_t metMin = 0.0;
 Double_t metMax = 250.0;
 Int_t passrndm, numPassMuon,passmuon,cleanCutsFlag,recalBrokeFlag;
-Float_t algAMET,algBMET,metoffrecal,offrecal_met,offrecal_mex,offrecal_mey,offrecalmuon_mex,offrecalmuon_mey,acthresh,bcthresh;
+Float_t algAMET,algBMET,metoffrecal,offrecal_met,offrecal_mex,offrecal_mey,offrecalmuon_mex,offrecalmuon_mey,
+metl1thresh, acthresh,bcthresh,metl1;
+metl1thresh = 40.0;
 
 //myMuonTree->SetBranchAddress("passmu24med", &passmuon);
 myMuonTree->SetBranchAddress("passmu26med", &passmuon);
@@ -56,6 +58,7 @@ std::cout << "MuonNentries: " << muonNentries << std::endl;
   myTree->SetBranchAddress("passrndm", &passrndm); // get pass rndm flag
   myTree->SetBranchAddress(algA,&algAMET);
   myTree->SetBranchAddress(algB,&algBMET);
+  myTree->SetBranchAddress("metl1",&metl1);
   TH1F *algAMETHist = new TH1F(algA, algA, nbins, metMin, metMax);
   TH1F *algBMETHist = new TH1F(algB, algB, nbins, metMin, metMax);
   TH1F *algAMETtarget = new TH1F("cumu1", "cumu", nbins, metMin, metMax);
@@ -71,6 +74,7 @@ std::cout << "MuonNentries: " << muonNentries << std::endl;
   std::cout << "Returned to threeEfficiencies.c" << std::endl;
   std::cout << "algAThresh: " << algAThresh << std::endl;
   std::cout << "algBThresh: " << algBThresh << std::endl;
+  std::cout << "Using METL1THRESH: " << metl1thresh << std::endl;
 
   Int_t numRndm =0 ;
   for (Int_t k = 0; k < nentries; k++) //determine numRndm and fill histograms
@@ -88,7 +92,7 @@ std::cout << "MuonNentries: " << muonNentries << std::endl;
   std::cout << "frac " << frac << std::endl;
   std::cout << "numCombined to keep: " << numRndm * frac << std::endl;
   Float_t lwrbnd = frac;
-  Float_t uprbnd = 0.005;
+  Float_t uprbnd = 0.07;
   Float_t eps = 25.0;
 
   std::cout << "Entering bisection to determine individual fractions" << std::endl;
@@ -121,15 +125,15 @@ std::cout << "MuonNentries: " << muonNentries << std::endl;
     myTree->GetEntry(i);
     if (passrndm > 0.5)
     {
-      if ((algAMET > algAMETx1thresh) && (algBMET > algBMETx1thresh))
+      if ((algAMET > algAMETx1thresh) && (algBMET > algBMETx1thresh) && (metl1 > metl1thresh))
       {
         counter1++;
       }
-      if ((algAMET > algAMETx2thresh) && (algBMET > algBMETx2thresh))
+      if ((algAMET > algAMETx2thresh) && (algBMET > algBMETx2thresh) && (metl1 > metl1thresh))
       {
         counter2++;
       }
-      if ((algAMET > algAMETx3thresh) && (algBMET > algBMETx3thresh))
+      if ((algAMET > algAMETx3thresh) && (algBMET > algBMETx3thresh) && (metl1 > metl1thresh))
       {
         counter3++;
       }
@@ -206,7 +210,7 @@ do{
     for (Int_t i  = 0 ; i < nentries ;i++)
     {
       myTree->GetEntry(i);
-      if ((passrndm > 0.1) && (algAMET > algAMETx2thresh) && (algBMET > algBMETx2thresh))
+      if ((passrndm > 0.1) && (algAMET > algAMETx2thresh) && (algBMET > algBMETx2thresh) && (metl1 > metl1thresh))
       {
         counter2++;
       }
@@ -279,7 +283,7 @@ determined by the bisection algorithm..." << std::endl;
 std::cout << "ENTERING determineCombinedEventsKept.c" <<std::endl;
 gROOT->ProcessLine(".L determineCombinedEventsKept.c");
 TString argc;
-argc = ".x determineCombinedEventsKept.c(\"" + algA + "\","+Form("%.7f",acthresh)+",\""+algB+"\","+Form("%.7f",bcthresh)+",\""
+argc = ".x determineCombinedEventsKept.c(\"" + algA + "\","+Form("%.7f",acthresh)+",\""+algB+"\","+Form("%.7f",bcthresh)+","+ Form("%.7f",metl1thresh)+ ",\""
         +myFileName+ "\")";
 Float_t eventsCombined = (Float_t) gROOT->ProcessLine(argc);
 
@@ -306,6 +310,7 @@ if(logFile) std::cout << "logFile Successfully Opened" << std::endl;
 logFile << "Algorithms: " << algA << "\t" << algB << "\r\n";
 logFile << "ZEROBIAS DATAFILE: " << myFileName << "\r\n";
 logFile << "Zerboias Nentries: " << nentries << "\r\n";
+logFile << "METL1 THRESH: " << metl1thresh << "\r\n";
 logFile << "MUON DATAFILE: " << muonFilename << "\r\n";
 logFile << "Muon nentries: " << muonNentries << "\r\n";
 logFile << "Nbins: " << nbins << "\t METMIN: " << metMin << "\t METMAX: " << metMax << "\r\n";
