@@ -90,7 +90,7 @@ std::cout << "MuonNentries: " << muonNentries << std::endl;
   std::cout << "frac " << frac << std::endl;
   std::cout << "numCombined to keep: " << numRndm * frac << std::endl;
   Float_t lwrbnd = frac;
-  Float_t uprbnd = 0.1;
+  Float_t uprbnd = 0.13;
   Float_t eps = 25.0;
 
   std::cout << "Entering bisection to determine individual fractions" << std::endl;
