@@ -1,12 +1,26 @@
-Float_t determineThresh(TString& all = "y", Float_t frac = (1.e-4),TString& dataFile = "ZeroBias2016new.13Runs.root")
+#include <string>
+#include <cmath>
+#include <math.h>
+#include "TMath.h"
+#include "TH1.h"
+#include "TFile.h"
+#include "TString.h"
+#include "TTree.h"
+#include "TROOT.h"
+#include <iostream>
+
+
+Float_t determineThresh( const TString& all = "y", const Float_t frac = (1.e-4), Float_t metl1thresh = 0.0, const TString& dataFile = "ZeroBias2016R307195R311481Runs56.root")
 {
-	#include <string>
+	//FUNCTION PROTOTYPES
+	TH1F* computeTarget(TH1F*,TH1F*,Int_t);
+	Float_t computeThresh(TH1F*,Float_t,Int_t);
 	gROOT->ProcessLine("gROOT->Reset();");
-	using namespace std;
-	std::cout << "Entering determineThresh.c" << std::endl;
+	cout << "Entering determineThresh.c" << std::endl;
 	TString fileName = "../myData/" + dataFile;
 	std::cout << "DATAFILE: " << fileName << std::endl;
 	TFile *myFile = TFile::Open(fileName, "READ");
+	TTree *tree = (TTree*)myFile->Get("tree");
 	Int_t nentries = tree->GetEntries();
 	Int_t nbins = 400;
 	Int_t numRndm = 0;
@@ -14,7 +28,7 @@ Float_t determineThresh(TString& all = "y", Float_t frac = (1.e-4),TString& data
 	Double_t metMin = 0.0;
 	Double_t metMax = 500.0;
 	Float_t metl1, metcell, metmht, mettopocl, mettopoclps, mettopoclpuc, metoffrecal,indeterminate,
-	metl1thresh, metcellthresh, metmhtthresh, mettopoclthresh, mettopoclpsthresh, mettopoclpucthresh,
+	metcellthresh, metmhtthresh, mettopoclthresh, mettopoclpsthresh, mettopoclpucthresh,
 	indeterminatethresh,rightHandSum;
 	TString xlabel = "MET [GeV]";
 	TString yaxis = "Events";
@@ -58,37 +72,33 @@ Float_t determineThresh(TString& all = "y", Float_t frac = (1.e-4),TString& data
 				mettopoclpucHist->Fill(mettopoclpuc);
 			}
 		}
+	
 		Float_t numKeep = numRndm * frac;
+	
 		computeTarget(metl1Hist,metl1target,nbins);
 		metl1thresh = computeThresh(metl1target, numKeep, nbins);
+	
 		computeTarget(metcellHist,metcelltarget,nbins);
 		metcellthresh = computeThresh(metcelltarget, numKeep, nbins);
+	
 		computeTarget(metmhtHist,metmhttarget,nbins);
 		metmhtthresh = computeThresh(metmhttarget, numKeep, nbins);
+	
 		computeTarget(mettopoclHist,mettopocltarget,nbins);
 		mettopoclthresh = computeThresh(mettopocltarget, numKeep, nbins);
+	
 		computeTarget(mettopoclpsHist,mettopoclpstarget,nbins);
 		mettopoclpsthresh = computeThresh(mettopoclpstarget, numKeep, nbins);
+	
 		computeTarget(mettopoclpucHist,mettopoclpuctarget,nbins);
 		mettopoclpucthresh = computeThresh(mettopoclpuctarget, numKeep, nbins);
+	
 		std::cout << "METL1 THRESHOLD: " << metl1thresh << std::endl;
 		std::cout << "METCELL THRESHOLD: " << metcellthresh << std::endl;
 		std::cout << "METMHT THRESHOLD: " << metmhtthresh << std::endl;
 		std::cout << "METTOPOCL THRESHOLD: " << mettopoclthresh << std::endl;
 		std::cout << "METTOPOCLPS THRESHOLD: " << mettopoclpsthresh << std::endl;
 		std::cout << "METTOPOCLPUC THRESHOLD: " << mettopoclpucthresh << std::endl;
-/*
-		std::ofstream log_file("DetermineThreshLog.txt", std::ios_base::out | std::ios_base::app );
-		log_file << "Accessed: " << currentDateTime() << std::endl;
-		log_file << "DATAFILE: " << fileName << "\tFRACTION: " << frac << std::endl;
-		log_file << "NBINS: " << nbins << "NUMRNDM:" << numRndm << std::endl;
-		log_file << "METL1 THRESH: " << metl1thresh << std::endl;
-		log_file << "METCELL THRESH: " << metcellthresh << std::endl;
-		log_file << "METMHT THRESH: "<< metmhtthresh << std::endl;
-		log_file << "METTOPOCL THRESH: " << mettopoclthresh << std::endl;
-		log_file << "METTOPOCLPS THRESH: " << mettopoclpsthresh << std::endl;
-		log_file << "METTOPOCLPUC THRESH: " << mettopoclpucthresh << std::endl;
-		log_file << "\n" << std::endl;*/
 	}
 
 	if (all != "y") //only compute thresh for one alg
@@ -96,31 +106,38 @@ Float_t determineThresh(TString& all = "y", Float_t frac = (1.e-4),TString& data
 		TH1F *indeterminateHist = new TH1F(all, all, nbins, metMin, metMax);
 		TH1F *indeterminatetarget = new TH1F("cumu7", "cumu", nbins, metMin, metMax);
 		tree->SetBranchAddress(all,&indeterminate);
+		tree->SetBranchAddress("metl1",&metl1);
 		std::cout << all << " SELECTED..." << std::endl;
+		std::cout << "Computing number to keep after cutting on metl1 at thresh: " << metl1thresh << std::endl;
 		for (Int_t k = 0; k < nentries; k++)
 		{
 			tree->GetEntry(k);
-			if (passrndm > 0.1)
+			if ((passrndm > 0.1) && (metl1 >= metl1thresh))
 			{
 				numRndm++;
 				indeterminateHist->Fill(indeterminate);
 			}
 		}
+
 		computeTarget(indeterminateHist,indeterminatetarget,nbins);
 		Float_t numKeep = numRndm * frac;
+
 		indeterminatethresh = computeThresh(indeterminatetarget, numKeep, nbins);
 		std::cout << all << " THRESHOLD: " << indeterminatethresh << std::endl;
-/*
-		std::ofstream log_file("DetermineThreshLog.txt", std::ios_base::out | std::ios_base::app );
-		log_file << "Accessed: " << currentDateTime() << std::endl;
-		log_file << "DATAFILE: " << fileName << "\tFRACTION: " << frac << std::endl;
-		log_file << "NBINS: " << nbins << "NUMRNDM:" << numRndm << std::endl;
-		log_file << "ALG: " << all << "THRESH: " << indeterminatethresh << std::endl;
-		log_file << "\n" << std::endl;
-*/
 	}
-	std::cout << "EVENTS KEPT: " << frac * numRndm << std::endl;
-	myFile.Close();
+	std::cout << "Number of events that should have been kept: " << frac * numRndm << std::endl;
+	std::cout << "Checking how many events are kept by the alg at the determined threshold..." << std::endl;
+	int counter=0;
+	for (int l = 0 ; l < nentries ; l++)
+	{
+		tree->GetEntry(l);
+		if ((passrndm > 0.5) && ((indeterminate >= ( indeterminatethresh - ( ( metMax - metMin ) / ( 2 * nbins ))))))//count the event if its geq left edge of bin (we use center for thresh)
+		{
+			counter++;
+		}
+	}
+	myFile->Close();
+	std::cout << "Number of events counted above threshold: " << counter << std::endl;
 	return(indeterminatethresh);
 }
 
@@ -141,21 +158,34 @@ Float_t computeThresh(TH1F* target, Float_t numKeep, Int_t nbins)
 	Float_t thresh;
 	for (Int_t t = nbins; t >= 0; t--)
 	{
-		if ((abs(target->GetBinContent(t) - (numKeep) > 0) != (abs(target->GetBinContent(t + 1) - (numKeep)) > 0)))
+		if ((target->GetBinContent(t) - (numKeep) > 0) != (target->GetBinContent(t + 1) - (numKeep) > 0))
 		{
 			thresh = target->GetBinCenter(t);
 		}
 	}
 	return(thresh);
 }
-/*
-std::string currentDateTime()
-{
-    time_t     now = time(0);
-    struct tm  tstruct;
-    char       buf[80];
-    tstruct = *localtime(&now);
-    strftime(buf, sizeof(buf), "%Y-%m-%d.%X", &tstruct);
-    return buf;
-}
-*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
