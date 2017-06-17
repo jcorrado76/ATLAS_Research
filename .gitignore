@@ -1,14 +1,3 @@
-# this is a list of things to ignore for git 
-#Ignore Everything 
-# in order to not ignore something, put [!<fileName>]
-# in ordert o not ignore everything put [!*]
-
 *
-!myMacros/
-!atlasresearchMyVers
-!pictures/
-!*.c
-
-
-#Even if they are in subdirectories 
+!myMacros
 
