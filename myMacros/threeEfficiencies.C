@@ -102,7 +102,6 @@ Int_t threeEfficiencies( const TString& algA , const TString& algB, const Float_
 		numRndm++;
 		algAMETHist->Fill(algAMET);
 		algBMETHist->Fill(algBMET);
-//		if (k % 20 == 0) {std::cout << "algAMET" << algAMET << "\talgBMET: " << algBMET << std::endl;}
 	    }
 	}
     }
@@ -116,7 +115,6 @@ Int_t threeEfficiencies( const TString& algA , const TString& algB, const Float_
 		numRndm++;
 		algAMETHist->Fill(algAMET);
 		algBMETHist->Fill(algBMET);
-		if (k % 20 == 0) {std::cout << "algAMET: " << algAMET << "\talgBMET: " << algBMET << std::endl;}
 	    }
 	}
     }
@@ -143,7 +141,6 @@ Int_t threeEfficiencies( const TString& algA , const TString& algB, const Float_
     Float_t numKeepx3 = numRndm * x3;
     
     
-    //THIS IS COMPUTING ZERO FOR ALL TARGET BINS; THIS IS THE ERROR
     computeTarget(algAMETHist,algAMETtarget,nbins);
     computeTarget(algBMETHist,algBMETtarget,nbins);
 
@@ -578,10 +575,8 @@ Float_t determineThresh( const TString& all = "y", const Float_t frac = (1.e-4),
 				indeterminateHist->Fill(indeterminate);
 			}
 		}
-
 		computeTarget(indeterminateHist,indeterminatetarget,nbins);
 		Float_t numKeep = numRndm * frac;
-
 		indeterminateThresh = computeThresh(indeterminatetarget, numKeep, nbins);
 		std::cout << all << " THRESHOLD: " << indeterminateThresh << std::endl;
 	}
@@ -619,7 +614,6 @@ Float_t determineCombinedEventsKept( const TString& algA, const Float_t threshA,
     Int_t nentries = tree->GetEntries();
     Float_t algAMET, algBMET,metl1;
     Int_t passrndm;
-
     tree->SetBranchAddress("passrndm",&passrndm);
     tree->SetBranchAddress(algA,&algAMET);
     tree->SetBranchAddress(algB,&algBMET);
@@ -661,31 +655,5 @@ std::cout << "Combined alg kept: " << counter << " events" << std::endl;
 Float_t frac = (Float_t) counter / (Float_t) numRndm;
 std::cout << "Fraction of passrndm events: " << frac << std::endl;
 return(counter);
-
-
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
