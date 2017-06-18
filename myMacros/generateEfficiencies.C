@@ -13,7 +13,7 @@ Int_t generateEfficiencies(Float_t metl1Thresh = 30.0, const Float_t frac = 1e-4
     {
 	for (Int_t j = i+1 ; j < 6 ; j++)
 	{
-	    gROOT->ProcessLine(".x threeEfficiencies.C(\"" + algArray[i] + "\",\"" + algArray[j] + "\"," + Form("%.7f",metl1Thresh) + "," + Form("%.7f",frac) + ",\""+zeroBiasFileName+"\",\""+muonFilename+"\")");
+	    gROOT->ProcessLine(".x threeEfficiencies.C(\"" + algArray[i] + "\",\"" + algArray[j] + "\"," + Form("%.7f",metl1Thresh) + "," + Form("%.7f",frac) + ",\""+ folderName + "\",\"" +zeroBiasFileName+"\",\""+muonFilename+"\")");
 	}
     }
 
