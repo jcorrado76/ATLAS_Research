@@ -73,7 +73,6 @@ Int_t threeEfficiencies( const TString& algA , const TString& algB, const Float_
     TString xlabel = "MET [GeV]";
     TString yaxis = "Events";
     myTree->SetBranchAddress("passrndm", &passrndm); // get pass rndm flag
-    //WHEN ALGA==ALGB; ALGAMET BECOMES ALL ZEROES
     myTree->SetBranchAddress(algA,&algAMET);
     myTree->SetBranchAddress(algB,&algBMET);
     myTree->SetBranchAddress("metl1",&metl1);
