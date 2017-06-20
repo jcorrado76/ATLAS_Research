@@ -11,7 +11,10 @@
 #include "TSystem.h"
 
 
-Int_t threeEfficiencies( const TString& algA , const TString& algB, const Float_t metl1thresh = 0.0, const Float_t frac = 1e-4, const TString folder = "", const TString& myFileName = "ZeroBias2016R307195R311481Runs56.root", const TString& muonFilename = "PhysicsMain2016.Muons.noalgL1XE45R3073065R311481Runs9B.root")
+Int_t threeEfficiencies( const TString& algA , const TString& algB, const Float_t metl1thresh = 0.0, 
+        const Float_t frac = 1e-4, const TString folder = "", 
+        const TString& myFileName = "ZeroBias2016R307195R311481Runs56.root", 
+        const TString& muonFilename = "PhysicsMain2016.Muons.noalgL1XE45R3073065R311481Runs9B.root")
 {
     /*
     Makes TEFFICIENCY Plots ONCE
@@ -23,7 +26,8 @@ Int_t threeEfficiencies( const TString& algA , const TString& algB, const Float_
     Float_t determineThresh( const TString&, const Float_t, Float_t, const TString&);
     TH1F* computeTarget(TH1F*,TH1F*,Int_t);
     Float_t computeThresh(TH1F*,Float_t,Int_t);
-    Float_t determineCombinedEventsKept( const TString&, const Float_t, const TString&, const Float_t, const Float_t, const TString&);
+    Float_t determineCombinedEventsKept( const TString&, const Float_t, const TString&, 
+            const Float_t, const Float_t, const TString&);
 
     gROOT->ProcessLine("gROOT->Reset();");
     gROOT->ProcessLine("gROOT->SetBatch(kTRUE);");
@@ -45,8 +49,9 @@ Int_t threeEfficiencies( const TString& algA , const TString& algB, const Float_
     Int_t counter3 = 0;
     Double_t metMin = 0.0;
     Double_t metMax = 250.0;
-    Int_t passrndm, numPassMuon,passmuon,cleanCutsFlag,recalBrokeFlag;
-    Float_t algAMET,algBMET,metoffrecal,offrecal_met,offrecal_mex,offrecal_mey,offrecalmuon_mex,offrecalmuon_mey, acthresh,bcthresh,metl1;
+    Int_t passRndm, numPassMuon,passmuon,cleanCutsFlag,recalBrokeFlag;
+    Float_t algAMET,algBMET,metoffrecal,offrecal_met,offrecal_mex,offrecal_mey,offrecalmuon_mex,
+            offrecalmuon_mey, acthresh,bcthresh,metl1;
 
     //myMuonTree->SetBranchAddress("passmu24med", &passmuon);
     myMuonTree->SetBranchAddress("passmu26med", &passmuon);
@@ -72,7 +77,7 @@ Int_t threeEfficiencies( const TString& algA , const TString& algB, const Float_
     Float_t algAMETx3thresh,algBMETx3thresh;
     TString xlabel = "MET [GeV]";
     TString yaxis = "Events";
-    myTree->SetBranchAddress("passrndm", &passrndm); // get pass rndm flag
+    myTree->SetBranchAddress("passrndm", &passRndm); // get pass rndm flag
     myTree->SetBranchAddress(algA,&algAMET);
     myTree->SetBranchAddress(algB,&algBMET);
     myTree->SetBranchAddress("metl1",&metl1);
@@ -96,13 +101,18 @@ Int_t threeEfficiencies( const TString& algA , const TString& algB, const Float_
 	for (Int_t k = 0; k < nentries; k++)
 	{
 	    myTree->GetEntry(k);
-	    if (passrndm > 0.1)
+        //ADDITIONAL CHECK ON METL1 TO GET CORRECT INDIVIDUAL FRACTIONS
+	    if (passRndm > 0.1 && metl1 > metl1thresh)
 	    {
 		algAMET = algBMET;
-		numRndm++;
+		//numRndm++;
 		algAMETHist->Fill(algAMET);
 		algBMETHist->Fill(algBMET);
 	    }
+        if (passRndm > 0.1)
+        {
+            numRndm++;
+        }
 	}
     }
     else
@@ -110,15 +120,19 @@ Int_t threeEfficiencies( const TString& algA , const TString& algB, const Float_
 	for (Int_t k = 0; k < nentries; k++) //determine numRndm and fill histograms
 	{
 	    myTree->GetEntry(k);
-	    if (passrndm > 0.1)
+	    if (passRndm > 0.1 && metl1 > metl1thresh)
 	    {
-		numRndm++;
+		//numRndm++;
 		algAMETHist->Fill(algAMET);
 		algBMETHist->Fill(algBMET);
 	    }
+        if (passRndm > 0.1)
+        {
+            numRndm++;
+        }
 	}
     }
-    std::cout << "numRndm " << numRndm << std::endl;
+    std::cout << "numRndm that passed l1: " << numRndm << std::endl;
     std::cout << "frac " << frac << std::endl;
     std::cout << "numCombined to keep: " << numRndm * frac << std::endl;
     Float_t lwrbnd = 0.5*frac;
@@ -151,53 +165,53 @@ Int_t threeEfficiencies( const TString& algA , const TString& algB, const Float_
     algAMETx3thresh = computeThresh(algAMETtarget, numKeepx3, nbins);
     algBMETx3thresh = computeThresh(algBMETtarget, numKeepx3, nbins);
 
-    std::cout << algAMETx1thresh << std::endl;
-    std::cout << algBMETx1thresh << std::endl;
-    std::cout << metl1thresh << std::endl;
+    std::cout << "algAx1Thresh: " << algAMETx1thresh << std::endl;
+    std::cout << "algBx1Thresh: " << algBMETx1thresh << std::endl;
+    std::cout << "metl1thresh : " << metl1thresh << std::endl;
     if (algA==algB)
     {
-	for (Int_t i  = 0 ; i < nentries ;i++) //determine events kept at each guess
-	{
-	myTree->GetEntry(i);
-	if (passrndm > 0.5)
-	    {
-		algAMET = algBMET;
-		if ((algAMET > algAMETx1thresh) && (algBMET > algBMETx1thresh) && (metl1 > metl1thresh))
-		{
-		    counter1++;
-		}
-		if ((algAMET > algAMETx2thresh) && (algBMET > algBMETx2thresh) && (metl1 > metl1thresh))
-		{
-		    counter2++;
-		}
-		if ((algAMET > algAMETx3thresh) && (algBMET > algBMETx3thresh) && (metl1 > metl1thresh))
-		{
-		    counter3++;
-		}
-	    }
-	}
+        for (Int_t i  = 0 ; i < nentries ;i++) //determine events kept at each guess
+        {
+            myTree->GetEntry(i);
+            if (passRndm > 0.5)
+            {
+                algAMET = algBMET;
+                if ((algAMET > algAMETx1thresh) && (algBMET > algBMETx1thresh) && (metl1 > metl1thresh))
+                {
+                    counter1++;
+                }
+                if ((algAMET > algAMETx2thresh) && (algBMET > algBMETx2thresh) && (metl1 > metl1thresh))
+                {
+                    counter2++;
+                }
+                if ((algAMET > algAMETx3thresh) && (algBMET > algBMETx3thresh) && (metl1 > metl1thresh))
+                {
+                    counter3++;
+                }
+            }
+        }
     }
     else
     {
-	for (Int_t i  = 0 ; i < nentries ;i++) //determine events kept at each guess
-	{
-	myTree->GetEntry(i);
-	if (passrndm > 0.5)
-	    {
-	    if ((algAMET > algAMETx1thresh) && (algBMET > algBMETx1thresh) && (metl1 > metl1thresh))
-	    {
-		counter1++;
-	    }
-	    if ((algAMET > algAMETx2thresh) && (algBMET > algBMETx2thresh) && (metl1 > metl1thresh))
-	    {
-		counter2++;
-	    }
-	    if ((algAMET > algAMETx3thresh) && (algBMET > algBMETx3thresh) && (metl1 > metl1thresh))
-	    {
-		counter3++;
-	    }
-	    }
-	}
+        for (Int_t i  = 0 ; i < nentries ;i++) //determine events kept at each guess
+        {
+        myTree->GetEntry(i);
+            if (passRndm > 0.5)
+            {
+                if ((algAMET > algAMETx1thresh) && (algBMET > algBMETx1thresh) && (metl1 > metl1thresh))
+                {
+                counter1++;
+                }
+                if ((algAMET > algAMETx2thresh) && (algBMET > algBMETx2thresh) && (metl1 > metl1thresh))
+                {
+                counter2++;
+                }
+                if ((algAMET > algAMETx3thresh) && (algBMET > algBMETx3thresh) && (metl1 > metl1thresh))
+                {
+                counter3++;
+                }
+            }
+        }
     }
 
     std::cout << "At x1 = " << x1 << " counter1: " << counter1 << " events" << std::endl;
@@ -273,7 +287,7 @@ do{
 	{
 	  myTree->GetEntry(i);
 	  algAMET=algBMET;
-	  if ((passrndm > 0.1) && (algAMET > algAMETx2thresh) && (algBMET > algBMETx2thresh) && (metl1 > metl1thresh))
+	  if ((passRndm > 0.1) && (algBMET > algBMETx2thresh) && (metl1 > metl1thresh))
 	  {
 	    counter2++;
 	  }
@@ -284,7 +298,7 @@ do{
 	for (Int_t i  = 0 ; i < nentries ;i++)
 	{
 	  myTree->GetEntry(i);
-	  if ((passrndm > 0.1) && (algAMET > algAMETx2thresh) && (algBMET > algBMETx2thresh) && (metl1 > metl1thresh))
+	  if ((passRndm > 0.1) && (algAMET > algAMETx2thresh) && (algBMET > algBMETx2thresh) && (metl1 > metl1thresh))
 	  {
 	    counter2++;
 	  }
@@ -316,7 +330,7 @@ do{
 //first condition: abs(counter2-(numRndm*frac)) <= eps ||
   if ( abs( counter2 - (numRndm * frac) ) <= eps || abs(algAThreshDiff) <= binWidth || abs(algBThreshDiff) <= binWidth)
   {
-    std::cout << "\nA root at x = " <<  initialGuess << " was found to within one bin: " << binWidth << " GeV"
+    std::cout << "A root at x = " <<  initialGuess << " was found to within one bin: " << binWidth << " GeV"
               << " in " << j << " iterations" << std::endl;
     std::cout << "The number of combined events kept is  " << f2 * numRndm << std::endl;
     std::cout << "The fraction of combined events kept is  " << f2 << std::endl;
@@ -377,7 +391,7 @@ TCanvas* efficiencyCanvas = new TCanvas("Efficiency Canvas", "Efficiency Canvas"
 
 if (algA==algB)
 {
-    Ateff->SetLineColorAlpha(kBlue,0.25);
+    Ateff->SetLineColorAlpha(kBlue,0.35);
     Cteff->SetLineColorAlpha(kRed,0.65);
     Bteff->SetLineColorAlpha(kGreen,0.45);
 }
@@ -481,14 +495,14 @@ Float_t determineThresh( const TString& all = "y", const Float_t frac = (1.e-4),
 	Int_t nentries = tree->GetEntries();
 	Int_t nbins = 400;
 	Int_t numRndm = 0;
-	Int_t passrndm;
+	Int_t passRndm;
 	Double_t metMin = 0.0;
 	Double_t metMax = 500.0;
 	Float_t metl1, metcell, metmht, mettopocl, mettopoclps, mettopoclpuc, metoffrecal,indeterminate,
 	metcellthresh, metmhtthresh, mettopoclthresh, mettopoclpsthresh, mettopoclpucthresh,rightHandSum;
 	TString xlabel = "MET [GeV]";
 	TString yaxis = "Events";
-	tree->SetBranchAddress("passrndm", &passrndm);
+	tree->SetBranchAddress("passrndm", &passRndm);
 	std::cout << "FRACTION: " << frac << std::endl;
 	std::cout << "NENTRIES: " << nentries << std::endl;
 	Float_t indeterminateThresh = 0;
@@ -518,9 +532,9 @@ Float_t determineThresh( const TString& all = "y", const Float_t frac = (1.e-4),
 		for (Int_t k = 0; k < nentries; k++)
 		{
 			tree->GetEntry(k);
-			if ((passrndm > 0.1) && (metl1 > metl1thresh))
+			if ((passRndm > 0.1) && (metl1 > metl1thresh))
 			{
-				numRndm++;
+			    //numRndm++;
 				metl1Hist->Fill(metl1);
 				metcellHist->Fill(metcell);
 				metmhtHist->Fill(metmht);
@@ -528,6 +542,10 @@ Float_t determineThresh( const TString& all = "y", const Float_t frac = (1.e-4),
 				mettopoclpsHist->Fill(mettopoclps);
 				mettopoclpucHist->Fill(mettopoclpuc);
 			}
+            if (passRndm > 0.5)
+            {
+                numRndm++;
+            }
 		}
 	
 		Float_t numKeep = numRndm * frac;
@@ -569,11 +587,15 @@ Float_t determineThresh( const TString& all = "y", const Float_t frac = (1.e-4),
 		for (Int_t k = 0; k < nentries; k++)
 		{
 			tree->GetEntry(k);
-			if ((passrndm > 0.1) && (metl1 >= metl1thresh))
+			if ((passRndm > 0.1) && (metl1 >= metl1thresh))
 			{
-				numRndm++;
+			    //numRndm++;
 				indeterminateHist->Fill(indeterminate);
 			}
+            if (passRndm > 0.5)
+            {
+                numRndm++;
+            }
 		}
 		computeTarget(indeterminateHist,indeterminatetarget,nbins);
 		Float_t numKeep = numRndm * frac;
@@ -586,7 +608,7 @@ Float_t determineThresh( const TString& all = "y", const Float_t frac = (1.e-4),
 	for (int l = 0 ; l < nentries ; l++)
 	{
 		tree->GetEntry(l);
-		if ((passrndm > 0.5) && ((indeterminate >= ( indeterminateThresh - ( ( metMax - metMin ) / ( 2 * nbins ))))))//count the event if its geq left edge of bin (we use center for thresh)
+		if ((passRndm > 0.5) && ((indeterminate >= ( indeterminateThresh - ( ( metMax - metMin ) / ( 2 * nbins ))))))//count the event if its geq left edge of bin (we use center for thresh)
 		{
 			counter++;
 		}
@@ -613,8 +635,8 @@ Float_t determineCombinedEventsKept( const TString& algA, const Float_t threshA,
     Double_t metMax = 500.0;
     Int_t nentries = tree->GetEntries();
     Float_t algAMET, algBMET,metl1;
-    Int_t passrndm;
-    tree->SetBranchAddress("passrndm",&passrndm);
+    Int_t passRndm;
+    tree->SetBranchAddress("passrndm",&passRndm);
     tree->SetBranchAddress(algA,&algAMET);
     tree->SetBranchAddress(algB,&algBMET);
     tree->SetBranchAddress("metl1",&metl1);
@@ -626,11 +648,11 @@ if (algA==algB)
       {
 	tree->GetEntry(i);
 	algAMET=algBMET;
-	if (passrndm >0.1)
+	if (passRndm >0.1)
 	{
 	  numRndm++;
 	}
-	if ((passrndm > 0.1) && (algAMET > threshA) && (algBMET > threshB) && (metl1 > metl1thresh))
+	if ((passRndm > 0.1) && (algAMET > threshA) && (algBMET > threshB) && (metl1 > metl1thresh))
 	{
 	  counter++;
 	}
@@ -641,11 +663,11 @@ else
     for (Int_t i  = 0 ; i < nentries ;i++)
       {
 	tree->GetEntry(i);
-	if (passrndm >0.1)
+	if (passRndm >0.1)
 	{
 	  numRndm++;
 	}
-	if ((passrndm > 0.1) && (algAMET > threshA) && (algBMET > threshB) && (metl1 > metl1thresh))
+	if ((passRndm > 0.1) && (algAMET > threshA) && (algBMET > threshB) && (metl1 > metl1thresh))
 	{
 	  counter++;
 	}
@@ -653,7 +675,7 @@ else
 }
 std::cout << "Combined alg kept: " << counter << " events" << std::endl;
 Float_t frac = (Float_t) counter / (Float_t) numRndm;
-std::cout << "Fraction of passrndm events: " << frac << std::endl;
+std::cout << "Fraction of passRndm events: " << frac << std::endl;
 return(counter);
 }
 
