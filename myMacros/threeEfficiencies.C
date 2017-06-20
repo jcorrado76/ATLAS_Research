@@ -132,7 +132,7 @@ Int_t threeEfficiencies( const TString& algA , const TString& algB, const Float_
         }
 	}
     }
-    std::cout << "numRndm that passed l1: " << numRndm << std::endl;
+    std::cout << "numRndm: " << numRndm << std::endl;
     std::cout << "frac " << frac << std::endl;
     std::cout << "numCombined to keep: " << numRndm * frac << std::endl;
     Float_t lwrbnd = 0.5*frac;
@@ -176,15 +176,15 @@ Int_t threeEfficiencies( const TString& algA , const TString& algB, const Float_
             if (passRndm > 0.5)
             {
                 algAMET = algBMET;
-                if ((algAMET > algAMETx1thresh) && (algBMET > algBMETx1thresh) && (metl1 > metl1thresh))
+                if ((algBMET > algBMETx1thresh) && (metl1 > metl1thresh))
                 {
                     counter1++;
                 }
-                if ((algAMET > algAMETx2thresh) && (algBMET > algBMETx2thresh) && (metl1 > metl1thresh))
+                if ((algBMET > algBMETx2thresh) && (metl1 > metl1thresh))
                 {
                     counter2++;
                 }
-                if ((algAMET > algAMETx3thresh) && (algBMET > algBMETx3thresh) && (metl1 > metl1thresh))
+                if ((algBMET > algBMETx3thresh) && (metl1 > metl1thresh))
                 {
                     counter3++;
                 }
@@ -274,7 +274,11 @@ do{
     initialGuess = ( x1 + x3 ) / 2.0;
     inputArray[j+2] = initialGuess;
     std::cout << "New Guess: " << initialGuess << std::endl;
+    std::cout << "numRndm: " << numRndm << std::endl;
     numKeepx2 = numRndm * initialGuess;
+    std::cout << "numKeepx2: " << numKeepx2 << std::endl;
+    std::cout << "algAtarget"  << " nentries: " << algAMETtarget->GetEntries() << std::endl;
+    std::cout << "algBtarget"  << " nentries: " << algBMETtarget->GetEntries() << std::endl;
     algAMETx2thresh = computeThresh(algAMETtarget, numKeepx2, nbins);
     algBMETx2thresh = computeThresh(algBMETtarget, numKeepx2, nbins);
     thresholdAarray[j+2] = (Float_t) algAMETx2thresh;
@@ -305,8 +309,8 @@ do{
 	}
     }
     numEventsArray[j+2] = counter2;
-    std::cout << algA << " Thresh: " << algAMETx2thresh << std::endl;
-    std::cout << algB << " Thresh: " << algBMETx2thresh << std::endl;
+    std::cout << "algAMETx2thresh: " << algAMETx2thresh << std::endl;
+    std::cout << "algBMETx2thresh: " << algBMETx2thresh << std::endl;
     std::cout << "Counter2: " << counter2 << std::endl;
     f2 = (Float_t) counter2 / (Float_t) numRndm;
     std::cout << "f2: " << f2 << std::endl;
@@ -470,9 +474,11 @@ TH1F* computeTarget(TH1F* hist , TH1F* target, Int_t nbins)
 
 Float_t computeThresh(TH1F* target, Float_t numKeep, Int_t nbins)
 {
+    std::cout << "Targethist name: " << target->GetName() << " Nentries: " << target->GetEntries() << std::endl;
 	Float_t thresh = 0;
 	for (Int_t t = nbins; t >= 0; t--)
 	{
+        std::cout << "bincontent at t=" << t << ": " << target->GetBinContent(t) << std::endl;
 		if (((target->GetBinContent(t) - (numKeep)) > 0) != ((target->GetBinContent(t + 1) - (numKeep)) > 0))
 		{
 			thresh = target->GetBinCenter(t);
