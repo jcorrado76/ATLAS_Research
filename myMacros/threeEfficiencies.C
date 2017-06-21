@@ -9,6 +9,9 @@
 #include "TROOT.h"
 #include "TCanvas.h"
 #include "TSystem.h"
+//#include "mincertools.h"
+
+
 
 
 Int_t threeEfficiencies( const TString& algA , const TString& algB, const Float_t metl1thresh = 0.0, 
@@ -23,13 +26,11 @@ Int_t threeEfficiencies( const TString& algA , const TString& algB, const Float_
     TEFFICIENCY ALG c AT 10^(-4)
     */
 
-    Float_t determineThresh( const TString&, const Float_t, Float_t, const TString&);
+   Float_t determineThresh( const TString&, const Float_t, Float_t, const TString&);
     TH1F* computeTarget(TH1F*,TH1F*,Int_t);
     Float_t computeThresh(TH1F*,Float_t,Int_t);
     Float_t determineCombinedEventsKept( const TString&, const Float_t, const TString&, 
             const Float_t, const Float_t, const TString&);
-
-    gROOT->ProcessLine("gROOT->Reset();");
     gROOT->ProcessLine("gROOT->SetBatch(kTRUE);");
     gROOT->ProcessLine("gROOT->Time();");
 
@@ -63,7 +64,7 @@ Int_t threeEfficiencies( const TString& algA , const TString& algB, const Float_
     myMuonTree->SetBranchAddress("mexoffrecalmuon", &offrecalmuon_mex);
     myMuonTree->SetBranchAddress("meyoffrecalmuon", &offrecalmuon_mey);
 
-    std::cout << "MuonNentries: " << muonNentries << std::endl;
+    std::cout << "MuonNentries: " << muonNentries << "\n" << std::endl;
 
     path = "../myData/"+ myFileName;
     TFile * myData = TFile::Open(path, "READ");
@@ -101,11 +102,11 @@ Int_t threeEfficiencies( const TString& algA , const TString& algB, const Float_
 	for (Int_t k = 0; k < nentries; k++)
 	{
 	    myTree->GetEntry(k);
-        //ADDITIONAL CHECK ON METL1 TO GET CORRECT INDIVIDUAL FRACTIONS
-	    if (passRndm > 0.1 && metl1 > metl1thresh)
+        //DO NOT CUT ON L1 HERE; SAVE THAT FOR COUNTERS LATER
+	    if (passRndm > 0.1)
 	    {
 		algAMET = algBMET;
-		//numRndm++;
+	//	numRndm++;
 		algAMETHist->Fill(algAMET);
 		algBMETHist->Fill(algBMET);
 	    }
@@ -120,9 +121,9 @@ Int_t threeEfficiencies( const TString& algA , const TString& algB, const Float_
 	for (Int_t k = 0; k < nentries; k++) //determine numRndm and fill histograms
 	{
 	    myTree->GetEntry(k);
-	    if (passRndm > 0.1 && metl1 > metl1thresh)
+	    if (passRndm > 0.1)
 	    {
-		//numRndm++;
+	//	numRndm++;
 		algAMETHist->Fill(algAMET);
 		algBMETHist->Fill(algBMET);
 	    }
@@ -277,8 +278,8 @@ do{
     std::cout << "numRndm: " << numRndm << std::endl;
     numKeepx2 = numRndm * initialGuess;
     std::cout << "numKeepx2: " << numKeepx2 << std::endl;
-    std::cout << "algAtarget"  << " nentries: " << algAMETtarget->GetEntries() << std::endl;
-    std::cout << "algBtarget"  << " nentries: " << algBMETtarget->GetEntries() << std::endl;
+    std::cout << "algAtarget"  << " nentries: " << algAMETtarget->Integral() << std::endl;
+    std::cout << "algBtarget"  << " nentries: " << algBMETtarget->Integral() << std::endl;
     algAMETx2thresh = computeThresh(algAMETtarget, numKeepx2, nbins);
     algBMETx2thresh = computeThresh(algBMETtarget, numKeepx2, nbins);
     thresholdAarray[j+2] = (Float_t) algAMETx2thresh;
@@ -417,13 +418,13 @@ legend->AddEntry(Ateff, astring);
 legend->AddEntry(Bteff, bstring);
 legend->AddEntry(Cteff, cstring);
 legend->Draw();
-path = "./TEfficienciesPics/" + folder + "/" + algA + "_and_" + algB + "_efficiencies.pdf";
+path = "./TEfficienciesPics/" + folder + "/L1" + Form("%.1f",metl1thresh) + "-" +  algA + "_and_" + algB + "_efficiencies.pdf";
 efficiencyCanvas->Print(path);
 
-TString logFileName = "./TEfficienciesPics/" + folder + "/" + algA + "_and_" + algB + "_efficiencies.txt";
+TString logFileName = "./TEfficienciesPics/" + folder + "/L1" + Form("%.1f",metl1thresh) + "-" + algA + "_and_" + algB + "_efficiencies.txt";
 std::cout << "Generating log file: " << logFileName << std::endl;
 const char* newLogFileName = logFileName.Data(); //need to go inside and grab data to caste to a data type so i can open ofstream
-ofstream logFile;
+std::ofstream logFile;
 logFile.open(newLogFileName, std::fstream::out);
 if(logFile) std::cout << "logFile Successfully Opened" << std::endl;
 
@@ -460,13 +461,18 @@ logFile.close();
 return(0);
 }
 
+
+
+
 //HELPER FUNCTIONS
 TH1F* computeTarget(TH1F* hist , TH1F* target, Int_t nbins)
 {
+//    std::cout << "\nCOMPUTETARGET.C" << std::endl;
 	Float_t rightHandSum = 0;
 	for (Int_t t = nbins; t >= 0; t--)
 	{
 		rightHandSum = hist->Integral(t,nbins); //compute t'th target bin
+        //std::cout << "Right hand integral from bin: " << t << ": rightHandSum: " << rightHandSum << std::endl;
 		target->SetBinContent(t, rightHandSum);
 	}
 	return(target);
@@ -474,15 +480,19 @@ TH1F* computeTarget(TH1F* hist , TH1F* target, Int_t nbins)
 
 Float_t computeThresh(TH1F* target, Float_t numKeep, Int_t nbins)
 {
-    std::cout << "Targethist name: " << target->GetName() << " Nentries: " << target->GetEntries() << std::endl;
-	Float_t thresh = 0;
-	for (Int_t t = nbins; t >= 0; t--)
-	{
-        std::cout << "bincontent at t=" << t << ": " << target->GetBinContent(t) << std::endl;
-		if (((target->GetBinContent(t) - (numKeep)) > 0) != ((target->GetBinContent(t + 1) - (numKeep)) > 0))
+ //   std::cout << "\nCOMPUTETHRESH.C" << std::endl; std::cout << "Targethist: " << target->GetName() << "->Integral(): " << target->Integral() << std::endl; 
+    Float_t thresh = 0; 
+    for (Int_t t = nbins; t >= 0; t--) 
+    {
+		if (((target->GetBinContent(t) - numKeep) > 0) != ((target->GetBinContent(t + 1) - numKeep) > 0))
 		{
-			thresh = target->GetBinCenter(t);
-		}
+  //          std::cout << "Determined thresh at t= " << t << std::endl;
+   //         std::cout << "GetBin(t): " << target->GetBin(t) << std::endl;
+    //        std::cout << "GetBinCenter(t): " << (target->GetXaxis())->GetBinCenter(t) << std::endl;
+			thresh = (target->GetXaxis())->GetBinCenter(t);
+	   //     thresh = target->GetBin(t);	
+        //    std::cout << "thresh: " << thresh << std::endl;
+        }
 	}
 	return(thresh);
 
@@ -492,8 +502,7 @@ Float_t computeThresh(TH1F* target, Float_t numKeep, Int_t nbins)
 
 Float_t determineThresh( const TString& all = "y", const Float_t frac = (1.e-4), Float_t metl1thresh = 0.0, const TString& dataFile = "ZeroBias2016R307195R311481Runs56.root")
 {
-	gROOT->ProcessLine("gROOT->Reset();");
-	cout << "Entering determineThresh.c" << std::endl;
+    std::cout << "\nDETERMINETHRESH.C" << std::endl;
 	TString fileName = "../myData/" + dataFile;
 	std::cout << "DATAFILE: " << fileName << std::endl;
 	TFile *myFile = TFile::Open(fileName, "READ");
@@ -589,11 +598,11 @@ Float_t determineThresh( const TString& all = "y", const Float_t frac = (1.e-4),
 		tree->SetBranchAddress(all,&indeterminate);
 		tree->SetBranchAddress("metl1",&metl1);
 		std::cout << all << " SELECTED..." << std::endl;
-		std::cout << "Computing number to keep after cutting on metl1 at thresh: " << metl1thresh << std::endl;
+		std::cout << "l1 thresh: " << metl1thresh << std::endl;
 		for (Int_t k = 0; k < nentries; k++)
 		{
 			tree->GetEntry(k);
-			if ((passRndm > 0.1) && (metl1 >= metl1thresh))
+			if ((passRndm > 0.5) && (metl1 > metl1thresh))
 			{
 			    //numRndm++;
 				indeterminateHist->Fill(indeterminate);
@@ -604,7 +613,10 @@ Float_t determineThresh( const TString& all = "y", const Float_t frac = (1.e-4),
             }
 		}
 		computeTarget(indeterminateHist,indeterminatetarget,nbins);
+  //      std::cout << "nentries in hist: " << indeterminateHist->GetEntries() << std::endl;
+   //     std::cout << "Numrndm: " << numRndm << std::endl;
 		Float_t numKeep = numRndm * frac;
+   //    std::cout << "numKeep " << numKeep << std::endl;
 		indeterminateThresh = computeThresh(indeterminatetarget, numKeep, nbins);
 		std::cout << all << " THRESHOLD: " << indeterminateThresh << std::endl;
 	}
@@ -614,7 +626,7 @@ Float_t determineThresh( const TString& all = "y", const Float_t frac = (1.e-4),
 	for (int l = 0 ; l < nentries ; l++)
 	{
 		tree->GetEntry(l);
-		if ((passRndm > 0.5) && ((indeterminate >= ( indeterminateThresh - ( ( metMax - metMin ) / ( 2 * nbins ))))))//count the event if its geq left edge of bin (we use center for thresh)
+		if ((passRndm > 0.5) && (indeterminate > indeterminateThresh) && (metl1 > metl1thresh)) 
 		{
 			counter++;
 		}
