@@ -13,11 +13,7 @@
 #include "TF1.h"
 #include "Math/WrappedTF1.h"
 #include "Math/RootFinderAlgorithms.h"
-
 #include "Math/BrentRootFinder.h"
-
-
-
 
 Int_t threeEfficiencies( const TString& algA , const TString& algB, const Float_t metl1thresh = 0.0,
         const Float_t frac = 1e-4, const TString folder = "",
@@ -32,7 +28,7 @@ Int_t threeEfficiencies( const TString& algA , const TString& algB, const Float_
     */
 
     Float_t determineThresh( const TString&, const Float_t, Float_t, const TString&);
-    Float_t computeThresh(TH1F*,Float_t,Int_t);
+    Float_t computeThresh(TH1F*,Float_t);
     Float_t determineCombinedEventsKept( const TString&, const Float_t, const TString&,
             const Float_t, const Float_t, const TString&);
     //gROOT->ProcessLine("gROOT->SetBatch(kTRUE);");
@@ -161,7 +157,7 @@ Int_t threeEfficiencies( const TString& algA , const TString& algB, const Float_
     TH1F *algBMETtarget = (TH1F*) algBMETHist->GetCumulative(kFALSE);
     algAMETtarget->SetName(algAMETtarget->GetName() + (const TString)"A");
     algBMETtarget->SetName(algBMETtarget->GetName() + (const TString)"B");
-
+/*
     TCanvas* algTarget = new TCanvas;
   	algTarget->Divide(1, 2);
   	algTarget->cd(1);
@@ -169,13 +165,13 @@ Int_t threeEfficiencies( const TString& algA , const TString& algB, const Float_
   	algTarget->cd(2);
   	algBMETtarget->Draw();
   	algTarget->Update();
-
-    algAMETx1thresh = computeThresh(algAMETtarget, numKeepx1, nbins);
-    algBMETx1thresh = computeThresh(algBMETtarget, numKeepx1, nbins);
-    algAMETx2thresh = computeThresh(algAMETtarget, numKeepx2, nbins);
-    algBMETx2thresh = computeThresh(algBMETtarget, numKeepx2, nbins);
-    algAMETx3thresh = computeThresh(algAMETtarget, numKeepx3, nbins);
-    algBMETx3thresh = computeThresh(algBMETtarget, numKeepx3, nbins);
+*/
+    algAMETx1thresh = computeThresh(algAMETtarget, numKeepx1);
+    algBMETx1thresh = computeThresh(algBMETtarget, numKeepx1);
+    algAMETx2thresh = computeThresh(algAMETtarget, numKeepx2);
+    algBMETx2thresh = computeThresh(algBMETtarget, numKeepx2);
+    algAMETx3thresh = computeThresh(algAMETtarget, numKeepx3);
+    algBMETx3thresh = computeThresh(algBMETtarget, numKeepx3);
 
     std::cout << "algAx1Thresh: " << algAMETx1thresh << std::endl;
     std::cout << "algBx1Thresh: " << algBMETx1thresh << std::endl;
@@ -291,8 +287,8 @@ do{
     std::cout << "numKeepx2: " << numKeepx2 << std::endl;
     std::cout << "algAtarget"  << " nentries: " << algAMETtarget->Integral() << std::endl;
     std::cout << "algBtarget"  << " nentries: " << algBMETtarget->Integral() << std::endl;
-    algAMETx2thresh = computeThresh(algAMETtarget, numKeepx2, nbins);
-    algBMETx2thresh = computeThresh(algBMETtarget, numKeepx2, nbins);
+    algAMETx2thresh = computeThresh(algAMETtarget, numKeepx2);
+    algBMETx2thresh = computeThresh(algBMETtarget, numKeepx2);
     thresholdAarray[j+2] = (Float_t) algAMETx2thresh;
     thresholdBarray[j+2] = (Float_t) algBMETx2thresh;
 
@@ -488,58 +484,26 @@ return(0);
 //HELPER FUNCTIONS
 
 //Float_t computeThresh(TH1F* target, Float_t numKeep, Int_t nbins)
-Float_t computeThresh(TH1F* target, Float_t numKeep, Int_t nbins)
+Float_t computeThresh(TH1F* target, Float_t numKeep)
 {
-  //target nbins will be aqual to = nbins from the hist
-  Float_t thresh = 0;
-  /*TF1* fitFunc = new TF1("fitFunc","gaus(0)",0,200);
-  fitFunc->SetParameter(0,1); //initialize normalization constant to 1
-  fitFunc->SetParameter(1,50); //initialize gaussian centered around 50 GeV
-  fitFunc->SetParameter(2,1); //inistialize sigma to 1
-  target->Fit("fitFunc");
-  TF1* myFunc = target->GetFunction("fitFunc");
-  TString myKeep = Form("%.7f",numKeep);
-  TString myArg = "[&](double *x , double *p){return " + myKeep + " - fitFunc(x);}";
-  Int_t low = 0; Int_t high = 200; Int_t par = 3;
-  TF1* objectiveFunc = new TF1("fObj", myArg ,low, high, par);
-  ROOT::Math::WrappedTF1 wf1(*objectiveFunc);
-  ROOT::Math::Roots::Bisection bis;
-  bis.SetFunction( wf1, 0.0, 200 );
-  bis.Solve();
-  thresh = bis.Root();*/
-
-  std::cout << "target nbins" << target->GetNbinsX() << std::endl;
-  for (Int_t t = target->GetNbinsX(); t >= 0; t--)
-  {
-        std::cout << "t: " << t << " target->GetBin(t): " << target->GetBin(t) << " target->GetBinContent(t): " << target->GetBinContent(t) << std::endl;
-  		if (((target->GetBinContent(t) - numKeep) > 0) != ((target->GetBinContent(t + 1) - numKeep) > 0))
-  		{
-  			thresh = (target->GetXaxis())->GetBinCenter(t);
-      }
-  }
-   Int_t nbin = 0;
-   target->GetBinWithContent(numKeep,nbin,0,200,5);
-   std::cout << "Numkeep: " << numKeep << std::endl;
-   Float_t content = target->GetBinContent(nbin);
-   std::cout << "bin with content: " << nbin << std::endl;
-   std::cout << "Bin content: " << target->GetBinContent(nbin) << std::endl;
-
-   std::cout << "thresh: " << thresh << std::endl;
-  	return(nbin);
-
+    gROOT->ProcessLine("gROOT->Reset();");
+    Int_t nbin = 0;
+    target->GetBinWithContent(numKeep,nbin,0,1200,25);
+    Float_t thresh = (target->GetXaxis())->GetBinCenter(nbin);
+    return(thresh);
 }
 
 
 
 Float_t determineThresh( const TString& all = "y", const Float_t frac = (1.e-4), Float_t metl1thresh = 0.0, const TString& dataFile = "ZeroBias2016R307195R311481Runs56.root")
 {
-  std::cout << "\nDETERMINETHRESH" << std::endl;
+    std::cout << "\nDETERMINETHRESH" << std::endl;
 	TString fileName = "../myData/" + dataFile;
 	std::cout << "DATAFILE: " << fileName << std::endl;
 	TFile *myFile = TFile::Open(fileName, "READ");
 	TTree *tree = (TTree*)myFile->Get("tree");
 	Int_t nentries = tree->GetEntries();
-	Int_t nbins = 400;
+	Int_t nbins = 1200;
 	Int_t numRndm = 0;
 	Int_t passRndm;
 	Double_t metMin = 0.0;
@@ -551,95 +515,28 @@ Float_t determineThresh( const TString& all = "y", const Float_t frac = (1.e-4),
 	tree->SetBranchAddress("passrndm", &passRndm);
 	std::cout << "FRACTION: " << frac << std::endl;
 	std::cout << "NENTRIES: " << nentries << std::endl;
-	Float_t indeterminateThresh = 0;
 
-	if (all == "y")
+	TH1F *indeterminateHist = new TH1F(all, all, nbins, metMin, metMax);
+	tree->SetBranchAddress(all,&indeterminate);
+	tree->SetBranchAddress("metl1",&metl1);
+	std::cout << all << " SELECTED..." << std::endl;
+	std::cout << "l1 thresh: " << metl1thresh << std::endl;
+	for (Int_t k = 0; k < nentries; k++)
 	{
-		TH1F *metl1Hist         = new TH1F("metl1", "metl1", nbins, metMin, metMax);;
-		TH1F *metcellHist       = new TH1F("metcell", "metcell", nbins, metMin, metMax);
-		TH1F *metmhtHist        = new TH1F("metmht", "metmht", nbins, metMin, metMax);
-		TH1F *mettopoclHist     = new TH1F("mettopocl", "mettopocl", nbins, metMin, metMax);
-		TH1F *mettopoclpsHist   = new TH1F("mettopoclps", "mettopoclps", nbins, metMin, metMax);
-		TH1F *mettopoclpucHist  = new TH1F("mettopoclpuc", "mettopoclpuc", nbins, metMin, metMax);
-
-		tree->SetBranchAddress("metl1", &metl1);
-		tree->SetBranchAddress("metcell", &metcell);
-		tree->SetBranchAddress("metmht", &metmht);
-		tree->SetBranchAddress("mettopocl", &mettopocl);
-		tree->SetBranchAddress("mettopoclps", &mettopoclps);
-		tree->SetBranchAddress("mettopoclpuc", &mettopoclpuc);
-		tree->SetBranchAddress("metoffrecal", &metoffrecal);
-		std::cout << "ALL ALGORITHMS SELECTED..." << std::endl;
-		for (Int_t k = 0; k < nentries; k++)
+		tree->GetEntry(k);
+		if ((passRndm > 0.5) && (metl1 > metl1thresh))
 		{
-			tree->GetEntry(k);
-			if ((passRndm > 0.5) && (metl1 > metl1thresh))
-			{
-				metl1Hist->Fill(metl1);
-				metcellHist->Fill(metcell);
-				metmhtHist->Fill(metmht);
-				mettopoclHist->Fill(mettopocl);
-				mettopoclpsHist->Fill(mettopoclps);
-				mettopoclpucHist->Fill(mettopoclpuc);
-			}
-      if (passRndm > 0.5)
-      {
-          numRndm++;
-      }
+			indeterminateHist->Fill(indeterminate);
 		}
-
-		Float_t numKeep = numRndm * frac;
-
-    TH1F *metl1target= (TH1F*) metl1Hist->GetCumulative(kFALSE);
-		metl1thresh = computeThresh(metl1target, numKeep, nbins);
-
-    TH1F *metcelltarget = (TH1F*)metcellHist->GetCumulative(kFALSE);
-		metcellthresh = computeThresh(metcelltarget, numKeep, nbins);
-
-    TH1F *metmhttarget = (TH1F*) metmhtHist->GetCumulative(kFALSE);
-		metmhtthresh = computeThresh(metmhttarget, numKeep, nbins);
-
-    TH1F *mettopocltarget = (TH1F*) mettopoclHist->GetCumulative(kFALSE);
-		mettopoclthresh = computeThresh(mettopocltarget, numKeep, nbins);
-
-    TH1F *mettopoclpstarget = (TH1F*) mettopoclpsHist->GetCumulative(kFALSE);
-		mettopoclpsthresh = computeThresh(mettopoclpstarget, numKeep, nbins);
-
-    TH1F *mettopoclpuctarget = (TH1F*) mettopoclpucHist->GetCumulative(kFALSE);
-		mettopoclpucthresh = computeThresh(mettopoclpuctarget, numKeep, nbins);
-
-		std::cout << "METL1 THRESHOLD: " << metl1thresh << std::endl;
-		std::cout << "METCELL THRESHOLD: " << metcellthresh << std::endl;
-		std::cout << "METMHT THRESHOLD: " << metmhtthresh << std::endl;
-		std::cout << "METTOPOCL THRESHOLD: " << mettopoclthresh << std::endl;
-		std::cout << "METTOPOCLPS THRESHOLD: " << mettopoclpsthresh << std::endl;
-		std::cout << "METTOPOCLPUC THRESHOLD: " << mettopoclpucthresh << std::endl;
-	}
-
-	if (all != "y") //only compute thresh for one alg
-	{
-		TH1F *indeterminateHist = new TH1F(all, all, nbins, metMin, metMax);
-		tree->SetBranchAddress(all,&indeterminate);
-		tree->SetBranchAddress("metl1",&metl1);
-		std::cout << all << " SELECTED..." << std::endl;
-		std::cout << "l1 thresh: " << metl1thresh << std::endl;
-		for (Int_t k = 0; k < nentries; k++)
-		{
-			tree->GetEntry(k);
-			if ((passRndm > 0.5) && (metl1 > metl1thresh))
-			{
-				indeterminateHist->Fill(indeterminate);
-			}
-            if (passRndm > 0.5)
-            {
-              numRndm++;
-            }
-	    }
-        TH1F *indeterminatetarget = (TH1F*) indeterminateHist->GetCumulative(kFALSE);
-		Float_t numKeep = numRndm * frac;
-		indeterminateThresh = computeThresh(indeterminatetarget, numKeep, nbins);
-		std::cout << all << " THRESHOLD: " << indeterminateThresh << std::endl;
-	}
+        if (passRndm > 0.5)
+        {
+          numRndm++;
+        }
+    }
+    TH1F *indeterminatetarget = (TH1F*) indeterminateHist->GetCumulative(kFALSE);
+	Float_t numKeep = numRndm * frac;
+	Float_t indeterminateThresh = computeThresh(indeterminatetarget, numKeep);
+	std::cout << all << " THRESHOLD: " << indeterminateThresh << std::endl;
 	std::cout << "Number of events that should have been kept: " << frac * numRndm << std::endl;
 	std::cout << "Checking how many events are kept by the alg at the determined threshold..." << std::endl;
 	Int_t counter=0;
