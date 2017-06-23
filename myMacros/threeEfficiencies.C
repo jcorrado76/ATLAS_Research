@@ -15,6 +15,19 @@
 #include "Math/RootFinderAlgorithms.h"
 #include "Math/BrentRootFinder.h"
 
+namespace myConstants
+{
+    Int_t nbins = 1200;
+    Int_t muonNbins = 100;
+    Float_t metMin = 0;
+    Float_t metMax = 300;
+    Float_t muonMetMin = metMin;
+    Float_t muonMetMax = metMax;
+
+}
+
+
+
 Int_t threeEfficiencies( const TString& algA , const TString& algB, const Float_t metl1thresh = 0.0,
         const Float_t frac = 1e-4, const TString folder = "",
         const TString& myFileName = "ZeroBias2016R307195R311481Runs56.root",
@@ -40,16 +53,14 @@ Int_t threeEfficiencies( const TString& algA , const TString& algB, const Float_
     muonFile->GetObject("tree",myMuonTree);
     std::cout << "Muon Data being used to compute algorithm efficiency: " << path << std::endl;
     Int_t muonNentries = myMuonTree->GetEntries();
-    Int_t muonNbins = 100;
-    Int_t nbins = 1200;
-    Double_t muonMetMin = 0.0;
-    Double_t muonMetMax = 300.0;
-    Int_t numRndm = 0;
-    Int_t counter1 = 0;
-    Int_t counter2 = 0;
-    Int_t counter3 = 0;
-    Double_t metMin = 0.0;
-    Double_t metMax = 300.0;
+    Int_t muonNbins = myConstants::muonNbins;
+    Int_t nbins = myConstants::nbins;
+    Double_t muonMetMin = myConstants::muonMetMin;
+    Double_t muonMetMax = myConstants::muonMetMax;
+    Int_t numRndm = 0; Int_t counter1 = 0; Int_t counter2 = 0; Int_t counter3 = 0;
+
+    Double_t metMin = myConstants::metMin; Double_t metMax = myConstants::metMax;
+    
     Int_t passRndm, numPassMuon,passmuon,passmuvarmed,cleanCutsFlag,recalBrokeFlag;
     Float_t algAMET,algBMET,metoffrecal,offrecal_met,offrecal_mex,offrecal_mey,offrecalmuon_mex,
             offrecalmuon_mey, acthresh,bcthresh,metl1;
@@ -256,8 +267,6 @@ Int_t threeEfficiencies( const TString& algA , const TString& algB, const Float_
     thresholdBarray[2] = (Float_t) algBMETx2thresh;
     thresholdBarray[1] = (Float_t) algBMETx3thresh;
 
-    //OLD CONDITION: While ((abs( numRndm * frac - counter2) > eps))
-
     Int_t j = 0 ;
     Int_t imax = 30;
     Float_t binWidth = (metMax - metMin)/ nbins;
@@ -407,6 +416,8 @@ std::cout << "Alg ABC total nentries: " << (Cteff->GetTotalHistogram())->GetEntr
 
 std::cout << "Running an external check macro to verify number of events kept at fraction determined by the bisection algorithm..." << std::endl;
 std::cout << "ENTERING determineCombinedEventsKept.algTarget" <<std::endl;
+
+//SHOULDN'T THIS LOOP OVER MUON EVENTS?
 Float_t eventsCombined = determineCombinedEventsKept( algA , acthresh , algB , bcthresh , metl1thresh , myFileName );
 
 TCanvas* efficiencyCanvas = new TCanvas("Efficiency Canvas", "Efficiency Canvas");
@@ -478,63 +489,39 @@ logFile.close();
 return(0);
 }
 
-
-
-
-//HELPER FUNCTIONS
-
-//Float_t computeThresh(TH1F* target, Float_t numKeep, Int_t nbins)
 Float_t computeThresh(TH1F* target, Float_t numKeep)
 {
-
-    gROOT->ProcessLine("gROOT->Reset();");
-    /*TString stringy = (TString)"./TEfficienciesPics/log" + target->GetName() + (TString)"numKeep" + Form("%.2f",numKeep);
-    stringy = ".> " + stringy;
-    gROOT->ProcessLine(stringy);
-
-
     Int_t nbin = 0;
-    for (Int_t i = 0 ; i < target->GetNbinsX() ; i++)
-    {
-        std::cout << "bin: " << i << " bincontent: " << target->GetBinContent(i) << std::endl;
-    }
-    std::cout << "nunmKeep: " << numKeep << std::endl;*/
-    //std::cout << "bin: " << nbin << " thresh: " << thresh << " content: " << target->GetBinContent(nbin) << std::endl;
-    //gROOT->ProcessLine(".>");
-    
+    gROOT->ProcessLine("gROOT->Reset();");
     target->GetBinWithContent(numKeep,nbin,0,-1,20000); //if firstx<=0{firstx=1}; if lastx<firstx{lastx=fXaxis.GetNbinsX()};
     Float_t thresh = (target->GetXaxis())->GetBinCenter(nbin);
-
     return(thresh);
 }
 
 
-
-Float_t determineThresh( const TString& all = "y", const Float_t frac = (1.e-4), Float_t metl1thresh = 0.0, const TString& dataFile = "ZeroBias2016R307195R311481Runs56.root")
+Float_t determineThresh( const TString& alg, const Float_t frac = (1.e-4), Float_t metl1thresh = 0.0, const TString& dataFile = "ZeroBias2016R307195R311481Runs56.root")
 {
-    std::cout << "\nDETERMINETHRESH" << std::endl;
+    std::cout << "DETERMINETHRESH" << std::endl;
 	TString fileName = "../myData/" + dataFile;
-	std::cout << "DATAFILE: " << fileName << std::endl;
+	std::cout << "ZERO BIAS DATAFILE: " << fileName << std::endl;
 	TFile *myFile = TFile::Open(fileName, "READ");
 	TTree *tree = (TTree*)myFile->Get("tree");
-	Int_t nentries = tree->GetEntries();
-	Int_t nbins = 1200;
-	Int_t numRndm = 0;
-	Int_t passRndm;
-	Double_t metMin = 0.0;
-	Double_t metMax = 500.0;
+	Int_t nentries = tree->GetEntries();Int_t numRndm = 0;Int_t passRndm;
+	Int_t nbins = myConstants::nbins;
+	Double_t metMin = myConstants::metMin;
+	Double_t metMax = myConstants::metMax;
 	Float_t metl1, metcell, metmht, mettopocl, mettopoclps, mettopoclpuc, metoffrecal,indeterminate,
 	metcellthresh, metmhtthresh, mettopoclthresh, mettopoclpsthresh, mettopoclpucthresh,rightHandSum;
 	TString xlabel = "MET [GeV]";
 	TString yaxis = "Events";
 	tree->SetBranchAddress("passrndm", &passRndm);
 	std::cout << "FRACTION: " << frac << std::endl;
-	std::cout << "NENTRIES: " << nentries << std::endl;
+	std::cout << "ZEROBIAS NENTRIES: " << nentries << std::endl;
 
-	TH1F *indeterminateHist = new TH1F(all, all, nbins, metMin, metMax);
-	tree->SetBranchAddress(all,&indeterminate);
+	TH1F *indeterminateHist = new TH1F(alg, alg, nbins, metMin, metMax);
+	tree->SetBranchAddress(alg,&indeterminate);
 	tree->SetBranchAddress("metl1",&metl1);
-	std::cout << all << " SELECTED..." << std::endl;
+	std::cout << "ALG:" << alg << std::endl;
 	std::cout << "l1 thresh: " << metl1thresh << std::endl;
 	for (Int_t k = 0; k < nentries; k++)
 	{
@@ -551,7 +538,7 @@ Float_t determineThresh( const TString& all = "y", const Float_t frac = (1.e-4),
     TH1F *indeterminatetarget = (TH1F*) indeterminateHist->GetCumulative(kFALSE);
 	Float_t numKeep = numRndm * frac;
 	Float_t indeterminateThresh = computeThresh(indeterminatetarget, numKeep);
-	std::cout << all << " THRESHOLD: " << indeterminateThresh << std::endl;
+	std::cout << alg << " THRESHOLD: " << indeterminateThresh << std::endl;
 	std::cout << "Number of events that should have been kept: " << frac * numRndm << std::endl;
 	std::cout << "Checking how many events are kept by the alg at the determined threshold..." << std::endl;
 	Int_t counter=0;
@@ -568,16 +555,14 @@ Float_t determineThresh( const TString& all = "y", const Float_t frac = (1.e-4),
 	return(indeterminateThresh);
 }
 
-Float_t determineCombinedEventsKept( const TString& algA, const Float_t threshA, const TString& algB, const Float_t threshB, const Float_t metl1thresh = 0.0, const TString& fileName = "ZeroBias2016new.13Runs.root")
+Float_t determineCombinedEventsKept( const TString& algA, const Float_t threshA, const TString& algB,
+    const Float_t threshB, const Float_t metl1thresh = 0.0, const TString& fileName = "ZeroBias2016R307195R311481Runs56.root")
 {
     std::cout << "Determining fraction of zero bias events kept when using combined algorithm of " << algA << " at: " << threshA << " and "
     << algB << " at: " << threshB << std::endl;
     TString path = "../myData/"+fileName;
     TFile * myFile = TFile::Open(path, "READ");
     TTree* tree = (TTree*)myFile->Get("tree");
-    Int_t nbins = 400;
-    Double_t metMin = 0.0;
-    Double_t metMax = 500.0;
     Int_t nentries = tree->GetEntries();
     Float_t algAMET, algBMET,metl1;
     Int_t passRndm;
