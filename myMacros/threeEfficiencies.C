@@ -355,7 +355,7 @@ acthresh = algAMETx2thresh;
 bcthresh = algBMETx2thresh;
 
 TString cstring = "TEfficiency using " + algA + " at thresh " + Form(" %.2f", acthresh) + " and " + algB +
-" at thresh " + Form(" %.2f", bcthresh);
+" at thresh " + Form(" %.2f", bcthresh) + " and L1 cut at: " + Form("%.2f",metl1thresh);
 TString astring = algA + " TEfficiency at thresh of " + Form(" %.2f", algAThresh) + " and L1 cut at: " + Form("%.2f" ,metl1thresh);
 TString bstring = algB + " TEfficiency at thresh of " + Form(" %.2f", algBThresh) + " and L1 cut at: " + Form("%.2f" ,metl1thresh);
 
@@ -486,10 +486,25 @@ return(0);
 //Float_t computeThresh(TH1F* target, Float_t numKeep, Int_t nbins)
 Float_t computeThresh(TH1F* target, Float_t numKeep)
 {
+
     gROOT->ProcessLine("gROOT->Reset();");
+    /*TString stringy = (TString)"./TEfficienciesPics/log" + target->GetName() + (TString)"numKeep" + Form("%.2f",numKeep);
+    stringy = ".> " + stringy;
+    gROOT->ProcessLine(stringy);
+
+
     Int_t nbin = 0;
-    target->GetBinWithContent(numKeep,nbin,0,1200,25);
+    for (Int_t i = 0 ; i < target->GetNbinsX() ; i++)
+    {
+        std::cout << "bin: " << i << " bincontent: " << target->GetBinContent(i) << std::endl;
+    }
+    std::cout << "nunmKeep: " << numKeep << std::endl;*/
+    //std::cout << "bin: " << nbin << " thresh: " << thresh << " content: " << target->GetBinContent(nbin) << std::endl;
+    //gROOT->ProcessLine(".>");
+    
+    target->GetBinWithContent(numKeep,nbin,0,-1,20000); //if firstx<=0{firstx=1}; if lastx<firstx{lastx=fXaxis.GetNbinsX()};
     Float_t thresh = (target->GetXaxis())->GetBinCenter(nbin);
+
     return(thresh);
 }
 
