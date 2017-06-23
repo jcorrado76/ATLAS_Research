@@ -1,3 +1,4 @@
+#include "TMath.h"
 #include "TH1.h"
 #include "TFile.h"
 #include "TTree.h"
@@ -9,29 +10,32 @@
 #include "TROOT.h"
 #include "TCanvas.h"
 #include "TSystem.h"
-//#include "mincertools.h"
+#include "TF1.h"
+#include "Math/WrappedTF1.h"
+#include "Math/RootFinderAlgorithms.h"
+
+#include "Math/BrentRootFinder.h"
 
 
 
 
-Int_t threeEfficiencies( const TString& algA , const TString& algB, const Float_t metl1thresh = 0.0, 
-        const Float_t frac = 1e-4, const TString folder = "", 
-        const TString& myFileName = "ZeroBias2016R307195R311481Runs56.root", 
+Int_t threeEfficiencies( const TString& algA , const TString& algB, const Float_t metl1thresh = 0.0,
+        const Float_t frac = 1e-4, const TString folder = "",
+        const TString& myFileName = "ZeroBias2016R307195R311481Runs56.root",
         const TString& muonFilename = "PhysicsMain2016.Muons.noalgL1XE45R3073065R311481Runs9B.root")
 {
     /*
     Makes TEFFICIENCY Plots ONCE
     TEFFICIENCY ALG A AT 10^(-4)
     TEFFICIENCY ALG b AT 10^(-4)
-    TEFFICIENCY ALG c AT 10^(-4)
+    TEFFICIENCY ALG algTarget AT 10^(-4)
     */
 
-   Float_t determineThresh( const TString&, const Float_t, Float_t, const TString&);
-    TH1F* computeTarget(TH1F*,TH1F*,Int_t);
+    Float_t determineThresh( const TString&, const Float_t, Float_t, const TString&);
     Float_t computeThresh(TH1F*,Float_t,Int_t);
-    Float_t determineCombinedEventsKept( const TString&, const Float_t, const TString&, 
+    Float_t determineCombinedEventsKept( const TString&, const Float_t, const TString&,
             const Float_t, const Float_t, const TString&);
-    gROOT->ProcessLine("gROOT->SetBatch(kTRUE);");
+    //gROOT->ProcessLine("gROOT->SetBatch(kTRUE);");
     gROOT->ProcessLine("gROOT->Time();");
 
     TString path = "../myData/"+muonFilename;
@@ -40,22 +44,23 @@ Int_t threeEfficiencies( const TString& algA , const TString& algB, const Float_
     muonFile->GetObject("tree",myMuonTree);
     std::cout << "Muon Data being used to compute algorithm efficiency: " << path << std::endl;
     Int_t muonNentries = myMuonTree->GetEntries();
-    Int_t muonNbins = 50;
-    Int_t nbins = 400;
+    Int_t muonNbins = 100;
+    Int_t nbins = 1200;
     Double_t muonMetMin = 0.0;
-    Double_t muonMetMax = 250.0;
+    Double_t muonMetMax = 300.0;
     Int_t numRndm = 0;
     Int_t counter1 = 0;
     Int_t counter2 = 0;
     Int_t counter3 = 0;
     Double_t metMin = 0.0;
-    Double_t metMax = 250.0;
-    Int_t passRndm, numPassMuon,passmuon,cleanCutsFlag,recalBrokeFlag;
+    Double_t metMax = 300.0;
+    Int_t passRndm, numPassMuon,passmuon,passmuvarmed,cleanCutsFlag,recalBrokeFlag;
     Float_t algAMET,algBMET,metoffrecal,offrecal_met,offrecal_mex,offrecal_mey,offrecalmuon_mex,
             offrecalmuon_mey, acthresh,bcthresh,metl1;
 
     //myMuonTree->SetBranchAddress("passmu24med", &passmuon);
     myMuonTree->SetBranchAddress("passmu26med", &passmuon);
+    myMuonTree->SetBranchAddress("passmu26varmed", &passmuvarmed);
     myMuonTree->SetBranchAddress("passcleancuts", &cleanCutsFlag);
     myMuonTree->SetBranchAddress("recalbroke", &recalBrokeFlag);
     myMuonTree->SetBranchAddress("metoffrecal", &offrecal_met);
@@ -84,13 +89,12 @@ Int_t threeEfficiencies( const TString& algA , const TString& algB, const Float_
     myTree->SetBranchAddress("metl1",&metl1);
     TH1F *algAMETHist = new TH1F("algA", "algA", nbins, metMin, metMax);
     TH1F *algBMETHist = new TH1F("algB", "algB", nbins, metMin, metMax);
-    TH1F *algAMETtarget = new TH1F("cumu1", "algAcumu", nbins, metMin, metMax);
-    TH1F *algBMETtarget = new TH1F("cumu2", "algBcumu", nbins, metMin, metMax);
+
 
     Float_t algAThresh = determineThresh(algA,frac,metl1thresh,myFileName);
     Float_t algBThresh = determineThresh(algB,frac,metl1thresh,myFileName);
 
-    std::cout << "Returned to threeEfficiencies.c" << std::endl;
+    std::cout << "Returned to threeEfficiencies.C" << std::endl;
     std::cout << "algAThresh: " << algAThresh << std::endl;
     std::cout << "algBThresh: " << algBThresh << std::endl;
     std::cout << "Using METL1THRESH: " << metl1thresh << std::endl;
@@ -105,10 +109,9 @@ Int_t threeEfficiencies( const TString& algA , const TString& algB, const Float_
         //DO NOT CUT ON L1 HERE; SAVE THAT FOR COUNTERS LATER
 	    if (passRndm > 0.1)
 	    {
-		algAMET = algBMET;
-	//	numRndm++;
-		algAMETHist->Fill(algAMET);
-		algBMETHist->Fill(algBMET);
+    		algAMET = algBMET;
+    		algAMETHist->Fill(algAMET);
+    		algBMETHist->Fill(algBMET);
 	    }
         if (passRndm > 0.1)
         {
@@ -123,14 +126,13 @@ Int_t threeEfficiencies( const TString& algA , const TString& algB, const Float_
 	    myTree->GetEntry(k);
 	    if (passRndm > 0.1)
 	    {
-	//	numRndm++;
-		algAMETHist->Fill(algAMET);
-		algBMETHist->Fill(algBMET);
+    		algAMETHist->Fill(algAMET);
+    		algBMETHist->Fill(algBMET);
 	    }
-        if (passRndm > 0.1)
-        {
-            numRndm++;
-        }
+      if (passRndm > 0.1)
+      {
+          numRndm++;
+      }
 	}
     }
     std::cout << "numRndm: " << numRndm << std::endl;
@@ -154,10 +156,19 @@ Int_t threeEfficiencies( const TString& algA , const TString& algB, const Float_
     Float_t numKeepx1 = numRndm * x1;
     Float_t numKeepx2 = numRndm * initialGuess;
     Float_t numKeepx3 = numRndm * x3;
-    
-    
-    computeTarget(algAMETHist,algAMETtarget,nbins);
-    computeTarget(algBMETHist,algBMETtarget,nbins);
+
+    TH1F *algAMETtarget = (TH1F*) algAMETHist->GetCumulative(kFALSE);
+    TH1F *algBMETtarget = (TH1F*) algBMETHist->GetCumulative(kFALSE);
+    algAMETtarget->SetName(algAMETtarget->GetName() + (const TString)"A");
+    algBMETtarget->SetName(algBMETtarget->GetName() + (const TString)"B");
+
+    TCanvas* algTarget = new TCanvas;
+  	algTarget->Divide(1, 2);
+  	algTarget->cd(1);
+  	algAMETtarget->Draw();
+  	algTarget->cd(2);
+  	algBMETtarget->Draw();
+  	algTarget->Update();
 
     algAMETx1thresh = computeThresh(algAMETtarget, numKeepx1, nbins);
     algBMETx1thresh = computeThresh(algBMETtarget, numKeepx1, nbins);
@@ -349,8 +360,8 @@ bcthresh = algBMETx2thresh;
 
 TString cstring = "TEfficiency using " + algA + " at thresh " + Form(" %.2f", acthresh) + " and " + algB +
 " at thresh " + Form(" %.2f", bcthresh);
-TString astring = algA + " TEfficiency at thresh of " + Form(" %.2f", algAThresh);
-TString bstring = algB + " TEfficiency at thresh of " + Form(" %.2f", algBThresh);
+TString astring = algA + " TEfficiency at thresh of " + Form(" %.2f", algAThresh) + " and L1 cut at: " + Form("%.2f" ,metl1thresh);
+TString bstring = algB + " TEfficiency at thresh of " + Form(" %.2f", algBThresh) + " and L1 cut at: " + Form("%.2f" ,metl1thresh);
 
 TEfficiency* Ateff  = new TEfficiency(astring , "Efficiency", muonNbins, muonMetMin, muonMetMax);
 TEfficiency* Bteff  = new TEfficiency(bstring , "Efficiency", muonNbins, muonMetMin, muonMetMax);
@@ -359,37 +370,47 @@ Float_t algAmuonMET = 0;
 Float_t algBmuonMET = 0;
 myMuonTree->SetBranchAddress(algA,&algAmuonMET);
 myMuonTree->SetBranchAddress(algB,&algBmuonMET);
-for (Int_t l = 0 ; l < nentries ; l++)
+for (Int_t l = 0 ; l < muonNentries ; l++)
 {
     myMuonTree->GetEntry(l);
-    //CLEANCUTS AND RECALBROKE
     if (algA == algB)
     {
-	algAmuonMET = algBmuonMET;
-	if (passmuon > 0.1 && cleanCutsFlag > 0.1 && recalBrokeFlag < 0.1)
-	{
-	    Float_t metnomu = sqrt(((offrecal_mex - offrecalmuon_mex) * (offrecal_mex - offrecalmuon_mex)) +
-	    ((offrecal_mey - offrecalmuon_mey)*(offrecal_mey - offrecalmuon_mey))); //compute metnomu
-	    Ateff->Fill(algAmuonMET > algAThresh, metnomu);
-	    Bteff->Fill(algBmuonMET > algBThresh, metnomu);
-	    Cteff->Fill(((algAmuonMET > acthresh) && (algBmuonMET > bcthresh) ), metnomu);
-	}
+        algAmuonMET = algBmuonMET;
+        if ((passmuvarmed > 0.1 || passmuon > 0.1) && cleanCutsFlag > 0.1 && recalBrokeFlag < 0.1)
+        {
+            Float_t metnomu = sqrt(((offrecal_mex - offrecalmuon_mex) * (offrecal_mex - offrecalmuon_mex)) +
+            ((offrecal_mey - offrecalmuon_mey)*(offrecal_mey - offrecalmuon_mey))); //compute metnomu
+
+            Ateff->Fill((algAmuonMET > algAThresh) && (metl1 > metl1thresh), metnomu);
+            Bteff->Fill((algBmuonMET > algBThresh) && (metl1 > metl1thresh), metnomu);
+            Cteff->Fill(((algAmuonMET > acthresh) && (algBmuonMET > bcthresh) && (metl1 > metl1thresh)), metnomu);
+        }
     }
     else
     {
-	if (passmuon > 0.1 && cleanCutsFlag > 0.1 && recalBrokeFlag < 0.1)
+	if ((passmuvarmed > 0.1 || passmuon > 0.1) && cleanCutsFlag > 0.1 && recalBrokeFlag < 0.1)
 	{
 	    Float_t metnomu = sqrt(((offrecal_mex - offrecalmuon_mex) * (offrecal_mex - offrecalmuon_mex)) +
 	    ((offrecal_mey - offrecalmuon_mey)*(offrecal_mey - offrecalmuon_mey))); //compute metnomu
-	    Ateff->Fill(algAmuonMET > algAThresh, metnomu);
-	    Bteff->Fill(algBmuonMET > algBThresh, metnomu);
-	    Cteff->Fill(((algAmuonMET > acthresh) && (algBmuonMET > bcthresh) ), metnomu);
+
+      Ateff->Fill(algAmuonMET > algAThresh && metl1 > metl1thresh, metnomu);
+	    Bteff->Fill(algBmuonMET > algBThresh && metl1 > metl1thresh, metnomu);
+	    Cteff->Fill(((algAmuonMET > acthresh) && (algBmuonMET > bcthresh) && metl1 > metl1thresh), metnomu);
 	}
     }
 }
 
+
+std::cout << "Alg A passed nentries: " << (Ateff->GetPassedHistogram())->GetEntries() << std::endl;
+std::cout << "Alg B passed nentries: " << (Bteff->GetPassedHistogram())->GetEntries() << std::endl;
+std::cout << "Alg ABC passed nentries: " << (Cteff->GetPassedHistogram())->GetEntries() << std::endl;
+std::cout << "Alg A total nentries: " << (Ateff->GetTotalHistogram())->GetEntries() << std::endl;
+std::cout << "Alg B total nentries: " << (Bteff->GetTotalHistogram())->GetEntries() << std::endl;
+std::cout << "Alg ABC total nentries: " << (Cteff->GetTotalHistogram())->GetEntries() << std::endl;
+
+
 std::cout << "Running an external check macro to verify number of events kept at fraction determined by the bisection algorithm..." << std::endl;
-std::cout << "ENTERING determineCombinedEventsKept.c" <<std::endl;
+std::cout << "ENTERING determineCombinedEventsKept.algTarget" <<std::endl;
 Float_t eventsCombined = determineCombinedEventsKept( algA , acthresh , algB , bcthresh , metl1thresh , myFileName );
 
 TCanvas* efficiencyCanvas = new TCanvas("Efficiency Canvas", "Efficiency Canvas");
@@ -449,13 +470,13 @@ logFile << "x2\t\t\t" << inputArray[2] << "\t\t\t" << outputArray[2] << "\t\t\t"
 algAMETx2thresh << "\t\t\t" << algBMETx2thresh <<"\r\n";
 logFile << "x3\t\t\t" << inputArray[1] << "\t\t\t" << outputArray[1] << "\t\t\t" << numEventsArray[1] << "\t\t\t" <<
 algAMETx3thresh << "\t\t\t" << algBMETx3thresh <<"\r\n";
-for (int m = 1; m < j+1 ; m++)
+for (Int_t m = 1; m < j+1 ; m++)
 {
   logFile << Form("I%d",m) << "\t\t\t" << Form("%.7f",inputArray[m+2]) << "\t\t" << Form("%.7f",outputArray[m+2])
   << "\t\t\t" << Form("%.7f",numEventsArray[m+2]) << "\t\t" << Form("%.7f",thresholdAarray[m+2]) << "\t\t" <<
   Form("%.7f",thresholdBarray[m+2]) << "\r\n";
 }
-logFile << "Number of combined events kept, as determined by verification macro 'determineCombinedEventsKept.c': "
+logFile << "Number of combined events kept, as determined by verification macro 'determineCombinedEventsKept.algTarget': "
 << eventsCombined << "\r\n";
 logFile.close();
 return(0);
@@ -465,36 +486,46 @@ return(0);
 
 
 //HELPER FUNCTIONS
-TH1F* computeTarget(TH1F* hist , TH1F* target, Int_t nbins)
-{
-//    std::cout << "\nCOMPUTETARGET.C" << std::endl;
-	Float_t rightHandSum = 0;
-	for (Int_t t = nbins; t >= 0; t--)
-	{
-		rightHandSum = hist->Integral(t,nbins); //compute t'th target bin
-        //std::cout << "Right hand integral from bin: " << t << ": rightHandSum: " << rightHandSum << std::endl;
-		target->SetBinContent(t, rightHandSum);
-	}
-	return(target);
-}
 
+//Float_t computeThresh(TH1F* target, Float_t numKeep, Int_t nbins)
 Float_t computeThresh(TH1F* target, Float_t numKeep, Int_t nbins)
 {
- //   std::cout << "\nCOMPUTETHRESH.C" << std::endl; std::cout << "Targethist: " << target->GetName() << "->Integral(): " << target->Integral() << std::endl; 
-    Float_t thresh = 0; 
-    for (Int_t t = nbins; t >= 0; t--) 
-    {
-		if (((target->GetBinContent(t) - numKeep) > 0) != ((target->GetBinContent(t + 1) - numKeep) > 0))
-		{
-  //          std::cout << "Determined thresh at t= " << t << std::endl;
-   //         std::cout << "GetBin(t): " << target->GetBin(t) << std::endl;
-    //        std::cout << "GetBinCenter(t): " << (target->GetXaxis())->GetBinCenter(t) << std::endl;
-			thresh = (target->GetXaxis())->GetBinCenter(t);
-	   //     thresh = target->GetBin(t);	
-        //    std::cout << "thresh: " << thresh << std::endl;
-        }
-	}
-	return(thresh);
+  //target nbins will be aqual to = nbins from the hist
+  Float_t thresh = 0;
+  /*TF1* fitFunc = new TF1("fitFunc","gaus(0)",0,200);
+  fitFunc->SetParameter(0,1); //initialize normalization constant to 1
+  fitFunc->SetParameter(1,50); //initialize gaussian centered around 50 GeV
+  fitFunc->SetParameter(2,1); //inistialize sigma to 1
+  target->Fit("fitFunc");
+  TF1* myFunc = target->GetFunction("fitFunc");
+  TString myKeep = Form("%.7f",numKeep);
+  TString myArg = "[&](double *x , double *p){return " + myKeep + " - fitFunc(x);}";
+  Int_t low = 0; Int_t high = 200; Int_t par = 3;
+  TF1* objectiveFunc = new TF1("fObj", myArg ,low, high, par);
+  ROOT::Math::WrappedTF1 wf1(*objectiveFunc);
+  ROOT::Math::Roots::Bisection bis;
+  bis.SetFunction( wf1, 0.0, 200 );
+  bis.Solve();
+  thresh = bis.Root();*/
+
+  std::cout << "target nbins" << target->GetNbinsX() << std::endl;
+  for (Int_t t = target->GetNbinsX(); t >= 0; t--)
+  {
+        std::cout << "t: " << t << " target->GetBin(t): " << target->GetBin(t) << " target->GetBinContent(t): " << target->GetBinContent(t) << std::endl;
+  		if (((target->GetBinContent(t) - numKeep) > 0) != ((target->GetBinContent(t + 1) - numKeep) > 0))
+  		{
+  			thresh = (target->GetXaxis())->GetBinCenter(t);
+      }
+  }
+   Int_t nbin = 0;
+   target->GetBinWithContent(numKeep,nbin,0,200,5);
+   std::cout << "Numkeep: " << numKeep << std::endl;
+   Float_t content = target->GetBinContent(nbin);
+   std::cout << "bin with content: " << nbin << std::endl;
+   std::cout << "Bin content: " << target->GetBinContent(nbin) << std::endl;
+
+   std::cout << "thresh: " << thresh << std::endl;
+  	return(nbin);
 
 }
 
@@ -502,7 +533,7 @@ Float_t computeThresh(TH1F* target, Float_t numKeep, Int_t nbins)
 
 Float_t determineThresh( const TString& all = "y", const Float_t frac = (1.e-4), Float_t metl1thresh = 0.0, const TString& dataFile = "ZeroBias2016R307195R311481Runs56.root")
 {
-    std::cout << "\nDETERMINETHRESH.C" << std::endl;
+  std::cout << "\nDETERMINETHRESH" << std::endl;
 	TString fileName = "../myData/" + dataFile;
 	std::cout << "DATAFILE: " << fileName << std::endl;
 	TFile *myFile = TFile::Open(fileName, "READ");
@@ -530,12 +561,7 @@ Float_t determineThresh( const TString& all = "y", const Float_t frac = (1.e-4),
 		TH1F *mettopoclHist     = new TH1F("mettopocl", "mettopocl", nbins, metMin, metMax);
 		TH1F *mettopoclpsHist   = new TH1F("mettopoclps", "mettopoclps", nbins, metMin, metMax);
 		TH1F *mettopoclpucHist  = new TH1F("mettopoclpuc", "mettopoclpuc", nbins, metMin, metMax);
-		TH1F *metl1target         = new TH1F("cumu1", "cumu", nbins, metMin, metMax);;
-		TH1F *metcelltarget       = new TH1F("cumu2", "cumu", nbins, metMin, metMax);
-		TH1F *metmhttarget        = new TH1F("cumu3", "cumu", nbins, metMin, metMax);
-		TH1F *mettopocltarget     = new TH1F("cumu4", "cumu", nbins, metMin, metMax);
-		TH1F *mettopoclpstarget   = new TH1F("cumu5", "cumu", nbins, metMin, metMax);
-		TH1F *mettopoclpuctarget  = new TH1F("cumu6", "cumu", nbins, metMin, metMax);
+
 		tree->SetBranchAddress("metl1", &metl1);
 		tree->SetBranchAddress("metcell", &metcell);
 		tree->SetBranchAddress("metmht", &metmht);
@@ -547,9 +573,8 @@ Float_t determineThresh( const TString& all = "y", const Float_t frac = (1.e-4),
 		for (Int_t k = 0; k < nentries; k++)
 		{
 			tree->GetEntry(k);
-			if ((passRndm > 0.1) && (metl1 > metl1thresh))
+			if ((passRndm > 0.5) && (metl1 > metl1thresh))
 			{
-			    //numRndm++;
 				metl1Hist->Fill(metl1);
 				metcellHist->Fill(metcell);
 				metmhtHist->Fill(metmht);
@@ -557,32 +582,32 @@ Float_t determineThresh( const TString& all = "y", const Float_t frac = (1.e-4),
 				mettopoclpsHist->Fill(mettopoclps);
 				mettopoclpucHist->Fill(mettopoclpuc);
 			}
-            if (passRndm > 0.5)
-            {
-                numRndm++;
-            }
+      if (passRndm > 0.5)
+      {
+          numRndm++;
+      }
 		}
-	
+
 		Float_t numKeep = numRndm * frac;
-	
-		computeTarget(metl1Hist,metl1target,nbins);
+
+    TH1F *metl1target= (TH1F*) metl1Hist->GetCumulative(kFALSE);
 		metl1thresh = computeThresh(metl1target, numKeep, nbins);
-	
-		computeTarget(metcellHist,metcelltarget,nbins);
+
+    TH1F *metcelltarget = (TH1F*)metcellHist->GetCumulative(kFALSE);
 		metcellthresh = computeThresh(metcelltarget, numKeep, nbins);
-	
-		computeTarget(metmhtHist,metmhttarget,nbins);
+
+    TH1F *metmhttarget = (TH1F*) metmhtHist->GetCumulative(kFALSE);
 		metmhtthresh = computeThresh(metmhttarget, numKeep, nbins);
-	
-		computeTarget(mettopoclHist,mettopocltarget,nbins);
+
+    TH1F *mettopocltarget = (TH1F*) mettopoclHist->GetCumulative(kFALSE);
 		mettopoclthresh = computeThresh(mettopocltarget, numKeep, nbins);
-	
-		computeTarget(mettopoclpsHist,mettopoclpstarget,nbins);
+
+    TH1F *mettopoclpstarget = (TH1F*) mettopoclpsHist->GetCumulative(kFALSE);
 		mettopoclpsthresh = computeThresh(mettopoclpstarget, numKeep, nbins);
-	
-		computeTarget(mettopoclpucHist,mettopoclpuctarget,nbins);
+
+    TH1F *mettopoclpuctarget = (TH1F*) mettopoclpucHist->GetCumulative(kFALSE);
 		mettopoclpucthresh = computeThresh(mettopoclpuctarget, numKeep, nbins);
-	
+
 		std::cout << "METL1 THRESHOLD: " << metl1thresh << std::endl;
 		std::cout << "METCELL THRESHOLD: " << metcellthresh << std::endl;
 		std::cout << "METMHT THRESHOLD: " << metmhtthresh << std::endl;
@@ -594,7 +619,6 @@ Float_t determineThresh( const TString& all = "y", const Float_t frac = (1.e-4),
 	if (all != "y") //only compute thresh for one alg
 	{
 		TH1F *indeterminateHist = new TH1F(all, all, nbins, metMin, metMax);
-		TH1F *indeterminatetarget = new TH1F("indeterminatecumu", "indeterminatecumu", nbins, metMin, metMax);
 		tree->SetBranchAddress(all,&indeterminate);
 		tree->SetBranchAddress("metl1",&metl1);
 		std::cout << all << " SELECTED..." << std::endl;
@@ -604,29 +628,25 @@ Float_t determineThresh( const TString& all = "y", const Float_t frac = (1.e-4),
 			tree->GetEntry(k);
 			if ((passRndm > 0.5) && (metl1 > metl1thresh))
 			{
-			    //numRndm++;
 				indeterminateHist->Fill(indeterminate);
 			}
             if (passRndm > 0.5)
             {
-                numRndm++;
+              numRndm++;
             }
-		}
-		computeTarget(indeterminateHist,indeterminatetarget,nbins);
-  //      std::cout << "nentries in hist: " << indeterminateHist->GetEntries() << std::endl;
-   //     std::cout << "Numrndm: " << numRndm << std::endl;
+	    }
+        TH1F *indeterminatetarget = (TH1F*) indeterminateHist->GetCumulative(kFALSE);
 		Float_t numKeep = numRndm * frac;
-   //    std::cout << "numKeep " << numKeep << std::endl;
 		indeterminateThresh = computeThresh(indeterminatetarget, numKeep, nbins);
 		std::cout << all << " THRESHOLD: " << indeterminateThresh << std::endl;
 	}
 	std::cout << "Number of events that should have been kept: " << frac * numRndm << std::endl;
 	std::cout << "Checking how many events are kept by the alg at the determined threshold..." << std::endl;
-	int counter=0;
-	for (int l = 0 ; l < nentries ; l++)
+	Int_t counter=0;
+	for (Int_t l = 0 ; l < nentries ; l++)
 	{
 		tree->GetEntry(l);
-		if ((passRndm > 0.5) && (indeterminate > indeterminateThresh) && (metl1 > metl1thresh)) 
+		if ((passRndm > 0.5) && (indeterminate > indeterminateThresh) && (metl1 > metl1thresh))
 		{
 			counter++;
 		}
@@ -636,13 +656,8 @@ Float_t determineThresh( const TString& all = "y", const Float_t frac = (1.e-4),
 	return(indeterminateThresh);
 }
 
-
-
-
-
 Float_t determineCombinedEventsKept( const TString& algA, const Float_t threshA, const TString& algB, const Float_t threshB, const Float_t metl1thresh = 0.0, const TString& fileName = "ZeroBias2016new.13Runs.root")
 {
-    gROOT->ProcessLine("gROOT->Reset();");
     std::cout << "Determining fraction of zero bias events kept when using combined algorithm of " << algA << " at: " << threshA << " and "
     << algB << " at: " << threshB << std::endl;
     TString path = "../myData/"+fileName;
@@ -660,40 +675,39 @@ Float_t determineCombinedEventsKept( const TString& algA, const Float_t threshA,
     tree->SetBranchAddress("metl1",&metl1);
     Int_t counter = 0;
     Int_t numRndm = 0;
-if (algA==algB)
-{
-    for (Int_t i  = 0 ; i < nentries ;i++)
-      {
-	tree->GetEntry(i);
-	algAMET=algBMET;
-	if (passRndm >0.1)
-	{
-	  numRndm++;
-	}
-	if ((passRndm > 0.1) && (algAMET > threshA) && (algBMET > threshB) && (metl1 > metl1thresh))
-	{
-	  counter++;
-	}
-      }
+    if (algA==algB)
+    {
+        for (Int_t i  = 0 ; i < nentries ;i++)
+          {
+            tree->GetEntry(i);
+            algAMET=algBMET;
+            if (passRndm >0.1)
+            {
+              numRndm++;
+            }
+            if ((passRndm > 0.1) && (algAMET > threshA) && (algBMET > threshB) && (metl1 > metl1thresh))
+            {
+              counter++;
+            }
+          }
+    }
+    else
+    {
+        for (Int_t i  = 0 ; i < nentries ;i++)
+        {
+          	tree->GetEntry(i);
+          	if (passRndm >0.1)
+          	{
+          	  numRndm++;
+          	}
+          	if ((passRndm > 0.1) && (algAMET > threshA) && (algBMET > threshB) && (metl1 > metl1thresh))
+          	{
+          	  counter++;
+          	}
+        }
+    }
+    std::cout << "Combined alg kept: " << counter << " events" << std::endl;
+    Float_t frac = (Float_t) counter / (Float_t) numRndm;
+    std::cout << "Fraction of passRndm events: " << frac << std::endl;
+    return(counter);
 }
-else
-{
-    for (Int_t i  = 0 ; i < nentries ;i++)
-      {
-	tree->GetEntry(i);
-	if (passRndm >0.1)
-	{
-	  numRndm++;
-	}
-	if ((passRndm > 0.1) && (algAMET > threshA) && (algBMET > threshB) && (metl1 > metl1thresh))
-	{
-	  counter++;
-	}
-      }
-}
-std::cout << "Combined alg kept: " << counter << " events" << std::endl;
-Float_t frac = (Float_t) counter / (Float_t) numRndm;
-std::cout << "Fraction of passRndm events: " << frac << std::endl;
-return(counter);
-}
-
