@@ -2,6 +2,7 @@
 #include <iostream>
 Int_t bigMacro()
 {
+    gDirectory->cd("../myMacros");
     gROOT->ProcessLine(".L generateEfficiencies.C;");
     TString algArray[6] = {"mettopoclem","metcell","metmht","mettopocl","mettopoclps","mettopoclpuc"};
     std::cout << "Inside bigMAcro" << std::endl;
@@ -18,4 +19,3 @@ Int_t bigMacro()
 
     return(0);
 }
-    
