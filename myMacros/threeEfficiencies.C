@@ -60,7 +60,7 @@ Int_t threeEfficiencies( const TString& algA , const TString& algB, const Float_
     Int_t numRndm = 0; Int_t counter1 = 0; Int_t counter2 = 0; Int_t counter3 = 0;
 
     Double_t metMin = myConstants::metMin; Double_t metMax = myConstants::metMax;
-    
+
     Int_t passRndm, numPassMuon,passmuon,passmuvarmed,cleanCutsFlag,recalBrokeFlag;
     Float_t algAMET,algBMET,metoffrecal,offrecal_met,offrecal_mex,offrecal_mey,offrecalmuon_mex,
             offrecalmuon_mey, acthresh,bcthresh,metl1;
@@ -98,9 +98,11 @@ Int_t threeEfficiencies( const TString& algA , const TString& algB, const Float_
     TH1F *algBMETHist = new TH1F("algB", "algB", nbins, metMin, metMax);
 
 
+//IN DETERMINE THRESH I COMPUTE THRESHOLD AFTER ALSO CUTTING ON METL1 TO MAKE HISTOGRAMS
     Float_t algAThresh = determineThresh(algA,frac,metl1thresh,myFileName);
     Float_t algBThresh = determineThresh(algB,frac,metl1thresh,myFileName);
 
+//FINISHED COMPUTING INDIVIDUAL THRESHOLDS; NOW DO THEM TOGETHER
     std::cout << "Returned to threeEfficiencies.C" << std::endl;
     std::cout << "algAThresh: " << algAThresh << std::endl;
     std::cout << "algBThresh: " << algBThresh << std::endl;
@@ -373,8 +375,14 @@ TEfficiency* Bteff  = new TEfficiency(bstring , "Efficiency", muonNbins, muonMet
 TEfficiency* Cteff  = new TEfficiency(cstring,  "Efficiency", muonNbins, muonMetMin, muonMetMax);
 Float_t algAmuonMET = 0;
 Float_t algBmuonMET = 0;
+Float_t muonMetl1 = 0;
 myMuonTree->SetBranchAddress(algA,&algAmuonMET);
 myMuonTree->SetBranchAddress(algB,&algBmuonMET);
+myMuonTree->SetBranchAddress("metl1",&muonMetl1);
+TString stringy = (TString)"./TEfficienciesPics/logAteffBteffCteff.txt";
+stringy = ".> " + stringy;
+gROOT->ProcessLine(stringy);
+std::cout << "algAmuonMET > algAThresh\t" << "algBmuonMET > algBThresh\t" << "metl1 > metl1thresh" << std::endl;
 for (Int_t l = 0 ; l < muonNentries ; l++)
 {
     myMuonTree->GetEntry(l);
@@ -386,25 +394,29 @@ for (Int_t l = 0 ; l < muonNentries ; l++)
             Float_t metnomu = sqrt(((offrecal_mex - offrecalmuon_mex) * (offrecal_mex - offrecalmuon_mex)) +
             ((offrecal_mey - offrecalmuon_mey)*(offrecal_mey - offrecalmuon_mey))); //compute metnomu
 
-            Ateff->Fill((algAmuonMET > algAThresh) && (metl1 > metl1thresh), metnomu);
-            Bteff->Fill((algBmuonMET > algBThresh) && (metl1 > metl1thresh), metnomu);
-            Cteff->Fill(((algAmuonMET > acthresh) && (algBmuonMET > bcthresh) && (metl1 > metl1thresh)), metnomu);
+            Ateff->Fill((algAmuonMET > algAThresh) && (muonMetl1 > metl1thresh), metnomu);
+            Bteff->Fill((algBmuonMET > algBThresh) && (muonMetl1 > metl1thresh), metnomu);
+            Cteff->Fill(((algAmuonMET > acthresh) && (algBmuonMET > bcthresh) && (muonMetl1 > metl1thresh)), metnomu);
         }
     }
     else
     {
-	if ((passmuvarmed > 0.1 || passmuon > 0.1) && cleanCutsFlag > 0.1 && recalBrokeFlag < 0.1)
-	{
-	    Float_t metnomu = sqrt(((offrecal_mex - offrecalmuon_mex) * (offrecal_mex - offrecalmuon_mex)) +
-	    ((offrecal_mey - offrecalmuon_mey)*(offrecal_mey - offrecalmuon_mey))); //compute metnomu
+        if ((passmuvarmed > 0.1 || passmuon > 0.1) && (cleanCutsFlag > 0.1) && (recalBrokeFlag < 0.1))
+    	{
 
-      Ateff->Fill(algAmuonMET > algAThresh && metl1 > metl1thresh, metnomu);
-	    Bteff->Fill(algBmuonMET > algBThresh && metl1 > metl1thresh, metnomu);
-	    Cteff->Fill(((algAmuonMET > acthresh) && (algBmuonMET > bcthresh) && metl1 > metl1thresh), metnomu);
-	}
+    	    Float_t metnomu = sqrt(((offrecal_mex - offrecalmuon_mex) * (offrecal_mex - offrecalmuon_mex)) +
+    	    ((offrecal_mey - offrecalmuon_mey)*(offrecal_mey - offrecalmuon_mey))); //compute metnomu
+            std::cout << Form("%d",(algAmuonMET > algAThresh)) << "\t"
+                      << Form("%d",(algBmuonMET > algBThresh)) << "\t"
+                      << Form("%d",(metl1 > metl1thresh))
+                      << std::endl;
+            Ateff->Fill((algAmuonMET > algAThresh) && (muonMetl1 > metl1thresh), metnomu);
+    	    Bteff->Fill((algBmuonMET > algBThresh) && (muonMetl1 > metl1thresh), metnomu);
+    	    Cteff->Fill(((algAmuonMET > acthresh) && (algBmuonMET > bcthresh) && (muonMetl1 > metl1thresh)), metnomu);
+    	}
     }
 }
-
+gROOT->ProcessLine(".>");
 
 std::cout << "Alg A passed nentries: " << (Ateff->GetPassedHistogram())->GetEntries() << std::endl;
 std::cout << "Alg B passed nentries: " << (Bteff->GetPassedHistogram())->GetEntries() << std::endl;
@@ -415,7 +427,7 @@ std::cout << "Alg ABC total nentries: " << (Cteff->GetTotalHistogram())->GetEntr
 
 
 std::cout << "Running an external check macro to verify number of events kept at fraction determined by the bisection algorithm..." << std::endl;
-std::cout << "ENTERING determineCombinedEventsKept.algTarget" <<std::endl;
+std::cout << "ENTERING determineCombinedEventsKept.algTarget" << std::endl;
 
 //SHOULDN'T THIS LOOP OVER MUON EVENTS?
 Float_t eventsCombined = determineCombinedEventsKept( algA , acthresh , algB , bcthresh , metl1thresh , myFileName );
@@ -499,7 +511,8 @@ Float_t computeThresh(TH1F* target, Float_t numKeep)
 }
 
 
-Float_t determineThresh( const TString& alg, const Float_t frac = (1.e-4), Float_t metl1thresh = 0.0, const TString& dataFile = "ZeroBias2016R307195R311481Runs56.root")
+Float_t determineThresh( const TString& alg, const Float_t frac = (1.e-4), Float_t metl1thresh = 0.0,
+const TString& dataFile = "ZeroBias2016R307195R311481Runs56.root")
 {
     std::cout << "DETERMINETHRESH" << std::endl;
 	TString fileName = "../myData/" + dataFile;
