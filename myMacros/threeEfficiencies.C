@@ -44,13 +44,12 @@ Int_t threeEfficiencies( const TString& algA , const TString& algB, const Float_
     Float_t computeThresh(TH1F*,Float_t);
     Float_t determineMuonEventsKeptCombined( const TString&, const Float_t, const TString&,
             const Float_t, const Float_t, const TString&);
-    //gROOT->ProcessLine("gROOT->SetBatch(kTRUE);");
+
     gROOT->ProcessLine("gROOT->Time();");
 
     TString muonFilePath = "../myData/"+muonFilename;
     TFile * muonFile = TFile::Open(muonFilePath, "READ");
-    TTree* myMuonTree = NULL;
-    muonFile->GetObject("tree",myMuonTree);
+    TTree* myMuonTree = (TTree*)muonFile->Get("tree");
     std::cout << "Muon Data being used to compute algorithm efficiency: " << muonFilePath << std::endl;
     Int_t muonNentries = myMuonTree->GetEntries();
     Int_t muonNbins = myConstants::muonNbins;
@@ -79,8 +78,7 @@ Int_t threeEfficiencies( const TString& algA , const TString& algB, const Float_
 
     TString zerobiasFilePath = "../myData/"+ zerobiasFileName;
     TFile * zeroBiasFile = TFile::Open(zerobiasFilePath, "READ");
-    TTree* zeroBiasTree = NULL;
-    zeroBiasFile->GetObject("tree",zeroBiasTree);
+    TTree* zeroBiasTree = (TTree*)zeroBiasFile->Get("tree");
     Int_t zerobiasNentries = zeroBiasTree->GetEntries();
 
 
@@ -501,7 +499,7 @@ const TString& zeroBiasFileName = "ZeroBias2016R307195R311481Runs56.root")
     TString zeroBiasPath = "../myData/" + zeroBiasFileName;
     std::cout << "DETERMINETHRESH.C" << std::endl;
     std::cout << "ZERO BIAS DATAFILE: " << zeroBiasPath << std::endl;
-    std::cout << "ALG:" << alg << std::endl;
+    std::cout << "ALG: " << alg << std::endl;
     std::cout << "L1 THRESH: " << metl1thresh << std::endl;
 	TFile *zeroBiasFile = TFile::Open(zeroBiasPath, "READ");
 	TTree *zeroBiasTree = (TTree*)(zeroBiasFile->Get("tree"));
