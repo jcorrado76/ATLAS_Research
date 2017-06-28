@@ -264,6 +264,8 @@ Int_t threeEfficiencies( const TString& algA , const TString& algB, const Float_
     Float_t algAThreshDiff;
     Float_t algBThreshDiff;
 
+//TODO: make a TBenchmark here for "bisection"
+
 do{
     j++;
     std::cout << "Inside iteration number: " << j << std::endl;
