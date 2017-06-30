@@ -423,6 +423,8 @@ else
     Bteff->SetLineColor(kGreen);
 }
 
+Ateff->SetTitle("Efficiency;Offline Recalibrated MET w/o Muon term [GeV];Efficiency");
+
 Ateff->Draw();
 Bteff->Draw("same");
 Cteff->Draw("same");
