@@ -22,7 +22,7 @@ namespace myConstants
     Float_t metMin = 0;
     Float_t metMax = 300;
     Float_t muonMetMin = metMin;
-    Float_t muonMetMax = metMax;
+    Float_t muonMetMax = 500;
 
 }
 
@@ -353,10 +353,10 @@ do{
 acthresh = algAMETx2thresh;
 bcthresh = algBMETx2thresh;
 
-TString cstring = "TEfficiency using " + algA + " at thresh " + Form(" %.2f", acthresh) + " and " + algB +
-" at thresh " + Form(" %.2f", bcthresh) + " and L1 cut at: " + Form("%.2f",metl1thresh);
-TString astring = algA + " TEfficiency at thresh of " + Form(" %.2f", algAThresh) + " and L1 cut at: " + Form("%.2f" ,metl1thresh);
-TString bstring = algB + " TEfficiency at thresh of " + Form(" %.2f", algBThresh) + " and L1 cut at: " + Form("%.2f" ,metl1thresh);
+TString cstring = algA + " > " + Form(" %.2f", acthresh) + " " +
+algB + " > " + Form(" %.2f", bcthresh) + "  L1 > " + Form("%.2f",metl1thresh);
+TString astring = algA + " > " + Form(" %.2f", algAThresh) + " L1 > " + Form("%.2f" ,metl1thresh);
+TString bstring = algB + " > " + Form(" %.2f", algBThresh) + " L1 > " + Form("%.2f" ,metl1thresh);
 
 TEfficiency* Ateff  = new TEfficiency(astring , "Efficiency", muonNbins, muonMetMin, muonMetMax);
 TEfficiency* Bteff  = new TEfficiency(bstring , "Efficiency", muonNbins, muonMetMin, muonMetMax);
@@ -409,6 +409,8 @@ std::cout << "Running determineMuonEventsKeptCombined.C to check number of MUON 
 Float_t muonEventsCombined = determineMuonEventsKeptCombined( algA , acthresh , algB , bcthresh , metl1thresh , muonFilename );
 
 TCanvas* efficiencyCanvas = new TCanvas("Efficiency Canvas", "Efficiency Canvas");
+efficiencyCanvas->RangeAxis(0,0,500,1.0);
+
 
 if (algA==algB)
 {
@@ -423,7 +425,7 @@ else
     Bteff->SetLineColor(kGreen);
 }
 
-Ateff->SetTitle("Efficiency;Offline Recalibrated MET w/o Muon term [GeV];Efficiency");
+Ateff->SetTitle("Combined MET Algorithm Efficiency;Offline Recalibrated MET w/o Muon term [GeV];Efficiency");
 
 Ateff->Draw();
 Bteff->Draw("same");
@@ -431,7 +433,7 @@ Cteff->Draw("same");
 
 
 
-TLegend *legend = new TLegend(.1,.7,.48,.9);
+TLegend *legend = new TLegend(0.60,0.15,0.87, 0.35 ,"","NDC");
 legend->AddEntry(Ateff, astring);
 legend->AddEntry(Bteff, bstring);
 legend->AddEntry(Cteff, cstring);
