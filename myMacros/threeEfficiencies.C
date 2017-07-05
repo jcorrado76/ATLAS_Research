@@ -357,10 +357,13 @@ TString cstring = algA + " > " + Form(" %.2f", acthresh) + " " +
 algB + " > " + Form(" %.2f", bcthresh) + "  L1 > " + Form("%.2f",metl1thresh);
 TString astring = algA + " > " + Form(" %.2f", algAThresh) + " L1 > " + Form("%.2f" ,metl1thresh);
 TString bstring = algB + " > " + Form(" %.2f", algBThresh) + " L1 > " + Form("%.2f" ,metl1thresh);
+TString dstring = "L1 cut at 30, algA and algB at 0";
 
 TEfficiency* Ateff  = new TEfficiency(astring , "Efficiency", muonNbins, muonMetMin, muonMetMax);
 TEfficiency* Bteff  = new TEfficiency(bstring , "Efficiency", muonNbins, muonMetMin, muonMetMax);
 TEfficiency* Cteff  = new TEfficiency(cstring,  "Efficiency", muonNbins, muonMetMin, muonMetMax);
+TEfficiency* Dteff  = new TEfficiency(dstring,  "Efficiency", muonNbins, muonMetMin, muonMetMax);//combined just L1 cut, 0 on others
+
 Float_t algAmuonMET = 0;
 Float_t algBmuonMET = 0;
 Float_t muonMetl1 = 0;
@@ -395,6 +398,7 @@ for (Int_t l = 0 ; l < muonNentries ; l++)
             Ateff->Fill((algAmuonMET > algAThresh) && (muonMetl1 > metl1thresh), metnomu);
     	    Bteff->Fill((algBmuonMET > algBThresh) && (muonMetl1 > metl1thresh), metnomu);
     	    Cteff->Fill(((algAmuonMET > acthresh) && (algBmuonMET > bcthresh) && (muonMetl1 > metl1thresh)), metnomu);
+            Dteff->Fill((muonMetl1 > 30.0), metnomu);
     	}
     }
 }
@@ -423,6 +427,7 @@ else
     Ateff->SetLineColor(kBlue);
     Cteff->SetLineColor(kRed);
     Bteff->SetLineColor(kGreen);
+    Dteff->SetLineColor(kBlack);
 }
 
 Ateff->SetTitle("Combined MET Algorithm Efficiency;Offline Recalibrated MET w/o Muon term [GeV];Efficiency");
@@ -430,6 +435,7 @@ Ateff->SetTitle("Combined MET Algorithm Efficiency;Offline Recalibrated MET w/o 
 Ateff->Draw();
 Bteff->Draw("same");
 Cteff->Draw("same");
+Dteff->Draw("same");
 
 
 
@@ -437,6 +443,7 @@ TLegend *legend = new TLegend(0.60,0.15,0.87, 0.35 ,"","NDC");
 legend->AddEntry(Ateff, astring);
 legend->AddEntry(Bteff, bstring);
 legend->AddEntry(Cteff, cstring);
+legend->AddEntry(Dteff, dstring);
 legend->Draw();
 TString folderPath = "./TEfficienciesPics/" + folder + "/L1" + Form("%.1f",metl1thresh) + "-" +  algA + "_and_" + algB + "_efficiencies.pdf";
 efficiencyCanvas->Print(folderPath);
