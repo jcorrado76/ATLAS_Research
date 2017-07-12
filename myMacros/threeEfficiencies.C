@@ -427,7 +427,9 @@ else
     Dteff->SetLineColor(kBlack);
 }
 
-Ateff->SetTitle("Combined MET Algorithm Efficiency;Offline Recalibrated MET w/o Muon term [GeV];Efficiency");
+const TString canvName = algA + " and " + algB + " Combined Efficiency" + ";Offline Recalibrated MET w/o Muon term [GeV];Efficiency";
+
+Ateff->SetTitle(canvName);
 
 Ateff->Draw();
 Bteff->Draw("same");
