@@ -28,14 +28,14 @@ namespace myConstants
 
 Int_t threeEfficiencies( const TString& algA , const TString& algB,
         const Float_t frac = 0.00590, const TString folder = "",
-        const TString& zerobiasFileName = "PhysicsMain.All.noalgXEtriggers.2016.f731f758._m1659m1710.48Runs",
+        const TString& zerobiasFileName = "PhysicsMain.All.noalgXEtriggers.2016.f731f758._m1659m1710.48Runs.root",
         const TString& muonFilename = "PhysicsMain2016.Muons.noalgL1XE45R3073065R311481Runs9B.root")
 {
 
     Float_t determineZeroBiasThresh( const TString&, const Float_t, const TString&);
     Float_t computeThresh(TH1F*,Float_t);
     Float_t determineMuonEventsKeptCombined( const TString&, const Float_t, const TString&,
-            const Float_t, const Float_t, const TString&);
+        const Float_t,const TString& );
 
     gROOT->ProcessLine("gROOT->Time();");
 
@@ -54,8 +54,8 @@ Int_t threeEfficiencies( const TString& algA , const TString& algB,
 
     Int_t passRndm, numPassMuon,passmuon,passmuvarmed,cleanCutsFlag,recalBrokeFlag;
     Float_t algAMET,algBMET,metoffrecal,offrecal_met,offrecal_mex,offrecal_mey,offrecalmuon_mex,
-            offrecalmuon_mey, acthresh,bcthresh,metl1;
-    Float_t passnoalgL1XE10,passnoalgL1XE30,passnoalgL1XE40,passnoalgL1XE45;
+            offrecalmuon_mey, acthresh,bcthresh,metl1,metcell;
+    Int_t passnoalgL1XE10,passnoalgL1XE30,passnoalgL1XE40,passnoalgL1XE45;
 
     myMuonTree->SetBranchAddress("passmu26med", &passmuon);
     myMuonTree->SetBranchAddress("passmu26varmed", &passmuvarmed);
@@ -85,6 +85,7 @@ Int_t threeEfficiencies( const TString& algA , const TString& algB,
     zeroBiasTree->SetBranchAddress(algA,&algAMET);
     zeroBiasTree->SetBranchAddress(algB,&algBMET);
     zeroBiasTree->SetBranchAddress("metl1",&metl1);
+    zeroBiasTree->SetBranchAddress("metcell",&metcell);
     zeroBiasTree->SetBranchAddress("passnoalgL1XE10",&passnoalgL1XE10);
     zeroBiasTree->SetBranchAddress("passnoalgL1XE30",&passnoalgL1XE30);
     zeroBiasTree->SetBranchAddress("passnoalgL1XE40",&passnoalgL1XE40);
@@ -94,14 +95,14 @@ Int_t threeEfficiencies( const TString& algA , const TString& algB,
 
 
 //IN DETERMINE THRESH I COMPUTE THRESHOLD AFTER ALSO CUTTING ON METL1 TO MAKE HISTOGRAMS
-    Float_t algAThresh = determineZeroBiasThresh(algA,frac,myConstants::metl1thresh,zerobiasFileName);
-    Float_t algBThresh = determineZeroBiasThresh(algB,frac,myConstants::metl1thresh,zerobiasFileName);
+    Float_t algAThresh = determineZeroBiasThresh(algA,frac,zerobiasFileName);
+    Float_t algBThresh = determineZeroBiasThresh(algB,frac,zerobiasFileName);
 
 //FINISHED COMPUTING INDIVIDUAL THRESHOLDS; NOW DO THEM TOGETHER
     std::cout << "Returned to threeEfficiencies.C" << std::endl;
     std::cout << "algAThresh: " << algAThresh << std::endl;
     std::cout << "algBThresh: " << algBThresh << std::endl;
-    std::cout << "Using METL1THRESH: " << metl1thresh << std::endl;
+    std::cout << "Using METL1THRESH: " << myConstants::metl1thresh << std::endl;
 
     numZeroBiasRndm = 0 ;
     std::cout << "algA==algB? " << (algA==algB) << std::endl;
@@ -175,7 +176,7 @@ Int_t threeEfficiencies( const TString& algA , const TString& algB,
 
     std::cout << "algAx1Thresh: " << algAMETx1thresh << std::endl;
     std::cout << "algBx1Thresh: " << algBMETx1thresh << std::endl;
-    std::cout << "metl1thresh : " << metl1thresh << std::endl;
+    std::cout << "metl1thresh : " << myConstants::metl1thresh << std::endl;
     if (algA==algB)
     {
         for (Int_t i  = 0 ; i < zerobiasNentries ;i++) //determine events kept at each guess
@@ -184,17 +185,17 @@ Int_t threeEfficiencies( const TString& algA , const TString& algB,
             if (passRndm > 0.5)
             {
                 algAMET = algBMET;
-                if ((algBMET > algBMETx1thresh) && ( metl1 > metl1thresh ) && ( passnoalgL1XE10 > 0.5 || passnoalgL1XE30 > 0.5 ||
+                if ((algBMET > algBMETx1thresh) && ( metl1 > myConstants::metl1thresh ) && ( passnoalgL1XE10 > 0.5 || passnoalgL1XE30 > 0.5 ||
                 passnoalgL1XE40 > 0.5 || passnoalgL1XE45 > 0.5  ) &&(metcell > 100.0) )
                 {
                     counter1++;
                 }
-                if ((algBMET > algBMETx2thresh) && (metl1 > metl1thresh)&& ( passnoalgL1XE10 > 0.5 || passnoalgL1XE30 > 0.5 ||
+                if ((algBMET > algBMETx2thresh) && (metl1 > myConstants::metl1thresh)&& ( passnoalgL1XE10 > 0.5 || passnoalgL1XE30 > 0.5 ||
                 passnoalgL1XE40 > 0.5 || passnoalgL1XE45 > 0.5  ) &&(metcell > 100.0))
                 {
                     counter2++;
                 }
-                if ((algBMET > algBMETx3thresh) && (metl1 > metl1thresh)&& ( passnoalgL1XE10 > 0.5 || passnoalgL1XE30 > 0.5 ||
+                if ((algBMET > algBMETx3thresh) && (metl1 > myConstants::metl1thresh)&& ( passnoalgL1XE10 > 0.5 || passnoalgL1XE30 > 0.5 ||
                 passnoalgL1XE40 > 0.5 || passnoalgL1XE45 > 0.5  ) &&(metcell > 100.0))
                 {
                     counter3++;
@@ -209,17 +210,17 @@ Int_t threeEfficiencies( const TString& algA , const TString& algB,
         zeroBiasTree->GetEntry(i);
             if (passRndm > 0.5)
             {
-                if ((algAMET > algAMETx1thresh) && (algBMET > algBMETx1thresh) && (metl1 > metl1thresh)&& ( passnoalgL1XE10 > 0.5 || passnoalgL1XE30 > 0.5 ||
+                if ((algAMET > algAMETx1thresh) && (algBMET > algBMETx1thresh) && (metl1 > myConstants::metl1thresh)&& ( passnoalgL1XE10 > 0.5 || passnoalgL1XE30 > 0.5 ||
                 passnoalgL1XE40 > 0.5 || passnoalgL1XE45 > 0.5  ) &&(metcell > 100.0))
                 {
                 counter1++;
                 }
-                if ((algAMET > algAMETx2thresh) && (algBMET > algBMETx2thresh) && (metl1 > metl1thresh)&& ( passnoalgL1XE10 > 0.5 || passnoalgL1XE30 > 0.5 ||
+                if ((algAMET > algAMETx2thresh) && (algBMET > algBMETx2thresh) && (metl1 > myConstants::metl1thresh)&& ( passnoalgL1XE10 > 0.5 || passnoalgL1XE30 > 0.5 ||
                 passnoalgL1XE40 > 0.5 || passnoalgL1XE45 > 0.5  ) &&(metcell > 100.0))
                 {
                 counter2++;
                 }
-                if ((algAMET > algAMETx3thresh) && (algBMET > algBMETx3thresh) && (metl1 > metl1thresh)&& ( passnoalgL1XE10 > 0.5 || passnoalgL1XE30 > 0.5 ||
+                if ((algAMET > algAMETx3thresh) && (algBMET > algBMETx3thresh) && (metl1 > myConstants::metl1thresh)&& ( passnoalgL1XE10 > 0.5 || passnoalgL1XE30 > 0.5 ||
                 passnoalgL1XE40 > 0.5 || passnoalgL1XE45 > 0.5  ) &&(metcell > 100.0))
                 {
                 counter3++;
@@ -303,7 +304,7 @@ do{
 	{
 	  zeroBiasTree->GetEntry(i);
 	  algAMET=algBMET;
-	  if ((passRndm > 0.1) && (algBMET > algBMETx2thresh) && (metl1 > metl1thresh)&& ( passnoalgL1XE10 > 0.5 || passnoalgL1XE30 > 0.5 ||
+	  if ((passRndm > 0.1) && (algBMET > algBMETx2thresh) && (metl1 > myConstants::metl1thresh)&& ( passnoalgL1XE10 > 0.5 || passnoalgL1XE30 > 0.5 ||
       passnoalgL1XE40 > 0.5 || passnoalgL1XE45 > 0.5  ) &&(metcell > 100.0))
 	  {
 	    counter2++;
@@ -315,8 +316,8 @@ do{
 	for (Int_t i  = 0 ; i < zerobiasNentries ;i++)
 	{
 	  zeroBiasTree->GetEntry(i);
-	  if ((passRndm > 0.1) && (algAMET > algAMETx2thresh) && (algBMET > algBMETx2thresh) && (metl1 > metl1thresh)&& ( passnoalgL1XE10 > 0.5 || passnoalgL1XE30 > 0.5 ||
-      passnoalgL1XE40 > 0.5 || passnoalgL1XE45 > 0.5  ) &&(metcell > 100.0))
+	  if ((passRndm > 0.1) && (algAMET > algAMETx2thresh) && (algBMET > algBMETx2thresh) && (metl1 > myConstants::metl1thresh)&& ( passnoalgL1XE10 > 0.5 ||
+          passnoalgL1XE30 > 0.5 || passnoalgL1XE40 > 0.5 || passnoalgL1XE45 > 0.5  ) &&(metcell > 100.0))
 	  {
 	    counter2++;
 	  }
@@ -360,10 +361,10 @@ acthresh = algAMETx2thresh;
 bcthresh = algBMETx2thresh;
 
 TString cstring = algA + " > " + Form(" %.2f", acthresh) + " " +
-algB + " > " + Form(" %.2f", bcthresh) + "  L1 > " + Form("%.2f",metl1thresh);
-TString astring = algA + " > " + Form(" %.2f", algAThresh) + " L1 > " + Form("%.2f" ,metl1thresh);
-TString bstring = algB + " > " + Form(" %.2f", algBThresh) + " L1 > " + Form("%.2f" ,metl1thresh);
-TString dstring = (TString) "L1 cut at " + Form(" %.2f" , metl1thresh) +  " and " + algA + " and " + algB + " at 0";
+algB + " > " + Form(" %.2f", bcthresh) + "  L1 > " + Form("%.2f", myConstants::metl1thresh);
+TString astring = algA + " > " + Form(" %.2f", algAThresh) + " L1 > " + Form("%.2f" ,myConstants::metl1thresh);
+TString bstring = algB + " > " + Form(" %.2f", algBThresh) + " L1 > " + Form("%.2f" ,myConstants::metl1thresh);
+TString dstring = (TString) "L1 cut at " + Form(" %.2f" , myConstants::metl1thresh) +  " and " + algA + " and " + algB + " at 0";
 
 TEfficiency* Ateff  = new TEfficiency(astring , "Efficiency", muonNbins, muonMetMin, muonMetMax);
 TEfficiency* Bteff  = new TEfficiency(bstring , "Efficiency", muonNbins, muonMetMin, muonMetMax);
@@ -388,7 +389,7 @@ for (Int_t l = 0 ; l < muonNentries ; l++)
             Float_t metnomu = sqrt(((offrecal_mex - offrecalmuon_mex) * (offrecal_mex - offrecalmuon_mex)) +
             ((offrecal_mey - offrecalmuon_mey)*(offrecal_mey - offrecalmuon_mey))); //compute metnomu
             numbPassMuon++;
-            Ateff->Fill((algAmuonMET > algAThresh) && (muonMetl1 > myyConstants::metl1thresh), metnomu);
+            Ateff->Fill((algAmuonMET > algAThresh) && (muonMetl1 > myConstants::metl1thresh), metnomu);
             Bteff->Fill((algBmuonMET > algBThresh) && (muonMetl1 > myConstants::metl1thresh), metnomu);
             Cteff->Fill(((algAmuonMET > acthresh) && (algBmuonMET > bcthresh) && (muonMetl1 > myConstants::metl1thresh)), metnomu);
         }
@@ -416,7 +417,7 @@ std::cout << "NUMB MUON ENTRIES TOTAL  ALG A: " << (Ateff->GetTotalHistogram())-
 std::cout << "NUMB MUON ENTRIES TOTAL  ALG B: " << (Bteff->GetTotalHistogram())->GetEntries() << std::endl;
 std::cout << "NUMB MUON ENTRIES TOTAL  ALG C: " << (Cteff->GetTotalHistogram())->GetEntries() << std::endl;
 std::cout << "Running determineMuonEventsKeptCombined.C to check number of MUON events kept at fraction determined by the bisection algorithm..." << std::endl;
-Float_t muonEventsCombined = determineMuonEventsKeptCombined( algA , acthresh , algB , bcthresh , myConstants::metl1thresh , muonFilename );
+Float_t muonEventsCombined = determineMuonEventsKeptCombined( algA , acthresh , algB , bcthresh, muonFilename );
 
 TCanvas* efficiencyCanvas = new TCanvas("Efficiency Canvas", "Efficiency Canvas");
 efficiencyCanvas->RangeAxis(0,0,500,1.0);
@@ -521,15 +522,19 @@ const TString& zeroBiasFileName = "PhysicsMain.All.noalgXEtriggers.2016.f731f758
     std::cout << "DETERMINETHRESH.C" << std::endl;
     std::cout << "ZERO BIAS DATAFILE: " << zeroBiasPath << std::endl;
     std::cout << "ALG: " << alg << std::endl;
-    std::cout << "L1 THRESH: " << metl1thresh << std::endl;
+    std::cout << "L1 THRESH: " << myConstants::metl1thresh << std::endl;
 	TFile *zeroBiasFile = TFile::Open(zeroBiasPath, "READ");
 	TTree *zeroBiasTree = (TTree*)(zeroBiasFile->Get("tree"));
-	Int_t zerobiasNentries = zeroBiasTree->GetEntries();Int_t numZeroBiasRndm = 0;Int_t passRndm;
+	Int_t zerobiasNentries = zeroBiasTree->GetEntries();
+    Int_t numZeroBiasRndm = 0;
+    Int_t passRndm;
 	Int_t nbins = myConstants::nbins;
 	Double_t metMin = myConstants::metMin;
 	Double_t metMax = myConstants::metMax;
+    Float_t metl1thresh = myConstants::metl1thresh;
 	Float_t metl1, metcell, metmht, mettopocl, mettopoclps, mettopoclpuc, metoffrecal,indeterminate,
 	metcellthresh, metmhtthresh, mettopoclthresh, mettopoclpsthresh, mettopoclpucthresh,rightHandSum;
+    Int_t passnoalgL1XE10,passnoalgL1XE30,passnoalgL1XE40,passnoalgL1XE45;
     TH1F *indeterminateHist = new TH1F(alg, alg, nbins, metMin, metMax);
 	zeroBiasTree->SetBranchAddress(alg,&indeterminate);
 	zeroBiasTree->SetBranchAddress("metl1",&metl1);
@@ -544,14 +549,15 @@ const TString& zeroBiasFileName = "PhysicsMain.All.noalgXEtriggers.2016.f731f758
     for (Int_t k = 0; k < zerobiasNentries; k++)
 	{
 		zeroBiasTree->GetEntry(k);
+        if (k % 1000 == 0){std::cout<<k<<" " <<passRndm<<std::endl;}
 		if ((passRndm > 0.5) && ( ( passnoalgL1XE10 > 0.5 || passnoalgL1XE30 > 0.5 || passnoalgL1XE40 > 0.5 ||
-            passnoalgL1XE45 > 0.5 || ) && ( metl1 > 50.0 ) ) && (metcell > 100.0 ) )
+            passnoalgL1XE45 > 0.5 ) && ( metl1 > metl1thresh ) ) && (metcell > 100.0 ) )
 		{
 			indeterminateHist->Fill(indeterminate);
 		}
         if (passRndm > 0.5)
         {
-          numZeroBiasRndm++;
+            numZeroBiasRndm++;
         }
     }
 	std::cout << "FRACTION: " << frac << std::endl;
@@ -583,12 +589,11 @@ Float_t determineMuonEventsKeptCombined( const TString& algA, const Float_t thre
     const TString& muonFileName = "PhysicsMain2016.Muons.noalgL1XE45R3073065R311481Runs9B.root")
 {
     std::cout << "Determining fraction of muon events kept when using combined algorithm of " << algA << " at: " << threshA << ", "
-    << algB << " at: " << threshB << " and metl1 at: " << metl1thresh << std::endl;
+    << algB << " at: " << threshB << " and metl1 at: " << myConstants::metl1thresh << std::endl;
     TString muonFilePath = "../myData/"+muonFileName;
     TFile * muonFile = TFile::Open(muonFilePath, "READ");
     TTree* muonTree = (TTree*)muonFile->Get("tree");
     Int_t muonNentries = muonTree->GetEntries();
-    Float_t metl1thresh = 50.0;
     Float_t algAMET, algBMET,metl1;
     Int_t passmuon,passmuvarmed,recalBrokeFlag,cleanCutsFlag;
     muonTree->SetBranchAddress("passmu26med",&passmuon);

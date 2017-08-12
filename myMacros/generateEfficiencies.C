@@ -1,9 +1,9 @@
 #include "TString.h"
 #include "TROOT.h"
 
-Int_t generateEfficiencies(Float_t metl1Thresh = 30.0, const Float_t frac = 1e-4, 
-        const TString& folderName = "", 
-        const TString& zeroBiasFileName = "ZeroBias2016R307195R311481Runs56.root", 
+Int_t generateEfficiencies(const Float_t frac = 0.00590,
+        const TString& folderName = "",
+        const TString& zeroBiasFileName = "PhysicsMain.All.noalgXEtriggers.2016.f731f758._m1659m1710.48Runs.root",
         const TString& muonFilename = "PhysicsMain2016.Muons.noalgL1XE45R3073065R311481Runs9B.root")
 {
     /*
@@ -16,7 +16,8 @@ Int_t generateEfficiencies(Float_t metl1Thresh = 30.0, const Float_t frac = 1e-4
     {
 	for (Int_t j = i+1 ; j < 6 ; j++)
 	{
-	    gROOT->ProcessLine(".x threeEfficiencies.C(\"" + algArray[i] + "\",\"" + algArray[j] + "\"," + Form("%.7f",metl1Thresh) + "," + Form("%.7f",frac) + ",\""+ folderName + "\",\"" +zeroBiasFileName+"\",\""+muonFilename+"\")");
+	    gROOT->ProcessLine(".x threeEfficiencies.C(\"" + algArray[i] + "\",\"" + algArray[j] + "\"," +
+        Form("%.7f",frac) + ",\""+ folderName + "\",\"" +zeroBiasFileName+"\",\""+muonFilename+"\")");
 	}
     }
 
