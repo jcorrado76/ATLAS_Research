@@ -526,7 +526,6 @@ const TString& zeroBiasFileName = "PhysicsMain.All.noalgXEtriggers.2016.f731f758
 	TFile *zeroBiasFile = TFile::Open(zeroBiasPath, "READ");
 	TTree *zeroBiasTree = (TTree*)(zeroBiasFile->Get("tree"));
 	Int_t zerobiasNentries = zeroBiasTree->GetEntries();
-    Int_t numZeroBiasRndm = 0;
     Int_t passRndm;
 	Int_t nbins = myConstants::nbins;
 	Double_t metMin = myConstants::metMin;
@@ -549,32 +548,29 @@ const TString& zeroBiasFileName = "PhysicsMain.All.noalgXEtriggers.2016.f731f758
     for (Int_t k = 0; k < zerobiasNentries; k++)
 	{
 		zeroBiasTree->GetEntry(k);
-        if (k % 1000 == 0){std::cout<<k<<" " <<passRndm<<std::endl;}
-		if ((passRndm > 0.5) && ( ( passnoalgL1XE10 > 0.5 || passnoalgL1XE30 > 0.5 || passnoalgL1XE40 > 0.5 ||
+		if (( ( passnoalgL1XE10 > 0.5 || passnoalgL1XE30 > 0.5 || passnoalgL1XE40 > 0.5 ||
             passnoalgL1XE45 > 0.5 ) && ( metl1 > metl1thresh ) ) && (metcell > 100.0 ) )
 		{
 			indeterminateHist->Fill(indeterminate);
 		}
-        if (passRndm > 0.5)
-        {
-            numZeroBiasRndm++;
-        }
+
     }
 	std::cout << "FRACTION: " << frac << std::endl;
 	std::cout << "ZEROBIAS NENTRIES: " << zerobiasNentries << std::endl;
     std::cout << "NUMZEROBIASRNDM: " << numZeroBiasRndm << std::endl;
 
     TH1F *indeterminatetarget = (TH1F*) indeterminateHist->GetCumulative(kFALSE);
-	Float_t numKeep = numZeroBiasRndm * frac;
+	Float_t numKeep = 5762.0;
 	Float_t indeterminateThresh = computeThresh(indeterminatetarget, numKeep);
 	std::cout << alg << " THRESHOLD: " << indeterminateThresh << std::endl;
-	std::cout << "Number of events that should have been kept: " << frac * numZeroBiasRndm << std::endl;
+	std::cout << "Number of events that should have been kept: " << numKeep << std::endl;
 	std::cout << "Checking how many events are kept by the alg at the determined threshold..." << std::endl;
 	Int_t counter=0;
 	for (Int_t l = 0 ; l < zerobiasNentries ; l++)
 	{
 		zeroBiasTree->GetEntry(l);
-		if ((passRndm > 0.5) && (indeterminate > indeterminateThresh) && (metl1 > metl1thresh))
+		if (( passnoalgL1XE10 > 0.5 || passnoalgL1XE30 > 0.5 || passnoalgL1XE40 > 0.5 ||
+            passnoalgL1XE45 > 0.5 ) && (indeterminate > indeterminateThresh) && (metl1 > metl1thresh) && ( metcell > 100.0) )
 		{
 			counter++;
 		}
@@ -594,7 +590,7 @@ Float_t determineMuonEventsKeptCombined( const TString& algA, const Float_t thre
     TFile * muonFile = TFile::Open(muonFilePath, "READ");
     TTree* muonTree = (TTree*)muonFile->Get("tree");
     Int_t muonNentries = muonTree->GetEntries();
-    Float_t algAMET, algBMET,metl1;
+    Float_t algAMET, algBMET,metl1,metcell;
     Int_t passmuon,passmuvarmed,recalBrokeFlag,cleanCutsFlag;
     muonTree->SetBranchAddress("passmu26med",&passmuon);
     muonTree->SetBranchAddress("passmu26varmed",&passmuvarmed);
@@ -603,6 +599,7 @@ Float_t determineMuonEventsKeptCombined( const TString& algA, const Float_t thre
     muonTree->SetBranchAddress(algA,&algAMET);
     muonTree->SetBranchAddress(algB,&algBMET);
     muonTree->SetBranchAddress("metl1",&metl1);
+    muonTree->SetBranchAddress("metcell",&metcell);
     Int_t counter = 0;
     Int_t numbPassMuon = 0;
     if (algA==algB)
@@ -617,7 +614,7 @@ Float_t determineMuonEventsKeptCombined( const TString& algA, const Float_t thre
               numbPassMuon++;
             }
             if (((passmuon > 0.5) || (passmuvarmed > 0.5)) && cleanCutsFlag > 0.1 && recalBrokeFlag < 0.1
-            && (algAMET > threshA) && (algBMET > threshB) && (metl1 > myConstants::metl1thresh))
+            && (algAMET > threshA) && (algBMET > threshB) && (metl1 > myConstants::metl1thresh) && (metcell > 100.0))
             {
               counter++;
             }
@@ -628,11 +625,12 @@ Float_t determineMuonEventsKeptCombined( const TString& algA, const Float_t thre
         for (Int_t i  = 0 ; i < muonNentries ;i++)
         {
           	muonTree->GetEntry(i);
-          	if ( (passmuon > 0.5) || (passmuvarmed > 0.5) )
+          	if ( ((passmuon > 0.5) || (passmuvarmed > 0.5)) && cleanCutsFlag > 0.1 && recalBrokeFlag < 0.1 )
           	{
           	  numbPassMuon++;
           	}
-          	if ( ((passmuon > 0.5) || (passmuvarmed > 0.5)) && (algAMET > threshA) && (algBMET > threshB) && (metl1 > myConstants::metl1thresh))
+          	if ( ((passmuon > 0.5) || (passmuvarmed > 0.5)) && (algAMET > threshA) && (algBMET > threshB) &&
+            (metcell > 100.0) && (metl1 > myConstants::metl1thresh)&& cleanCutsFlag > 0.1 && recalBrokeFlag < 0.1)
           	{
           	  counter++;
           	}
