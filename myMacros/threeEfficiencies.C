@@ -85,7 +85,6 @@ Int_t threeEfficiencies( const TString& algA , const TString& algB,
     zeroBiasTree->SetBranchAddress(algA,&algAMET);
     zeroBiasTree->SetBranchAddress(algB,&algBMET);
     zeroBiasTree->SetBranchAddress("metl1",&metl1);
-    zeroBiasTree->SetBranchAddress("metcell",&metcell);
     zeroBiasTree->SetBranchAddress("passnoalgL1XE10",&passnoalgL1XE10);
     zeroBiasTree->SetBranchAddress("passnoalgL1XE30",&passnoalgL1XE30);
     zeroBiasTree->SetBranchAddress("passnoalgL1XE40",&passnoalgL1XE40);
@@ -111,17 +110,14 @@ Int_t threeEfficiencies( const TString& algA , const TString& algB,
     	for (Int_t k = 0; k < zerobiasNentries; k++)
     	{
     	    zeroBiasTree->GetEntry(k);
-            //DO NOT CUT ON L1 HERE; SAVE THAT FOR COUNTERS LATER
-    	    if (passRndm > 0.1)
+    	    if (metl1 > 50.0 && ( passnoalgL1XE10 > 0.5 || passnoalgL1XE30 > 0.5 ||
+            passnoalgL1XE40 > 0.5 || passnoalgL1XE45 > 0.5  ) )
     	    {
         		algAMET = algBMET;
         		algAMETHist->Fill(algAMET);
         		algBMETHist->Fill(algBMET);
-    	    }
-            if (passRndm > 0.1)
-            {
                 numZeroBiasRndm++;
-            }
+    	    }
     	}
     }
     else
@@ -129,15 +125,13 @@ Int_t threeEfficiencies( const TString& algA , const TString& algB,
     	for (Int_t k = 0; k < zerobiasNentries; k++) //determine numZeroBiasRndm and fill histograms
     	{
     	    zeroBiasTree->GetEntry(k);
-    	    if (passRndm > 0.1)
+    	    if (metl1 > 50.0 && ( passnoalgL1XE10 > 0.5 || passnoalgL1XE30 > 0.5 ||
+            passnoalgL1XE40 > 0.5 || passnoalgL1XE45 > 0.5  ))
     	    {
         		algAMETHist->Fill(algAMET);
         		algBMETHist->Fill(algBMET);
+                numZeroBiasRndm++;
     	    }
-          if (passRndm > 0.1)
-          {
-              numZeroBiasRndm++;
-          }
     	}
     }
     std::cout << "numZeroBiasRndm: " << numZeroBiasRndm << std::endl;
@@ -182,25 +176,25 @@ Int_t threeEfficiencies( const TString& algA , const TString& algB,
         for (Int_t i  = 0 ; i < zerobiasNentries ;i++) //determine events kept at each guess
         {
             zeroBiasTree->GetEntry(i);
-            if (passRndm > 0.5)
-            {
+            //if (passRndm > 0.5)
+            //{
                 algAMET = algBMET;
                 if ((algBMET > algBMETx1thresh) && ( metl1 > myConstants::metl1thresh ) && ( passnoalgL1XE10 > 0.5 || passnoalgL1XE30 > 0.5 ||
-                passnoalgL1XE40 > 0.5 || passnoalgL1XE45 > 0.5  ) &&(metcell > 100.0) )
+                passnoalgL1XE40 > 0.5 || passnoalgL1XE45 > 0.5  ))
                 {
                     counter1++;
                 }
                 if ((algBMET > algBMETx2thresh) && (metl1 > myConstants::metl1thresh)&& ( passnoalgL1XE10 > 0.5 || passnoalgL1XE30 > 0.5 ||
-                passnoalgL1XE40 > 0.5 || passnoalgL1XE45 > 0.5  ) &&(metcell > 100.0))
+                passnoalgL1XE40 > 0.5 || passnoalgL1XE45 > 0.5  ))
                 {
                     counter2++;
                 }
                 if ((algBMET > algBMETx3thresh) && (metl1 > myConstants::metl1thresh)&& ( passnoalgL1XE10 > 0.5 || passnoalgL1XE30 > 0.5 ||
-                passnoalgL1XE40 > 0.5 || passnoalgL1XE45 > 0.5  ) &&(metcell > 100.0))
+                passnoalgL1XE40 > 0.5 || passnoalgL1XE45 > 0.5  ))
                 {
                     counter3++;
                 }
-            }
+            //}
         }
     }
     else
@@ -208,24 +202,24 @@ Int_t threeEfficiencies( const TString& algA , const TString& algB,
         for (Int_t i  = 0 ; i < zerobiasNentries ;i++) //determine events kept at each guess
         {
         zeroBiasTree->GetEntry(i);
-            if (passRndm > 0.5)
-            {
+            //if (passRndm > 0.5)
+            //{
                 if ((algAMET > algAMETx1thresh) && (algBMET > algBMETx1thresh) && (metl1 > myConstants::metl1thresh)&& ( passnoalgL1XE10 > 0.5 || passnoalgL1XE30 > 0.5 ||
-                passnoalgL1XE40 > 0.5 || passnoalgL1XE45 > 0.5  ) &&(metcell > 100.0))
+                passnoalgL1XE40 > 0.5 || passnoalgL1XE45 > 0.5  ) )
                 {
                 counter1++;
                 }
                 if ((algAMET > algAMETx2thresh) && (algBMET > algBMETx2thresh) && (metl1 > myConstants::metl1thresh)&& ( passnoalgL1XE10 > 0.5 || passnoalgL1XE30 > 0.5 ||
-                passnoalgL1XE40 > 0.5 || passnoalgL1XE45 > 0.5  ) &&(metcell > 100.0))
+                passnoalgL1XE40 > 0.5 || passnoalgL1XE45 > 0.5  ))
                 {
                 counter2++;
                 }
                 if ((algAMET > algAMETx3thresh) && (algBMET > algBMETx3thresh) && (metl1 > myConstants::metl1thresh)&& ( passnoalgL1XE10 > 0.5 || passnoalgL1XE30 > 0.5 ||
-                passnoalgL1XE40 > 0.5 || passnoalgL1XE45 > 0.5  ) &&(metcell > 100.0))
+                passnoalgL1XE40 > 0.5 || passnoalgL1XE45 > 0.5  ) )
                 {
                 counter3++;
                 }
-            }
+            //}
         }
     }
 
@@ -304,11 +298,11 @@ do{
 	{
 	  zeroBiasTree->GetEntry(i);
 	  algAMET=algBMET;
-	  if ((passRndm > 0.1) && (algBMET > algBMETx2thresh) && (metl1 > myConstants::metl1thresh)&& ( passnoalgL1XE10 > 0.5 || passnoalgL1XE30 > 0.5 ||
-      passnoalgL1XE40 > 0.5 || passnoalgL1XE45 > 0.5  ) &&(metcell > 100.0))
-	  {
-	    counter2++;
-	  }
+	  if ((algBMET > algBMETx2thresh) && (metl1 > myConstants::metl1thresh)&& ( passnoalgL1XE10 > 0.5 || passnoalgL1XE30 > 0.5 ||
+          passnoalgL1XE40 > 0.5 || passnoalgL1XE45 > 0.5  ))
+    	  {
+    	    counter2++;
+    	  }
 	}
     }
     else
@@ -316,8 +310,8 @@ do{
 	for (Int_t i  = 0 ; i < zerobiasNentries ;i++)
 	{
 	  zeroBiasTree->GetEntry(i);
-	  if ((passRndm > 0.1) && (algAMET > algAMETx2thresh) && (algBMET > algBMETx2thresh) && (metl1 > myConstants::metl1thresh)&& ( passnoalgL1XE10 > 0.5 ||
-          passnoalgL1XE30 > 0.5 || passnoalgL1XE40 > 0.5 || passnoalgL1XE45 > 0.5  ) &&(metcell > 100.0))
+	  if ((algAMET > algAMETx2thresh) && (algBMET > algBMETx2thresh) && (metl1 > myConstants::metl1thresh)&& ( passnoalgL1XE10 > 0.5 ||
+          passnoalgL1XE30 > 0.5 || passnoalgL1XE40 > 0.5 || passnoalgL1XE45 > 0.5  ) )
 	  {
 	    counter2++;
 	  }
@@ -389,9 +383,12 @@ for (Int_t l = 0 ; l < muonNentries ; l++)
             Float_t metnomu = sqrt(((offrecal_mex - offrecalmuon_mex) * (offrecal_mex - offrecalmuon_mex)) +
             ((offrecal_mey - offrecalmuon_mey)*(offrecal_mey - offrecalmuon_mey))); //compute metnomu
             numbPassMuon++;
-            Ateff->Fill((algAmuonMET > algAThresh) && (muonMetl1 > myConstants::metl1thresh), metnomu);
-            Bteff->Fill((algBmuonMET > algBThresh) && (muonMetl1 > myConstants::metl1thresh), metnomu);
-            Cteff->Fill(((algAmuonMET > acthresh) && (algBmuonMET > bcthresh) && (muonMetl1 > myConstants::metl1thresh)), metnomu);
+            Ateff->Fill((algAmuonMET > algAThresh) && (muonMetl1 > myConstants::metl1thresh)&& ( passnoalgL1XE10 > 0.5 ||
+                passnoalgL1XE30 > 0.5 || passnoalgL1XE40 > 0.5 || passnoalgL1XE45 > 0.5  ), metnomu);
+            Bteff->Fill((algBmuonMET > algBThresh) && (muonMetl1 > myConstants::metl1thresh)&& ( passnoalgL1XE10 > 0.5 ||
+                passnoalgL1XE30 > 0.5 || passnoalgL1XE40 > 0.5 || passnoalgL1XE45 > 0.5  ), metnomu);
+            Cteff->Fill(((algAmuonMET > acthresh) && (algBmuonMET > bcthresh) && (muonMetl1 > myConstants::metl1thresh))&& ( passnoalgL1XE10 > 0.5 ||
+                passnoalgL1XE30 > 0.5 || passnoalgL1XE40 > 0.5 || passnoalgL1XE45 > 0.5  ), metnomu);
         }
     }
     else
@@ -402,10 +399,14 @@ for (Int_t l = 0 ; l < muonNentries ; l++)
     	    Float_t metnomu = sqrt(((offrecal_mex - offrecalmuon_mex) * (offrecal_mex - offrecalmuon_mex)) +
     	    ((offrecal_mey - offrecalmuon_mey)*(offrecal_mey - offrecalmuon_mey))); //compute metnomu
             numbPassMuon++;
-            Ateff->Fill((algAmuonMET > algAThresh) && (muonMetl1 > myConstants::metl1thresh), metnomu);
-    	    Bteff->Fill((algBmuonMET > algBThresh) && (muonMetl1 > myConstants::metl1thresh), metnomu);
-    	    Cteff->Fill(((algAmuonMET > acthresh) && (algBmuonMET > bcthresh) && (muonMetl1 > myConstants::metl1thresh)), metnomu);
-            Dteff->Fill((muonMetl1 >= myConstants::metl1thresh), metnomu);
+            Ateff->Fill((algAmuonMET > algAThresh) && (muonMetl1 > myConstants::metl1thresh)&& ( passnoalgL1XE10 > 0.5 ||
+                passnoalgL1XE30 > 0.5 || passnoalgL1XE40 > 0.5 || passnoalgL1XE45 > 0.5  ), metnomu);
+    	    Bteff->Fill((algBmuonMET > algBThresh) && (muonMetl1 > myConstants::metl1thresh)&& ( passnoalgL1XE10 > 0.5 ||
+                passnoalgL1XE30 > 0.5 || passnoalgL1XE40 > 0.5 || passnoalgL1XE45 > 0.5  ), metnomu);
+    	    Cteff->Fill(((algAmuonMET > acthresh) && (algBmuonMET > bcthresh) && (muonMetl1 > myConstants::metl1thresh))&& ( passnoalgL1XE10 > 0.5 ||
+                passnoalgL1XE30 > 0.5 || passnoalgL1XE40 > 0.5 || passnoalgL1XE45 > 0.5  ), metnomu);
+            Dteff->Fill((muonMetl1 >= myConstants::metl1thresh)&& ( passnoalgL1XE10 > 0.5 ||
+                passnoalgL1XE30 > 0.5 || passnoalgL1XE40 > 0.5 || passnoalgL1XE45 > 0.5  ), metnomu);
     	}
     }
 }
@@ -537,7 +538,6 @@ const TString& zeroBiasFileName = "PhysicsMain.All.noalgXEtriggers.2016.f731f758
     TH1F *indeterminateHist = new TH1F(alg, alg, nbins, metMin, metMax);
 	zeroBiasTree->SetBranchAddress(alg,&indeterminate);
 	zeroBiasTree->SetBranchAddress("metl1",&metl1);
-    zeroBiasTree->SetBranchAddress("metcell",&metcell);
     zeroBiasTree->SetBranchAddress("passrndm", &passRndm);
     zeroBiasTree->SetBranchAddress("passnoalgL1XE10",&passnoalgL1XE10);
     zeroBiasTree->SetBranchAddress("passnoalgL1XE30",&passnoalgL1XE30);
@@ -549,7 +549,7 @@ const TString& zeroBiasFileName = "PhysicsMain.All.noalgXEtriggers.2016.f731f758
 	{
 		zeroBiasTree->GetEntry(k);
 		if (( ( passnoalgL1XE10 > 0.5 || passnoalgL1XE30 > 0.5 || passnoalgL1XE40 > 0.5 ||
-            passnoalgL1XE45 > 0.5 ) && ( metl1 > metl1thresh ) ) && (metcell > 100.0 ) )
+            passnoalgL1XE45 > 0.5 ) && ( metl1 > metl1thresh ) ))
 		{
 			indeterminateHist->Fill(indeterminate);
 		}
@@ -557,7 +557,6 @@ const TString& zeroBiasFileName = "PhysicsMain.All.noalgXEtriggers.2016.f731f758
     }
 	std::cout << "FRACTION: " << frac << std::endl;
 	std::cout << "ZEROBIAS NENTRIES: " << zerobiasNentries << std::endl;
-    std::cout << "NUMZEROBIASRNDM: " << numZeroBiasRndm << std::endl;
 
     TH1F *indeterminatetarget = (TH1F*) indeterminateHist->GetCumulative(kFALSE);
 	Float_t numKeep = 5762.0;
@@ -570,7 +569,7 @@ const TString& zeroBiasFileName = "PhysicsMain.All.noalgXEtriggers.2016.f731f758
 	{
 		zeroBiasTree->GetEntry(l);
 		if (( passnoalgL1XE10 > 0.5 || passnoalgL1XE30 > 0.5 || passnoalgL1XE40 > 0.5 ||
-            passnoalgL1XE45 > 0.5 ) && (indeterminate > indeterminateThresh) && (metl1 > metl1thresh) && ( metcell > 100.0) )
+            passnoalgL1XE45 > 0.5 ) && (indeterminate > indeterminateThresh) && (metl1 > metl1thresh))
 		{
 			counter++;
 		}
@@ -614,7 +613,7 @@ Float_t determineMuonEventsKeptCombined( const TString& algA, const Float_t thre
               numbPassMuon++;
             }
             if (((passmuon > 0.5) || (passmuvarmed > 0.5)) && cleanCutsFlag > 0.1 && recalBrokeFlag < 0.1
-            && (algAMET > threshA) && (algBMET > threshB) && (metl1 > myConstants::metl1thresh) && (metcell > 100.0))
+            && (algAMET > threshA) && (algBMET > threshB) && (metl1 > myConstants::metl1thresh) )
             {
               counter++;
             }
@@ -630,7 +629,7 @@ Float_t determineMuonEventsKeptCombined( const TString& algA, const Float_t thre
           	  numbPassMuon++;
           	}
           	if ( ((passmuon > 0.5) || (passmuvarmed > 0.5)) && (algAMET > threshA) && (algBMET > threshB) &&
-            (metcell > 100.0) && (metl1 > myConstants::metl1thresh)&& cleanCutsFlag > 0.1 && recalBrokeFlag < 0.1)
+            ((metl1 > myConstants::metl1thresh)&& cleanCutsFlag > 0.1 && recalBrokeFlag < 0.1))
           	{
           	  counter++;
           	}
