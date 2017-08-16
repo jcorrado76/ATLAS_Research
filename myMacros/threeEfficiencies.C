@@ -357,7 +357,7 @@ do{
 acthresh = algAMETx2thresh;
 bcthresh = algBMETx2thresh;
 
-TString cstring = algA + " > " + Form(" %.2f", acthresh) + " and " + algB + " > " + Form(" %.2f", bcthresh));
+TString cstring = algA + " > " + Form(" %.2f", acthresh) + " and " + algB + " > " + Form(" %.2f", bcthresh);
 TString astring = algA + " > " + Form(" %.2f", algAThresh);
 TString bstring = algB + " > " + Form(" %.2f", algBThresh);
 TString dstring = (TString) "L1 > " + Form(" %.2f" , myConstants::metl1thresh);
@@ -460,7 +460,7 @@ Dteff->Draw("same");
 
 
 
-TLegend *legend = new TLegend(0.60,0.15,0.87, 0.35 ,"","NDC");
+TLegend *legend = new TLegend(0.57,0.15,0.9, 0.4 ,"","NDC");
 legend->AddEntry(Ateff, astring);
 legend->AddEntry(Bteff, bstring);
 legend->AddEntry(Cteff, cstring);
