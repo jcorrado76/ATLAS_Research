@@ -53,8 +53,8 @@ Int_t threeEfficiencies( const TString& algA , const TString& algB,
     Double_t metMin = myConstants::metMin; Double_t metMax = myConstants::metMax;
 
     Int_t passRndm, numPassMuon,passmuon,passmuvarmed,cleanCutsFlag,recalBrokeFlag;
-    Float_t algAMET,algBMET,metoffrecal,offrecal_met,offrecal_mex,offrecal_mey,offrecalmuon_mex,
-            offrecalmuon_mey, acthresh,bcthresh,metl1,metcell;
+    Float_t algAMET,algBMET,offrecal_met,offrecal_mex,offrecal_mey,offrecalmuon_mex,
+            offrecalmuon_mey, acthresh,bcthresh,metl1,metcell,metrefmuon,mexrefmuon,meyrefmuon;
     Int_t passnoalgL1XE10,passnoalgL1XE30,passnoalgL1XE40,passnoalgL1XE45;
 
     myMuonTree->SetBranchAddress("passmu26med", &passmuon);
@@ -66,6 +66,9 @@ Int_t threeEfficiencies( const TString& algA , const TString& algB,
     myMuonTree->SetBranchAddress("meyoffrecal", &offrecal_mey);
     myMuonTree->SetBranchAddress("mexoffrecalmuon", &offrecalmuon_mex);
     myMuonTree->SetBranchAddress("meyoffrecalmuon", &offrecalmuon_mey);
+    myMuonTree->SetBranchAddress("metrefmuon", &metrefmuon);
+    myMuonTree->SetBranchAddress("mexrefmuon", &mexrefmuon);
+    myMuonTree->SetBranchAddress("meyrefmuon", &meyrefmuon);
 
 
     std::cout << "MuonNentries: " << muonNentries << "\n" << std::endl;
@@ -371,7 +374,7 @@ Float_t muonMetl1 = 0;
 myMuonTree->SetBranchAddress(algA,&algAmuonMET);
 myMuonTree->SetBranchAddress(algB,&algBmuonMET);
 myMuonTree->SetBranchAddress("metl1",&muonMetl1);
-Int_t numbPassMuon = 0;
+Int_t numbPassMuon = 0;Float_t w;
 for (Int_t l = 0 ; l < muonNentries ; l++)
 {
     myMuonTree->GetEntry(l);
@@ -380,33 +383,36 @@ for (Int_t l = 0 ; l < muonNentries ; l++)
         algAmuonMET = algBmuonMET;
         if ((passmuvarmed > 0.1 || passmuon > 0.1) && cleanCutsFlag > 0.1 && recalBrokeFlag < 0.1)
         {
+            w = sqrt(2.0*offrecal_met*metrefmuon*(1-((offrecal_mex*mexrefmuon+offrecal_mey*meyrefmuon)/(
+                offrecal_met * metrefmuon))));
             Float_t metnomu = sqrt(((offrecal_mex - offrecalmuon_mex) * (offrecal_mex - offrecalmuon_mex)) +
             ((offrecal_mey - offrecalmuon_mey)*(offrecal_mey - offrecalmuon_mey))); //compute metnomu
             numbPassMuon++;
             Ateff->Fill((algAmuonMET > algAThresh) && (muonMetl1 > myConstants::metl1thresh)&& ( passnoalgL1XE10 > 0.5 ||
-                passnoalgL1XE30 > 0.5 || passnoalgL1XE40 > 0.5 || passnoalgL1XE45 > 0.5  ), metnomu);
+                passnoalgL1XE30 > 0.5 || passnoalgL1XE40 > 0.5 || passnoalgL1XE45 > 0.5  ) && w >= 40.0 && w <= 80.0, metnomu);
             Bteff->Fill((algBmuonMET > algBThresh) && (muonMetl1 > myConstants::metl1thresh)&& ( passnoalgL1XE10 > 0.5 ||
-                passnoalgL1XE30 > 0.5 || passnoalgL1XE40 > 0.5 || passnoalgL1XE45 > 0.5  ), metnomu);
+                passnoalgL1XE30 > 0.5 || passnoalgL1XE40 > 0.5 || passnoalgL1XE45 > 0.5  ) && w >= 40.0 && w <= 80.0, metnomu);
             Cteff->Fill(((algAmuonMET > acthresh) && (algBmuonMET > bcthresh) && (muonMetl1 > myConstants::metl1thresh))&& ( passnoalgL1XE10 > 0.5 ||
-                passnoalgL1XE30 > 0.5 || passnoalgL1XE40 > 0.5 || passnoalgL1XE45 > 0.5  ), metnomu);
+                passnoalgL1XE30 > 0.5 || passnoalgL1XE40 > 0.5 || passnoalgL1XE45 > 0.5  ) && w >= 40.0 && w <= 80.0, metnomu);
         }
     }
     else
     {
         if ((passmuvarmed > 0.1 || passmuon > 0.1) && (cleanCutsFlag > 0.1) && (recalBrokeFlag < 0.1))
     	{
-
+            w = sqrt(2.0*offrecal_met*metrefmuon*(1-((offrecal_mex*mexrefmuon+offrecal_mey*meyrefmuon)/(
+                offrecal_met * metrefmuon))));
     	    Float_t metnomu = sqrt(((offrecal_mex - offrecalmuon_mex) * (offrecal_mex - offrecalmuon_mex)) +
     	    ((offrecal_mey - offrecalmuon_mey)*(offrecal_mey - offrecalmuon_mey))); //compute metnomu
             numbPassMuon++;
             Ateff->Fill((algAmuonMET > algAThresh) && (muonMetl1 > myConstants::metl1thresh)&& ( passnoalgL1XE10 > 0.5 ||
-                passnoalgL1XE30 > 0.5 || passnoalgL1XE40 > 0.5 || passnoalgL1XE45 > 0.5  ), metnomu);
+                passnoalgL1XE30 > 0.5 || passnoalgL1XE40 > 0.5 || passnoalgL1XE45 > 0.5  ) && w >= 40.0 && w <= 80.0, metnomu);
     	    Bteff->Fill((algBmuonMET > algBThresh) && (muonMetl1 > myConstants::metl1thresh)&& ( passnoalgL1XE10 > 0.5 ||
-                passnoalgL1XE30 > 0.5 || passnoalgL1XE40 > 0.5 || passnoalgL1XE45 > 0.5  ), metnomu);
+                passnoalgL1XE30 > 0.5 || passnoalgL1XE40 > 0.5 || passnoalgL1XE45 > 0.5  ) && w >= 40.0 && w <= 80.0, metnomu);
     	    Cteff->Fill(((algAmuonMET > acthresh) && (algBmuonMET > bcthresh) && (muonMetl1 > myConstants::metl1thresh))&& ( passnoalgL1XE10 > 0.5 ||
-                passnoalgL1XE30 > 0.5 || passnoalgL1XE40 > 0.5 || passnoalgL1XE45 > 0.5  ), metnomu);
+                passnoalgL1XE30 > 0.5 || passnoalgL1XE40 > 0.5 || passnoalgL1XE45 > 0.5  ) && w >= 40.0 && w <= 80.0, metnomu);
             Dteff->Fill((muonMetl1 >= myConstants::metl1thresh)&& ( passnoalgL1XE10 > 0.5 ||
-                passnoalgL1XE30 > 0.5 || passnoalgL1XE40 > 0.5 || passnoalgL1XE45 > 0.5  ), metnomu);
+                passnoalgL1XE30 > 0.5 || passnoalgL1XE40 > 0.5 || passnoalgL1XE45 > 0.5  ) && w >= 40.0 && w <= 80.0, metnomu);
     	}
     }
 }
@@ -532,7 +538,7 @@ const TString& zeroBiasFileName = "PhysicsMain.All.noalgXEtriggers.2016.f731f758
 	Double_t metMin = myConstants::metMin;
 	Double_t metMax = myConstants::metMax;
     Float_t metl1thresh = myConstants::metl1thresh;
-	Float_t metl1, metcell, metmht, mettopocl, mettopoclps, mettopoclpuc, metoffrecal,indeterminate,
+	Float_t metl1, metcell, metmht, mettopocl, mettopoclps, mettopoclpuc, indeterminate,
 	metcellthresh, metmhtthresh, mettopoclthresh, mettopoclpsthresh, mettopoclpucthresh,rightHandSum;
     Int_t passnoalgL1XE10,passnoalgL1XE30,passnoalgL1XE40,passnoalgL1XE45;
     TH1F *indeterminateHist = new TH1F(alg, alg, nbins, metMin, metMax);
@@ -589,8 +595,9 @@ Float_t determineMuonEventsKeptCombined( const TString& algA, const Float_t thre
     TFile * muonFile = TFile::Open(muonFilePath, "READ");
     TTree* muonTree = (TTree*)muonFile->Get("tree");
     Int_t muonNentries = muonTree->GetEntries();
-    Float_t algAMET, algBMET,metl1,metcell;
+    Float_t algAMET, algBMET,metl1,w;
     Int_t passmuon,passmuvarmed,recalBrokeFlag,cleanCutsFlag;
+    Float_t offrecal_met,offrecal_mex,offrecal_mey,offrecalmuon_mex,offrecalmuon_mey,metrefmuon,mexrefmuon,meyrefmuon;
     muonTree->SetBranchAddress("passmu26med",&passmuon);
     muonTree->SetBranchAddress("passmu26varmed",&passmuvarmed);
     muonTree->SetBranchAddress("recalbroke",&recalBrokeFlag);
@@ -598,7 +605,14 @@ Float_t determineMuonEventsKeptCombined( const TString& algA, const Float_t thre
     muonTree->SetBranchAddress(algA,&algAMET);
     muonTree->SetBranchAddress(algB,&algBMET);
     muonTree->SetBranchAddress("metl1",&metl1);
-    muonTree->SetBranchAddress("metcell",&metcell);
+    muonTree->SetBranchAddress("metoffrecal", &offrecal_met);
+    muonTree->SetBranchAddress("mexoffrecal", &offrecal_mex);
+    muonTree->SetBranchAddress("meyoffrecal", &offrecal_mey);
+    muonTree->SetBranchAddress("mexoffrecalmuon", &offrecalmuon_mex);
+    muonTree->SetBranchAddress("meyoffrecalmuon", &offrecalmuon_mey);
+    muonTree->SetBranchAddress("metrefmuon", &metrefmuon);
+    muonTree->SetBranchAddress("mexrefmuon", &mexrefmuon);
+    muonTree->SetBranchAddress("meyrefmuon", &meyrefmuon);
     Int_t counter = 0;
     Int_t numbPassMuon = 0;
     if (algA==algB)
@@ -607,13 +621,14 @@ Float_t determineMuonEventsKeptCombined( const TString& algA, const Float_t thre
           {
             muonTree->GetEntry(i);
             algAMET=algBMET;
-            //TODO: ADD IN THE W FLAG HERE
-            if ( ((passmuon > 0.5) || (passmuvarmed > 0.5)) && cleanCutsFlag > 0.1 && recalBrokeFlag < 0.1 )
+            w = sqrt(2.0*offrecal_met*metrefmuon*(1-((offrecal_mex*mexrefmuon+offrecal_mey*meyrefmuon)/(
+                offrecal_met * metrefmuon))));
+            if ( ((passmuon > 0.5) || (passmuvarmed > 0.5)) && cleanCutsFlag > 0.1 && recalBrokeFlag < 0.1&& w >= 40.0 && w <= 80.0 )
             {
               numbPassMuon++;
             }
             if (((passmuon > 0.5) || (passmuvarmed > 0.5)) && cleanCutsFlag > 0.1 && recalBrokeFlag < 0.1
-            && (algAMET > threshA) && (algBMET > threshB) && (metl1 > myConstants::metl1thresh) )
+            && (algAMET > threshA) && (algBMET > threshB) && (metl1 > myConstants::metl1thresh)&& w >= 40.0 && w <= 80.0 )
             {
               counter++;
             }
@@ -624,12 +639,14 @@ Float_t determineMuonEventsKeptCombined( const TString& algA, const Float_t thre
         for (Int_t i  = 0 ; i < muonNentries ;i++)
         {
           	muonTree->GetEntry(i);
-          	if ( ((passmuon > 0.5) || (passmuvarmed > 0.5)) && cleanCutsFlag > 0.1 && recalBrokeFlag < 0.1 )
+            w = sqrt(2.0*offrecal_met*metrefmuon*(1-((offrecal_mex*mexrefmuon+offrecal_mey*meyrefmuon)/(
+                offrecal_met * metrefmuon))));
+          	if ( ((passmuon > 0.5) || (passmuvarmed > 0.5)) && cleanCutsFlag > 0.1 && recalBrokeFlag < 0.1 && w >= 40.0 && w <= 80.0)
           	{
           	  numbPassMuon++;
           	}
           	if ( ((passmuon > 0.5) || (passmuvarmed > 0.5)) && (algAMET > threshA) && (algBMET > threshB) &&
-            ((metl1 > myConstants::metl1thresh)&& cleanCutsFlag > 0.1 && recalBrokeFlag < 0.1))
+            ((metl1 > myConstants::metl1thresh)&& cleanCutsFlag > 0.1 && recalBrokeFlag < 0.1)&& w >= 40.0 && w <= 80.0)
           	{
           	  counter++;
           	}
