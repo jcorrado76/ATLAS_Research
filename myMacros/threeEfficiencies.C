@@ -19,7 +19,7 @@ namespace myConstants
     Float_t metMin = 0;
     Float_t metMax = 300;
     Float_t muonMetMin = metMin;
-    Float_t muonMetMax = 500;
+    Float_t muonMetMax = 300;
     Float_t metl1thresh = 50.0;
 
 }
