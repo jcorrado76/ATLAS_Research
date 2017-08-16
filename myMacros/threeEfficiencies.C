@@ -357,11 +357,10 @@ do{
 acthresh = algAMETx2thresh;
 bcthresh = algBMETx2thresh;
 
-TString cstring = algA + " > " + Form(" %.2f", acthresh) + " " +
-algB + " > " + Form(" %.2f", bcthresh) + "  L1 > " + Form("%.2f", myConstants::metl1thresh);
-TString astring = algA + " > " + Form(" %.2f", algAThresh) + " L1 > " + Form("%.2f" ,myConstants::metl1thresh);
-TString bstring = algB + " > " + Form(" %.2f", algBThresh) + " L1 > " + Form("%.2f" ,myConstants::metl1thresh);
-TString dstring = (TString) "L1 cut at " + Form(" %.2f" , myConstants::metl1thresh) +  " and " + algA + " and " + algB + " at 0";
+TString cstring = algA + " > " + Form(" %.2f", acthresh) + " and " + algB + " > " + Form(" %.2f", bcthresh));
+TString astring = algA + " > " + Form(" %.2f", algAThresh);
+TString bstring = algB + " > " + Form(" %.2f", algBThresh);
+TString dstring = (TString) "L1 > " + Form(" %.2f" , myConstants::metl1thresh);
 
 TEfficiency* Ateff  = new TEfficiency(astring , "Efficiency", muonNbins, muonMetMin, muonMetMax);
 TEfficiency* Bteff  = new TEfficiency(bstring , "Efficiency", muonNbins, muonMetMin, muonMetMax);
