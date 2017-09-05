@@ -443,7 +443,7 @@ legend->AddEntry(Cteffw, cstringw);
 
 legend->Draw();
 TString folderPath = "./TEfficienciesPics/" + folder + "-" +  algA + "_and_" + algB + "_wcomparison.png";
-efficiencyCanvas->Print(folderPath);
+wcompCanvas->Print(folderPath);
 
 TString logFileName = "./TEfficienciesPics/" + folder +  algA + "_and_" + algB + "_wcomparison.txt";
 std::cout << "Generating log file: " << logFileName << std::endl;
