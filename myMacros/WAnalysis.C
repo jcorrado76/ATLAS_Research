@@ -26,7 +26,7 @@ namespace myConstants
 
 
 
-Int_t threeEfficiencies( const TString& algA , const TString& algB,
+Int_t WAnalysis( const TString& algA , const TString& algB,
         const Float_t frac = 0.00590, const TString folder = "",
         const TString& zerobiasFileName = "PhysicsMain.All.noalgXEtriggers.2016.f731f758._m1659m1710.48Runs.root",
         const TString& muonFilename = "PhysicsMain2016.Muons.noalgL1XE45R3073065R311481Runs9B.root")
@@ -357,21 +357,11 @@ do{
 acthresh = algAMETx2thresh;
 bcthresh = algBMETx2thresh;
 
-TString cstring = algA + " > " + Form(" %.2f", acthresh) + " and " + algB + " > " + Form(" %.2f", bcthresh);
+TString cstring = algA + " > " + Form(" %.2f", acthresh) + " and " + algB + " > " + Form(" %.2f", bcthresh) + " w/o w";
 TString cstringw = algA + " > " + Form(" %.2f", acthresh) + " and " + algB + " > " + Form(" %.2f", bcthresh) + " with w";
-TString astring = algA + " > " + Form(" %.2f", algAThresh);
-TString bstring = algB + " > " + Form(" %.2f", algBThresh);
-TString dstring = (TString) "L1 > " + Form(" %.2f" , myConstants::metl1thresh);
 
-TEfficiency* Ateff  = new TEfficiency(astring , "Efficiency", muonNbins, muonMetMin, muonMetMax);
-TEfficiency* Bteff  = new TEfficiency(bstring , "Efficiency", muonNbins, muonMetMin, muonMetMax);
 TEfficiency* Cteff  = new TEfficiency(cstring,  "Efficiency", muonNbins, muonMetMin, muonMetMax);
-TEfficiency* Dteff  = new TEfficiency(dstring,  "Efficiency", muonNbins, muonMetMin, muonMetMax);//combined just L1 cut, 0 on others
-
-TEfficiency* AteffW  = new TEfficiency(astring , "WEfficiency", muonNbins, muonMetMin, muonMetMax);
-TEfficiency* BteffW  = new TEfficiency(bstring , "WEfficiency", muonNbins, muonMetMin, muonMetMax);
-TEfficiency* CteffW  = new TEfficiency(cstring,  "WEfficiency", muonNbins, muonMetMin, muonMetMax);
-TEfficiency* DteffW  = new TEfficiency(dstring,  "WEfficiency", muonNbins, muonMetMin, muonMetMax);//combined just L1 cut, 0 on others
+TEfficiency* Cteffw  = new TEfficiency(cstringw,  "WEfficiency", muonNbins, muonMetMin, muonMetMax);
 
 Float_t algAmuonMET = 0;
 Float_t algBmuonMET = 0;
@@ -390,46 +380,43 @@ for (Int_t l = 0 ; l < muonNentries ; l++)
         {
             w = sqrt(2.0*offrecal_met*metrefmuon*(1-((offrecal_mex*mexrefmuon+offrecal_mey*meyrefmuon)/(
                 offrecal_met * metrefmuon))));
+            Float_t metnomu = sqrt(((offrecal_mex - offrecalmuon_mex) * (offrecal_mex - offrecalmuon_mex)) +
+            ((offrecal_mey - offrecalmuon_mey)*(offrecal_mey - offrecalmuon_mey))); //compute metnomu
+            numbPassMuon++;
+            Cteff->Fill(((algAmuonMET > acthresh) && (algBmuonMET > bcthresh) && (muonMetl1 > myConstants::metl1thresh))&& ( passnoalgL1XE10 > 0.5 ||
+                passnoalgL1XE30 > 0.5 || passnoalgL1XE40 > 0.5 || passnoalgL1XE45 > 0.5  ), metnomu);
             if (w >= 40.0 && w <= 80.0)
             {
-                Float_t metnomu = sqrt(((offrecal_mex - offrecalmuon_mex) * (offrecal_mex - offrecalmuon_mex)) +
-                ((offrecal_mey - offrecalmuon_mey)*(offrecal_mey - offrecalmuon_mey))); //compute metnomu
-                numbPassMuon++;
-                Cteff->Fill(((algAmuonMET > acthresh) && (algBmuonMET > bcthresh) && (muonMetl1 > myConstants::metl1thresh))&& ( passnoalgL1XE10 > 0.5 ||
+                Cteffw->Fill(((algAmuonMET > acthresh) && (algBmuonMET > bcthresh) && (muonMetl1 > myConstants::metl1thresh))&& ( passnoalgL1XE10 > 0.5 ||
                     passnoalgL1XE30 > 0.5 || passnoalgL1XE40 > 0.5 || passnoalgL1XE45 > 0.5  ), metnomu);
-                CteffW->Fill(((algAmuonMET > acthresh) && (algBmuonMET > bcthresh) && (muonMetl1 > myConstants::metl1thresh))&& ( passnoalgL1XE10 > 0.5 ||
-                    passnoalgL1XE30 > 0.5 || passnoalgL1XE40 > 0.5 || passnoalgL1XE45 > 0.5  )&& w >= 40.0 && w <= 80.0, metnomu);
             }
         }
     }
     else
     {
         if ((passmuvarmed > 0.1 || passmuon > 0.1) && (cleanCutsFlag > 0.1) && (recalBrokeFlag < 0.1))
-    	{
+        {
             w = sqrt(2.0*offrecal_met*metrefmuon*(1-((offrecal_mex*mexrefmuon+offrecal_mey*meyrefmuon)/(
                 offrecal_met * metrefmuon))));
+            Float_t metnomu = sqrt(((offrecal_mex - offrecalmuon_mex) * (offrecal_mex - offrecalmuon_mex)) +
+            ((offrecal_mey - offrecalmuon_mey)*(offrecal_mey - offrecalmuon_mey))); //compute metnomu
+            numbPassMuon++;
+            Cteff->Fill(((algAmuonMET > acthresh) && (algBmuonMET > bcthresh) && (muonMetl1 > myConstants::metl1thresh))&& ( passnoalgL1XE10 > 0.5 ||
+                passnoalgL1XE30 > 0.5 || passnoalgL1XE40 > 0.5 || passnoalgL1XE45 > 0.5  ), metnomu);
             if (w >= 40.0 && w <= 80.0)
             {
-        	    Float_t metnomu = sqrt(((offrecal_mex - offrecalmuon_mex) * (offrecal_mex - offrecalmuon_mex)) +
-        	    ((offrecal_mey - offrecalmuon_mey)*(offrecal_mey - offrecalmuon_mey))); //compute metnomu
-                numbPassMuon++;
-        	    Cteff->Fill(((algAmuonMET > acthresh) && (algBmuonMET > bcthresh) && (muonMetl1 > myConstants::metl1thresh))
-                    && ( passnoalgL1XE10 > 0.5 || passnoalgL1XE30 > 0.5 || passnoalgL1XE40 > 0.5 || passnoalgL1XE45 > 0.5  ), metnomu);
-                CteffW->Fill(((algAmuonMET > acthresh) && (algBmuonMET > bcthresh) && (muonMetl1 > myConstants::metl1thresh))&& ( passnoalgL1XE10 > 0.5 ||
-                    passnoalgL1XE30 > 0.5 || passnoalgL1XE40 > 0.5 || passnoalgL1XE45 > 0.5  )&& w >= 40.0 && w <= 80.0, metnomu);
+                Cteffw->Fill(((algAmuonMET > acthresh) && (algBmuonMET > bcthresh) && (muonMetl1 > myConstants::metl1thresh))&& ( passnoalgL1XE10 > 0.5 ||
+                    passnoalgL1XE30 > 0.5 || passnoalgL1XE40 > 0.5 || passnoalgL1XE45 > 0.5  ), metnomu);
             }
-    	}
+        }
     }
 }
 
 std::cout << "Running determineMuonEventsKeptCombined.C to check number of MUON events kept at fraction determined by the bisection algorithm..." << std::endl;
 Float_t muonEventsCombined = determineMuonEventsKeptCombined( algA , acthresh , algB , bcthresh, muonFilename );
 
-TCanvas* efficiencyCanvas = new TCanvas("Efficiency Canvas", "Efficiency Canvas");
-efficiencyCanvas->RangeAxis(0,0,500,1.0);
-
-TCanvas* wcompCanvas = new TCanvas("W Comparison Canvas" , "W Comparison Canvas")
-
+TCanvas* wcompCanvas = new TCanvas("W Comparison Canvas" , "W Comparison Canvas");
+wcompCanvas->RangeAxis(0,0,500,1.0);
 if (algA==algB)
 {
     Cteff->SetLineColorAlpha(kBlue,0.35);
@@ -443,16 +430,16 @@ else
 
 const TString canvName = algA + " and " + algB + " Combined Efficiency with and w/o W" + ";Offline Recalibrated MET w/o Muon term [GeV];Efficiency";
 
-Ateff->SetTitle(canvName);
+Cteff->SetTitle(canvName);
 
 Cteff->Draw();
-CteffW->Draw("same");
+Cteffw->Draw("same");
 
 
 
 TLegend *legend = new TLegend(0.57,0.15,0.9, 0.4 ,"","NDC");
 legend->AddEntry(Cteff, cstring);
-legend->AddEntry(CteffW, cstringw);
+legend->AddEntry(Cteffw, cstringw);
 
 legend->Draw();
 TString folderPath = "./TEfficienciesPics/" + folder + "-" +  algA + "_and_" + algB + "_wcomparison.png";
@@ -480,12 +467,6 @@ logFile << "MUON NENTRIES: " << muonNentries << "\r\n";
 logFile << "NUMBERPASSMUON: " << numbPassMuon << "\r\n";
 logFile << "Number MUON events kept using final zerobias thresholds determined below: " << muonEventsCombined << "\r\n";
 logFile << "Fraction times Numb MUON events kept: " << frac * numbPassMuon << "\r\n";
-logFile << "NUMB MUON ENTRIES PASSED ALG A: " << (Ateff->GetPassedHistogram())->GetEntries() << "\r\n";
-logFile << "NUMB MUON ENTRIES PASSED ALG B: " << (Bteff->GetPassedHistogram())->GetEntries() << "\r\n";
-logFile << "NUMB MUON ENTRIES PASSED ALG C: " << (Cteff->GetPassedHistogram())->GetEntries() << "\r\n";
-logFile << "NUMB MUON ENTRIES TOTAL  ALG A: " << (Ateff->GetTotalHistogram())->GetEntries() << "\r\n";
-logFile << "NUMB MUON ENTRIES TOTAL  ALG B: " << (Bteff->GetTotalHistogram())->GetEntries() << "\r\n";
-logFile << "NUMB MUON ENTRIES TOTAL  ALG C: " << (Cteff->GetTotalHistogram())->GetEntries() << "\r\n";
 logFile << "Epsilon tolerance for bisection accuracy: " << eps << " events" << "\r\n";
 logFile << "ZEROBIAS Bisection Information: " << "\r\n";
 logFile << "Iteration Number : " << "\tIndividual Fraction: \t" << "Combined Fraction Kept: \t" << "Combined Events Kept: \t" <<
