@@ -17,18 +17,24 @@ Int_t printEfficiencies()
 {
     /* makes a plot with simply all 5 efficiency curves*/
     Float_t determineZeroBiasThresh( const TString&, const Float_t, const TString&);
+    const Float_t frac = 0.00590;
     const TString& zerobiasFileName = "PhysicsMain.All.noalgXEtriggers.2016.f731f758._m1659m1710.48Runs.root";
+    const TString metcellName = "metcell";
+    const TString metmhtName = "metmht";
+    const TString mettopoclName = "mettopocl";
+    const TString mettopoclpsName = "mettopoclps";
+    const TString mettopoclpucName = "mettopoclpuc";
 
     TString zerobiasFilePath = "../myData/"+ zerobiasFileName;
     TFile * zeroBiasFile = TFile::Open(zerobiasFilePath, "READ");
     TTree* zeroBiasTree = (TTree*)zeroBiasFile->Get("tree");
     Int_t zerobiasNentries = zeroBiasTree->GetEntries();
 
-    Float_t metcellThresh = determineZeroBiasThresh(algA,frac,zerobiasFileName);
-    Float_t metmhtThresh = determineZeroBiasThresh(algB,frac,zerobiasFileName);
-    Float_t mettopoclThresh = determineZeroBiasThresh(algA,frac,zerobiasFileName);
-    Float_t mettopoclpsThresh = determineZeroBiasThresh(algB,frac,zerobiasFileName);
-    Float_t mettopoclpucThresh = determineZeroBiasThresh(algA,frac,zerobiasFileName);
+    Float_t metcellThresh = determineZeroBiasThresh(metcellName,frac,zerobiasFileName);
+    Float_t metmhtThresh = determineZeroBiasThresh(metmhtName,frac,zerobiasFileName);
+    Float_t mettopoclThresh = determineZeroBiasThresh(mettopoclName,frac,zerobiasFileName);
+    Float_t mettopoclpsThresh = determineZeroBiasThresh(mettopoclpsName,frac,zerobiasFileName);
+    Float_t mettopoclpucThresh = determineZeroBiasThresh(mettopoclpucName,frac,zerobiasFileName);
 }
 
 
