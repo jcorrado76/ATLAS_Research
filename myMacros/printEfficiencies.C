@@ -35,6 +35,94 @@ Int_t printEfficiencies()
     Float_t mettopoclThresh = determineZeroBiasThresh(mettopoclName,frac,zerobiasFileName);
     Float_t mettopoclpsThresh = determineZeroBiasThresh(mettopoclpsName,frac,zerobiasFileName);
     Float_t mettopoclpucThresh = determineZeroBiasThresh(mettopoclpucName,frac,zerobiasFileName);
+
+    TEfficiency* metcellteff  = new TEfficiency(metcellName , "Metcell Efficiency", muonNbins, muonMetMin, muonMetMax);
+    TEfficiency* metmhtteff  = new TEfficiency(metmhtName , "Metmht Efficiency", muonNbins, muonMetMin, muonMetMax);
+    TEfficiency* mettopoclteff  = new TEfficiency(mettopoclName,  "Mettopocl Efficiency", muonNbins, muonMetMin, muonMetMax);
+    TEfficiency* mettopoclpsteff  = new TEfficiency(mettopoclpsName,  "Mettopoclps Efficiency", muonNbins, muonMetMin, muonMetMax);
+    TEfficiency* mettopoclpucteff  = new TEfficiency(mettopoclpucName,  "Mettopoclpuc Efficiency", muonNbins, muonMetMin, muonMetMax);
+
+    TString muonFilePath = "../myData/"+muonFilename;
+    TFile * muonFile = TFile::Open(muonFilePath, "READ");
+    TTree* myMuonTree = (TTree*)muonFile->Get("tree");
+
+    myMuonTree->SetBranchAddress("passmu26med", &passmuon);
+    myMuonTree->SetBranchAddress("passmu26varmed", &passmuvarmed);
+    myMuonTree->SetBranchAddress("passcleancuts", &cleanCutsFlag);
+    myMuonTree->SetBranchAddress("recalbroke", &recalBrokeFlag);
+    myMuonTree->SetBranchAddress("metoffrecal", &offrecal_met);
+    myMuonTree->SetBranchAddress("mexoffrecal", &offrecal_mex);
+    myMuonTree->SetBranchAddress("meyoffrecal", &offrecal_mey);
+    myMuonTree->SetBranchAddress("mexoffrecalmuon", &offrecalmuon_mex);
+    myMuonTree->SetBranchAddress("meyoffrecalmuon", &offrecalmuon_mey);
+    myMuonTree->SetBranchAddress("metrefmuon", &metrefmuon);
+    myMuonTree->SetBranchAddress("mexrefmuon", &mexrefmuon);
+    myMuonTree->SetBranchAddress("meyrefmuon", &meyrefmuon);
+
+    Float_t metcell,metmht,mettopocl,mettopoclps,mettopoclpuc;
+
+    zeroBiasTree->SetBranchAddress(metcellName,&metcell);
+    zeroBiasTree->SetBranchAddress(metmhtName,&metmht);
+    zeroBiasTree->SetBranchAddress(mettopoclName,&mettopcl);
+    zeroBiasTree->SetBranchAddress(mettopoclpsName,&mettopoclps);
+    zeroBiasTree->SetBranchAddress(mettopoclpucName,&mettopoclpuc);
+
+    zeroBiasTree->SetBranchAddress("metl1",&metl1);
+    zeroBiasTree->SetBranchAddress("passnoalgL1XE10",&passnoalgL1XE10);
+    zeroBiasTree->SetBranchAddress("passnoalgL1XE30",&passnoalgL1XE30);
+    zeroBiasTree->SetBranchAddress("passnoalgL1XE40",&passnoalgL1XE40);
+    zeroBiasTree->SetBranchAddress("passnoalgL1XE45",&passnoalgL1XE45);
+
+    if ((passmuvarmed > 0.1 || passmuon > 0.1) && (cleanCutsFlag > 0.1) && (recalBrokeFlag < 0.1))
+    {
+        w = sqrt(2.0*offrecal_met*metrefmuon*(1-((offrecal_mex*mexrefmuon+offrecal_mey*meyrefmuon)/(
+            offrecal_met * metrefmuon))));
+        if (w >= 40.0 && w <= 80.0)
+        {
+            Float_t metnomu = sqrt(((offrecal_mex - offrecalmuon_mex) * (offrecal_mex - offrecalmuon_mex)) +
+            ((offrecal_mey - offrecalmuon_mey)*(offrecal_mey - offrecalmuon_mey))); //compute metnomu
+            numbPassMuon++;
+            metcellteff->Fill((metcell > metcellThresh) && (muonMetl1 > myConstants::metl1thresh)&& ( passnoalgL1XE10 > 0.5 ||
+                passnoalgL1XE30 > 0.5 || passnoalgL1XE40 > 0.5 || passnoalgL1XE45 > 0.5  ), metnomu);
+            metmhtteff->Fill((metmht > metmhtThresh) && (muonMetl1 > myConstants::metl1thresh)&& ( passnoalgL1XE10 > 0.5 ||
+                passnoalgL1XE30 > 0.5 || passnoalgL1XE40 > 0.5 || passnoalgL1XE45 > 0.5  ), metnomu);
+            mettopoclteff->Fill(((mettopocl > mettopoclThresh) && (algBmuonMET > bcthresh) && (muonMetl1 > myConstants::metl1thresh))
+                && ( passnoalgL1XE10 > 0.5 || passnoalgL1XE30 > 0.5 || passnoalgL1XE40 > 0.5 || passnoalgL1XE45 > 0.5  ), metnomu);
+            mettopoclpsteff->Fill((mettopoclps > mettopoclpsThresh)&& ( passnoalgL1XE10 > 0.5 ||
+                passnoalgL1XE30 > 0.5 || passnoalgL1XE40 > 0.5 || passnoalgL1XE45 > 0.5  ), metnomu);
+            mettopoclpucteff->Fill((mettopoclpuc > mettopoclpucThresh)&& ( passnoalgL1XE10 > 0.5 ||
+                passnoalgL1XE30 > 0.5 || passnoalgL1XE40 > 0.5 || passnoalgL1XE45 > 0.5  ), metnomu);
+        }
+    }
+
+    TCanvas* efficiencyCanvas = new TCanvas("Efficiency Canvas", "Efficiency Canvas");
+    efficiencyCanvas->RangeAxis(0,0,500,1.0);
+
+    metcellteff->SetLineColor(kBlue);
+    metmhtteff->SetLineColor(kRed);
+    mettopoclteff->SetLineColor(kGreen);
+    mettopoclpsteff->SetLineColor(kBlack);
+    mettopoclpucteff->SetLineColor(kPurple);
+
+    const TString canvName = algA + " and " + algB + " Combined Efficiency" + ";Offline Recalibrated MET w/o Muon term [GeV];Efficiency";
+
+    Ateff->SetTitle(canvName);
+
+    metcellteff->Draw();
+    metmhtteff->Draw("same");
+    mettopoclteff->Draw("same");
+    mettopoclpsteff->Draw("same");
+    mettopoclpucteff->Draw("same");
+
+    TLegend *legend = new TLegend(0.57,0.15,0.9, 0.4 ,"","NDC");
+    legend->AddEntry(metcellteff, metcellName);
+    legend->AddEntry(metmhtteff, metmhtName);
+    legend->AddEntry(mettopoclteff, mettopoclName);
+    legend->AddEntry(mettopoclpsteff, mettopoclpsName);
+    legend->AddEntry(mettopoclpucteff, mettopoclpucName);
+    legend->Draw();
+    TString folderPath = "./TEfficienciesPics/" + folder + "_5_efficiencies.png";
+    efficiencyCanvas->Print(folderPath);
 }
 
 
