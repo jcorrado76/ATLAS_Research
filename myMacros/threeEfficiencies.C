@@ -31,7 +31,7 @@ Int_t threeEfficiencies( const TString& algA , const TString& algB,
         const TString& zerobiasFileName = "PhysicsMain.All.noalgXEtriggers.2016.f731f758._m1659m1710.48Runs.root",
         const TString& muonFilename = "PhysicsMain.L1KFmuontriggers.2016.f731f758_m1659m1710.Run309759.48Runs.root")
 {
-    Float_t w();
+    Float_t w( const Float_t , const Float_t ,const Float_t ,const Float_t ,const Float_t ,const Float_t);
     Float_t determineZeroBiasThresh( const TString&, const Float_t, const TString&);
     Float_t computeThresh(TH1F*,Float_t);
     Float_t determineMuonEventsKeptCombined( const TString&, const Float_t, const TString&,
@@ -374,7 +374,7 @@ Float_t muonMetl1 = 0;
 myMuonTree->SetBranchAddress(algA,&algAmuonMET);
 myMuonTree->SetBranchAddress(algB,&algBmuonMET);
 myMuonTree->SetBranchAddress("metl1",&muonMetl1);
-Int_t numbPassMuon = 0;Float_t w;
+Int_t numbPassMuon = 0;Float_t wValue;
 for (Int_t l = 0 ; l < muonNentries ; l++)
 {
     myMuonTree->GetEntry(l);
@@ -383,9 +383,8 @@ for (Int_t l = 0 ; l < muonNentries ; l++)
         algAmuonMET = algBmuonMET;
         if ((passmuvarmed > 0.1 || passmuon > 0.1) && cleanCutsFlag > 0.1 && recalBrokeFlag < 0.1)
         {
-            w = sqrt(2.0*metoffrecal*metoffrecalmuon*(1+((mexoffrecal*mexoffrecalmuon+meyoffrecal*meyoffrecalmuon)/(
-                metoffrecal * metoffrecalmuon))));
-            if (w >= 40.0 && w <= 80.0)
+            wValue = w(metoffrecal,mexoffrecal,meyoffrecal,metoffrecalmuon,mexoffrecalmuon,meyoffrecalmuon);
+            if (wValue >= 40.0 && wValue <= 80.0)
             {
                 Float_t metnomu = sqrt(((mexoffrecal - mexoffrecalmuon) * (mexoffrecal - mexoffrecalmuon)) +
                 ((meyoffrecal - meyoffrecalmuon)*(meyoffrecal - meyoffrecalmuon))); //compute metnomu
@@ -400,9 +399,8 @@ for (Int_t l = 0 ; l < muonNentries ; l++)
     {
         if ((passmuvarmed > 0.1 || passmuon > 0.1) && (cleanCutsFlag > 0.1) && (recalBrokeFlag < 0.1))
     	{
-            w = sqrt(2.0*metoffrecal*metoffrecalmuon*(1+((mexoffrecal*mexoffrecalmuon+meyoffrecal*meyoffrecalmuon)/(
-                metoffrecal * metoffrecalmuon))));
-            if (w >= 40.0 && w <= 80.0)
+            wValue = w(metoffrecal,mexoffrecal,meyoffrecal,metoffrecalmuon,mexoffrecalmuon,meyoffrecalmuon);
+            if (wValue >= 40.0 && wValue <= 80.0)
             {
         	    Float_t metnomu = sqrt(((mexoffrecal - mexoffrecalmuon) * (mexoffrecal - mexoffrecalmuon)) +
         	    ((meyoffrecal - meyoffrecalmuon)*(meyoffrecal - meyoffrecalmuon))); //compute metnomu
@@ -511,6 +509,14 @@ logFile.close();
 return(0);
 }
 
+Float_t w( const Float_t metoffrecal     , const Float_t mexoffrecal     , const Float_t meyoffrecal ,
+           const Float_t metoffrecalmuon , const Float_t mexoffrecalmuon , const Float_t meyoffrecalmuon )
+{
+    Float_t wValue = sqrt( 2.0 * metoffrecal * metoffrecalmuon * ( 1 + ( ( mexoffrecal * mexoffrecalmuon + meyoffrecal * meyoffrecalmuon ) /
+                           ( metoffrecal * metoffrecalmuon ) ) ) )
+    return(wValue);
+}
+
 Float_t computeThresh(TH1F* target, Float_t numKeep)
 {
     Int_t nbin = 0;
@@ -594,7 +600,7 @@ Float_t determineMuonEventsKeptCombined( const TString& algA, const Float_t thre
     TFile * muonFile = TFile::Open(muonFilePath, "READ");
     TTree* muonTree = (TTree*)muonFile->Get("tree");
     Int_t muonNentries = muonTree->GetEntries();
-    Float_t algAMET, algBMET,metl1,w;
+    Float_t algAMET, algBMET,metl1, wValue;
     Int_t passmuon,passmuvarmed,recalBrokeFlag,cleanCutsFlag;
     Float_t metoffrecal,metoffrecalmuon,mexoffrecal,meyoffrecal,mexoffrecalmuon,meyoffrecalmuon,metrefmuon,mexrefmuon,meyrefmuon;
     muonTree->SetBranchAddress("passmu26med",&passmuon);
@@ -621,14 +627,13 @@ Float_t determineMuonEventsKeptCombined( const TString& algA, const Float_t thre
           {
             muonTree->GetEntry(i);
             algAMET=algBMET;
-            w = sqrt(2.0*metoffrecal*metoffrecalmuon*(1+((mexoffrecal*mexoffrecalmuon+meyoffrecal*meyoffrecalmuon)/(
-                metoffrecal * metoffrecalmuon))));
-            if ( ((passmuon > 0.5) || (passmuvarmed > 0.5)) && cleanCutsFlag > 0.1 && recalBrokeFlag < 0.1&& w >= 40.0 && w <= 80.0 )
+            wValue = w(metoffrecal,mexoffrecal,meyoffrecal,metoffrecalmuon,mexoffrecalmuon,meyoffrecalmuon);
+            if ( ((passmuon > 0.5) || (passmuvarmed > 0.5)) && cleanCutsFlag > 0.1 && recalBrokeFlag < 0.1&& wValue >= 40.0 && wValue <= 80.0 )
             {
               numbPassMuon++;
             }
             if (((passmuon > 0.5) || (passmuvarmed > 0.5)) && cleanCutsFlag > 0.1 && recalBrokeFlag < 0.1
-            && (algAMET > threshA) && (algBMET > threshB) && (metl1 > myConstants::metl1thresh)&& w >= 40.0 && w <= 80.0 )
+            && (algAMET > threshA) && (algBMET > threshB) && (metl1 > myConstants::metl1thresh)&& wValue >= 40.0 && wValue <= 80.0 )
             {
               counter++;
             }
@@ -639,14 +644,13 @@ Float_t determineMuonEventsKeptCombined( const TString& algA, const Float_t thre
         for (Int_t i  = 0 ; i < muonNentries ;i++)
         {
           	muonTree->GetEntry(i);
-            w = sqrt(2.0*metoffrecal*metoffrecalmuon*(1+((mexoffrecal*mexoffrecalmuon+meyoffrecal*meyoffrecalmuon)/(
-                metoffrecal * metoffrecalmuon))));
-          	if ( ((passmuon > 0.5) || (passmuvarmed > 0.5)) && cleanCutsFlag > 0.1 && recalBrokeFlag < 0.1 && w >= 40.0 && w <= 80.0)
+            wValue = w(metoffrecal,mexoffrecal,meyoffrecal,metoffrecalmuon,mexoffrecalmuon,meyoffrecalmuon);
+          	if ( ((passmuon > 0.5) || (passmuvarmed > 0.5)) && cleanCutsFlag > 0.1 && recalBrokeFlag < 0.1 && wValue >= 40.0 && wValue <= 80.0)
           	{
           	  numbPassMuon++;
           	}
           	if ( ((passmuon > 0.5) || (passmuvarmed > 0.5)) && (algAMET > threshA) && (algBMET > threshB) &&
-            ((metl1 > myConstants::metl1thresh)&& cleanCutsFlag > 0.1 && recalBrokeFlag < 0.1)&& w >= 40.0 && w <= 80.0)
+            ((metl1 > myConstants::metl1thresh)&& cleanCutsFlag > 0.1 && recalBrokeFlag < 0.1)&& wValue >= 40.0 && wValue <= 80.0)
           	{
           	  counter++;
           	}
