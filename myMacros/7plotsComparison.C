@@ -415,15 +415,7 @@ for (Int_t l = 0 ; l < muonNentries ; l++)
     }
 }
 
-std::cout << "NUMB MUON ENTRIES PASSED ALG A: " << (Ateff->GetPassedHistogram())->GetEntries() << std::endl;
-std::cout << "NUMB MUON ENTRIES PASSED ALG B: " << (Bteff->GetPassedHistogram())->GetEntries() << std::endl;
-std::cout << "NUMB MUON ENTRIES PASSED ALG C: " << (Cteff->GetPassedHistogram())->GetEntries() << std::endl;
-std::cout << "NUMB MUON ENTRIES TOTAL  ALG A: " << (Ateff->GetTotalHistogram())->GetEntries() << std::endl;
-std::cout << "NUMB MUON ENTRIES TOTAL  ALG B: " << (Bteff->GetTotalHistogram())->GetEntries() << std::endl;
-std::cout << "NUMB MUON ENTRIES TOTAL  ALG C: " << (Cteff->GetTotalHistogram())->GetEntries() << std::endl;
-std::cout << "Running determineMuonEventsKeptCombined.C to check number of MUON events kept at fraction determined by the bisection algorithm..." << std::endl;
 Float_t muonEventsCombined = determineMuonEventsKeptCombined( algA , acthresh , algB , bcthresh, muonFilename );
-
 TCanvas* efficiencyCanvas = new TCanvas("Efficiency Canvas", "Efficiency Canvas");
 efficiencyCanvas->RangeAxis(0,0,500,1.0);
 
@@ -469,46 +461,6 @@ std::ofstream logFile;
 logFile.open(newLogFileName, std::fstream::out);
 if(logFile) std::cout << "logFile Successfully Opened" << std::endl;
 
-logFile << "Algorithms: " << algA << "\t" << algB << "\r\n";
-logFile << "Nbins: " << nbins << "\t METMIN: " << metMin << "\t METMAX: " << metMax << "\r\n";
-logFile << "METL1 THRESH: " << myConstants::metl1thresh << "\r\n";
-logFile << "Fraction to keep of zerobias for bisection: " << frac << "\r\n";
-logFile << "ZEROBIAS DATAFILE: " << zerobiasFileName << "\r\n";
-logFile << "ZEROIAS NENTRIES : " << zerobiasNentries << "\r\n";
-logFile << "NUMBZEROBIASRNDM: " << numZeroBiasRndm << "\r\n";
-logFile << "Fraction times numZeroBiasRndm: " << frac * numZeroBiasRndm << "\r\n";
-logFile << "Threshold for " + algA + " to keep fraction by itself: " << algAThresh << "\r\n";
-logFile << "Threshold for " + algB + " to keep fraction by itself: " << algBThresh << "\r\n";
-logFile << "MUON DATAFILE: " << muonFilename << "\r\n";
-logFile << "MUON NENTRIES: " << muonNentries << "\r\n";
-logFile << "NUMBERPASSMUON: " << numbPassMuon << "\r\n";
-logFile << "Number MUON events kept using final zerobias thresholds determined below: " << muonEventsCombined << "\r\n";
-logFile << "Fraction times Numb MUON events kept: " << frac * numbPassMuon << "\r\n";
-logFile << "NUMB MUON ENTRIES PASSED ALG A: " << (Ateff->GetPassedHistogram())->GetEntries() << "\r\n";
-logFile << "NUMB MUON ENTRIES PASSED ALG B: " << (Bteff->GetPassedHistogram())->GetEntries() << "\r\n";
-logFile << "NUMB MUON ENTRIES PASSED ALG C: " << (Cteff->GetPassedHistogram())->GetEntries() << "\r\n";
-logFile << "NUMB MUON ENTRIES TOTAL  ALG A: " << (Ateff->GetTotalHistogram())->GetEntries() << "\r\n";
-logFile << "NUMB MUON ENTRIES TOTAL  ALG B: " << (Bteff->GetTotalHistogram())->GetEntries() << "\r\n";
-logFile << "NUMB MUON ENTRIES TOTAL  ALG C: " << (Cteff->GetTotalHistogram())->GetEntries() << "\r\n";
-logFile << "Epsilon tolerance for bisection accuracy: " << eps << " events" << "\r\n";
-logFile << "ZEROBIAS Bisection Information: " << "\r\n";
-logFile << "Iteration Number : " << "\tIndividual Fraction: \t" << "Combined Fraction Kept: \t" << "Combined Events Kept: \t" <<
-"Threshold for " + algA + '\t' << "Threshold for " + algB +'\t' << "\r\n";
-logFile << "x1\t\t\t" << inputArray[0] << "\t\t\t" << outputArray[0] << "\t\t\t" << numEventsArray[0] << "\t\t\t" <<
-algAMETx1thresh << "\t\t\t" << algBMETx1thresh << "\r\n";
-logFile << "x2\t\t\t" << inputArray[2] << "\t\t" << outputArray[2] << "\t\t\t" << numEventsArray[2] << "\t\t\t" <<
-algAMETx2thresh << "\t\t\t" << algBMETx2thresh <<"\r\n";
-logFile << "x3\t\t\t" << inputArray[1] << "\t\t\t" << outputArray[1] << "\t\t\t" << numEventsArray[1] << "\t\t\t" <<
-algAMETx3thresh << "\t\t\t" << algBMETx3thresh <<"\r\n";
-for (Int_t m = 1; m < j+1 ; m++)
-{
-  logFile << Form("I%d",m) << "\t\t\t" << Form("%.7f",inputArray[m+2]) << "\t\t" << Form("%.7f",outputArray[m+2])
-  << "\t\t\t" << Form("%.7f",numEventsArray[m+2]) << "\t\t" << Form("%.7f",thresholdAarray[m+2]) << "\t\t" <<
-  Form("%.7f",thresholdBarray[m+2]) << "\r\n";
-}
-logFile.close();
-return(0);
-}
 
 Float_t computeThresh(TH1F* target, Float_t numKeep)
 {
