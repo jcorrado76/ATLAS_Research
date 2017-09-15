@@ -17,8 +17,11 @@ Int_t printEfficiencies()
 {
     /* makes a plot with simply all 5 efficiency curves*/
     Float_t determineZeroBiasThresh( const TString&, const Float_t, const TString&);
+    Float_t computeThresh(TH1F*,Float_t);
     const Float_t frac = 0.00590;
     const TString& zerobiasFileName = "PhysicsMain.All.noalgXEtriggers.2016.f731f758._m1659m1710.48Runs.root";
+    const TString& muonFileName = "PhysicsMain2016.Muons.noalgL1XE45R3073065R311481Runs9B.root";
+    const TString& folder = "";
     const TString metcellName = "metcell";
     const TString metmhtName = "metmht";
     const TString mettopoclName = "mettopocl";
@@ -30,11 +33,24 @@ Int_t printEfficiencies()
     TTree* zeroBiasTree = (TTree*)zeroBiasFile->Get("tree");
     Int_t zerobiasNentries = zeroBiasTree->GetEntries();
 
+    Int_t nbins = 1200;
+    Int_t muonNbins = 200;
+    Float_t metMin = 0;
+    Float_t metMax = 300;
+    Float_t muonMetMin = metMin;
+    Float_t muonMetMax = 300;
+    Int_t numbPassMuon = 0;
     Float_t metcellThresh = determineZeroBiasThresh(metcellName,frac,zerobiasFileName);
     Float_t metmhtThresh = determineZeroBiasThresh(metmhtName,frac,zerobiasFileName);
     Float_t mettopoclThresh = determineZeroBiasThresh(mettopoclName,frac,zerobiasFileName);
     Float_t mettopoclpsThresh = determineZeroBiasThresh(mettopoclpsName,frac,zerobiasFileName);
     Float_t mettopoclpucThresh = determineZeroBiasThresh(mettopoclpucName,frac,zerobiasFileName);
+    Float_t metl1Thresh = 50.0;
+    Float_t metcell,metmht,mettopocl,mettopoclps,mettopoclpuc,metl1;
+    Int_t passRndm, numPassMuon,passmuon,passmuvarmed,cleanCutsFlag,recalBrokeFlag;
+    Float_t algAMET,algBMET,offrecal_met,offrecal_mex,offrecal_mey,offrecalmuon_mex,
+            offrecalmuon_mey, acthresh,bcthresh,metrefmuon,mexrefmuon,meyrefmuon,w;
+    Int_t passnoalgL1XE10,passnoalgL1XE30,passnoalgL1XE40,passnoalgL1XE45;
 
     TEfficiency* metcellteff  = new TEfficiency(metcellName , "Metcell Efficiency", muonNbins, muonMetMin, muonMetMax);
     TEfficiency* metmhtteff  = new TEfficiency(metmhtName , "Metmht Efficiency", muonNbins, muonMetMin, muonMetMax);
@@ -42,10 +58,13 @@ Int_t printEfficiencies()
     TEfficiency* mettopoclpsteff  = new TEfficiency(mettopoclpsName,  "Mettopoclps Efficiency", muonNbins, muonMetMin, muonMetMax);
     TEfficiency* mettopoclpucteff  = new TEfficiency(mettopoclpucName,  "Mettopoclpuc Efficiency", muonNbins, muonMetMin, muonMetMax);
 
-    TString muonFilePath = "../myData/"+muonFilename;
+    TString muonFilePath = "../myData/" + muonFileName;
     TFile * muonFile = TFile::Open(muonFilePath, "READ");
     TTree* myMuonTree = (TTree*)muonFile->Get("tree");
 
+
+
+    Int_t muonNentries = myMuonTree->GetEntries();
     myMuonTree->SetBranchAddress("passmu26med", &passmuon);
     myMuonTree->SetBranchAddress("passmu26varmed", &passmuvarmed);
     myMuonTree->SetBranchAddress("passcleancuts", &cleanCutsFlag);
@@ -58,40 +77,41 @@ Int_t printEfficiencies()
     myMuonTree->SetBranchAddress("metrefmuon", &metrefmuon);
     myMuonTree->SetBranchAddress("mexrefmuon", &mexrefmuon);
     myMuonTree->SetBranchAddress("meyrefmuon", &meyrefmuon);
-
-    Float_t metcell,metmht,mettopocl,mettopoclps,mettopoclpuc;
-
-    zeroBiasTree->SetBranchAddress(metcellName,&metcell);
-    zeroBiasTree->SetBranchAddress(metmhtName,&metmht);
-    zeroBiasTree->SetBranchAddress(mettopoclName,&mettopcl);
-    zeroBiasTree->SetBranchAddress(mettopoclpsName,&mettopoclps);
-    zeroBiasTree->SetBranchAddress(mettopoclpucName,&mettopoclpuc);
-
-    zeroBiasTree->SetBranchAddress("metl1",&metl1);
+    myMuonTree->SetBranchAddress("metl1", &metl1);
+    myMuonTree->SetBranchAddress(metcellName,&metcell);
+    myMuonTree->SetBranchAddress(metmhtName,&metmht);
+    myMuonTree->SetBranchAddress(mettopoclName,&mettopocl);
+    myMuonTree->SetBranchAddress(mettopoclpsName,&mettopoclps);
+    myMuonTree->SetBranchAddress(mettopoclpucName,&mettopoclpuc);
+    myMuonTree->SetBranchAddress("metl1",&metl1);
     zeroBiasTree->SetBranchAddress("passnoalgL1XE10",&passnoalgL1XE10);
     zeroBiasTree->SetBranchAddress("passnoalgL1XE30",&passnoalgL1XE30);
     zeroBiasTree->SetBranchAddress("passnoalgL1XE40",&passnoalgL1XE40);
     zeroBiasTree->SetBranchAddress("passnoalgL1XE45",&passnoalgL1XE45);
 
-    if ((passmuvarmed > 0.1 || passmuon > 0.1) && (cleanCutsFlag > 0.1) && (recalBrokeFlag < 0.1))
+    for (Int_t l = 0 ; l < muonNentries ; l++)
     {
-        w = sqrt(2.0*offrecal_met*metrefmuon*(1-((offrecal_mex*mexrefmuon+offrecal_mey*meyrefmuon)/(
-            offrecal_met * metrefmuon))));
-        if (w >= 40.0 && w <= 80.0)
+        myMuonTree->GetEntry(l);
+        if ((passmuvarmed > 0.1 || passmuon > 0.1) && (cleanCutsFlag > 0.1) && (recalBrokeFlag < 0.1))
         {
-            Float_t metnomu = sqrt(((offrecal_mex - offrecalmuon_mex) * (offrecal_mex - offrecalmuon_mex)) +
-            ((offrecal_mey - offrecalmuon_mey)*(offrecal_mey - offrecalmuon_mey))); //compute metnomu
-            numbPassMuon++;
-            metcellteff->Fill((metcell > metcellThresh) && (muonMetl1 > myConstants::metl1thresh)&& ( passnoalgL1XE10 > 0.5 ||
-                passnoalgL1XE30 > 0.5 || passnoalgL1XE40 > 0.5 || passnoalgL1XE45 > 0.5  ), metnomu);
-            metmhtteff->Fill((metmht > metmhtThresh) && (muonMetl1 > myConstants::metl1thresh)&& ( passnoalgL1XE10 > 0.5 ||
-                passnoalgL1XE30 > 0.5 || passnoalgL1XE40 > 0.5 || passnoalgL1XE45 > 0.5  ), metnomu);
-            mettopoclteff->Fill(((mettopocl > mettopoclThresh) && (algBmuonMET > bcthresh) && (muonMetl1 > myConstants::metl1thresh))
-                && ( passnoalgL1XE10 > 0.5 || passnoalgL1XE30 > 0.5 || passnoalgL1XE40 > 0.5 || passnoalgL1XE45 > 0.5  ), metnomu);
-            mettopoclpsteff->Fill((mettopoclps > mettopoclpsThresh)&& ( passnoalgL1XE10 > 0.5 ||
-                passnoalgL1XE30 > 0.5 || passnoalgL1XE40 > 0.5 || passnoalgL1XE45 > 0.5  ), metnomu);
-            mettopoclpucteff->Fill((mettopoclpuc > mettopoclpucThresh)&& ( passnoalgL1XE10 > 0.5 ||
-                passnoalgL1XE30 > 0.5 || passnoalgL1XE40 > 0.5 || passnoalgL1XE45 > 0.5  ), metnomu);
+            w = sqrt(2.0*offrecal_met*metrefmuon*(1-((offrecal_mex*mexrefmuon+offrecal_mey*meyrefmuon)/(
+                offrecal_met * metrefmuon))));
+            if (w >= 40.0 && w <= 80.0)
+            {
+                Float_t metnomu = sqrt(((offrecal_mex - offrecalmuon_mex) * (offrecal_mex - offrecalmuon_mex)) +
+                ((offrecal_mey - offrecalmuon_mey)*(offrecal_mey - offrecalmuon_mey))); //compute metnomu
+                numbPassMuon++;
+                metcellteff->Fill((metcell > metcellThresh) && (metl1 > metl1Thresh)&& ( passnoalgL1XE10 > 0.5 ||
+                    passnoalgL1XE30 > 0.5 || passnoalgL1XE40 > 0.5 || passnoalgL1XE45 > 0.5  ), metnomu);
+                metmhtteff->Fill((metmht > metmhtThresh) && (metl1 > metl1Thresh)&& ( passnoalgL1XE10 > 0.5 ||
+                    passnoalgL1XE30 > 0.5 || passnoalgL1XE40 > 0.5 || passnoalgL1XE45 > 0.5  ), metnomu);
+                mettopoclteff->Fill((mettopocl > mettopoclThresh) && (metl1 > metl1Thresh)
+                    && ( passnoalgL1XE10 > 0.5 || passnoalgL1XE30 > 0.5 || passnoalgL1XE40 > 0.5 || passnoalgL1XE45 > 0.5  ), metnomu);
+                mettopoclpsteff->Fill((mettopoclps > mettopoclpsThresh)&& (metl1 > metl1Thresh) &&( passnoalgL1XE10 > 0.5 ||
+                    passnoalgL1XE30 > 0.5 || passnoalgL1XE40 > 0.5 || passnoalgL1XE45 > 0.5  ), metnomu);
+                mettopoclpucteff->Fill((mettopoclpuc > mettopoclpucThresh)&& (metl1 > metl1Thresh) && ( passnoalgL1XE10 > 0.5 ||
+                    passnoalgL1XE30 > 0.5 || passnoalgL1XE40 > 0.5 || passnoalgL1XE45 > 0.5  ), metnomu);
+            }
         }
     }
 
@@ -102,11 +122,11 @@ Int_t printEfficiencies()
     metmhtteff->SetLineColor(kRed);
     mettopoclteff->SetLineColor(kGreen);
     mettopoclpsteff->SetLineColor(kBlack);
-    mettopoclpucteff->SetLineColor(kPurple);
+    mettopoclpucteff->SetLineColor(kYellow);
 
-    const TString canvName = algA + " and " + algB + " Combined Efficiency" + ";Offline Recalibrated MET w/o Muon term [GeV];Efficiency";
+    const TString canvName = "5 Efficiencies;Offline Recalibrated MET w/o Muon term [GeV];Efficiency";
 
-    Ateff->SetTitle(canvName);
+    metcellteff->SetTitle(canvName);
 
     metcellteff->Draw();
     metmhtteff->Draw("same");
@@ -129,19 +149,16 @@ Int_t printEfficiencies()
 Float_t determineZeroBiasThresh( const TString& alg, const Float_t frac = 0.00590,
 const TString& zeroBiasFileName = "PhysicsMain.All.noalgXEtriggers.2016.f731f758._m1659m1710.48Runs")
 {
+    Float_t computeThresh(TH1F*,Float_t);
     TString zeroBiasPath = "../myData/" + zeroBiasFileName;
-    std::cout << "DETERMINETHRESH.C" << std::endl;
-    std::cout << "ZERO BIAS DATAFILE: " << zeroBiasPath << std::endl;
-    std::cout << "ALG: " << alg << std::endl;
-    std::cout << "L1 THRESH: " << myConstants::metl1thresh << std::endl;
 	TFile *zeroBiasFile = TFile::Open(zeroBiasPath, "READ");
 	TTree *zeroBiasTree = (TTree*)(zeroBiasFile->Get("tree"));
 	Int_t zerobiasNentries = zeroBiasTree->GetEntries();
     Int_t passRndm;
-	Int_t nbins = myConstants::nbins;
-	Double_t metMin = myConstants::metMin;
-	Double_t metMax = myConstants::metMax;
-    Float_t metl1thresh = myConstants::metl1thresh;
+	Int_t nbins = 1200;
+	Double_t metMin = 0;
+	Double_t metMax = 300;
+    Float_t metl1thresh = 50.0;
 	Float_t metl1, metcell, metmht, mettopocl, mettopoclps, mettopoclpuc, indeterminate,
 	metcellthresh, metmhtthresh, mettopoclthresh, mettopoclpsthresh, mettopoclpucthresh,rightHandSum;
     Int_t passnoalgL1XE10,passnoalgL1XE30,passnoalgL1XE40,passnoalgL1XE45;
@@ -187,4 +204,13 @@ const TString& zeroBiasFileName = "PhysicsMain.All.noalgXEtriggers.2016.f731f758
 	zeroBiasFile->Close();
 	std::cout << "Number of events counted above threshold: " << counter << "\n" << std::endl;
 	return(indeterminateThresh);
+}
+
+Float_t computeThresh(TH1F* target, Float_t numKeep)
+{
+    Int_t nbin = 0;
+    gROOT->ProcessLine("gROOT->Reset();");
+    target->GetBinWithContent(numKeep,nbin,0,-1,20000); //if firstx<=0{firstx=1}; if lastx<firstx{lastx=fXaxis.GetNbinsX()};
+    Float_t thresh = (target->GetXaxis())->GetBinCenter(nbin);
+    return(thresh);
 }
