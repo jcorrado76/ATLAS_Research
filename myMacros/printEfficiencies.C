@@ -49,7 +49,7 @@ Int_t printEfficiencies()
     Float_t metl1Thresh = 50.0;
     Float_t metcell,metmht,mettopocl,mettopoclps,mettopoclpuc,metl1;
     Int_t passRndm, numPassMuon,passmuon,passmuvarmed,cleanCutsFlag,recalBrokeFlag;
-    Float_t algAMET,algBMET,offrecal_met,offrecal_mex,offrecal_mey,offrecalmuon_mex,
+    Float_t algAMET,algBMET,metoffrecal,mexoffrecal,meyoffrecal,offrecalmuon_mex,
             offrecalmuon_mey, acthresh,bcthresh,metrefmuon,mexrefmuon,meyrefmuon,w;
     Int_t passnoalgL1XE10,passnoalgL1XE30,passnoalgL1XE40,passnoalgL1XE45;
 
@@ -70,9 +70,9 @@ Int_t printEfficiencies()
     myMuonTree->SetBranchAddress("passmu26varmed", &passmuvarmed);
     myMuonTree->SetBranchAddress("passcleancuts", &cleanCutsFlag);
     myMuonTree->SetBranchAddress("recalbroke", &recalBrokeFlag);
-    myMuonTree->SetBranchAddress("metoffrecal", &offrecal_met);
-    myMuonTree->SetBranchAddress("mexoffrecal", &offrecal_mex);
-    myMuonTree->SetBranchAddress("meyoffrecal", &offrecal_mey);
+    myMuonTree->SetBranchAddress("metoffrecal", &metoffrecal);
+    myMuonTree->SetBranchAddress("mexoffrecal", &mexoffrecal);
+    myMuonTree->SetBranchAddress("meyoffrecal", &meyoffrecal);
     myMuonTree->SetBranchAddress("metoffrecalmuon", &metoffrecalmuon);
     myMuonTree->SetBranchAddress("mexoffrecalmuon", &offrecalmuon_mex);
     myMuonTree->SetBranchAddress("meyoffrecalmuon", &offrecalmuon_mey);
@@ -95,12 +95,12 @@ Int_t printEfficiencies()
         myMuonTree->GetEntry(l);
         if ((passmuvarmed > 0.1 || passmuon > 0.1) && (cleanCutsFlag > 0.1) && (recalBrokeFlag < 0.1))
         {
-            w = sqrt(2.0*offrecal_met*metoffrecalmuon*(1+((offrecal_mex*mexoffrecalmuon+offrecal_mey*meyoffrecalmuon)/(
-                offrecal_met * metoffrecalmuon))));
+            w = sqrt(2.0*metoffrecal*metoffrecalmuon*(1+((mexoffrecal*mexoffrecalmuon+meyoffrecal*meyoffrecalmuon)/(
+                metoffrecal * metoffrecalmuon))));
             if (w >= 40.0 && w <= 80.0)
             {
-                Float_t metnomu = sqrt(((offrecal_mex - offrecalmuon_mex) * (offrecal_mex - offrecalmuon_mex)) +
-                ((offrecal_mey - offrecalmuon_mey)*(offrecal_mey - offrecalmuon_mey))); //compute metnomu
+                Float_t metnomu = sqrt(((mexoffrecal - offrecalmuon_mex) * (mexoffrecal - offrecalmuon_mex)) +
+                ((meyoffrecal - offrecalmuon_mey)*(meyoffrecal - offrecalmuon_mey))); //compute metnomu
                 numbPassMuon++;
                 metcellteff->Fill((metcell > metcellThresh) && (metl1 > metl1Thresh), metnomu);
                 metmhtteff->Fill((metmht > metmhtThresh) && (metl1 > metl1Thresh), metnomu);
