@@ -13,14 +13,15 @@
 #include "TF1.h"
 
 
+const TString& zerobiasFileName = "PhysicsMain.All.noalgXEtriggers.2016.f731f758._m1659m1710.48Runs.root";
+const TString& muonFileName = "PhysicsMain2016.Muons.noalgL1XE45R3073065R311481Runs9B.root";
+
 Int_t printEfficiencies()
 {
     /* makes a plot with simply all 5 efficiency curves*/
     Float_t determineZeroBiasThresh( const TString&, const Float_t, const TString&);
     Float_t computeThresh(TH1F*,Float_t);
     const Float_t frac = 0.00590;
-    const TString& zerobiasFileName = "PhysicsMain.All.noalgXEtriggers.2016.f731f758._m1659m1710.48Runs.root";
-    const TString& muonFileName = "PhysicsMain2016.Muons.noalgL1XE45R3073065R311481Runs9B.root";
     const TString& folder = "";
     const TString metcellName = "metcell";
     const TString metmhtName = "metmht";
@@ -83,7 +84,6 @@ Int_t printEfficiencies()
     myMuonTree->SetBranchAddress(mettopoclName,&mettopocl);
     myMuonTree->SetBranchAddress(mettopoclpsName,&mettopoclps);
     myMuonTree->SetBranchAddress(mettopoclpucName,&mettopoclpuc);
-    myMuonTree->SetBranchAddress("metl1",&metl1);
     zeroBiasTree->SetBranchAddress("passnoalgL1XE10",&passnoalgL1XE10);
     zeroBiasTree->SetBranchAddress("passnoalgL1XE30",&passnoalgL1XE30);
     zeroBiasTree->SetBranchAddress("passnoalgL1XE40",&passnoalgL1XE40);
@@ -101,16 +101,11 @@ Int_t printEfficiencies()
                 Float_t metnomu = sqrt(((offrecal_mex - offrecalmuon_mex) * (offrecal_mex - offrecalmuon_mex)) +
                 ((offrecal_mey - offrecalmuon_mey)*(offrecal_mey - offrecalmuon_mey))); //compute metnomu
                 numbPassMuon++;
-                metcellteff->Fill((metcell > metcellThresh) && (metl1 > metl1Thresh)&& ( passnoalgL1XE10 > 0.5 ||
-                    passnoalgL1XE30 > 0.5 || passnoalgL1XE40 > 0.5 || passnoalgL1XE45 > 0.5  ), metnomu);
-                metmhtteff->Fill((metmht > metmhtThresh) && (metl1 > metl1Thresh)&& ( passnoalgL1XE10 > 0.5 ||
-                    passnoalgL1XE30 > 0.5 || passnoalgL1XE40 > 0.5 || passnoalgL1XE45 > 0.5  ), metnomu);
-                mettopoclteff->Fill((mettopocl > mettopoclThresh) && (metl1 > metl1Thresh)
-                    && ( passnoalgL1XE10 > 0.5 || passnoalgL1XE30 > 0.5 || passnoalgL1XE40 > 0.5 || passnoalgL1XE45 > 0.5  ), metnomu);
-                mettopoclpsteff->Fill((mettopoclps > mettopoclpsThresh)&& (metl1 > metl1Thresh) &&( passnoalgL1XE10 > 0.5 ||
-                    passnoalgL1XE30 > 0.5 || passnoalgL1XE40 > 0.5 || passnoalgL1XE45 > 0.5  ), metnomu);
-                mettopoclpucteff->Fill((mettopoclpuc > mettopoclpucThresh)&& (metl1 > metl1Thresh) && ( passnoalgL1XE10 > 0.5 ||
-                    passnoalgL1XE30 > 0.5 || passnoalgL1XE40 > 0.5 || passnoalgL1XE45 > 0.5  ), metnomu);
+                metcellteff->Fill((metcell > metcellThresh) && (metl1 > metl1Thresh), metnomu);
+                metmhtteff->Fill((metmht > metmhtThresh) && (metl1 > metl1Thresh), metnomu);
+                mettopoclteff->Fill((mettopocl > mettopoclThresh) && (metl1 > metl1Thresh), metnomu);
+                mettopoclpsteff->Fill((mettopoclps > mettopoclpsThresh)&& (metl1 > metl1Thresh), metnomu);
+                mettopoclpucteff->Fill((mettopoclpuc > mettopoclpucThresh)&& (metl1 > metl1Thresh), metnomu);
             }
         }
     }
@@ -146,8 +141,7 @@ Int_t printEfficiencies()
 }
 
 
-Float_t determineZeroBiasThresh( const TString& alg, const Float_t frac = 0.00590,
-const TString& zeroBiasFileName = "PhysicsMain.All.noalgXEtriggers.2016.f731f758._m1659m1710.48Runs")
+Float_t determineZeroBiasThresh( const TString& alg, const Float_t frac = 0.00590, zerobiasFileName)
 {
     Float_t computeThresh(TH1F*,Float_t);
     TString zeroBiasPath = "../myData/" + zeroBiasFileName;
