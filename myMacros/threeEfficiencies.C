@@ -383,7 +383,7 @@ for (Int_t l = 0 ; l < muonNentries ; l++)
         algAmuonMET = algBmuonMET;
         if ((passmuvarmed > 0.1 || passmuon > 0.1) && cleanCutsFlag > 0.1 && recalBrokeFlag < 0.1)
         {
-            w = sqrt(2.0*offrecal_met*metoffrecalmuon*(1+((offrecal_mex*mexrefmuon+offrecal_mey*meyrefmuon)/(
+            w = sqrt(2.0*offrecal_met*metoffrecalmuon*(1+((offrecal_mex*mexoffrecalmuon+offrecal_mey*meyoffrecalmuon)/(
                 offrecal_met * metoffrecalmuon))));
             if (w >= 40.0 && w <= 80.0)
             {
@@ -400,7 +400,7 @@ for (Int_t l = 0 ; l < muonNentries ; l++)
     {
         if ((passmuvarmed > 0.1 || passmuon > 0.1) && (cleanCutsFlag > 0.1) && (recalBrokeFlag < 0.1))
     	{
-            w = sqrt(2.0*offrecal_met*metoffrecalmuon*(1+((offrecal_mex*mexrefmuon+offrecal_mey*meyrefmuon)/(
+            w = sqrt(2.0*offrecal_met*metoffrecalmuon*(1+((offrecal_mex*mexoffrecalmuon+offrecal_mey*meyoffrecalmuon)/(
                 offrecal_met * metoffrecalmuon))));
             if (w >= 40.0 && w <= 80.0)
             {
@@ -596,7 +596,7 @@ Float_t determineMuonEventsKeptCombined( const TString& algA, const Float_t thre
     Int_t muonNentries = muonTree->GetEntries();
     Float_t algAMET, algBMET,metl1,w;
     Int_t passmuon,passmuvarmed,recalBrokeFlag,cleanCutsFlag;
-    Float_t offrecal_met,offrecal_mex,offrecal_mey,mexoffrecalmuon,meyoffrecalmuon,metrefmuon,mexrefmuon,meyrefmuon;
+    Float_t offrecal_met,metoffrecalmuon,offrecal_mex,offrecal_mey,mexoffrecalmuon,meyoffrecalmuon,metrefmuon,mexrefmuon,meyrefmuon;
     muonTree->SetBranchAddress("passmu26med",&passmuon);
     muonTree->SetBranchAddress("passmu26varmed",&passmuvarmed);
     muonTree->SetBranchAddress("recalbroke",&recalBrokeFlag);
@@ -607,6 +607,7 @@ Float_t determineMuonEventsKeptCombined( const TString& algA, const Float_t thre
     muonTree->SetBranchAddress("metoffrecal", &offrecal_met);
     muonTree->SetBranchAddress("mexoffrecal", &offrecal_mex);
     muonTree->SetBranchAddress("meyoffrecal", &offrecal_mey);
+    muonTree->SetBranchAddress("metoffrecalmuon", &metoffrecalmuon);
     muonTree->SetBranchAddress("mexoffrecalmuon", &mexoffrecalmuon);
     muonTree->SetBranchAddress("meyoffrecalmuon", &meyoffrecalmuon);
     muonTree->SetBranchAddress("metrefmuon", &metrefmuon);
@@ -620,7 +621,7 @@ Float_t determineMuonEventsKeptCombined( const TString& algA, const Float_t thre
           {
             muonTree->GetEntry(i);
             algAMET=algBMET;
-            w = sqrt(2.0*offrecal_met*metoffrecalmuon*(1+((offrecal_mex*mexrefmuon+offrecal_mey*meyrefmuon)/(
+            w = sqrt(2.0*offrecal_met*metoffrecalmuon*(1+((offrecal_mex*mexoffrecalmuon+offrecal_mey*meyoffrecalmuon)/(
                 offrecal_met * metoffrecalmuon))));
             if ( ((passmuon > 0.5) || (passmuvarmed > 0.5)) && cleanCutsFlag > 0.1 && recalBrokeFlag < 0.1&& w >= 40.0 && w <= 80.0 )
             {
@@ -638,7 +639,7 @@ Float_t determineMuonEventsKeptCombined( const TString& algA, const Float_t thre
         for (Int_t i  = 0 ; i < muonNentries ;i++)
         {
           	muonTree->GetEntry(i);
-            w = sqrt(2.0*offrecal_met*metoffrecalmuon*(1+((offrecal_mex*mexrefmuon+offrecal_mey*meyrefmuon)/(
+            w = sqrt(2.0*offrecal_met*metoffrecalmuon*(1+((offrecal_mex*mexoffrecalmuon+offrecal_mey*meyoffrecalmuon)/(
                 offrecal_met * metoffrecalmuon))));
           	if ( ((passmuon > 0.5) || (passmuvarmed > 0.5)) && cleanCutsFlag > 0.1 && recalBrokeFlag < 0.1 && w >= 40.0 && w <= 80.0)
           	{

@@ -73,6 +73,7 @@ Int_t printEfficiencies()
     myMuonTree->SetBranchAddress("metoffrecal", &offrecal_met);
     myMuonTree->SetBranchAddress("mexoffrecal", &offrecal_mex);
     myMuonTree->SetBranchAddress("meyoffrecal", &offrecal_mey);
+    myMuonTree->SetBranchAddress("metoffrecalmuon", &metoffrecalmuon);
     myMuonTree->SetBranchAddress("mexoffrecalmuon", &offrecalmuon_mex);
     myMuonTree->SetBranchAddress("meyoffrecalmuon", &offrecalmuon_mey);
     myMuonTree->SetBranchAddress("metrefmuon", &metrefmuon);
@@ -94,8 +95,8 @@ Int_t printEfficiencies()
         myMuonTree->GetEntry(l);
         if ((passmuvarmed > 0.1 || passmuon > 0.1) && (cleanCutsFlag > 0.1) && (recalBrokeFlag < 0.1))
         {
-            w = sqrt(2.0*offrecal_met*metrefmuon*(1-((offrecal_mex*mexrefmuon+offrecal_mey*meyrefmuon)/(
-                offrecal_met * metrefmuon))));
+            w = sqrt(2.0*offrecal_met*metoffrecalmuon*(1+((offrecal_mex*mexoffrecalmuon+offrecal_mey*meyoffrecalmuon)/(
+                offrecal_met * metoffrecalmuon))));
             if (w >= 40.0 && w <= 80.0)
             {
                 Float_t metnomu = sqrt(((offrecal_mex - offrecalmuon_mex) * (offrecal_mex - offrecalmuon_mex)) +
