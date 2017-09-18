@@ -19,7 +19,7 @@ const TString& muonFileName = "PhysicsMain.L1KFmuontriggers.2016.f731f758_m1659m
 Int_t print5Efficiencies()
 {
     /* makes a plot with simply all 5 efficiency curves*/
-    gROOT->ProcessLine("gSystem->Load(\"./mincerMacros.so\")");
+    gROOT->ProcessLine("gSystem->Load(\"./mincerMacros_C.so\")");
     Float_t determineZeroBiasThresh( const TString&, const Float_t, const Float_t , const TString&);
     Float_t computeThresh(TH1F*,Float_t);
     const Float_t frac = 0.00590;
