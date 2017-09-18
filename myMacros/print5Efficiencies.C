@@ -19,7 +19,7 @@ const TString& muonFileName = "PhysicsMain.L1KFmuontriggers.2016.f731f758_m1659m
 Int_t print5Efficiencies()
 {
     /* makes a plot with simply all 5 efficiency curves*/
-    gROOT->ProcessLine(".L mincerMacros.C+");
+    gROOT->ProcessLine("gSystem->Load(\"./mincerMacros.so\")");
     Float_t determineZeroBiasThresh( const TString&, const Float_t, const TString&);
     Float_t computeThresh(TH1F*,Float_t);
     const Float_t frac = 0.00590;
@@ -75,8 +75,8 @@ Int_t print5Efficiencies()
     myMuonTree->SetBranchAddress("mexoffrecal", &mexoffrecal);
     myMuonTree->SetBranchAddress("meyoffrecal", &meyoffrecal);
     myMuonTree->SetBranchAddress("metoffrecalmuon", &metoffrecalmuon);
-    myMuonTree->SetBranchAddress("mexoffrecalmuon", &offrecalmuon_mex);
-    myMuonTree->SetBranchAddress("meyoffrecalmuon", &offrecalmuon_mey);
+    myMuonTree->SetBranchAddress("mexoffrecalmuon", &mexoffrecalmuon);
+    myMuonTree->SetBranchAddress("meyoffrecalmuon", &meyoffrecalmuon);
     myMuonTree->SetBranchAddress("metrefmuon", &metrefmuon);
     myMuonTree->SetBranchAddress("mexrefmuon", &mexrefmuon);
     myMuonTree->SetBranchAddress("meyrefmuon", &meyrefmuon);
@@ -100,9 +100,11 @@ Int_t print5Efficiencies()
                 metoffrecal * metoffrecalmuon))));
             if (w >= 40.0 && w <= 80.0)
             {
-                Float_t metnomu = sqrt(((mexoffrecal - offrecalmuon_mex) * (mexoffrecal - offrecalmuon_mex)) +
-                ((meyoffrecal - offrecalmuon_mey)*(meyoffrecal - offrecalmuon_mey))); //compute metnomu
+                Float_t metnomu = sqrt(((mexoffrecal - mexoffrecalmuon) * (mexoffrecal - mexoffrecalmuon)) +
+                ((meyoffrecal - meyoffrecalmuon)*(meyoffrecal - meyoffrecalmuon))); //compute metnomu
+
                 numbPassMuon++;
+
                 metcellteff->Fill((metcell > metcellThresh) && (metl1 > metl1Thresh), metnomu);
                 metmhtteff->Fill((metmht > metmhtThresh) && (metl1 > metl1Thresh), metnomu);
                 mettopoclteff->Fill((mettopocl > mettopoclThresh) && (metl1 > metl1Thresh), metnomu);
@@ -140,4 +142,5 @@ Int_t print5Efficiencies()
     legend->Draw();
     TString folderPath = "./TEfficienciesPics/" + folder + "_5_efficiencies.png";
     efficiencyCanvas->Print(folderPath);
+    return(0);
 }
