@@ -513,7 +513,7 @@ Float_t w( const Float_t metoffrecal     , const Float_t mexoffrecal     , const
            const Float_t metoffrecalmuon , const Float_t mexoffrecalmuon , const Float_t meyoffrecalmuon )
 {
     Float_t wValue = sqrt( 2.0 * metoffrecal * metoffrecalmuon * ( 1 + ( ( mexoffrecal * mexoffrecalmuon + meyoffrecal * meyoffrecalmuon ) /
-                           ( metoffrecal * metoffrecalmuon ) ) ) )
+                           ( metoffrecal * metoffrecalmuon ) ) ) );
     return(wValue);
 }
 
