@@ -39,10 +39,15 @@ Int_t threeEfficiencies( const TString& algA , const TString& algB,
 
     gROOT->ProcessLine("gROOT->Time();");
 
+    
+    //first, open the muon file and get the muon tree
     TString muonFilePath = "../myData/"+muonFilename;
     TFile * muonFile = TFile::Open(muonFilePath, "READ");
     TTree* myMuonTree = (TTree*)muonFile->Get("tree");
+
     std::cout << "Muon Data being used to compute algorithm efficiency: " << muonFilePath << std::endl;
+
+    //initialize variables to be used later
     Int_t muonNentries = myMuonTree->GetEntries();
     Int_t muonNbins = myConstants::muonNbins;
     Int_t nbins = myConstants::nbins;

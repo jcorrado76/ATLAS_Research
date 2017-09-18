@@ -18,22 +18,32 @@ const TString& muonFileName = "PhysicsMain.L1KFmuontriggers.2016.f731f758_m1659m
 
 Int_t print7Efficiencies()
 {
-    /* makes a plot with simply all 5 efficiency curves*/
+    /* makes a plot with all 7 efficiency curves*/
+
+    //initialize functions
     Float_t determineZeroBiasThresh( const TString&, const Float_t, const TString&);
     Float_t computeThresh(TH1F*,Float_t);
+    Float_t w( const Float_t , const Float_t ,const Float_t ,const Float_t ,const Float_t ,const Float_t);
+
     const Float_t frac = 0.00590;
     const TString& folder = "";
     const TString metcellName = "metcell";
     const TString metmhtName = "metmht";
-    const TString mettopoclName = "mettopocl";
-    const TString mettopoclpsName = "mettopoclps";
     const TString mettopoclpucName = "mettopoclpuc";
 
+    //get zb tree
     TString zerobiasFilePath = "../myData/"+ zerobiasFileName;
     TFile * zeroBiasFile = TFile::Open(zerobiasFilePath, "READ");
     TTree* zeroBiasTree = (TTree*)zeroBiasFile->Get("tree");
-    Int_t zerobiasNentries = zeroBiasTree->GetEntries();
+    const Int_t zerobiasNentries = zeroBiasTree->GetEntries();
 
+    //get muon tree
+    TString muonFilePath = "../myData/" + muonFileName;
+    TFile * muonFile = TFile::Open(muonFilePath, "READ");
+    TTree* myMuonTree = (TTree*)muonFile->Get("tree");
+    const Int_t muonNentries = myMuonTree->GetEntries();
+
+    //initialize parameters and get thresholds
     Int_t nbins = 1200;
     Int_t muonNbins = 200;
     Float_t metMin = 0;
@@ -43,29 +53,19 @@ Int_t print7Efficiencies()
     Int_t numbPassMuon = 0;
     Float_t metcellThresh = determineZeroBiasThresh(metcellName,frac,zerobiasFileName);
     Float_t metmhtThresh = determineZeroBiasThresh(metmhtName,frac,zerobiasFileName);
-    Float_t mettopoclThresh = determineZeroBiasThresh(mettopoclName,frac,zerobiasFileName);
-    Float_t mettopoclpsThresh = determineZeroBiasThresh(mettopoclpsName,frac,zerobiasFileName);
     Float_t mettopoclpucThresh = determineZeroBiasThresh(mettopoclpucName,frac,zerobiasFileName);
     Float_t metl1Thresh = 50.0;
-    Float_t metcell,metmht,mettopocl,mettopoclps,mettopoclpuc,metl1;
-    Int_t passRndm, numPassMuon,passmuon,passmuvarmed,cleanCutsFlag,recalBrokeFlag;
+    Float_t metcell,metmht,mettopoclpuc,metl1;
+    Int_t passRndm,passmuon,passmuvarmed,cleanCutsFlag,recalBrokeFlag;
     Float_t algAMET,algBMET,metoffrecal,mexoffrecal,meyoffrecal,offrecalmuon_mex,
             offrecalmuon_mey, acthresh,bcthresh,metrefmuon,mexrefmuon,meyrefmuon,w;
     Int_t passnoalgL1XE10,passnoalgL1XE30,passnoalgL1XE40,passnoalgL1XE45;
 
     TEfficiency* metcellteff  = new TEfficiency(metcellName , "Metcell Efficiency", muonNbins, muonMetMin, muonMetMax);
     TEfficiency* metmhtteff  = new TEfficiency(metmhtName , "Metmht Efficiency", muonNbins, muonMetMin, muonMetMax);
-    TEfficiency* mettopoclteff  = new TEfficiency(mettopoclName,  "Mettopocl Efficiency", muonNbins, muonMetMin, muonMetMax);
-    TEfficiency* mettopoclpsteff  = new TEfficiency(mettopoclpsName,  "Mettopoclps Efficiency", muonNbins, muonMetMin, muonMetMax);
     TEfficiency* mettopoclpucteff  = new TEfficiency(mettopoclpucName,  "Mettopoclpuc Efficiency", muonNbins, muonMetMin, muonMetMax);
 
-    TString muonFilePath = "../myData/" + muonFileName;
-    TFile * muonFile = TFile::Open(muonFilePath, "READ");
-    TTree* myMuonTree = (TTree*)muonFile->Get("tree");
-
-
-
-    Int_t muonNentries = myMuonTree->GetEntries();
+    //set branch addresses for all muon variables to be used
     myMuonTree->SetBranchAddress("passmu26med", &passmuon);
     myMuonTree->SetBranchAddress("passmu26varmed", &passmuvarmed);
     myMuonTree->SetBranchAddress("passcleancuts", &cleanCutsFlag);
@@ -82,30 +82,29 @@ Int_t print7Efficiencies()
     myMuonTree->SetBranchAddress("metl1", &metl1);
     myMuonTree->SetBranchAddress(metcellName,&metcell);
     myMuonTree->SetBranchAddress(metmhtName,&metmht);
-    myMuonTree->SetBranchAddress(mettopoclName,&mettopocl);
-    myMuonTree->SetBranchAddress(mettopoclpsName,&mettopoclps);
     myMuonTree->SetBranchAddress(mettopoclpucName,&mettopoclpuc);
+
+    //set branch address for passrndm stuff to determine thresholds
     zeroBiasTree->SetBranchAddress("passnoalgL1XE10",&passnoalgL1XE10);
     zeroBiasTree->SetBranchAddress("passnoalgL1XE30",&passnoalgL1XE30);
     zeroBiasTree->SetBranchAddress("passnoalgL1XE40",&passnoalgL1XE40);
     zeroBiasTree->SetBranchAddress("passnoalgL1XE45",&passnoalgL1XE45);
 
+    Float_t wValue;
     for (Int_t l = 0 ; l < muonNentries ; l++)
     {
+        //IN MUON TREE
         myMuonTree->GetEntry(l);
         if ((passmuvarmed > 0.1 || passmuon > 0.1) && (cleanCutsFlag > 0.1) && (recalBrokeFlag < 0.1))
         {
-            w = sqrt(2.0*metoffrecal*metoffrecalmuon*(1+((mexoffrecal*mexoffrecalmuon+meyoffrecal*meyoffrecalmuon)/(
-                metoffrecal * metoffrecalmuon))));
-            if (w >= 40.0 && w <= 80.0)
+            wValue = w( metoffrecal , mexoffrecal , meyoffrecal , metoffrecalmuon , mexoffrecalmuon , meyoffrecalmuon )
+            if (wValue >= 40.0 && wValue <= 80.0)
             {
                 Float_t metnomu = sqrt(((mexoffrecal - offrecalmuon_mex) * (mexoffrecal - offrecalmuon_mex)) +
                 ((meyoffrecal - offrecalmuon_mey)*(meyoffrecal - offrecalmuon_mey))); //compute metnomu
-                numbPassMuon++;
+
                 metcellteff->Fill((metcell > metcellThresh) && (metl1 > metl1Thresh), metnomu);
                 metmhtteff->Fill((metmht > metmhtThresh) && (metl1 > metl1Thresh), metnomu);
-                mettopoclteff->Fill((mettopocl > mettopoclThresh) && (metl1 > metl1Thresh), metnomu);
-                mettopoclpsteff->Fill((mettopoclps > mettopoclpsThresh)&& (metl1 > metl1Thresh), metnomu);
                 mettopoclpucteff->Fill((mettopoclpuc > mettopoclpucThresh)&& (metl1 > metl1Thresh), metnomu);
             }
         }
@@ -116,28 +115,24 @@ Int_t print7Efficiencies()
 
     metcellteff->SetLineColor(kBlue);
     metmhtteff->SetLineColor(kRed);
-    mettopoclteff->SetLineColor(kGreen);
-    mettopoclpsteff->SetLineColor(kBlack);
+    //mettopoclteff->SetLineColor(kGreen);
+    //mettopoclpsteff->SetLineColor(kBlack);
     mettopoclpucteff->SetLineColor(kYellow);
 
-    const TString canvName = "5 Efficiencies;Offline Recalibrated MET w/o Muon term [GeV];Efficiency";
+    const TString canvName = "7 Efficiencies;Offline Recalibrated MET w/o Muon term [GeV];Efficiency";
 
     metcellteff->SetTitle(canvName);
 
     metcellteff->Draw();
     metmhtteff->Draw("same");
-    mettopoclteff->Draw("same");
-    mettopoclpsteff->Draw("same");
     mettopoclpucteff->Draw("same");
 
     TLegend *legend = new TLegend(0.57,0.15,0.9, 0.4 ,"","NDC");
     legend->AddEntry(metcellteff, metcellName);
     legend->AddEntry(metmhtteff, metmhtName);
-    legend->AddEntry(mettopoclteff, mettopoclName);
-    legend->AddEntry(mettopoclpsteff, mettopoclpsName);
     legend->AddEntry(mettopoclpucteff, mettopoclpucName);
     legend->Draw();
-    TString folderPath = "./TEfficienciesPics/" + folder + "_5_efficiencies.png";
+    TString folderPath = "./TEfficienciesPics/" + folder + "_7_efficiencies.png";
     efficiencyCanvas->Print(folderPath);
 }
 
@@ -199,6 +194,14 @@ Float_t determineZeroBiasThresh( const TString& alg, const Float_t frac = 0.0059
 	zeroBiasFile->Close();
 	std::cout << "Number of events counted above threshold: " << counter << "\n" << std::endl;
 	return(indeterminateThresh);
+}
+
+Float_t w( const Float_t metoffrecal     , const Float_t mexoffrecal     , const Float_t meyoffrecal ,
+           const Float_t metoffrecalmuon , const Float_t mexoffrecalmuon , const Float_t meyoffrecalmuon )
+{
+    Float_t wValue = sqrt( 2.0 * metoffrecal * metoffrecalmuon * ( 1 + ( ( mexoffrecal * mexoffrecalmuon + meyoffrecal * meyoffrecalmuon ) /
+                           ( metoffrecal * metoffrecalmuon ) ) ) );
+    return(wValue);
 }
 
 Float_t computeThresh(TH1F* target, Float_t numKeep)
