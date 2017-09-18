@@ -594,6 +594,7 @@ Float_t determineMuonEventsKeptCombined( const TString& algA, const Float_t thre
     const Float_t threshB,
     const TString& muonFileName = "PhysicsMain2016.Muons.noalgL1XE45R3073065R311481Runs9B.root")
 {
+    Float_t w( const Float_t , const Float_t ,const Float_t ,const Float_t ,const Float_t ,const Float_t);
     std::cout << "Determining fraction of muon events kept when using combined algorithm of " << algA << " at: " << threshA << ", "
     << algB << " at: " << threshB << " and metl1 at: " << myConstants::metl1thresh << std::endl;
     TString muonFilePath = "../myData/"+muonFileName;

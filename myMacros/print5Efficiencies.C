@@ -16,7 +16,7 @@
 const TString& zerobiasFileName = "PhysicsMain.All.noalgXEtriggers.2016.f731f758._m1659m1710.48Runs.root";
 const TString& muonFileName = "PhysicsMain.L1KFmuontriggers.2016.f731f758_m1659m1710.Run309759.48Runs.root";
 
-Int_t printEfficiencies()
+Int_t print5Efficiencies()
 {
     /* makes a plot with simply all 5 efficiency curves*/
     Float_t determineZeroBiasThresh( const TString&, const Float_t, const TString&);
