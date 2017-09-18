@@ -104,7 +104,6 @@ Float_t determineMuonEventsKeptCombined( const TString& algA, const Float_t thre
                                          const Float_t metL1Thresh = 50.0,
     const TString& muonFileName = "PhysicsMain2016.Muons.noalgL1XE45R3073065R311481Runs9B.root")
 {
-    Float_t w( const Float_t , const Float_t ,const Float_t ,const Float_t ,const Float_t ,const Float_t);
 
     //display algs and thresholds
     std::cout << "Determining fraction of muon events kept when using combined algorithm of " << algA << " at: " << threshA << ", "

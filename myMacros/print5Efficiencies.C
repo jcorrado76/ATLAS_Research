@@ -63,9 +63,7 @@ Int_t print5Efficiencies()
     TString muonFilePath = "../myData/" + muonFileName;
     TFile * muonFile = TFile::Open(muonFilePath, "READ");
     TTree* myMuonTree = (TTree*)muonFile->Get("tree");
-
-
-
+    
     Int_t muonNentries = myMuonTree->GetEntries();
     myMuonTree->SetBranchAddress("passmu26med", &passmuon);
     myMuonTree->SetBranchAddress("passmu26varmed", &passmuvarmed);
