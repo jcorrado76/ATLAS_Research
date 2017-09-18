@@ -20,7 +20,7 @@ Int_t print5Efficiencies()
 {
     /* makes a plot with simply all 5 efficiency curves*/
     gROOT->ProcessLine("gSystem->Load(\"./mincerMacros.so\")");
-    Float_t determineZeroBiasThresh( const TString&, const Float_t, const TString&);
+    Float_t determineZeroBiasThresh( const TString&, const Float_t, const Float_t , const TString&);
     Float_t computeThresh(TH1F*,Float_t);
     const Float_t frac = 0.00590;
     const TString& folder = "";
@@ -42,12 +42,12 @@ Int_t print5Efficiencies()
     Float_t muonMetMin = metMin;
     Float_t muonMetMax = 300;
     Int_t numbPassMuon = 0;
-    Float_t metcellThresh = determineZeroBiasThresh(metcellName,frac,zerobiasFileName);
-    Float_t metmhtThresh = determineZeroBiasThresh(metmhtName,frac,zerobiasFileName);
-    Float_t mettopoclThresh = determineZeroBiasThresh(mettopoclName,frac,zerobiasFileName);
-    Float_t mettopoclpsThresh = determineZeroBiasThresh(mettopoclpsName,frac,zerobiasFileName);
-    Float_t mettopoclpucThresh = determineZeroBiasThresh(mettopoclpucName,frac,zerobiasFileName);
     Float_t metl1Thresh = 50.0;
+    Float_t metcellThresh = determineZeroBiasThresh(metcellName,frac,metl1Thresh,zerobiasFileName);
+    Float_t metmhtThresh = determineZeroBiasThresh(metmhtName,frac,metl1Thresh,zerobiasFileName);
+    Float_t mettopoclThresh = determineZeroBiasThresh(mettopoclName,frac,metl1Thresh,zerobiasFileName);
+    Float_t mettopoclpsThresh = determineZeroBiasThresh(mettopoclpsName,frac,metl1Thresh,zerobiasFileName);
+    Float_t mettopoclpucThresh = determineZeroBiasThresh(mettopoclpucName,frac,metl1Thresh,zerobiasFileName);
     Float_t metcell,metmht,mettopocl,mettopoclps,mettopoclpuc,metl1;
     Int_t passRndm, numPassMuon,passmuon,passmuvarmed,cleanCutsFlag,recalBrokeFlag;
     Float_t algAMET,algBMET,metoffrecal,mexoffrecal,meyoffrecal,offrecalmuon_mex,
