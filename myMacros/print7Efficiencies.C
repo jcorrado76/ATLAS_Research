@@ -19,6 +19,8 @@ const TString& muonFileName = "PhysicsMain.L1KFmuontriggers.2016.f731f758_m1659m
 Int_t print7Efficiencies()
 {
     /* makes a plot with all 7 efficiency curves*/
+    /* This plot compares the 4 combined algorithms that do better when used together, and plots them
+    on the same canvas as the algorithms CERN currently uses*/
 
     //initialize functions
     Float_t determineZeroBiasThresh( const TString&, const Float_t, const TString&);

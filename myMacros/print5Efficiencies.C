@@ -19,6 +19,7 @@ const TString& muonFileName = "PhysicsMain.L1KFmuontriggers.2016.f731f758_m1659m
 Int_t print5Efficiencies()
 {
     /* makes a plot with simply all 5 efficiency curves*/
+    gROOT->ProcessLine(".L mincerMacros.C+");
     Float_t determineZeroBiasThresh( const TString&, const Float_t, const TString&);
     Float_t computeThresh(TH1F*,Float_t);
     const Float_t frac = 0.00590;
@@ -52,7 +53,7 @@ Int_t print5Efficiencies()
     Float_t algAMET,algBMET,metoffrecal,mexoffrecal,meyoffrecal,offrecalmuon_mex,
             offrecalmuon_mey, acthresh,bcthresh,metrefmuon,mexrefmuon,meyrefmuon,w;
     Int_t passnoalgL1XE10,passnoalgL1XE30,passnoalgL1XE40,passnoalgL1XE45;
-
+    Float_t metoffrecalmuon,mexoffrecalmuon,meyoffrecalmuon;
     TEfficiency* metcellteff  = new TEfficiency(metcellName , "Metcell Efficiency", muonNbins, muonMetMin, muonMetMax);
     TEfficiency* metmhtteff  = new TEfficiency(metmhtName , "Metmht Efficiency", muonNbins, muonMetMin, muonMetMax);
     TEfficiency* mettopoclteff  = new TEfficiency(mettopoclName,  "Mettopocl Efficiency", muonNbins, muonMetMin, muonMetMax);
@@ -139,73 +140,4 @@ Int_t print5Efficiencies()
     legend->Draw();
     TString folderPath = "./TEfficienciesPics/" + folder + "_5_efficiencies.png";
     efficiencyCanvas->Print(folderPath);
-}
-
-
-Float_t determineZeroBiasThresh( const TString& alg, const Float_t frac = 0.00590, zerobiasFileName)
-{
-    Float_t computeThresh(TH1F*,Float_t);
-    TString zeroBiasPath = "../myData/" + zeroBiasFileName;
-	TFile *zeroBiasFile = TFile::Open(zeroBiasPath, "READ");
-	TTree *zeroBiasTree = (TTree*)(zeroBiasFile->Get("tree"));
-	Int_t zerobiasNentries = zeroBiasTree->GetEntries();
-    Int_t passRndm;
-	Int_t nbins = 1200;
-	Double_t metMin = 0;
-	Double_t metMax = 300;
-    Float_t metl1thresh = 50.0;
-	Float_t metl1, metcell, metmht, mettopocl, mettopoclps, mettopoclpuc, indeterminate,
-	metcellthresh, metmhtthresh, mettopoclthresh, mettopoclpsthresh, mettopoclpucthresh,rightHandSum;
-    Int_t passnoalgL1XE10,passnoalgL1XE30,passnoalgL1XE40,passnoalgL1XE45;
-    TH1F *indeterminateHist = new TH1F(alg, alg, nbins, metMin, metMax);
-	zeroBiasTree->SetBranchAddress(alg,&indeterminate);
-	zeroBiasTree->SetBranchAddress("metl1",&metl1);
-    zeroBiasTree->SetBranchAddress("passrndm", &passRndm);
-    zeroBiasTree->SetBranchAddress("passnoalgL1XE10",&passnoalgL1XE10);
-    zeroBiasTree->SetBranchAddress("passnoalgL1XE30",&passnoalgL1XE30);
-    zeroBiasTree->SetBranchAddress("passnoalgL1XE40",&passnoalgL1XE40);
-    zeroBiasTree->SetBranchAddress("passnoalgL1XE45",&passnoalgL1XE45);
-	TString xlabel = "MET [GeV]";
-	TString yaxis = "Events";
-    for (Int_t k = 0; k < zerobiasNentries; k++)
-	{
-		zeroBiasTree->GetEntry(k);
-		if (( ( passnoalgL1XE10 > 0.5 || passnoalgL1XE30 > 0.5 || passnoalgL1XE40 > 0.5 ||
-            passnoalgL1XE45 > 0.5 ) && ( metl1 > metl1thresh ) ))
-		{
-			indeterminateHist->Fill(indeterminate);
-		}
-
-    }
-	std::cout << "FRACTION: " << frac << std::endl;
-	std::cout << "ZEROBIAS NENTRIES: " << zerobiasNentries << std::endl;
-
-    TH1F *indeterminatetarget = (TH1F*) indeterminateHist->GetCumulative(kFALSE);
-	Float_t numKeep = 5762.0;
-	Float_t indeterminateThresh = computeThresh(indeterminatetarget, numKeep);
-	std::cout << alg << " THRESHOLD: " << indeterminateThresh << std::endl;
-	std::cout << "Number of events that should have been kept: " << numKeep << std::endl;
-	std::cout << "Checking how many events are kept by the alg at the determined threshold..." << std::endl;
-	Int_t counter=0;
-	for (Int_t l = 0 ; l < zerobiasNentries ; l++)
-	{
-		zeroBiasTree->GetEntry(l);
-		if (( passnoalgL1XE10 > 0.5 || passnoalgL1XE30 > 0.5 || passnoalgL1XE40 > 0.5 ||
-            passnoalgL1XE45 > 0.5 ) && (indeterminate > indeterminateThresh) && (metl1 > metl1thresh))
-		{
-			counter++;
-		}
-	}
-	zeroBiasFile->Close();
-	std::cout << "Number of events counted above threshold: " << counter << "\n" << std::endl;
-	return(indeterminateThresh);
-}
-
-Float_t computeThresh(TH1F* target, Float_t numKeep)
-{
-    Int_t nbin = 0;
-    gROOT->ProcessLine("gROOT->Reset();");
-    target->GetBinWithContent(numKeep,nbin,0,-1,20000); //if firstx<=0{firstx=1}; if lastx<firstx{lastx=fXaxis.GetNbinsX()};
-    Float_t thresh = (target->GetXaxis())->GetBinCenter(nbin);
-    return(thresh);
 }
