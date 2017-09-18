@@ -1,8 +1,4 @@
-
-
-
-
-
+#include "TH1.h"
 
 Float_t computeThresh(TH1F* target, Float_t numKeep)
 {

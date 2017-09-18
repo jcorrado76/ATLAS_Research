@@ -1,3 +1,25 @@
+#include "TMath.h"
+#include "TH1.h"
+#include "TFile.h"
+#include "TTree.h"
+#include "TString.h"
+#include "TEfficiency.h"
+#include "TLegend.h"
+#include <iostream>
+#include <fstream>
+#include "TROOT.h"
+#include "TCanvas.h"
+#include "TSystem.h"
+#include "TF1.h"
+
+Float_t computeThresh(TH1F* target, Float_t numberEventsToKeep)
+{
+    Int_t nbin = 0;
+    target->GetBinWithContent( numberEventsToKeep , nbin , 0 , -1 , 20000 ); //if firstx<=0{firstx=1}; if lastx<firstx{lastx=fXaxis.GetNbinsX()};
+    Float_t thresh = (target->GetXaxis())->GetBinCenter(nbin);
+    return(thresh);
+}
+
 
 Float_t determineZeroBiasThresh( const TString& alg, const Float_t frac = 0.00590,
 const TString& zeroBiasFileName = "PhysicsMain.All.noalgXEtriggers.2016.f731f758._m1659m1710.48Runs")
@@ -15,8 +37,8 @@ const TString& zeroBiasFileName = "PhysicsMain.All.noalgXEtriggers.2016.f731f758
 	TTree *zeroBiasTree = (TTree*)(zeroBiasFile->Get("tree"));
 
     //intialize useful parameters
+    Float_t numberEventsToKeep = 5762.0;
 	Int_t zerobiasNentries = zeroBiasTree->GetEntries();
-    //Int_t passRndm;
 	Int_t nbins = myConstants::nbins;
 	Double_t metMin = myConstants::metMin;
 	Double_t metMax = myConstants::metMax;
@@ -29,7 +51,6 @@ const TString& zeroBiasFileName = "PhysicsMain.All.noalgXEtriggers.2016.f731f758
     //set branch address for zb variables
 	zeroBiasTree->SetBranchAddress(alg,&indeterminate);
 	zeroBiasTree->SetBranchAddress("metl1",&metl1);
-    //zeroBiasTree->SetBranchAddress("passrndm", &passRndm);
     zeroBiasTree->SetBranchAddress("passnoalgL1XE10",&passnoalgL1XE10);
     zeroBiasTree->SetBranchAddress("passnoalgL1XE30",&passnoalgL1XE30);
     zeroBiasTree->SetBranchAddress("passnoalgL1XE40",&passnoalgL1XE40);
@@ -49,10 +70,9 @@ const TString& zeroBiasFileName = "PhysicsMain.All.noalgXEtriggers.2016.f731f758
 	std::cout << "ZEROBIAS NENTRIES: " << zerobiasNentries << std::endl;
 
     TH1F *indeterminatetarget = (TH1F*) indeterminateHist->GetCumulative(kFALSE);
-	Float_t numKeep = 5762.0;
-	Float_t indeterminateThresh = computeThresh(indeterminatetarget, numKeep);
+	Float_t indeterminateThresh = computeThresh(indeterminatetarget, numberEventsToKeep);
 	std::cout << alg << " THRESHOLD: " << indeterminateThresh << std::endl;
-	std::cout << "Number of events that should have been kept: " << numKeep << std::endl;
+	std::cout << "Number of events that should have been kept: " << numberEventsToKeep << std::endl;
 	std::cout << "Checking how many events are kept by the alg at the determined threshold..." << std::endl;
 	Int_t counter=0;
 	for (Int_t l = 0 ; l < zerobiasNentries ; l++)
