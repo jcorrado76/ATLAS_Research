@@ -361,6 +361,10 @@ do{
     std::cout << "No root found; max iterations exceeded" << std::endl;
   }
 
+
+//ZZEROBIAS STUFF IS FINISHED
+
+
 acthresh = algAMETx2thresh;
 bcthresh = algBMETx2thresh;
 

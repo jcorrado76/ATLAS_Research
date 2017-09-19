@@ -178,8 +178,69 @@ Float_t determineMuonEventsKeptCombined( const TString& algA, const Float_t thre
 }
 
 
-Float_t bisection()
+Float_t bisection(const TH1F* hist1 , const TH1F* hist2, const Float_t binWidth, const Int_t numZeroBiasRndm = 0 , const Float_t frac = 0.00590)
 {
+    //TODO: need to finish making the bisection compatible as a separate function
+
+    //some useful parameters
+    Int_t j = 0;
+    Int_t imax = 30;
+    Float_t lwrbnd = 0.5*frac;
+    Float_t uprbnd = 0.13;
+    Float_t eps = 25.0;
+    Float_t x1,x3; //thresholds of individual algorithms
+    Float_t f1,f2,f3 = 0; //number of events kept
+    x1 = lwrbnd;
+    x3 = uprbnd;
+    Float_t initialGuess = ( x1 + x3 ) / 2.0;
+    Float_t firstGuess = initialGuess;
+    Float_t numKeepx1 = numZeroBiasRndm * x1;
+    Float_t numKeepx2 = numZeroBiasRndm * initialGuess;
+    Float_t numKeepx3 = numZeroBiasRndm * x3;
+
+    //print the status
+    std::cout << "Entering bisection to determine individual fractions" << std::endl;
+    std::cout << "Lower Bound: " << lwrbnd << std::endl;
+    std::cout << "Midpoint: " << (lwrbnd+uprbnd)/2. << std::endl;
+    std::cout << "Upper Bound: " << uprbnd << std::endl;
+    std::cout << "Epsilon: " << eps << std::endl;
+
+
+    //generate the cumulative right hand sum histograms
+    TH1F *algAMETtarget = (TH1F*) algAMETHist->GetCumulative(kFALSE);
+    TH1F *algBMETtarget = (TH1F*) algBMETHist->GetCumulative(kFALSE);
+
+    //set the names of the histograms to also contain the letters A and B
+    algAMETtarget->SetName(algAMETtarget->GetName() + (const TString)"A");
+    algBMETtarget->SetName(algBMETtarget->GetName() + (const TString)"B");
+
+
+    //compute initial thresholds at each of the extrema and first guess
+    algAMETx1thresh = computeThresh(algAMETtarget, numKeepx1);
+    algBMETx1thresh = computeThresh(algBMETtarget, numKeepx1);
+    algAMETx2thresh = computeThresh(algAMETtarget, numKeepx2);
+    algBMETx2thresh = computeThresh(algBMETtarget, numKeepx2);
+    algAMETx3thresh = computeThresh(algAMETtarget, numKeepx3);
+    algBMETx3thresh = computeThresh(algBMETtarget, numKeepx3);
+
+    std::cout << "algAx1Thresh: " << algAMETx1thresh << std::endl;
+    std::cout << "algBx1Thresh: " << algBMETx1thresh << std::endl;
+    std::cout << "metl1thresh : " << myConstants::metl1thresh << std::endl;
+
+
+    f1 = (Float_t) counter1 / (Float_t) numZeroBiasRndm;
+    f2 = (Float_t) counter2 / (Float_t) numZeroBiasRndm;
+    f3 = (Float_t) counter3 / (Float_t) numZeroBiasRndm;
+
+
+    std::cout << "At x1 = " << x1 << " counter1: " << counter1 << " events = " << "f1: " << f1 << std::endl;
+    std::cout << "At x2 = " << initialGuess << " counter2: " << counter2 << " events = " << "f2: " << f2 << std::endl;
+    std::cout << "At x3 = " << x3 << " counter3: " << counter3 << " events" << "f3: " << f3 << std::endl;
+
+
+
+
+
     do{
         j++;
         std::cout << "Inside iteration number: " << j << std::endl;
