@@ -13,10 +13,8 @@
 #include "TF1.h"
 
 
-const TString& zerobiasFileName = "PhysicsMain.All.noalgXEtriggers.2016.f731f758._m1659m1710.48Runs.root";
-const TString& muonFileName = "PhysicsMain.L1KFmuontriggers.2016.f731f758_m1659m1710.Run309759.48Runs.root";
-
-Int_t print7Efficiencies()
+Int_t print7Efficiencies(const TString& zerobiasFileName = "PhysicsMain.All.noalgXEtriggers.2016.f731f758._m1659m1710.48Runs.root",
+                         const TString& muonFileName = "PhysicsMain.L1KFmuontriggers.2016.f731f758_m1659m1710.Run309759.48Runs.root")
 {
     /* makes a plot with all 7 efficiency curves*/
     /* This plot compares the 4 combined algorithms that do better when used together, and plots them

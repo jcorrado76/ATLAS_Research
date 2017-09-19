@@ -13,10 +13,8 @@
 #include "TF1.h"
 
 
-const TString& zerobiasFileName = "PhysicsMain.All.noalgXEtriggers.2016.f731f758._m1659m1710.48Runs.root";
-const TString& muonFileName = "PhysicsMain.L1KFmuontriggers.2016.f731f758_m1659m1710.Run309759.48Runs.root";
-
-Int_t print5Efficiencies()
+Int_t print5Efficiencies( const TString& zerobiasFileName = "PhysicsMain.All.noalgXEtriggers.2016.f731f758._m1659m1710.48Runs.root" ,
+                          const TString& muonFileName = "PhysicsMain.L1KFmuontriggers.2016.f731f758_m1659m1710.Run309759.48Runs.root")
 {
     /* makes a plot with simply all 5 efficiency curves*/
     gROOT->ProcessLine("gSystem->Load(\"./mincerMacros_C.so\")");
@@ -63,7 +61,7 @@ Int_t print5Efficiencies()
     TString muonFilePath = "../myData/" + muonFileName;
     TFile * muonFile = TFile::Open(muonFilePath, "READ");
     TTree* myMuonTree = (TTree*)muonFile->Get("tree");
-    
+
     Int_t muonNentries = myMuonTree->GetEntries();
     myMuonTree->SetBranchAddress("passmu26med", &passmuon);
     myMuonTree->SetBranchAddress("passmu26varmed", &passmuvarmed);

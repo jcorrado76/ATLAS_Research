@@ -138,6 +138,7 @@ Float_t determineMuonEventsKeptCombined( const TString& algA, const Float_t thre
     muonTree->SetBranchAddress("metrefmuon", &metrefmuon);
     muonTree->SetBranchAddress("mexrefmuon", &mexrefmuon);
     muonTree->SetBranchAddress("meyrefmuon", &meyrefmuon);
+
     if ( algA != algB ) {//algs not the same, initialize second alg
          muonTree->SetBranchAddress( algB , &algBMET );
      }
@@ -174,4 +175,96 @@ Float_t determineMuonEventsKeptCombined( const TString& algA, const Float_t thre
     Float_t frac = numbPassedEvents / numberMuonEvents;
     std::cout << "Fraction of muon events kept: " << frac << std::endl;
     return(numbPassedEvents);
+}
+
+
+Float_t bisection()
+{
+    do{
+        j++;
+        std::cout << "Inside iteration number: " << j << std::endl;
+        if ( (f1-frac)*(f2-frac) < 0 ) //root is in left half of interval
+        {
+          std::cout << "Root is to the left of " << initialGuess << std::endl;
+          f3 = f2;
+          x3 = initialGuess;
+        }
+        else //root is in right half of  interval
+        {
+          std::cout << "Root is to the right of " << initialGuess << std::endl;
+          f1 = f2;
+          x1 = initialGuess;
+        }
+        initialGuess = ( x1 + x3 ) / 2.0;
+        inputArray[j+2] = initialGuess;
+        std::cout << "New Guess: " << initialGuess << std::endl;
+        std::cout << "numZeroBiasRndm: " << numZeroBiasRndm << std::endl;
+        numKeepx2 = numZeroBiasRndm * initialGuess;
+        std::cout << "numKeepx2: " << numKeepx2 << std::endl;
+        algAMETx2thresh = computeThresh(algAMETtarget, numKeepx2);
+        algBMETx2thresh = computeThresh(algBMETtarget, numKeepx2);
+        thresholdAarray[j+2] = (Float_t) algAMETx2thresh;
+        thresholdBarray[j+2] = (Float_t) algBMETx2thresh;
+
+        counter2 = 0;
+        if (algA==algB)
+        {
+    	for (Int_t i  = 0 ; i < zerobiasNentries ;i++)
+    	{
+    	  zeroBiasTree->GetEntry(i);
+    	  algAMET=algBMET;
+    	  if ((algBMET > algBMETx2thresh) && (metl1 > myConstants::metl1thresh)&& ( passnoalgL1XE10 > 0.5 || passnoalgL1XE30 > 0.5 ||
+              passnoalgL1XE40 > 0.5 || passnoalgL1XE45 > 0.5  ))
+        	  {
+        	    counter2++;
+        	  }
+    	}
+        }
+        else
+        {
+    	for (Int_t i  = 0 ; i < zerobiasNentries ;i++)
+    	{
+    	  zeroBiasTree->GetEntry(i);
+    	  if ((algAMET > algAMETx2thresh) && (algBMET > algBMETx2thresh) && (metl1 > myConstants::metl1thresh)&& ( passnoalgL1XE10 > 0.5 ||
+              passnoalgL1XE30 > 0.5 || passnoalgL1XE40 > 0.5 || passnoalgL1XE45 > 0.5  ) )
+    	  {
+    	    counter2++;
+    	  }
+    	}
+        }
+        numEventsArray[j+2] = counter2;
+        std::cout << "algAMETx2thresh: " << algAMETx2thresh << std::endl;
+        std::cout << "algBMETx2thresh: " << algBMETx2thresh << std::endl;
+        std::cout << "Counter2: " << counter2 << std::endl;
+        f2 = (Float_t) counter2 / (Float_t) numZeroBiasRndm;
+        std::cout << "f2: " << f2 << std::endl;
+        std::cout << "Condition: " << abs(numZeroBiasRndm * frac - counter2) << " > " << eps << std::endl;
+        outputArray[j+2] = f2;
+
+        algAThreshDiff = (Float_t) thresholdAarray[j+2] - (Float_t) thresholdAarray[j+1];
+        algBThreshDiff = (Float_t) thresholdBarray[j+2] - (Float_t) thresholdBarray[j+1];
+
+        algAThreshDiff = abs(algAThreshDiff);
+        algBThreshDiff = abs(algBThreshDiff);
+
+      std::cout << "algA current threshold: " << Form("%.7f",thresholdAarray[j+2]) << std::endl;
+      std::cout << "algA previous threshold: " << Form("%.7f",thresholdAarray[j+1]) << std::endl;
+      std::cout << "algB current threshold: " << Form("%.7f",thresholdBarray[j+2]) << std::endl;
+      std::cout << "algB previous threshold: " << Form("%.7f",thresholdBarray[j+1]) << std::endl;
+      std::cout << "binWidth: " << binWidth << "\n" << std::endl;
+
+    }while ( abs( counter2 - (numZeroBiasRndm * frac) ) > eps && (abs(algAThreshDiff) > binWidth) && (abs(algBThreshDiff) > binWidth) && ( j <= imax ) );
+
+      if ( abs( counter2 - (numZeroBiasRndm * frac) ) <= eps || abs(algAThreshDiff) <= binWidth || abs(algBThreshDiff) <= binWidth)
+      {
+        std::cout << "A root at x = " <<  initialGuess << " was found to within one bin: " << binWidth << " GeV"
+                  << " in " << j << " iterations" << std::endl;
+        std::cout << "The number of combined events kept is  " << f2 * numZeroBiasRndm << std::endl;
+        std::cout << "The fraction of combined events kept is  " << f2 << std::endl;
+      }
+      else{
+        std::cout << "No root found; max iterations exceeded" << std::endl;
+      }
+
+    return( initialGuess );
 }

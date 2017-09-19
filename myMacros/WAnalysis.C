@@ -12,45 +12,41 @@
 #include "TSystem.h"
 #include "TF1.h"
 
-namespace myConstants
-{
-    Int_t nbins = 1200;
-    Int_t muonNbins = 200;
-    Float_t metMin = 0;
-    Float_t metMax = 300;
-    Float_t muonMetMin = metMin;
-    Float_t muonMetMax = 300;
-    Float_t metl1thresh = 50.0;
-
-}
-
-
-
 Int_t WAnalysis( const TString& algA , const TString& algB,
         const Float_t frac = 0.00590, const TString folder = "",
         const TString& zerobiasFileName = "PhysicsMain.All.noalgXEtriggers.2016.f731f758._m1659m1710.48Runs.root",
         const TString& muonFilename = "PhysicsMain2016.Muons.noalgL1XE45R3073065R311481Runs9B.root")
 {
+    //load in external functions
     gROOT->ProcessLine("gSystem->Load(\"./mincerMacros_C.so\")");
     Float_t determineZeroBiasThresh( const TString&, const Float_t, const TString&);
     Float_t computeThresh(TH1F*,Float_t);
     Float_t determineMuonEventsKeptCombined( const TString&, const Float_t, const TString&,
         const Float_t,const TString& );
-
     gROOT->ProcessLine("gROOT->Time();");
 
+
+    //open file
     TString muonFilePath = "../myData/"+muonFilename;
     TFile * muonFile = TFile::Open(muonFilePath, "READ");
     TTree* myMuonTree = (TTree*)muonFile->Get("tree");
-    std::cout << "Muon Data being used to compute algorithm efficiency: " << muonFilePath << std::endl;
-    Int_t muonNentries = myMuonTree->GetEntries();
-    Int_t muonNbins = myConstants::muonNbins;
-    Int_t nbins = myConstants::nbins;
-    Double_t muonMetMin = myConstants::muonMetMin;
-    Double_t muonMetMax = myConstants::muonMetMax;
-    Int_t numZeroBiasRndm = 0; Int_t counter1 = 0; Int_t counter2 = 0; Int_t counter3 = 0;
+    std::cout << "Muon Data being used to compute algorithm efficiency: " << muonFilename << std::endl;
 
-    Double_t metMin = myConstants::metMin; Double_t metMax = myConstants::metMax;
+    //useful constants
+    Int_t muonNentries = myMuonTree->GetEntries();
+    Int_t muonNbins = 200;
+    Int_t nbins = 1200;
+    Double_t metMin = 0.0;
+    Double_t metMax = 300.0;
+    Double_t muonMetMin = metMin;
+    Double_t muonMetMax = metMax;
+    Int_t numZeroBiasRndm = 0;
+    Int_t counter1 = 0;
+    Int_t counter2 = 0;
+    Int_t counter3 = 0;
+    Float_t metl1thresh = 50.0;
+
+
 
     Int_t passRndm, numPassMuon,passmuon,passmuvarmed,cleanCutsFlag,recalBrokeFlag;
     Float_t algAMET,algBMET,offrecal_met,offrecal_mex,offrecal_mey,offrecalmuon_mex,
