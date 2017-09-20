@@ -30,7 +30,7 @@ Float_t computeThresh(const TH1F* target, const Float_t numberEventsToKeep)
 
 
 Float_t determineZeroBiasThresh( const TString& algName, const Float_t frac = 0.00590, const Float_t metL1Thresh = 50.0 ,
-const TString& zeroBiasFileName = "PhysicsMain.L1KFmuontriggers.2016.f731f758_m1659m1710.Run309759.48Runs.root")
+const TString& zeroBiasFileName = "PhysicsMain.All.noalgXEtriggers.2016.f731f758._m1659m1710.48Runs.root")
 {
     /*Returns the threshold needed for an algorithm to keep the fraction of zerobias events*/
 
