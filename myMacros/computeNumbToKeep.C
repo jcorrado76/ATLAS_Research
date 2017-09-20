@@ -24,7 +24,7 @@ Int_t computeNumbToKeep(const TString& zeroBiasFileName = "PhysicsMain.All.noalg
     Int_t passnoalgL1XE10 , passnoalgL1XE30, passnoalgL1XE40, passnoalgL1XE45;
 
     zeroBiasTree->SetBranchAddress("metl1",&metl1);
-    zeroBiasTree->SetBranchAddress("metcell", &metcell)
+    zeroBiasTree->SetBranchAddress("metcell", &metcell);
     zeroBiasTree->SetBranchAddress("passnoalgL1XE10",&passnoalgL1XE10);
     zeroBiasTree->SetBranchAddress("passnoalgL1XE30",&passnoalgL1XE30);
     zeroBiasTree->SetBranchAddress("passnoalgL1XE40",&passnoalgL1XE40);
