@@ -14,8 +14,13 @@
 
 Int_t computeNumbToKeep(const TString& zeroBiasFileName = "PhysicsMain.All.noalgXEtriggers.2016.f731f758._m1659m1710.48Runs.root")
 {
-    /* given a new zerobias file, this macro computes what fraction the triggers currently in use at CERN would keep */
-    TString zerobiasFilePath = "../myData/"+ zerobiasFileName;
+    /* given a new zerobias file, this macro computes what fraction the triggers currently in use at CERN would keep
+    must pass metl1 > 50.0, cell > 100.0, and all  passnoalg_i > 0.5
+    PhysicsMain.All.noalgXEtriggers.2016.f731f758._m1659m1710.48Runs.root should yield 5762
+    */
+
+
+    TString zerobiasFilePath = "../myData/"+ zeroBiasFileName;
     TFile * zeroBiasFile = TFile::Open(zerobiasFilePath, "READ");
     TTree* zeroBiasTree = (TTree*)zeroBiasFile->Get("tree");
     Int_t zerobiasNentries = zeroBiasTree->GetEntries();
