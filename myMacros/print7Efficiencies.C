@@ -22,93 +22,100 @@ Int_t print7Efficiencies(const TString& muonFileName = "PhysicsMain.L1KFmuontrig
     3 individually: metmht ; metcell ; mettopoclpuc
     */
 
-gROOT->ProcessLine("gSystem->Load(\"./mincerMacros_C.so\")");
-gROOT->ProcessLine("gROOT->Time();");
+    gROOT->ProcessLine("gSystem->Load(\"./mincerMacros_C.so\")");
+    gROOT->ProcessLine("gROOT->Time();");
 
-//parameters
-Int_t nbins = 300;
-Float_t metMin = 0.0;
-Float_t metMax = 300.0;
-Float_t metl1thresh = 50.0;
+    //parameters
+    Int_t nbins = 300;
+    Float_t metMin = 0.0;
+    Float_t metMax = 300.0;
+    Float_t metl1thresh = 50.0;
 
-//individual thresholds
-Float_t cellThresh = 100.0;
-Float_t mhtThresh = 139.88;
-Float_t topoclThresh = 153.62;
+    //individual thresholds
+    Float_t cellThresh = 100.0;
+    Float_t mhtThresh = 139.88;
+    Float_t topoclThresh = 153.62;
 
-//combined pairs of threhsolds
-Float_t cellCombinedThresh = 81.12;
-Float_t mhtCombinedThresh = 116.62;
+    //combined pairs of threhsolds
+    Float_t cellCombinedThresh = 81.12;
+    Float_t mhtCombinedThresh = 116.62;
 
-Float_t cellCombined2Thresh = 78.62;
-Float_t topoclCombinedThresh = 123.62;
+    Float_t cellCombined2Thresh = 78.62;
+    Float_t topoclCombinedThresh = 123.62;
 
-Float_t cellCombined3Thresh = 80.12;
-Float_t topoclpsCombinedThresh = 121.88;
+    Float_t cellCombined3Thresh = 80.12;
+    Float_t topoclpsCombinedThresh = 121.88;
 
-Float_t mhtCombined2Thresh = 123.62;
-Float_t topoclpucCombinedThresh = 106.38;
+    Float_t mhtCombined2Thresh = 123.62;
+    Float_t topoclpucCombinedThresh = 106.38;
 
-//individuals
-TEfficiency* cellTeff  = new TEfficiency("metcell" , "Efficiency", nbins, metMin, metMax);
-TEfficiency* mhtTeff  = new TEfficiency("metmht", "Efficiency", nbins, metMin, metMax);
-TEfficiency* topoclTeff  = new TEfficiency("mettopocl",  "Efficiency", nbins, metMin, metMax);
+    //individuals
+    TEfficiency* cellTeff  = new TEfficiency("metcell" , "Efficiency", nbins, metMin, metMax);
+    TEfficiency* mhtTeff  = new TEfficiency("metmht", "Efficiency", nbins, metMin, metMax);
+    TEfficiency* topoclTeff  = new TEfficiency("mettopocl",  "Efficiency", nbins, metMin, metMax);
 
-///combined algs
-TEfficiency* cellmhtTeff  = new TEfficiency("cellmhtcombined" , "Efficiency", nbins, metMin, metMax);
-TEfficiency* mhttopoclTeff  = new TEfficiency("mhttopoclcombined", "Efficiency", nbins, metMin, metMax);
-TEfficiency* celltopoclTeff  = new TEfficiency("celltopoclcombined",  "Efficiency", nbins, metMin, metMax);
-TEfficiency* mhttopoclTeff  = new TEfficiency("mhttopoclcombined" , "Efficiency", nbins, metMin, metMax);
+    ///combined algs
+    TEfficiency* cellmhtTeff  = new TEfficiency("cellmhtcombined" , "Efficiency", nbins, metMin, metMax);
+    TEfficiency* celltopoclTeff  = new TEfficiency("celltopoclcombined", "Efficiency", nbins, metMin, metMax);
+    TEfficiency* celltopoclpsTeff  = new TEfficiency("celltopoclpscombined",  "Efficiency", nbins, metMin, metMax);
+    TEfficiency* mhttopoclpucTeff  = new TEfficiency("mhttopoclpuccombined" , "Efficiency", nbins, metMin, metMax);
 
-//initialize branch variables
-Float_t metcell = 0;
-Float_t metmht = 0;
-Float_t mettopocl = 0;
-Float_t mettopoclps = 0;
-Float_t mettopoclpuc = 0;
-Float_t metl1 = 0;
+    //initialize branch variables
+    Float_t metcell = 0;
+    Float_t metmht = 0;
+    Float_t mettopocl = 0;
+    Float_t mettopoclps = 0;
+    Float_t mettopoclpuc = 0;
+    Float_t metl1 = 0;
 
-///open muon tree
-TString muonFilePath = "../myData/"+muonFilename;
-TFile * muonFile = TFile::Open(muonFilePath, "READ");
-TTree* myMuonTree = (TTree*)muonFile->Get("tree");
-Int_t muonNentries = myMuonTree->GetEntries();
+    ///open muon tree
+    TString muonFilePath = "../myData/"+muonFilename;
+    TFile * muonFile = TFile::Open(muonFilePath, "READ");
+    TTree* myMuonTree = (TTree*)muonFile->Get("tree");
+    Int_t muonNentries = myMuonTree->GetEntries();
 
-//assign branch variables to locations
-myMuonTree->SetBranchAddress("metcell",&metcell);
-myMuonTree->SetBranchAddress("metmht",&metmht);
-myMuonTree->SetBranchAddress("metl1",&metl1);
-myMuonTree->SetBranchAddress("mettopocl",&mettopcl);
-myMuonTree->SetBranchAddress("mettopoclps",&mettopoclps);
-myMuonTree->SetBranchAddress("mettopoclpuc",&mettopoclpuc);
+    //assign branch variables to locations
+    myMuonTree->SetBranchAddress("metcell",&metcell);
+    myMuonTree->SetBranchAddress("metmht",&metmht);
+    myMuonTree->SetBranchAddress("metl1",&metl1);
+    myMuonTree->SetBranchAddress("mettopocl",&mettopcl);
+    myMuonTree->SetBranchAddress("mettopoclps",&mettopoclps);
+    myMuonTree->SetBranchAddress("mettopoclpuc",&mettopoclpuc);
 
-myMuonTree->SetBranchAddress("passmu26med", &passmuon);
-myMuonTree->SetBranchAddress("passmu26varmed", &passmuvarmed);
-myMuonTree->SetBranchAddress("passcleancuts", &cleanCutsFlag);
-myMuonTree->SetBranchAddress("recalbroke", &recalBrokeFlag);
-myMuonTree->SetBranchAddress("metoffrecal", &metoffrecal);
-myMuonTree->SetBranchAddress("mexoffrecal", &mexoffrecal);
-myMuonTree->SetBranchAddress("meyoffrecal", &meyoffrecal);
-myMuonTree->SetBranchAddress("metoffrecalmuon", &metoffrecalmuon);
-myMuonTree->SetBranchAddress("mexoffrecalmuon", &mexoffrecalmuon);
-myMuonTree->SetBranchAddress("meyoffrecalmuon", &meyoffrecalmuon);
+    myMuonTree->SetBranchAddress("passmu26med", &passmuon);
+    myMuonTree->SetBranchAddress("passmu26varmed", &passmuvarmed);
+    myMuonTree->SetBranchAddress("passcleancuts", &cleanCutsFlag);
+    myMuonTree->SetBranchAddress("recalbroke", &recalBrokeFlag);
+    myMuonTree->SetBranchAddress("metoffrecal", &metoffrecal);
+    myMuonTree->SetBranchAddress("mexoffrecal", &mexoffrecal);
+    myMuonTree->SetBranchAddress("meyoffrecal", &meyoffrecal);
+    myMuonTree->SetBranchAddress("metoffrecalmuon", &metoffrecalmuon);
+    myMuonTree->SetBranchAddress("mexoffrecalmuon", &mexoffrecalmuon);
+    myMuonTree->SetBranchAddress("meyoffrecalmuon", &meyoffrecalmuon);
 
 
-for (Int_t l = 0 ; l < muonNentries ; l++)
-{
-    myMuonTree->GetEntry(l);
+    for (Int_t l = 0 ; l < muonNentries ; l++)
     {
-        if ((passmuvarmed > 0.1 || passmuon > 0.1) && cleanCutsFlag > 0.1 && recalBrokeFlag < 0.1)
+        myMuonTree->GetEntry(l);
         {
-            wValue = w(metoffrecal,mexoffrecal,meyoffrecal,metoffrecalmuon,mexoffrecalmuon,meyoffrecalmuon);
-            if (wValue >= 40.0 && wValue <= 100.0)
+            if ((passmuvarmed > 0.1 || passmuon > 0.1) && cleanCutsFlag > 0.1 && recalBrokeFlag < 0.1)
             {
-                Float_t metnomu = sqrt(((mexoffrecal - mexoffrecalmuon) * (mexoffrecal - mexoffrecalmuon)) +
-                ((meyoffrecal - meyoffrecalmuon)*(meyoffrecal - meyoffrecalmuon))); //compute metnomu
-                numbPassMuon++;
-                cellTeff->Fill((algAmuonMET > algAThresh) && (metl1 > metl1thresh), metnomu);
-                mhtTeff->Fill((algBmuonMET > algBThresh) && (metl1 > metl1thresh), metnomu);
-                topoclTeff->Fill(((algAmuonMET > acthresh) && (algBmuonMET > bcthresh) && (metl1 > metl1thresh)), metnomu);
+                wValue = w(metoffrecal,mexoffrecal,meyoffrecal,metoffrecalmuon,mexoffrecalmuon,meyoffrecalmuon);
+                if (wValue >= 40.0 && wValue <= 100.0)
+                {
+                    Float_t metnomu = sqrt(((mexoffrecal - mexoffrecalmuon) * (mexoffrecal - mexoffrecalmuon)) +
+                    ((meyoffrecal - meyoffrecalmuon)*(meyoffrecal - meyoffrecalmuon))); //compute metnomu
+                    numbPassMuon++;
+                    cellTeff->Fill( (metcell > cellThresh) && (metl1 > metl1thresh), metnomu);
+                    mhtTeff->Fill( (metmht > mhtThresh) && (metl1 > metl1thresh), metnomu);
+                    topoclTeff->Fill( (mettopocl > topoclThresh) && (metl1 > metl1thresh) , metnomu);
+
+                    cellmhtTeff->Fill( (metcell > cellCombinedThresh) && (metmht > mhtCombinedThresh)&& (metl1 > metl1thresh), metnomu );
+                    celltopoclTeff->Fill( (metcell> cellCombined2Thresh) && (mettopocl> topoclCombinedThresh)&& (metl1 > metl1thresh), metnomu);
+                    celltopoclpsTeff->Fill( ( (metcell >cellCombined3Thresh) && (mettopoclps >topoclpsCombinedThresh) && (metl1 > metl1thresh)), metnomu);
+                    mhttopoclpucTeff->Fill( ( (metmht > mhtCombined2Thresh) && (mettopoclpuc > topoclpucCombinedThresh) && (metl1 > metl1thresh)), metnomu);
+                }
             }
         }
     }
+}
