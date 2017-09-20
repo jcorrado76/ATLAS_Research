@@ -23,15 +23,17 @@ Float_t w( const Float_t metoffrecal     , const Float_t mexoffrecal     , const
 Float_t computeThresh(const TH1F* target, const Float_t numberEventsToKeep)
 {
     Int_t nbin = 0;
-    target->GetBinWithContent( numberEventsToKeep , nbin , 0 , -1 , 20000 ); //if firstx<=0{firstx=1}; if lastx<firstx{lastx=fXaxis.GetNbinsX()};
+    target->GetBinWithContent( numberEventsToKeep , nbin , 5 , -1 , 20000 ); //if firstx<=0{firstx=1}; if lastx<firstx{lastx=fXaxis.GetNbinsX()};
     Float_t thresh = (target->GetXaxis())->GetBinCenter(nbin);
     return(thresh);
 }
 
 
 Float_t determineZeroBiasThresh( const TString& algName, const Float_t frac = 0.00590, const Float_t metL1Thresh = 50.0 ,
-const TString& zeroBiasFileName = "PhysicsMain.All.noalgXEtriggers.2016.f731f758._m1659m1710.48Runs")
+const TString& zeroBiasFileName = "PhysicsMain.L1KFmuontriggers.2016.f731f758_m1659m1710.Run309759.48Runs.root")
 {
+    /*Returns the threshold needed for an algorithm to keep the fraction of zerobias events*/
+
     //get zerobias tree
     const TString zeroBiasPath = "../myData/" + zeroBiasFileName;
 	TFile *zeroBiasFile = TFile::Open(zeroBiasPath, "READ");
@@ -177,7 +179,7 @@ Float_t determineMuonEventsKeptCombined( const TString& algA, const Float_t thre
     return(numbPassedEvents);
 }
 
-
+/*
 Float_t bisection(const TH1F* hist1 , const TH1F* hist2, const Float_t binWidth, const Int_t numZeroBiasRndm = 0 , const Float_t frac = 0.00590)
 {
     //TODO: need to finish making the bisection compatible as a separate function
@@ -328,4 +330,4 @@ Float_t bisection(const TH1F* hist1 , const TH1F* hist2, const Float_t binWidth,
       }
 
     return( initialGuess );
-}
+}*/

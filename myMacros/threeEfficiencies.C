@@ -394,7 +394,7 @@ for (Int_t l = 0 ; l < muonNentries ; l++)
         if ((passmuvarmed > 0.1 || passmuon > 0.1) && cleanCutsFlag > 0.1 && recalBrokeFlag < 0.1)
         {
             wValue = w(metoffrecal,mexoffrecal,meyoffrecal,metoffrecalmuon,mexoffrecalmuon,meyoffrecalmuon);
-            if (wValue >= 40.0 && wValue <= 80.0)
+            if (wValue >= 40.0 && wValue <= 100.0)
             {
                 Float_t metnomu = sqrt(((mexoffrecal - mexoffrecalmuon) * (mexoffrecal - mexoffrecalmuon)) +
                 ((meyoffrecal - meyoffrecalmuon)*(meyoffrecal - meyoffrecalmuon))); //compute metnomu
@@ -410,7 +410,7 @@ for (Int_t l = 0 ; l < muonNentries ; l++)
         if ((passmuvarmed > 0.1 || passmuon > 0.1) && (cleanCutsFlag > 0.1) && (recalBrokeFlag < 0.1))
     	{
             wValue = w(metoffrecal,mexoffrecal,meyoffrecal,metoffrecalmuon,mexoffrecalmuon,meyoffrecalmuon);
-            if (wValue >= 40.0 && wValue <= 80.0)
+            if (wValue >= 40.0 && wValue <= 100.0)
             {
         	    Float_t metnomu = sqrt(((mexoffrecal - mexoffrecalmuon) * (mexoffrecal - mexoffrecalmuon)) +
         	    ((meyoffrecal - meyoffrecalmuon)*(meyoffrecal - meyoffrecalmuon))); //compute metnomu
