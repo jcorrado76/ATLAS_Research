@@ -24,6 +24,7 @@ Int_t print7Efficiencies(const TString& muonFileName = "PhysicsMain.L1KFmuontrig
 
     gROOT->ProcessLine("gSystem->Load(\"./mincerMacros_C.so\")");
     gROOT->ProcessLine("gROOT->Time();");
+    Float_t w( const Float_t , const Float_t ,const Float_t ,const Float_t ,const Float_t ,const Float_t);
 
     //parameters
     Int_t nbins = 300;
@@ -61,24 +62,27 @@ Int_t print7Efficiencies(const TString& muonFileName = "PhysicsMain.L1KFmuontrig
     TEfficiency* mhttopoclpucTeff  = new TEfficiency("mhttopoclpuccombined" , "Efficiency", nbins, metMin, metMax);
 
     //initialize branch variables
-    Float_t metcell = 0;
-    Float_t metmht = 0;
-    Float_t mettopocl = 0;
-    Float_t mettopoclps = 0;
-    Float_t mettopoclpuc = 0;
-    Float_t metl1 = 0;
 
     ///open muon tree
-    TString muonFilePath = "../myData/"+muonFilename;
+    TString muonFilePath = "../myData/"+muonFileName;
     TFile * muonFile = TFile::Open(muonFilePath, "READ");
     TTree* myMuonTree = (TTree*)muonFile->Get("tree");
     Int_t muonNentries = myMuonTree->GetEntries();
+
+
+    Float_t metcell,metmht,metl1,mettopocl,mettopoclps,mettopoclpuc,wValue,metoffrecal,mexoffrecal,
+    meyoffrecal,metoffrecalmuon,mexoffrecalmuon,meyoffrecalmuon;
+    Int_t passmuon,passmuvarmed,cleanCutsFlag,recalBrokeFlag;
+
+
+
+
 
     //assign branch variables to locations
     myMuonTree->SetBranchAddress("metcell",&metcell);
     myMuonTree->SetBranchAddress("metmht",&metmht);
     myMuonTree->SetBranchAddress("metl1",&metl1);
-    myMuonTree->SetBranchAddress("mettopocl",&mettopcl);
+    myMuonTree->SetBranchAddress("mettopocl",&mettopocl);
     myMuonTree->SetBranchAddress("mettopoclps",&mettopoclps);
     myMuonTree->SetBranchAddress("mettopoclpuc",&mettopoclpuc);
 
@@ -105,7 +109,6 @@ Int_t print7Efficiencies(const TString& muonFileName = "PhysicsMain.L1KFmuontrig
                 {
                     Float_t metnomu = sqrt(((mexoffrecal - mexoffrecalmuon) * (mexoffrecal - mexoffrecalmuon)) +
                     ((meyoffrecal - meyoffrecalmuon)*(meyoffrecal - meyoffrecalmuon))); //compute metnomu
-                    numbPassMuon++;
                     cellTeff->Fill( (metcell > cellThresh) && (metl1 > metl1thresh), metnomu);
                     mhtTeff->Fill( (metmht > mhtThresh) && (metl1 > metl1thresh), metnomu);
                     topoclTeff->Fill( (mettopocl > topoclThresh) && (metl1 > metl1thresh) , metnomu);
@@ -118,4 +121,43 @@ Int_t print7Efficiencies(const TString& muonFileName = "PhysicsMain.L1KFmuontrig
             }
         }
     }
+
+
+    TCanvas* efficiencyCanvas = new TCanvas("Efficiency Canvas", "Efficiency Canvas");
+    efficiencyCanvas->RangeAxis(0,0,500,1.0);
+
+    cellTeff->SetLineColor(kBlue);
+    mhtTeff->SetLineColor(kRed);
+    topoclTeff->SetLineColor(kGreen);
+    cellmhtTeff->SetLineColor(kBlack);
+    celltopoclTeff->SetLineColor(kYellow);
+    celltopoclpsTeff->SetLineColor(kMagenta);
+    mhttopoclpucTeff->SetLineColor(kOrange);
+
+    const TString canvName = "7 Efficiencies Comparison;Offline Recalibrated MET w/o Muon term [GeV];Efficiency";
+
+    cellTeff->SetTitle(canvName);
+
+    cellTeff->Draw();
+    mhtTeff->Draw("same");
+    topoclTeff->Draw("same");
+    cellmhtTeff->Draw("same");
+    celltopoclTeff->Draw("same");
+    celltopoclpsTeff->Draw("same");
+    mhttopoclpucTeff->Draw("same");
+
+
+    TLegend *legend = new TLegend(0.57,0.15,0.9, 0.4 ,"","NDC");
+    legend->AddEntry(cellTeff, "metcell");
+    legend->AddEntry(mhtTeff, "metmht");
+    legend->AddEntry(topoclTeff, "mettopocl");
+    legend->AddEntry(cellmhtTeff, "cell and mht");
+    legend->AddEntry(celltopoclTeff, "cell and topocl");
+    legend->AddEntry(celltopoclpsTeff, "cell and topoclps");
+    legend->AddEntry(mhttopoclpucTeff, "mht and topoclpuc");
+    legend->Draw();
+
+    TString folderPath = "./TEfficienciesPics/print_7_efficiencies.png";
+    efficiencyCanvas->Print(folderPath);
+
 }
