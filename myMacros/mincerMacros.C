@@ -29,10 +29,12 @@ Float_t computeThresh(const TH1F* target, const Float_t numberEventsToKeep)
 }
 
 
-Float_t determineZeroBiasThresh( const TString& algName, const Float_t frac = 0.00590, const Float_t metL1Thresh = 50.0 ,
+Float_t determineZeroBiasThresh( const TString& algName, const Float_t frac = 0.00590,
 const TString& zeroBiasFileName = "PhysicsMain.All.noalgXEtriggers.2016.f731f758._m1659m1710.48Runs.root")
 {
     /*Returns the threshold needed for an algorithm to keep the fraction of zerobias events*/
+
+    const Float_t metL1Thresh = 50;
 
     //get zerobias tree
     const TString zeroBiasPath = "../myData/" + zeroBiasFileName;
@@ -103,10 +105,10 @@ const TString& zeroBiasFileName = "PhysicsMain.All.noalgXEtriggers.2016.f731f758
 
 Float_t determineMuonEventsKeptCombined( const TString& algA, const Float_t threshA,
                                          const TString& algB, Float_t threshB,
-                                         const Float_t metL1Thresh = 50.0,
-    const TString& muonFileName = "PhysicsMain2016.Muons.noalgL1XE45R3073065R311481Runs9B.root")
+                                         const TString& muonFileName = "PhysicsMain2016.Muons.noalgL1XE45R3073065R311481Runs9B.root")
 {
 
+    const Float_t metL1Thresh = 50.0;
     //display algs and thresholds
     std::cout << "Determining fraction of muon events kept when using combined algorithm of " << algA << " at: " << threshA << ", "
     << algB << " at: " << threshB << " and metl1 at: " << metL1Thresh << std::endl;

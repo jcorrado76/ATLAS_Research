@@ -34,7 +34,7 @@ Int_t threeEfficiencies( const TString& algA , const TString& algB,
     gROOT->ProcessLine("gSystem->Load(\"./mincerMacros_C.so\")");
     Float_t w( const Float_t , const Float_t ,const Float_t ,const Float_t ,const Float_t ,const Float_t);
     Float_t determineZeroBiasThresh( const TString&, const Float_t, const TString&);
-    Float_t computeThresh(TH1F*,Float_t);
+    Float_t computeThresh( const TH1F*, const Float_t);
     Float_t determineMuonEventsKeptCombined( const TString&, const Float_t, const TString&,
         const Float_t,const TString& );
 
