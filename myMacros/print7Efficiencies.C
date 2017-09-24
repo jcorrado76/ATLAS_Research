@@ -35,7 +35,7 @@ Int_t print7Efficiencies(const TString& muonFileName = "PhysicsMain.L1KFmuontrig
     //individual thresholds
     Float_t cellThresh = 100.0;
     Float_t mhtThresh = 139.88;
-    Float_t topoclThresh = 153.62;
+    Float_t topoclpucThresh = 122.62;
 
     //combined pairs of threhsolds
     Float_t cellCombinedThresh = 81.12;
@@ -53,7 +53,7 @@ Int_t print7Efficiencies(const TString& muonFileName = "PhysicsMain.L1KFmuontrig
     //individuals
     TEfficiency* cellTeff  = new TEfficiency("metcell" , "Efficiency", nbins, metMin, metMax);
     TEfficiency* mhtTeff  = new TEfficiency("metmht", "Efficiency", nbins, metMin, metMax);
-    TEfficiency* topoclTeff  = new TEfficiency("mettopocl",  "Efficiency", nbins, metMin, metMax);
+    TEfficiency* topoclpucTeff  = new TEfficiency("mettopocl",  "Efficiency", nbins, metMin, metMax);
 
     ///combined algs
     TEfficiency* cellmhtTeff  = new TEfficiency("cellmhtcombined" , "Efficiency", nbins, metMin, metMax);
@@ -111,7 +111,7 @@ Int_t print7Efficiencies(const TString& muonFileName = "PhysicsMain.L1KFmuontrig
                     ((meyoffrecal - meyoffrecalmuon)*(meyoffrecal - meyoffrecalmuon))); //compute metnomu
                     cellTeff->Fill( (metcell > cellThresh) && (metl1 > metl1thresh), metnomu);
                     mhtTeff->Fill( (metmht > mhtThresh) && (metl1 > metl1thresh), metnomu);
-                    topoclTeff->Fill( (mettopocl > topoclThresh) && (metl1 > metl1thresh) , metnomu);
+                    topoclpucTeff->Fill( (mettopoclpuc > topoclpucThresh) && (metl1 > metl1thresh) , metnomu);
 
                     cellmhtTeff->Fill( (metcell > cellCombinedThresh) && (metmht > mhtCombinedThresh)&& (metl1 > metl1thresh), metnomu );
                     celltopoclTeff->Fill( (metcell> cellCombined2Thresh) && (mettopocl> topoclCombinedThresh)&& (metl1 > metl1thresh), metnomu);
@@ -150,7 +150,7 @@ Int_t print7Efficiencies(const TString& muonFileName = "PhysicsMain.L1KFmuontrig
     TLegend *legend = new TLegend(0.57,0.15,0.9, 0.4 ,"","NDC");
     legend->AddEntry(cellTeff, "metcell");
     legend->AddEntry(mhtTeff, "metmht");
-    legend->AddEntry(topoclTeff, "mettopocl");
+    legend->AddEntry(topoclTeff, "mettopoclpuc");
     legend->AddEntry(cellmhtTeff, "cell and mht");
     legend->AddEntry(celltopoclTeff, "cell and topocl");
     legend->AddEntry(celltopoclpsTeff, "cell and topoclps");
