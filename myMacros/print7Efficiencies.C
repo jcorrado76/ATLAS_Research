@@ -128,7 +128,7 @@ Int_t print7Efficiencies(const TString& muonFileName = "PhysicsMain.L1KFmuontrig
 
     cellTeff->SetLineColor(kBlue);
     mhtTeff->SetLineColor(kRed);
-    topoclTeff->SetLineColor(kGreen);
+    topoclpucTeff->SetLineColor(kGreen);
     cellmhtTeff->SetLineColor(kBlack);
     celltopoclTeff->SetLineColor(kYellow);
     celltopoclpsTeff->SetLineColor(kMagenta);
@@ -140,7 +140,7 @@ Int_t print7Efficiencies(const TString& muonFileName = "PhysicsMain.L1KFmuontrig
 
     cellTeff->Draw();
     mhtTeff->Draw("same");
-    topoclTeff->Draw("same");
+    topoclpucTeff->Draw("same");
     cellmhtTeff->Draw("same");
     celltopoclTeff->Draw("same");
     celltopoclpsTeff->Draw("same");
@@ -150,7 +150,7 @@ Int_t print7Efficiencies(const TString& muonFileName = "PhysicsMain.L1KFmuontrig
     TLegend *legend = new TLegend(0.57,0.15,0.9, 0.4 ,"","NDC");
     legend->AddEntry(cellTeff, "metcell");
     legend->AddEntry(mhtTeff, "metmht");
-    legend->AddEntry(topoclTeff, "mettopoclpuc");
+    legend->AddEntry(topoclpucTeff, "mettopoclpuc");
     legend->AddEntry(cellmhtTeff, "cell and mht");
     legend->AddEntry(celltopoclTeff, "cell and topocl");
     legend->AddEntry(celltopoclpsTeff, "cell and topoclps");
@@ -159,5 +159,5 @@ Int_t print7Efficiencies(const TString& muonFileName = "PhysicsMain.L1KFmuontrig
 
     TString folderPath = "./TEfficienciesPics/print_7_efficiencies.png";
     efficiencyCanvas->Print(folderPath);
-
+    return(0);
 }
