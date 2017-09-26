@@ -130,9 +130,9 @@ Int_t print7Efficiencies(const TString& muonFileName = "PhysicsMain.L1KFmuontrig
     mhtTeff->SetLineColor(kRed);
     topoclpucTeff->SetLineColor(kGreen);
     cellmhtTeff->SetLineColor(kBlack);
-    celltopoclTeff->SetLineColor(kYellow);
+    celltopoclTeff->SetLineColor(kViolet);
     celltopoclpsTeff->SetLineColor(kMagenta);
-    mhttopoclpucTeff->SetLineColor(kOrange);
+    mhttopoclpucTeff->SetLineColor(kTeal);
 
     const TString canvName = "7 Efficiencies Comparison;Offline Recalibrated MET w/o Muon term [GeV];Efficiency";
 
