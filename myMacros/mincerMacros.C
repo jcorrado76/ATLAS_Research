@@ -194,11 +194,6 @@ Float_t & individAThreshFinal, Float_t & individBThreshFinal)
     //TODO: need to finish making the bisection compatible as a separate function
 
     //some useful parameters
-    Int_t j = 0;
-    Int_t imax = 30;
-    Float_t lwrbnd = 0.5*frac;
-    Float_t uprbnd = 0.13;
-    Float_t eps = 25.0;
     Float_t x1,x3; //thresholds of individual algorithms
     Float_t f1,f2,f3 = 0; //fractions of events kept out of passrndm
     x1 = lwrbnd;
@@ -298,8 +293,11 @@ Float_t & individAThreshFinal, Float_t & individBThreshFinal)
     std::cout << "At x3 = " << x3 << " counter3: " << counter3 << " events" << "f3: " << f3 << std::endl;
 
 
-//TODO: replace all explicit indexing functions with TNtuple->Fill
-
+    Int_t j = 0;
+    Int_t imax = 30;
+    Float_t lwrbnd = 0.5*frac;
+    Float_t uprbnd = 0.13;
+    Float_t eps = 25.0;
     do{
         j++;
         std::cout << "Inside iteration number: " << j << std::endl;
@@ -316,15 +314,15 @@ Float_t & individAThreshFinal, Float_t & individBThreshFinal)
           x1 = initialGuess;
         }
         initialGuess = ( x1 + x3 ) / 2.0;
-        inputArray[j+2] = initialGuess;
+        inputArray->Fill(initialGuess);
         std::cout << "New Guess: " << initialGuess << std::endl;
         std::cout << "numZeroBiasRndm: " << numZeroBiasRndm << std::endl;
         numKeepx2 = numZeroBiasRndm * initialGuess;
         std::cout << "numKeepx2: " << numKeepx2 << std::endl;
         algAMETx2thresh = computeThresh(algAMETtarget, numKeepx2);
         algBMETx2thresh = computeThresh(algBMETtarget, numKeepx2);
-        thresholdAarray[j+2] = (Float_t) algAMETx2thresh;
-        thresholdBarray[j+2] = (Float_t) algBMETx2thresh;
+        thresholdAarray->Fill(algAMETx2thresh);
+        thresholdBarray->Fill(algBMETx2thresh);
 
         counter2 = 0;
 
@@ -338,25 +336,25 @@ Float_t & individAThreshFinal, Float_t & individBThreshFinal)
     	  }
         }
 
-        numEventsArray[j+2] = counter2;
+        numEventsArray->Fill(counter2);
         std::cout << "algAMETx2thresh: " << algAMETx2thresh << std::endl;
         std::cout << "algBMETx2thresh: " << algBMETx2thresh << std::endl;
         std::cout << "Counter2: " << counter2 << std::endl;
         f2 = (Float_t) counter2 / (Float_t) numZeroBiasRndm;
         std::cout << "f2: " << f2 << std::endl;
         std::cout << "Condition: " << abs(numZeroBiasRndm * frac - counter2) << " > " << eps << std::endl;
-        outputArray[j+2] = f2;
+        outputArray->Fill(f2);
 
-        algAThreshDiff = (Float_t) thresholdAarray[j+2] - (Float_t) thresholdAarray[j+1];
-        algBThreshDiff = (Float_t) thresholdBarray[j+2] - (Float_t) thresholdBarray[j+1];
+        algAThreshDiff = (thresholdAarray->GetArgs())[j+2] - (thresholdAarray->GetArgs())[j+1];
+        algBThreshDiff = (thresholdBarray->GetArgs())[j+2] - (thresholdBarray->GetArgs())[j+1];
 
         algAThreshDiff = abs(algAThreshDiff);
         algBThreshDiff = abs(algBThreshDiff);
 
-      std::cout << "algA current threshold: " << Form("%.7f",thresholdAarray[j+2]) << std::endl;
-      std::cout << "algA previous threshold: " << Form("%.7f",thresholdAarray[j+1]) << std::endl;
-      std::cout << "algB current threshold: " << Form("%.7f",thresholdBarray[j+2]) << std::endl;
-      std::cout << "algB previous threshold: " << Form("%.7f",thresholdBarray[j+1]) << std::endl;
+      std::cout << "algA current threshold: " << Form("%.7f",(thresholdAarray->GetArgs())[j+2]) << std::endl;
+      std::cout << "algA previous threshold: " << Form("%.7f",(thresholdAarray->GetArgs())[j+1]) << std::endl;
+      std::cout << "algB current threshold: " << Form("%.7f",(thresholdBarray->GetArgs())[j+2]) << std::endl;
+      std::cout << "algB previous threshold: " << Form("%.7f",(thresholdBarray->GetArgs())[j+1]) << std::endl;
       std::cout << "binWidth: " << binWidth << "\n" << std::endl;
 
     }while ( abs( counter2 - (numZeroBiasRndm * frac) ) > eps && (abs(algAThreshDiff) > binWidth) && (abs(algBThreshDiff) > binWidth) && ( j <= imax ) );
