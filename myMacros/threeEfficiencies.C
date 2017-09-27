@@ -12,12 +12,9 @@
 #include "TSystem.h"
 #include "TF1.h"
 #include "TBenchmark.h"
+#include "TNtuple.h"
 
-
-//TODO: make this function return the .root TFile* handle to pass to generate efficiencies, so I can put all the root files
-//from several threeEfficiencies runs into a single root file, separated by folders
-
-Int_t threeEfficiencies( const TString& algA , const TString& algB,
+TFile* threeEfficiencies( const TString& algA , const TString& algB,
         const Float_t frac = 0.00590, const TString folder = "",
         const TString& zerobiasFileName = "PhysicsMain.All.noalgXEtriggers.2016.f731f758._m1659m1710.48Runs.root",
         const TString& muonFilename = "PhysicsMain.L1KFmuontriggers.2016.f731f758_m1659m1710.Run309759.48Runs.root")
@@ -131,11 +128,11 @@ Int_t threeEfficiencies( const TString& algA , const TString& algB,
 	    }
 	}
 
-    Float_t inputArray[100];
-    Float_t outputArray[100];
-    Float_t numEventsArray[100];
-    Float_t thresholdAarray[100];
-    Float_t thresholdBarray[100];
+    TNtuple inputArray;
+    TNtuple outputArray;
+    TNtuple numEventsArray;
+    TNtuple thresholdAarray;
+    TNtuple thresholdBarray;
 
     Float_t binWidth = (metMax - metMin)/ nbins;
 
@@ -227,7 +224,15 @@ Int_t threeEfficiencies( const TString& algA , const TString& algB,
     legend->Draw();
 
 
+    //write efficiencies to the root file
+    Ateff->Write( algA + " TEfficiency" );
+    Bteff->Write( algB + " TEfficiency" );
+    Cteff->Write( algC + " TEfficiency" );
+    Dteff->Write( algD + " TEfficiency" );
+    //write canvas to the root file
+    efficiencyCanvas->Write("Efficiency Cavnas");
 
+    //TODO: Generate a TTRee with all logfile info
 
     TString folderPath = "./TEfficienciesPics/" + folder + "-" +  algA + "_and_" + algB + "_efficiencies.tiff";
     efficiencyCanvas->Print(folderPath);
@@ -283,5 +288,5 @@ Int_t threeEfficiencies( const TString& algA , const TString& algB,
     threeEfficienciesBenchmark->Show("Three Efficiencies");
 
     threeEfficienciesBenchmark->Summary();
-    return(0);
+    return( myFile );
     }
