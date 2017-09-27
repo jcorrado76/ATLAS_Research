@@ -128,11 +128,11 @@ TFile* threeEfficiencies( const TString& algA , const TString& algB,
 	    }
 	}
 
-    TNtuple inputArray;
-    TNtuple outputArray;
-    TNtuple numEventsArray;
-    TNtuple thresholdAarray;
-    TNtuple thresholdBarray;
+    TNtuple* inputArray = new TNtuple();
+    TNtuple* outputArray = new TNtuple();
+    TNtuple* numEventsArray = new TNtuple();
+    TNtuple* thresholdAarray = new TNtuple();
+    TNtuple* thresholdBarray = new TNtuple();
 
     Float_t binWidth = (metMax - metMin)/ nbins;
 
@@ -145,12 +145,15 @@ TFile* threeEfficiencies( const TString& algA , const TString& algB,
 
     //start bisection timer
     threeEfficienciesBenchmark->Start("Bisection");
+
     //run BISECTION
     bisectionIndividFrac = bisection( algAMETHist , algBMETHist, binWidth, numZeroBiasRndm , frac ,
     inputArray , outputArray ,numEventsArray ,thresholdAarray ,thresholdBarray,
     individAThreshFinal, individBThreshFinal );
+
     //end bisection timer
     threeEfficienciesBenchmark->Show("Bisection");
+    
     //END ZEROBIAS TIMER
     threeEfficienciesBenchmark->Show("ZeroBias Thresholds");
 

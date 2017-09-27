@@ -188,7 +188,7 @@ Float_t determineMuonEventsKeptCombined( const TString& algA, const Float_t thre
 //TODO: separate bisection as its own macro
 //TODO: change all the arrays to TNtuples
 Float_t bisection(const TH1F* hist1 , const TH1F* hist2, const Float_t binWidth, const Int_t numZeroBiasRndm = 0 , const Float_t frac = 0.00590,
-Float_t * inputArray ,Float_t * outputArray ,Float_t * numEventsArray ,Float_t * thresholdAarray ,Float_t * thresholdBarray,
+TNtuple* inputArray , TNtuple* outputArray , TNtuple* numEventsArray , TNtuple* thresholdAarray ,TNtuple* thresholdBarray,
 Float_t & individAThreshFinal, Float_t & individBThreshFinal)
 {
     //TODO: need to finish making the bisection compatible as a separate function
@@ -286,28 +286,19 @@ Float_t & individAThreshFinal, Float_t & individBThreshFinal)
     f2 = (Float_t) counter2 / (Float_t) numZeroBiasRndm;
     f3 = (Float_t) counter3 / (Float_t) numZeroBiasRndm;
 
-    //initialize arrays with the
-    inputArray[0] = x1;
-    inputArray[2] = initialGuess;
-    inputArray[1] = x3;
-    outputArray[0] = f1;
-    outputArray[2] = f2;
-    outputArray[1] = f3;
-    numEventsArray[0] = counter1;
-    numEventsArray[2] = counter2;
-    numEventsArray[1] = counter3;
-    thresholdAarray[0] = (Float_t) algAMETx1thresh;
-    thresholdAarray[2] = (Float_t) algAMETx2thresh;
-    thresholdAarray[1] = (Float_t) algAMETx3thresh;
-    thresholdBarray[0] = (Float_t) algBMETx1thresh;
-    thresholdBarray[2] = (Float_t) algBMETx2thresh;
-    thresholdBarray[1] = (Float_t) algBMETx3thresh;
-
+    //initialize ntuples with initial guess values
+    inputArray->Fill({x1,initialGuess,x3})
+    outputArray->Fill({f1,f2,f3});
+    numEventsArray->Fill({counter1,counter2,counter3});
+    thresholdAarray->Fill({algAMETx1thresh,algAMETx2thresh,algAMETx3thresh});
+    thresholdBarray->Fill({algBMETx1thresh,algBMETx2thresh,algBMETx3thresh});
 
     std::cout << "At x1 = " << x1 << " counter1: " << counter1 << " events = " << "f1: " << f1 << std::endl;
     std::cout << "At x2 = " << initialGuess << " counter2: " << counter2 << " events = " << "f2: " << f2 << std::endl;
     std::cout << "At x3 = " << x3 << " counter3: " << counter3 << " events" << "f3: " << f3 << std::endl;
 
+
+//TODO: replace all explicit indexing functions with TNtuple->Fill
 
     do{
         j++;
