@@ -185,7 +185,7 @@ Float_t determineMuonEventsKeptCombined( const TString& algA, const Float_t thre
     return(numbPassedEvents);
 }
 
-/*
+
 Float_t bisection(const TH1F* hist1 , const TH1F* hist2, const Float_t binWidth, const Int_t numZeroBiasRndm = 0 , const Float_t frac = 0.00590)
 {
     //TODO: need to finish making the bisection compatible as a separate function
@@ -246,9 +246,6 @@ Float_t bisection(const TH1F* hist1 , const TH1F* hist2, const Float_t binWidth,
     std::cout << "At x3 = " << x3 << " counter3: " << counter3 << " events" << "f3: " << f3 << std::endl;
 
 
-
-
-
     do{
         j++;
         std::cout << "Inside iteration number: " << j << std::endl;
@@ -278,28 +275,28 @@ Float_t bisection(const TH1F* hist1 , const TH1F* hist2, const Float_t binWidth,
         counter2 = 0;
         if (algA==algB)
         {
-    	for (Int_t i  = 0 ; i < zerobiasNentries ;i++)
-    	{
-    	  zeroBiasTree->GetEntry(i);
-    	  algAMET=algBMET;
-    	  if ((algBMET > algBMETx2thresh) && (metl1 > myConstants::metl1thresh)&& ( passnoalgL1XE10 > 0.5 || passnoalgL1XE30 > 0.5 ||
-              passnoalgL1XE40 > 0.5 || passnoalgL1XE45 > 0.5  ))
-        	  {
-        	    counter2++;
-        	  }
-    	}
+        	for (Int_t i  = 0 ; i < zerobiasNentries ;i++)
+        	{
+        	  zeroBiasTree->GetEntry(i);
+        	  algAMET=algBMET;
+        	  if ((algBMET > algBMETx2thresh) && (metl1 > myConstants::metl1thresh)&& ( passnoalgL1XE10 > 0.5 || passnoalgL1XE30 > 0.5 ||
+                  passnoalgL1XE40 > 0.5 || passnoalgL1XE45 > 0.5  ))
+            	  {
+            	    counter2++;
+            	  }
+        	}
         }
         else
         {
-    	for (Int_t i  = 0 ; i < zerobiasNentries ;i++)
-    	{
-    	  zeroBiasTree->GetEntry(i);
-    	  if ((algAMET > algAMETx2thresh) && (algBMET > algBMETx2thresh) && (metl1 > myConstants::metl1thresh)&& ( passnoalgL1XE10 > 0.5 ||
-              passnoalgL1XE30 > 0.5 || passnoalgL1XE40 > 0.5 || passnoalgL1XE45 > 0.5  ) )
-    	  {
-    	    counter2++;
-    	  }
-    	}
+        	for (Int_t i  = 0 ; i < zerobiasNentries ;i++)
+        	{
+        	  zeroBiasTree->GetEntry(i);
+        	  if ((algAMET > algAMETx2thresh) && (algBMET > algBMETx2thresh) && (metl1 > myConstants::metl1thresh)&& ( passnoalgL1XE10 > 0.5 ||
+                  passnoalgL1XE30 > 0.5 || passnoalgL1XE40 > 0.5 || passnoalgL1XE45 > 0.5  ) )
+        	  {
+        	    counter2++;
+        	  }
+        	}
         }
         numEventsArray[j+2] = counter2;
         std::cout << "algAMETx2thresh: " << algAMETx2thresh << std::endl;
@@ -336,4 +333,4 @@ Float_t bisection(const TH1F* hist1 , const TH1F* hist2, const Float_t binWidth,
       }
 
     return( initialGuess );
-}*/
+}

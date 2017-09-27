@@ -13,20 +13,8 @@
 #include "TF1.h"
 
 
-//TODO: get rid of this namespace and hardcode constants (initialize at the top)
-namespace myConstants
-{
-    Int_t nbins = 1200;
-    Int_t muonNbins = 200;
-    Float_t metMin = 0;
-    Float_t metMax = 300;
-    Float_t muonMetMin = metMin;
-    Float_t muonMetMax = 300;
-    Float_t metl1thresh = 50.0;
-
-}
-
-
+//TODO: make this function return the .root TFile* handle to pass to generate efficiencies, so I can put all the root files
+//from several threeEfficiencies runs into a single root file, separated by folders
 
 Int_t threeEfficiencies( const TString& algA , const TString& algB,
         const Float_t frac = 0.00590, const TString folder = "",
@@ -51,6 +39,7 @@ Int_t threeEfficiencies( const TString& algA , const TString& algB,
     std::cout << "Muon Data being used to compute algorithm efficiency: " << muonFilePath << std::endl;
 
     //initialize variables to be used later
+    Float_t metl1thresh = 50.0;
     Int_t muonNentries = myMuonTree->GetEntries();
     Int_t muonNbins = 200;
     Int_t nbins = 1200;
@@ -113,7 +102,7 @@ Int_t threeEfficiencies( const TString& algA , const TString& algB,
     std::cout << "Returned to threeEfficiencies.C" << std::endl;
     std::cout << "algAThresh: " << algAThresh << std::endl;
     std::cout << "algBThresh: " << algBThresh << std::endl;
-    std::cout << "Using METL1THRESH: " << myConstants::metl1thresh << std::endl;
+    std::cout << "Using METL1THRESH: " << metl1thresh << std::endl;
 
     numZeroBiasRndm = 0 ;
 
@@ -165,23 +154,23 @@ Int_t threeEfficiencies( const TString& algA , const TString& algB,
 
     std::cout << "algAx1Thresh: " << algAMETx1thresh << std::endl;
     std::cout << "algBx1Thresh: " << algBMETx1thresh << std::endl;
-    std::cout << "metl1thresh : " << myConstants::metl1thresh << std::endl;
+    std::cout << "metl1thresh : " << metl1thresh << std::endl;
     for (Int_t i  = 0 ; i < zerobiasNentries ;i++) //determine events kept at each guess
     {
     zeroBiasTree->GetEntry(i);
         //if (passRndm > 0.5)
         //{
-            if ((algAMET > algAMETx1thresh) && (algBMET > algBMETx1thresh) && (metl1 > myConstants::metl1thresh)&& ( passnoalgL1XE10 > 0.5 || passnoalgL1XE30 > 0.5 ||
+            if ((algAMET > algAMETx1thresh) && (algBMET > algBMETx1thresh) && (metl1 > metl1thresh)&& ( passnoalgL1XE10 > 0.5 || passnoalgL1XE30 > 0.5 ||
             passnoalgL1XE40 > 0.5 || passnoalgL1XE45 > 0.5  ) )
             {
             counter1++;
             }
-            if ((algAMET > algAMETx2thresh) && (algBMET > algBMETx2thresh) && (metl1 > myConstants::metl1thresh)&& ( passnoalgL1XE10 > 0.5 || passnoalgL1XE30 > 0.5 ||
+            if ((algAMET > algAMETx2thresh) && (algBMET > algBMETx2thresh) && (metl1 > metl1thresh)&& ( passnoalgL1XE10 > 0.5 || passnoalgL1XE30 > 0.5 ||
             passnoalgL1XE40 > 0.5 || passnoalgL1XE45 > 0.5  ))
             {
             counter2++;
             }
-            if ((algAMET > algAMETx3thresh) && (algBMET > algBMETx3thresh) && (metl1 > myConstants::metl1thresh)&& ( passnoalgL1XE10 > 0.5 || passnoalgL1XE30 > 0.5 ||
+            if ((algAMET > algAMETx3thresh) && (algBMET > algBMETx3thresh) && (metl1 > metl1thresh)&& ( passnoalgL1XE10 > 0.5 || passnoalgL1XE30 > 0.5 ||
             passnoalgL1XE40 > 0.5 || passnoalgL1XE45 > 0.5  ) )
             {
             counter3++;
@@ -231,6 +220,11 @@ Int_t threeEfficiencies( const TString& algA , const TString& algB,
 
 //TODO: make a TBenchmark here for "bisection"
 //TODO: finish writing bisection in mincerMacros, and use it here for encapsulation
+
+
+ initialGuess = bisection( algAMETHist , algBMETHist, binWidth, numZeroBiasRndm , frac );
+
+
 do{
     j++;
     std::cout << "Inside iteration number: " << j << std::endl;
@@ -261,7 +255,7 @@ do{
 	for (Int_t i  = 0 ; i < zerobiasNentries ;i++)
 	{
 	  zeroBiasTree->GetEntry(i);
-	  if ((algAMET > algAMETx2thresh) && (algBMET > algBMETx2thresh) && (metl1 > myConstants::metl1thresh)&& ( passnoalgL1XE10 > 0.5 ||
+	  if ((algAMET > algAMETx2thresh) && (algBMET > algBMETx2thresh) && (metl1 > metl1thresh)&& ( passnoalgL1XE10 > 0.5 ||
           passnoalgL1XE30 > 0.5 || passnoalgL1XE40 > 0.5 || passnoalgL1XE45 > 0.5  ) )
 	  {
 	    counter2++;
@@ -303,7 +297,7 @@ do{
   }
 
 
-//ZZEROBIAS STUFF IS FINISHED
+//END ZEROBIAS
 
 
 acthresh = algAMETx2thresh;
@@ -312,7 +306,7 @@ bcthresh = algBMETx2thresh;
 TString cstring = algA + " > " + Form(" %.2f", acthresh) + " and " + algB + " > " + Form(" %.2f", bcthresh);
 TString astring = algA + " > " + Form(" %.2f", algAThresh);
 TString bstring = algB + " > " + Form(" %.2f", algBThresh);
-TString dstring = (TString) "L1 > " + Form(" %.2f" , myConstants::metl1thresh);
+TString dstring = (TString) "L1 > " + Form(" %.2f" , metl1thresh);
 
 TEfficiency* Ateff  = new TEfficiency(astring , "Efficiency", muonNbins, muonMetMin, muonMetMax);
 TEfficiency* Bteff  = new TEfficiency(bstring , "Efficiency", muonNbins, muonMetMin, muonMetMax);
@@ -336,10 +330,10 @@ for (Int_t l = 0 ; l < muonNentries ; l++)
     	    Float_t metnomu = sqrt(((mexoffrecal - mexoffrecalmuon) * (mexoffrecal - mexoffrecalmuon)) +
     	    ((meyoffrecal - meyoffrecalmuon)*(meyoffrecal - meyoffrecalmuon))); //compute metnomu
             numbPassMuon++;
-            Ateff->Fill((algAmuonMET > algAThresh) && (muonMetl1 > myConstants::metl1thresh), metnomu);
-    	    Bteff->Fill((algBmuonMET > algBThresh) && (muonMetl1 > myConstants::metl1thresh), metnomu);
-    	    Cteff->Fill(((algAmuonMET > acthresh) && (algBmuonMET > bcthresh) && (muonMetl1 > myConstants::metl1thresh)), metnomu);
-            Dteff->Fill((muonMetl1 >= myConstants::metl1thresh), metnomu);
+            Ateff->Fill((algAmuonMET > algAThresh) && (muonMetl1 > metl1thresh), metnomu);
+    	    Bteff->Fill((algBmuonMET > algBThresh) && (muonMetl1 > metl1thresh), metnomu);
+    	    Cteff->Fill(((algAmuonMET > acthresh) && (algBmuonMET > bcthresh) && (muonMetl1 > metl1thresh)), metnomu);
+            Dteff->Fill((muonMetl1 >= metl1thresh), metnomu);
         }
 	}
 }
@@ -394,7 +388,7 @@ if(logFile) std::cout << "logFile Successfully Opened" << std::endl;
 
 logFile << "Algorithms: " << algA << "\t" << algB << "\r\n";
 logFile << "Nbins: " << nbins << "\t METMIN: " << metMin << "\t METMAX: " << metMax << "\r\n";
-logFile << "METL1 THRESH: " << myConstants::metl1thresh << "\r\n";
+logFile << "METL1 THRESH: " << metl1thresh << "\r\n";
 logFile << "Fraction to keep of zerobias for bisection: " << frac << "\r\n";
 logFile << "ZEROBIAS DATAFILE: " << zerobiasFileName << "\r\n";
 logFile << "ZEROIAS NENTRIES : " << zerobiasNentries << "\r\n";
