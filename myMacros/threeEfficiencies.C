@@ -274,7 +274,7 @@ Int_t threeEfficiencies( const TString& algA , const TString& algB,
     Float_t algBThreshDiff;
 
 //TODO: make a TBenchmark here for "bisection"
-
+//TODO: finish writing bisection in mincerMacros, and use it here for encapsulation 
 do{
     j++;
     std::cout << "Inside iteration number: " << j << std::endl;
@@ -385,6 +385,7 @@ myMuonTree->SetBranchAddress(algA,&algAmuonMET);
 myMuonTree->SetBranchAddress(algB,&algBmuonMET);
 myMuonTree->SetBranchAddress("metl1",&muonMetl1);
 Int_t numbPassMuon = 0;Float_t wValue;
+//TODO: get rid of the same alg check; do it the same way you did in the other macro; this is clumsy
 for (Int_t l = 0 ; l < muonNentries ; l++)
 {
     myMuonTree->GetEntry(l);
@@ -424,6 +425,8 @@ for (Int_t l = 0 ; l < muonNentries ; l++)
     }
 }
 
+
+//TODO: write all efficiencies to a root file
 std::cout << "NUMB MUON ENTRIES PASSED ALG A: " << (Ateff->GetPassedHistogram())->GetEntries() << std::endl;
 std::cout << "NUMB MUON ENTRIES PASSED ALG B: " << (Bteff->GetPassedHistogram())->GetEntries() << std::endl;
 std::cout << "NUMB MUON ENTRIES PASSED ALG C: " << (Cteff->GetPassedHistogram())->GetEntries() << std::endl;
@@ -475,6 +478,8 @@ TString logFileName = "./TEfficienciesPics/" + folder +  algA + "_and_" + algB +
 std::cout << "Generating log file: " << logFileName << std::endl;
 const char* newLogFileName = logFileName.Data(); //need to go inside and grab data to caste to a data type so i can open ofstream
 std::ofstream logFile;
+
+//TODO: write logfile to the same root file
 logFile.open(newLogFileName, std::fstream::out);
 if(logFile) std::cout << "logFile Successfully Opened" << std::endl;
 

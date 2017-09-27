@@ -9,6 +9,7 @@ Int_t generateEfficiencies(const Float_t frac = 0.00590,
     /*
     This program should just call threeefficiencies.c for all of the 15 combinations of algorithms
     */
+    //TODO: move mettopolem to the back of the array so if anything, it is done last
     gROOT->ProcessLine(".L threeEfficiencies.C");
     TString algArray[6] = {"mettopoclem","metcell","metmht","mettopocl","mettopoclps","mettopoclpuc"};
     //TString algArray[6] = {"metl1","metcell","metmht","mettopocl","mettopoclps","mettopoclpuc"};
