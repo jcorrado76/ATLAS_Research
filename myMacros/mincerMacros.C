@@ -186,7 +186,9 @@ Float_t determineMuonEventsKeptCombined( const TString& algA, const Float_t thre
 }
 
 
-Float_t bisection(const TH1F* hist1 , const TH1F* hist2, const Float_t binWidth, const Int_t numZeroBiasRndm = 0 , const Float_t frac = 0.00590)
+Float_t bisection(const TH1F* hist1 , const TH1F* hist2, const Float_t binWidth, const Int_t numZeroBiasRndm = 0 , const Float_t frac = 0.00590,
+Float_t * inputArray ,Float_t * outputArray ,Float_t * numEventsArray ,Float_t * thresholdAarray ,Float_t * thresholdBarray,
+Float_t individAThreshFinal, Float_t individBThreshFinal)
 {
     //TODO: need to finish making the bisection compatible as a separate function
 
@@ -197,7 +199,7 @@ Float_t bisection(const TH1F* hist1 , const TH1F* hist2, const Float_t binWidth,
     Float_t uprbnd = 0.13;
     Float_t eps = 25.0;
     Float_t x1,x3; //thresholds of individual algorithms
-    Float_t f1,f2,f3 = 0; //number of events kept
+    Float_t f1,f2,f3 = 0; //fractions of events kept out of passrndm
     x1 = lwrbnd;
     x3 = uprbnd;
     Float_t initialGuess = ( x1 + x3 ) / 2.0;
@@ -206,13 +208,33 @@ Float_t bisection(const TH1F* hist1 , const TH1F* hist2, const Float_t binWidth,
     Float_t numKeepx2 = numZeroBiasRndm * initialGuess;
     Float_t numKeepx3 = numZeroBiasRndm * x3;
 
+    //compute the cumulative right hand sum hists
+    TH1F *algAMETtarget = (TH1F*) algAMETHist->GetCumulative(kFALSE);
+    TH1F *algBMETtarget = (TH1F*) algBMETHist->GetCumulative(kFALSE);
+    //rename for clarity later on
+    algAMETtarget->SetName(algAMETtarget->GetName() + (const TString)"A");
+    algBMETtarget->SetName(algBMETtarget->GetName() + (const TString)"B");
+
+    //compute thresholds at boundaris to use
+    algAMETx1thresh = computeThresh(algAMETtarget, numKeepx1);
+    algBMETx1thresh = computeThresh(algBMETtarget, numKeepx1);
+
+    algAMETx2thresh = computeThresh(algAMETtarget, numKeepx2);
+    algBMETx2thresh = computeThresh(algBMETtarget, numKeepx2);
+
+    algAMETx3thresh = computeThresh(algAMETtarget, numKeepx3);
+    algBMETx3thresh = computeThresh(algBMETtarget, numKeepx3);
+
     //print the status
+    std::cout << "numZeroBiasRndm: " << numZeroBiasRndm << std::endl;
+    std::cout << "frac " << frac << std::endl;
+    std::cout << "numCombined to keep: " << numZeroBiasRndm * frac << std::endl;
+
     std::cout << "Entering bisection to determine individual fractions" << std::endl;
     std::cout << "Lower Bound: " << lwrbnd << std::endl;
     std::cout << "Midpoint: " << (lwrbnd+uprbnd)/2. << std::endl;
     std::cout << "Upper Bound: " << uprbnd << std::endl;
     std::cout << "Epsilon: " << eps << std::endl;
-
 
     //generate the cumulative right hand sum histograms
     TH1F *algAMETtarget = (TH1F*) algAMETHist->GetCumulative(kFALSE);
@@ -235,10 +257,50 @@ Float_t bisection(const TH1F* hist1 , const TH1F* hist2, const Float_t binWidth,
     std::cout << "algBx1Thresh: " << algBMETx1thresh << std::endl;
     std::cout << "metl1thresh : " << myConstants::metl1thresh << std::endl;
 
+    for (Int_t i  = 0 ; i < zerobiasNentries ;i++) //determine events kept at each guess
+    {
+    zeroBiasTree->GetEntry(i);
+        //if (passRndm > 0.5)
+        //{
+            if ((algAMET > algAMETx1thresh) && (algBMET > algBMETx1thresh) && (metl1 > metl1thresh)&& ( passnoalgL1XE10 > 0.5 || passnoalgL1XE30 > 0.5 ||
+            passnoalgL1XE40 > 0.5 || passnoalgL1XE45 > 0.5  ) )
+            {
+            counter1++;
+            }
+            if ((algAMET > algAMETx2thresh) && (algBMET > algBMETx2thresh) && (metl1 > metl1thresh)&& ( passnoalgL1XE10 > 0.5 || passnoalgL1XE30 > 0.5 ||
+            passnoalgL1XE40 > 0.5 || passnoalgL1XE45 > 0.5  ))
+            {
+            counter2++;
+            }
+            if ((algAMET > algAMETx3thresh) && (algBMET > algBMETx3thresh) && (metl1 > metl1thresh)&& ( passnoalgL1XE10 > 0.5 || passnoalgL1XE30 > 0.5 ||
+            passnoalgL1XE40 > 0.5 || passnoalgL1XE45 > 0.5  ) )
+            {
+            counter3++;
+            }
+        //}
+    }
+
 
     f1 = (Float_t) counter1 / (Float_t) numZeroBiasRndm;
     f2 = (Float_t) counter2 / (Float_t) numZeroBiasRndm;
     f3 = (Float_t) counter3 / (Float_t) numZeroBiasRndm;
+
+
+    inputArray[0] = x1;
+    inputArray[2] = initialGuess;
+    inputArray[1] = x3;
+    outputArray[0] = f1;
+    outputArray[2] = f2;
+    outputArray[1] = f3;
+    numEventsArray[0] = counter1;
+    numEventsArray[2] = counter2;
+    numEventsArray[1] = counter3;
+    thresholdAarray[0] = (Float_t) algAMETx1thresh;
+    thresholdAarray[2] = (Float_t) algAMETx2thresh;
+    thresholdAarray[1] = (Float_t) algAMETx3thresh;
+    thresholdBarray[0] = (Float_t) algBMETx1thresh;
+    thresholdBarray[2] = (Float_t) algBMETx2thresh;
+    thresholdBarray[1] = (Float_t) algBMETx3thresh;
 
 
     std::cout << "At x1 = " << x1 << " counter1: " << counter1 << " events = " << "f1: " << f1 << std::endl;
@@ -273,31 +335,17 @@ Float_t bisection(const TH1F* hist1 , const TH1F* hist2, const Float_t binWidth,
         thresholdBarray[j+2] = (Float_t) algBMETx2thresh;
 
         counter2 = 0;
-        if (algA==algB)
-        {
-        	for (Int_t i  = 0 ; i < zerobiasNentries ;i++)
-        	{
-        	  zeroBiasTree->GetEntry(i);
-        	  algAMET=algBMET;
-        	  if ((algBMET > algBMETx2thresh) && (metl1 > myConstants::metl1thresh)&& ( passnoalgL1XE10 > 0.5 || passnoalgL1XE30 > 0.5 ||
-                  passnoalgL1XE40 > 0.5 || passnoalgL1XE45 > 0.5  ))
-            	  {
-            	    counter2++;
-            	  }
-        	}
+
+    	for (Int_t i  = 0 ; i < zerobiasNentries ;i++)
+    	{
+    	  zeroBiasTree->GetEntry(i);
+    	  if ((algAMET > algAMETx2thresh) && (algBMET > algBMETx2thresh) && (metl1 > myConstants::metl1thresh)&& ( passnoalgL1XE10 > 0.5 ||
+              passnoalgL1XE30 > 0.5 || passnoalgL1XE40 > 0.5 || passnoalgL1XE45 > 0.5  ) )
+    	  {
+    	    counter2++;
+    	  }
         }
-        else
-        {
-        	for (Int_t i  = 0 ; i < zerobiasNentries ;i++)
-        	{
-        	  zeroBiasTree->GetEntry(i);
-        	  if ((algAMET > algAMETx2thresh) && (algBMET > algBMETx2thresh) && (metl1 > myConstants::metl1thresh)&& ( passnoalgL1XE10 > 0.5 ||
-                  passnoalgL1XE30 > 0.5 || passnoalgL1XE40 > 0.5 || passnoalgL1XE45 > 0.5  ) )
-        	  {
-        	    counter2++;
-        	  }
-        	}
-        }
+        
         numEventsArray[j+2] = counter2;
         std::cout << "algAMETx2thresh: " << algAMETx2thresh << std::endl;
         std::cout << "algBMETx2thresh: " << algBMETx2thresh << std::endl;
