@@ -12,14 +12,16 @@
 #include "TSystem.h"
 #include "TF1.h"
 
-
-//TODO: make this return a bool, tell it to return true or false for a given entry if passes transverse mass cut
-Float_t w( const Float_t metoffrecal     , const Float_t mexoffrecal     , const Float_t meyoffrecal ,
+Bool_t passTransverseMassCut( const Float_t metoffrecal     , const Float_t mexoffrecal     , const Float_t meyoffrecal ,
            const Float_t metoffrecalmuon , const Float_t mexoffrecalmuon , const Float_t meyoffrecalmuon )
 {
+    Float_t wLowerbnd = 40.0;
+    Float_t wUpperbnd = 100.0;
     Float_t wValue = sqrt( 2.0 * metoffrecal * metoffrecalmuon * ( 1 + ( ( mexoffrecal * mexoffrecalmuon + meyoffrecal * meyoffrecalmuon ) /
                            ( metoffrecal * metoffrecalmuon ) ) ) );
-    return(wValue);
+    Bool_t pass;
+    pass = ( wValue >= wLowerbnd ) && ( wValue <= wUpperbnd );
+    return( pass );
 }
 
 Float_t computeThresh(const TH1F* target, const Float_t numberEventsToKeep)

@@ -70,7 +70,7 @@ Int_t print7Efficiencies(const TString& muonFileName = "PhysicsMain.L1KFmuontrig
     Int_t muonNentries = myMuonTree->GetEntries();
 
 
-    Float_t metcell,metmht,metl1,mettopocl,mettopoclps,mettopoclpuc,wValue,metoffrecal,mexoffrecal,
+    Float_t metcell,metmht,metl1,mettopocl,mettopoclps,mettopoclpuc,metoffrecal,mexoffrecal,
     meyoffrecal,metoffrecalmuon,mexoffrecalmuon,meyoffrecalmuon;
     Int_t passmuon,passmuvarmed,cleanCutsFlag,recalBrokeFlag;
 
@@ -104,8 +104,7 @@ Int_t print7Efficiencies(const TString& muonFileName = "PhysicsMain.L1KFmuontrig
         {
             if ((passmuvarmed > 0.1 || passmuon > 0.1) && cleanCutsFlag > 0.1 && recalBrokeFlag < 0.1)
             {
-                wValue = w(metoffrecal,mexoffrecal,meyoffrecal,metoffrecalmuon,mexoffrecalmuon,meyoffrecalmuon);
-                if (wValue >= 40.0 && wValue <= 100.0)
+                if ( passTransverseMassCut(metoffrecal,mexoffrecal,meyoffrecal,metoffrecalmuon,mexoffrecalmuon,meyoffrecalmuon) )
                 {
                     Float_t metnomu = sqrt(((mexoffrecal - mexoffrecalmuon) * (mexoffrecal - mexoffrecalmuon)) +
                     ((meyoffrecal - meyoffrecalmuon)*(meyoffrecal - meyoffrecalmuon))); //compute metnomu
