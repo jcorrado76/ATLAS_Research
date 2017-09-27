@@ -13,6 +13,9 @@
 #include "TF1.h"
 #include "TBenchmark.h"
 #include "TNtuple.h"
+#include <TParameter.h>
+#include "TList.h"
+#include "TBranch.h"
 
 TFile* threeEfficiencies( const TString& algA , const TString& algB,
         const Float_t frac = 0.00590, const TString folder = "",
@@ -128,6 +131,18 @@ TFile* threeEfficiencies( const TString& algA , const TString& algB,
 	    }
 	}
 
+
+
+
+    TList* parameters = new TList();
+    TParameter* algparA = new TParameter("Algorithm A", const TString& algA);
+    TParameter* algparB = new TParameter("Algorithm B", const TString& algB);
+    TParameter* Nbins = new TParameter("nbins", const Int_t nbins);
+    TParameter* metl1par = new TParameter("metl1Thresh", const Float_t metl1thresh );
+    TParameter<Float_t>* fraction = new TParameter<Float_t>("frac", const Float_t frac);
+
+
+
     TNtuple* inputArray = new TNtuple();
     TNtuple* outputArray = new TNtuple();
     TNtuple* numEventsArray = new TNtuple();
@@ -153,9 +168,16 @@ TFile* threeEfficiencies( const TString& algA , const TString& algB,
 
     //end bisection timer
     threeEfficienciesBenchmark->Show("Bisection");
-    
+
     //END ZEROBIAS TIMER
     threeEfficienciesBenchmark->Show("ZeroBias Thresholds");
+
+
+
+
+
+
+
 
     TString cstring = algA + " > " + Form(" %.2f", individAThreshFinal) + " and " + algB + " > " + Form(" %.2f", individBThreshFinal);
     TString astring = algA + " > " + Form(" %.2f", algAThresh);
@@ -198,6 +220,7 @@ TFile* threeEfficiencies( const TString& algA , const TString& algB,
     threeEfficienciesBenchmark->Show("Fill Muon TEfficiencies");
 
     //TODO: write efficiencies and canvas to a root file
+    //TODO: handle the case if there is already a root file with same name
     TString fileName = algA + "_" + algB + " efficiencies.root";
     TFile myFile = new TFile(fileName,"RECREATE");
 
@@ -232,23 +255,32 @@ TFile* threeEfficiencies( const TString& algA , const TString& algB,
     Bteff->Write( algB + " TEfficiency" );
     Cteff->Write( algC + " TEfficiency" );
     Dteff->Write( algD + " TEfficiency" );
+
+    //make a tiff picture of the efficiency canvas just in case
+    TString folderPath = "./TEfficienciesPics/" + folder + "-" +  algA + "_and_" + algB + "_efficiencies.tiff";
+    efficiencyCanvas->Print(folderPath);
     //write canvas to the root file
     efficiencyCanvas->Write("Efficiency Cavnas");
 
-    //TODO: Generate a TTRee with all logfile info
+    //TODO: Generate a TTree with all logfile info
+    TTree* parameterTree = new TTree("parTree","Tree Containing Run Parameters");
+    TTree* logFileTree = new TTree("logTree","Log File Data");
 
-    TString folderPath = "./TEfficienciesPics/" + folder + "-" +  algA + "_and_" + algB + "_efficiencies.tiff";
-    efficiencyCanvas->Print(folderPath);
+    TBranch *b_inputArray = logFileTree->Branch("Input Array", inputArray, "F" );
+    TBranch *b_outputArray = logFileTree->Branch("Output Array", outputArray, "F" );
+    TBranch *b_threshAArray = logFileTree->Branch("Threshold A Array", thresholdAarray, "F" );
+    TBranch *b_threshBArray = logFileTree->Branch("Threshold B Array", thresholdBarray, "F" );
 
-    TString logFileName = "./TEfficienciesPics/" + folder +  algA + "_and_" + algB + "_efficiencies.txt";
-    std::cout << "Generating log file: " << logFileName << std::endl;
-    const char* newLogFileName = logFileName.Data(); //need to go inside and grab data to caste to a data type so i can open ofstream
-    std::ofstream logFile;
+    TBranch *algAName = parameterTree->Branch("Algorithm A" , &algA , "C");
+    TBranch *algBName = parameterTree->Branch("Algorithm B" , &algB , "C");
+    TBranch *Nbins = parameterTree->Branch("nbins" , &nbins , "I");
+    TBranch *metmin = parameterTree->Branch("MET Min" , &metMin , "F");
+
+
+
+
 
     //TODO: write logfile to the same root file
-    logFile.open(newLogFileName, std::fstream::out);
-    if(logFile) std::cout << "logFile Successfully Opened" << std::endl;
-
     logFile << "Algorithms: " << algA << "\t" << algB << "\r\n";
     logFile << "Nbins: " << nbins << "\t METMIN: " << metMin << "\t METMAX: " << metMax << "\r\n";
     logFile << "METL1 THRESH: " << metl1thresh << "\r\n";
@@ -288,8 +320,9 @@ TFile* threeEfficiencies( const TString& algA , const TString& algB,
     }
     logFile.close();
 
+    //end the three efficiencies benchmark
     threeEfficienciesBenchmark->Show("Three Efficiencies");
-
+    //show the summary and totals of all benchmarks
     threeEfficienciesBenchmark->Summary();
     return( myFile );
     }
