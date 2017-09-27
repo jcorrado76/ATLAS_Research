@@ -1,3 +1,5 @@
+#include <iostream>
+#include <fstream>
 #include "TMath.h"
 #include "TH1.h"
 #include "TFile.h"
@@ -5,12 +7,11 @@
 #include "TString.h"
 #include "TEfficiency.h"
 #include "TLegend.h"
-#include <iostream>
-#include <fstream>
 #include "TROOT.h"
 #include "TCanvas.h"
 #include "TSystem.h"
 #include "TF1.h"
+#include "TBenchmark.h"
 
 
 //TODO: make this function return the .root TFile* handle to pass to generate efficiencies, so I can put all the root files
@@ -36,8 +37,10 @@ Int_t threeEfficiencies( const TString& algA , const TString& algB,
     Float_t determineMuonEventsKeptCombined( const TString&, const Float_t, const TString&,
         const Float_t,const TString& );
 
-    gROOT->ProcessLine("gROOT->Time();");
-
+    //initialize TBenchmark for this macro
+    TBenchmark* threeEfficienciesBenchmark = new TBenchmark();
+    //start the clock running for total time
+    threeEfficienciesBenchmark->Start("Three Efficiencies");
 
     //first, open the muon file and get the muon tree
     TString muonFilePath = "../myData/"+muonFilename;
@@ -101,6 +104,8 @@ Int_t threeEfficiencies( const TString& algA , const TString& algB,
     TH1F *algAMETHist = new TH1F("algA", "algA", nbins, metMin, metMax);
     TH1F *algBMETHist = new TH1F("algB", "algB", nbins, metMin, metMax);
 
+    //start timer on zerobias determination of thresholds
+    threeEfficienciesBenchmark->Start("ZeroBias Thresholds");
 
     //IN DETERMINE THRESH I COMPUTE THRESHOLD AFTER ALSO CUTTING ON METL1 TO MAKE HISTOGRAMS
     Float_t algAThresh = determineZeroBiasThresh(algA,frac,zerobiasFileName);
@@ -141,13 +146,16 @@ Int_t threeEfficiencies( const TString& algA , const TString& algB,
     Float_t individAThreshFinal;
     FLoat_t individBThreshFinal;
 
-    //TODO: make a TBenchmark here for "bisection"
-
+    //start bisection timer
+    threeEfficienciesBenchmark->Start("Bisection");
+    //run BISECTION
     bisectionIndividFrac = bisection( algAMETHist , algBMETHist, binWidth, numZeroBiasRndm , frac ,
     inputArray , outputArray ,numEventsArray ,thresholdAarray ,thresholdBarray,
     individAThreshFinal, individBThreshFinal );
-
-    //END ZEROBIAS
+    //end bisection timer
+    threeEfficienciesBenchmark->Show("Bisection");
+    //END ZEROBIAS TIMER
+    threeEfficienciesBenchmark->Show("ZeroBias Thresholds");
 
     TString cstring = algA + " > " + Form(" %.2f", individAThreshFinal) + " and " + algB + " > " + Form(" %.2f", individBThreshFinal);
     TString astring = algA + " > " + Form(" %.2f", algAThresh);
@@ -158,6 +166,8 @@ Int_t threeEfficiencies( const TString& algA , const TString& algB,
     TEfficiency* Bteff  = new TEfficiency(bstring , "Efficiency", muonNbins, muonMetMin, muonMetMax);
     TEfficiency* Cteff  = new TEfficiency(cstring,  "Efficiency", muonNbins, muonMetMin, muonMetMax);
     TEfficiency* Dteff  = new TEfficiency(dstring,  "Efficiency", muonNbins, muonMetMin, muonMetMax);//combined just L1 cut, 0 on others
+
+    threeEfficienciesBenchmark->Start("Fill Muon TEfficiencies");
 
     Float_t algAmuonMET = 0;
     Float_t algBmuonMET = 0;
@@ -185,16 +195,16 @@ Int_t threeEfficiencies( const TString& algA , const TString& algB,
     }
 
 
-    //TODO: write all efficiencies to a root file
+    threeEfficienciesBenchmark->Show("Fill Muon TEfficiencies");
+
+    //TODO: write efficiencies and canvas to a root file
     TString fileName = algA + "_" + algB + " efficiencies.root";
     TFile myFile = new TFile(fileName,"RECREATE");
 
-
-
-
-
     const TString canvName = algA + " and " + algB + " Combined Efficiency" + ";Offline Recalibrated MET w/o Muon term [GeV];Efficiency";
+
     TCanvas* efficiencyCanvas = new TCanvas("Efficiency Canvas", "Efficiency Canvas");
+
     efficiencyCanvas->RangeAxis(0,0,500,1.0);
 
     Ateff->SetTitle(canvName);
@@ -217,7 +227,9 @@ Int_t threeEfficiencies( const TString& algA , const TString& algB,
     legend->Draw();
 
 
-    TString folderPath = "./TEfficienciesPics/" + folder + "-" +  algA + "_and_" + algB + "_efficiencies.png";
+
+
+    TString folderPath = "./TEfficienciesPics/" + folder + "-" +  algA + "_and_" + algB + "_efficiencies.tiff";
     efficiencyCanvas->Print(folderPath);
 
     TString logFileName = "./TEfficienciesPics/" + folder +  algA + "_and_" + algB + "_efficiencies.txt";
@@ -267,5 +279,9 @@ Int_t threeEfficiencies( const TString& algA , const TString& algB,
       Form("%.7f",thresholdBarray[m+2]) << "\r\n";
     }
     logFile.close();
+
+    threeEfficienciesBenchmark->Show("Three Efficiencies");
+
+    threeEfficienciesBenchmark->Summary();
     return(0);
     }
