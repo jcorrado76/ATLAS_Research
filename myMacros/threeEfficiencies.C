@@ -275,21 +275,6 @@ do{
     thresholdBarray[j+2] = (Float_t) algBMETx2thresh;
 
     counter2 = 0;
-    if (algA==algB)
-    {
-	for (Int_t i  = 0 ; i < zerobiasNentries ;i++)
-	{
-	  zeroBiasTree->GetEntry(i);
-	  algAMET=algBMET;
-	  if ((algBMET > algBMETx2thresh) && (metl1 > myConstants::metl1thresh)&& ( passnoalgL1XE10 > 0.5 || passnoalgL1XE30 > 0.5 ||
-          passnoalgL1XE40 > 0.5 || passnoalgL1XE45 > 0.5  ))
-    	  {
-    	    counter2++;
-    	  }
-	}
-    }
-    else
-    {
 	for (Int_t i  = 0 ; i < zerobiasNentries ;i++)
 	{
 	  zeroBiasTree->GetEntry(i);
@@ -362,40 +347,20 @@ Int_t numbPassMuon = 0;Float_t wValue;
 for (Int_t l = 0 ; l < muonNentries ; l++)
 {
     myMuonTree->GetEntry(l);
-    if (algA == algB)
-    {
-        algAmuonMET = algBmuonMET;
-        if ((passmuvarmed > 0.1 || passmuon > 0.1) && cleanCutsFlag > 0.1 && recalBrokeFlag < 0.1)
+    if ((passmuvarmed > 0.1 || passmuon > 0.1) && (cleanCutsFlag > 0.1) && (recalBrokeFlag < 0.1))
+	{
+        wValue = w(metoffrecal,mexoffrecal,meyoffrecal,metoffrecalmuon,mexoffrecalmuon,meyoffrecalmuon);
+        if (wValue >= 40.0 && wValue <= 100.0)
         {
-            wValue = w(metoffrecal,mexoffrecal,meyoffrecal,metoffrecalmuon,mexoffrecalmuon,meyoffrecalmuon);
-            if (wValue >= 40.0 && wValue <= 100.0)
-            {
-                Float_t metnomu = sqrt(((mexoffrecal - mexoffrecalmuon) * (mexoffrecal - mexoffrecalmuon)) +
-                ((meyoffrecal - meyoffrecalmuon)*(meyoffrecal - meyoffrecalmuon))); //compute metnomu
-                numbPassMuon++;
-                Ateff->Fill((algAmuonMET > algAThresh) && (muonMetl1 > myConstants::metl1thresh), metnomu);
-                Bteff->Fill((algBmuonMET > algBThresh) && (muonMetl1 > myConstants::metl1thresh), metnomu);
-                Cteff->Fill(((algAmuonMET > acthresh) && (algBmuonMET > bcthresh) && (muonMetl1 > myConstants::metl1thresh)), metnomu);
-            }
+    	    Float_t metnomu = sqrt(((mexoffrecal - mexoffrecalmuon) * (mexoffrecal - mexoffrecalmuon)) +
+    	    ((meyoffrecal - meyoffrecalmuon)*(meyoffrecal - meyoffrecalmuon))); //compute metnomu
+            numbPassMuon++;
+            Ateff->Fill((algAmuonMET > algAThresh) && (muonMetl1 > myConstants::metl1thresh), metnomu);
+    	    Bteff->Fill((algBmuonMET > algBThresh) && (muonMetl1 > myConstants::metl1thresh), metnomu);
+    	    Cteff->Fill(((algAmuonMET > acthresh) && (algBmuonMET > bcthresh) && (muonMetl1 > myConstants::metl1thresh)), metnomu);
+            Dteff->Fill((muonMetl1 >= myConstants::metl1thresh), metnomu);
         }
-    }
-    else
-    {
-        if ((passmuvarmed > 0.1 || passmuon > 0.1) && (cleanCutsFlag > 0.1) && (recalBrokeFlag < 0.1))
-    	{
-            wValue = w(metoffrecal,mexoffrecal,meyoffrecal,metoffrecalmuon,mexoffrecalmuon,meyoffrecalmuon);
-            if (wValue >= 40.0 && wValue <= 100.0)
-            {
-        	    Float_t metnomu = sqrt(((mexoffrecal - mexoffrecalmuon) * (mexoffrecal - mexoffrecalmuon)) +
-        	    ((meyoffrecal - meyoffrecalmuon)*(meyoffrecal - meyoffrecalmuon))); //compute metnomu
-                numbPassMuon++;
-                Ateff->Fill((algAmuonMET > algAThresh) && (muonMetl1 > myConstants::metl1thresh), metnomu);
-        	    Bteff->Fill((algBmuonMET > algBThresh) && (muonMetl1 > myConstants::metl1thresh), metnomu);
-        	    Cteff->Fill(((algAmuonMET > acthresh) && (algBmuonMET > bcthresh) && (muonMetl1 > myConstants::metl1thresh)), metnomu);
-                Dteff->Fill((muonMetl1 >= myConstants::metl1thresh), metnomu);
-            }
-    	}
-    }
+	}
 }
 
 
