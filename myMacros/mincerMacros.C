@@ -188,7 +188,7 @@ Float_t determineMuonEventsKeptCombined( const TString& algA, const Float_t thre
 
 Float_t bisection(const TH1F* hist1 , const TH1F* hist2, const Float_t binWidth, const Int_t numZeroBiasRndm = 0 , const Float_t frac = 0.00590,
 Float_t * inputArray ,Float_t * outputArray ,Float_t * numEventsArray ,Float_t * thresholdAarray ,Float_t * thresholdBarray,
-Float_t individAThreshFinal, Float_t individBThreshFinal)
+Float_t & individAThreshFinal, Float_t & individBThreshFinal)
 {
     //TODO: need to finish making the bisection compatible as a separate function
 
@@ -280,12 +280,12 @@ Float_t individAThreshFinal, Float_t individBThreshFinal)
         //}
     }
 
-
+    //compute fractions kept at initial guesses
     f1 = (Float_t) counter1 / (Float_t) numZeroBiasRndm;
     f2 = (Float_t) counter2 / (Float_t) numZeroBiasRndm;
     f3 = (Float_t) counter3 / (Float_t) numZeroBiasRndm;
 
-
+    //initialize arrays with the 
     inputArray[0] = x1;
     inputArray[2] = initialGuess;
     inputArray[1] = x3;
@@ -345,7 +345,7 @@ Float_t individAThreshFinal, Float_t individBThreshFinal)
     	    counter2++;
     	  }
         }
-        
+
         numEventsArray[j+2] = counter2;
         std::cout << "algAMETx2thresh: " << algAMETx2thresh << std::endl;
         std::cout << "algBMETx2thresh: " << algBMETx2thresh << std::endl;
@@ -379,6 +379,9 @@ Float_t individAThreshFinal, Float_t individBThreshFinal)
       else{
         std::cout << "No root found; max iterations exceeded" << std::endl;
       }
+
+    individAThreshFinal = algAMETx2thresh;
+    individBThreshFinal = algBMETx2thresh;
 
     return( initialGuess );
 }
