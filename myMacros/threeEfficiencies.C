@@ -183,56 +183,27 @@ Int_t threeEfficiencies( const TString& algA , const TString& algB,
     std::cout << "algAx1Thresh: " << algAMETx1thresh << std::endl;
     std::cout << "algBx1Thresh: " << algBMETx1thresh << std::endl;
     std::cout << "metl1thresh : " << myConstants::metl1thresh << std::endl;
-    if (algA==algB)
+    for (Int_t i  = 0 ; i < zerobiasNentries ;i++) //determine events kept at each guess
     {
-        for (Int_t i  = 0 ; i < zerobiasNentries ;i++) //determine events kept at each guess
-        {
-            zeroBiasTree->GetEntry(i);
-            //if (passRndm > 0.5)
-            //{
-                algAMET = algBMET;
-                if ((algBMET > algBMETx1thresh) && ( metl1 > myConstants::metl1thresh ) && ( passnoalgL1XE10 > 0.5 || passnoalgL1XE30 > 0.5 ||
-                passnoalgL1XE40 > 0.5 || passnoalgL1XE45 > 0.5  ))
-                {
-                    counter1++;
-                }
-                if ((algBMET > algBMETx2thresh) && (metl1 > myConstants::metl1thresh)&& ( passnoalgL1XE10 > 0.5 || passnoalgL1XE30 > 0.5 ||
-                passnoalgL1XE40 > 0.5 || passnoalgL1XE45 > 0.5  ))
-                {
-                    counter2++;
-                }
-                if ((algBMET > algBMETx3thresh) && (metl1 > myConstants::metl1thresh)&& ( passnoalgL1XE10 > 0.5 || passnoalgL1XE30 > 0.5 ||
-                passnoalgL1XE40 > 0.5 || passnoalgL1XE45 > 0.5  ))
-                {
-                    counter3++;
-                }
-            //}
-        }
-    }
-    else
-    {
-        for (Int_t i  = 0 ; i < zerobiasNentries ;i++) //determine events kept at each guess
-        {
-        zeroBiasTree->GetEntry(i);
-            //if (passRndm > 0.5)
-            //{
-                if ((algAMET > algAMETx1thresh) && (algBMET > algBMETx1thresh) && (metl1 > myConstants::metl1thresh)&& ( passnoalgL1XE10 > 0.5 || passnoalgL1XE30 > 0.5 ||
-                passnoalgL1XE40 > 0.5 || passnoalgL1XE45 > 0.5  ) )
-                {
-                counter1++;
-                }
-                if ((algAMET > algAMETx2thresh) && (algBMET > algBMETx2thresh) && (metl1 > myConstants::metl1thresh)&& ( passnoalgL1XE10 > 0.5 || passnoalgL1XE30 > 0.5 ||
-                passnoalgL1XE40 > 0.5 || passnoalgL1XE45 > 0.5  ))
-                {
-                counter2++;
-                }
-                if ((algAMET > algAMETx3thresh) && (algBMET > algBMETx3thresh) && (metl1 > myConstants::metl1thresh)&& ( passnoalgL1XE10 > 0.5 || passnoalgL1XE30 > 0.5 ||
-                passnoalgL1XE40 > 0.5 || passnoalgL1XE45 > 0.5  ) )
-                {
-                counter3++;
-                }
-            //}
-        }
+    zeroBiasTree->GetEntry(i);
+        //if (passRndm > 0.5)
+        //{
+            if ((algAMET > algAMETx1thresh) && (algBMET > algBMETx1thresh) && (metl1 > myConstants::metl1thresh)&& ( passnoalgL1XE10 > 0.5 || passnoalgL1XE30 > 0.5 ||
+            passnoalgL1XE40 > 0.5 || passnoalgL1XE45 > 0.5  ) )
+            {
+            counter1++;
+            }
+            if ((algAMET > algAMETx2thresh) && (algBMET > algBMETx2thresh) && (metl1 > myConstants::metl1thresh)&& ( passnoalgL1XE10 > 0.5 || passnoalgL1XE30 > 0.5 ||
+            passnoalgL1XE40 > 0.5 || passnoalgL1XE45 > 0.5  ))
+            {
+            counter2++;
+            }
+            if ((algAMET > algAMETx3thresh) && (algBMET > algBMETx3thresh) && (metl1 > myConstants::metl1thresh)&& ( passnoalgL1XE10 > 0.5 || passnoalgL1XE30 > 0.5 ||
+            passnoalgL1XE40 > 0.5 || passnoalgL1XE45 > 0.5  ) )
+            {
+            counter3++;
+            }
+        //}
     }
 
     std::cout << "At x1 = " << x1 << " counter1: " << counter1 << " events" << std::endl;
