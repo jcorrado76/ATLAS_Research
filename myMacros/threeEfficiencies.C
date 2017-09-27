@@ -116,36 +116,19 @@ Int_t threeEfficiencies( const TString& algA , const TString& algB,
     std::cout << "Using METL1THRESH: " << myConstants::metl1thresh << std::endl;
 
     numZeroBiasRndm = 0 ;
-    std::cout << "algA==algB? " << (algA==algB) << std::endl;
-    if (algA == algB)
-    {
-    	for (Int_t k = 0; k < zerobiasNentries; k++)
-    	{
-    	    zeroBiasTree->GetEntry(k);
-    	    if (metl1 > 50.0 && ( passnoalgL1XE10 > 0.5 || passnoalgL1XE30 > 0.5 ||
-            passnoalgL1XE40 > 0.5 || passnoalgL1XE45 > 0.5  ) )
-    	    {
-        		algAMET = algBMET;
-        		algAMETHist->Fill(algAMET);
-        		algBMETHist->Fill(algBMET);
-                numZeroBiasRndm++;
-    	    }
-    	}
-    }
-    else
-    {
-    	for (Int_t k = 0; k < zerobiasNentries; k++) //determine numZeroBiasRndm and fill histograms
-    	{
-    	    zeroBiasTree->GetEntry(k);
-    	    if (metl1 > 50.0 && ( passnoalgL1XE10 > 0.5 || passnoalgL1XE30 > 0.5 ||
-            passnoalgL1XE40 > 0.5 || passnoalgL1XE45 > 0.5  ))
-    	    {
-        		algAMETHist->Fill(algAMET);
-        		algBMETHist->Fill(algBMET);
-                numZeroBiasRndm++;
-    	    }
-    	}
-    }
+
+	for (Int_t k = 0; k < zerobiasNentries; k++) //determine numZeroBiasRndm and fill histograms
+	{
+	    zeroBiasTree->GetEntry(k);
+	    if (metl1 > 50.0 && ( passnoalgL1XE10 > 0.5 || passnoalgL1XE30 > 0.5 ||
+        passnoalgL1XE40 > 0.5 || passnoalgL1XE45 > 0.5  ))
+	    {
+    		algAMETHist->Fill(algAMET);
+    		algBMETHist->Fill(algBMET);
+            numZeroBiasRndm++;
+	    }
+	}
+
     std::cout << "numZeroBiasRndm: " << numZeroBiasRndm << std::endl;
     std::cout << "frac " << frac << std::endl;
     std::cout << "numCombined to keep: " << numZeroBiasRndm * frac << std::endl;
@@ -343,7 +326,6 @@ myMuonTree->SetBranchAddress(algA,&algAmuonMET);
 myMuonTree->SetBranchAddress(algB,&algBmuonMET);
 myMuonTree->SetBranchAddress("metl1",&muonMetl1);
 Int_t numbPassMuon = 0;Float_t wValue;
-//TODO: get rid of the same alg check; do it the same way you did in the other macro; this is clumsy
 for (Int_t l = 0 ; l < muonNentries ; l++)
 {
     myMuonTree->GetEntry(l);
@@ -377,20 +359,10 @@ Float_t muonEventsCombined = determineMuonEventsKeptCombined( algA , acthresh , 
 TCanvas* efficiencyCanvas = new TCanvas("Efficiency Canvas", "Efficiency Canvas");
 efficiencyCanvas->RangeAxis(0,0,500,1.0);
 
-
-if (algA==algB)
-{
-    Ateff->SetLineColorAlpha(kBlue,0.35);
-    Cteff->SetLineColorAlpha(kRed,0.65);
-    Bteff->SetLineColorAlpha(kGreen,0.45);
-}
-else
-{
     Ateff->SetLineColor(kBlue);
     Cteff->SetLineColor(kRed);
     Bteff->SetLineColor(kGreen);
     Dteff->SetLineColor(kBlack);
-}
 
 const TString canvName = algA + " and " + algB + " Combined Efficiency" + ";Offline Recalibrated MET w/o Muon term [GeV];Efficiency";
 
