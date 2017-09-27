@@ -11,7 +11,7 @@ Int_t generateEfficiencies(const Float_t frac = 0.00590,
     */
     //TODO: move mettopolem to the back of the array so if anything, it is done last
     gROOT->ProcessLine(".L threeEfficiencies.C");
-    TString algArray[6] = {"mettopoclem","metcell","metmht","mettopocl","mettopoclps","mettopoclpuc"};
+    TString algArray[6] = {"metcell","metmht","mettopocl","mettopoclps","mettopoclpuc","mettopoclem"};
     //TString algArray[6] = {"metl1","metcell","metmht","mettopocl","mettopoclps","mettopoclpuc"};
     for (Int_t i = 0 ; i < 6 ; i++)
     {

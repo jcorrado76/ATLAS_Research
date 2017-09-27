@@ -12,6 +12,8 @@
 #include "TSystem.h"
 #include "TF1.h"
 
+
+//TODO: make this return a bool, tell it to return true or false for a given entry if passes transverse mass cut
 Float_t w( const Float_t metoffrecal     , const Float_t mexoffrecal     , const Float_t meyoffrecal ,
            const Float_t metoffrecalmuon , const Float_t mexoffrecalmuon , const Float_t meyoffrecalmuon )
 {

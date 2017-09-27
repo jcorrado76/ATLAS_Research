@@ -12,6 +12,8 @@
 #include "TSystem.h"
 #include "TF1.h"
 
+
+//TODO: get rid of this namespace and hardcode constants (initialize at the top)
 namespace myConstants
 {
     Int_t nbins = 1200;
@@ -274,7 +276,7 @@ Int_t threeEfficiencies( const TString& algA , const TString& algB,
     Float_t algBThreshDiff;
 
 //TODO: make a TBenchmark here for "bisection"
-//TODO: finish writing bisection in mincerMacros, and use it here for encapsulation 
+//TODO: finish writing bisection in mincerMacros, and use it here for encapsulation
 do{
     j++;
     std::cout << "Inside iteration number: " << j << std::endl;
