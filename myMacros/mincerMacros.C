@@ -159,24 +159,18 @@ Float_t determineMuonEventsKeptCombined( const TString& algA, const Float_t thre
       {
         muonTree->GetEntry(i);
 
-        wValue = w( metoffrecal ,mexoffrecal , meyoffrecal , metoffrecalmuon , mexoffrecalmuon , meyoffrecalmuon );
-
         if (
                ((passmuon > 0.5) || (passmuvarmed > 0.5)) &&
                (cleanCutsFlag > 0.1 && recalBrokeFlag < 0.1) &&
-               (wValue >= 40.0 && wValue <= 80.0) )
-        {
-          numberMuonEvents++;
-        }
-        if (
-             ((algAMET > threshA) && (algBMET > threshB) && (metl1 > metL1Thresh)) &&
-             ((passmuon > 0.5) || (passmuvarmed > 0.5)) &&
-             (cleanCutsFlag > 0.1 && recalBrokeFlag < 0.1) &&
-             (wValue >= 40.0 && wValue <= 80.0 )
+               (passTransverseMassCut(metoffrecal ,mexoffrecal , meyoffrecal , metoffrecalmuon , mexoffrecalmuon , meyoffrecalmuon ))
            )
-        {
-          numbPassedEvents++;
-        }
+            {
+              numberMuonEvents++;
+            }
+                if (((algAMET > threshA) && (algBMET > threshB) && (metl1 > metL1Thresh)))
+                {
+                    numbPassedEvents++;
+                }
       }
 
 
