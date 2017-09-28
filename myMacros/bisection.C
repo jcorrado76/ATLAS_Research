@@ -16,7 +16,7 @@
 
 //TODO: implement proof lite
 Float_t bisection(TString& algA , TString& algB, const Float_t binWidth, const Int_t numZeroBiasRndm = 0 , const Float_t frac = 0.00590, TNtuple* logFileData = NULL,
-                  Float_t & individAThreshFinal = 0, Float_t & individBThreshFinal = 0, TTree* zeroBiasTree = NULL)
+                  Float_t & individAThreshFinal = 0.0, Float_t & individBThreshFinal = 0.0, TTree* zeroBiasTree = NULL)
 {
     Float_t computeThresh( const TH1F*, const Float_t);
     //some useful parameters
