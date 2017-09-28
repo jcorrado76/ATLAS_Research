@@ -32,6 +32,7 @@ TFile* threeEfficiencies( const TString& algA , const TString& algB,
 
 
     gROOT->ProcessLine("gSystem->Load(\"./mincerMacros_C.so\")");
+    gROOT->ProcessLine("gSystem->Load(\"./bisection_C.so\")");
     Float_t passTransverseMassCut( const Float_t , const Float_t ,const Float_t ,const Float_t ,const Float_t ,const Float_t);
     Float_t determineZeroBiasThresh( const TString&, const Float_t, const TString&);
     Float_t computeThresh( const TH1F*, const Float_t);

@@ -16,11 +16,17 @@
 
 //TODO: implement proof lite
 Float_t bisection(const TH1F* hist1 , const TH1F* hist2, const Float_t binWidth, const Int_t numZeroBiasRndm = 0 , const Float_t frac = 0.00590,
-NTuple* logFileData, Float_t & individAThreshFinal, Float_t & individBThreshFinal)
+TNtuple* logFileData, Float_t & individAThreshFinal, Float_t & individBThreshFinal)
 {
+    Float_t computeThresh( const TH1F*, const Float_t);
     //some useful parameters
+
+    Float_t metl1thresh = 50.0;
+
     Float_t lwrbnd = 0.5*frac;
     Float_t uprbnd = 0.13;
+    Float_t eps = 25.0;
+
     Float_t x1,x3; //thresholds of individual algorithms
     Float_t f1,f2,f3 = 0; //fractions of events kept out of passrndm
     x1 = lwrbnd;
@@ -39,6 +45,7 @@ NTuple* logFileData, Float_t & individAThreshFinal, Float_t & individBThreshFina
     algBMETtarget->SetName(algBMETtarget->GetName() + (const TString)"B");
 
     //compute thresholds at boundaris to use
+    Float_t algAMETx1thresh,algAMETx2thresh,algAMETx3thresh,algBMETx1thresh,algBMETx2thresh, algBMETx3thresh;
     algAMETx1thresh = computeThresh(algAMETtarget, numKeepx1);
     algBMETx1thresh = computeThresh(algBMETtarget, numKeepx1);
 
@@ -59,10 +66,6 @@ NTuple* logFileData, Float_t & individAThreshFinal, Float_t & individBThreshFina
     std::cout << "Upper Bound: " << uprbnd << std::endl;
     std::cout << "Epsilon: " << eps << std::endl;
 
-    //generate the cumulative right hand sum histograms
-    TH1F *algAMETtarget = (TH1F*) algAMETHist->GetCumulative(kFALSE);
-    TH1F *algBMETtarget = (TH1F*) algBMETHist->GetCumulative(kFALSE);
-
     //set the names of the histograms to also contain the letters A and B
     algAMETtarget->SetName(algAMETtarget->GetName() + (const TString)"A");
     algBMETtarget->SetName(algBMETtarget->GetName() + (const TString)"B");
@@ -78,7 +81,7 @@ NTuple* logFileData, Float_t & individAThreshFinal, Float_t & individBThreshFina
 
     std::cout << "algAx1Thresh: " << algAMETx1thresh << std::endl;
     std::cout << "algBx1Thresh: " << algBMETx1thresh << std::endl;
-    std::cout << "metl1thresh : " << myConstants::metl1thresh << std::endl;
+    std::cout << "metl1thresh : " << metl1thresh << std::endl;
 
     for (Int_t i  = 0 ; i < zerobiasNentries ;i++) //determine events kept at each guess
     {
@@ -120,9 +123,6 @@ NTuple* logFileData, Float_t & individAThreshFinal, Float_t & individBThreshFina
 
     Int_t j = 0;
     Int_t imax = 30;
-    Float_t lwrbnd = 0.5*frac;
-    Float_t uprbnd = 0.13;
-    Float_t eps = 25.0;
 
     do{
         j++;
@@ -153,7 +153,7 @@ NTuple* logFileData, Float_t & individAThreshFinal, Float_t & individBThreshFina
     	for (Int_t i  = 0 ; i < zerobiasNentries ;i++)
     	{
     	  zeroBiasTree->GetEntry(i);
-    	  if ((algAMET > algAMETx2thresh) && (algBMET > algBMETx2thresh) && (metl1 > myConstants::metl1thresh)&& ( passnoalgL1XE10 > 0.5 ||
+    	  if ((algAMET > algAMETx2thresh) && (algBMET > algBMETx2thresh) && (metl1 > metl1thresh)&& ( passnoalgL1XE10 > 0.5 ||
               passnoalgL1XE30 > 0.5 || passnoalgL1XE40 > 0.5 || passnoalgL1XE45 > 0.5  ) )
     	  {
     	    counter2++;
