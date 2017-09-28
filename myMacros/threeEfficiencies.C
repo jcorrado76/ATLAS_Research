@@ -16,6 +16,7 @@
 #include <TParameter.h>
 #include "TList.h"
 #include "TBranch.h"
+#include "TObjString.h"
 
 TFile* threeEfficiencies( const TString& algA , const TString& algB,
         const Float_t frac = 0.00590, const TString folder = "",
@@ -131,18 +132,6 @@ TFile* threeEfficiencies( const TString& algA , const TString& algB,
 	    }
 	}
 
-
-
-
-    TList* parameters = new TList();
-    TParameter* algparA = new TParameter("Algorithm A", const TString& algA);
-    TParameter* algparB = new TParameter("Algorithm B", const TString& algB);
-    TParameter* Nbins = new TParameter("nbins", const Int_t nbins);
-    TParameter* metl1par = new TParameter("metl1Thresh", const Float_t metl1thresh );
-    TParameter<Float_t>* fraction = new TParameter<Float_t>("frac", const Float_t frac);
-
-
-
     TNtuple* inputArray = new TNtuple();
     TNtuple* outputArray = new TNtuple();
     TNtuple* numEventsArray = new TNtuple();
@@ -158,6 +147,10 @@ TFile* threeEfficiencies( const TString& algA , const TString& algB,
     Float_t individAThreshFinal;
     FLoat_t individBThreshFinal;
 
+
+    TNtuple* logFileData = new TNtuple("logFileData" , "Bisection Data" , "Individual Fraction:Combined Fraction: Numb Events Kept: Threshold A:Threshold B");
+
+
     //start bisection timer
     threeEfficienciesBenchmark->Start("Bisection");
 
@@ -171,12 +164,6 @@ TFile* threeEfficiencies( const TString& algA , const TString& algB,
 
     //END ZEROBIAS TIMER
     threeEfficienciesBenchmark->Show("ZeroBias Thresholds");
-
-
-
-
-
-
 
 
     TString cstring = algA + " > " + Form(" %.2f", individAThreshFinal) + " and " + algB + " > " + Form(" %.2f", individBThreshFinal);
@@ -262,20 +249,20 @@ TFile* threeEfficiencies( const TString& algA , const TString& algB,
     //write canvas to the root file
     efficiencyCanvas->Write("Efficiency Cavnas");
 
+
+    TList* parameters = new TList();
+    TObjString* algAName = new TObjString(algA);
+    TObjString* algBName = new TObjString(algB);
+    TObjString* zb_fileName = new TObjString(zerobiasFileName);
+    TObjString* muon_fileName = new TObjString(muonFilename);
+
+
+    parameters->Add();
     //TODO: Generate a TTree with all logfile info
-    TTree* parameterTree = new TTree("parTree","Tree Containing Run Parameters");
-    TTree* logFileTree = new TTree("logTree","Log File Data");
-
-    TBranch *b_inputArray = logFileTree->Branch("Input Array", inputArray, "F" );
-    TBranch *b_outputArray = logFileTree->Branch("Output Array", outputArray, "F" );
-    TBranch *b_threshAArray = logFileTree->Branch("Threshold A Array", thresholdAarray, "F" );
-    TBranch *b_threshBArray = logFileTree->Branch("Threshold B Array", thresholdBarray, "F" );
-
-    TBranch *algAName = parameterTree->Branch("Algorithm A" , &algA , "C");
-    TBranch *algBName = parameterTree->Branch("Algorithm B" , &algB , "C");
-    TBranch *Nbins = parameterTree->Branch("nbins" , &nbins , "I");
-    TBranch *metmin = parameterTree->Branch("MET Min" , &metMin , "F");
-
+    TTree* logFileTree = new TTree("tree" , "Log File Tree");
+    logFileTree->Branch("Parameters", &parameters, "algA/C:algB/C:nbins/i:metmin/F:metmax/F:metl1thresh/F:zb_frac/F:
+    zbFile/C:zb_nentries/i:zb_rndm/i:fracRndm/F:algAthresh/F:algBthresh/F:muonFile/C:muon_nentries/i:numbPassMuon/i:numMuonCombined/i:fracPassMuon/F
+    numbPassA/i:numbPassB/i:numbPassC/i:totalPass/i:epsilon/F");
 
 
 
@@ -300,8 +287,6 @@ TFile* threeEfficiencies( const TString& algA , const TString& algB,
     logFile << "NUMB MUON ENTRIES PASSED ALG B: " << (Bteff->GetPassedHistogram())->GetEntries() << "\r\n";
     logFile << "NUMB MUON ENTRIES PASSED ALG C: " << (Cteff->GetPassedHistogram())->GetEntries() << "\r\n";
     logFile << "NUMB MUON ENTRIES TOTAL  ALG A: " << (Ateff->GetTotalHistogram())->GetEntries() << "\r\n";
-    logFile << "NUMB MUON ENTRIES TOTAL  ALG B: " << (Bteff->GetTotalHistogram())->GetEntries() << "\r\n";
-    logFile << "NUMB MUON ENTRIES TOTAL  ALG C: " << (Cteff->GetTotalHistogram())->GetEntries() << "\r\n";
     logFile << "Epsilon tolerance for bisection accuracy: " << eps << " events" << "\r\n";
     logFile << "ZEROBIAS Bisection Information: " << "\r\n";
     logFile << "Iteration Number : " << "\tIndividual Fraction: \t" << "Combined Fraction Kept: \t" << "Combined Events Kept: \t" <<

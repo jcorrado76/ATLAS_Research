@@ -13,13 +13,6 @@
 #include "TF1.h"
 
 
-
-
-
-
-
-
-//TODO: separate bisection as its own macro
 //TODO: implement proof lite
 Float_t bisection(const TH1F* hist1 , const TH1F* hist2, const Float_t binWidth, const Int_t numZeroBiasRndm = 0 , const Float_t frac = 0.00590,
 TNtuple* inputArray , TNtuple* outputArray , TNtuple* numEventsArray , TNtuple* thresholdAarray ,TNtuple* thresholdBarray,

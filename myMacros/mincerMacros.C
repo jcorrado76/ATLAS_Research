@@ -11,6 +11,7 @@
 #include "TCanvas.h"
 #include "TSystem.h"
 #include "TF1.h"
+#include "TNtuple.h"
 
 Bool_t passTransverseMassCut( const Float_t metoffrecal     , const Float_t mexoffrecal     , const Float_t meyoffrecal ,
            const Float_t metoffrecalmuon , const Float_t mexoffrecalmuon , const Float_t meyoffrecalmuon )
