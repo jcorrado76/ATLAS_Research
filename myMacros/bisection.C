@@ -11,7 +11,7 @@
 #include "TCanvas.h"
 #include "TSystem.h"
 #include "TF1.h"
-#include "NTuple.h"
+#include "TNtuple.h"
 
 
 //TODO: implement proof lite
@@ -19,6 +19,8 @@ Float_t bisection(const TH1F* hist1 , const TH1F* hist2, const Float_t binWidth,
 NTuple* logFileData, Float_t & individAThreshFinal, Float_t & individBThreshFinal)
 {
     //some useful parameters
+    Float_t lwrbnd = 0.5*frac;
+    Float_t uprbnd = 0.13;
     Float_t x1,x3; //thresholds of individual algorithms
     Float_t f1,f2,f3 = 0; //fractions of events kept out of passrndm
     x1 = lwrbnd;
@@ -30,8 +32,8 @@ NTuple* logFileData, Float_t & individAThreshFinal, Float_t & individBThreshFina
     Float_t numKeepx3 = numZeroBiasRndm * x3;
 
     //compute the cumulative right hand sum hists
-    TH1F *algAMETtarget = (TH1F*) algAMETHist->GetCumulative(kFALSE);
-    TH1F *algBMETtarget = (TH1F*) algBMETHist->GetCumulative(kFALSE);
+    TH1F *algAMETtarget = (TH1F*) hist1->GetCumulative(kFALSE);
+    TH1F *algBMETtarget = (TH1F*) hist2->GetCumulative(kFALSE);
     //rename for clarity later on
     algAMETtarget->SetName(algAMETtarget->GetName() + (const TString)"A");
     algBMETtarget->SetName(algBMETtarget->GetName() + (const TString)"B");
