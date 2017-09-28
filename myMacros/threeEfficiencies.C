@@ -132,12 +132,6 @@ TFile* threeEfficiencies( const TString& algA , const TString& algB,
 	    }
 	}
 
-    TNtuple* inputArray = new TNtuple();
-    TNtuple* outputArray = new TNtuple();
-    TNtuple* numEventsArray = new TNtuple();
-    TNtuple* thresholdAarray = new TNtuple();
-    TNtuple* thresholdBarray = new TNtuple();
-
     Float_t binWidth = (metMax - metMin)/ nbins;
 
     //the individual fraction needed such that when both algs constrained to keep the same fraction individually,
@@ -150,13 +144,12 @@ TFile* threeEfficiencies( const TString& algA , const TString& algB,
 
     TNtuple* logFileData = new TNtuple("logFileData" , "Bisection Data" , "Individual Fraction:Combined Fraction: Numb Events Kept: Threshold A:Threshold B");
 
-
     //start bisection timer
     threeEfficienciesBenchmark->Start("Bisection");
 
     //run BISECTION
     bisectionIndividFrac = bisection( algAMETHist , algBMETHist, binWidth, numZeroBiasRndm , frac ,
-    inputArray , outputArray ,numEventsArray ,thresholdAarray ,thresholdBarray,
+    logFileData,
     individAThreshFinal, individBThreshFinal );
 
     //end bisection timer

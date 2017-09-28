@@ -11,12 +11,12 @@
 #include "TCanvas.h"
 #include "TSystem.h"
 #include "TF1.h"
+#include "NTuple.h"
 
 
 //TODO: implement proof lite
 Float_t bisection(const TH1F* hist1 , const TH1F* hist2, const Float_t binWidth, const Int_t numZeroBiasRndm = 0 , const Float_t frac = 0.00590,
-TNtuple* inputArray , TNtuple* outputArray , TNtuple* numEventsArray , TNtuple* thresholdAarray ,TNtuple* thresholdBarray,
-Float_t & individAThreshFinal, Float_t & individBThreshFinal)
+NTuple* logFileData, Float_t & individAThreshFinal, Float_t & individBThreshFinal)
 {
     //some useful parameters
     Float_t x1,x3; //thresholds of individual algorithms
@@ -107,11 +107,9 @@ Float_t & individAThreshFinal, Float_t & individBThreshFinal)
     f3 = (Float_t) counter3 / (Float_t) numZeroBiasRndm;
 
     //initialize ntuples with initial guess values
-    inputArray->Fill({x1,initialGuess,x3})
-    outputArray->Fill({f1,f2,f3});
-    numEventsArray->Fill({counter1,counter2,counter3});
-    thresholdAarray->Fill({algAMETx1thresh,algAMETx2thresh,algAMETx3thresh});
-    thresholdBarray->Fill({algBMETx1thresh,algBMETx2thresh,algBMETx3thresh});
+    logFileData->Fill(x1,f1,counter1,algAMETx1thresh,algBMETx1thresh);
+    logFileData->Fill(initialGuess,f2,counter2,algAMETx2thresh,algBMETx2thresh);
+    logFileData->Fill(x3,f3,counter3,algAMETx3thresh,algBMETx3thresh);
 
     std::cout << "At x1 = " << x1 << " counter1: " << counter1 << " events = " << "f1: " << f1 << std::endl;
     std::cout << "At x2 = " << initialGuess << " counter2: " << counter2 << " events = " << "f2: " << f2 << std::endl;
@@ -140,15 +138,13 @@ Float_t & individAThreshFinal, Float_t & individBThreshFinal)
           x1 = initialGuess;
         }
         initialGuess = ( x1 + x3 ) / 2.0;
-        inputArray->Fill(initialGuess);
         std::cout << "New Guess: " << initialGuess << std::endl;
         std::cout << "numZeroBiasRndm: " << numZeroBiasRndm << std::endl;
         numKeepx2 = numZeroBiasRndm * initialGuess;
         std::cout << "numKeepx2: " << numKeepx2 << std::endl;
         algAMETx2thresh = computeThresh(algAMETtarget, numKeepx2);
         algBMETx2thresh = computeThresh(algBMETtarget, numKeepx2);
-        thresholdAarray->Fill(algAMETx2thresh);
-        thresholdBarray->Fill(algBMETx2thresh);
+
 
         counter2 = 0;
 
@@ -162,14 +158,16 @@ Float_t & individAThreshFinal, Float_t & individBThreshFinal)
     	  }
         }
 
-        numEventsArray->Fill(counter2);
+
         std::cout << "algAMETx2thresh: " << algAMETx2thresh << std::endl;
         std::cout << "algBMETx2thresh: " << algBMETx2thresh << std::endl;
         std::cout << "Counter2: " << counter2 << std::endl;
         f2 = (Float_t) counter2 / (Float_t) numZeroBiasRndm;
         std::cout << "f2: " << f2 << std::endl;
         std::cout << "Condition: " << abs(numZeroBiasRndm * frac - counter2) << " > " << eps << std::endl;
-        outputArray->Fill(f2);
+
+
+
 
         algAThreshDiff = (thresholdAarray->GetArgs())[j+2] - (thresholdAarray->GetArgs())[j+1];
         algBThreshDiff = (thresholdBarray->GetArgs())[j+2] - (thresholdBarray->GetArgs())[j+1];
@@ -183,6 +181,7 @@ Float_t & individAThreshFinal, Float_t & individBThreshFinal)
       std::cout << "algB previous threshold: " << Form("%.7f",(thresholdBarray->GetArgs())[j+1]) << std::endl;
       std::cout << "binWidth: " << binWidth << "\n" << std::endl;
 
+      logFileData->Fill(initialGuess,f2,counter2,algAMETx2thresh,algBMETx2thresh);
     }while ( abs( counter2 - (numZeroBiasRndm * frac) ) > eps && (abs(algAThreshDiff) > binWidth) && (abs(algBThreshDiff) > binWidth) && ( j <= imax ) );
 
       if ( abs( counter2 - (numZeroBiasRndm * frac) ) <= eps || abs(algAThreshDiff) <= binWidth || abs(algBThreshDiff) <= binWidth)
