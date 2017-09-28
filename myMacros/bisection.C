@@ -15,8 +15,8 @@
 
 
 //TODO: implement proof lite
-Float_t bisection(const TH1F* hist1 , const TH1F* hist2, const Float_t binWidth, const Int_t numZeroBiasRndm = 0 , const Float_t frac = 0.00590,
-TNtuple* logFileData, Float_t & individAThreshFinal, Float_t & individBThreshFinal, TTree* zeroBiasTree)
+Float_t bisection(TString& algA , TString& algB, const Float_t binWidth, const Int_t numZeroBiasRndm = 0 , const Float_t frac = 0.00590, TNtuple* logFileData = NULL,
+                  Float_t & individAThreshFinal = 0, Float_t & individBThreshFinal = 0, TTree* zeroBiasTree = NULL)
 {
     Float_t computeThresh( const TH1F*, const Float_t);
     //some useful parameters
@@ -91,6 +91,10 @@ TNtuple* logFileData, Float_t & individAThreshFinal, Float_t & individBThreshFin
     zeroBiasTree->SetBranchAddress("passnoalgL1XE30",&passnoalgL1XE30);
     zeroBiasTree->SetBranchAddress("passnoalgL1XE40",&passnoalgL1XE40);
     zeroBiasTree->SetBranchAddress("passnoalgL1XE45",&passnoalgL1XE45);
+
+    Int_t counter1,counter2,counter3;
+
+    Int_t zerobiasNentries = zeroBiasTree->GetEntries();
 
     for (Int_t i  = 0 ; i < zerobiasNentries ;i++) //determine events kept at each guess
     {
