@@ -151,7 +151,7 @@ TFile* threeEfficiencies( const TString& algA , const TString& algB,
     //run BISECTION
     bisectionIndividFrac = bisection( algAMETHist , algBMETHist, binWidth, numZeroBiasRndm , frac ,
     logFileData,
-    individAThreshFinal, individBThreshFinal );
+    individAThreshFinal, individBThreshFinal, zeroBiasTree);
 
     //end bisection timer
     threeEfficienciesBenchmark->Show("Bisection");

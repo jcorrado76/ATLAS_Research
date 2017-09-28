@@ -16,7 +16,7 @@
 
 //TODO: implement proof lite
 Float_t bisection(const TH1F* hist1 , const TH1F* hist2, const Float_t binWidth, const Int_t numZeroBiasRndm = 0 , const Float_t frac = 0.00590,
-TNtuple* logFileData, Float_t & individAThreshFinal, Float_t & individBThreshFinal)
+TNtuple* logFileData, Float_t & individAThreshFinal, Float_t & individBThreshFinal, TTree* zeroBiasTree)
 {
     Float_t computeThresh( const TH1F*, const Float_t);
     //some useful parameters
@@ -82,6 +82,15 @@ TNtuple* logFileData, Float_t & individAThreshFinal, Float_t & individBThreshFin
     std::cout << "algAx1Thresh: " << algAMETx1thresh << std::endl;
     std::cout << "algBx1Thresh: " << algBMETx1thresh << std::endl;
     std::cout << "metl1thresh : " << metl1thresh << std::endl;
+    Float_t algAMET,algBMET, metl1,passnoalgL1XE10,passnoalgL1XE30,passnoalgL1XE40,passnoalgL1XE45;
+
+    zeroBiasTree->SetBranchAddress(algA,&algAMET);
+    zeroBiasTree->SetBranchAddress(algB,&algBMET);
+    zeroBiasTree->SetBranchAddress("metl1",&metl1);
+    zeroBiasTree->SetBranchAddress("passnoalgL1XE10",&passnoalgL1XE10);
+    zeroBiasTree->SetBranchAddress("passnoalgL1XE30",&passnoalgL1XE30);
+    zeroBiasTree->SetBranchAddress("passnoalgL1XE40",&passnoalgL1XE40);
+    zeroBiasTree->SetBranchAddress("passnoalgL1XE45",&passnoalgL1XE45);
 
     for (Int_t i  = 0 ; i < zerobiasNentries ;i++) //determine events kept at each guess
     {
