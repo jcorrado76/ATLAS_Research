@@ -179,6 +179,7 @@ TFile* threeEfficiencies( const TString& algA , const TString& algB,
     myMuonTree->SetBranchAddress(algB,&algBmuonMET);
     myMuonTree->SetBranchAddress("metl1",&muonMetl1);
     Int_t numbPassMuon = 0;Float_t wValue;
+    //TODO: add in actint > 35.0 in the numerator and denominator 
     for (Int_t l = 0 ; l < muonNentries ; l++)
     {
         myMuonTree->GetEntry(l);

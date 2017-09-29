@@ -89,7 +89,8 @@ Int_t print7Efficiencies(const TString& muonFileName = "PhysicsMain.L1KFmuontrig
     myMuonTree->SetBranchAddress("mexoffrecalmuon", &mexoffrecalmuon);
     myMuonTree->SetBranchAddress("meyoffrecalmuon", &meyoffrecalmuon);
 
-
+    //TODO: find the number of events that passes all of the below cuts, except the alg cut itself
+    Int_t numbPassAllCutsndL1 = 0;
     for (Int_t l = 0 ; l < muonNentries ; l++)
     {
         myMuonTree->GetEntry(l);
@@ -98,6 +99,10 @@ Int_t print7Efficiencies(const TString& muonFileName = "PhysicsMain.L1KFmuontrig
             {
                 if ( passTransverseMassCut(metoffrecal,mexoffrecal,meyoffrecal,metoffrecalmuon,mexoffrecalmuon,meyoffrecalmuon) )
                 {
+                    if ( metl1 > metl1thresh )
+                    {
+                        numbPassAllCutsndL1++;
+                    }
                     Float_t metnomu = sqrt(((mexoffrecal - mexoffrecalmuon) * (mexoffrecal - mexoffrecalmuon)) +
                     ((meyoffrecal - meyoffrecalmuon)*(meyoffrecal - meyoffrecalmuon))); //compute metnomu
                     cellTeff->Fill( (metcell > cellThresh) && (metl1 > metl1thresh), metnomu);

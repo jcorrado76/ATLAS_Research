@@ -20,7 +20,7 @@ Float_t bisection(TString& algA , TString& algB, const Float_t binWidth, const I
 {
     Float_t computeThresh( const TH1F*, const Float_t);
     //some useful parameters
-
+    //TODO: need to add in actint > 35.0
     Float_t metl1thresh = 50.0;
 
     Float_t lwrbnd = 0.5*frac;
@@ -36,6 +36,10 @@ Float_t bisection(TString& algA , TString& algB, const Float_t binWidth, const I
     Float_t numKeepx1 = numZeroBiasRndm * x1;
     Float_t numKeepx2 = numZeroBiasRndm * initialGuess;
     Float_t numKeepx3 = numZeroBiasRndm * x3;
+
+
+    //TODO: Figure out how to pass all the proper information to this macro
+
 
     //compute the cumulative right hand sum hists
     TH1F *algAMETtarget = (TH1F*) hist1->GetCumulative(kFALSE);
