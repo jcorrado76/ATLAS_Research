@@ -41,12 +41,6 @@ Int_t print7Efficiencies(const TString& muonFileName = "PhysicsMain.L1KFmuontrig
     Float_t cellCombinedThresh = 81.12;
     Float_t mhtCombinedThresh = 116.62;
 
-    Float_t cellCombined2Thresh = 78.62;
-    Float_t topoclCombinedThresh = 123.62;
-
-    Float_t cellCombined3Thresh = 80.12;
-    Float_t topoclpsCombinedThresh = 121.88;
-
     Float_t mhtCombined2Thresh = 123.62;
     Float_t topoclpucCombinedThresh = 106.38;
 
@@ -57,8 +51,6 @@ Int_t print7Efficiencies(const TString& muonFileName = "PhysicsMain.L1KFmuontrig
 
     ///combined algs
     TEfficiency* cellmhtTeff  = new TEfficiency("cellmhtcombined" , "Efficiency", nbins, metMin, metMax);
-    TEfficiency* celltopoclTeff  = new TEfficiency("celltopoclcombined", "Efficiency", nbins, metMin, metMax);
-    TEfficiency* celltopoclpsTeff  = new TEfficiency("celltopoclpscombined",  "Efficiency", nbins, metMin, metMax);
     TEfficiency* mhttopoclpucTeff  = new TEfficiency("mhttopoclpuccombined" , "Efficiency", nbins, metMin, metMax);
 
     //initialize branch variables
@@ -113,8 +105,6 @@ Int_t print7Efficiencies(const TString& muonFileName = "PhysicsMain.L1KFmuontrig
                     topoclpucTeff->Fill( (mettopoclpuc > topoclpucThresh) && (metl1 > metl1thresh) , metnomu);
 
                     cellmhtTeff->Fill( (metcell > cellCombinedThresh) && (metmht > mhtCombinedThresh)&& (metl1 > metl1thresh), metnomu );
-                    celltopoclTeff->Fill( (metcell> cellCombined2Thresh) && (mettopocl> topoclCombinedThresh)&& (metl1 > metl1thresh), metnomu);
-                    celltopoclpsTeff->Fill( ( (metcell >cellCombined3Thresh) && (mettopoclps >topoclpsCombinedThresh) && (metl1 > metl1thresh)), metnomu);
                     mhttopoclpucTeff->Fill( ( (metmht > mhtCombined2Thresh) && (mettopoclpuc > topoclpucCombinedThresh) && (metl1 > metl1thresh)), metnomu);
                 }
             }
@@ -129,8 +119,6 @@ Int_t print7Efficiencies(const TString& muonFileName = "PhysicsMain.L1KFmuontrig
     mhtTeff->SetLineColor(kRed);
     topoclpucTeff->SetLineColor(kGreen);
     cellmhtTeff->SetLineColor(kBlack);
-    celltopoclTeff->SetLineColor(kViolet);
-    celltopoclpsTeff->SetLineColor(kMagenta);
     mhttopoclpucTeff->SetLineColor(kTeal);
 
 
