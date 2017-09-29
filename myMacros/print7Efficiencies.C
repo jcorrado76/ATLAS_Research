@@ -116,6 +116,8 @@ Int_t print7Efficiencies(const TString& muonFileName = "PhysicsMain.L1KFmuontrig
         }
     }
 
+    std::cout << "Number of events that passed all cuts, except for the cut on the alg itself (includes L1, etc.)"
+    << numbPassAllCutsndL1 << std::endl;
 
     TCanvas* efficiencyCanvas = new TCanvas("myCanv", "Efficiency Canvas");
     efficiencyCanvas->RangeAxis(0,0,500,1.0);
