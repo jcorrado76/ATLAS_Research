@@ -148,7 +148,21 @@ Int_t print7Efficiencies(const TString& muonFileName = "PhysicsMain.L1KFmuontrig
     legend->AddEntry(mhttopoclpucTeff, "mht and topoclpuc");
     legend->Draw();
 
-    TFile myFile("./TEfficienciesPics/Print5Efficiencies/EfficiencyBestCombination.root","RECREATE");
+    TString bestCombinationRootFileName = "./TEfficienciesPics/Print5Efficiencies/EfficiencyBestCombination.root";
+    TFile myFile( bestCombinationRootFileName ,"NEW")
+
+    if ( myFile.IsZombie() )
+        {
+            TString prefix;
+            std::cout << "Unable to open file" << std::endl;
+            std::cout << "Enter run number: ";
+            std::cin >> prefix;
+            TString newName = preix + bestCombinationRootFileName;
+            TFile myFile( newName ,"NEW");
+        }
+    else
+        { std::cout << "File successfully opened" << std::endl; }
+
     efficiencyCanvas->Write();
     cellTeff->Write();
     mhtTeff->Write();
