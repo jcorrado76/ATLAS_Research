@@ -145,20 +145,22 @@ Int_t print7Efficiencies(const TString& muonFileName = "PhysicsMain.L1KFmuontrig
     legend->AddEntry(mhttopoclpucTeff, "mht and topoclpuc");
     legend->Draw();
 
+    TString folderPath = "./TEfficienciesPics/Print5Efficiencies/BestCombinationefficiencies.tiff";
     TString bestCombinationRootFileName = "./TEfficienciesPics/Print5Efficiencies/EfficiencyBestCombination.root";
-    TFile* rootFile= 0;
+    TFile rootFile(bestCombinationRootFileName,"CREATE");
 
-    while ( !(rootFile->Open(bestCombinationRootFileName,"CREATE")) )
+    if ( !( rootFile.IsOpen() ) )
         {
-            TString suffix;
+            TString suffix = "";
             std::cout << "Unable to open file" << std::endl;
             std::cout << "Enter run number: ";
             std::cin >> suffix;
             suffix = "(" + suffix + ")";
             bestCombinationRootFileName.Insert( (bestCombinationRootFileName.Length()-5),suffix);
-            rootFile->Open( bestCombinationRootFileName ,"RECREATE");
+            rootFile.Open( bestCombinationRootFileName ,"RECREATE");
+            folderPath.Insert( (folderPath.Length()-5),suffix);
         }
-        
+
     std::cout << "Root file successfully opened" << std::endl;
 
     efficiencyCanvas->Write();
@@ -168,7 +170,7 @@ Int_t print7Efficiencies(const TString& muonFileName = "PhysicsMain.L1KFmuontrig
     cellmhtTeff->Write();
     mhttopoclpucTeff->Write();
 
-    TString folderPath = "./TEfficienciesPics/Print5Efficiencies/BestCombinationefficiencies.tiff";
+
     efficiencyCanvas->Print(folderPath);
     return(0);
 }
