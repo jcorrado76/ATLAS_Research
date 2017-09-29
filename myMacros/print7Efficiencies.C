@@ -158,8 +158,8 @@ Int_t print7Efficiencies(const TString& muonFileName = "PhysicsMain.L1KFmuontrig
             bestCombinationRootFileName.Insert( (bestCombinationRootFileName.Length()-5),suffix);
             rootFile->Open( bestCombinationRootFileName ,"RECREATE");
         }
-    else
-        { std::cout << "File successfully opened" << std::endl; }
+        
+    std::cout << "Root file successfully opened" << std::endl;
 
     efficiencyCanvas->Write();
     cellTeff->Write();
