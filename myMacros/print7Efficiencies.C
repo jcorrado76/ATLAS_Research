@@ -133,7 +133,8 @@ Int_t print7Efficiencies(const TString& muonFileName = "PhysicsMain.L1KFmuontrig
     celltopoclpsTeff->SetLineColor(kMagenta);
     mhttopoclpucTeff->SetLineColor(kTeal);
 
-    const TString canvName = "7 Efficiencies Comparison;Offline Recalibrated MET w/o Muon term [GeV];Efficiency";
+
+    const TString canvName = "Efficiency Best Combination vs Best Individual;Offline Recalibrated MET w/o Muon term [GeV];Efficiency";
 
     cellTeff->SetTitle(canvName);
 
@@ -141,8 +142,6 @@ Int_t print7Efficiencies(const TString& muonFileName = "PhysicsMain.L1KFmuontrig
     mhtTeff->Draw("same");
     topoclpucTeff->Draw("same");
     cellmhtTeff->Draw("same");
-    celltopoclTeff->Draw("same");
-    celltopoclpsTeff->Draw("same");
     mhttopoclpucTeff->Draw("same");
 
 
@@ -151,8 +150,6 @@ Int_t print7Efficiencies(const TString& muonFileName = "PhysicsMain.L1KFmuontrig
     legend->AddEntry(mhtTeff, "metmht");
     legend->AddEntry(topoclpucTeff, "mettopoclpuc");
     legend->AddEntry(cellmhtTeff, "cell and mht");
-    legend->AddEntry(celltopoclTeff, "cell and topocl");
-    legend->AddEntry(celltopoclpsTeff, "cell and topoclps");
     legend->AddEntry(mhttopoclpucTeff, "mht and topoclpuc");
     legend->Draw();
 
