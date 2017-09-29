@@ -146,9 +146,9 @@ Int_t print7Efficiencies(const TString& muonFileName = "PhysicsMain.L1KFmuontrig
     legend->Draw();
 
     TString bestCombinationRootFileName = "./TEfficienciesPics/Print5Efficiencies/EfficiencyBestCombination.root";
-    TFile myFile(bestCombinationRootFileName,"CREATE");
+    TFile* rootFile= 0;
 
-    if ( !(myFile.IsOpen()) )
+    while ( !(rootFile->Open(bestCombinationRootFileName,"CREATE")) )
         {
             TString suffix;
             std::cout << "Unable to open file" << std::endl;
@@ -156,7 +156,7 @@ Int_t print7Efficiencies(const TString& muonFileName = "PhysicsMain.L1KFmuontrig
             std::cin >> suffix;
             suffix = "(" + suffix + ")";
             bestCombinationRootFileName.Insert( (bestCombinationRootFileName.Length()-5),suffix);
-            myFile.Open( bestCombinationRootFileName ,"RECREATE");
+            rootFile->Open( bestCombinationRootFileName ,"RECREATE");
         }
     else
         { std::cout << "File successfully opened" << std::endl; }
