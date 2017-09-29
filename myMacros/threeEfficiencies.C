@@ -18,6 +18,56 @@
 #include "TBranch.h"
 #include "TObjString.h"
 
+struct userInfo {
+    TString algAName;
+    TString algBName;
+    Int_t nbins;
+    Float_t metmin;
+    Float_t metmax;
+    Float_t metl1thresh;
+    Float_t frac;
+    TString zbFileName;
+    TString muonFileName;
+    Int_t numzbRndm;
+    Float_t algAThresh;
+    Float_t algBThresh;
+    Int_t muonNentries;
+    Int_t zbNentries;
+    Int_t numPassMuon;
+    Int_t numMuonKeptCombined;
+
+    Int_t numMuonPassNumeratorAlgA;
+    Int_t numMuonPassNumeratorAlgB;
+    Int_t numMuonPassNumeratorAlgC;
+    Int_t numMuonDenominator;
+    Float_t eps;
+
+}
+
+
+//TODO: write logfile to the same root file
+logFile << "Algorithms: " << algA << "\t" << algB << "\r\n";
+logFile << "Nbins: " << nbins << "\t METMIN: " << metMin << "\t METMAX: " << metMax << "\r\n";
+logFile << "METL1 THRESH: " << metl1thresh << "\r\n";
+logFile << "Fraction to keep of zerobias for bisection: " << frac << "\r\n";
+logFile << "ZEROBIAS DATAFILE: " << zerobiasFileName << "\r\n";
+logFile << "ZEROIAS NENTRIES : " << zerobiasNentries << "\r\n";
+logFile << "NUMBZEROBIASRNDM: " << numZeroBiasRndm << "\r\n";
+logFile << "Fraction times numZeroBiasRndm: " << frac * numZeroBiasRndm << "\r\n";
+logFile << "Threshold for " + algA + " to keep fraction by itself: " << algAThresh << "\r\n";
+logFile << "Threshold for " + algB + " to keep fraction by itself: " << algBThresh << "\r\n";
+logFile << "MUON DATAFILE: " << muonFilename << "\r\n";
+logFile << "MUON NENTRIES: " << muonNentries << "\r\n";
+logFile << "NUMBERPASSMUON: " << numbPassMuon << "\r\n";
+logFile << "Number MUON events kept using final zerobias thresholds determined below: " << muonEventsCombined << "\r\n";
+logFile << "Fraction times Numb MUON events kept: " << frac * numbPassMuon << "\r\n";
+logFile << "NUMB MUON ENTRIES PASSED ALG A: " << (Ateff->GetPassedHistogram())->GetEntries() << "\r\n";
+logFile << "NUMB MUON ENTRIES PASSED ALG B: " << (Bteff->GetPassedHistogram())->GetEntries() << "\r\n";
+logFile << "NUMB MUON ENTRIES PASSED ALG C: " << (Cteff->GetPassedHistogram())->GetEntries() << "\r\n";
+logFile << "NUMB MUON ENTRIES TOTAL  ALG A: " << (Ateff->GetTotalHistogram())->GetEntries() << "\r\n";
+logFile << "Epsilon tolerance for bisection accuracy: " << eps << " events" << "\r\n";
+
+
 TFile* threeEfficiencies( const TString& algA , const TString& algB,
         const Float_t frac = 0.00590, const TString folder = "",
         const TString& zerobiasFileName = "PhysicsMain.All.noalgXEtriggers.2016.f731f758._m1659m1710.48Runs.root",
@@ -38,6 +88,9 @@ TFile* threeEfficiencies( const TString& algA , const TString& algB,
     Float_t computeThresh( const TH1F*, const Float_t);
     Float_t determineMuonEventsKeptCombined( const TString&, const Float_t, const TString&,
         const Float_t,const TString& );
+
+    //user defined struct to store all log data
+    userInfo logFileParams;
 
     //initialize TBenchmark for this macro
     TBenchmark* threeEfficienciesBenchmark = new TBenchmark();
@@ -246,36 +299,12 @@ TFile* threeEfficiencies( const TString& algA , const TString& algB,
 
 
     //TODO: Generate a TTree with all logfile info
-
+    //TODO: fill param data into the user info struct
     TTree* logFileTree = new TTree("tree" , "Log File Tree");
-    logFileTree->Branch("Parameters", &parameters, "algA/C:algB/C:nbins/i:metmin/F:metmax/F:metl1thresh/F:zb_frac/F:
-    zbFile/C:zb_nentries/i:zb_rndm/i:fracRndm/F:algAthresh/F:algBthresh/F:muonFile/C:muon_nentries/i:numbPassMuon/i:numMuonCombined/i:fracPassMuon/F
-    numbPassA/i:numbPassB/i:numbPassC/i:totalPass/i:epsilon/F");
+    //adds the log file data struct containing information on all parameters
+    logFilTree->GetUserInfo()->Add(logFileParams);
 
 
-
-
-    //TODO: write logfile to the same root file
-    logFile << "Algorithms: " << algA << "\t" << algB << "\r\n";
-    logFile << "Nbins: " << nbins << "\t METMIN: " << metMin << "\t METMAX: " << metMax << "\r\n";
-    logFile << "METL1 THRESH: " << metl1thresh << "\r\n";
-    logFile << "Fraction to keep of zerobias for bisection: " << frac << "\r\n";
-    logFile << "ZEROBIAS DATAFILE: " << zerobiasFileName << "\r\n";
-    logFile << "ZEROIAS NENTRIES : " << zerobiasNentries << "\r\n";
-    logFile << "NUMBZEROBIASRNDM: " << numZeroBiasRndm << "\r\n";
-    logFile << "Fraction times numZeroBiasRndm: " << frac * numZeroBiasRndm << "\r\n";
-    logFile << "Threshold for " + algA + " to keep fraction by itself: " << algAThresh << "\r\n";
-    logFile << "Threshold for " + algB + " to keep fraction by itself: " << algBThresh << "\r\n";
-    logFile << "MUON DATAFILE: " << muonFilename << "\r\n";
-    logFile << "MUON NENTRIES: " << muonNentries << "\r\n";
-    logFile << "NUMBERPASSMUON: " << numbPassMuon << "\r\n";
-    logFile << "Number MUON events kept using final zerobias thresholds determined below: " << muonEventsCombined << "\r\n";
-    logFile << "Fraction times Numb MUON events kept: " << frac * numbPassMuon << "\r\n";
-    logFile << "NUMB MUON ENTRIES PASSED ALG A: " << (Ateff->GetPassedHistogram())->GetEntries() << "\r\n";
-    logFile << "NUMB MUON ENTRIES PASSED ALG B: " << (Bteff->GetPassedHistogram())->GetEntries() << "\r\n";
-    logFile << "NUMB MUON ENTRIES PASSED ALG C: " << (Cteff->GetPassedHistogram())->GetEntries() << "\r\n";
-    logFile << "NUMB MUON ENTRIES TOTAL  ALG A: " << (Ateff->GetTotalHistogram())->GetEntries() << "\r\n";
-    logFile << "Epsilon tolerance for bisection accuracy: " << eps << " events" << "\r\n";
     logFile << "ZEROBIAS Bisection Information: " << "\r\n";
     logFile << "Iteration Number : " << "\tIndividual Fraction: \t" << "Combined Fraction Kept: \t" << "Combined Events Kept: \t" <<
     "Threshold for " + algA + '\t' << "Threshold for " + algB +'\t' << "\r\n";
