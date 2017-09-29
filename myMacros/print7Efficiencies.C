@@ -117,7 +117,7 @@ Int_t print7Efficiencies(const TString& muonFileName = "PhysicsMain.L1KFmuontrig
     }
 
 
-    TCanvas* efficiencyCanvas = new TCanvas("Efficiency Canvas", "Efficiency Canvas");
+    TCanvas* efficiencyCanvas = new TCanvas("myCanv", "Efficiency Canvas");
     efficiencyCanvas->RangeAxis(0,0,500,1.0);
 
     cellTeff->SetLineColor(kBlue);
@@ -146,7 +146,12 @@ Int_t print7Efficiencies(const TString& muonFileName = "PhysicsMain.L1KFmuontrig
     legend->AddEntry(mhttopoclpucTeff, "mht and topoclpuc");
     legend->Draw();
 
-    TString folderPath = "./TEfficienciesPics/print_7_efficiencies.png";
+
+
+    TFile myFile("EfficiencyBestCombination.root","RECREATE");
+    efficiencyCanvas->Write();
+
+    TString folderPath = "./TEfficienciesPics/print_7_efficiencies.tiff";
     efficiencyCanvas->Print(folderPath);
     return(0);
 }
