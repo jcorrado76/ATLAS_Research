@@ -66,10 +66,6 @@ Int_t print7Efficiencies(const TString& muonFileName = "PhysicsMain.L1KFmuontrig
     meyoffrecal,metoffrecalmuon,mexoffrecalmuon,meyoffrecalmuon;
     Int_t passmuon,passmuvarmed,cleanCutsFlag,recalBrokeFlag;
 
-
-
-
-
     //assign branch variables to locations
     myMuonTree->SetBranchAddress("metcell",&metcell);
     myMuonTree->SetBranchAddress("metmht",&metmht);
@@ -89,7 +85,7 @@ Int_t print7Efficiencies(const TString& muonFileName = "PhysicsMain.L1KFmuontrig
     myMuonTree->SetBranchAddress("mexoffrecalmuon", &mexoffrecalmuon);
     myMuonTree->SetBranchAddress("meyoffrecalmuon", &meyoffrecalmuon);
 
-    //TODO: find the number of events that passes all of the below cuts, except the alg cut itself
+    /*
     Int_t numbPassAllCutsndL1 = 0;
     for (Int_t l = 0 ; l < muonNentries ; l++)
     {
@@ -119,6 +115,7 @@ Int_t print7Efficiencies(const TString& muonFileName = "PhysicsMain.L1KFmuontrig
     std::cout << "Number of events that passed all cuts, except for the cut on the alg itself (includes L1, etc.) "
     << numbPassAllCutsndL1 << std::endl;
 
+*/
     TCanvas* efficiencyCanvas = new TCanvas("myCanv", "Efficiency Canvas");
     efficiencyCanvas->RangeAxis(0,0,500,1.0);
 
@@ -149,16 +146,17 @@ Int_t print7Efficiencies(const TString& muonFileName = "PhysicsMain.L1KFmuontrig
     legend->Draw();
 
     TString bestCombinationRootFileName = "./TEfficienciesPics/Print5Efficiencies/EfficiencyBestCombination.root";
-    TFile myFile( bestCombinationRootFileName ,"NEW")
+    TFile myFile(bestCombinationRootFileName,"CREATE");
 
-    if ( myFile.IsZombie() )
+    if ( !(myFile.IsOpen()) )
         {
-            TString prefix;
+            TString suffix;
             std::cout << "Unable to open file" << std::endl;
             std::cout << "Enter run number: ";
-            std::cin >> prefix;
-            TString newName = preix + bestCombinationRootFileName;
-            TFile myFile( newName ,"NEW");
+            std::cin >> suffix;
+            suffix = "(" + suffix + ")";
+            bestCombinationRootFileName.Insert( (bestCombinationRootFileName.Length()-5),suffix);
+            myFile.Open( bestCombinationRootFileName ,"RECREATE");
         }
     else
         { std::cout << "File successfully opened" << std::endl; }
