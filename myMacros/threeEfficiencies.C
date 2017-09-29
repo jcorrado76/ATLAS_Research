@@ -45,7 +45,7 @@ struct userInfo {
 }
 
 
-//TODO: write logfile to the same root file
+/*
 logFile << "Algorithms: " << algA << "\t" << algB << "\r\n";
 logFile << "Nbins: " << nbins << "\t METMIN: " << metMin << "\t METMAX: " << metMax << "\r\n";
 logFile << "METL1 THRESH: " << metl1thresh << "\r\n";
@@ -66,7 +66,7 @@ logFile << "NUMB MUON ENTRIES PASSED ALG B: " << (Bteff->GetPassedHistogram())->
 logFile << "NUMB MUON ENTRIES PASSED ALG C: " << (Cteff->GetPassedHistogram())->GetEntries() << "\r\n";
 logFile << "NUMB MUON ENTRIES TOTAL  ALG A: " << (Ateff->GetTotalHistogram())->GetEntries() << "\r\n";
 logFile << "Epsilon tolerance for bisection accuracy: " << eps << " events" << "\r\n";
-
+*/
 
 TFile* threeEfficiencies( const TString& algA , const TString& algB,
         const Float_t frac = 0.00590, const TString folder = "",
@@ -298,8 +298,9 @@ TFile* threeEfficiencies( const TString& algA , const TString& algB,
     efficiencyCanvas->Write("Efficiency Cavnas");
 
 
-    //TODO: Generate a TTree with all logfile info
+    //TODO: Figure out how to add the numerical data to the logTTree
     //TODO: fill param data into the user info struct
+    //TODO: write TTree to the logfile
     TTree* logFileTree = new TTree("tree" , "Log File Tree");
     //adds the log file data struct containing information on all parameters
     logFilTree->GetUserInfo()->Add(logFileParams);
