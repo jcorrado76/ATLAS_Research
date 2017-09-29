@@ -116,7 +116,7 @@ Int_t print7Efficiencies(const TString& muonFileName = "PhysicsMain.L1KFmuontrig
         }
     }
 
-    std::cout << "Number of events that passed all cuts, except for the cut on the alg itself (includes L1, etc.)"
+    std::cout << "Number of events that passed all cuts, except for the cut on the alg itself (includes L1, etc.) "
     << numbPassAllCutsndL1 << std::endl;
 
     TCanvas* efficiencyCanvas = new TCanvas("myCanv", "Efficiency Canvas");
@@ -148,7 +148,7 @@ Int_t print7Efficiencies(const TString& muonFileName = "PhysicsMain.L1KFmuontrig
     legend->AddEntry(mhttopoclpucTeff, "mht and topoclpuc");
     legend->Draw();
 
-    TFile myFile("./TEfficienciesPics/BestCombination/EfficiencyBestCombination.root","RECREATE");
+    TFile myFile("./TEfficienciesPics/Print5Efficiencies/EfficiencyBestCombination.root","RECREATE");
     efficiencyCanvas->Write();
     cellTeff->Write();
     mhtTeff->Write();
@@ -156,7 +156,7 @@ Int_t print7Efficiencies(const TString& muonFileName = "PhysicsMain.L1KFmuontrig
     cellmhtTeff->Write();
     mhttopoclpucTeff->Write();
 
-    TString folderPath = "./TEfficienciesPics/BestCombination/BestCombinationefficiencies.tiff";
+    TString folderPath = "./TEfficienciesPics/Print5Efficiencies/BestCombinationefficiencies.tiff";
     efficiencyCanvas->Print(folderPath);
     return(0);
 }

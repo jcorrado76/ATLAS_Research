@@ -179,7 +179,7 @@ TFile* threeEfficiencies( const TString& algA , const TString& algB,
     myMuonTree->SetBranchAddress(algB,&algBmuonMET);
     myMuonTree->SetBranchAddress("metl1",&muonMetl1);
     Int_t numbPassMuon = 0;Float_t wValue;
-    //TODO: add in actint > 35.0 in the numerator and denominator 
+    //TODO: add in actint > 35.0 in the numerator and denominator
     for (Int_t l = 0 ; l < muonNentries ; l++)
     {
         myMuonTree->GetEntry(l);
@@ -245,15 +245,8 @@ TFile* threeEfficiencies( const TString& algA , const TString& algB,
     efficiencyCanvas->Write("Efficiency Cavnas");
 
 
-    TList* parameters = new TList();
-    TObjString* algAName = new TObjString(algA);
-    TObjString* algBName = new TObjString(algB);
-    TObjString* zb_fileName = new TObjString(zerobiasFileName);
-    TObjString* muon_fileName = new TObjString(muonFilename);
-
-
-    parameters->Add();
     //TODO: Generate a TTree with all logfile info
+
     TTree* logFileTree = new TTree("tree" , "Log File Tree");
     logFileTree->Branch("Parameters", &parameters, "algA/C:algB/C:nbins/i:metmin/F:metmax/F:metl1thresh/F:zb_frac/F:
     zbFile/C:zb_nentries/i:zb_rndm/i:fracRndm/F:algAthresh/F:algBthresh/F:muonFile/C:muon_nentries/i:numbPassMuon/i:numMuonCombined/i:fracPassMuon/F
