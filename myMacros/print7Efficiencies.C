@@ -146,7 +146,7 @@ Int_t print7Efficiencies(const TString& muonFileName = "PhysicsMain.L1KFmuontrig
     legend->AddEntry(mhttopoclpucTeff, "mht and topoclpuc");
     legend->Draw();
 
-    TFile myFile("EfficiencyBestCombination.root","RECREATE");
+    TFile myFile("./TEfficienciesPics/BestCombination/EfficiencyBestCombination.root","RECREATE");
     efficiencyCanvas->Write();
     cellTeff->Write();
     mhtTeff->Write();
@@ -154,7 +154,7 @@ Int_t print7Efficiencies(const TString& muonFileName = "PhysicsMain.L1KFmuontrig
     cellmhtTeff->Write();
     mhttopoclpucTeff->Write();
 
-    TString folderPath = "./TEfficienciesPics/print_5_efficiencies.tiff";
+    TString folderPath = "./TEfficienciesPics/BestCombination/BestCombinationefficiencies.tiff";
     efficiencyCanvas->Print(folderPath);
     return(0);
 }
