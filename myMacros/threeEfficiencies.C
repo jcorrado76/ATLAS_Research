@@ -45,28 +45,7 @@ struct userInfo {
 }
 
 
-/*
-logFile << "Algorithms: " << algA << "\t" << algB << "\r\n";
-logFile << "Nbins: " << nbins << "\t METMIN: " << metMin << "\t METMAX: " << metMax << "\r\n";
-logFile << "METL1 THRESH: " << metl1thresh << "\r\n";
-logFile << "Fraction to keep of zerobias for bisection: " << frac << "\r\n";
-logFile << "ZEROBIAS DATAFILE: " << zerobiasFileName << "\r\n";
-logFile << "ZEROIAS NENTRIES : " << zerobiasNentries << "\r\n";
-logFile << "NUMBZEROBIASRNDM: " << numZeroBiasRndm << "\r\n";
-logFile << "Fraction times numZeroBiasRndm: " << frac * numZeroBiasRndm << "\r\n";
-logFile << "Threshold for " + algA + " to keep fraction by itself: " << algAThresh << "\r\n";
-logFile << "Threshold for " + algB + " to keep fraction by itself: " << algBThresh << "\r\n";
-logFile << "MUON DATAFILE: " << muonFilename << "\r\n";
-logFile << "MUON NENTRIES: " << muonNentries << "\r\n";
-logFile << "NUMBERPASSMUON: " << numbPassMuon << "\r\n";
-logFile << "Number MUON events kept using final zerobias thresholds determined below: " << muonEventsCombined << "\r\n";
-logFile << "Fraction times Numb MUON events kept: " << frac * numbPassMuon << "\r\n";
-logFile << "NUMB MUON ENTRIES PASSED ALG A: " << (Ateff->GetPassedHistogram())->GetEntries() << "\r\n";
-logFile << "NUMB MUON ENTRIES PASSED ALG B: " << (Bteff->GetPassedHistogram())->GetEntries() << "\r\n";
-logFile << "NUMB MUON ENTRIES PASSED ALG C: " << (Cteff->GetPassedHistogram())->GetEntries() << "\r\n";
-logFile << "NUMB MUON ENTRIES TOTAL  ALG A: " << (Ateff->GetTotalHistogram())->GetEntries() << "\r\n";
-logFile << "Epsilon tolerance for bisection accuracy: " << eps << " events" << "\r\n";
-*/
+
 
 TFile* threeEfficiencies( const TString& algA , const TString& algB,
         const Float_t frac = 0.00590, const TString folder = "",
@@ -301,6 +280,29 @@ TFile* threeEfficiencies( const TString& algA , const TString& algB,
     //TODO: Figure out how to add the numerical data to the logTTree
     //TODO: fill param data into the user info struct
     //TODO: write TTree to the logfile
+
+    logFileParams.algAName = algA;
+    logFileParams.algBName = algB;
+    logFileParams.nbins = nbins;
+    logFileParams.metmin = metMin;
+    logFileParams.metmax = metMax;
+    logFileParams.metl1thresh = metl1thresh;
+    logFileParams.frac = frac;
+    logFileParams.zbFileName = zerobiasFileName;
+    logFileParams.muonFileName = muonFilename;
+    logFileParams.numzbRndm = numZeroBiasRndm;
+    logFileParams.algAThresh = algAThresh;
+    logFileParams.algBThresh = algBThresh;
+    logFileParams.muonNentries = muonNentries;
+    logFileParams.zbNentries = zerobiasNentries;
+    logFileParams.numPassMuon = numbPassMuon;
+    logFileParams.numMuonKeptCombined = muonEventsCombined;
+    logFileParams.numMuonPassNumeratorAlgA = (Ateff->GetPassedHistogram())->GetEntries();
+    logFileParams.numMuonPassNumeratorAlgB = (Bteff->GetPassedHistogram())->GetEntries();
+    logFileParams.numMuonPassNumeratorAlgC = (Cteff->GetPassedHistogram())->GetEntries();
+    logFileParams.numMuonDenominator = (Ateff->GetTotalHistogram())->GetEntries();
+    logFileParams.eps = eps;
+
     TTree* logFileTree = new TTree("tree" , "Log File Tree");
     //adds the log file data struct containing information on all parameters
     logFilTree->GetUserInfo()->Add(logFileParams);
