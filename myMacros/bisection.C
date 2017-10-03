@@ -15,7 +15,7 @@
 
 
 //TODO: implement proof lite
-Float_t bisection(TString& algA , TString& algB, const Float_t binWidth, const Int_t numZeroBiasRndm = 0 , Float_t & individAThreshFinal, Float_t & individBThreshFinal,
+Float_t bisection(TH1F algAHist , TH1F algBHist, const Float_t binWidth, const Int_t numZeroBiasRndm = 0 , Float_t & individAThreshFinal, Float_t & individBThreshFinal,
     const Float_t frac = 0.00590, TNtuple* logFileData = NULL,TTree* zeroBiasTree = NULL)
 {
     Float_t computeThresh( const TH1F*, const Float_t);
@@ -42,8 +42,8 @@ Float_t bisection(TString& algA , TString& algB, const Float_t binWidth, const I
 
 
     //compute the cumulative right hand sum hists
-    TH1F *algAMETtarget = (TH1F*) hist1->GetCumulative(kFALSE);
-    TH1F *algBMETtarget = (TH1F*) hist2->GetCumulative(kFALSE);
+    TH1F *algAMETtarget = (TH1F*) algAHist->GetCumulative(kFALSE);
+    TH1F *algBMETtarget = (TH1F*) algBHist->GetCumulative(kFALSE);
     //rename for clarity later on
     algAMETtarget->SetName(algAMETtarget->GetName() + (const TString)"A");
     algBMETtarget->SetName(algBMETtarget->GetName() + (const TString)"B");
@@ -140,6 +140,8 @@ Float_t bisection(TString& algA , TString& algB, const Float_t binWidth, const I
 
     Int_t j = 0;
     Int_t imax = 30;
+    Float_t algAThreshDiff;
+    Float_t algBThreshDiff;
 
     do{
         j++;
