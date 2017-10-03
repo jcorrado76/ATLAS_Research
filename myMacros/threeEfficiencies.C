@@ -71,6 +71,9 @@ TFile* threeEfficiencies( const TString& algA , const TString& algB,
     //user defined struct to store all log data
     userInfo logFileParams;
 
+    //initialize ttree to store all data
+    TTree* logFileTree = new TTree("tree" , "Log File Tree");
+
     //initialize TBenchmark for this macro
     TBenchmark* threeEfficienciesBenchmark = new TBenchmark();
     //start the clock running for total time
@@ -135,8 +138,8 @@ TFile* threeEfficiencies( const TString& algA , const TString& algB,
     zeroBiasTree->SetBranchAddress("passnoalgL1XE30",&passnoalgL1XE30);
     zeroBiasTree->SetBranchAddress("passnoalgL1XE40",&passnoalgL1XE40);
     zeroBiasTree->SetBranchAddress("passnoalgL1XE45",&passnoalgL1XE45);
-    TH1F *algAMETHist = new TH1F("algA", "algA", nbins, metMin, metMax);
-    TH1F *algBMETHist = new TH1F("algB", "algB", nbins, metMin, metMax);
+    TH1F *algAMETHist = new TH1F(algA, "algA", nbins, metMin, metMax);
+    TH1F *algBMETHist = new TH1F(algB, "algB", nbins, metMin, metMax);
 
     //start timer on zerobias determination of thresholds
     threeEfficienciesBenchmark->Start("ZeroBias Thresholds");
@@ -273,12 +276,12 @@ TFile* threeEfficiencies( const TString& algA , const TString& algB,
     //make a tiff picture of the efficiency canvas just in case
     TString folderPath = "./TEfficienciesPics/" + folder + "-" +  algA + "_and_" + algB + "_efficiencies.tiff";
     efficiencyCanvas->Print(folderPath);
+
     //write canvas to the root file
     efficiencyCanvas->Write("Efficiency Cavnas");
 
 
     //TODO: Figure out how to add the numerical data to the logTTree
-    //TODO: fill param data into the user info struct
     //TODO: write TTree to the logfile
 
     logFileParams.algAName = algA;
@@ -303,12 +306,13 @@ TFile* threeEfficiencies( const TString& algA , const TString& algB,
     logFileParams.numMuonDenominator = (Ateff->GetTotalHistogram())->GetEntries();
     logFileParams.eps = eps;
 
-    TTree* logFileTree = new TTree("tree" , "Log File Tree");
     //adds the log file data struct containing information on all parameters
-    logFilTree->GetUserInfo()->Add(logFileParams);
+    logFileTree->GetUserInfo()->Add(logFileParams);
+
+    logFileTree->Write();
 
 
-    logFile << "ZEROBIAS Bisection Information: " << "\r\n";
+    /*logFile << "ZEROBIAS Bisection Information: " << "\r\n";
     logFile << "Iteration Number : " << "\tIndividual Fraction: \t" << "Combined Fraction Kept: \t" << "Combined Events Kept: \t" <<
     "Threshold for " + algA + '\t' << "Threshold for " + algB +'\t' << "\r\n";
     logFile << "x1\t\t\t" << inputArray[0] << "\t\t\t" << outputArray[0] << "\t\t\t" << numEventsArray[0] << "\t\t\t" <<
@@ -323,7 +327,7 @@ TFile* threeEfficiencies( const TString& algA , const TString& algB,
       << "\t\t\t" << Form("%.7f",numEventsArray[m+2]) << "\t\t" << Form("%.7f",thresholdAarray[m+2]) << "\t\t" <<
       Form("%.7f",thresholdBarray[m+2]) << "\r\n";
     }
-    logFile.close();
+    logFile.close();*/
 
     //end the three efficiencies benchmark
     threeEfficienciesBenchmark->Show("Three Efficiencies");
