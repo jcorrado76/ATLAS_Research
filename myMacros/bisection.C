@@ -50,6 +50,7 @@ Float_t bisection(TH1F* algAHist , TH1F* algBHist, const Float_t binWidth, Float
 
     //compute thresholds at boundaris to use
     Float_t algAMETx1thresh,algAMETx2thresh,algAMETx3thresh,algBMETx1thresh,algBMETx2thresh, algBMETx3thresh;
+
     algAMETx1thresh = computeThresh(algAMETtarget, numKeepx1);
     algBMETx1thresh = computeThresh(algBMETtarget, numKeepx1);
 
@@ -99,7 +100,9 @@ Float_t bisection(TH1F* algAHist , TH1F* algBHist, const Float_t binWidth, Float
     zeroBiasTree->SetBranchAddress("passnoalgL1XE40",&passnoalgL1XE40);
     zeroBiasTree->SetBranchAddress("passnoalgL1XE45",&passnoalgL1XE45);
 
-    Int_t counter1,counter2,counter3;
+    Int_t counter1 = 0;
+    Int_t counter2 = 0;
+    Int_t counter3 = 0;
 
     Int_t zerobiasNentries = zeroBiasTree->GetEntries();
 
@@ -145,6 +148,10 @@ Float_t bisection(TH1F* algAHist , TH1F* algBHist, const Float_t binWidth, Float
     Int_t imax = 30;
     Float_t algAThreshDiff;
     Float_t algBThreshDiff;
+
+    Float_t thresholdAarray[imax];
+    Float_t thresholdBarray[imax];
+
 
     do{
         j++;
@@ -193,16 +200,16 @@ Float_t bisection(TH1F* algAHist , TH1F* algBHist, const Float_t binWidth, Float
 
 
 
-        algAThreshDiff = (thresholdAarray->GetArgs())[j+2] - (thresholdAarray->GetArgs())[j+1];
-        algBThreshDiff = (thresholdBarray->GetArgs())[j+2] - (thresholdBarray->GetArgs())[j+1];
+        algAThreshDiff = thresholdAarray[j+2] - thresholdAarray[j+1];
+        algBThreshDiff = thresholdBarray[j+2] - thresholdBarray[j+1];
 
         algAThreshDiff = abs(algAThreshDiff);
         algBThreshDiff = abs(algBThreshDiff);
 
-      std::cout << "algA current threshold: " << Form("%.7f",(thresholdAarray->GetArgs())[j+2]) << std::endl;
-      std::cout << "algA previous threshold: " << Form("%.7f",(thresholdAarray->GetArgs())[j+1]) << std::endl;
-      std::cout << "algB current threshold: " << Form("%.7f",(thresholdBarray->GetArgs())[j+2]) << std::endl;
-      std::cout << "algB previous threshold: " << Form("%.7f",(thresholdBarray->GetArgs())[j+1]) << std::endl;
+      std::cout << "algA current threshold: " << Form("%.7f",thresholdAarray[j+2]) << std::endl;
+      std::cout << "algA previous threshold: " << Form("%.7f",thresholdAarray[j+1]) << std::endl;
+      std::cout << "algB current threshold: " << Form("%.7f",thresholdBarray[j+2]) << std::endl;
+      std::cout << "algB previous threshold: " << Form("%.7f",thresholdBarray[j+1]) << std::endl;
       std::cout << "binWidth: " << binWidth << "\n" << std::endl;
 
       logFileData->Fill(initialGuess,f2,counter2,algAMETx2thresh,algBMETx2thresh);
