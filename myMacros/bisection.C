@@ -12,9 +12,14 @@
 #include "TSystem.h"
 #include "TF1.h"
 #include "TNtuple.h"
+#include "userInfo.h"
+
+
+extern userInfo logFileParams;
 
 //TODO: implement proof lite
-Float_t bisection(TH1F* algAHist , TH1F* algBHist, const Float_t binWidth, Float_t &  individAThreshFinal , Float_t  & individBThreshFinal, struct &userInfo, const Int_t numZeroBiasRndm = 0 ,
+Float_t bisection(TH1F* algAHist , TH1F* algBHist, const Float_t binWidth, Float_t &  individAThreshFinal , Float_t  & individBThreshFinal,
+    userInfo& logFileParams, const Int_t numZeroBiasRndm = 0 ,
     const Float_t frac = 0.00590, TNtuple* logFileData = NULL,TTree* zeroBiasTree = NULL)
 {
     Float_t computeThresh( const TH1F*, const Float_t);
@@ -86,7 +91,8 @@ Float_t bisection(TH1F* algAHist , TH1F* algBHist, const Float_t binWidth, Float
     std::cout << "algAx1Thresh: " << algAMETx1thresh << std::endl;
     std::cout << "algBx1Thresh: " << algBMETx1thresh << std::endl;
     std::cout << "metl1thresh : " << metl1thresh << std::endl;
-    Float_t algAMET,algBMET, metl1,passnoalgL1XE10,passnoalgL1XE30,passnoalgL1XE40,passnoalgL1XE45;
+    Float_t algAMET,algBMET, metl1;
+    Int_t passnoalgL1XE10,passnoalgL1XE30,passnoalgL1XE40,passnoalgL1XE45;
 
     TString algA = algAHist->GetName();
     TString algB = algBHist->GetName();

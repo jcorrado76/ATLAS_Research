@@ -18,35 +18,6 @@
 #include "TBranch.h"
 #include "TObjString.h"
 
-struct userInfo {
-    TString algAName;
-    TString algBName;
-    Int_t nbins;
-    Float_t metmin;
-    Float_t metmax;
-    Float_t metl1thresh;
-    Float_t frac;
-    TString zbFileName;
-    TString muonFileName;
-    Int_t numzbRndm;
-    Float_t algAThresh;
-    Float_t algBThresh;
-    Int_t muonNentries;
-    Int_t zbNentries;
-    Int_t numPassMuon;
-    Int_t numMuonKeptCombined;
-
-    Int_t numMuonPassNumeratorAlgA;
-    Int_t numMuonPassNumeratorAlgB;
-    Int_t numMuonPassNumeratorAlgC;
-    Int_t numMuonDenominator;
-    Float_t eps;
-
-}
-
-
-
-
 TFile* threeEfficiencies( const TString& algA , const TString& algB,
         const Float_t frac = 0.00590, const TString folder = "",
         const TString& zerobiasFileName = "PhysicsMain.All.noalgXEtriggers.2016.f731f758._m1659m1710.48Runs.root",
@@ -62,7 +33,7 @@ TFile* threeEfficiencies( const TString& algA , const TString& algB,
 
     gROOT->ProcessLine("gSystem->Load(\"./mincerMacros_C.so\")");
     gROOT->ProcessLine("gSystem->Load(\"./bisection_C.so\")");
-    Float_t passTransverseMassCut( const Float_t , const Float_t ,const Float_t ,const Float_t ,const Float_t ,const Float_t);
+    Bool_t passTransverseMassCut( const Float_t , const Float_t ,const Float_t ,const Float_t ,const Float_t ,const Float_t);
     Float_t determineZeroBiasThresh( const TString&, const Float_t, const TString&);
     Float_t computeThresh( const TH1F*, const Float_t);
     Float_t determineMuonEventsKeptCombined( const TString&, const Float_t, const TString&,
@@ -176,7 +147,7 @@ TFile* threeEfficiencies( const TString& algA , const TString& algB,
 
     Float_t bisectionIndividFrac;
     Float_t individAThreshFinal;
-    FLoat_t individBThreshFinal;
+    Float_t individBThreshFinal;
 
 
     TNtuple* logFileData = new TNtuple("logFileData" , "Bisection Data" , "Individual Fraction:Combined Fraction: Numb Events Kept: Threshold A:Threshold B");
@@ -246,7 +217,7 @@ TFile* threeEfficiencies( const TString& algA , const TString& algB,
     //TODO: write efficiencies and canvas to a root file
     //TODO: handle the case if there is already a root file with same name
     TString fileName = algA + "_" + algB + " efficiencies.root";
-    TFile myFile = new TFile(fileName,"RECREATE");
+    TFile* myFile = new TFile(fileName,"RECREATE");
 
     const TString canvName = algA + " and " + algB + " Combined Efficiency" + ";Offline Recalibrated MET w/o Muon term [GeV];Efficiency";
 
@@ -277,8 +248,8 @@ TFile* threeEfficiencies( const TString& algA , const TString& algB,
     //write efficiencies to the root file
     Ateff->Write( algA + " TEfficiency" );
     Bteff->Write( algB + " TEfficiency" );
-    Cteff->Write( algC + " TEfficiency" );
-    Dteff->Write( algD + " TEfficiency" );
+    Cteff->Write( algA + " and " + algB + " TEfficiency" );
+    Dteff->Write( "METL1 TEfficiency" );
 
     //make a tiff picture of the efficiency canvas just in case
     TString folderPath = "./TEfficienciesPics/" + folder + "-" +  algA + "_and_" + algB + "_efficiencies.tiff";
@@ -290,6 +261,9 @@ TFile* threeEfficiencies( const TString& algA , const TString& algB,
     //TODO: Figure out how to add the numerical data to the logTTree
 
     TBranch* paramBranch = logFileTree->Branch("parameters", "userInfo", &logFileParams);
+
+    Int_t muonEventsCombined = determineMuonEventsKeptCombined( algA, individAThreshFinal , algB , individBThreshFinal , muonFilename );
+
 
     logFileParams.algAName = algA;
     logFileParams.algBName = algB;
@@ -337,6 +311,7 @@ TFile* threeEfficiencies( const TString& algA , const TString& algB,
     //end the three efficiencies benchmark
     threeEfficienciesBenchmark->Show("Three Efficiencies");
     //show the summary and totals of all benchmarks
-    threeEfficienciesBenchmark->Summary();
+    Float_t realtime, cputime;
+    threeEfficienciesBenchmark->Summary(realtime ,cputime);
     return( myFile );
     }

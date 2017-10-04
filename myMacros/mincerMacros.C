@@ -12,6 +12,7 @@
 #include "TSystem.h"
 #include "TF1.h"
 #include "TNtuple.h"
+#include "TBenchmark.h"
 
 Bool_t passTransverseMassCut( const Float_t metoffrecal     , const Float_t mexoffrecal     , const Float_t meyoffrecal ,
            const Float_t metoffrecalmuon , const Float_t mexoffrecalmuon , const Float_t meyoffrecalmuon )
@@ -39,7 +40,12 @@ const TString& zeroBiasFileName = "PhysicsMain.All.noalgXEtriggers.2016.f731f758
 {
     /*Returns the threshold needed for an algorithm to keep the fraction of zerobias events*/
     //TODO: need to add actint > 35.0 to redetermine thresholds
-    
+
+
+    TBenchmark* zbThreshBenchmark = new TBenchmark();
+    zbThreshBenchmark->Start("zb Individual Threshold for: " + algName);
+
+
     const Float_t metL1Thresh = 50;
 
     //get zerobias tree
@@ -102,10 +108,14 @@ const TString& zeroBiasFileName = "PhysicsMain.All.noalgXEtriggers.2016.f731f758
 		}
 	}
 
-    std::cout << "number of events kept at threshold: " << numberEventsKept << "\n" << std::endl;
+    zbThreshBenchmark->Show("zb Individual Threshold for " + algName);
+
+    std::cout << "number of events kept at threshold: " << numberEventsKept << std::endl;
+
+
+    std::cout << "\n" << std::endl;
 
     zeroBiasFile->Close();
-
 	return(indeterminateThresh);
 }
 
