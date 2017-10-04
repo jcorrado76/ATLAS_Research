@@ -76,7 +76,7 @@ TFile* threeEfficiencies( const TString& algA , const TString& algB,
 
     //initialize TBenchmark for this macro
     TBenchmark* threeEfficienciesBenchmark = new TBenchmark();
-    
+
     //start the clock running for total time
     threeEfficienciesBenchmark->Start("Three Efficiencies");
 
@@ -284,13 +284,8 @@ TFile* threeEfficiencies( const TString& algA , const TString& algB,
 
     //TODO: Figure out how to add the numerical data to the logTTree
 
+    TBranch* paramBranch = logFileTree->Branch("parameters", "userInfo", &logFileParams);
 
-
-
-    TBranch* paramBranch = logFileTree->Branch("parameters", logFileParams, &userInfo );
-
-
-    //TODO: figure out how to store the parameter information in the ttree
     logFileParams.algAName = algA;
     logFileParams.algBName = algB;
     logFileParams.nbins = nbins;
@@ -314,14 +309,7 @@ TFile* threeEfficiencies( const TString& algA , const TString& algB,
     logFileParams.eps = eps;
 
     logFileTree->Fill();
-
-
-
-    //adds the log file data struct containing information on all parameters
-
-
     logFileTree->Write();
-
 
     /*logFile << "ZEROBIAS Bisection Information: " << "\r\n";
     logFile << "Iteration Number : " << "\tIndividual Fraction: \t" << "Combined Fraction Kept: \t" << "Combined Events Kept: \t" <<
