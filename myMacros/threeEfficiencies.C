@@ -185,9 +185,9 @@ TFile* threeEfficiencies( const TString& algA , const TString& algB,
     threeEfficienciesBenchmark->Start("Bisection");
 
     //run BISECTION
-    bisectionIndividFrac = bisection( algAMETHist , algBMETHist, binWidth, numZeroBiasRndm , frac ,
-    logFileData,
-    individAThreshFinal, individBThreshFinal, zeroBiasTree);
+    bisectionIndividFrac = bisection( algAMETHist , algBMETHist, binWidth, individAThreshFinal,
+    individBThreshFinal, logFileParams, numZeroBiasRndm , frac ,
+    logFileData,zeroBiasTree);
 
     //end bisection timer
     threeEfficienciesBenchmark->Show("Bisection");
@@ -281,7 +281,6 @@ TFile* threeEfficiencies( const TString& algA , const TString& algB,
     //write canvas to the root file
     efficiencyCanvas->Write("Efficiency Cavnas");
 
-
     //TODO: Figure out how to add the numerical data to the logTTree
 
     TBranch* paramBranch = logFileTree->Branch("parameters", "userInfo", &logFileParams);
@@ -308,6 +307,7 @@ TFile* threeEfficiencies( const TString& algA , const TString& algB,
     logFileParams.numMuonDenominator = (Ateff->GetTotalHistogram())->GetEntries();
     logFileParams.eps = eps;
 
+    //add the parameter struct in a branch of the tree
     logFileTree->Fill();
     logFileTree->Write();
 
