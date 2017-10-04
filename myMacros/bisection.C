@@ -13,9 +13,8 @@
 #include "TF1.h"
 #include "TNtuple.h"
 
-
 //TODO: implement proof lite
-Float_t bisection(TH1F* algAHist , TH1F* algBHist, const Float_t binWidth, Float_t &  individAThreshFinal , Float_t  & individBThreshFinal, const Int_t numZeroBiasRndm = 0 ,
+Float_t bisection(TH1F* algAHist , TH1F* algBHist, const Float_t binWidth, Float_t &  individAThreshFinal , Float_t  & individBThreshFinal, struct &userInfo, const Int_t numZeroBiasRndm = 0 ,
     const Float_t frac = 0.00590, TNtuple* logFileData = NULL,TTree* zeroBiasTree = NULL)
 {
     Float_t computeThresh( const TH1F*, const Float_t);
@@ -134,11 +133,6 @@ Float_t bisection(TH1F* algAHist , TH1F* algBHist, const Float_t binWidth, Float
     f2 = (Float_t) counter2 / (Float_t) numZeroBiasRndm;
     f3 = (Float_t) counter3 / (Float_t) numZeroBiasRndm;
 
-    //initialize ntuples with initial guess values
-    logFileData->Fill(x1,f1,counter1,algAMETx1thresh,algBMETx1thresh);
-    logFileData->Fill(initialGuess,f2,counter2,algAMETx2thresh,algBMETx2thresh);
-    logFileData->Fill(x3,f3,counter3,algAMETx3thresh,algBMETx3thresh);
-
     std::cout << "At x1 = " << x1 << " counter1: " << counter1 << " events = " << "f1: " << f1 << std::endl;
     std::cout << "At x2 = " << initialGuess << " counter2: " << counter2 << " events = " << "f2: " << f2 << std::endl;
     std::cout << "At x3 = " << x3 << " counter3: " << counter3 << " events" << "f3: " << f3 << std::endl;
@@ -212,6 +206,8 @@ Float_t bisection(TH1F* algAHist , TH1F* algBHist, const Float_t binWidth, Float
       std::cout << "algB previous threshold: " << Form("%.7f",thresholdBarray[j+1]) << std::endl;
       std::cout << "binWidth: " << binWidth << "\n" << std::endl;
 
+
+      //fill TNtuple with the numerical logfile data:
       logFileData->Fill(initialGuess,f2,counter2,algAMETx2thresh,algBMETx2thresh);
     }while ( abs( counter2 - (numZeroBiasRndm * frac) ) > eps && (abs(algAThreshDiff) > binWidth) && (abs(algBThreshDiff) > binWidth) && ( j <= imax ) );
 
@@ -226,8 +222,11 @@ Float_t bisection(TH1F* algAHist , TH1F* algBHist, const Float_t binWidth, Float
         std::cout << "No root found; max iterations exceeded" << std::endl;
       }
 
+
     individAThreshFinal = algAMETx2thresh;
     individBThreshFinal = algBMETx2thresh;
+
+    logFileParams.eps = eps;
 
     return( initialGuess );
 }
