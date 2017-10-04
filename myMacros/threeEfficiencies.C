@@ -152,7 +152,7 @@ TFile* threeEfficiencies( const TString& algA , const TString& algB,
 
     TNtuple* logFileData = new TNtuple("logFileData" , "Bisection Data" , "Individual Fraction:Combined Fraction: Numb Events Kept: Threshold A:Threshold B");
 
-    TBranch* logFileBranch = logFileTree->Branch("Threshold Data", "Bisection Data", &logFileData);
+    TBranch* logFileBranch = logFileTree->Branch("Bisection Data", &logFileData);
 
 
     //start bisection timer

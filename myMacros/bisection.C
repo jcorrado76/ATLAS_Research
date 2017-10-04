@@ -139,9 +139,12 @@ Float_t bisection(TH1F* algAHist , TH1F* algBHist, const Float_t binWidth, Float
     f2 = (Float_t) counter2 / (Float_t) numZeroBiasRndm;
     f3 = (Float_t) counter3 / (Float_t) numZeroBiasRndm;
 
-    std::cout << "At x1 = " << x1 << " counter1: " << counter1 << " events = " << "f1: " << f1 << std::endl;
-    std::cout << "At x2 = " << initialGuess << " counter2: " << counter2 << " events = " << "f2: " << f2 << std::endl;
-    std::cout << "At x3 = " << x3 << " counter3: " << counter3 << " events" << "f3: " << f3 << std::endl;
+    std::cout << "At x1 = " << x1 << " counter1: " << counter1 << " events " << std::endl;
+    std::cout << "f1: " << f1 << std::endl;
+    std::cout << "At x2 = " << initialGuess << " counter2: " << counter2 << " events " << std::endl;
+    std::cout << "f2: " << f2 << std::endl;
+    std::cout << "At x3 = " << x3 << " counter3: " << counter3 << " events " << std::endl;
+    std::cout << "f3: " << f3 << std::endl;
 
 
     Int_t j = 0;
