@@ -192,6 +192,9 @@ TFile* threeEfficiencies( const TString& algA , const TString& algB,
     individBThreshFinal, logFileParams, numZeroBiasRndm , frac ,
     logFileData,zeroBiasTree);
 
+    //fill the tree with the newly acquired bisection data
+    logFileTree->Fill();
+
     //end bisection timer
     threeEfficienciesBenchmark->Show("Bisection");
 
