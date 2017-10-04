@@ -11,7 +11,7 @@
 #include "TCanvas.h"
 #include "TSystem.h"
 #include "TF1.h"
-
+#include "TBenchmark.h"
 
 Int_t compareEfficiencies(const TString& muonFileName = "PhysicsMain.L1KFmuontriggers.2016.f731f758_m1659m1710.Run309759.48Runs.root")
 {
@@ -21,6 +21,12 @@ Int_t compareEfficiencies(const TString& muonFileName = "PhysicsMain.L1KFmuontri
 
     gROOT->ProcessLine("gSystem->Load(\"./mincerMacros_C.so\")");
     Bool_t passTransverseMassCut( const Float_t , const Float_t ,const Float_t ,const Float_t ,const Float_t ,const Float_t);
+
+
+    TBenchmark* compareThreshBench = new TBenchmark();
+
+
+    compareThreshBench->Start("Threshold Comparison");
 
     //parameters
     Int_t nbins = 300;
@@ -77,10 +83,6 @@ Int_t compareEfficiencies(const TString& muonFileName = "PhysicsMain.L1KFmuontri
             {
                 if ( passTransverseMassCut(metoffrecal,mexoffrecal,meyoffrecal,metoffrecalmuon,mexoffrecalmuon,meyoffrecalmuon) )
                 {
-                    if ( metl1 > metl1thresh )
-                    {
-                        numbPassAllCutsndL1++;
-                    }
                     Float_t metnomu = sqrt(((mexoffrecal - mexoffrecalmuon) * (mexoffrecal - mexoffrecalmuon)) +
                     ((meyoffrecal - meyoffrecalmuon)*(meyoffrecal - meyoffrecalmuon))); //compute metnomu
                     betterpair->Fill( (metmht > mhtbetter) && (mettopoclpuc > pucbetter) && (metl1 > metl1thresh), metnomu);
@@ -111,7 +113,17 @@ Int_t compareEfficiencies(const TString& muonFileName = "PhysicsMain.L1KFmuontri
     legend->AddEntry(worsepair, "worsepair");
     legend->Draw();
 
+
+    std::cout << "Number of events passed by worse pair: " << (worsepair->GetPassedHistogram())->GetEntries() << std::endl;
+    std::cout << "Number of events passed by better pair: " << (betterpair->GetPassedHistogram())->GetEntries() << std::endl;
+    std::cout << "Total number of entries: " << (betterpair->GetTotalHistogram())->GetEntries() << std::endl;
+
+
+
     TString folderPath = "./TEfficienciesPics/Print5Efficiencies/ThresholdComparison.tiff";
     efficiencyCanvas->Print(folderPath);
+
+    compareThreshBench->Show("Threshold Comparison");
+
     return(0);
 }

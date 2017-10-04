@@ -23,7 +23,6 @@ Int_t print7Efficiencies(const TString& muonFileName = "PhysicsMain.L1KFmuontrig
     */
 
     gROOT->ProcessLine("gSystem->Load(\"./mincerMacros_C.so\")");
-    gROOT->ProcessLine("gROOT->Time();");
     Bool_t passTransverseMassCut( const Float_t , const Float_t ,const Float_t ,const Float_t ,const Float_t ,const Float_t);
 
     //parameters

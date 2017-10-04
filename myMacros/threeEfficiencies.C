@@ -216,8 +216,11 @@ TFile* threeEfficiencies( const TString& algA , const TString& algB,
 
     //TODO: write efficiencies and canvas to a root file
     //TODO: handle the case if there is already a root file with same name
-    TString fileName = algA + "_" + algB + " efficiencies.root";
+    TString fileName = "./TEfficienciesPics/" + algA + "_" + algB + " efficiencies.root";
     TFile* myFile = new TFile(fileName,"RECREATE");
+
+
+    std::cout << "Current directory: " << fileName << std::endl;
 
     const TString canvName = algA + " and " + algB + " Combined Efficiency" + ";Offline Recalibrated MET w/o Muon term [GeV];Efficiency";
 

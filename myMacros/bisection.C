@@ -169,10 +169,6 @@ Float_t bisection(TH1F* algAHist , TH1F* algBHist, const Float_t binWidth, Float
     thresholdBarray[2] = (Float_t) algBMETx2thresh;
     thresholdBarray[1] = (Float_t) algBMETx3thresh;
 
-
-
-
-
     Int_t j = 0;
     Int_t imax = 30;
     Float_t algAThreshDiff;
@@ -194,12 +190,16 @@ Float_t bisection(TH1F* algAHist , TH1F* algBHist, const Float_t binWidth, Float
           x1 = initialGuess;
         }
         initialGuess = ( x1 + x3 ) / 2.0;
+        inputArray[j+2] = initialGuess;
         std::cout << "New Guess: " << initialGuess << std::endl;
         std::cout << "numZeroBiasRndm: " << numZeroBiasRndm << std::endl;
         numKeepx2 = numZeroBiasRndm * initialGuess;
         std::cout << "numKeepx2: " << numKeepx2 << std::endl;
         algAMETx2thresh = computeThresh(algAMETtarget, numKeepx2);
         algBMETx2thresh = computeThresh(algBMETtarget, numKeepx2);
+
+        thresholdAarray[j+2] = (Float_t) algAMETx2thresh;
+        thresholdBarray[j+2] = (Float_t) algBMETx2thresh;
 
 
         counter2 = 0;
@@ -214,6 +214,7 @@ Float_t bisection(TH1F* algAHist , TH1F* algBHist, const Float_t binWidth, Float
     	  }
         }
 
+        numEventsArray[j+2] = counter2;
 
         std::cout << "algAMETx2thresh: " << algAMETx2thresh << std::endl;
         std::cout << "algBMETx2thresh: " << algBMETx2thresh << std::endl;
@@ -221,6 +222,7 @@ Float_t bisection(TH1F* algAHist , TH1F* algBHist, const Float_t binWidth, Float
         f2 = (Float_t) counter2 / (Float_t) numZeroBiasRndm;
         std::cout << "f2: " << f2 << std::endl;
         std::cout << "Condition: " << abs(numZeroBiasRndm * frac - counter2) << " > " << eps << std::endl;
+        outputArray[j+2] = f2;
 
 
 
@@ -238,8 +240,7 @@ Float_t bisection(TH1F* algAHist , TH1F* algBHist, const Float_t binWidth, Float
       std::cout << "binWidth: " << binWidth << "\n" << std::endl;
 
 
-      //fill TNtuple with the numerical logfile data:
-      logFileData->Fill(initialGuess,f2,counter2,algAMETx2thresh,algBMETx2thresh);
+
     }while ( abs( counter2 - (numZeroBiasRndm * frac) ) > eps && (abs(algAThreshDiff) > binWidth) && (abs(algBThreshDiff) > binWidth) && ( j <= imax ) );
 
       if ( abs( counter2 - (numZeroBiasRndm * frac) ) <= eps || abs(algAThreshDiff) <= binWidth || abs(algBThreshDiff) <= binWidth)
@@ -257,17 +258,12 @@ Float_t bisection(TH1F* algAHist , TH1F* algBHist, const Float_t binWidth, Float
     individAThreshFinal = algAMETx2thresh;
     individBThreshFinal = algBMETx2thresh;
 
-
+    //fill TNtuple with the numerical logfile data:
     while ( inputArray[k] )
     {
         logFileData->Fill(inputArray[k],outputArray[k],numEventsArray[k],thresholdAarray[k],thresholdBarray[k]);
         k++;
     }
-
-
-
-
-
 
     logFileParams.eps = eps;
 
