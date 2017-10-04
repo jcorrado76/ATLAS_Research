@@ -147,14 +147,36 @@ Float_t bisection(TH1F* algAHist , TH1F* algBHist, const Float_t binWidth, Float
     std::cout << "f3: " << f3 << std::endl;
 
 
+    Float_t inputArray[100];
+    Float_t outputArray[100];
+    Float_t numEventsArray[100];
+    Float_t thresholdAarray[100];
+    Float_t thresholdBarray[100];
+
+    inputArray[0] = x1;
+    inputArray[2] = initialGuess;
+    inputArray[1] = x3;
+    outputArray[0] = f1;
+    outputArray[2] = f2;
+    outputArray[1] = f3;
+    numEventsArray[0] = counter1;
+    numEventsArray[2] = counter2;
+    numEventsArray[1] = counter3;
+    thresholdAarray[0] = (Float_t) algAMETx1thresh;
+    thresholdAarray[2] = (Float_t) algAMETx2thresh;
+    thresholdAarray[1] = (Float_t) algAMETx3thresh;
+    thresholdBarray[0] = (Float_t) algBMETx1thresh;
+    thresholdBarray[2] = (Float_t) algBMETx2thresh;
+    thresholdBarray[1] = (Float_t) algBMETx3thresh;
+
+
+
+
+
     Int_t j = 0;
     Int_t imax = 30;
     Float_t algAThreshDiff;
     Float_t algBThreshDiff;
-
-    Float_t thresholdAarray[imax];
-    Float_t thresholdBarray[imax];
-
 
     do{
         j++;
@@ -234,6 +256,18 @@ Float_t bisection(TH1F* algAHist , TH1F* algBHist, const Float_t binWidth, Float
 
     individAThreshFinal = algAMETx2thresh;
     individBThreshFinal = algBMETx2thresh;
+
+
+    while ( inputArray[k] )
+    {
+        logFileData->Fill(inputArray[k],outputArray[k],numEventsArray[k],thresholdAarray[k],thresholdBarray[k]);
+        k++;
+    }
+
+
+
+
+
 
     logFileParams.eps = eps;
 
