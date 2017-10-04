@@ -181,6 +181,9 @@ TFile* threeEfficiencies( const TString& algA , const TString& algB,
 
     TNtuple* logFileData = new TNtuple("logFileData" , "Bisection Data" , "Individual Fraction:Combined Fraction: Numb Events Kept: Threshold A:Threshold B");
 
+    TBranch* logFileBranch = logFileTree->Branch("Threshold Data", "Bisection Data", &logFileData);
+
+
     //start bisection timer
     threeEfficienciesBenchmark->Start("Bisection");
 
@@ -305,7 +308,7 @@ TFile* threeEfficiencies( const TString& algA , const TString& algB,
     logFileParams.numMuonPassNumeratorAlgB = (Bteff->GetPassedHistogram())->GetEntries();
     logFileParams.numMuonPassNumeratorAlgC = (Cteff->GetPassedHistogram())->GetEntries();
     logFileParams.numMuonDenominator = (Ateff->GetTotalHistogram())->GetEntries();
-    logFileParams.eps = eps;
+
 
     //add the parameter struct in a branch of the tree
     logFileTree->Fill();
