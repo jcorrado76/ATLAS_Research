@@ -23,16 +23,12 @@ class userInfo : public TObject {
     Int_t muonNentries;
     Int_t zbNentries;
     Int_t numMuonKeptCombined;
-
     Int_t numMuonPassNumeratorAlgA;
     Int_t numMuonPassNumeratorAlgB;
     Int_t numMuonPassNumeratorAlgC;
     Int_t numMuonDenominator;
     Float_t eps;
-
     Float_t actintCut;
-
-    userInfo();
     void Print();
 
 };

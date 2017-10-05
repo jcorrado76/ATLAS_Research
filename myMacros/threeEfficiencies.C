@@ -19,6 +19,31 @@
 #include "TObjString.h"
 #include "userInfo.h"
 
+void userInfo::Print()
+{
+    std::cout << "Alg A Name: " << algAName << std::endl;
+    std::cout << "Alg B Name: " << algBName << std::endl;
+    std::cout << "nbins: " << nbins << std::endl;
+    std::cout << "MetMin: " << metmin << std::endl;
+    std::cout << "MetMax: " << metmax << std::endl;
+    std::cout << "METL1 thresh used: " << metl1thresh << std::endl;
+    std::cout << "frac to keep: " << frac << std::endl;
+    std::cout << "Zero Bias File Used: " << zbFileName << std::endl;
+    std::cout << "Muon File Used: " << muonFileName << std::endl;
+    std::cout << "Number of zerobias events that passed no alg and metl1: " << numzbRndm << std::endl;
+    std::cout << "Threshold needed on A: " << algAThresh << std::endl;
+    std::cout << "Threshold needed on B: " << algBThresh << std::endl;
+    std::cout << "Muon Nentries: " << muonNentries << std::endl;
+    std::cout << "ZeroBias Nentries: " << zbNentries << std::endl;
+    std::cout << "Number of entries kept using combined thresholds: " <<  numMuonKeptCombined << std::endl;
+    std::cout << "Number of entries that passed all muon cuts and " + algAName + " at Individ thresh: " << numMuonPassNumeratorAlgA << std::endl;
+    std::cout << "Number of entries that passed all muon cuts and " + algBName + " at Individ thresh: " << numMuonPassNumeratorAlgB << std::endl;
+    std::cout << "Number of entries that passed all muon cuts and both algs at Combined thresh: " << numMuonPassNumeratorAlgC << std::endl;
+    std::cout << "Number entries that passed all muon cuts without alg: " << numMuonDenominator << std::endl;
+    std::cout << "Epsilon tolerance on number events used for bisection: " << eps << std::endl;
+}
+
+
 TFile* threeEfficiencies( const TString& algA , const TString& algB,
         const Float_t frac = 0.00590, const TString folder = "",
         const TString& zerobiasFileName = "PhysicsMain.All.noalgXEtriggers.2016.f731f758._m1659m1710.48Runs.root",
@@ -31,21 +56,8 @@ TFile* threeEfficiencies( const TString& algA , const TString& algB,
     In addition, generates a root file with all of the statistics.
     */
 
-
-
-
-
-
-
     gROOT->ProcessLine("gSystem->Load(\"./mincerMacros_C.so\")");
     gROOT->ProcessLine("gSystem->Load(\"./bisection_C.so\")");
-    gROOT->ProcessLine("gSystem->Load(\"./userInfo_C.so\")");
-/*
-    gROOT->ProcessLine("gInterpreter->LoadMacro(\"./mincerMacros.C\")");
-    gROOT->ProcessLine("gInterpreter->LoadMacro(\"./bisection.C\")");
-    gROOT->ProcessLine("gInterpreter->LoadMacro(\"./userInfo.C\")");
-*/
-
 
     Bool_t passTransverseMassCut( const Float_t , const Float_t ,const Float_t ,const Float_t ,const Float_t ,const Float_t);
     Float_t determineZeroBiasThresh( const TString&, const Float_t, const TString&);
@@ -56,11 +68,9 @@ TFile* threeEfficiencies( const TString& algA , const TString& algB,
         userInfo& , const Int_t,
         const Float_t , TNtuple* ,TTree* );
 
-
     //user defined struct to store all log data
     userInfo logFileParams;
     logFileParams.Print();
-
 
     //initialize TBenchmark for this macro
     TBenchmark* threeEfficienciesBenchmark = new TBenchmark();
@@ -300,9 +310,6 @@ TFile* threeEfficiencies( const TString& algA , const TString& algB,
     logFileParams.numMuonPassNumeratorAlgC = (Cteff->GetPassedHistogram())->GetEntries();
     logFileParams.numMuonDenominator = (Ateff->GetTotalHistogram())->GetEntries();
     logFileParams.actintCut = actintCut;
-
-
-
 
     myFile->cd();
 

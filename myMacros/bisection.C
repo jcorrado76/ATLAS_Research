@@ -14,8 +14,7 @@
 #include "TNtuple.h"
 #include "userInfo.h"
 
-
-//extern userInfo logFileParams;
+extern userInfo logFileParams;
 
 //TODO: implement proof lite
 Float_t bisection(TH1F* algAHist , TH1F* algBHist, const Float_t binWidth, Float_t &  individAThreshFinal , Float_t  & individBThreshFinal,
