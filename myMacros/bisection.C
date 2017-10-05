@@ -259,6 +259,7 @@ Float_t bisection(TH1F* algAHist , TH1F* algBHist, const Float_t binWidth, Float
     individBThreshFinal = algBMETx2thresh;
 
     //fill TNtuple with the numerical logfile data:
+    Int_t k = 0;
     while ( inputArray[k] )
     {
         logFileData->Fill(inputArray[k],outputArray[k],numEventsArray[k],thresholdAarray[k],thresholdBarray[k]);
