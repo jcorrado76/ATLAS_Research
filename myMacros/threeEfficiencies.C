@@ -43,9 +43,6 @@ TFile* threeEfficiencies( const TString& algA , const TString& algB,
     //user defined struct to store all log data
     userInfo logFileParams;
 
-    //initialize ttree to store all data
-    TTree* logFileTree = new TTree("tree" , "Log File Tree");
-
     //initialize TBenchmark for this macro
     TBenchmark* threeEfficienciesBenchmark = new TBenchmark();
 
@@ -254,9 +251,6 @@ TFile* threeEfficiencies( const TString& algA , const TString& algB,
     //write canvas to the root file
     efficiencyCanvas->Write("efficiencyCanvas");
 
-    //create TBranch containing struct for paramters
-    TBranch* paramBranch = logFileTree->Branch("parameters", "userInfo", &logFileParams);
-
     //compute number muon events actually kept using external macro
     Int_t muonEventsCombined = determineMuonEventsKeptCombined( algA, individAThreshFinal , algB , individBThreshFinal , muonFilename );
 
@@ -284,13 +278,14 @@ TFile* threeEfficiencies( const TString& algA , const TString& algB,
     logFileParams.actintCut = actintCut;
 
 
-    //add the parameter struct in a branch of the tree
-    logFileTree->Fill();
+
 
     myFile->cd();
 
+    //write the tntuple to the file
     logFileData->Write("bisectionData");
-    logFileTree->Write("bisectionTree");
+    //write the TObject struct to file
+    logFileParams->Write("parameters");
 
     //end the three efficiencies benchmark
     threeEfficienciesBenchmark->Stop("Three Efficiencies");
@@ -298,5 +293,8 @@ TFile* threeEfficiencies( const TString& algA , const TString& algB,
     //show the summary and totals of all benchmarks
     Float_t realtime, cputime;
     threeEfficienciesBenchmark->Summary(realtime ,cputime);
+
+    myFile->Close();
+
     return( myFile );
     }
