@@ -14,6 +14,7 @@
 #include "TNtuple.h"
 #include "TBenchmark.h"
 
+
 Bool_t passTransverseMassCut( const Float_t metoffrecal     , const Float_t mexoffrecal     , const Float_t meyoffrecal ,
            const Float_t metoffrecalmuon , const Float_t mexoffrecalmuon , const Float_t meyoffrecalmuon )
 {
@@ -186,7 +187,7 @@ Float_t determineMuonEventsKeptCombined( const TString& algA, const Float_t thre
 
 
     std::cout << "Number of muon events kept: " << numbPassedEvents << std::endl;
-    Float_t frac = numbPassedEvents / numberMuonEvents;
+    Float_t frac = (Float_t) numbPassedEvents / (Float_t) numberMuonEvents;
     std::cout << "Fraction of muon events kept: " << frac << std::endl;
     return(numbPassedEvents);
 }

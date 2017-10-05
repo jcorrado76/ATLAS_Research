@@ -33,6 +33,7 @@ TFile* threeEfficiencies( const TString& algA , const TString& algB,
 
     gROOT->ProcessLine("gSystem->Load(\"./mincerMacros_C.so\")");
     gROOT->ProcessLine("gSystem->Load(\"./bisection_C.so\")");
+    gROOT->ProcessLine(".L bisection.C+");
     Bool_t passTransverseMassCut( const Float_t , const Float_t ,const Float_t ,const Float_t ,const Float_t ,const Float_t);
     Float_t determineZeroBiasThresh( const TString&, const Float_t, const TString&);
     Float_t computeThresh( const TH1F*, const Float_t);
@@ -150,10 +151,8 @@ TFile* threeEfficiencies( const TString& algA , const TString& algB,
     Float_t individBThreshFinal;
 
 
-    TNtuple* logFileData = new TNtuple("logFileData" , "Bisection Data" , "Individual Fraction:Combined Fraction: Numb Events Kept: Threshold A:Threshold B");
-
-    TBranch* logFileBranch = logFileTree->Branch("Bisection Data", &logFileData);
-
+    TNtuple* logFileData = new TNtuple("logFileData" , "Bisection Data" ,
+    "Individual Fraction:Combined Fraction: Numb Events Kept: Threshold A:Threshold B");
 
     //start bisection timer
     threeEfficienciesBenchmark->Start("Bisection");
@@ -162,9 +161,6 @@ TFile* threeEfficiencies( const TString& algA , const TString& algB,
     bisectionIndividFrac = bisection( algAMETHist , algBMETHist, binWidth, individAThreshFinal,
     individBThreshFinal, logFileParams, numZeroBiasRndm , frac ,
     logFileData,zeroBiasTree);
-
-    //fill the tree with the newly acquired bisection data
-    logFileTree->Fill();
 
     //end bisection timer
     threeEfficienciesBenchmark->Show("Bisection");
@@ -183,7 +179,7 @@ TFile* threeEfficiencies( const TString& algA , const TString& algB,
     TEfficiency* Cteff  = new TEfficiency(cstring,  "Efficiency", muonNbins, muonMetMin, muonMetMax);
     TEfficiency* Dteff  = new TEfficiency(dstring,  "Efficiency", muonNbins, muonMetMin, muonMetMax);//combined just L1 cut, 0 on others
 
-    threeEfficienciesBenchmark->Start("Fill Muon TEfficiencies");
+    threeEfficienciesBenchmark->Start("Fill TEfficiencies");
 
     Float_t algAmuonMET = 0;
     Float_t algBmuonMET = 0;
@@ -193,6 +189,8 @@ TFile* threeEfficiencies( const TString& algA , const TString& algB,
     myMuonTree->SetBranchAddress("metl1",&muonMetl1);
     Int_t numbPassMuon = 0;
     //TODO: add in actint > 35.0 in the numerator and denominator
+
+
     for (Int_t l = 0 ; l < muonNentries ; l++)
     {
         myMuonTree->GetEntry(l);
@@ -212,15 +210,13 @@ TFile* threeEfficiencies( const TString& algA , const TString& algB,
     }
 
 
-    threeEfficienciesBenchmark->Show("Fill Muon TEfficiencies");
+    threeEfficienciesBenchmark->Show("Fill TEfficiencies");
 
-    //TODO: write efficiencies and canvas to a root file
     //TODO: handle the case if there is already a root file with same name
-    TString fileName = "./TEfficienciesPics/" + algA + "_" + algB + " efficiencies.root";
+    TString fileName = "./TEfficienciesPics/" + algA + "_" + algB + "Efficiencies.root";
     TFile* myFile = new TFile(fileName,"RECREATE");
 
-
-    std::cout << "Current directory: " << fileName << std::endl;
+    myFile->cd();
 
     const TString canvName = algA + " and " + algB + " Combined Efficiency" + ";Offline Recalibrated MET w/o Muon term [GeV];Efficiency";
 
@@ -249,22 +245,22 @@ TFile* threeEfficiencies( const TString& algA , const TString& algB,
 
 
     //write efficiencies to the root file
-    Ateff->Write( algA + " TEfficiency" );
-    Bteff->Write( algB + " TEfficiency" );
-    Cteff->Write( algA + " and " + algB + " TEfficiency" );
-    Dteff->Write( "METL1 TEfficiency" );
+    Ateff->Write( algA + "Efficiency" );
+    Bteff->Write( algB + "Efficiency" );
+    Cteff->Write( algA + algB + "combinedEfficiency" );
+    Dteff->Write( "metl1Efficiency" );
 
     //make a tiff picture of the efficiency canvas just in case
     TString folderPath = "./TEfficienciesPics/" + folder + "-" +  algA + "_and_" + algB + "_efficiencies.tiff";
     efficiencyCanvas->Print(folderPath);
 
     //write canvas to the root file
-    efficiencyCanvas->Write("Efficiency Cavnas");
+    efficiencyCanvas->Write("efficiencyCanvas");
 
-    //TODO: Figure out how to add the numerical data to the logTTree
-
+    //create TBranch containing struct for paramters
     TBranch* paramBranch = logFileTree->Branch("parameters", "userInfo", &logFileParams);
 
+    //compute number muon events actually kept using external macro
     Int_t muonEventsCombined = determineMuonEventsKeptCombined( algA, individAThreshFinal , algB , individBThreshFinal , muonFilename );
 
 
@@ -291,8 +287,11 @@ TFile* threeEfficiencies( const TString& algA , const TString& algB,
 
 
     //add the parameter struct in a branch of the tree
+    std::cout << "Just filled the logFile Tree with the params" << std::endl;
     logFileTree->Fill();
-    logFileTree->Write();
+    std::cout << "Attempt to write tree to file: " << std::endl;
+    logFileData->Write("bisectionData");
+    logFileTree->Write("bisectionTree");
 
     /*logFile << "ZEROBIAS Bisection Information: " << "\r\n";
     logFile << "Iteration Number : " << "\tIndividual Fraction: \t" << "Combined Fraction Kept: \t" << "Combined Events Kept: \t" <<
@@ -313,6 +312,7 @@ TFile* threeEfficiencies( const TString& algA , const TString& algB,
 
     //end the three efficiencies benchmark
     threeEfficienciesBenchmark->Show("Three Efficiencies");
+
     //show the summary and totals of all benchmarks
     Float_t realtime, cputime;
     threeEfficienciesBenchmark->Summary(realtime ,cputime);
