@@ -194,6 +194,6 @@ Float_t determineMuonEventsKeptCombined( const TString& algA, const Float_t thre
 
     muonFile->Close();
 
-    
+
     return(numbPassedEvents);
 }
