@@ -17,6 +17,7 @@
 #include "TList.h"
 #include "TBranch.h"
 #include "TObjString.h"
+#include "userInfo.h"
 
 TFile* threeEfficiencies( const TString& algA , const TString& algB,
         const Float_t frac = 0.00590, const TString folder = "",
@@ -34,6 +35,7 @@ TFile* threeEfficiencies( const TString& algA , const TString& algB,
     gROOT->ProcessLine("gSystem->Load(\"./mincerMacros_C.so\")");
     gROOT->ProcessLine("gSystem->Load(\"./bisection_C.so\")");
     gROOT->ProcessLine(".L bisection.C+");
+
     Bool_t passTransverseMassCut( const Float_t , const Float_t ,const Float_t ,const Float_t ,const Float_t ,const Float_t);
     Float_t determineZeroBiasThresh( const TString&, const Float_t, const TString&);
     Float_t computeThresh( const TH1F*, const Float_t);
@@ -42,7 +44,9 @@ TFile* threeEfficiencies( const TString& algA , const TString& algB,
 
     //user defined struct to store all log data
     userInfo logFileParams;
+    logFileParams.Print();
 
+    
     //initialize TBenchmark for this macro
     TBenchmark* threeEfficienciesBenchmark = new TBenchmark();
 
@@ -189,7 +193,6 @@ TFile* threeEfficiencies( const TString& algA , const TString& algB,
     myMuonTree->SetBranchAddress("metl1",&muonMetl1);
     myMuonTree->SetBranchAddress("actint", &muonActint);
 
-    Int_t numbPassMuon = 0;
     for (Int_t l = 0 ; l < muonNentries ; l++)
     {
         myMuonTree->GetEntry(l);
@@ -199,7 +202,6 @@ TFile* threeEfficiencies( const TString& algA , const TString& algB,
             {
         	    Float_t metnomu = sqrt(((mexoffrecal - mexoffrecalmuon) * (mexoffrecal - mexoffrecalmuon)) +
         	    ((meyoffrecal - meyoffrecalmuon)*(meyoffrecal - meyoffrecalmuon))); //compute metnomu
-                numbPassMuon++;
                 Ateff->Fill((algAmuonMET > algAThresh) && (muonMetl1 > metl1thresh) && ( muonActint > actintCut ), metnomu);
         	    Bteff->Fill((algBmuonMET > algBThresh) && (muonMetl1 > metl1thresh)&& ( muonActint > actintCut ), metnomu);
         	    Cteff->Fill(((algAmuonMET > individAThreshFinal) && (algBmuonMET > individBThreshFinal)
@@ -269,7 +271,6 @@ TFile* threeEfficiencies( const TString& algA , const TString& algB,
     logFileParams.algBThresh = algBThresh;
     logFileParams.muonNentries = muonNentries;
     logFileParams.zbNentries = zerobiasNentries;
-    logFileParams.numPassMuon = numbPassMuon;
     logFileParams.numMuonKeptCombined = muonEventsCombined;
     logFileParams.numMuonPassNumeratorAlgA = (Ateff->GetPassedHistogram())->GetEntries();
     logFileParams.numMuonPassNumeratorAlgB = (Bteff->GetPassedHistogram())->GetEntries();
