@@ -13,7 +13,7 @@ Float_t Frac = 0.0059;
 TString zerobiasFileName = "PhysicsMain.All.noalgXEtriggers.2016.f731f758._m1659m1710.48Runs.root";
 TString muonFilename = "PhysicsMain.L1KFmuontriggers.2016.f731f758_m1659m1710.Run309759.48Runs.root";
 Float_t actinTCut = 35.0;
-
+Int_t epsilon = 25;
 
 
 userInfo::userInfo()
@@ -26,6 +26,7 @@ userInfo::userInfo()
     zbFileName = zerobiasFileName;
     muonFileName = muonFilename;
     actintCut = actinTCut;
+    eps = 25;
 }
 
 

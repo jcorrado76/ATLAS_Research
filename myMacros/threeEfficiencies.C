@@ -36,11 +36,11 @@ TFile* threeEfficiencies( const TString& algA , const TString& algB,
 
 
 
-/*
+
     gROOT->ProcessLine("gSystem->Load(\"./mincerMacros_C.so\")");
     gROOT->ProcessLine("gSystem->Load(\"./bisection_C.so\")");
     gROOT->ProcessLine("gSystem->Load(\"./userInfo_C.so\")");
-
+/*
     gROOT->ProcessLine("gInterpreter->LoadMacro(\"./mincerMacros.C\")");
     gROOT->ProcessLine("gInterpreter->LoadMacro(\"./bisection.C\")");
     gROOT->ProcessLine("gInterpreter->LoadMacro(\"./userInfo.C\")");
@@ -55,13 +55,6 @@ TFile* threeEfficiencies( const TString& algA , const TString& algB,
     Float_t bisection(TH1F* , TH1F* , const Float_t , Float_t , Float_t  ,
         userInfo& , const Int_t,
         const Float_t , TNtuple* ,TTree* );
-
-
-    /*
-    gROOT->ProcessLine(".L mincerMacros.C+");
-    gROOT->ProcessLine(".L bisection.C+");
-    gROOT->ProcessLine(".L userInfo.C+");
-    */
 
 
     //user defined struct to store all log data
@@ -220,6 +213,8 @@ TFile* threeEfficiencies( const TString& algA , const TString& algB,
     myMuonTree->SetBranchAddress(algB,&algBmuonMET);
     myMuonTree->SetBranchAddress("metl1",&muonMetl1);
     myMuonTree->SetBranchAddress("actint", &muonActint);
+
+    std::cout << "Starting to fill TEfficiencies.." << std::endl;
 
     for (Int_t l = 0 ; l < muonNentries ; l++)
     {
