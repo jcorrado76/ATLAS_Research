@@ -191,5 +191,9 @@ Float_t determineMuonEventsKeptCombined( const TString& algA, const Float_t thre
     std::cout << "Number of muon events kept: " << numbPassedEvents << std::endl;
     Float_t frac = (Float_t) numbPassedEvents / (Float_t) numberMuonEvents;
     std::cout << "Fraction of muon events kept: " << frac << std::endl;
+
+    muonFile->Close();
+
+    
     return(numbPassedEvents);
 }
