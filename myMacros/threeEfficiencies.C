@@ -287,28 +287,12 @@ TFile* threeEfficiencies( const TString& algA , const TString& algB,
 
 
     //add the parameter struct in a branch of the tree
-    std::cout << "Just filled the logFile Tree with the params" << std::endl;
     logFileTree->Fill();
-    std::cout << "Attempt to write tree to file: " << std::endl;
+
+    myFile->cd();
+
     logFileData->Write("bisectionData");
     logFileTree->Write("bisectionTree");
-
-    /*logFile << "ZEROBIAS Bisection Information: " << "\r\n";
-    logFile << "Iteration Number : " << "\tIndividual Fraction: \t" << "Combined Fraction Kept: \t" << "Combined Events Kept: \t" <<
-    "Threshold for " + algA + '\t' << "Threshold for " + algB +'\t' << "\r\n";
-    logFile << "x1\t\t\t" << inputArray[0] << "\t\t\t" << outputArray[0] << "\t\t\t" << numEventsArray[0] << "\t\t\t" <<
-    algAMETx1thresh << "\t\t\t" << algBMETx1thresh << "\r\n";
-    logFile << "x2\t\t\t" << inputArray[2] << "\t\t" << outputArray[2] << "\t\t\t" << numEventsArray[2] << "\t\t\t" <<
-    algAMETx2thresh << "\t\t\t" << algBMETx2thresh <<"\r\n";
-    logFile << "x3\t\t\t" << inputArray[1] << "\t\t\t" << outputArray[1] << "\t\t\t" << numEventsArray[1] << "\t\t\t" <<
-    algAMETx3thresh << "\t\t\t" << algBMETx3thresh <<"\r\n";
-    for (Int_t m = 1; m < j+1 ; m++)
-    {
-      logFile << Form("I%d",m) << "\t\t\t" << Form("%.7f",inputArray[m+2]) << "\t\t" << Form("%.7f",outputArray[m+2])
-      << "\t\t\t" << Form("%.7f",numEventsArray[m+2]) << "\t\t" << Form("%.7f",thresholdAarray[m+2]) << "\t\t" <<
-      Form("%.7f",thresholdBarray[m+2]) << "\r\n";
-    }
-    logFile.close();*/
 
     //end the three efficiencies benchmark
     threeEfficienciesBenchmark->Show("Three Efficiencies");
