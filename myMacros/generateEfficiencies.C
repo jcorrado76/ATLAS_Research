@@ -1,6 +1,10 @@
 #include "TString.h"
 #include "TROOT.h"
 
+
+
+//TODO: write some file handling code that generates a folder within TEfficienciesPics and time stamps it to keep everything
+//organized
 Int_t generateEfficiencies(const Float_t frac = 0.00590,
         const TString& folderName = "",
         const TString& zeroBiasFileName = "PhysicsMain.All.noalgXEtriggers.2016.f731f758._m1659m1710.48Runs.root",
