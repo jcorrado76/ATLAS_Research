@@ -24,8 +24,8 @@ Float_t bisection(TH1F* algAHist , TH1F* algBHist, const Float_t binWidth, Float
 {
     Float_t computeThresh( const TH1F*, const Float_t);
     //some useful parameters
-    //TODO: need to add in actint > 35.0
     Float_t metl1thresh = 50.0;
+    Float_t actintCut = 35.0;
 
     Float_t lwrbnd = 0.5*frac;
     Float_t uprbnd = 0.13;
@@ -40,10 +40,6 @@ Float_t bisection(TH1F* algAHist , TH1F* algBHist, const Float_t binWidth, Float
     Float_t numKeepx1 = numZeroBiasRndm * x1;
     Float_t numKeepx2 = numZeroBiasRndm * initialGuess;
     Float_t numKeepx3 = numZeroBiasRndm * x3;
-
-
-    //TODO: Figure out how to pass all the proper information to this macro
-
 
     //compute the cumulative right hand sum hists
     TH1F *algAMETtarget = (TH1F*) algAHist->GetCumulative(kFALSE);
@@ -104,6 +100,7 @@ Float_t bisection(TH1F* algAHist , TH1F* algBHist, const Float_t binWidth, Float
     zeroBiasTree->SetBranchAddress("passnoalgL1XE30",&passnoalgL1XE30);
     zeroBiasTree->SetBranchAddress("passnoalgL1XE40",&passnoalgL1XE40);
     zeroBiasTree->SetBranchAddress("passnoalgL1XE45",&passnoalgL1XE45);
+    zeroBiasTree->SetBranchAddress("actint",&zb_actint);
 
     Int_t counter1 = 0;
     Int_t counter2 = 0;
@@ -116,17 +113,20 @@ Float_t bisection(TH1F* algAHist , TH1F* algBHist, const Float_t binWidth, Float
     zeroBiasTree->GetEntry(i);
         //if (passRndm > 0.5)
         //{
-            if ((algAMET > algAMETx1thresh) && (algBMET > algBMETx1thresh) && (metl1 > metl1thresh)&& ( passnoalgL1XE10 > 0.5 || passnoalgL1XE30 > 0.5 ||
+            if ((algAMET > algAMETx1thresh) && (algBMET > algBMETx1thresh) && (metl1 > metl1thresh)&& (zb_actint > actintCut) &&
+            ( passnoalgL1XE10 > 0.5 || passnoalgL1XE30 > 0.5 ||
             passnoalgL1XE40 > 0.5 || passnoalgL1XE45 > 0.5  ) )
             {
             counter1++;
             }
-            if ((algAMET > algAMETx2thresh) && (algBMET > algBMETx2thresh) && (metl1 > metl1thresh)&& ( passnoalgL1XE10 > 0.5 || passnoalgL1XE30 > 0.5 ||
+            if ((algAMET > algAMETx2thresh) && (algBMET > algBMETx2thresh) && (metl1 > metl1thresh)&& (zb_actint > actintCut) &&
+            ( passnoalgL1XE10 > 0.5 || passnoalgL1XE30 > 0.5 ||
             passnoalgL1XE40 > 0.5 || passnoalgL1XE45 > 0.5  ))
             {
             counter2++;
             }
-            if ((algAMET > algAMETx3thresh) && (algBMET > algBMETx3thresh) && (metl1 > metl1thresh)&& ( passnoalgL1XE10 > 0.5 || passnoalgL1XE30 > 0.5 ||
+            if ((algAMET > algAMETx3thresh) && (algBMET > algBMETx3thresh) && (metl1 > metl1thresh)&& (zb_actint > actintCut) &&
+            ( passnoalgL1XE10 > 0.5 || passnoalgL1XE30 > 0.5 ||
             passnoalgL1XE40 > 0.5 || passnoalgL1XE45 > 0.5  ) )
             {
             counter3++;
@@ -207,8 +207,8 @@ Float_t bisection(TH1F* algAHist , TH1F* algBHist, const Float_t binWidth, Float
     	for (Int_t i  = 0 ; i < zerobiasNentries ;i++)
     	{
     	  zeroBiasTree->GetEntry(i);
-    	  if ((algAMET > algAMETx2thresh) && (algBMET > algBMETx2thresh) && (metl1 > metl1thresh)&& ( passnoalgL1XE10 > 0.5 ||
-              passnoalgL1XE30 > 0.5 || passnoalgL1XE40 > 0.5 || passnoalgL1XE45 > 0.5  ) )
+    	  if ((algAMET > algAMETx2thresh) && (algBMET > algBMETx2thresh) && (metl1 > metl1thresh)&& (zb_actint > actintCut) &&
+          ( passnoalgL1XE10 > 0.5 || passnoalgL1XE30 > 0.5 || passnoalgL1XE40 > 0.5 || passnoalgL1XE45 > 0.5  ) )
     	  {
     	    counter2++;
     	  }
