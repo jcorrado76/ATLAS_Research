@@ -40,8 +40,6 @@ Float_t determineZeroBiasThresh( const TString& algName, const Float_t frac = 0.
 const TString& zeroBiasFileName = "PhysicsMain.All.noalgXEtriggers.2016.f731f758._m1659m1710.48Runs.root")
 {
     /*Returns the threshold needed for an algorithm to keep the fraction of zerobias events*/
-    //TODO: need to add actint > 35.0 to redetermine thresholds
-
 
     TBenchmark* zbThreshBenchmark = new TBenchmark();
     zbThreshBenchmark->Start("zb Individual Threshold for: " + algName);
@@ -55,6 +53,8 @@ const TString& zeroBiasFileName = "PhysicsMain.All.noalgXEtriggers.2016.f731f758
 	TFile *zeroBiasFile = TFile::Open(zeroBiasPath, "READ");
 	TTree *zeroBiasTree = (TTree*)(zeroBiasFile->Get("tree"));
     const Int_t zerobiasNentries = zeroBiasTree->GetEntries();
+    Float_t zb_actint = 0;
+
 
     //display inputs
     std::cout << "DETERMINETHRESH.C" << std::endl;
