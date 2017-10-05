@@ -46,8 +46,9 @@ const TString& zeroBiasFileName = "PhysicsMain.All.noalgXEtriggers.2016.f731f758
     TBenchmark* zbThreshBenchmark = new TBenchmark();
     zbThreshBenchmark->Start("zb Individual Threshold for: " + algName);
 
-
     const Float_t metL1Thresh = 50;
+    const Float_t actintCut = 35.0;
+
 
     //get zerobias tree
     const TString zeroBiasPath = "../myData/" + zeroBiasFileName;
@@ -80,6 +81,7 @@ const TString& zeroBiasFileName = "PhysicsMain.All.noalgXEtriggers.2016.f731f758
     zeroBiasTree->SetBranchAddress("passnoalgL1XE30",&passnoalgL1XE30);
     zeroBiasTree->SetBranchAddress("passnoalgL1XE40",&passnoalgL1XE40);
     zeroBiasTree->SetBranchAddress("passnoalgL1XE45",&passnoalgL1XE45);
+    zeroBiasTree->SetBranchAddress("actint",&zb_actint);
 
     //fill the histogram with entries
     for (Int_t k = 0; k < zerobiasNentries; k++)
@@ -102,7 +104,7 @@ const TString& zeroBiasFileName = "PhysicsMain.All.noalgXEtriggers.2016.f731f758
 	for (Int_t l = 0 ; l < zerobiasNentries ; l++)
 	{
 		zeroBiasTree->GetEntry(l);
-		if ( (algMET > indeterminateThresh) && (metl1 > metL1Thresh) &&
+		if ( (algMET > indeterminateThresh) && (metl1 > metL1Thresh) && ( zb_actint > actintCut ) &&
            ( passnoalgL1XE10 > 0.5 || passnoalgL1XE30 > 0.5 || passnoalgL1XE40 > 0.5 || passnoalgL1XE45 > 0.5 ) )
 		{
 			numberEventsKept++;
