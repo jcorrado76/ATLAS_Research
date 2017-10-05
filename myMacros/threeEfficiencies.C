@@ -295,7 +295,7 @@ TFile* threeEfficiencies( const TString& algA , const TString& algB,
     logFileTree->Write("bisectionTree");
 
     //end the three efficiencies benchmark
-    threeEfficienciesBenchmark->Show("Three Efficiencies");
+    threeEfficienciesBenchmark->Stop("Three Efficiencies");
 
     //show the summary and totals of all benchmarks
     Float_t realtime, cputime;
