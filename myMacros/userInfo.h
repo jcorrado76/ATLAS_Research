@@ -23,4 +23,6 @@ struct userInfo : public TObject {
     Int_t numMuonPassNumeratorAlgC;
     Int_t numMuonDenominator;
     Float_t eps;
+
+    Float_t actintCut;
 };
