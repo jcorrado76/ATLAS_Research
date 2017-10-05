@@ -17,6 +17,7 @@
 extern userInfo logFileParams;
 
 //TODO: implement proof lite
+
 Float_t bisection(TH1F* algAHist , TH1F* algBHist, const Float_t binWidth, Float_t &  individAThreshFinal , Float_t  & individBThreshFinal,
     userInfo& logFileParams, const Int_t numZeroBiasRndm = 0 ,
     const Float_t frac = 0.00590, TNtuple* logFileData = NULL,TTree* zeroBiasTree = NULL)

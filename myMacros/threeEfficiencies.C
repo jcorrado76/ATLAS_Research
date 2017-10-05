@@ -18,7 +18,7 @@
 #include "TBranch.h"
 #include "TObjString.h"
 #include "userInfo.h"
-
+/*
 void userInfo::Print()
 {
     std::cout << "Alg A Name: " << algAName << std::endl;
@@ -42,8 +42,7 @@ void userInfo::Print()
     std::cout << "Number entries that passed all muon cuts without alg: " << numMuonDenominator << std::endl;
     std::cout << "Epsilon tolerance on number events used for bisection: " << eps << std::endl;
 }
-
-
+*/
 TFile* threeEfficiencies( const TString& algA , const TString& algB,
         const Float_t frac = 0.00590, const TString folder = "",
         const TString& zerobiasFileName = "PhysicsMain.All.noalgXEtriggers.2016.f731f758._m1659m1710.48Runs.root",
@@ -64,9 +63,7 @@ TFile* threeEfficiencies( const TString& algA , const TString& algB,
     Float_t computeThresh( const TH1F*, const Float_t);
     Float_t determineMuonEventsKeptCombined( const TString&, const Float_t, const TString&,
         const Float_t,const TString& );
-    Float_t bisection(TH1F* , TH1F* , const Float_t , Float_t , Float_t  ,
-        userInfo& , const Int_t,
-        const Float_t , TNtuple* ,TTree* );
+    Float_t bisection(TH1F* , TH1F* , const Float_t , Float_t , Float_t  ,userInfo& , const Int_t,const Float_t , TNtuple* ,TTree* );
 
     //user defined struct to store all log data
     userInfo logFileParams;

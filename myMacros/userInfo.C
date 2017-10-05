@@ -1,7 +1,7 @@
-#include "userInfo.h"
+/*#include "userInfo.h"
 #include <iostream>
 
-
+MY ATTEMPT AT IMPLEMENTING A GLOBAL PARAMETER FILE THAT WOULD BE PASSED THROUGHOUT THE MACROS
 
 //TODO: import this file into threeEfficiencies, bisection, and
 
