@@ -21,8 +21,6 @@ logFileParams.metl1thresh = metl1thresh;
 logFileParams.frac = frac;
 logFileParams.zbFileName = zerobiasFileName;
 logFileParams.muonFileName = muonFilename;
-logFileParams.muonNentries = muonNentries;
-logFileParams.zbNentries = zerobiasNentries;
 logFileParams.actintCut = actintCut;
 
 
