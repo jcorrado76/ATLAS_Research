@@ -216,8 +216,6 @@ TFile* threeEfficiencies( const TString& algA , const TString& algB,
     TString fileName = "./TEfficienciesPics/" + algA + "_" + algB + "Efficiencies.root";
     TFile* myFile = new TFile(fileName,"RECREATE");
 
-    myFile->cd();
-
     const TString canvName = algA + " and " + algB + " Combined Efficiency" + ";Offline Recalibrated MET w/o Muon term [GeV];Efficiency";
 
     TCanvas* efficiencyCanvas = new TCanvas("Efficiency Canvas", "Efficiency Canvas");
@@ -249,10 +247,6 @@ TFile* threeEfficiencies( const TString& algA , const TString& algB,
     Bteff->Write( algB + "Efficiency" );
     Cteff->Write( algA + algB + "combinedEfficiency" );
     Dteff->Write( "metl1Efficiency" );
-
-    //make a tiff picture of the efficiency canvas just in case
-    TString folderPath = "./TEfficienciesPics/" + folder + "-" +  algA + "_and_" + algB + "_efficiencies.tiff";
-    efficiencyCanvas->Print(folderPath);
 
     //write canvas to the root file
     efficiencyCanvas->Write("efficiencyCanvas");
