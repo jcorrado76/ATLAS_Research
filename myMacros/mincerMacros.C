@@ -115,9 +115,6 @@ const TString& zeroBiasFileName = "PhysicsMain.All.noalgXEtriggers.2016.f731f758
 
     std::cout << "number of events kept at threshold: " << numberEventsKept << std::endl;
 
-
-    std::cout << "\n" << std::endl;
-
     zeroBiasFile->Close();
 	return(indeterminateThresh);
 }

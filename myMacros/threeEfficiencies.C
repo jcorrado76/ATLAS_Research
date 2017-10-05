@@ -32,21 +32,43 @@ TFile* threeEfficiencies( const TString& algA , const TString& algB,
     */
 
 
+
+
+
+
+/*
     gROOT->ProcessLine("gSystem->Load(\"./mincerMacros_C.so\")");
     gROOT->ProcessLine("gSystem->Load(\"./bisection_C.so\")");
-    gROOT->ProcessLine(".L bisection.C+");
+    gROOT->ProcessLine("gSystem->Load(\"./userInfo_C.so\")");
+
+    gROOT->ProcessLine("gInterpreter->LoadMacro(\"./mincerMacros.C\")");
+    gROOT->ProcessLine("gInterpreter->LoadMacro(\"./bisection.C\")");
+    gROOT->ProcessLine("gInterpreter->LoadMacro(\"./userInfo.C\")");
+*/
+
 
     Bool_t passTransverseMassCut( const Float_t , const Float_t ,const Float_t ,const Float_t ,const Float_t ,const Float_t);
     Float_t determineZeroBiasThresh( const TString&, const Float_t, const TString&);
     Float_t computeThresh( const TH1F*, const Float_t);
     Float_t determineMuonEventsKeptCombined( const TString&, const Float_t, const TString&,
         const Float_t,const TString& );
+    Float_t bisection(TH1F* , TH1F* , const Float_t , Float_t , Float_t  ,
+        userInfo& , const Int_t,
+        const Float_t , TNtuple* ,TTree* );
+
+
+    /*
+    gROOT->ProcessLine(".L mincerMacros.C+");
+    gROOT->ProcessLine(".L bisection.C+");
+    gROOT->ProcessLine(".L userInfo.C+");
+    */
+
 
     //user defined struct to store all log data
     userInfo logFileParams;
     logFileParams.Print();
 
-    
+
     //initialize TBenchmark for this macro
     TBenchmark* threeEfficienciesBenchmark = new TBenchmark();
 
@@ -121,8 +143,14 @@ TFile* threeEfficiencies( const TString& algA , const TString& algB,
     threeEfficienciesBenchmark->Start("ZeroBias Thresholds");
 
     //IN DETERMINE THRESH I COMPUTE THRESHOLD AFTER ALSO CUTTING ON METL1 TO MAKE HISTOGRAMS
+    threeEfficienciesBenchmark->Start( "determine" + algA + "Thresh");
     Float_t algAThresh = determineZeroBiasThresh(algA,frac,zerobiasFileName);
+    threeEfficienciesBenchmark->Show( "determine" + algA + "Thresh");
+    std::cout << "\n" << std::endl;
+    threeEfficienciesBenchmark->Start( "determine" + algB + "Thresh");
     Float_t algBThresh = determineZeroBiasThresh(algB,frac,zerobiasFileName);
+    threeEfficienciesBenchmark->Show( "determine" + algB + "Thresh");
+    std::cout << "\n" << std::endl;
 
     //FINISHED COMPUTING INDIVIDUAL THRESHOLDS; NOW DO THEM TOGETHER
     std::cout << "Returned to threeEfficiencies.C" << std::endl;
