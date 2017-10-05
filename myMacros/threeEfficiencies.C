@@ -61,6 +61,8 @@ TFile* threeEfficiencies( const TString& algA , const TString& algB,
 
     //initialize variables to be used later
     Float_t metl1thresh = 50.0;
+    Float_t actintCut = 35.0;
+    Float_t zb_actint = 0.0;
     Int_t muonNentries = myMuonTree->GetEntries();
     Int_t muonNbins = 200;
     Int_t nbins = 1200;
@@ -184,27 +186,28 @@ TFile* threeEfficiencies( const TString& algA , const TString& algB,
     Float_t algAmuonMET = 0;
     Float_t algBmuonMET = 0;
     Float_t muonMetl1 = 0;
+    Float_t muonActint = 0;
     myMuonTree->SetBranchAddress(algA,&algAmuonMET);
     myMuonTree->SetBranchAddress(algB,&algBmuonMET);
     myMuonTree->SetBranchAddress("metl1",&muonMetl1);
+    myMuonTree->SetBranchAddress("actint", &muonActint);
+
     Int_t numbPassMuon = 0;
-    //TODO: add in actint > 35.0 in the numerator and denominator
-
-
     for (Int_t l = 0 ; l < muonNentries ; l++)
     {
         myMuonTree->GetEntry(l);
-        if ((passmuvarmed > 0.1 || passmuon > 0.1) && (cleanCutsFlag > 0.1) && (recalBrokeFlag < 0.1))
+        if ((passmuvarmed > 0.1 || passmuon > 0.1) && (cleanCutsFlag > 0.1) && (recalBrokeFlag < 0.1) && ( muonActint > actintCut ))
     	{
             if ( passTransverseMassCut(metoffrecal,mexoffrecal,meyoffrecal,metoffrecalmuon,mexoffrecalmuon,meyoffrecalmuon) )
             {
         	    Float_t metnomu = sqrt(((mexoffrecal - mexoffrecalmuon) * (mexoffrecal - mexoffrecalmuon)) +
         	    ((meyoffrecal - meyoffrecalmuon)*(meyoffrecal - meyoffrecalmuon))); //compute metnomu
                 numbPassMuon++;
-                Ateff->Fill((algAmuonMET > algAThresh) && (muonMetl1 > metl1thresh), metnomu);
-        	    Bteff->Fill((algBmuonMET > algBThresh) && (muonMetl1 > metl1thresh), metnomu);
-        	    Cteff->Fill(((algAmuonMET > individAThreshFinal) && (algBmuonMET > individBThreshFinal) && (muonMetl1 > metl1thresh)), metnomu);
-                Dteff->Fill((muonMetl1 >= metl1thresh), metnomu);
+                Ateff->Fill((algAmuonMET > algAThresh) && (muonMetl1 > metl1thresh) && ( muonActint > actintCut ), metnomu);
+        	    Bteff->Fill((algBmuonMET > algBThresh) && (muonMetl1 > metl1thresh)&& ( muonActint > actintCut ), metnomu);
+        	    Cteff->Fill(((algAmuonMET > individAThreshFinal) && (algBmuonMET > individBThreshFinal)
+                && ( muonActint > actintCut )&& (muonMetl1 > metl1thresh)), metnomu);
+                Dteff->Fill((muonMetl1 >= metl1thresh) && ( muonActint > actintCut ), metnomu);
             }
     	}
     }
@@ -278,6 +281,7 @@ TFile* threeEfficiencies( const TString& algA , const TString& algB,
     logFileParams.numMuonPassNumeratorAlgB = (Bteff->GetPassedHistogram())->GetEntries();
     logFileParams.numMuonPassNumeratorAlgC = (Cteff->GetPassedHistogram())->GetEntries();
     logFileParams.numMuonDenominator = (Ateff->GetTotalHistogram())->GetEntries();
+    logFileParams.actintCut = actintCut;
 
 
     //add the parameter struct in a branch of the tree
