@@ -1,6 +1,10 @@
 #include "userInfo.h"
 
 
+
+
+//TODO: import this file into threeEfficiencies, bisection, and 
+
 {
 userInfo logFileParams;
 
@@ -27,10 +31,3 @@ logFileParams.actintCut = actintCut;
 
 
 }
-
-
-
-
-
-
-//TODO: define th evariables in the userinfo struct in this file. Needs to import userinfo.h
