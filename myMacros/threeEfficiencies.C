@@ -18,35 +18,16 @@
 #include "TBranch.h"
 #include "TObjString.h"
 #include "userInfo.h"
-/*
-void userInfo::Print()
-{
-    std::cout << "Alg A Name: " << algAName << std::endl;
-    std::cout << "Alg B Name: " << algBName << std::endl;
-    std::cout << "nbins: " << nbins << std::endl;
-    std::cout << "MetMin: " << metmin << std::endl;
-    std::cout << "MetMax: " << metmax << std::endl;
-    std::cout << "METL1 thresh used: " << metl1thresh << std::endl;
-    std::cout << "frac to keep: " << frac << std::endl;
-    std::cout << "Zero Bias File Used: " << zbFileName << std::endl;
-    std::cout << "Muon File Used: " << muonFileName << std::endl;
-    std::cout << "Number of zerobias events that passed no alg and metl1: " << numzbRndm << std::endl;
-    std::cout << "Threshold needed on A: " << algAThresh << std::endl;
-    std::cout << "Threshold needed on B: " << algBThresh << std::endl;
-    std::cout << "Muon Nentries: " << muonNentries << std::endl;
-    std::cout << "ZeroBias Nentries: " << zbNentries << std::endl;
-    std::cout << "Number of entries kept using combined thresholds: " <<  numMuonKeptCombined << std::endl;
-    std::cout << "Number of entries that passed all muon cuts and " + algAName + " at Individ thresh: " << numMuonPassNumeratorAlgA << std::endl;
-    std::cout << "Number of entries that passed all muon cuts and " + algBName + " at Individ thresh: " << numMuonPassNumeratorAlgB << std::endl;
-    std::cout << "Number of entries that passed all muon cuts and both algs at Combined thresh: " << numMuonPassNumeratorAlgC << std::endl;
-    std::cout << "Number entries that passed all muon cuts without alg: " << numMuonDenominator << std::endl;
-    std::cout << "Epsilon tolerance on number events used for bisection: " << eps << std::endl;
-}
-*/
+
+
+
+
+
+
 TFile* threeEfficiencies( const TString& algA , const TString& algB,
         const Float_t frac = 0.00590, const TString folder = "",
         const TString& zerobiasFileName = "PhysicsMain.All.noalgXEtriggers.2016.f731f758._m1659m1710.48Runs.root",
-        const TString& muonFilename = "PhysicsMain.L1KFmuontriggers.2016.f731f758_m1659m1710.Run309759.48Runs.root")
+        const TString& muonFilename = "PhysicsMain.L1KFmuontriggers.2016.f731f758_m1659m1710.Run309759.48Runs.root" )
 {
     /*
     This macro basically will take 2 algorithms, and it generate the combined efficiency curve
@@ -63,7 +44,7 @@ TFile* threeEfficiencies( const TString& algA , const TString& algB,
     Float_t computeThresh( const TH1F*, const Float_t);
     Float_t determineMuonEventsKeptCombined( const TString&, const Float_t, const TString&,
         const Float_t,const TString& );
-    Float_t bisection(TH1F* , TH1F* , const Float_t , Float_t , Float_t  ,userInfo& , const Int_t,const Float_t , TNtuple* ,TTree* );
+    Float_t bisection(TH1F* , TH1F* , const Float_t , Float_t , Float_t  , const Int_t, const Float_t , TNtuple* ,TTree* );
 
     //user defined struct to store all log data
     userInfo logFileParams;
@@ -190,7 +171,7 @@ TFile* threeEfficiencies( const TString& algA , const TString& algB,
 
     //run BISECTION
     bisectionIndividFrac = bisection( algAMETHist , algBMETHist, binWidth, individAThreshFinal,
-    individBThreshFinal, logFileParams, numZeroBiasRndm , frac ,
+    individBThreshFinal, numZeroBiasRndm , frac ,
     logFileData,zeroBiasTree);
 
     //end bisection timer

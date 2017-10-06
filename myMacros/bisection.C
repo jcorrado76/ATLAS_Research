@@ -12,15 +12,11 @@
 #include "TSystem.h"
 #include "TF1.h"
 #include "TNtuple.h"
-#include "userInfo.h"
-
-extern userInfo logFileParams;
 
 //TODO: implement proof lite
 
 Float_t bisection(TH1F* algAHist , TH1F* algBHist, const Float_t binWidth, Float_t &  individAThreshFinal , Float_t  & individBThreshFinal,
-    userInfo& logFileParams, const Int_t numZeroBiasRndm = 0 ,
-    const Float_t frac = 0.00590, TNtuple* logFileData = NULL,TTree* zeroBiasTree = NULL)
+    const Int_t numZeroBiasRndm = 0 , const Float_t frac = 0.00590, TNtuple* logFileData = NULL, TTree* zeroBiasTree = NULL)
 {
     Float_t computeThresh( const TH1F*, const Float_t);
     //some useful parameters
@@ -266,8 +262,6 @@ Float_t bisection(TH1F* algAHist , TH1F* algBHist, const Float_t binWidth, Float
         logFileData->Fill(inputArray[k],outputArray[k],numEventsArray[k],thresholdAarray[k],thresholdBarray[k]);
         k++;
     }
-
-    logFileParams.eps = eps;
 
     return( initialGuess );
 }
