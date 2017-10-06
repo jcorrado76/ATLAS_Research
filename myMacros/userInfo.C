@@ -1,7 +1,5 @@
-/*#include "userInfo.h"
+#include "userInfo.h"
 #include <iostream>
-
-MY ATTEMPT AT IMPLEMENTING A GLOBAL PARAMETER FILE THAT WOULD BE PASSED THROUGHOUT THE MACROS
 
 //TODO: import this file into threeEfficiencies, bisection, and
 
@@ -53,6 +51,3 @@ void userInfo::Print()
     std::cout << "Number entries that passed all muon cuts without alg: " << numMuonDenominator << std::endl;
     std::cout << "Epsilon tolerance on number events used for bisection: " << eps << std::endl;
 }
-
-
-//}
