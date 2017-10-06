@@ -25,9 +25,7 @@
 
 
 TFile* threeEfficiencies( const TString& algA , const TString& algB,
-        const Float_t frac = 0.00590, const TString folder = "",
-        const TString& zerobiasFileName = "PhysicsMain.All.noalgXEtriggers.2016.f731f758._m1659m1710.48Runs.root",
-        const TString& muonFilename = "PhysicsMain.L1KFmuontriggers.2016.f731f758_m1659m1710.Run309759.48Runs.root" )
+        const Float_t frac = 0.00590, const TString folder = "")
 {
     /*
     This macro basically will take 2 algorithms, and it generate the combined efficiency curve
@@ -49,6 +47,13 @@ TFile* threeEfficiencies( const TString& algA , const TString& algB,
     //user defined struct to store all log data
     userInfo logFileParams;
     logFileParams.Print();
+
+
+    zerobiasFileName = logFileParams.zbFileName;
+    muonFileName = logFileParams.muonFileName;
+
+
+
 
     //initialize TBenchmark for this macro
     TBenchmark* threeEfficienciesBenchmark = new TBenchmark();
@@ -275,8 +280,6 @@ TFile* threeEfficiencies( const TString& algA , const TString& algB,
     logFileParams.metmax = metMax;
     logFileParams.metl1thresh = metl1thresh;
     logFileParams.frac = frac;
-    logFileParams.zbFileName = zerobiasFileName;
-    logFileParams.muonFileName = muonFilename;
     logFileParams.numzbRndm = numZeroBiasRndm;
     logFileParams.algAThresh = algAThresh;
     logFileParams.algBThresh = algBThresh;
