@@ -44,7 +44,7 @@ TFile* threeEfficiencies( const TString& algA , const TString& algB,
     Float_t computeThresh( const TH1F*, const Float_t);
     Float_t determineMuonEventsKeptCombined( const TString&, const Float_t, const TString&,
         const Float_t,const TString& );
-    Float_t bisection(TH1F* , TH1F* , const Float_t , Float_t , Float_t  , const Int_t, const Float_t , TNtuple* ,TTree* );
+    Float_t bisection(TH1F* , TH1F* , const Float_t , Float_t& , Float_t&  , const Int_t, const Float_t , TNtuple* ,TTree* );
 
     //user defined struct to store all log data
     userInfo logFileParams;
