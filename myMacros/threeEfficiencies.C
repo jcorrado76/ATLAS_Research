@@ -296,6 +296,10 @@ TFile* threeEfficiencies( const TString& algA , const TString& algB,
 
     //write the tntuple to the file
     logFileData->Write("bisectionData");
+    
+    //should print end resulting parameters
+    logFileParams.Print();
+
     //write the TObject struct to file
     logFileParams.Write("parameters");
 
