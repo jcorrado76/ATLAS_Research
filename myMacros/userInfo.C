@@ -37,6 +37,7 @@ userInfo::userInfo()
 
 void userInfo::Print()
 {
+    std::cout << "Printing the data members for the userInfo struct: " << std::endl;
     std::cout << "Alg A Name: " << algAName << std::endl;
     std::cout << "Alg B Name: " << algBName << std::endl;
     std::cout << "nbins: " << nbins << std::endl;
@@ -57,5 +58,5 @@ void userInfo::Print()
     std::cout << "Number of entries that passed all muon cuts and both algs at Combined thresh: " << numMuonPassNumeratorAlgC << std::endl;
     std::cout << "Number entries that passed all muon cuts without alg: " << numMuonDenominator << std::endl;
     std::cout << "Epsilon tolerance on number events used for bisection: " << eps << std::endl;
-    std::cout << "Actint cut: " << actintCut << std::endl;
+    std::cout << "Actint cut: " << actintCut << "\n" << std::endl;
 }
