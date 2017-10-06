@@ -25,6 +25,13 @@ userInfo::userInfo()
     muonFileName = muonFilename;
     actintCut = actinTCut;
     eps = 25;
+    numzbRndm = 0;
+    algAThresh = 0.0;
+    algBThresh = 0.0;
+    numMuonPassNumeratorAlgA = 0;
+    numMuonPassNumeratorAlgB = 0;
+    algAName = " [not entered yet] ";
+    algBName = " [not entered yet] ";
 }
 
 
