@@ -25,7 +25,7 @@
 
 
 TFile* threeEfficiencies( const TString& algA , const TString& algB,
-        const Float_t frac = 0.00590, const TString folder = "")
+        const Float_t frac = 0.00590, const TString folder = "" )
 {
     /*
     This macro basically will take 2 algorithms, and it generate the combined efficiency curve
@@ -48,7 +48,7 @@ TFile* threeEfficiencies( const TString& algA , const TString& algB,
     userInfo logFileParams;
     logFileParams.Print();
 
-
+    //get the files we're using from userInfo.
     zerobiasFileName = logFileParams.zbFileName;
     muonFileName = logFileParams.muonFileName;
 
