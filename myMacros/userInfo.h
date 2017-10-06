@@ -29,7 +29,8 @@ class userInfo : public TObject {
     Int_t numMuonDenominator;
     Float_t eps;
     Float_t actintCut;
-    //void Print();
+    void Print();
+    userInfo();
 
 };
 
