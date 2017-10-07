@@ -15,6 +15,8 @@
 
 //TODO: implement proof lite
 
+class userInfo;
+
 Float_t bisection(TH1F* algAHist , TH1F* algBHist, const Float_t binWidth, Float_t &  individAThreshFinal , Float_t  & individBThreshFinal,
     const Int_t numZeroBiasRndm = 0 , const Float_t frac = 0.00590, TNtuple* logFileData = NULL, TTree* zeroBiasTree = NULL)
 {
