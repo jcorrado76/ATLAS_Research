@@ -21,7 +21,7 @@
 
 
 
-
+//TODO: change all cuts to using TCut object, and store TCollections of TCuts for zb cuts and muon cuts
 
 
 TFile* threeEfficiencies( const TString& algA , const TString& algB,
@@ -51,9 +51,6 @@ TFile* threeEfficiencies( const TString& algA , const TString& algB,
     //get the files we're using from userInfo.
     zerobiasFileName = logFileParams.zbFileName;
     muonFileName = logFileParams.muonFileName;
-
-
-
 
     //initialize TBenchmark for this macro
     TBenchmark* threeEfficienciesBenchmark = new TBenchmark();
@@ -240,7 +237,7 @@ TFile* threeEfficiencies( const TString& algA , const TString& algB,
 
     efficiencyCanvas->RangeAxis(0,0,500,1.0);
 
-    Ateff->SetTitle(canvName);
+    efficiencyCanvas->SetTitle(canvName);
 
     Ateff->SetLineColor(kBlue);
     Cteff->SetLineColor(kRed);
@@ -296,7 +293,7 @@ TFile* threeEfficiencies( const TString& algA , const TString& algB,
 
     //write the tntuple to the file
     logFileData->Write("bisectionData");
-    
+
     //should print end resulting parameters
     logFileParams.Print();
 
