@@ -61,6 +61,7 @@ const TString& zeroBiasFileName = "PhysicsMain.All.noalgXEtriggers.2016.f731f758
     std::cout << "zerobias nentries: " << zerobiasNentries << std::endl;
 
     //intialize parameters
+    //TODO: replace these local variables with global calls
     const Float_t numberEventsToKeep = 5762.0;
 	const Int_t nbins = 1200;
 	const Double_t metMin = 0.0;
