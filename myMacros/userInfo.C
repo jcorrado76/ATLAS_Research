@@ -1,4 +1,4 @@
-#include "userInfo.h"
+/*#include "userInfo.h"
 #include <iostream>
 
 void userInfo::Print() const
@@ -26,3 +26,4 @@ void userInfo::Print() const
     std::cout << "Epsilon tolerance on number events used for bisection: " << eps << std::endl;
     std::cout << "Actint cut: " << actintCut << "\n" << std::endl;
 }
+*/
