@@ -2,6 +2,7 @@
 #include <Rtypes.h>
 #include "TObject.h"
 #include "TString.h"
+#include "TCut.h"
 
 Int_t Nbins = 1200;
 Float_t metMin = 0.0;
@@ -62,6 +63,7 @@ public:
         numMuonPassNumeratorAlgB = 0;
         numMuonPassNumeratorAlgC = 0;
         numMuonDenominator = 0;
+        l1Cut = "" + Form();
     }
     //destructor
     //~userInfo(){};

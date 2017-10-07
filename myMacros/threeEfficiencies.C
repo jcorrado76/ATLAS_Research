@@ -47,8 +47,6 @@ TFile* threeEfficiencies( const TString& algA , const TString& algB,
     userInfo logFileParams;
     logFileParams.Print();
 
-    std::cout << logFileParams.get_zbFileName() << std::endl;
-    std::cout << logFileParams.get_muonFileName() << std::endl;
     //get the files we're using from userInfo.
     TString zerobiasFileName = logFileParams.get_zbFileName();
     TString muonFileName = logFileParams.get_muonFileName();
