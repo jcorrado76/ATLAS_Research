@@ -258,10 +258,10 @@ TFile* threeEfficiencies( const TString& algA , const TString& algB,
 
 
     //write efficiencies to the root file
-    Ateff->Write( algA + "Efficiency" );
-    Bteff->Write( algB + "Efficiency" );
-    Cteff->Write( algA + algB + "combinedEfficiency" );
-    Dteff->Write( "metl1Efficiency" );
+    Ateff->Write( algA );
+    Bteff->Write( algB );
+    Cteff->Write( algA + " and " +  algB );
+    Dteff->Write( "METL1" );
 
     //write canvas to the root file
     efficiencyCanvas->Write("efficiencyCanvas");
