@@ -19,8 +19,6 @@
 #include "TObjString.h"
 #include "userInfo.h"
 
-
-
 //TODO: change all cuts to using TCut object, and store TCollections of TCuts for zb cuts and muon cuts
 
 
@@ -36,6 +34,7 @@ TFile* threeEfficiencies( const TString& algA , const TString& algB,
 
     gROOT->ProcessLine("gSystem->Load(\"./mincerMacros_C.so\")");
     gROOT->ProcessLine("gSystem->Load(\"./bisection_C.so\")");
+    //gROOT->ProcessLine("gSystem->Load(\"./userInfo_C.so\");");
 
     Bool_t passTransverseMassCut( const Float_t , const Float_t ,const Float_t ,const Float_t ,const Float_t ,const Float_t);
     Float_t determineZeroBiasThresh( const TString&, const Float_t, const TString&);
@@ -48,9 +47,11 @@ TFile* threeEfficiencies( const TString& algA , const TString& algB,
     userInfo logFileParams;
     logFileParams.Print();
 
+    std::cout << logFileParams.get_zbFileName() << std::endl;
+    std::cout << logFileParams.get_muonFileName() << std::endl;
     //get the files we're using from userInfo.
-    zerobiasFileName = logFileParams.zbFileName;
-    muonFileName = logFileParams.muonFileName;
+    TString zerobiasFileName = logFileParams.get_zbFileName();
+    TString muonFileName = logFileParams.get_muonFileName();
 
     //initialize TBenchmark for this macro
     TBenchmark* threeEfficienciesBenchmark = new TBenchmark();
@@ -269,25 +270,19 @@ TFile* threeEfficiencies( const TString& algA , const TString& algB,
     //compute number muon events actually kept using external macro
     Int_t muonEventsCombined = determineMuonEventsKeptCombined( algA, individAThreshFinal , algB , individBThreshFinal , muonFilename );
 
-
-    logFileParams.algAName = algA;
-    logFileParams.algBName = algB;
-    logFileParams.nbins = nbins;
-    logFileParams.metmin = metMin;
-    logFileParams.metmax = metMax;
-    logFileParams.metl1thresh = metl1thresh;
-    logFileParams.frac = frac;
-    logFileParams.numzbRndm = numZeroBiasRndm;
-    logFileParams.algAThresh = algAThresh;
-    logFileParams.algBThresh = algBThresh;
-    logFileParams.muonNentries = muonNentries;
-    logFileParams.zbNentries = zerobiasNentries;
-    logFileParams.numMuonKeptCombined = muonEventsCombined;
-    logFileParams.numMuonPassNumeratorAlgA = (Ateff->GetPassedHistogram())->GetEntries();
-    logFileParams.numMuonPassNumeratorAlgB = (Bteff->GetPassedHistogram())->GetEntries();
-    logFileParams.numMuonPassNumeratorAlgC = (Cteff->GetPassedHistogram())->GetEntries();
-    logFileParams.numMuonDenominator = (Ateff->GetTotalHistogram())->GetEntries();
-    logFileParams.actintCut = actintCut;
+    logFileParams.setAlgAName( algA );
+    logFileParams.setAlgBName( algB );
+    logFileParams.setNum_zbRndm( numZeroBiasRndm );
+    logFileParams.setAlgAThresh( algAThresh);
+    logFileParams.setAlgBThresh( algBThresh );
+    logFileParams.setMuonNentries( muonNentries );
+    logFileParams.set_zbNentries( zerobiasNentries );
+    logFileParams.setNumMuonKeptCombined( muonEventsCombined );
+    logFileParams.setNumPassA((Ateff->GetPassedHistogram())->GetEntries());
+    logFileParams.setNumPassB((Bteff->GetPassedHistogram())->GetEntries());
+    logFileParams.setNumPassCombined((Cteff->GetPassedHistogram())->GetEntries());
+    logFileParams.setNumTotal((Ateff->GetTotalHistogram())->GetEntries());
+    logFileParams.setActintCut(actintCut);
 
     myFile->cd();
 
