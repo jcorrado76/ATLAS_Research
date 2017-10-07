@@ -67,11 +67,14 @@ public:
         numMuonDenominator = 0;
     }
     //destructor
-    //~userInfo();
+    //~userInfo(){};
     void Print() const;
     //getters
     TString get_zbFileName() const { return(zbFileName); };
     TString get_muonFileName() const { return( muonFileName ); };
+    Float_t getMetL1Thresh() const { return (metl1thresh); };
+    Float_t getActintCut() const { return(actintCut); };
+    Float_t getFrac() const { return frac; } ;
     //setters
     void setAlgAName( const TString algA ) { algAName = algA; };
     void setAlgBName( const TString algB ) { algBName = algB; };
