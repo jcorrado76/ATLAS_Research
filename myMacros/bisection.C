@@ -26,10 +26,12 @@ Float_t bisection(TH1F* algAHist , TH1F* algBHist, const Float_t binWidth, Float
     //logFileParams will be taken from the scope of threeEfficiencies
     extern userInfo logFileParams;
     //some useful parameters
-    Float_t metl1thresh = 50.0;
-    Float_t actintCut = 35.0;
 
-    Float_t lwrbnd = 0.5*frac;
+    Float_t frac = logFileParams.getFrac();
+    Float_t metl1thresh = logFileParams.getMetL1Thresh();
+    Float_t actintCut = logFileParams.getActintCut();
+
+    Float_t lwrbnd = 0.5 * frac;
     Float_t uprbnd = 0.13;
     Float_t eps = 25.0;
 
