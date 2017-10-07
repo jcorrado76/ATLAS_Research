@@ -63,7 +63,6 @@ public:
         numMuonPassNumeratorAlgB = 0;
         numMuonPassNumeratorAlgC = 0;
         numMuonDenominator = 0;
-        l1Cut = "" + Form();
     }
     //destructor
     //~userInfo(){};
@@ -74,6 +73,8 @@ public:
     Float_t getMetL1Thresh() const { return (metl1thresh); };
     Float_t getActintCut() const { return(actintCut); };
     Float_t getFrac() const { return frac; } ;
+    Float_t getMetMin() const { return metmin; };
+    Float_t getMetMax() const { return metmax; };
     //setters
     void setAlgAName( const TString algA ) { algAName = algA; };
     void setAlgBName( const TString algB ) { algBName = algB; };
