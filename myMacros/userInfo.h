@@ -59,9 +59,15 @@ public:
         numMuonPassNumeratorAlgB = 0;
         algAName = " [not entered yet] ";
         algBName = " [not entered yet] ";
+        muonNentries = 0;
+        zbNentries = 0;
+        numMuonPassNumeratorAlgA = 0;
+        numMuonPassNumeratorAlgB = 0;
+        numMuonPassNumeratorAlgC = 0;
+        numMuonDenominator = 0;
     }
     //destructor
-    ~userInfo();
+    //~userInfo();
     void Print() const;
     //getters
     TString get_zbFileName() const { return(zbFileName); };
@@ -79,19 +85,16 @@ public:
     void setNumPassB( const Int_t num ) { numMuonPassNumeratorAlgB = num; };
     void setNumPassCombined( const Int_t num ) { numMuonPassNumeratorAlgC = num; };
     void setNumTotal( const Int_t num ) { numMuonDenominator = num; };
-    void setActintCut( const Float_t thresh ) { actintCut = threh; };
-
-
-
+    void setActintCut( const Float_t thresh ) { actintCut = thresh; };
 
     //this macro from Rtypes.h facilitates root I/O
     ClassDef( userInfo, 1);
 
 };
-
+/*
 #if !defined(__CLING__)
 ClassImp(userInfo)
 #endif
-
+*/
 
 #endif
