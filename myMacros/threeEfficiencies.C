@@ -19,8 +19,9 @@
 #include "TObjString.h"
 #include "userInfo.h"
 
-//TODO: change all cuts to using TCut object, and store TCollections of TCuts for zb cuts and muon cuts
-
+//TODO: change all cuts to using TCut object, TCut objects are basically strings, so I don't think
+//      their values update when you tree->GetEntry(i). If I could find a way to make that class work, it would simplify
+//      a lot o the coding
 
 TFile* threeEfficiencies( const TString& algA , const TString& algB,
         const Float_t frac = 0.00590, const TString folder = "" )
@@ -34,7 +35,6 @@ TFile* threeEfficiencies( const TString& algA , const TString& algB,
 
     gROOT->ProcessLine("gSystem->Load(\"./mincerMacros_C.so\")");
     gROOT->ProcessLine("gSystem->Load(\"./bisection_C.so\")");
-    //gROOT->ProcessLine("gSystem->Load(\"./userInfo_C.so\");");
 
     Bool_t passTransverseMassCut( const Float_t , const Float_t ,const Float_t ,const Float_t ,const Float_t ,const Float_t);
     Float_t determineZeroBiasThresh( const TString&, const Float_t, const TString&);
@@ -65,17 +65,15 @@ TFile* threeEfficiencies( const TString& algA , const TString& algB,
     std::cout << "Muon Data being used to compute algorithm efficiency: " << muonFilePath << std::endl;
 
     //initialize variables to be used later
-    Float_t metl1thresh = 50.0;
-    Float_t actintCut = 35.0;
+    Float_t metl1thresh = logFileParams.getMetL1Thresh();
+    Float_t actintCut = logFileParams.getActintCut();
     Float_t zb_actint = 0.0;
     Int_t muonNentries = myMuonTree->GetEntries();
     Int_t muonNbins = 200;
     Int_t nbins = 1200;
-    Double_t muonMetMin = 0.0;
-    Double_t muonMetMax = 300.0;
+    Double_t metMin = logFileParams.getMetMin();
+    Double_t metMax = logFileParams.getMetMax();
     Int_t numZeroBiasRndm = 0; Int_t counter1 = 0; Int_t counter2 = 0; Int_t counter3 = 0;
-
-    Double_t metMin = 0.0; Double_t metMax = muonMetMax;
 
     Int_t passRndm, numPassMuon,passmuon,passmuvarmed,cleanCutsFlag,recalBrokeFlag;
     Float_t algAMET,algBMET,metoffrecal,mexoffrecal,meyoffrecal,mexoffrecalmuon,
@@ -145,7 +143,7 @@ TFile* threeEfficiencies( const TString& algA , const TString& algB,
 	for (Int_t k = 0; k < zerobiasNentries; k++)
 	{
 	    zeroBiasTree->GetEntry(k);
-	    if (metl1 > 50.0 && ( passnoalgL1XE10 > 0.5 || passnoalgL1XE30 > 0.5 ||
+	    if ( (metl1 > metl1thresh) && ( passnoalgL1XE10 > 0.5 || passnoalgL1XE30 > 0.5 ||
         passnoalgL1XE40 > 0.5 || passnoalgL1XE45 > 0.5  ))
 	    {
     		algAMETHist->Fill(algAMET);
@@ -187,10 +185,10 @@ TFile* threeEfficiencies( const TString& algA , const TString& algB,
     TString bstring = algB + " > " + Form(" %.2f", algBThresh);
     TString dstring = (TString) "L1 > " + Form(" %.2f" , metl1thresh);
 
-    TEfficiency* Ateff  = new TEfficiency(astring , "Efficiency", muonNbins, muonMetMin, muonMetMax);
-    TEfficiency* Bteff  = new TEfficiency(bstring , "Efficiency", muonNbins, muonMetMin, muonMetMax);
-    TEfficiency* Cteff  = new TEfficiency(cstring,  "Efficiency", muonNbins, muonMetMin, muonMetMax);
-    TEfficiency* Dteff  = new TEfficiency(dstring,  "Efficiency", muonNbins, muonMetMin, muonMetMax);//combined just L1 cut, 0 on others
+    TEfficiency* Ateff  = new TEfficiency(astring , "Efficiency", muonNbins, metMin, metMax);
+    TEfficiency* Bteff  = new TEfficiency(bstring , "Efficiency", muonNbins, metMin, metMax);
+    TEfficiency* Cteff  = new TEfficiency(cstring,  "Efficiency", muonNbins, metMin, metMax);
+    TEfficiency* Dteff  = new TEfficiency(dstring,  "Efficiency", muonNbins, metMin, metMax);//combined just L1 cut, 0 on others
 
     threeEfficienciesBenchmark->Start("Fill TEfficiencies");
 
