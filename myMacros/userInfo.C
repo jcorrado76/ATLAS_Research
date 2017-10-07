@@ -1,41 +1,9 @@
 #include "userInfo.h"
 #include <iostream>
 
-//TODO: import this file into threeEfficiencies, bisection, and
+ClassImp(SClass);
 
-Int_t Nbins = 1200;
-Float_t metMin = 0.0;
-Float_t metMax = 300.0;
-Float_t metl1Thresh = 50.0;
-Float_t Frac = 0.0059;
-TString zerobiasFileName = "PhysicsMain.All.noalgXEtriggers.2016.f731f758._m1659m1710.48Runs.root";
-TString muonFilename = "PhysicsMain.L1KFmuontriggers.2016.f731f758_m1659m1710.Run309759.48Runs.root";
-Float_t actinTCut = 35.0;
-Int_t epsilon = 25;
-
-
-userInfo::userInfo()
-{
-    nbins = Nbins;
-    metmin = metMin;
-    metmax = metMax;
-    metl1thresh = metl1Thresh;
-    frac = Frac;
-    zbFileName = zerobiasFileName;
-    muonFileName = muonFilename;
-    actintCut = actinTCut;
-    eps = 25;
-    numzbRndm = 0;
-    algAThresh = 0.0;
-    algBThresh = 0.0;
-    numMuonPassNumeratorAlgA = 0;
-    numMuonPassNumeratorAlgB = 0;
-    algAName = " [not entered yet] ";
-    algBName = " [not entered yet] ";
-}
-
-
-void userInfo::Print()
+void userInfo::Print() const
 {
     std::cout << "Printing the data members for the userInfo struct: " << std::endl;
     std::cout << "Alg A Name: " << algAName << std::endl;
