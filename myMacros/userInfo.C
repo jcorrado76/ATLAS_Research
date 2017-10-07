@@ -1,8 +1,6 @@
 #include "userInfo.h"
 #include <iostream>
 
-ClassImp(SClass);
-
 void userInfo::Print() const
 {
     std::cout << "Printing the data members for the userInfo struct: " << std::endl;
