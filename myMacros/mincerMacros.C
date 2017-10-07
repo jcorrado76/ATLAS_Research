@@ -14,6 +14,7 @@
 #include "TNtuple.h"
 #include "TBenchmark.h"
 
+class userInfo;
 
 Bool_t passTransverseMassCut( const Float_t metoffrecal     , const Float_t mexoffrecal     , const Float_t meyoffrecal ,
            const Float_t metoffrecalmuon , const Float_t mexoffrecalmuon , const Float_t meyoffrecalmuon )
@@ -22,9 +23,7 @@ Bool_t passTransverseMassCut( const Float_t metoffrecal     , const Float_t mexo
     Float_t wUpperbnd = 100.0;
     Float_t wValue = sqrt( 2.0 * metoffrecal * metoffrecalmuon * ( 1 + ( ( mexoffrecal * mexoffrecalmuon + meyoffrecal * meyoffrecalmuon ) /
                            ( metoffrecal * metoffrecalmuon ) ) ) );
-    Bool_t pass;
-    pass = ( wValue >= wLowerbnd ) && ( wValue <= wUpperbnd );
-    return( pass );
+    return( (( wValue >= wLowerbnd ) && ( wValue <= wUpperbnd )) );
 }
 
 Float_t computeThresh(const TH1F* target, const Float_t numberEventsToKeep)
@@ -40,12 +39,9 @@ Float_t determineZeroBiasThresh( const TString& algName, const Float_t frac = 0.
 const TString& zeroBiasFileName = "PhysicsMain.All.noalgXEtriggers.2016.f731f758._m1659m1710.48Runs.root")
 {
     /*Returns the threshold needed for an algorithm to keep the fraction of zerobias events*/
-
-    TBenchmark* zbThreshBenchmark = new TBenchmark();
-    zbThreshBenchmark->Start("zb Individual Threshold for: " + algName);
-
-    const Float_t metL1Thresh = 50;
-    const Float_t actintCut = 35.0;
+    extern userInfo logFileParams;
+    const Float_t metL1Thresh = logFileParams.getMetL1Thresh();
+    const Float_t actintCut = logFileParams.getActintCut();
 
 
     //get zerobias tree
@@ -110,8 +106,6 @@ const TString& zeroBiasFileName = "PhysicsMain.All.noalgXEtriggers.2016.f731f758
 			numberEventsKept++;
 		}
 	}
-
-    zbThreshBenchmark->Show("zb Individual Threshold for " + algName);
 
     std::cout << "number of events kept at threshold: " << numberEventsKept << std::endl;
 
