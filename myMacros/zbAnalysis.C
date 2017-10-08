@@ -28,6 +28,12 @@
 #include "zbAnalysis.h"
 #include <TH2.h>
 #include <TStyle.h>
+#include "userInfo.h"
+
+
+//TODO: figure out how to pass algName to this macro.
+//dedicate this macro to be the parallel version of determineZeroBiasThresh; make separate bisection one
+userInfo* logFileParams = new userInfo();
 
 void zbAnalysis::Begin(TTree * /*tree*/)
 {
@@ -44,7 +50,26 @@ void zbAnalysis::SlaveBegin(TTree * /*tree*/)
    // When running with PROOF SlaveBegin() is called on each slave server.
    // The tree argument is deprecated (on PROOF 0 is passed).
 
+
+   //IF YOU NEEDED TO RETURN A HISTOGRAM, INITIALIZE IT HERE
    TString option = GetOption();
+
+   Int_t nbins = 1200;
+   Float_t metMin = 0.0;
+   Float_t metMax = 300.0;
+   Float_t metl1, zb_actint;
+   Int_t passnoalgL1XE10, passnoalgL1XE30, passnoalgL1XE40, passnoalgL1XE45;
+   //algName is a member variable that needs to be set before use
+   TH1F *indeterminateHist = new TH1F(algName, algName, nbins, metMin, metMax);
+   fChain->SetBranchAddress(algName,&algMET);
+   fChain->SetBranchAddress("metl1",&metl1);
+   fChain->SetBranchAddress("passnoalgL1XE10",&passnoalgL1XE10);
+   fChain->SetBranchAddress("passnoalgL1XE30",&passnoalgL1XE30);
+   fChain->SetBranchAddress("passnoalgL1XE40",&passnoalgL1XE40);
+   fChain->SetBranchAddress("passnoalgL1XE45",&passnoalgL1XE45);
+   fChain->SetBranchAddress("actint",&zb_actint);
+
+
 
 }
 
@@ -66,7 +91,17 @@ Bool_t zbAnalysis::Process(Long64_t entry)
    //
    // The return value is currently not used.
 
+
+   //what do you do every entry?
+   //call to TH1F->Fill(val) here
+   //do I need a "GetEntry(entry)" here? or does this line take care of it?
    fReader.SetEntry(entry);
+
+   if ( ( metl1 > metL1Thresh ) && ( zb_actint > actintCut ) &&
+       ( passnoalgL1XE10 > 0.5 || passnoalgL1XE30 > 0.5 || passnoalgL1XE40 > 0.5 || passnoalgL1XE45 > 0.5 ) )
+   {
+       indeterminateHist->Fill(algMET);
+   }
 
    return kTRUE;
 }

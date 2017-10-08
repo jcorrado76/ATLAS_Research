@@ -15,6 +15,7 @@
 #include <TTreeReader.h>
 #include <TTreeReaderValue.h>
 #include <TTreeReaderArray.h>
+#include "TString.h"
 
 // Headers needed by this particular selector
 
@@ -24,6 +25,7 @@ public :
    TTreeReader     fReader;  //!the tree reader
    TTree          *fChain = 0;   //!pointer to the analyzed TTree or TChain
    Float_t          thresh = 0 ; //resulting thresholds to return
+   TString          algName = "";
 
 
 
@@ -141,6 +143,8 @@ public :
    virtual TList  *GetOutputList() const { return fOutput; }
    virtual void    SlaveTerminate();
    virtual void    Terminate();
+   
+           void SetName( const TString name ) { algName = name; }
 
    ClassDef(zbAnalysis,0);
 

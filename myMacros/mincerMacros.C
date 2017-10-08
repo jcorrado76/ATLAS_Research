@@ -79,6 +79,8 @@ const TString& zeroBiasFileName = "PhysicsMain.All.noalgXEtriggers.2016.f731f758
     zeroBiasTree->SetBranchAddress("passnoalgL1XE45",&passnoalgL1XE45);
     zeroBiasTree->SetBranchAddress("actint",&zb_actint);
 
+
+    //TODO: replace this with zbTree process to use proof lite
     //fill the histogram with entries
     for (Int_t k = 0; k < zerobiasNentries; k++)
 	{
@@ -116,6 +118,7 @@ Float_t determineMuonEventsKeptCombined( const TString& algA, const Float_t thre
                                          const TString& muonFileName = "PhysicsMain2016.Muons.noalgL1XE45R3073065R311481Runs9B.root")
 {
 
+    //TODO: proof lite this
     const Float_t metL1Thresh = 50.0;
     //display algs and thresholds
     std::cout << "Determining fraction of muon events kept when using combined algorithm of " << algA << " at: " << threshA << ", "
