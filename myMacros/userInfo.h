@@ -1,4 +1,4 @@
-
+/*
 #ifndef userInfo_h
 #define userInfo_h
 
@@ -64,3 +64,4 @@ public:
 };
 
 #endif
+*/
