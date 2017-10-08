@@ -289,7 +289,6 @@ TFile* threeEfficiencies( const TString& algA , const TString& algB,
     logFileParams->Print();
 
     //write the TObject struct to file
-    //TODO: don't write a pointer.... dereference the pointer and write the object itself, moron
     logFileParams->Write("parameters");
 
     //end the three efficiencies benchmark
