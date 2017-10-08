@@ -83,7 +83,7 @@ const TString& zeroBiasFileName = "PhysicsMain.All.noalgXEtriggers.2016.f731f758
     for (Int_t k = 0; k < zerobiasNentries; k++)
 	{
 		zeroBiasTree->GetEntry(k);
-		if ( ( metl1 > metL1Thresh ) &&
+		if ( ( metl1 > metL1Thresh ) && ( zb_actint > actintCut ) &&
             ( passnoalgL1XE10 > 0.5 || passnoalgL1XE30 > 0.5 || passnoalgL1XE40 > 0.5 || passnoalgL1XE45 > 0.5 ) )
 		{
 			indeterminateHist->Fill(algMET);
@@ -106,9 +106,7 @@ const TString& zeroBiasFileName = "PhysicsMain.All.noalgXEtriggers.2016.f731f758
 			numberEventsKept++;
 		}
 	}
-
     std::cout << "number of events kept at threshold: " << numberEventsKept << std::endl;
-
     zeroBiasFile->Close();
 	return(indeterminateThresh);
 }
