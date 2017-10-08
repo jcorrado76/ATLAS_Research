@@ -7,8 +7,6 @@
 //      specific cut that was used during a given run without having to look into the file and see its
 //      numeric value
 
-//TODO: create a constructor that takes the two algs to be used as args for initialization
-
 TString zerobiasFileName = "PhysicsMain.All.noalgXEtriggers.2016.f731f758._m1659m1710.48Runs.root";
 TString muonFilename = "PhysicsMain.L1KFmuontriggers.2016.f731f758_m1659m1710.Run309759.48Runs.root";
 Int_t Nbins = 1200;
@@ -62,6 +60,31 @@ public:
         numMuonPassNumeratorAlgB = 0;
         algAName = " [not entered yet] ";
         algBName = " [not entered yet] ";
+        muonNentries = 0;
+        zbNentries = 0;
+        numMuonPassNumeratorAlgA = 0;
+        numMuonPassNumeratorAlgB = 0;
+        numMuonPassNumeratorAlgC = 0;
+        numMuonDenominator = 0;
+    }
+    userInfo( TString algA , TString algB)
+    {
+        nbins = Nbins;
+        metmin = metMin;
+        metmax = metMax;
+        metl1thresh = metl1Thresh;
+        frac = Frac;
+        zbFileName = zerobiasFileName;
+        muonFileName = muonFilename;
+        actintCut = actinTCut;
+        eps = epsilon;
+        numzbRndm = 0;
+        algAThresh = 0.0;
+        algBThresh = 0.0;
+        numMuonPassNumeratorAlgA = 0;
+        numMuonPassNumeratorAlgB = 0;
+        algAName = algA;
+        algBName = algB;
         muonNentries = 0;
         zbNentries = 0;
         numMuonPassNumeratorAlgA = 0;
