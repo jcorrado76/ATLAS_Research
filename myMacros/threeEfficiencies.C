@@ -224,6 +224,7 @@ TFile* threeEfficiencies( const TString& algA , const TString& algB,
 
     threeEfficienciesBenchmark->Show("Fill TEfficiencies");
 
+    //TODO: add in folder arg to path here
     //TODO: handle the case if there is already a root file with same name
     TString fileName = "./TEfficienciesPics/" + algA + "_" + algB + "Efficiencies.root";
     TFile* myFile = new TFile(fileName,"RECREATE");
