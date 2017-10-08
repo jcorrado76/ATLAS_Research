@@ -1,8 +1,14 @@
-#include "userInfo.h"
 #include <iostream>
 #include "TObject.h"
 #include "TString.h"
-#include "TCut.h"
+
+//TODO: add in a collection of TCut objects reflecting the parameters
+//      so that if we need to do some treee analysis, there's an easy way to draw the tree using a
+//      specific cut that was used during a given run without having to look into the file and see its
+//      numeric value
+
+//TODO: create a constructor that takes the two algs to be used as args for initialization
+
 
 Int_t Nbins = 1200;
 Float_t metMin = 0.0;
