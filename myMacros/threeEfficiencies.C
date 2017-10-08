@@ -260,9 +260,6 @@ TFile* threeEfficiencies( const TString& algA , const TString& algB,
     Cteff->Write( algA + " and " +  algB );
     Dteff->Write( "METL1" );
 
-    //write canvas to the root file
-    efficiencyCanvas->Write("efficiencyCanvas");
-
     //compute number muon events actually kept using external macro
     Int_t muonEventsCombined = determineMuonEventsKeptCombined( algA, individAThreshFinal , algB , individBThreshFinal , muonFilename );
 
@@ -285,10 +282,14 @@ TFile* threeEfficiencies( const TString& algA , const TString& algB,
     //write the tntuple to the file
     logFileData->Write("bisectionData");
 
+    //write canvas to the root file
+    efficiencyCanvas->Write("efficiencyCanvas");
+
     //should print end resulting parameters
     logFileParams->Print();
 
     //write the TObject struct to file
+    //TODO: don't write a pointer.... dereference the pointer and write the object itself, moron
     logFileParams->Write("parameters");
 
     //end the three efficiencies benchmark
