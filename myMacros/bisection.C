@@ -12,24 +12,25 @@
 #include "TSystem.h"
 #include "TF1.h"
 #include "TNtuple.h"
+#include "userInfo.h"
+
+
+
 //TODO: implement proof lite
-
-
+//TODO: use global calls to param list
 
 Float_t bisection(TH1F* algAHist , TH1F* algBHist, const Float_t binWidth, Float_t &  individAThreshFinal , Float_t  & individBThreshFinal,
-    const Int_t numZeroBiasRndm = 0 , const Float_t frac = 0.00590, TNtuple* logFileData = NULL, TTree* zeroBiasTree = NULL)
+    const Int_t numZeroBiasRndm = 0 , Float_t frac = 0.00590, TNtuple* logFileData = NULL, TTree* zeroBiasTree = NULL)
 {
     Float_t computeThresh( const TH1F*, const Float_t);
     //this needs to be marked extern because it will import its parameters directly from
     //threeEfficiencies, so it knows that logFileParams will be declared in userInfo.C, and then the identifier
     //logFileParams will be taken from the scope of threeEfficiencies
-    class userInfo;
-
-    extern userInfo logFileParams;
+    userInfo* logFileParams = new userInfo();
     //some useful parameters
-    frac = logFileParams.getFrac();
-    Float_t metl1thresh = logFileParams.getMetL1Thresh();
-    Float_t actintCut = logFileParams.getActintCut();
+    frac = logFileParams->getFrac();
+    Float_t metl1thresh = logFileParams->getMetL1Thresh();
+    Float_t actintCut = logFileParams->getActintCut();
 
     Float_t lwrbnd = 0.5 * frac;
     Float_t uprbnd = 0.13;

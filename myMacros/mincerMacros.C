@@ -13,11 +13,10 @@
 #include "TF1.h"
 #include "TNtuple.h"
 #include "TBenchmark.h"
+#include "userInfo.h"
 
-class userInfo;
-
-Bool_t passTransverseMassCut( const Float_t metoffrecal     , const Float_t mexoffrecal     , const Float_t meyoffrecal ,
-           const Float_t metoffrecalmuon , const Float_t mexoffrecalmuon , const Float_t meyoffrecalmuon )
+Bool_t passTransverseMassCut( const Float_t metoffrecal , const Float_t mexoffrecal  , const Float_t meyoffrecal ,
+                              const Float_t metoffrecalmuon , const Float_t mexoffrecalmuon , const Float_t meyoffrecalmuon )
 {
     Float_t wLowerbnd = 40.0;
     Float_t wUpperbnd = 100.0;
@@ -39,9 +38,9 @@ Float_t determineZeroBiasThresh( const TString& algName, const Float_t frac = 0.
 const TString& zeroBiasFileName = "PhysicsMain.All.noalgXEtriggers.2016.f731f758._m1659m1710.48Runs.root")
 {
     /*Returns the threshold needed for an algorithm to keep the fraction of zerobias events*/
-    extern userInfo logFileParams;
-    const Float_t metL1Thresh = logFileParams.getMetL1Thresh();
-    const Float_t actintCut = logFileParams.getActintCut();
+    userInfo* logFileParams = new userInfo();
+    const Float_t metL1Thresh = logFileParams->getMetL1Thresh();
+    const Float_t actintCut = logFileParams->getActintCut();
 
 
     //get zerobias tree

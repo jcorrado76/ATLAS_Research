@@ -1,8 +1,7 @@
-/*
+
 #ifndef userInfo_h
 #define userInfo_h
 
-#include <Rtypes.h>
 #include "TObject.h"
 #include "TString.h"
 
@@ -33,9 +32,9 @@ private:
 public:
     //default constructor
     userInfo();
+    userInfo(TString algA , TString algB);
     //destructor
-    ~userInfo();
-    void Print() const;
+    void Print(Option_t *option = "") const;
     //getters
     TString get_zbFileName() const;
     TString get_muonFileName() const;
@@ -44,6 +43,7 @@ public:
     Float_t getFrac() const;
     Float_t getMetMin() const;
     Float_t getMetMax() const;
+    Int_t getNbins() const;
     //setters
     void setAlgAName( const TString algA );
     void setAlgBName( const TString algB );
@@ -60,8 +60,13 @@ public:
     void setActintCut( const Float_t thresh );
 
     //this macro from Rtypes.h facilitates root I/O
-    ClassDef( userInfo, 1);
+    ClassDef( userInfo, 1)
 };
 
+
+
+//extern userInfo* logFileParams;
+
+
+
 #endif
-*/

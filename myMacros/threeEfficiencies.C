@@ -13,15 +13,16 @@
 #include "TF1.h"
 #include "TBenchmark.h"
 #include "TNtuple.h"
-#include <TParameter.h>
 #include "TList.h"
 #include "TBranch.h"
 #include "TObjString.h"
 #include "userInfo.h"
 
-//TODO: change all cuts to using TCut object, TCut objects are basically strings, so I don't think
-//      their values update when you tree->GetEntry(i). If I could find a way to make that class work, it would simplify
-//      a lot o the coding
+//TODO: require yourself to generate an instance of userInfo for each run of threeEfficiencies
+//      get all alg parameters and actint parameters from the logfile to facilitate and make clear
+//      what params we're using each time
+
+
 
 TFile* threeEfficiencies( const TString& algA , const TString& algB,
         const Float_t frac = 0.00590, const TString folder = "" )
@@ -41,23 +42,23 @@ TFile* threeEfficiencies( const TString& algA , const TString& algB,
     Float_t computeThresh( const TH1F*, const Float_t);
     Float_t determineMuonEventsKeptCombined( const TString&, const Float_t, const TString&,
         const Float_t,const TString& );
-    Float_t bisection(TH1F* , TH1F* , const Float_t , Float_t& , Float_t&  , const Int_t, const Float_t , TNtuple* ,TTree* );
+    Float_t bisection(TH1F* , TH1F* , const Float_t , Float_t& , Float_t&  , const Int_t, Float_t , TNtuple* ,TTree* );
 
-    //user defined struct to store all log data
-    userInfo logFileParams;
-    logFileParams.Print();
+    //INITIALIZE PARAMS
+    userInfo* logFileParams = new userInfo();
+    logFileParams->Print();
 
-    //get the files we're using from userInfo.
-    TString zerobiasFileName = logFileParams.get_zbFileName();
-    TString muonFileName = logFileParams.get_muonFileName();
+    //FILES
+    TString zerobiasFileName = logFileParams->get_zbFileName();
+    TString muonFilename = logFileParams->get_muonFileName();
 
-    //initialize TBenchmark for this macro
+    //THREEFF BENCHMARK
     TBenchmark* threeEfficienciesBenchmark = new TBenchmark();
 
-    //start the clock running for total time
+    //TOTAL TIMER
     threeEfficienciesBenchmark->Start("Three Efficiencies");
 
-    //first, open the muon file and get the muon tree
+    //MUON FILE; MUON TREE
     TString muonFilePath = "../myData/"+muonFilename;
     TFile * muonFile = TFile::Open(muonFilePath, "READ");
     TTree* myMuonTree = (TTree*)muonFile->Get("tree");
@@ -65,14 +66,13 @@ TFile* threeEfficiencies( const TString& algA , const TString& algB,
     std::cout << "Muon Data being used to compute algorithm efficiency: " << muonFilePath << std::endl;
 
     //initialize variables to be used later
-    Float_t metl1thresh = logFileParams.getMetL1Thresh();
-    Float_t actintCut = logFileParams.getActintCut();
-    Float_t zb_actint = 0.0;
+    Float_t metl1thresh = logFileParams->getMetL1Thresh();
+    Float_t actintCut = logFileParams->getActintCut();
     Int_t muonNentries = myMuonTree->GetEntries();
     Int_t muonNbins = 200;
-    Int_t nbins = 1200;
-    Double_t metMin = logFileParams.getMetMin();
-    Double_t metMax = logFileParams.getMetMax();
+    Int_t nbins = logFileParams->getNbins();
+    Double_t metMin = logFileParams->getMetMin();
+    Double_t metMax = logFileParams->getMetMax();
     Int_t numZeroBiasRndm = 0; Int_t counter1 = 0; Int_t counter2 = 0; Int_t counter3 = 0;
 
     Int_t passRndm, numPassMuon,passmuon,passmuvarmed,cleanCutsFlag,recalBrokeFlag;
@@ -266,19 +266,19 @@ TFile* threeEfficiencies( const TString& algA , const TString& algB,
     //compute number muon events actually kept using external macro
     Int_t muonEventsCombined = determineMuonEventsKeptCombined( algA, individAThreshFinal , algB , individBThreshFinal , muonFilename );
 
-    logFileParams.setAlgAName( algA );
-    logFileParams.setAlgBName( algB );
-    logFileParams.setNum_zbRndm( numZeroBiasRndm );
-    logFileParams.setAlgAThresh( algAThresh);
-    logFileParams.setAlgBThresh( algBThresh );
-    logFileParams.setMuonNentries( muonNentries );
-    logFileParams.set_zbNentries( zerobiasNentries );
-    logFileParams.setNumMuonKeptCombined( muonEventsCombined );
-    logFileParams.setNumPassA((Ateff->GetPassedHistogram())->GetEntries());
-    logFileParams.setNumPassB((Bteff->GetPassedHistogram())->GetEntries());
-    logFileParams.setNumPassCombined((Cteff->GetPassedHistogram())->GetEntries());
-    logFileParams.setNumTotal((Ateff->GetTotalHistogram())->GetEntries());
-    logFileParams.setActintCut(actintCut);
+    logFileParams->setNum_zbRndm( numZeroBiasRndm );
+    logFileParams->setAlgAThresh( algAThresh);
+    logFileParams->setAlgBThresh( algBThresh );
+    logFileParams->setMuonNentries( muonNentries );
+    logFileParams->set_zbNentries( zerobiasNentries );
+    logFileParams->setNumMuonKeptCombined( muonEventsCombined );
+    logFileParams->setNumPassA((Ateff->GetPassedHistogram())->GetEntries());
+    logFileParams->setNumPassB((Bteff->GetPassedHistogram())->GetEntries());
+    logFileParams->setNumPassCombined((Cteff->GetPassedHistogram())->GetEntries());
+    logFileParams->setNumTotal((Ateff->GetTotalHistogram())->GetEntries());
+    logFileParams->setActintCut(actintCut);
+    logFileParams->setAlgAName(algA);
+    logFileParams->setAlgBName(algB);
 
     myFile->cd();
 
@@ -286,10 +286,10 @@ TFile* threeEfficiencies( const TString& algA , const TString& algB,
     logFileData->Write("bisectionData");
 
     //should print end resulting parameters
-    logFileParams.Print();
+    logFileParams->Print();
 
     //write the TObject struct to file
-    logFileParams.Write("parameters");
+    logFileParams->Write("parameters");
 
     //end the three efficiencies benchmark
     threeEfficienciesBenchmark->Stop("Three Efficiencies");
