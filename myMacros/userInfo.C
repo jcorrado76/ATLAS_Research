@@ -9,14 +9,13 @@
 
 //TODO: create a constructor that takes the two algs to be used as args for initialization
 
-
+TString zerobiasFileName = "PhysicsMain.All.noalgXEtriggers.2016.f731f758._m1659m1710.48Runs.root";
+TString muonFilename = "PhysicsMain.L1KFmuontriggers.2016.f731f758_m1659m1710.Run309759.48Runs.root";
 Int_t Nbins = 1200;
 Float_t metMin = 0.0;
 Float_t metMax = 300.0;
 Float_t metl1Thresh = 50.0;
 Float_t Frac = 0.0059;
-TString zerobiasFileName = "PhysicsMain.All.noalgXEtriggers.2016.f731f758._m1659m1710.48Runs.root";
-TString muonFilename = "PhysicsMain.L1KFmuontriggers.2016.f731f758_m1659m1710.Run309759.48Runs.root";
 Float_t actinTCut = 35.0;
 Int_t epsilon = 25;
 
