@@ -104,6 +104,7 @@ void userInfo::Print(Option_t *option) const{
     std::cout << "Number of entries that passed all muon cuts and " + algBName + " at Individ thresh: " << numMuonPassNumeratorAlgB << std::endl;
     std::cout << "Number of entries that passed all muon cuts and both algs at Combined thresh: " << numMuonPassNumeratorAlgC << std::endl;
     std::cout << "Number entries that passed all muon cuts without alg: " << numMuonDenominator << std::endl;
+    //TODO: eps keeps registering as zero
     std::cout << "Epsilon tolerance on number events used for bisection: " << eps << std::endl;
     std::cout << "Actint cut: " << actintCut << "\n" << std::endl;
 }
