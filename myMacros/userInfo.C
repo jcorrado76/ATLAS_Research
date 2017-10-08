@@ -20,8 +20,32 @@ TString muonFilename = "PhysicsMain.L1KFmuontriggers.2016.f731f758_m1659m1710.Ru
 Float_t actinTCut = 35.0;
 Int_t epsilon = 25;
 
-
-    userInfo::userInfo()
+class userInfo : public TObject {
+private:
+    TString algAName;
+    TString algBName;
+    Int_t nbins;
+    Float_t metmin;
+    Float_t metmax;
+    Float_t metl1thresh;
+    Float_t frac;
+    TString zbFileName;
+    TString muonFileName;
+    Int_t numzbRndm;
+    Float_t algAThresh;
+    Float_t algBThresh;
+    Int_t muonNentries;
+    Int_t zbNentries;
+    Int_t numMuonKeptCombined;
+    Int_t numMuonPassNumeratorAlgA;
+    Int_t numMuonPassNumeratorAlgB;
+    Int_t numMuonPassNumeratorAlgC;
+    Int_t numMuonDenominator;
+    Float_t eps;
+    Float_t actintCut;
+public:
+    //default constructor
+    userInfo()
     {
         nbins = Nbins;
         metmin = metMin;
@@ -46,57 +70,60 @@ Int_t epsilon = 25;
         numMuonPassNumeratorAlgC = 0;
         numMuonDenominator = 0;
     }
+    //destructor
+    ~userInfo();
+
+    void Print() const{
+        std::cout << "Printing the data members for the userInfo struct: " << std::endl;
+        std::cout << "Alg A Name: " << algAName << std::endl;
+        std::cout << "Alg B Name: " << algBName << std::endl;
+        std::cout << "nbins: " << nbins << std::endl;
+        std::cout << "MetMin: " << metmin << std::endl;
+        std::cout << "MetMax: " << metmax << std::endl;
+        std::cout << "METL1 thresh used: " << metl1thresh << std::endl;
+        std::cout << "frac to keep: " << frac << std::endl;
+        std::cout << "Zero Bias File Used: " << zbFileName << std::endl;
+        std::cout << "Muon File Used: " << muonFileName << std::endl;
+        std::cout << "Number of zerobias events that passed no alg and metl1: " << numzbRndm << std::endl;
+        std::cout << "Threshold needed on A: " << algAThresh << std::endl;
+        std::cout << "Threshold needed on B: " << algBThresh << std::endl;
+        std::cout << "Muon Nentries: " << muonNentries << std::endl;
+        std::cout << "ZeroBias Nentries: " << zbNentries << std::endl;
+        std::cout << "Number of entries kept using combined thresholds: " <<  numMuonKeptCombined << std::endl;
+        std::cout << "Number of entries that passed all muon cuts and " + algAName + " at Individ thresh: " << numMuonPassNumeratorAlgA << std::endl;
+        std::cout << "Number of entries that passed all muon cuts and " + algBName + " at Individ thresh: " << numMuonPassNumeratorAlgB << std::endl;
+        std::cout << "Number of entries that passed all muon cuts and both algs at Combined thresh: " << numMuonPassNumeratorAlgC << std::endl;
+        std::cout << "Number entries that passed all muon cuts without alg: " << numMuonDenominator << std::endl;
+        std::cout << "Epsilon tolerance on number events used for bisection: " << eps << std::endl;
+        std::cout << "Actint cut: " << actintCut << "\n" << std::endl;
+    }
     //getters
-    TString userInfo::get_zbFileName() const { return(zbFileName);}
-    TString userInfo::get_muonFileName() const { return(muonFileName);}
-    Float_t userInfo::getMetL1Thresh() const { return( metl1thresh); }
-    Float_t userInfo::getActintCut() const { return( actintCut);}
-    Float_t userInfo::getFrac() const { return (frac); }
-    Float_t userInfo::getMetMin() const {return (metmin);}
-    Float_t userInfo::getMetMax() const { return (metmax);}
+    TString get_zbFileName() const { return(zbFileName);}
+    TString get_muonFileName() const { return(muonFileName);}
+    Float_t getMetL1Thresh() const { return( metl1thresh); }
+    Float_t getActintCut() const { return( actintCut);}
+    Float_t getFrac() const { return (frac); }
+    Float_t getMetMin() const {return (metmin);}
+    Float_t getMetMax() const { return (metmax);}
     //setters
-    void userInfo::setAlgAName( const TString algA ) { algAName = algA; };
-    void userInfo::setAlgBName( const TString algB ) { algBName = algB; };
-    void userInfo::setNum_zbRndm( const Float_t num ) { numzbRndm = num; };
-    void userInfo::setAlgAThresh( const Float_t thresh ) { algAThresh = thresh; };
-    void userInfo::setAlgBThresh( const Float_t thresh ) { algBThresh = thresh; };
-    void userInfo::setMuonNentries( const Int_t num ) { muonNentries = num; };
-    void userInfo::set_zbNentries( const Int_t num ) { zbNentries = num; };
-    void userInfo::setNumMuonKeptCombined( const Int_t num ) { numMuonKeptCombined = num; };
-    void userInfo::setNumPassA( const Int_t num ) { numMuonPassNumeratorAlgA = num; };
-    void userInfo::setNumPassB( const Int_t num ) { numMuonPassNumeratorAlgB = num; };
-    void userInfo::setNumPassCombined( const Int_t num ) { numMuonPassNumeratorAlgC = num; };
-    void userInfo::setNumTotal( const Int_t num ) { numMuonDenominator = num; };
-    void userInfo::setActintCut( const Float_t thresh ) { actintCut = thresh; };
+    void setAlgAName( const TString algA ) { algAName = algA; };
+    void setAlgBName( const TString algB ) { algBName = algB; };
+    void setNum_zbRndm( const Float_t num ) { numzbRndm = num; };
+    void setAlgAThresh( const Float_t thresh ) { algAThresh = thresh; };
+    void setAlgBThresh( const Float_t thresh ) { algBThresh = thresh; };
+    void setMuonNentries( const Int_t num ) { muonNentries = num; };
+    void set_zbNentries( const Int_t num ) { zbNentries = num; };
+    void setNumMuonKeptCombined( const Int_t num ) { numMuonKeptCombined = num; };
+    void setNumPassA( const Int_t num ) { numMuonPassNumeratorAlgA = num; };
+    void setNumPassB( const Int_t num ) { numMuonPassNumeratorAlgB = num; };
+    void setNumPassCombined( const Int_t num ) { numMuonPassNumeratorAlgC = num; };
+    void setNumTotal( const Int_t num ) { numMuonDenominator = num; };
+    void setActintCut( const Float_t thresh ) { actintCut = thresh; };
+
+    //this macro from Rtypes.h facilitates root I/O
+    ClassDef( userInfo, 1);
+};
 
 #if !defined(__CLING__)
 ClassImp(userInfo)
 #endif
-
-
-
-
-void userInfo::Print() const{
-    std::cout << "Printing the data members for the userInfo struct: " << std::endl;
-    std::cout << "Alg A Name: " << algAName << std::endl;
-    std::cout << "Alg B Name: " << algBName << std::endl;
-    std::cout << "nbins: " << nbins << std::endl;
-    std::cout << "MetMin: " << metmin << std::endl;
-    std::cout << "MetMax: " << metmax << std::endl;
-    std::cout << "METL1 thresh used: " << metl1thresh << std::endl;
-    std::cout << "frac to keep: " << frac << std::endl;
-    std::cout << "Zero Bias File Used: " << zbFileName << std::endl;
-    std::cout << "Muon File Used: " << muonFileName << std::endl;
-    std::cout << "Number of zerobias events that passed no alg and metl1: " << numzbRndm << std::endl;
-    std::cout << "Threshold needed on A: " << algAThresh << std::endl;
-    std::cout << "Threshold needed on B: " << algBThresh << std::endl;
-    std::cout << "Muon Nentries: " << muonNentries << std::endl;
-    std::cout << "ZeroBias Nentries: " << zbNentries << std::endl;
-    std::cout << "Number of entries kept using combined thresholds: " <<  numMuonKeptCombined << std::endl;
-    std::cout << "Number of entries that passed all muon cuts and " + algAName + " at Individ thresh: " << numMuonPassNumeratorAlgA << std::endl;
-    std::cout << "Number of entries that passed all muon cuts and " + algBName + " at Individ thresh: " << numMuonPassNumeratorAlgB << std::endl;
-    std::cout << "Number of entries that passed all muon cuts and both algs at Combined thresh: " << numMuonPassNumeratorAlgC << std::endl;
-    std::cout << "Number entries that passed all muon cuts without alg: " << numMuonDenominator << std::endl;
-    std::cout << "Epsilon tolerance on number events used for bisection: " << eps << std::endl;
-    std::cout << "Actint cut: " << actintCut << "\n" << std::endl;
-}
