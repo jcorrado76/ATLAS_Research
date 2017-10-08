@@ -226,7 +226,7 @@ TFile* threeEfficiencies( const TString& algA , const TString& algB,
 
     //TODO: add in folder arg to path here
     //TODO: handle the case if there is already a root file with same name
-    TString fileName = "./TEfficienciesPics/" + algA + "_" + algB + "Efficiencies.root";
+    TString fileName = "./TEfficienciesPics/" + folder + "/" + algA + "_" + algB + "Efficiencies.root";
     TFile* myFile = new TFile(fileName,"RECREATE");
 
     const TString canvName = algA + " and " + algB + " Combined Efficiency" + ";Offline Recalibrated MET w/o Muon term [GeV];Efficiency";
