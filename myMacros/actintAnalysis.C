@@ -11,6 +11,10 @@ void actintAnalysis(){
 
     userInfo* logFileParams = new userInfo();
 
+
+    //TODO: need to find a way to change the name of the root file each time you save
+    //with a different actint cut
+
     logFileParams->Print();
     logFileParams->setActintCut(40.0);
     logFileParams->Print();
