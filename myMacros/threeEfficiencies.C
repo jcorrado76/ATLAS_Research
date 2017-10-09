@@ -224,11 +224,6 @@ TFile* threeEfficiencies( const TString& algA , const TString& algB,
 
     threeEfficienciesBenchmark->Show("Fill TEfficiencies");
 
-    //TODO: add in folder arg to path here
-    //TODO: handle the case if there is already a root file with same name
-    TString fileName = "./TEfficienciesPics/" + folder + "/" + algA + "_" + algB + "Efficiencies.root";
-    TFile* myFile = new TFile(fileName,"RECREATE");
-
     const TString canvName = algA + " and " + algB + " Combined Efficiency" + ";Offline Recalibrated MET w/o Muon term [GeV];Efficiency";
 
     TCanvas* efficiencyCanvas = new TCanvas("Efficiency Canvas", "Efficiency Canvas");
@@ -255,11 +250,7 @@ TFile* threeEfficiencies( const TString& algA , const TString& algB,
     legend->Draw();
 
 
-    //write efficiencies to the root file
-    Ateff->Write( algA );
-    Bteff->Write( algB );
-    Cteff->Write( algA + " and " +  algB );
-    Dteff->Write( "METL1" );
+
 
     //compute number muon events actually kept using external macro
     Int_t muonEventsCombined = determineMuonEventsKeptCombined( algA, individAThreshFinal , algB , individBThreshFinal , muonFilename );
@@ -278,28 +269,39 @@ TFile* threeEfficiencies( const TString& algA , const TString& algB,
     logFileParams->setAlgAName(algA);
     logFileParams->setAlgBName(algB);
 
-    myFile->cd();
+    TString fileName = "./TEfficienciesPics/" + folder + "/" + algA + "_" + algB + "Efficiencies.root";
+    //if file already exists, not opened
+    TFile* rootFile = new TFile(fileName,"CREATE");
 
-    //write the tntuple to the file
+    if ( !( rootFile.IsOpen() ) )
+        {
+            TString suffix = "";
+            std::cout << "Unable to open file" << std::endl;
+            std::cout << "Enter run number: ";
+            std::cin >> suffix;
+            suffix = "(" + suffix + ")";
+            fileName.Insert( (fileName.Length()-5),suffix);
+            //try again, but this time if user inputs, can overwrite
+            rootFile.Open( fileName ,"RECREATE");
+        }
+
+    std::cout << "Root file successfully opened" << std::endl;
+
+    Ateff->Write( astring );
+    Bteff->Write( bstring );
+    Cteff->Write( cstring );
+    Dteff->Write( "METL1" );
     logFileData->Write("bisectionData");
-
-    //write canvas to the root file
     efficiencyCanvas->Write("efficiencyCanvas");
-
-    //should print end resulting parameters
     logFileParams->Print();
-
-    //write the TObject struct to file
     logFileParams->Write("parameters");
-
-    //end the three efficiencies benchmark
     threeEfficienciesBenchmark->Stop("Three Efficiencies");
 
     //show the summary and totals of all benchmarks
     Float_t realtime, cputime;
     threeEfficienciesBenchmark->Summary(realtime ,cputime);
 
-    myFile->Close();
+    rootFile->Close();
 
-    return( myFile );
+    return( rootFile );
     }
