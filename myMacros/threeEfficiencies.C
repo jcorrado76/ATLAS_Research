@@ -43,6 +43,7 @@ TFile* threeEfficiencies( const TString& algA , const TString& algB,
     Float_t determineMuonEventsKeptCombined( const TString&, const Float_t, const TString&,
         const Float_t,const TString& );
     Float_t bisection(TH1F* , TH1F* , const Float_t , Float_t& , Float_t&  , const Int_t, Float_t , TNtuple* ,TTree* );
+    Float_t computeMetNoMu( const Float_t , const Float_t , const Float_t , const Float_t );
 
     //INITIALIZE PARAMS
     userInfo* logFileParams = new userInfo();
@@ -210,8 +211,8 @@ TFile* threeEfficiencies( const TString& algA , const TString& algB,
     	{
             if ( passTransverseMassCut(metoffrecal,mexoffrecal,meyoffrecal,metoffrecalmuon,mexoffrecalmuon,meyoffrecalmuon) )
             {
-        	    Float_t metnomu = sqrt(((mexoffrecal - mexoffrecalmuon) * (mexoffrecal - mexoffrecalmuon)) +
-        	    ((meyoffrecal - meyoffrecalmuon)*(meyoffrecal - meyoffrecalmuon))); //compute metnomu
+        	    Float_t metnomu = Float_t computeMetNoMu(  mexoffrecal , meyoffrecal , mexoffrecalmuon , meyoffrecalmuon );
+
                 Ateff->Fill((algAmuonMET > algAThresh) && (muonMetl1 > metl1thresh) && ( muonActint > actintCut ), metnomu);
         	    Bteff->Fill((algBmuonMET > algBThresh) && (muonMetl1 > metl1thresh)&& ( muonActint > actintCut ), metnomu);
         	    Cteff->Fill(((algAmuonMET > individAThreshFinal) && (algBmuonMET > individBThreshFinal)
@@ -249,9 +250,6 @@ TFile* threeEfficiencies( const TString& algA , const TString& algB,
     legend->AddEntry(Dteff, dstring);
     legend->Draw();
 
-
-
-
     //compute number muon events actually kept using external macro
     Int_t muonEventsCombined = determineMuonEventsKeptCombined( algA, individAThreshFinal , algB , individBThreshFinal , muonFilename );
 
@@ -273,6 +271,8 @@ TFile* threeEfficiencies( const TString& algA , const TString& algB,
     //if file already exists, not opened
     TFile* rootFile = new TFile(fileName,"CREATE");
 
+    //TODO: add filehandling to use one root file for a given combination, and have it create subfolders within the root file to
+    //store different runs
     if ( !( rootFile.IsOpen() ) )
         {
             TString suffix = "";
