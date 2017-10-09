@@ -27,6 +27,8 @@ Int_t computeNumbToKeep(const TString& zeroBiasFileName = "PhysicsMain.All.noalg
 
     Float_t metl1, metcell;
     Int_t passnoalgL1XE10 , passnoalgL1XE30, passnoalgL1XE40, passnoalgL1XE45;
+    Float_t actint;
+    Int_t actintCut = 35.0;
 
     zeroBiasTree->SetBranchAddress("metl1",&metl1);
     zeroBiasTree->SetBranchAddress("metcell", &metcell);
@@ -34,7 +36,13 @@ Int_t computeNumbToKeep(const TString& zeroBiasFileName = "PhysicsMain.All.noalg
     zeroBiasTree->SetBranchAddress("passnoalgL1XE30",&passnoalgL1XE30);
     zeroBiasTree->SetBranchAddress("passnoalgL1XE40",&passnoalgL1XE40);
     zeroBiasTree->SetBranchAddress("passnoalgL1XE45",&passnoalgL1XE45);
+    zeroBiasTree->SetBranchAddress("actint",&actint);
 
+    /*
+    To compute number of events that we know we can trigger on
+    this is what CERN currently uses. The fraction needs to stay the same; need to still
+    use 1/200, but the number of events to keep changes based on the new actint cut, because you need to
+    multiply fraction to keep (0.0059) by some new numbToKeep
 
     Int_t numbToKeep = 0 ;
     for (Int_t i = 0 ; i < zerobiasNentries ; i++)
@@ -47,6 +55,27 @@ Int_t computeNumbToKeep(const TString& zeroBiasFileName = "PhysicsMain.All.noalg
             numbToKeep++;
         }
     }
+    */
+
+
+    //we want to be able to look at how the threshold on cell needed to keep same fraction
+    //varies as we change actint cut
+    //this is not the numb to keep. this is the numb to keep, divided by the fraction to keep
+
+
+    //TODO: what should I call this number? it's not numb to keep, is it the denominator?
+    Int_t numbToKeep = 0 ;
+    for (Int_t i = 0 ; i < zerobiasNentries ; i++)
+    {
+        zeroBiasTree->GetEntry(i);
+        if ( (metl1 > 50.0) && (actint > actintCut)  &&
+           ( passnoalgL1XE10 > 0.5 || passnoalgL1XE30 > 0.5 ||
+            passnoalgL1XE40 > 0.5 || passnoalgL1XE45 > 0.5  ) )
+        {
+            numbToKeep++;
+        }
+    }
+
 
     std::cout << "Number of events to keep: " << numbToKeep << std::endl;
 
