@@ -77,7 +77,7 @@ TFile* threeEfficiencies( const TString& algA , const TString& algB,
     Int_t numZeroBiasRndm = 0; Int_t counter1 = 0; Int_t counter2 = 0; Int_t counter3 = 0;
 
     Int_t passRndm, numPassMuon,passmuon,passmuvarmed,cleanCutsFlag,recalBrokeFlag;
-    Float_t algAMET,algBMET,metoffrecal,mexoffrecal,meyoffrecal,mexoffrecalmuon,
+    Float_t algAMET,algBMET,metoffrecal,mexoffrecal,meyoffrecal,mexoffrecalmuon, zb_actint,
             meyoffrecalmuon, metl1,metcell,metrefmuon,mexrefmuon,meyrefmuon,metoffrecalmuon;
     Int_t passnoalgL1XE10,passnoalgL1XE30,passnoalgL1XE40,passnoalgL1XE45;
 
@@ -117,6 +117,7 @@ TFile* threeEfficiencies( const TString& algA , const TString& algB,
     zeroBiasTree->SetBranchAddress("passnoalgL1XE30",&passnoalgL1XE30);
     zeroBiasTree->SetBranchAddress("passnoalgL1XE40",&passnoalgL1XE40);
     zeroBiasTree->SetBranchAddress("passnoalgL1XE45",&passnoalgL1XE45);
+    zeroBiasTree->SetBranchAddress("actint",&zb_actint);
     TH1F *algAMETHist = new TH1F(algA, "algA", nbins, metMin, metMax);
     TH1F *algBMETHist = new TH1F(algB, "algB", nbins, metMin, metMax);
 
@@ -144,7 +145,8 @@ TFile* threeEfficiencies( const TString& algA , const TString& algB,
 	for (Int_t k = 0; k < zerobiasNentries; k++)
 	{
 	    zeroBiasTree->GetEntry(k);
-	    if ( (metl1 > metl1thresh) && ( passnoalgL1XE10 > 0.5 || passnoalgL1XE30 > 0.5 ||
+	    if ( (metl1 > metl1thresh) && (actint > actintCut) &&
+         ( passnoalgL1XE10 > 0.5 || passnoalgL1XE30 > 0.5 ||
         passnoalgL1XE40 > 0.5 || passnoalgL1XE45 > 0.5  ))
 	    {
     		algAMETHist->Fill(algAMET);
