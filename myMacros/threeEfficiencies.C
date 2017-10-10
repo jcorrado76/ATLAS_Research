@@ -18,12 +18,6 @@
 #include "TObjString.h"
 #include "userInfo.h"
 
-//TODO: require yourself to generate an instance of userInfo for each run of threeEfficiencies
-//      get all alg parameters and actint parameters from the logfile to facilitate and make clear
-//      what params we're using each time
-
-
-
 TFile* threeEfficiencies( const TString& algA , const TString& algB,
         const Float_t frac = 0.00590, const TString folder = "" )
 {
