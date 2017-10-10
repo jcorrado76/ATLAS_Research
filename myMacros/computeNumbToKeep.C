@@ -75,7 +75,7 @@ Int_t computeNumbToKeep(const TString& zeroBiasFileName = "PhysicsMain.All.noalg
 
     std::cout << "zb_Nentries: " << zerobiasNentries << std::endl;
 
-    std::cout << "Number of events kept with passnoalg, l1, and cell > 100:" << counter1 << std::endl;
+    std::cout << "Number of events kept with passnoalg, l1, and cell > 100: " << counter1 << std::endl;
     std::cout << "Fraction of zb nentries: " << counter1Frac << std::endl;
 
     std::cout << "Number of events kept with passsnoalg, l1, and actint > 35: " << counter2 << std::endl;
