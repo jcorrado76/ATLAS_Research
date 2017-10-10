@@ -72,7 +72,7 @@ const TString& zeroBiasFileName = "PhysicsMain.All.noalgXEtriggers.2016.f731f758
 
     //TODO: need to change the number of events to keep. need to redetermine numb events to  keep
     //using the same machine limitation fraction but on a different selection of zb events (one including actint cut)
-    const Float_t numberEventsToKeep = 5762.0;
+    const Float_t numberEventsToKeep = 187904.0;
 	const Int_t nbins = 1200;
 	const Double_t metMin = 0.0;
 	const Double_t metMax = 300.0;

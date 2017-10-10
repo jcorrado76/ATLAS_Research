@@ -143,7 +143,7 @@ public :
    virtual TList  *GetOutputList() const { return fOutput; }
    virtual void    SlaveTerminate();
    virtual void    Terminate();
-   
+
            void SetName( const TString name ) { algName = name; }
 
    ClassDef(zbAnalysis,0);
