@@ -9,7 +9,6 @@
 #include "TLegend.h"
 #include "TROOT.h"
 #include "TCanvas.h"
-#include "TSystem.h"
 #include "TF1.h"
 #include "TBenchmark.h"
 #include "TNtuple.h"
