@@ -200,10 +200,15 @@ TFile* threeEfficiencies( const TString& algA , const TString& algB,
 
     std::cout << "Starting to fill TEfficiencies.." << std::endl;
 
+    Bool_t isMuon;
+    Bool_t isClean;
     for (Int_t l = 0 ; l < muonNentries ; l++)
     {
         myMuonTree->GetEntry(l);
-        if ((passmuvarmed > 0.1 || passmuon > 0.1) && (cleanCutsFlag > 0.1) && (recalBrokeFlag < 0.1) && ( muonActint > actintCut ))
+        isMuon = (passmuvarmed > 0.1 || passmuon > 0.1);
+        isClean = (cleanCutsFlag > 0.1) && (recalBrokeFlag < 0.1)
+
+        if ( isMuon && isClean && ( muonActint > actintCut ))
     	{
             if ( passTransverseMassCut(metoffrecal,mexoffrecal,meyoffrecal,metoffrecalmuon,mexoffrecalmuon,meyoffrecalmuon) )
             {

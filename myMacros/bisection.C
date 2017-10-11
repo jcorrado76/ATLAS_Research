@@ -34,7 +34,7 @@ Float_t bisection(TH1F* algAHist , TH1F* algBHist, const Float_t binWidth, Float
     Float_t uprbnd = 0.13;
 
     Float_t x1,x3; //thresholds of individual algorithms
-    Float_t f1,f2,f3 = 0; //fractions of events kept out of passrndm
+    Float_t Process2FracX1WithActintCut,Process2FracX2WithActintCut,Process2FracX3WithActintCut = 0; //fractions of events kept out of passrndm
     x1 = lwrbnd;
     x3 = uprbnd;
     Float_t initialGuess = ( x1 + x3 ) / 2.0;
@@ -138,16 +138,16 @@ Float_t bisection(TH1F* algAHist , TH1F* algBHist, const Float_t binWidth, Float
     }
 
     //compute fractions kept at initial guesses
-    f1 = (Float_t) numPassedProcess2WithActintCutX1 / (Float_t) numPassedProcess1WithActintCut;
-    f2 = (Float_t) numPassedProcess2WithActintCutX2 / (Float_t) numPassedProcess1WithActintCut;
-    f3 = (Float_t) numPassedProcess2WithActintCutX3 / (Float_t) numPassedProcess1WithActintCut;
+    Process2FracX1WithActintCut = (Float_t) numPassedProcess2WithActintCutX1 / (Float_t) numPassedProcess1WithActintCut;
+    Process2FracX2WithActintCut = (Float_t) numPassedProcess2WithActintCutX2 / (Float_t) numPassedProcess1WithActintCut;
+    Process2FracX3WithActintCut = (Float_t) numPassedProcess2WithActintCutX3 / (Float_t) numPassedProcess1WithActintCut;
 
     std::cout << "At x1 = " << x1 << " numPassedProcess2WithActintCutX1: " << numPassedProcess2WithActintCutX1 << " events " << std::endl;
-    std::cout << "f1: " << f1 << std::endl;
+    std::cout << "Process2FracX1WithActintCut: " << Process2FracX1WithActintCut << std::endl;
     std::cout << "At x2 = " << initialGuess << " numPassedProcess2WithActintCutX2: " << numPassedProcess2WithActintCutX2 << " events " << std::endl;
-    std::cout << "f2: " << f2 << std::endl;
+    std::cout << "Process2FracX2WithActintCut: " << Process2FracX2WithActintCut << std::endl;
     std::cout << "At x3 = " << x3 << " numPassedProcess2WithActintCutX3: " << numPassedProcess2WithActintCutX3 << " events " << std::endl;
-    std::cout << "f3: " << f3 << std::endl;
+    std::cout << "Process2FracX3WithActintCut: " << Process2FracX3WithActintCut << std::endl;
 
 
     Float_t inputArray[100];
@@ -159,9 +159,9 @@ Float_t bisection(TH1F* algAHist , TH1F* algBHist, const Float_t binWidth, Float
     inputArray[0] = x1;
     inputArray[2] = initialGuess;
     inputArray[1] = x3;
-    outputArray[0] = f1;
-    outputArray[2] = f2;
-    outputArray[1] = f3;
+    outputArray[0] = Process2FracX1WithActintCut;
+    outputArray[2] = Process2FracX2WithActintCut;
+    outputArray[1] = Process2FracX3WithActintCut;
     numEventsArray[0] = numPassedProcess2WithActintCutX1;
     numEventsArray[2] = numPassedProcess2WithActintCutX2;
     numEventsArray[1] = numPassedProcess2WithActintCutX3;
@@ -180,16 +180,16 @@ Float_t bisection(TH1F* algAHist , TH1F* algBHist, const Float_t binWidth, Float
     do{
         j++;
         std::cout << "Inside iteration number: " << j << std::endl;
-        if ( (f1-frac)*(f2-frac) < 0 ) //root is in left half of interval
+        if ( (Process2FracX1WithActintCut-frac)*(Process2FracX2WithActintCut-frac) < 0 ) //root is in left half of interval
         {
           std::cout << "Root is to the left of " << initialGuess << std::endl;
-          f3 = f2;
+          Process2FracX3WithActintCut = Process2FracX2WithActintCut;
           x3 = initialGuess;
         }
         else //root is in right half of  interval
         {
           std::cout << "Root is to the right of " << initialGuess << std::endl;
-          f1 = f2;
+          Process2FracX1WithActintCut = Process2FracX2WithActintCut;
           x1 = initialGuess;
         }
         initialGuess = ( x1 + x3 ) / 2.0;
@@ -222,10 +222,10 @@ Float_t bisection(TH1F* algAHist , TH1F* algBHist, const Float_t binWidth, Float
         std::cout << "algAMETx2thresh: " << algAMETx2thresh << std::endl;
         std::cout << "algBMETx2thresh: " << algBMETx2thresh << std::endl;
         std::cout << "Counter2: " << numPassedProcess2WithActintCutX2 << std::endl;
-        f2 = (Float_t) numPassedProcess2WithActintCutX2 / (Float_t) numPassedProcess1WithActintCut;
-        std::cout << "f2: " << f2 << std::endl;
+        Process2FracX2WithActintCut = (Float_t) numPassedProcess2WithActintCutX2 / (Float_t) numPassedProcess1WithActintCut;
+        std::cout << "Process2FracX2WithActintCut: " << Process2FracX2WithActintCut << std::endl;
         std::cout << "Condition: " << abs(numPassedProcess1WithActintCut * frac - numPassedProcess2WithActintCutX2) << " > " << epsilon << std::endl;
-        outputArray[j+2] = f2;
+        outputArray[j+2] = Process2FracX2WithActintCut;
 
 
 
@@ -250,8 +250,8 @@ Float_t bisection(TH1F* algAHist , TH1F* algBHist, const Float_t binWidth, Float
       {
         std::cout << "A root at x = " <<  initialGuess << " was found to within one bin: " << binWidth << " GeV"
                   << " in " << j << " iterations" << std::endl;
-        std::cout << "The number of combined events kept is  " << f2 * numPassedProcess1WithActintCut << std::endl;
-        std::cout << "The fraction of combined events kept is  " << f2 << std::endl;
+        std::cout << "The number of combined events kept is  " << Process2FracX2WithActintCut * numPassedProcess1WithActintCut << std::endl;
+        std::cout << "The fraction of combined events kept is  " << Process2FracX2WithActintCut << std::endl;
       }
       else{
         std::cout << "No root found; max iterations exceeded" << std::endl;
