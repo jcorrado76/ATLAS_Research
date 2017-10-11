@@ -23,9 +23,6 @@ Float_t bisection(TH1F* algAHist , TH1F* algBHist, const Float_t binWidth, Float
     const Int_t numZeroBiasRndm = 0 , Float_t frac = 0.00590, TNtuple* logFileData = NULL, TTree* zeroBiasTree = NULL)
 {
     Float_t computeThresh( const TH1F*, const Float_t);
-    //this needs to be marked extern because it will import its parameters directly from
-    //threeEfficiencies, so it knows that logFileParams will be declared in userInfo.C, and then the identifier
-    //logFileParams will be taken from the scope of threeEfficiencies
     userInfo* logFileParams = new userInfo();
     //some useful parameters
     frac = logFileParams->getFrac();
