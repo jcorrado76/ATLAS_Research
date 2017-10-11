@@ -82,12 +82,15 @@ Int_t computeNumbToKeep(const TString& thresholdFileName = "PhysicsMain.All.noal
     Float_t ActintCutProcess1Frac = (Float_t) ActintCutProcess1EventsKept / (Float_t) NentriesNoCuts;
 
     std::cout << "Entries kept with no cuts: " << NentriesNoCuts << std::endl;
+    std::cout << "\n" << std::endl;
 
     std::cout << "Number of events kept with l1>50.0: " << noActintProcess1EventsKept << std::endl;
     std::cout << "Fraction of passnoalg: " << noActintProcess1Frac << std::endl;
+    std::cout << "\n" << std::endl;
 
     std::cout << "Number of events kept with l1>50.0 and cell > 100.0: " << noActintProcess2EventsKept << std::endl;
     std::cout << "Fraction of noActint process 1: " << noActintProcess2Frac << std::endl;
+    std::cout << "\n" << std::endl;
 
     std::cout << "Number of events kept with l1>50.0 and actint > 35: " << ActintCutProcess1EventsKept << std::endl;
     std::cout << "Fraction of passnoalg: " << ActintCutProcess1Frac << std::endl;
