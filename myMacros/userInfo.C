@@ -26,7 +26,7 @@ Float_t metMax = 300.0;
 Float_t metl1Thresh = 50.0;
 Float_t Frac = 0.0059;
 Float_t actinTCut = 35.0;
-Float_t epsilon = 25.0;
+Int_t epson = 25;
 
 //default constructor
 userInfo::userInfo()
@@ -35,13 +35,12 @@ userInfo::userInfo()
     metmin = metMin;
     metmax = metMax;
     metl1thresh = metl1Thresh;
+    std::cout << "l1 thresh: " << metl1Thresh << std::endl;
     frac = Frac;
     zbFileName = zerobiasFileName;
     muonFileName = muonFilename;
     actintCut = actinTCut;
-    eps = epsilon;
-    std::cout << "Value of epsilon: " << epsilon << std::endl;
-    std::cout << "Value of epsilon: " << eps << std::endl;
+    epsilon = epson;
     numzbRndm = 0;
     algAThresh = 0.0;
     algBThresh = 0.0;
@@ -68,7 +67,7 @@ userInfo::userInfo( TString algA , TString algB)
     zbFileName = zerobiasFileName;
     muonFileName = muonFilename;
     actintCut = actinTCut;
-    eps = epsilon;
+    epsilon = epson;
     numzbRndm = 0;
     algAThresh = 0.0;
     algBThresh = 0.0;
@@ -106,7 +105,7 @@ void userInfo::Print(Option_t *option) const{
     std::cout << "Number of entries that passed all muon cuts and both algs at Combined thresh: " << numMuonPassNumeratorAlgC << std::endl;
     std::cout << "Number entries that passed all muon cuts without alg: " << numMuonDenominator << std::endl;
     //TODO: eps keeps registering as zero
-    std::cout << "Epsilon tolerance on number events used for bisection: " << eps << std::endl;
+    std::cout << "Epsilon tolerance on number events used for bisection: " << epsilon << std::endl;
     std::cout << "Actint cut: " << actintCut << "\n" << std::endl;
 }
 //getters
@@ -118,6 +117,7 @@ Float_t userInfo::getActintCut() const { return( actintCut);}
 Float_t userInfo::getFrac() const { return (frac); }
 Float_t userInfo::getMetMin() const {return (metmin);}
 Float_t userInfo::getMetMax() const { return (metmax);}
+Int_t userInfo::getEpsilon() const {return(epsilon);}
 //setters
 void userInfo::setAlgAName( const TString algA ) { algAName = algA; };
 void userInfo::setAlgBName( const TString algB ) { algBName = algB; };
@@ -132,3 +132,4 @@ void userInfo::setNumPassB( const Int_t num ) { numMuonPassNumeratorAlgB = num; 
 void userInfo::setNumPassCombined( const Int_t num ) { numMuonPassNumeratorAlgC = num; };
 void userInfo::setNumTotal( const Int_t num ) { numMuonDenominator = num; };
 void userInfo::setActintCut( const Float_t thresh ) { actintCut = thresh; };
+void userInfo::setEpsilon( const Int_t epson ) { epsilon = epson; };
