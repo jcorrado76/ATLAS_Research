@@ -73,7 +73,7 @@ const TString& threshFileName = "PhysicsMain.All.noalgXEtriggers.2016.f731f758._
     const Int_t numberEventsToKeep = 1108;
 	const Int_t nbins = logFileParams->getNbins();
 	const Double_t metMin = logFileParams->getMetMin();
-	const Double_t metMax = logFileParams->GetMetMax();
+	const Double_t metMax = logFileParams->getMetMax();
 	Float_t metl1, algMET;
     Int_t numberEventsKept = 0;
     Int_t passnoalgL1XE10 , passnoalgL1XE30 , passnoalgL1XE40 , passnoalgL1XE45;
