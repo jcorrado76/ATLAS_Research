@@ -45,9 +45,9 @@ Int_t computeNumbToKeep(const TString& thresholdFileName = "PhysicsMain.All.noal
     multiply fraction to keep (0.0059) by some new numbToKeep
     */
 
-    Int_t noActintProcess1EventsKept = 0 ;
-    Int_t noActintProcess2EventsKept = 0 ;
-    Int_t ActintCutProcess1EventsKept = 0;
+    Int_t Process1NoActintEventsKept = 0 ;
+    Int_t Process2NoActintEventsKept = 0 ;
+    Int_t Process1WithActintCutEventsKept = 0;
     for (Int_t i = 0 ; i < NentriesNoCuts ; i++)
     {
         thresholdTree->GetEntry(i);
@@ -55,19 +55,19 @@ Int_t computeNumbToKeep(const TString& thresholdFileName = "PhysicsMain.All.noal
            ( passnoalgL1XE10 > 0.5 || passnoalgL1XE30 > 0.5 ||
             passnoalgL1XE40 > 0.5 || passnoalgL1XE45 > 0.5  ) )
         {
-            noActintProcess1EventsKept++;
+            Process1NoActintEventsKept++;
         }
         if ( metl1 > 50.0 && metcell > 100.0  &&
            ( passnoalgL1XE10 > 0.5 || passnoalgL1XE30 > 0.5 ||
             passnoalgL1XE40 > 0.5 || passnoalgL1XE45 > 0.5  ) )
         {
-            noActintProcess2EventsKept++;
+            Process2NoActintEventsKept++;
         }
         if ( (metl1 > 50.0) && (actint > actintCut)  &&
            ( passnoalgL1XE10 > 0.5 || passnoalgL1XE30 > 0.5 ||
             passnoalgL1XE40 > 0.5 || passnoalgL1XE45 > 0.5  ) )
         {
-            ActintCutProcess1EventsKept++;
+            Process1WithActintCutEventsKept++;
         }
     }
 
@@ -77,22 +77,22 @@ Int_t computeNumbToKeep(const TString& thresholdFileName = "PhysicsMain.All.noal
     //varies as we change actint cut
     //this is not the numb to keep. this is the numb to keep, divided by the fraction to keep
 
-    Float_t noActintProcess1Frac = (Float_t) noActintProcess1EventsKept / (Float_t) NentriesNoCuts;
-    Float_t noActintProcess2Frac = (Float_t) noActintProcess2EventsKept / (Float_t) noActintProcess1EventsKept;
-    Float_t ActintCutProcess1Frac = (Float_t) ActintCutProcess1EventsKept / (Float_t) NentriesNoCuts;
+    Float_t noActintProcess1Frac = (Float_t) Process1NoActintEventsKept / (Float_t) NentriesNoCuts;
+    Float_t noActintProcess2Frac = (Float_t) Process2NoActintEventsKept / (Float_t) Process1NoActintEventsKept;
+    Float_t ActintCutProcess1Frac = (Float_t) Process1WithActintCutEventsKept / (Float_t) NentriesNoCuts;
 
     std::cout << "Passnoalg Nentries: " << NentriesNoCuts << std::endl;
     std::cout << "\n" << std::endl;
 
-    std::cout << "Number of events kept with l1>50.0: " << noActintProcess1EventsKept << std::endl;
+    std::cout << "Number of events kept with l1>50.0: " << Process1NoActintEventsKept << std::endl;
     std::cout << "Process 1 Fraction NoActint: " << noActintProcess1Frac << std::endl;
     std::cout << "\n" << std::endl;
 
-    std::cout << "Number of events kept with l1>50.0 and cell>100.0: " << noActintProcess2EventsKept << std::endl;
+    std::cout << "Number of events kept with l1>50.0 and cell>100.0: " << Process2NoActintEventsKept << std::endl;
     std::cout << "Process 2 Fraction NoActint: " << noActintProcess2Frac << std::endl;
     std::cout << "\n" << std::endl;
 
-    std::cout << "Number of events kept with l1>50.0 and actint>35.0: " << ActintCutProcess1EventsKept << std::endl;
+    std::cout << "Number of events kept with l1>50.0 and actint>35.0: " << Process1WithActintCutEventsKept << std::endl;
     std::cout << "Process 1 Fraction WithActint: " << ActintCutProcess1Frac << std::endl;
 
 
