@@ -135,7 +135,7 @@ TFile* threeEfficiencies( const TString& algA , const TString& algB,
 	for (Int_t k = 0; k < zerobiasNentries; k++)
 	{
 	    zeroBiasTree->GetEntry(k);
-	    if ( (metl1 > metl1thresh) && (actint > actintCut) &&
+	    if ( (metl1 > metl1thresh) && (zb_actint > actintCut) &&
          ( passnoalgL1XE10 > 0.5 || passnoalgL1XE30 > 0.5 ||
         passnoalgL1XE40 > 0.5 || passnoalgL1XE45 > 0.5  ))
 	    {
@@ -202,13 +202,13 @@ TFile* threeEfficiencies( const TString& algA , const TString& algB,
     {
         myMuonTree->GetEntry(l);
         isMuon = (passmuvarmed > 0.1 || passmuon > 0.1);
-        isClean = (cleanCutsFlag > 0.1) && (recalBrokeFlag < 0.1)
+        isClean = (cleanCutsFlag > 0.1) && (recalBrokeFlag < 0.1);
 
         if ( isMuon && isClean && ( muonActint > actintCut ))
     	{
             if ( passTransverseMassCut(metoffrecal,mexoffrecal,meyoffrecal,metoffrecalmuon,mexoffrecalmuon,meyoffrecalmuon) )
             {
-        	    Float_t metnomu = Float_t computeMetNoMu(  mexoffrecal , meyoffrecal , mexoffrecalmuon , meyoffrecalmuon );
+        	    Float_t metnomu = computeMetNoMu(  mexoffrecal , meyoffrecal , mexoffrecalmuon , meyoffrecalmuon );
 
                 Ateff->Fill((algAmuonMET > algAThresh) && (muonMetl1 > metl1thresh) && ( muonActint > actintCut ), metnomu);
         	    Bteff->Fill((algBmuonMET > algBThresh) && (muonMetl1 > metl1thresh)&& ( muonActint > actintCut ), metnomu);
@@ -270,7 +270,7 @@ TFile* threeEfficiencies( const TString& algA , const TString& algB,
 
     //TODO: add filehandling to use one root file for a given combination, and have it create subfolders within the root file to
     //store different runs
-    if ( !( rootFile.IsOpen() ) )
+    if ( !( rootFile->IsOpen() ) )
         {
             TString suffix = "";
             std::cout << "Unable to open file" << std::endl;
@@ -279,7 +279,7 @@ TFile* threeEfficiencies( const TString& algA , const TString& algB,
             suffix = "(" + suffix + ")";
             fileName.Insert( (fileName.Length()-5),suffix);
             //try again, but this time if user inputs, can overwrite
-            rootFile.Open( fileName ,"RECREATE");
+            rootFile->Open( fileName ,"RECREATE");
         }
 
     std::cout << "Root file successfully opened" << std::endl;
