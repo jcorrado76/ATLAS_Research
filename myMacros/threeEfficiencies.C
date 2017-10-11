@@ -68,7 +68,7 @@ TFile* threeEfficiencies( const TString& algA , const TString& algB,
     Int_t nbins = logFileParams->getNbins();
     Double_t metMin = logFileParams->getMetMin();
     Double_t metMax = logFileParams->getMetMax();
-    Int_t numZeroBiasRndm = 0; Int_t counter1 = 0; Int_t counter2 = 0; Int_t counter3 = 0;
+    Int_t NumberEventsProcess1ActintCutPassNoAlg = 0; Int_t counter1 = 0; Int_t counter2 = 0; Int_t counter3 = 0;
 
     Int_t passRndm, numPassMuon,passmuon,passmuvarmed,cleanCutsFlag,recalBrokeFlag;
     Float_t algAMET,algBMET,metoffrecal,mexoffrecal,meyoffrecal,mexoffrecalmuon, zb_actint,
@@ -134,8 +134,8 @@ TFile* threeEfficiencies( const TString& algA , const TString& algB,
     std::cout << "algBThresh: " << algBThresh << std::endl;
     std::cout << "Using METL1THRESH: " << metl1thresh << std::endl;
 
-    //determine numZeroBiasRndm and fill histograms
-    numZeroBiasRndm = 0 ;
+    //determine NumberEventsProcess1ActintCutPassNoAlg and fill histograms
+    NumberEventsProcess1ActintCutPassNoAlg = 0 ;
 	for (Int_t k = 0; k < zerobiasNentries; k++)
 	{
 	    zeroBiasTree->GetEntry(k);
@@ -145,7 +145,7 @@ TFile* threeEfficiencies( const TString& algA , const TString& algB,
 	    {
     		algAMETHist->Fill(algAMET);
     		algBMETHist->Fill(algBMET);
-            numZeroBiasRndm++;
+            NumberEventsProcess1ActintCutPassNoAlg++;
 	    }
 	}
 
@@ -167,7 +167,7 @@ TFile* threeEfficiencies( const TString& algA , const TString& algB,
 
     //run BISECTION
     bisectionIndividFrac = bisection( algAMETHist , algBMETHist, binWidth, individAThreshFinal,
-    individBThreshFinal, numZeroBiasRndm , frac ,
+    individBThreshFinal, NumberEventsProcess1ActintCutPassNoAlg , frac ,
     logFileData,zeroBiasTree);
 
     //end bisection timer
@@ -249,7 +249,7 @@ TFile* threeEfficiencies( const TString& algA , const TString& algB,
     //compute number muon events actually kept using external macro
     Int_t muonEventsCombined = determineMuonEventsKeptCombined( algA, individAThreshFinal , algB , individBThreshFinal , muonFilename );
 
-    logFileParams->setNum_zbRndm( numZeroBiasRndm );
+    logFileParams->setNum_zbRndm( NumberEventsProcess1ActintCutPassNoAlg );
     logFileParams->setAlgAThresh( algAThresh);
     logFileParams->setAlgBThresh( algBThresh );
     logFileParams->setMuonNentries( muonNentries );
