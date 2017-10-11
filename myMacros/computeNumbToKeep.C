@@ -98,7 +98,7 @@ Int_t computeNumbToKeep(const TString& thresholdFileName = "PhysicsMain.All.noal
     std::cout << "Process 1 Fraction WithActint: " << ActintCutProcess1Frac << std::endl;
     std::cout << "\n" << std::endl;
 
-    std::cout << "Number of events to keep using process2 frac with no actint cut on the number of process 1 events kept after using actint cut"
+    std::cout << "Number of events to keep using process2 frac with no actint cut on the number of process 1 events kept after using actint cut "
     << passnoalgEventsToKeep << std::endl;
 
     return(1);
