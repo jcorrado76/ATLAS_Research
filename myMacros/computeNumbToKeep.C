@@ -45,7 +45,7 @@ Int_t computeNumbToKeep(const TString& zeroBiasFileName = "PhysicsMain.All.noalg
     multiply fraction to keep (0.0059) by some new numbToKeep
     */
 
-    Int_t numEventsToKeep = 0 ;
+    Int_t noActintProcess1EventsKept = 0 ;
     Int_t counter2 = 0;
     for (Int_t i = 0 ; i < zerobiasNentries ; i++)
     {
@@ -54,7 +54,7 @@ Int_t computeNumbToKeep(const TString& zeroBiasFileName = "PhysicsMain.All.noalg
            ( passnoalgL1XE10 > 0.5 || passnoalgL1XE30 > 0.5 ||
             passnoalgL1XE40 > 0.5 || passnoalgL1XE45 > 0.5  ) )
         {
-            numEventsToKeep++;
+            noActintProcess1EventsKept++;
         }
         if ( (metl1 > 50.0) && (actint > actintCut)  &&
            ( passnoalgL1XE10 > 0.5 || passnoalgL1XE30 > 0.5 ||
@@ -70,13 +70,13 @@ Int_t computeNumbToKeep(const TString& zeroBiasFileName = "PhysicsMain.All.noalg
     //varies as we change actint cut
     //this is not the numb to keep. this is the numb to keep, divided by the fraction to keep
 
-    Float_t counter1Frac = (Float_t) numEventsToKeep / (Float_t) zerobiasNentries;
+    Float_t noActintProcess1Frac = (Float_t) noActintProcess1EventsKept / (Float_t) zerobiasNentries;
     Float_t counter2Frac = (Float_t) counter2 / (Float_t) zerobiasNentries;
 
-    std::cout << "zb_Nentries: " << zerobiasNentries << std::endl;
+    std::cout << "passnoalgNentries: " << zerobiasNentries << std::endl;
 
-    std::cout << "Number of events kept with passnoalg, l1, and cell > 100: " << numEventsToKeep << std::endl;
-    std::cout << "Fraction of zb nentries: " << counter1Frac << std::endl;
+    std::cout << "Number of events kept with l1>50.0 and cell > 100.0: " << noActintProcess1EventsKept << std::endl;
+    std::cout << "Fraction of passnoalg: " << noActintProcess1Frac << std::endl;
 
     std::cout << "Number of events kept with passsnoalg, l1, and actint > 35: " << counter2 << std::endl;
     std::cout << "Fraction of zb nentries: " << counter2Frac << std::endl;
