@@ -27,7 +27,7 @@ private:
     Int_t numMuonPassNumeratorAlgB;
     Int_t numMuonPassNumeratorAlgC;
     Int_t numMuonDenominator;
-    Float_t epsilon;
+    Int_t epsilon;
     Float_t actintCut;
 public:
     //default constructor
