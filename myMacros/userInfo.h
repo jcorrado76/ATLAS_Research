@@ -64,9 +64,4 @@ public:
 };
 
 
-
-//extern userInfo* logFileParams;
-
-
-
 #endif

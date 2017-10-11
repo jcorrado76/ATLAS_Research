@@ -26,8 +26,7 @@ Float_t metMax = 300.0;
 Float_t metl1Thresh = 50.0;
 Float_t Frac = 0.0059;
 Float_t actinTCut = 35.0;
-Int_t epsilon = 25;
-
+Float_t epsilon = 25.0;
 
 //default constructor
 userInfo::userInfo()
@@ -41,6 +40,8 @@ userInfo::userInfo()
     muonFileName = muonFilename;
     actintCut = actinTCut;
     eps = epsilon;
+    std::cout << "Value of epsilon: " << epsilon << std::endl;
+    std::cout << "Value of epsilon: " << eps << std::endl;
     numzbRndm = 0;
     algAThresh = 0.0;
     algBThresh = 0.0;
