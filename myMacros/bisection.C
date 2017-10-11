@@ -71,7 +71,7 @@ Float_t bisection(TH1F* algAHist , TH1F* algBHist, const Float_t binWidth, Float
     std::cout << "Lower Bound: " << lwrbnd << std::endl;
     std::cout << "Midpoint: " << (lwrbnd+uprbnd)/2. << std::endl;
     std::cout << "Upper Bound: " << uprbnd << std::endl;
-    std::cout << "Epsilon: " << eps << std::endl;
+    std::cout << "Epsilon: " << epsilon << std::endl;
 
     //set the names of the histograms to also contain the letters A and B
     algAMETtarget->SetName(algAMETtarget->GetName() + (const TString)"A");
@@ -224,7 +224,7 @@ Float_t bisection(TH1F* algAHist , TH1F* algBHist, const Float_t binWidth, Float
         std::cout << "Counter2: " << counter2 << std::endl;
         f2 = (Float_t) counter2 / (Float_t) numZeroBiasRndm;
         std::cout << "f2: " << f2 << std::endl;
-        std::cout << "Condition: " << abs(numZeroBiasRndm * frac - counter2) << " > " << eps << std::endl;
+        std::cout << "Condition: " << abs(numZeroBiasRndm * frac - counter2) << " > " << epsilon << std::endl;
         outputArray[j+2] = f2;
 
 
@@ -244,9 +244,9 @@ Float_t bisection(TH1F* algAHist , TH1F* algBHist, const Float_t binWidth, Float
 
 
 
-    }while ( abs( counter2 - (numZeroBiasRndm * frac) ) > eps && (abs(algAThreshDiff) > binWidth) && (abs(algBThreshDiff) > binWidth) && ( j <= imax ) );
+    }while ( abs( counter2 - (numZeroBiasRndm * frac) ) > epsilon && (abs(algAThreshDiff) > binWidth) && (abs(algBThreshDiff) > binWidth) && ( j <= imax ) );
 
-      if ( abs( counter2 - (numZeroBiasRndm * frac) ) <= eps || abs(algAThreshDiff) <= binWidth || abs(algBThreshDiff) <= binWidth)
+      if ( abs( counter2 - (numZeroBiasRndm * frac) ) <= epsilon || abs(algAThreshDiff) <= binWidth || abs(algBThreshDiff) <= binWidth)
       {
         std::cout << "A root at x = " <<  initialGuess << " was found to within one bin: " << binWidth << " GeV"
                   << " in " << j << " iterations" << std::endl;
