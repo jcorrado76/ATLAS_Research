@@ -20,7 +20,7 @@
 //TODO: use global calls to param list
 
 Float_t bisection(TH1F* algAHist , TH1F* algBHist, const Float_t binWidth, Float_t &  individAThreshFinal , Float_t  & individBThreshFinal,
-    const Int_t numZeroBiasRndm = 0 , Float_t frac = 0.00590, TNtuple* logFileData = NULL, TTree* zeroBiasTree = NULL)
+    const Int_t numPassedProcess1WithActintCut = 0 , Float_t frac = 0.00590, TNtuple* logFileData = NULL, TTree* passnoalgTree = NULL)
 {
     Float_t computeThresh( const TH1F*, const Float_t);
     userInfo* logFileParams = new userInfo();
@@ -39,9 +39,9 @@ Float_t bisection(TH1F* algAHist , TH1F* algBHist, const Float_t binWidth, Float
     x3 = uprbnd;
     Float_t initialGuess = ( x1 + x3 ) / 2.0;
     Float_t firstGuess = initialGuess;
-    Float_t numKeepx1 = numZeroBiasRndm * x1;
-    Float_t numKeepx2 = numZeroBiasRndm * initialGuess;
-    Float_t numKeepx3 = numZeroBiasRndm * x3;
+    Float_t numKeepx1 = numPassedProcess1WithActintCut * x1;
+    Float_t numKeepx2 = numPassedProcess1WithActintCut * initialGuess;
+    Float_t numKeepx3 = numPassedProcess1WithActintCut * x3;
 
     //compute the cumulative right hand sum hists
     TH1F *algAMETtarget = (TH1F*) algAHist->GetCumulative(kFALSE);
@@ -63,9 +63,9 @@ Float_t bisection(TH1F* algAHist , TH1F* algBHist, const Float_t binWidth, Float
     algBMETx3thresh = computeThresh(algBMETtarget, numKeepx3);
 
     //print the status
-    std::cout << "numZeroBiasRndm: " << numZeroBiasRndm << std::endl;
-    std::cout << "frac " << frac << std::endl;
-    std::cout << "numCombined to keep: " << numZeroBiasRndm * frac << std::endl;
+    std::cout << "numPassedProcess1WithActintCut: " << numPassedProcess1WithActintCut << std::endl;
+    std::cout << "Process2 No Actint Cut Fraction: " << frac << std::endl;
+    std::cout << "Process 2 with Actint Cut Num to Keep: " << numPassedProcess1WithActintCut * frac << std::endl;
 
     std::cout << "Entering bisection to determine individual fractions" << std::endl;
     std::cout << "Lower Bound: " << lwrbnd << std::endl;
@@ -90,63 +90,63 @@ Float_t bisection(TH1F* algAHist , TH1F* algBHist, const Float_t binWidth, Float
     std::cout << "algBx1Thresh: " << algBMETx1thresh << std::endl;
     std::cout << "metl1thresh : " << metl1thresh << std::endl;
     Float_t algAMET,algBMET, metl1;
-    Float_t zb_actint = 0 ;
+    Float_t passnoalg_actint = 0 ;
     Int_t passnoalgL1XE10,passnoalgL1XE30,passnoalgL1XE40,passnoalgL1XE45;
 
     TString algA = algAHist->GetName();
     TString algB = algBHist->GetName();
 
-    zeroBiasTree->SetBranchAddress(algA,&algAMET);
-    zeroBiasTree->SetBranchAddress(algB,&algBMET);
-    zeroBiasTree->SetBranchAddress("metl1",&metl1);
-    zeroBiasTree->SetBranchAddress("passnoalgL1XE10",&passnoalgL1XE10);
-    zeroBiasTree->SetBranchAddress("passnoalgL1XE30",&passnoalgL1XE30);
-    zeroBiasTree->SetBranchAddress("passnoalgL1XE40",&passnoalgL1XE40);
-    zeroBiasTree->SetBranchAddress("passnoalgL1XE45",&passnoalgL1XE45);
-    zeroBiasTree->SetBranchAddress("actint",&zb_actint);
+    passnoalgTree->SetBranchAddress(algA,&algAMET);
+    passnoalgTree->SetBranchAddress(algB,&algBMET);
+    passnoalgTree->SetBranchAddress("metl1",&metl1);
+    passnoalgTree->SetBranchAddress("passnoalgL1XE10",&passnoalgL1XE10);
+    passnoalgTree->SetBranchAddress("passnoalgL1XE30",&passnoalgL1XE30);
+    passnoalgTree->SetBranchAddress("passnoalgL1XE40",&passnoalgL1XE40);
+    passnoalgTree->SetBranchAddress("passnoalgL1XE45",&passnoalgL1XE45);
+    passnoalgTree->SetBranchAddress("actint",&passnoalg_actint);
 
-    Int_t counter1 = 0;
-    Int_t counter2 = 0;
-    Int_t counter3 = 0;
+    Int_t numPassedProcess2WithActintCutX1 = 0;
+    Int_t numPassedProcess2WithActintCutX2 = 0;
+    Int_t numPassedProcess2WithActintCutX3 = 0;
 
-    Int_t zerobiasNentries = zeroBiasTree->GetEntries();
+    Int_t passnoalgNentries = passnoalgTree->GetEntries();
+    Bool_t passedProcess1ActintCut;
+    Bool_t isPassnoalg;
 
-    for (Int_t i  = 0 ; i < zerobiasNentries ;i++) //determine events kept at each guess
+    //compute number of noalg events that pass process 2 at initial 3 guesses of individ fractions
+    for (Int_t i  = 0 ; i < passnoalgNentries ;i++) //determine events kept at each guess
     {
-    zeroBiasTree->GetEntry(i);
-        //if (passRndm > 0.5)
-        //{
-            if ((algAMET > algAMETx1thresh) && (algBMET > algBMETx1thresh) && (metl1 > metl1thresh)&& (zb_actint > actintCut) &&
-            ( passnoalgL1XE10 > 0.5 || passnoalgL1XE30 > 0.5 ||
-            passnoalgL1XE40 > 0.5 || passnoalgL1XE45 > 0.5  ) )
+        passnoalgTree->GetEntry(i);
+        passedProcess1ActintCut = ( metl1 > metl1thresh ) && (passnoalg_actint > actintCut);
+        isPassnoalg = ( passnoalgL1XE10 > 0.5 || passnoalgL1XE30 > 0.5 || passnoalgL1XE40 > 0.5 || passnoalgL1XE45 > 0.5  )
+
+        if ( isPassnoalg && passedProcess1ActintCut )
+        {
+            if ((algAMET > algAMETx1thresh) && (algBMET > algBMETx1thresh))
             {
-            counter1++;
+            numPassedProcess2WithActintCutX1++;
             }
-            if ((algAMET > algAMETx2thresh) && (algBMET > algBMETx2thresh) && (metl1 > metl1thresh)&& (zb_actint > actintCut) &&
-            ( passnoalgL1XE10 > 0.5 || passnoalgL1XE30 > 0.5 ||
-            passnoalgL1XE40 > 0.5 || passnoalgL1XE45 > 0.5  ))
+            if ((algAMET > algAMETx2thresh) && (algBMET > algBMETx2thresh))
             {
-            counter2++;
+            numPassedProcess2WithActintCutX2++;
             }
-            if ((algAMET > algAMETx3thresh) && (algBMET > algBMETx3thresh) && (metl1 > metl1thresh)&& (zb_actint > actintCut) &&
-            ( passnoalgL1XE10 > 0.5 || passnoalgL1XE30 > 0.5 ||
-            passnoalgL1XE40 > 0.5 || passnoalgL1XE45 > 0.5  ) )
+            if ((algAMET > algAMETx3thresh) && (algBMET > algBMETx3thresh))
             {
-            counter3++;
+            numPassedProcess2WithActintCutX3++;
             }
-        //}
+        }
     }
 
     //compute fractions kept at initial guesses
-    f1 = (Float_t) counter1 / (Float_t) numZeroBiasRndm;
-    f2 = (Float_t) counter2 / (Float_t) numZeroBiasRndm;
-    f3 = (Float_t) counter3 / (Float_t) numZeroBiasRndm;
+    f1 = (Float_t) numPassedProcess2WithActintCutX1 / (Float_t) numPassedProcess1WithActintCut;
+    f2 = (Float_t) numPassedProcess2WithActintCutX2 / (Float_t) numPassedProcess1WithActintCut;
+    f3 = (Float_t) numPassedProcess2WithActintCutX3 / (Float_t) numPassedProcess1WithActintCut;
 
-    std::cout << "At x1 = " << x1 << " counter1: " << counter1 << " events " << std::endl;
+    std::cout << "At x1 = " << x1 << " numPassedProcess2WithActintCutX1: " << numPassedProcess2WithActintCutX1 << " events " << std::endl;
     std::cout << "f1: " << f1 << std::endl;
-    std::cout << "At x2 = " << initialGuess << " counter2: " << counter2 << " events " << std::endl;
+    std::cout << "At x2 = " << initialGuess << " numPassedProcess2WithActintCutX2: " << numPassedProcess2WithActintCutX2 << " events " << std::endl;
     std::cout << "f2: " << f2 << std::endl;
-    std::cout << "At x3 = " << x3 << " counter3: " << counter3 << " events " << std::endl;
+    std::cout << "At x3 = " << x3 << " numPassedProcess2WithActintCutX3: " << numPassedProcess2WithActintCutX3 << " events " << std::endl;
     std::cout << "f3: " << f3 << std::endl;
 
 
@@ -162,9 +162,9 @@ Float_t bisection(TH1F* algAHist , TH1F* algBHist, const Float_t binWidth, Float
     outputArray[0] = f1;
     outputArray[2] = f2;
     outputArray[1] = f3;
-    numEventsArray[0] = counter1;
-    numEventsArray[2] = counter2;
-    numEventsArray[1] = counter3;
+    numEventsArray[0] = numPassedProcess2WithActintCutX1;
+    numEventsArray[2] = numPassedProcess2WithActintCutX2;
+    numEventsArray[1] = numPassedProcess2WithActintCutX3;
     thresholdAarray[0] = (Float_t) algAMETx1thresh;
     thresholdAarray[2] = (Float_t) algAMETx2thresh;
     thresholdAarray[1] = (Float_t) algAMETx3thresh;
@@ -195,8 +195,8 @@ Float_t bisection(TH1F* algAHist , TH1F* algBHist, const Float_t binWidth, Float
         initialGuess = ( x1 + x3 ) / 2.0;
         inputArray[j+2] = initialGuess;
         std::cout << "New Guess: " << initialGuess << std::endl;
-        std::cout << "numZeroBiasRndm: " << numZeroBiasRndm << std::endl;
-        numKeepx2 = numZeroBiasRndm * initialGuess;
+        std::cout << "numPassedProcess1WithActintCut: " << numPassedProcess1WithActintCut << std::endl;
+        numKeepx2 = numPassedProcess1WithActintCut * initialGuess;
         std::cout << "numKeepx2: " << numKeepx2 << std::endl;
         algAMETx2thresh = computeThresh(algAMETtarget, numKeepx2);
         algBMETx2thresh = computeThresh(algBMETtarget, numKeepx2);
@@ -205,26 +205,26 @@ Float_t bisection(TH1F* algAHist , TH1F* algBHist, const Float_t binWidth, Float
         thresholdBarray[j+2] = (Float_t) algBMETx2thresh;
 
 
-        counter2 = 0;
+        numPassedProcess2WithActintCutX2 = 0;
 
-    	for (Int_t i  = 0 ; i < zerobiasNentries ;i++)
+    	for (Int_t i  = 0 ; i < passnoalgNentries ;i++)
     	{
-    	  zeroBiasTree->GetEntry(i);
-    	  if ((algAMET > algAMETx2thresh) && (algBMET > algBMETx2thresh) && (metl1 > metl1thresh)&& (zb_actint > actintCut) &&
+    	  passnoalgTree->GetEntry(i);
+    	  if ((algAMET > algAMETx2thresh) && (algBMET > algBMETx2thresh) && (metl1 > metl1thresh)&& (passnoalg_actint > actintCut) &&
           ( passnoalgL1XE10 > 0.5 || passnoalgL1XE30 > 0.5 || passnoalgL1XE40 > 0.5 || passnoalgL1XE45 > 0.5  ) )
     	  {
-    	    counter2++;
+    	    numPassedProcess2WithActintCutX2++;
     	  }
         }
 
-        numEventsArray[j+2] = counter2;
+        numEventsArray[j+2] = numPassedProcess2WithActintCutX2;
 
         std::cout << "algAMETx2thresh: " << algAMETx2thresh << std::endl;
         std::cout << "algBMETx2thresh: " << algBMETx2thresh << std::endl;
-        std::cout << "Counter2: " << counter2 << std::endl;
-        f2 = (Float_t) counter2 / (Float_t) numZeroBiasRndm;
+        std::cout << "Counter2: " << numPassedProcess2WithActintCutX2 << std::endl;
+        f2 = (Float_t) numPassedProcess2WithActintCutX2 / (Float_t) numPassedProcess1WithActintCut;
         std::cout << "f2: " << f2 << std::endl;
-        std::cout << "Condition: " << abs(numZeroBiasRndm * frac - counter2) << " > " << epsilon << std::endl;
+        std::cout << "Condition: " << abs(numPassedProcess1WithActintCut * frac - numPassedProcess2WithActintCutX2) << " > " << epsilon << std::endl;
         outputArray[j+2] = f2;
 
 
@@ -244,13 +244,13 @@ Float_t bisection(TH1F* algAHist , TH1F* algBHist, const Float_t binWidth, Float
 
 
 
-    }while ( abs( counter2 - (numZeroBiasRndm * frac) ) > epsilon && (abs(algAThreshDiff) > binWidth) && (abs(algBThreshDiff) > binWidth) && ( j <= imax ) );
+    }while ( abs( numPassedProcess2WithActintCutX2 - (numPassedProcess1WithActintCut * frac) ) > epsilon && (abs(algAThreshDiff) > binWidth) && (abs(algBThreshDiff) > binWidth) && ( j <= imax ) );
 
-      if ( abs( counter2 - (numZeroBiasRndm * frac) ) <= epsilon || abs(algAThreshDiff) <= binWidth || abs(algBThreshDiff) <= binWidth)
+      if ( abs( numPassedProcess2WithActintCutX2 - (numPassedProcess1WithActintCut * frac) ) <= epsilon || abs(algAThreshDiff) <= binWidth || abs(algBThreshDiff) <= binWidth)
       {
         std::cout << "A root at x = " <<  initialGuess << " was found to within one bin: " << binWidth << " GeV"
                   << " in " << j << " iterations" << std::endl;
-        std::cout << "The number of combined events kept is  " << f2 * numZeroBiasRndm << std::endl;
+        std::cout << "The number of combined events kept is  " << f2 * numPassedProcess1WithActintCut << std::endl;
         std::cout << "The fraction of combined events kept is  " << f2 << std::endl;
       }
       else{
