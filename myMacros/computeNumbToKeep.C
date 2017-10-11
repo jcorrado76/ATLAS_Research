@@ -85,15 +85,15 @@ Int_t computeNumbToKeep(const TString& thresholdFileName = "PhysicsMain.All.noal
     std::cout << "\n" << std::endl;
 
     std::cout << "Number of events kept with l1>50.0: " << noActintProcess1EventsKept << std::endl;
-    std::cout << "Fraction of passnoalg: " << noActintProcess1Frac << std::endl;
+    std::cout << "Process 1 Fraction NoActint: " << noActintProcess1Frac << std::endl;
     std::cout << "\n" << std::endl;
 
-    std::cout << "Number of events kept with l1>50.0 and cell > 100.0: " << noActintProcess2EventsKept << std::endl;
-    std::cout << "Fraction of noActint process 1: " << noActintProcess2Frac << std::endl;
+    std::cout << "Number of events kept with l1>50.0 and cell>100.0: " << noActintProcess2EventsKept << std::endl;
+    std::cout << "Process 2 Fraction NoActint: " << noActintProcess2Frac << std::endl;
     std::cout << "\n" << std::endl;
 
-    std::cout << "Number of events kept with l1>50.0 and actint > 35: " << ActintCutProcess1EventsKept << std::endl;
-    std::cout << "Fraction of passnoalg: " << ActintCutProcess1Frac << std::endl;
+    std::cout << "Number of events kept with l1>50.0 and actint>35.0: " << ActintCutProcess1EventsKept << std::endl;
+    std::cout << "Process 1 Fraction WithActint: " << ActintCutProcess1Frac << std::endl;
 
 
     return(1);
