@@ -43,7 +43,7 @@ Float_t computeThresh(const TH1F* target, const Float_t numberEventsToKeep)
 
 
 Float_t determineZeroBiasThresh( const TString& algName, const Float_t frac = 0.00590,
-const TString& zeroBiasFileName = "PhysicsMain.All.noalgXEtriggers.2016.f731f758._m1659m1710.48Runs.root")
+const TString& threshFileName = "PhysicsMain.All.noalgXEtriggers.2016.f731f758._m1659m1710.48Runs.root")
 {
     /*Returns the threshold needed for an algorithm to keep the fraction of zerobias events*/
     userInfo* logFileParams = new userInfo();
@@ -52,51 +52,49 @@ const TString& zeroBiasFileName = "PhysicsMain.All.noalgXEtriggers.2016.f731f758
 
 
     //get zerobias tree
-    const TString zeroBiasPath = "../myData/" + zeroBiasFileName;
-	TFile *zeroBiasFile = TFile::Open(zeroBiasPath, "READ");
-	TTree *zeroBiasTree = (TTree*)(zeroBiasFile->Get("tree"));
-    const Int_t zerobiasNentries = zeroBiasTree->GetEntries();
-    Float_t zb_actint = 0;
+    const TString threshFilePath = "../myData/" + threshFileName;
+	TFile *threshFileHandle = TFile::Open(threshFilePath, "READ");
+	TTree *threshTree = (TTree*)(threshFileHandle->Get("tree"));
+    const Int_t zerobiasNentries = threshTree->GetEntries();
+    Float_t passnoalg_actint = 0;
 
 
     //display inputs
     std::cout << "DETERMINETHRESH.C" << std::endl;
-    std::cout << "using zerobias datafile: " << zeroBiasFileName << std::endl;
+    std::cout << "using passnoalg datafile: " << threshFileName << std::endl;
     std::cout << "alg: " << algName << std::endl;
     std::cout << "using L1 thresh: " << metL1Thresh << std::endl;
     std::cout << "fraction of events to keep: " << frac << std::endl;
-    std::cout << "zerobias nentries: " << zerobiasNentries << std::endl;
+    std::cout << "passnoalg nentries: " << zerobiasNentries << std::endl;
 
     //intialize parameters
-    //TODO: replace these local variables with global calls
-
     //TODO: need to change the number of events to keep. need to redetermine numb events to  keep
     //using the same machine limitation fraction but on a different selection of zb events (one including actint cut)
-    const Float_t numberEventsToKeep = 187904.0;
-	const Int_t nbins = 1200;
-	const Double_t metMin = 0.0;
-	const Double_t metMax = 300.0;
+    const Int_t numberEventsToKeep = 1108;
+	const Int_t nbins = logFileParams->getNbins();
+	const Double_t metMin = logFileParams->getMetMin();
+	const Double_t metMax = logFileParams->GetMetMax();
 	Float_t metl1, algMET;
     Int_t numberEventsKept = 0;
     Int_t passnoalgL1XE10 , passnoalgL1XE30 , passnoalgL1XE40 , passnoalgL1XE45;
     TH1F *indeterminateHist = new TH1F(algName, algName, nbins, metMin, metMax);
 
     //set branch address for zerobias branches
-	zeroBiasTree->SetBranchAddress(algName,&algMET);
-	zeroBiasTree->SetBranchAddress("metl1",&metl1);
-    zeroBiasTree->SetBranchAddress("passnoalgL1XE10",&passnoalgL1XE10);
-    zeroBiasTree->SetBranchAddress("passnoalgL1XE30",&passnoalgL1XE30);
-    zeroBiasTree->SetBranchAddress("passnoalgL1XE40",&passnoalgL1XE40);
-    zeroBiasTree->SetBranchAddress("passnoalgL1XE45",&passnoalgL1XE45);
-    zeroBiasTree->SetBranchAddress("actint",&zb_actint);
+	threshTree->SetBranchAddress(algName,&algMET);
+	threshTree->SetBranchAddress("metl1",&metl1);
+    threshTree->SetBranchAddress("passnoalgL1XE10",&passnoalgL1XE10);
+    threshTree->SetBranchAddress("passnoalgL1XE30",&passnoalgL1XE30);
+    threshTree->SetBranchAddress("passnoalgL1XE40",&passnoalgL1XE40);
+    threshTree->SetBranchAddress("passnoalgL1XE45",&passnoalgL1XE45);
+    threshTree->SetBranchAddress("actint",&passnoalg_actint);
 
 
     //TODO: replace this with zbTree process to use proof lite
     //fill the histogram with entries
     for (Int_t k = 0; k < zerobiasNentries; k++)
 	{
-		zeroBiasTree->GetEntry(k);
-		if ( ( metl1 > metL1Thresh ) && ( zb_actint > actintCut ) &&
+		threshTree->GetEntry(k);
+		if ( ( metl1 > metL1Thresh ) && ( passnoalg_actint > actintCut ) &&
             ( passnoalgL1XE10 > 0.5 || passnoalgL1XE30 > 0.5 || passnoalgL1XE40 > 0.5 || passnoalgL1XE45 > 0.5 ) )
 		{
 			indeterminateHist->Fill(algMET);
@@ -112,15 +110,15 @@ const TString& zeroBiasFileName = "PhysicsMain.All.noalgXEtriggers.2016.f731f758
     //determine number of events kept at determined threshold (gives idea of error due to binning)
 	for (Int_t l = 0 ; l < zerobiasNentries ; l++)
 	{
-		zeroBiasTree->GetEntry(l);
-		if ( (algMET > indeterminateThresh) && (metl1 > metL1Thresh) && ( zb_actint > actintCut ) &&
+		threshTree->GetEntry(l);
+		if ( (algMET > indeterminateThresh) && (metl1 > metL1Thresh) && ( passnoalg_actint > actintCut ) &&
            ( passnoalgL1XE10 > 0.5 || passnoalgL1XE30 > 0.5 || passnoalgL1XE40 > 0.5 || passnoalgL1XE45 > 0.5 ) )
 		{
 			numberEventsKept++;
 		}
 	}
     std::cout << "number of events kept at threshold: " << numberEventsKept << std::endl;
-    zeroBiasFile->Close();
+    threshFileHandle->Close();
 	return(indeterminateThresh);
 }
 
