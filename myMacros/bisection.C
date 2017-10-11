@@ -28,10 +28,10 @@ Float_t bisection(TH1F* algAHist , TH1F* algBHist, const Float_t binWidth, Float
     frac = logFileParams->getFrac();
     Float_t metl1thresh = logFileParams->getMetL1Thresh();
     Float_t actintCut = logFileParams->getActintCut();
+    Int_t epsilon = logFileParams->getEpsilon();
 
     Float_t lwrbnd = 0.5 * frac;
     Float_t uprbnd = 0.13;
-    Float_t eps = 25.0;
 
     Float_t x1,x3; //thresholds of individual algorithms
     Float_t f1,f2,f3 = 0; //fractions of events kept out of passrndm
