@@ -118,7 +118,7 @@ Float_t bisection(TH1F* algAHist , TH1F* algBHist, const Float_t binWidth, Float
     {
         passnoalgTree->GetEntry(i);
         passedProcess1ActintCut = ( metl1 > metl1thresh ) && (passnoalg_actint > actintCut);
-        isPassnoalg = ( passnoalgL1XE10 > 0.5 || passnoalgL1XE30 > 0.5 || passnoalgL1XE40 > 0.5 || passnoalgL1XE45 > 0.5  )
+        isPassnoalg = ( passnoalgL1XE10 > 0.5 || passnoalgL1XE30 > 0.5 || passnoalgL1XE40 > 0.5 || passnoalgL1XE45 > 0.5  );
 
         if ( isPassnoalg && passedProcess1ActintCut )
         {
