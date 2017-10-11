@@ -13,9 +13,6 @@
 #include "TF1.h"
 #include "TBenchmark.h"
 #include "TNtuple.h"
-#include "TList.h"
-#include "TBranch.h"
-#include "TObjString.h"
 #include "userInfo.h"
 
 TFile* threeEfficiencies( const TString& algA , const TString& algB,
