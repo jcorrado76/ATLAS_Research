@@ -27,7 +27,7 @@ private:
     Int_t numMuonPassNumeratorAlgB;
     Int_t numMuonPassNumeratorAlgC;
     Int_t numMuonDenominator;
-    Float_t eps;
+    Float_t epsilon;
     Float_t actintCut;
 public:
     //default constructor
@@ -44,6 +44,7 @@ public:
     Float_t getMetMin() const;
     Float_t getMetMax() const;
     Int_t getNbins() const;
+    Int_t getEpsilon() const;
     //setters
     void setAlgAName( const TString algA );
     void setAlgBName( const TString algB );
@@ -58,6 +59,7 @@ public:
     void setNumPassCombined( const Int_t num );
     void setNumTotal( const Int_t num );
     void setActintCut( const Float_t thresh );
+    void setEpsilon( const Int_t epsilon );
 
     //this macro from Rtypes.h facilitates root I/O
     ClassDef( userInfo, 1)
