@@ -35,7 +35,6 @@ userInfo::userInfo()
     metmin = metMin;
     metmax = metMax;
     metl1thresh = metl1Thresh;
-    std::cout << "l1 thresh: " << metl1Thresh << std::endl;
     frac = Frac;
     zbFileName = zerobiasFileName;
     muonFileName = muonFilename;
@@ -84,7 +83,7 @@ userInfo::userInfo( TString algA , TString algB)
 }
 
 void userInfo::Print(Option_t *option) const{
-    std::cout << "Printing the data members for the userInfo struct: " << std::endl;
+    std::cout << "Printing the data members for the userInfo struct: \n" << std::endl;
     std::cout << "Alg A Name: " << algAName << std::endl;
     std::cout << "Alg B Name: " << algBName << std::endl;
     std::cout << "nbins: " << nbins << std::endl;
@@ -92,11 +91,15 @@ void userInfo::Print(Option_t *option) const{
     std::cout << "MetMax: " << metmax << std::endl;
     std::cout << "METL1 thresh used: " << metl1thresh << std::endl;
     std::cout << "frac to keep: " << frac << std::endl;
+    //TODO: we aren't using zero bias files
     std::cout << "Zero Bias File Used: " << zbFileName << std::endl;
     std::cout << "Muon File Used: " << muonFileName << std::endl;
     std::cout << "Number of zerobias events that passed no alg and metl1: " << numzbRndm << std::endl;
-    std::cout << "Threshold needed on A: " << algAThresh << std::endl;
-    std::cout << "Threshold needed on B: " << algBThresh << std::endl;
+    std::cout << "\nThresholds needed to keep the proper trigger rate when combined: " << std::endl;
+    //TODO: should clarify language between thresholds to keep trigger rate individually and then combined
+    //      also should display the thresholds needed to keep individually, and then thresholds for combined
+    std::cout << "Threshold needed on " + algAName + ": " << algAThresh << std::endl;
+    std::cout << "Threshold needed on " + algBName + ": " << algBThresh << std::endl;
     std::cout << "Muon Nentries: " << muonNentries << std::endl;
     std::cout << "ZeroBias Nentries: " << zbNentries << std::endl;
     std::cout << "Number of entries kept using combined thresholds: " <<  numMuonKeptCombined << std::endl;
@@ -104,7 +107,6 @@ void userInfo::Print(Option_t *option) const{
     std::cout << "Number of entries that passed all muon cuts and " + algBName + " at Individ thresh: " << numMuonPassNumeratorAlgB << std::endl;
     std::cout << "Number of entries that passed all muon cuts and both algs at Combined thresh: " << numMuonPassNumeratorAlgC << std::endl;
     std::cout << "Number entries that passed all muon cuts without alg: " << numMuonDenominator << std::endl;
-    //TODO: eps keeps registering as zero
     std::cout << "Epsilon tolerance on number events used for bisection: " << epsilon << std::endl;
     std::cout << "Actint cut: " << actintCut << "\n" << std::endl;
 }
