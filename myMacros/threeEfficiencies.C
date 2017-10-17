@@ -156,7 +156,7 @@ TFile* threeEfficiencies( const TString& algA , const TString& algB,
 
 
     TNtuple* logFileData = new TNtuple("logFileData" , "Bisection Data" ,
-    "Individual Fraction:Combined Fraction: Numb Events Kept: Threshold A:Threshold B");
+    "Individual Fraction:Combined Fraction: Numb Events Kept:" + algA + " Threshold:" + algB + "Threshold");
 
     //start bisection timer
     threeEfficienciesBenchmark->Start("Bisection");
