@@ -68,6 +68,7 @@ Float_t determineZeroBiasThresh( const TString& algName, const Float_t frac = 0.
 
     //intialize parameters
     //numberEventsToKeep CHANGES BASED ON THE ACTINT CUT
+    //TODO: maybe recompute this number based on actint cut every time. not sure
     const Int_t numberEventsToKeep = 1108;
 	const Int_t nbins = logFileParams->getNbins();
 	const Double_t metMin = logFileParams->getMetMin();
