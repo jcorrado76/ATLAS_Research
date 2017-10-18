@@ -42,11 +42,13 @@ Float_t computeThresh(const TH1F* target, const Float_t numberEventsToKeep)
 }
 
 
-Float_t determineZeroBiasThresh( const TString& algName, const Float_t frac = 0.00590)
+Float_t determineZeroBiasThresh( const TString& algName, const Float_t frac = 0.00590,
+    const TString& threshFileName = "PhysicsMain.All.noalgXEtriggers.2016.f731f758._m1659m1710.48Runs.root")
 {
+    userInfo* logFileParams;
     //TODO: When I run this using actint cuts, the thresholds decrease, they should be increasing
     /*Returns the threshold needed for an algorithm to keep the fraction of zerobias events*/
-    const TString& threshFileName = logFileParams->get_zbFileName();
+
     const Float_t metL1Thresh = logFileParams->getMetL1Thresh();
     const Float_t actintCut = logFileParams->getActintCut();
 

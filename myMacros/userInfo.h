@@ -65,7 +65,7 @@ public:
     ClassDef( userInfo, 1)
 };
 
-    extern userInfo logFileParams;
+    extern userInfo* logFileParams;
 
 
 #endif
