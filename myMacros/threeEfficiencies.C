@@ -36,6 +36,7 @@ TFile* threeEfficiencies( const TString& algA , const TString& algB,
     Float_t computeMetNoMu( const Float_t , const Float_t , const Float_t , const Float_t );
 
     //INITIALIZE PARAMS
+    //HERE IS THE ONE AND TRUE DEFINITION
     userInfo* logFileParams = new userInfo();
     logFileParams->Print();
 
@@ -156,7 +157,7 @@ TFile* threeEfficiencies( const TString& algA , const TString& algB,
 
 
     TNtuple* logFileData = new TNtuple("logFileData" , "Bisection Data" ,
-    "Individual Fraction:Combined Fraction: Numb Events Kept:" + algA + " Threshold:" + algB + "Threshold");
+    "Individual Fraction:Combined Fraction: Numb Events Kept:" + algA + " Threshold:" + algB + " Threshold");
 
     //start bisection timer
     threeEfficienciesBenchmark->Start("Bisection");
