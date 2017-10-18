@@ -23,7 +23,6 @@ Float_t bisection(TH1F* algAHist , TH1F* algBHist, const Float_t binWidth, Float
     const Int_t numPassedProcess1WithActintCut = 0 , Float_t frac = 0.00590, TNtuple* logFileData = NULL, TTree* passnoalgTree = NULL)
 {
     Float_t computeThresh( const TH1F*, const Float_t);
-    userInfo* logFileParams = new userInfo();
     //some useful parameters
     frac = logFileParams->getFrac();
     Float_t metl1thresh = logFileParams->getMetL1Thresh();
