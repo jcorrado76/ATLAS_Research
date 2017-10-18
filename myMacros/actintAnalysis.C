@@ -9,25 +9,10 @@ void actintAnalysis(){
     TString algA = "metmht";
     TString algB = "mettopoclpuc";
 
-    userInfo* logFileParams = new userInfo();
-
-
     //TODO: need to find a way to change the name of the root file each time you save
     //with a different actint cut
 
-    //TODO: for each value of actint, need to recalculate fraction kept by process 2
-    logFileParams->Print();
-    logFileParams->setActintCut(40.0);
-    logFileParams->Print();
     threeEfficiencies(algA,algB, 0.0059, "ActintAnalysis");
-    logFileParams->setActintCut(35.0);
+    logFileParams->setActintCut(0.0);
     threeEfficiencies(algA,algB, 0.0059, "ActintAnalysis");
-    logFileParams->setActintCut(30.0);
-    threeEfficiencies(algA,algB, 0.0059, "ActintAnalysis");
-    logFileParams->setActintCut(25.0);
-    threeEfficiencies(algA,algB, 0.0059, "ActintAnalysis");
-    logFileParams->setActintCut(20.0);
-    threeEfficiencies(algA,algB, 0.0059, "ActintAnalysis");
-
-
 }
