@@ -4,6 +4,7 @@
 
 #include "TObject.h"
 #include "TString.h"
+#include "TDatime.h"
 
 
 class userInfo : public TObject {
@@ -29,6 +30,7 @@ private:
     Int_t numMuonDenominator;
     Int_t epsilon;
     Float_t actintCut;
+    TDatime now;
 public:
     //default constructor
     userInfo();
@@ -45,6 +47,7 @@ public:
     Float_t getMetMax() const;
     Int_t getNbins() const;
     Int_t getEpsilon() const;
+    TDatime getDate() const;
     //setters
     void setAlgAName( const TString algA );
     void setAlgBName( const TString algB );
