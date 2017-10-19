@@ -39,20 +39,19 @@ Float_t determineZeroBiasThresh( const TString& algName, const Float_t frac = 0.
     const TString& threshFileName = "PhysicsMain.All.noalgXEtriggers.2016.f731f758._m1659m1710.48Runs.root"
     ,Int_t& numPass = 0)
 {
-    userInfo* logFileParams;
-    //TODO: When I run this using actint cuts, the thresholds decrease, they should be increasing
-    /*Returns the threshold needed for an algorithm to keep the fraction of zerobias events*/
+    //this function determines thresh to keep proper trigger rate for process 2 on algs A and B
+    //these thresholds are used on both passnoalg and muon data
 
+    userInfo* logFileParams;
     const Float_t metL1Thresh = logFileParams->getMetL1Thresh();
     const Float_t actintCut = logFileParams->getActintCut();
 
-    //get zerobias tree
+    //get passnoalg tree
     const TString threshFilePath = "../myData/" + threshFileName;
 	TFile *threshFileHandle = TFile::Open(threshFilePath, "READ");
 	TTree *threshTree = (TTree*)(threshFileHandle->Get("tree"));
-    const Int_t zerobiasNentries = threshTree->GetEntries();
+    const Int_t passnoAlgNentries = threshTree->GetEntries();
     Float_t passnoalg_actint = 0;
-
 
     //display inputs
     std::cout << "DETERMINETHRESH.C" << std::endl;
@@ -60,7 +59,7 @@ Float_t determineZeroBiasThresh( const TString& algName, const Float_t frac = 0.
     std::cout << "alg: " << algName << std::endl;
     std::cout << "using L1 thresh: " << metL1Thresh << std::endl;
     std::cout << "fraction of events to keep: " << frac << std::endl;
-    std::cout << "passnoalg nentries: " << zerobiasNentries << std::endl;
+    std::cout << "passnoalg nentries: " << passnoAlgNentries << std::endl;
 
     //intialize parameters
     //numberEventsToKeep CHANGES BASED ON THE ACTINT CUT
@@ -86,7 +85,7 @@ Float_t determineZeroBiasThresh( const TString& algName, const Float_t frac = 0.
 
     //TODO: replace this with zbTree process to use proof lite
     //fill the histogram with entries
-    for (Int_t k = 0; k < zerobiasNentries; k++)
+    for (Int_t k = 0; k < passnoAlgNentries; k++)
 	{
 		threshTree->GetEntry(k);
 		if ( ( metl1 > metL1Thresh ) && ( passnoalg_actint > actintCut ) &&
@@ -103,7 +102,7 @@ Float_t determineZeroBiasThresh( const TString& algName, const Float_t frac = 0.
 	std::cout << "target number events to keep: " << numberEventsToKeep << std::endl;
 
     //determine number of events kept at determined threshold (gives idea of error due to binning)
-	for (Int_t l = 0 ; l < zerobiasNentries ; l++)
+	for (Int_t l = 0 ; l < passnoAlgNentries ; l++)
 	{
 		threshTree->GetEntry(l);
 		if ( (algMET > indeterminateThresh) && (metl1 > metL1Thresh) && ( passnoalg_actint > actintCut ) &&
@@ -122,6 +121,9 @@ Float_t determineMuonEventsKeptCombined( const TString& algA, const Float_t thre
                                          const TString& algB, Float_t threshB,
                                          const TString& muonFileName = "PhysicsMain2016.Muons.noalgL1XE45R3073065R311481Runs9B.root")
 {
+
+    //this function determines process2 for muon events on combined alg
+
 
     //TODO: proof lite this
     const Float_t metL1Thresh = 50.0;

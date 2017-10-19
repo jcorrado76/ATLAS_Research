@@ -18,18 +18,28 @@ private:
     Float_t frac;
     TString passNoAlgFile;
     TString muonFileName;
-    Int_t numPassnoalgPassProcess1;
-    Int_t numMuonPassProcess1;
+
+    Int_t NumPassnoalgPassProcess1;
+    Int_t NumMuonPassProcess1;
+
+    Int_t NumPassnoalgProcess2AlgA;
+    Int_t NumPassnoalgProcess2AlgB;
+    Int_t NumPassnoalgProcess2AlgCombined;
+
+    Int_t NumMuonPassProcess2AlgA;
+    Int_t NumMuonPassProcess2AlgB;
+    Int_t NumMuonPassProcess2Combined;
+
+    //passnoalg thresholds are being used on muon algs as well
+    //thresholds to separately keep trigger rate
     Float_t algAIndividThresh;
     Float_t algBIndividThresh;
+    //thresholds such that combined keep trigger rate
     Float_t algACombinedThresh;
     Float_t algBCombinedThresh;
     Int_t muonNentries;
     Int_t passnoAlgNentries;
     Int_t numMuonKeptCombined;
-    Int_t numMuonPassNumeratorAlgA;
-    Int_t numMuonPassNumeratorAlgB;
-    Int_t numMuonPassNumeratorAlgC;
     Int_t numMuonDenominator;
     Int_t epsilon;
     Float_t actintCut;
@@ -58,7 +68,14 @@ public:
     void setNumPassNoAlgPassProcess1( const Float_t num );
     void setNumMuonPassProcess1( const Float_t num );
 
-    void setNumPassNoAlgPassProcess2( const Float_t num );
+    void setNumPassNoAlgPassProcess2AlgA( const Float_t num );
+    void setNumPassNoAlgPassProcess2AlgB( const Float_t num );
+    void setNumPassNoAlgPassProcess2Combined( const Float_t num );
+
+    void setNumMuonPassProcess2AlgA( const Float_t num );
+    void setNumMuonPassProcess2AlgB( const Float_t num );
+    void setNumMuonPassProcess2Combined( const Float_t num );
+
     void setAlgAIndividThresh( const Float_t thresh );
     void setAlgBIndividThresh( const Float_t thresh );
     void setAlgACombinedThresh( const Float_t thresh );

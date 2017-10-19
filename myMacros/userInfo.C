@@ -41,19 +41,32 @@ userInfo::userInfo()
     muonFileName = muonFilename;
     actintCut = actinTCut;
     epsilon = epson;
-    numProcess1Events = 0;
+    //event process initializations
+    NumPassnoalgPassProcess1 = 0;
+    NumMuonPassProcess1 = 0;
+
+    NumPassnoalgProcess2AlgA = 0;
+    NumPassnoalgProcess2AlgB = 0;
+    NumPassnoalgProcess2AlgCombined = 0;
+
+    NumMuonPassProcess2AlgA = 0;
+    NumMuonPassProcess2AlgB = 0;
+    NumMuonPassProcess2Combined = 0;
+
+    //passnoalg thresholds are being used on muon algs as well
+    //thresholds to separately keep trigger rate
+    Float_t algAIndividThresh = 0;
+    Float_t algBIndividThresh = 0;
+    //thresholds such that combined keep trigger rate
+    Float_t algACombinedThresh = 0;
+    Float_t algBCombinedThresh = 0;
     algACombinedThresh = 0.0;
     algBCombinedThresh = 0.0;
-    numMuonPassNumeratorAlgA = 0;
-    numMuonPassNumeratorAlgB = 0;
     algAName = " [not entered yet] ";
     algBName = " [not entered yet] ";
     muonNentries = 0;
     passnoAlgNentries = 0;
     numMuonKeptCombined = 0;
-    numMuonPassNumeratorAlgA = 0;
-    numMuonPassNumeratorAlgB = 0;
-    numMuonPassNumeratorAlgC = 0;
     numMuonDenominator = 0;
     now = TDatime();
 }
@@ -71,8 +84,11 @@ void userInfo::Print(Option_t *option) const{
     std::cout << "Process 2 target frac: " << frac << std::endl;
     std::cout << "Passnoalg File: " << passNoAlgFile << std::endl;
     std::cout << "Muon File: " << muonFileName << std::endl;
-    std::cout << "Number of passnoalg events that passed process1: " << numProcess1PassnoAlgEvents << std::endl;
-    std::cout << "Number of passnoalg events that passed process2: " << numProcess2PassnoAlgEvents << std::endl;
+    std::cout << "Number of passnoalg events that passed process1: " << NumPassnoalgPassProcess1 << std::endl;
+    std::cout << "Numb passnoalg passed process2 for alg A: " << NumPassnoalgProcess2AlgA << std::endl;
+    std::cout << "Numb passnoalg passed process2 for alg B: " << NumPassnoalgProcess2AlgB << std::endl;
+    std::cout << "Numb passnoalg passed process2 for combined alg: " << NumPassnoalgProcess2AlgCombined << std::endl;
+
     std::cout << "Thresholds needed to keep trigger rate individually: " << std::endl;
     std::cout << "Individ Threshold needed on " + algAName + ": " << algAIndividThresh << std::endl;
     std::cout << "Individ Threshold needed on " + algBName + ": " << algBIndividThresh << std::endl;
@@ -102,15 +118,24 @@ Float_t userInfo::getFrac() const { return (frac); }
 Float_t userInfo::getMetMin() const {return (metmin);}
 Float_t userInfo::getMetMax() const { return (metmax);}
 Int_t userInfo::getEpsilon() const {return(epsilon);}
-TDatime userInfo::getDate() const {return(now);};
+TDatime userInfo::getDate() const { now.Print();return(now);};
+
+
 //setters
 void userInfo::setAlgAName( const TString algA ) { algAName = algA; };
 void userInfo::setAlgBName( const TString algB ) { algBName = algB; };
 
-void userInfo::setNumPassNoAlgPassProcess1( const Float_t num ) { numPassnoalgPassProcess1 = num; };
-void userInfo::setNumMuonPassProcess1( const Float_t num ) { numMuonPassProcess1 = num; };
+void userInfo::setNumPassNoAlgPassProcess1( const Float_t num ) {NumPassnoalgPassProcess1 = num;};
+void userInfo::setNumMuonPassProcess1( const Float_t num ) {NumMuonPassProcess1 = num;};
 
-void userInfo::setNumPassNoAlgPassProcess2( const Float_t num ) { numProcess2Events = num; };
+void userInfo::setNumPassNoAlgPassProcess2AlgA( const Float_t num ) {NumPassnoalgProcess2AlgA = num;};
+void userInfo::setNumPassNoAlgPassProcess2AlgB( const Float_t num ) {NumPassnoalgProcess2AlgB = num;};
+void userInfo::setNumPassNoAlgPassProcess2Combined( const Float_t num ) {NumPassnoalgProcess2Combined = num;};
+
+void userInfo::setNumMuonPassProcess2AlgA( const Float_t num ) {NumMuonPassProcess2AlgA = num;};
+void userInfo::setNumMuonPassProcess2AlgB( const Float_t num ) {NumMuonPassProcess2AlgB = num;};
+void userInfo::setNumMuonPassProcess2Combined( const Float_t num ) {NumMuonPassProcess2Combined = num;};
+
 void userInfo::setAlgAIndividThresh( const Float_t thresh ) { algAIndividThresh = thresh; };
 void userInfo::setAlgBIndividThresh( const Float_t thresh ) { algBIndividThresh = thresh; };
 void userInfo::setAlgACombinedThresh( const Float_t thresh ) { algACombinedThresh = thresh; };
@@ -118,9 +143,6 @@ void userInfo::setAlgBCombinedThresh( const Float_t thresh ) { algBCombinedThres
 void userInfo::setMuonNentries( const Int_t num ) { muonNentries = num; };
 void userInfo::set_PassnoalgNentries( const Int_t num ) { passnoAlgNentries = num; };
 void userInfo::setNumMuonKeptCombinedAtThresh( const Int_t num ) { numMuonKeptCombined = num; };
-void userInfo::setNumMuonPassProcess2AlgA( const Int_t num ) { numMuonPassNumeratorAlgA = num; };
-void userInfo::setNumMuonPassProcess2AlgB( const Int_t num ) { numMuonPassNumeratorAlgB = num; };
-void userInfo::setNumMuonPassProcess2Combined( const Int_t num ) { numMuonPassNumeratorAlgC = num; };
 void userInfo::setNumTotal( const Int_t num ) { numMuonDenominator = num; };
 void userInfo::setActintCut( const Float_t thresh ) { actintCut = thresh; };
 void userInfo::setEpsilon( const Int_t epson ) { epsilon = epson; };

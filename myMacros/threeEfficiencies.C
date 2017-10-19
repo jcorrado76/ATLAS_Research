@@ -65,7 +65,7 @@ TFile* threeEfficiencies( const TString& algA , const TString& algB,
     Int_t nbins = logFileParams->getNbins();
     Double_t metMin = logFileParams->getMetMin();
     Double_t metMax = logFileParams->getMetMax();
-    Int_t NumberEventsProcess1ActintCutPassNoAlg = 0; Int_t counter1 = 0; Int_t counter2 = 0; Int_t counter3 = 0;
+    Int_t NumbPassnoAlgPassProcess1WithActintCut = 0; Int_t counter1 = 0; Int_t counter2 = 0; Int_t counter3 = 0;
 
     Int_t passRndm, numPassMuon,passmuon,passmuvarmed,cleanCutsFlag,recalBrokeFlag;
     Float_t algAMET,algBMET,metoffrecal,mexoffrecal,meyoffrecal,mexoffrecalmuon, zb_actint,
@@ -117,13 +117,15 @@ TFile* threeEfficiencies( const TString& algA , const TString& algB,
 
     //IN DETERMINE THRESH I COMPUTE THRESHOLD AFTER ALSO CUTTING ON METL1 TO MAKE HISTOGRAMS
     threeEfficienciesBenchmark->Start( "determine" + algA + "Thresh");
-    Int_t numPassProcess1PassNoAlgAlgA;
-    Float_t algAThresh = determineZeroBiasThresh(algA,frac,zerobiasFileName,numPassProcess1PassNoAlgAlgA);
+
+    Int_t numPassnoalgPassProcess1AlgA;
+    Float_t algAThresh = determineZeroBiasThresh(algA,frac,zerobiasFileName,numPassnoalgPassProcess1AlgA);
     threeEfficienciesBenchmark->Show( "determine" + algA + "Thresh");
     std::cout << "\n" << std::endl;
+
     threeEfficienciesBenchmark->Start( "determine" + algB + "Thresh");
-    Int_t numPassProcess1PassNoAlgAlgB;
-    Float_t algBThresh = determineZeroBiasThresh(algB,frac,zerobiasFileName,numPassProcess1PassNoAlgAlgB);
+    Int_t numPassnoalgPassProcess1AlgB;
+    Float_t algBThresh = determineZeroBiasThresh(algB,frac,zerobiasFileName,numPassnoalgPassProcess1AlgB);
     threeEfficienciesBenchmark->Show( "determine" + algB + "Thresh");
     std::cout << "\n" << std::endl;
 
@@ -133,8 +135,8 @@ TFile* threeEfficiencies( const TString& algA , const TString& algB,
     std::cout << "algBThresh: " << algBThresh << std::endl;
     std::cout << "Using METL1THRESH: " << metl1thresh << std::endl;
 
-    //determine NumberEventsProcess1ActintCutPassNoAlg and fill histograms
-    NumberEventsProcess1ActintCutPassNoAlg = 0 ;
+    //determine NumbPassnoAlgPassProcess1WithActintCut and fill histograms
+    NumbPassnoAlgPassProcess1WithActintCut = 0 ;
 	for (Int_t k = 0; k < zerobiasNentries; k++)
 	{
 	    zeroBiasTree->GetEntry(k);
@@ -144,7 +146,7 @@ TFile* threeEfficiencies( const TString& algA , const TString& algB,
 	    {
     		algAMETHist->Fill(algAMET);
     		algBMETHist->Fill(algBMET);
-            NumberEventsProcess1ActintCutPassNoAlg++;
+            NumbPassnoAlgPassProcess1WithActintCut++;
 	    }
 	}
 
@@ -166,7 +168,7 @@ TFile* threeEfficiencies( const TString& algA , const TString& algB,
 
     //run BISECTION
     bisectionIndividFrac = bisection( algAMETHist , algBMETHist, binWidth, individAThreshFinal,
-    individBThreshFinal, NumberEventsProcess1ActintCutPassNoAlg , frac ,
+    individBThreshFinal, NumbPassnoAlgPassProcess1WithActintCut , frac ,
     logFileData,zeroBiasTree);
 
     //end bisection timer
@@ -199,6 +201,8 @@ TFile* threeEfficiencies( const TString& algA , const TString& algB,
 
     std::cout << "Starting to fill TEfficiencies.." << std::endl;
 
+    Int_t NumMuonPassProcess1WithActintCut = 0 ;
+
     Bool_t isMuon;
     Bool_t isClean;
     for (Int_t l = 0 ; l < muonNentries ; l++)
@@ -206,6 +210,12 @@ TFile* threeEfficiencies( const TString& algA , const TString& algB,
         myMuonTree->GetEntry(l);
         isMuon = (passmuvarmed > 0.1 || passmuon > 0.1);
         isClean = (cleanCutsFlag > 0.1) && (recalBrokeFlag < 0.1);
+
+        if ( isMuon && isClean && muonMetl1 > metl1thresh)
+        {
+            NumMuonPassProcess1WithActintCut++;
+        }
+
 
         if ( isMuon && isClean && ( muonActint > actintCut ))
     	{
@@ -221,10 +231,6 @@ TFile* threeEfficiencies( const TString& algA , const TString& algB,
             }
     	}
     }
-
-    Int_t NumberMuonEventsProcess2CombinedActintCut = (Cteff->GetPassedHistogram())->GetEntries() ;
-    Int_t NumberMuonEventsProcess2AlgAActintCut = (Ateff->GetPassedHistogram())->GetEntries() ;
-    Int_t NumberMuonEventsProcess2AlgBActintCut = (Bteff->GetPassedHistogram())->GetEntries() ;
 
     threeEfficienciesBenchmark->Show("Fill TEfficiencies");
 
@@ -256,15 +262,26 @@ TFile* threeEfficiencies( const TString& algA , const TString& algB,
     //compute number muon events actually kept using external macro
     Int_t muonEventsCombined = determineMuonEventsKeptCombined( algA, individAThreshFinal , algB , individBThreshFinal , muonFilename );
 
-    logFileParams->setNumPassNoAlgPassProcess1( NumberEventsProcess1ActintCutPassNoAlg );
-    logFileParams->setNumPassNoAlgPassProcess( NumberEventsProcess1ActintCutPassNoAlg );
-    logFileParams->setNum_PassProcess2Combined( NumberMuonEventsProcess2CombinedActintCut);
-    logFileParams->setNum_PassProcess2AlgA( NumberMuonEventsProcess2ALgAActintCut);
-    logFileParams->setNum_PassProcess2AlgB( NumberMuonEventsProcess2AlgBActintCut);
+    logFileParams->setNumPassNoAlgPassProcess1( NumbPassnoAlgPassProcess1WithActintCut );
+    logFileParams->setNumMuonPassProcess1( NumMuonPassProcess1WithActintCut );
+
+    Int_t NumberMuonEventsProcess2CombinedActintCut = (Cteff->GetPassedHistogram())->GetEntries() ;
+    Int_t NumberMuonEventsProcess2AlgAActintCut = (Ateff->GetPassedHistogram())->GetEntries() ;
+    Int_t NumberMuonEventsProcess2AlgBActintCut = (Bteff->GetPassedHistogram())->GetEntries() ;
+
+    logFileParams->setNumMuonPassProcess2Combined( NumberMuonEventsProcess2CombinedActintCut);
+    logFileParams->setNumMuonPassProcess2AlgA( NumberMuonEventsProcess2AlgAActintCut);
+    logFileParams->setNumMuonPassProcess2AlgB( NumberMuonEventsProcess2AlgBActintCut);
+
+//TODO: need to obtain the passnoalg process2 num kept for combined alg
+    logFileParams->setNumPassnoalgPassProcess2Combined( NumberMuonEventsProcess2CombinedActintCut);
+    logFileParams->setNumPassnoalgPassProcess2AlgA( numPassnoalgPassProcess1AlgA);
+    logFileParams->setNumPassnoalgPassProcess2AlgB( numPassnoalgPassProcess1AlgB);
+
     logFileParams->setAlgAThresh( algAThresh);
     logFileParams->setAlgBThresh( algBThresh );
     logFileParams->setMuonNentries( muonNentries );
-    logFileParams->set_zbNentries( zerobiasNentries );
+    logFileParams->set_PassnoalgNentries( zerobiasNentries );
     logFileParams->setNumMuonKeptCombinedAtThresh( muonEventsCombined );
     logFileParams->setNumTotal((Ateff->GetTotalHistogram())->GetEntries());
     logFileParams->setActintCut(actintCut);
