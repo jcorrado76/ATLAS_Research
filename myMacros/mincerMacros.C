@@ -43,7 +43,8 @@ Float_t computeThresh(const TH1F* target, const Float_t numberEventsToKeep)
 
 
 Float_t determineZeroBiasThresh( const TString& algName, const Float_t frac = 0.00590,
-    const TString& threshFileName = "PhysicsMain.All.noalgXEtriggers.2016.f731f758._m1659m1710.48Runs.root")
+    const TString& threshFileName = "PhysicsMain.All.noalgXEtriggers.2016.f731f758._m1659m1710.48Runs.root"
+    ,Int_t& numPass = 0)
 {
     userInfo* logFileParams;
     //TODO: When I run this using actint cuts, the thresholds decrease, they should be increasing
@@ -120,6 +121,7 @@ Float_t determineZeroBiasThresh( const TString& algName, const Float_t frac = 0.
 	}
     std::cout << "number of events kept at threshold: " << numberEventsKept << std::endl;
     threshFileHandle->Close();
+    numPass = numberEventsKept;
 	return(indeterminateThresh);
 }
 

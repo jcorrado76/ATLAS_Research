@@ -65,7 +65,7 @@ Float_t bisection(TH1F* algAHist , TH1F* algBHist, const Float_t binWidth, Float
     //print the status
     std::cout << "numPassedProcess1WithActintCut: " << numPassedProcess1WithActintCut << std::endl;
     std::cout << "Process2 No Actint Cut Fraction: " << frac << std::endl;
-    std::cout << "Process 2 with Actint Cut Num to Keep: " << numPassedProcess1WithActintCut * frac << std::endl;
+    std::cout << "Process 2 with Actint Cut Num to Keep: " << target << std::endl;
 
     std::cout << "Entering bisection to determine individual fractions" << std::endl;
     std::cout << "Lower Bound: " << lwrbnd << std::endl;
@@ -177,6 +177,9 @@ Float_t bisection(TH1F* algAHist , TH1F* algBHist, const Float_t binWidth, Float
     Float_t algAThreshDiff;
     Float_t algBThreshDiff;
 
+    Int_t target = target
+    std::cout << "Target fraction of events to keep: " << target << std::endl;
+
     do{
         j++;
         std::cout << "Inside iteration number: " << j << std::endl;
@@ -224,7 +227,7 @@ Float_t bisection(TH1F* algAHist , TH1F* algBHist, const Float_t binWidth, Float
         std::cout << "Counter2: " << numPassedProcess2WithActintCutX2 << std::endl;
         Process2FracX2WithActintCut = (Float_t) numPassedProcess2WithActintCutX2 / (Float_t) numPassedProcess1WithActintCut;
         std::cout << "Process2FracX2WithActintCut: " << Process2FracX2WithActintCut << std::endl;
-        std::cout << "Condition: " << abs(numPassedProcess1WithActintCut * frac - numPassedProcess2WithActintCutX2) << " > " << epsilon << std::endl;
+        std::cout << "Condition: " << abs(target - numPassedProcess2WithActintCutX2) << " > " << epsilon << std::endl;
         outputArray[j+2] = Process2FracX2WithActintCut;
 
 
@@ -244,9 +247,9 @@ Float_t bisection(TH1F* algAHist , TH1F* algBHist, const Float_t binWidth, Float
 
 
 
-    }while ( abs( numPassedProcess2WithActintCutX2 - (numPassedProcess1WithActintCut * frac) ) > epsilon && (abs(algAThreshDiff) > binWidth) && (abs(algBThreshDiff) > binWidth) && ( j <= imax ) );
+    }while ( abs( numPassedProcess2WithActintCutX2 - (target) ) > epsilon && (abs(algAThreshDiff) > binWidth) && (abs(algBThreshDiff) > binWidth) && ( j <= imax ) );
 
-      if ( abs( numPassedProcess2WithActintCutX2 - (numPassedProcess1WithActintCut * frac) ) <= epsilon || abs(algAThreshDiff) <= binWidth || abs(algBThreshDiff) <= binWidth)
+      if ( abs( numPassedProcess2WithActintCutX2 - (target) ) <= epsilon || abs(algAThreshDiff) <= binWidth || abs(algBThreshDiff) <= binWidth)
       {
         std::cout << "A root at x = " <<  initialGuess << " was found to within one bin: " << binWidth << " GeV"
                   << " in " << j << " iterations" << std::endl;

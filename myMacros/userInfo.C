@@ -37,82 +37,63 @@ userInfo::userInfo()
     metmax = metMax;
     metl1thresh = metl1Thresh;
     frac = Frac;
-    zbFileName = zerobiasFileName;
+    passNoAlgFile = zerobiasFileName;
     muonFileName = muonFilename;
     actintCut = actinTCut;
     epsilon = epson;
-    numzbRndm = 0;
-    algAThresh = 0.0;
-    algBThresh = 0.0;
+    numProcess1Events = 0;
+    algACombinedThresh = 0.0;
+    algBCombinedThresh = 0.0;
     numMuonPassNumeratorAlgA = 0;
     numMuonPassNumeratorAlgB = 0;
     algAName = " [not entered yet] ";
     algBName = " [not entered yet] ";
     muonNentries = 0;
-    zbNentries = 0;
+    passnoAlgNentries = 0;
     numMuonKeptCombined = 0;
     numMuonPassNumeratorAlgA = 0;
     numMuonPassNumeratorAlgB = 0;
     numMuonPassNumeratorAlgC = 0;
     numMuonDenominator = 0;
-}
-//alternative constructor to initialize with the algorithm names
-userInfo::userInfo( TString algA , TString algB)
-{
-    nbins = Nbins;
-    metmin = metMin;
-    metmax = metMax;
-    metl1thresh = metl1Thresh;
-    frac = Frac;
-    zbFileName = zerobiasFileName;
-    muonFileName = muonFilename;
-    actintCut = actinTCut;
-    epsilon = epson;
-    numzbRndm = 0;
-    algAThresh = 0.0;
-    algBThresh = 0.0;
-    numMuonPassNumeratorAlgA = 0;
-    numMuonPassNumeratorAlgB = 0;
-    algAName = algA;
-    algBName = algB;
-    muonNentries = 0;
-    zbNentries = 0;
-    numMuonPassNumeratorAlgA = 0;
-    numMuonPassNumeratorAlgB = 0;
-    numMuonPassNumeratorAlgC = 0;
-    numMuonDenominator = 0;
+    now = TDatime();
 }
 
 void userInfo::Print(Option_t *option) const{
     std::cout << "Printing the data members for the userInfo struct: \n" << std::endl;
+
+    now.Print();
     std::cout << "Alg A Name: " << algAName << std::endl;
     std::cout << "Alg B Name: " << algBName << std::endl;
     std::cout << "nbins: " << nbins << std::endl;
     std::cout << "MetMin: " << metmin << std::endl;
     std::cout << "MetMax: " << metmax << std::endl;
     std::cout << "METL1 thresh used: " << metl1thresh << std::endl;
-    std::cout << "frac to keep: " << frac << std::endl;
-    //TODO: we aren't using zero bias files
-    std::cout << "Zero Bias File Used: " << zbFileName << std::endl;
-    std::cout << "Muon File Used: " << muonFileName << std::endl;
-    std::cout << "Number of zerobias events that passed no alg and metl1: " << numzbRndm << std::endl;
+    std::cout << "Process 2 target frac: " << frac << std::endl;
+    std::cout << "Passnoalg File: " << passNoAlgFile << std::endl;
+    std::cout << "Muon File: " << muonFileName << std::endl;
+    std::cout << "Number of passnoalg events that passed process1: " << numProcess1PassnoAlgEvents << std::endl;
+    std::cout << "Number of passnoalg events that passed process2: " << numProcess2PassnoAlgEvents << std::endl;
+    std::cout << "Thresholds needed to keep trigger rate individually: " << std::endl;
+    std::cout << "Individ Threshold needed on " + algAName + ": " << algAIndividThresh << std::endl;
+    std::cout << "Individ Threshold needed on " + algBName + ": " << algBIndividThresh << std::endl;
     std::cout << "\nThresholds needed to keep the proper trigger rate when combined: " << std::endl;
-    //TODO: should clarify language between thresholds to keep trigger rate individually and then combined
-    //      also should display the thresholds needed to keep individually, and then thresholds for combined
-    std::cout << "Threshold needed on " + algAName + ": " << algAThresh << std::endl;
-    std::cout << "Threshold needed on " + algBName + ": " << algBThresh << std::endl;
+    std::cout << "Combined Threshold needed on " + algAName + ": " << algACombinedThresh << std::endl;
+    std::cout << "Combined Threshold needed on " + algBName + ": " << algBCombinedThresh << std::endl;
     std::cout << "Muon Nentries: " << muonNentries << std::endl;
-    std::cout << "ZeroBias Nentries: " << zbNentries << std::endl;
+    std::cout << "Passnoalg Nentries: " << passnoAlgNentries << std::endl;
     std::cout << "Number of entries kept using combined thresholds: " <<  numMuonKeptCombined << std::endl;
-    std::cout << "Number of entries that passed all muon cuts and " + algAName + " at Individ thresh: " << numMuonPassNumeratorAlgA << std::endl;
-    std::cout << "Number of entries that passed all muon cuts and " + algBName + " at Individ thresh: " << numMuonPassNumeratorAlgB << std::endl;
+    std::cout << "Number of entries that passed all muon cuts and " + algAName + " at Individ thresh: "
+    << numMuonPassNumeratorAlgA << std::endl;
+    std::cout << "Number of entries that passed all muon cuts and " + algBName + " at Individ thresh: "
+    << numMuonPassNumeratorAlgB << std::endl;
     std::cout << "Number of entries that passed all muon cuts and both algs at Combined thresh: " << numMuonPassNumeratorAlgC << std::endl;
-    std::cout << "Number entries that passed all muon cuts without alg: " << numMuonDenominator << std::endl;
+    std::cout << "Nentries Efficiency Denominator: " << numMuonDenominator << std::endl;
     std::cout << "Epsilon tolerance on number events used for bisection: " << epsilon << std::endl;
     std::cout << "Actint cut: " << actintCut << "\n" << std::endl;
+
 }
 //getters
-TString userInfo::get_zbFileName() const { return(zbFileName);}
+TString userInfo::get_passnoalgFileName() const { return(passNoAlgFile);}
 TString userInfo::get_muonFileName() const { return(muonFileName);}
 Int_t userInfo::getNbins() const { return(nbins); }
 Float_t userInfo::getMetL1Thresh() const { return( metl1thresh); }
@@ -121,18 +102,25 @@ Float_t userInfo::getFrac() const { return (frac); }
 Float_t userInfo::getMetMin() const {return (metmin);}
 Float_t userInfo::getMetMax() const { return (metmax);}
 Int_t userInfo::getEpsilon() const {return(epsilon);}
+TDatime userInfo::getDate() const {return(now);};
 //setters
 void userInfo::setAlgAName( const TString algA ) { algAName = algA; };
 void userInfo::setAlgBName( const TString algB ) { algBName = algB; };
-void userInfo::setNum_zbRndm( const Float_t num ) { numzbRndm = num; };
-void userInfo::setAlgAThresh( const Float_t thresh ) { algAThresh = thresh; };
-void userInfo::setAlgBThresh( const Float_t thresh ) { algBThresh = thresh; };
+
+void userInfo::setNumPassNoAlgPassProcess1( const Float_t num ) { numPassnoalgPassProcess1 = num; };
+void userInfo::setNumMuonPassProcess1( const Float_t num ) { numMuonPassProcess1 = num; };
+
+void userInfo::setNumPassNoAlgPassProcess2( const Float_t num ) { numProcess2Events = num; };
+void userInfo::setAlgAIndividThresh( const Float_t thresh ) { algAIndividThresh = thresh; };
+void userInfo::setAlgBIndividThresh( const Float_t thresh ) { algBIndividThresh = thresh; };
+void userInfo::setAlgACombinedThresh( const Float_t thresh ) { algACombinedThresh = thresh; };
+void userInfo::setAlgBCombinedThresh( const Float_t thresh ) { algBCombinedThresh = thresh; };
 void userInfo::setMuonNentries( const Int_t num ) { muonNentries = num; };
-void userInfo::set_zbNentries( const Int_t num ) { zbNentries = num; };
-void userInfo::setNumMuonKeptCombined( const Int_t num ) { numMuonKeptCombined = num; };
-void userInfo::setNumPassA( const Int_t num ) { numMuonPassNumeratorAlgA = num; };
-void userInfo::setNumPassB( const Int_t num ) { numMuonPassNumeratorAlgB = num; };
-void userInfo::setNumPassCombined( const Int_t num ) { numMuonPassNumeratorAlgC = num; };
+void userInfo::set_PassnoalgNentries( const Int_t num ) { passnoAlgNentries = num; };
+void userInfo::setNumMuonKeptCombinedAtThresh( const Int_t num ) { numMuonKeptCombined = num; };
+void userInfo::setNumMuonPassProcess2AlgA( const Int_t num ) { numMuonPassNumeratorAlgA = num; };
+void userInfo::setNumMuonPassProcess2AlgB( const Int_t num ) { numMuonPassNumeratorAlgB = num; };
+void userInfo::setNumMuonPassProcess2Combined( const Int_t num ) { numMuonPassNumeratorAlgC = num; };
 void userInfo::setNumTotal( const Int_t num ) { numMuonDenominator = num; };
 void userInfo::setActintCut( const Float_t thresh ) { actintCut = thresh; };
 void userInfo::setEpsilon( const Int_t epson ) { epsilon = epson; };

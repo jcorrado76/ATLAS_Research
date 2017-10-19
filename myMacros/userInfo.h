@@ -16,13 +16,16 @@ private:
     Float_t metmax;
     Float_t metl1thresh;
     Float_t frac;
-    TString zbFileName;
+    TString passNoAlgFile;
     TString muonFileName;
-    Int_t numzbRndm;
-    Float_t algAThresh;
-    Float_t algBThresh;
+    Int_t numPassnoalgPassProcess1;
+    Int_t numMuonPassProcess1;
+    Float_t algAIndividThresh;
+    Float_t algBIndividThresh;
+    Float_t algACombinedThresh;
+    Float_t algBCombinedThresh;
     Int_t muonNentries;
-    Int_t zbNentries;
+    Int_t passnoAlgNentries;
     Int_t numMuonKeptCombined;
     Int_t numMuonPassNumeratorAlgA;
     Int_t numMuonPassNumeratorAlgB;
@@ -38,7 +41,7 @@ public:
     //destructor
     void Print(Option_t *option = "") const;
     //getters
-    TString get_zbFileName() const;
+    TString get_passnoalgFileName() const;
     TString get_muonFileName() const;
     Float_t getMetL1Thresh() const;
     Float_t getActintCut() const;
@@ -51,15 +54,21 @@ public:
     //setters
     void setAlgAName( const TString algA );
     void setAlgBName( const TString algB );
-    void setNum_zbRndm( const Float_t num );
-    void setAlgAThresh( const Float_t thresh );
-    void setAlgBThresh( const Float_t thresh );
+
+    void setNumPassNoAlgPassProcess1( const Float_t num );
+    void setNumMuonPassProcess1( const Float_t num );
+
+    void setNumPassNoAlgPassProcess2( const Float_t num );
+    void setAlgAIndividThresh( const Float_t thresh );
+    void setAlgBIndividThresh( const Float_t thresh );
+    void setAlgACombinedThresh( const Float_t thresh );
+    void setAlgBCombinedThresh( const Float_t thresh );
     void setMuonNentries( const Int_t num );
-    void set_zbNentries( const Int_t num );
-    void setNumMuonKeptCombined( const Int_t num );
-    void setNumPassA( const Int_t num );
-    void setNumPassB( const Int_t num );
-    void setNumPassCombined( const Int_t num );
+    void set_PassnoalgNentries( const Int_t num );
+    void setNumMuonKeptCombinedAtThresh( const Int_t num );
+    void setNum_PassProcess2AlgA( const Int_t num );
+    void setNum_PassProcess2AlgB( const Int_t num );
+    void setNum_PassProcess2Combined( const Int_t num );
     void setNumTotal( const Int_t num );
     void setActintCut( const Float_t thresh );
     void setEpsilon( const Int_t epsilon );
