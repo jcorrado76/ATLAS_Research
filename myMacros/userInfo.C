@@ -10,6 +10,7 @@ ClassImp(userInfo)
 
 #ifdef __CLING__
 #pragma link C++ userInfo userInfo.h+;
+#pragma link C++ global logFileParams;
 #endif
 
 
