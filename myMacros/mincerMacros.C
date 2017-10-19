@@ -3,16 +3,9 @@
 #include "TFile.h"
 #include "TTree.h"
 #include "TString.h"
-#include "TEfficiency.h"
-#include "TLegend.h"
 #include <iostream>
 #include <fstream>
 #include "TROOT.h"
-#include "TCanvas.h"
-#include "TSystem.h"
-#include "TF1.h"
-#include "TNtuple.h"
-#include "TBenchmark.h"
 #include "userInfo.h"
 
 Float_t computeMetNoMu( const Float_t mexoffrecal , const Float_t meyoffrecal , const Float_t mexoffrecalmuon , const Float_t meyoffrecalmuon )
