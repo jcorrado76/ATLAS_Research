@@ -30,6 +30,8 @@ Float_t bisection(TH1F* algAHist , TH1F* algBHist, const Float_t binWidth, Float
     Float_t actintCut = logFileParams->getActintCut();
     Int_t epsilon = logFileParams->getEpsilon();
 
+    Int_t target = numPassedProcess1WithActintCut * frac;
+
     Float_t lwrbnd = 0.5 * frac;
     Float_t uprbnd = 0.13;
 
@@ -176,9 +178,6 @@ Float_t bisection(TH1F* algAHist , TH1F* algBHist, const Float_t binWidth, Float
     Int_t imax = 30;
     Float_t algAThreshDiff;
     Float_t algBThreshDiff;
-
-    Int_t target = target
-    std::cout << "Target fraction of events to keep: " << target << std::endl;
 
     do{
         j++;

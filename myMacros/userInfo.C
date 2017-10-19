@@ -11,6 +11,9 @@ ClassImp(userInfo)
 #ifdef __CLING__
 #pragma link C++ userInfo userInfo.h+;
 #pragma link C++ global logFileParams;
+#pragma link C++ function threeEfficiencies;
+#pragma link C++ function mincerMacros;
+#pragma link C++ function bisection;
 #endif
 
 
@@ -98,11 +101,12 @@ void userInfo::Print(Option_t *option) const{
     std::cout << "Muon Nentries: " << muonNentries << std::endl;
     std::cout << "Passnoalg Nentries: " << passnoAlgNentries << std::endl;
     std::cout << "Number of entries kept using combined thresholds: " <<  numMuonKeptCombined << std::endl;
-    std::cout << "Number of entries that passed all muon cuts and " + algAName + " at Individ thresh: "
-    << numMuonPassNumeratorAlgA << std::endl;
-    std::cout << "Number of entries that passed all muon cuts and " + algBName + " at Individ thresh: "
-    << numMuonPassNumeratorAlgB << std::endl;
-    std::cout << "Number of entries that passed all muon cuts and both algs at Combined thresh: " << numMuonPassNumeratorAlgC << std::endl;
+    std::cout << "Numb passed process 2 for " + algAName + " separately: "
+    << NumMuonPassProcess2AlgA << std::endl;
+    std::cout << "Numb passed process 2 for " + algBName + " separately: "
+    << NumMuonPassProcess2AlgB << std::endl;
+    std::cout << "Numb passed process 2 Combined: "
+    << NumMuonPassProcess2Combined << std::endl;
     std::cout << "Nentries Efficiency Denominator: " << numMuonDenominator << std::endl;
     std::cout << "Epsilon tolerance on number events used for bisection: " << epsilon << std::endl;
     std::cout << "Actint cut: " << actintCut << "\n" << std::endl;
@@ -124,24 +128,26 @@ TDatime userInfo::getDate() const { now.Print();return(now);};
 //setters
 void userInfo::setAlgAName( const TString algA ) { algAName = algA; };
 void userInfo::setAlgBName( const TString algB ) { algBName = algB; };
-
+//set all process 1's, they're same across 3 algs for passnoalgs and muons, respectively
 void userInfo::setNumPassNoAlgPassProcess1( const Float_t num ) {NumPassnoalgPassProcess1 = num;};
 void userInfo::setNumMuonPassProcess1( const Float_t num ) {NumMuonPassProcess1 = num;};
-
+//set passnoalgs process 2
 void userInfo::setNumPassNoAlgPassProcess2AlgA( const Float_t num ) {NumPassnoalgProcess2AlgA = num;};
 void userInfo::setNumPassNoAlgPassProcess2AlgB( const Float_t num ) {NumPassnoalgProcess2AlgB = num;};
-void userInfo::setNumPassNoAlgPassProcess2Combined( const Float_t num ) {NumPassnoalgProcess2Combined = num;};
-
+void userInfo::setNumPassNoAlgPassProcess2Combined( const Float_t num ) {NumPassnoalgProcess2AlgCombined = num;};
+//set muons process 2
 void userInfo::setNumMuonPassProcess2AlgA( const Float_t num ) {NumMuonPassProcess2AlgA = num;};
 void userInfo::setNumMuonPassProcess2AlgB( const Float_t num ) {NumMuonPassProcess2AlgB = num;};
 void userInfo::setNumMuonPassProcess2Combined( const Float_t num ) {NumMuonPassProcess2Combined = num;};
-
+//set thresholds
 void userInfo::setAlgAIndividThresh( const Float_t thresh ) { algAIndividThresh = thresh; };
 void userInfo::setAlgBIndividThresh( const Float_t thresh ) { algBIndividThresh = thresh; };
 void userInfo::setAlgACombinedThresh( const Float_t thresh ) { algACombinedThresh = thresh; };
 void userInfo::setAlgBCombinedThresh( const Float_t thresh ) { algBCombinedThresh = thresh; };
+//set nentries
 void userInfo::setMuonNentries( const Int_t num ) { muonNentries = num; };
 void userInfo::set_PassnoalgNentries( const Int_t num ) { passnoAlgNentries = num; };
+//set actual numb muon events kept process 2
 void userInfo::setNumMuonKeptCombinedAtThresh( const Int_t num ) { numMuonKeptCombined = num; };
 void userInfo::setNumTotal( const Int_t num ) { numMuonDenominator = num; };
 void userInfo::setActintCut( const Float_t thresh ) { actintCut = thresh; };

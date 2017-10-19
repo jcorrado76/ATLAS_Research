@@ -28,7 +28,7 @@ TFile* threeEfficiencies( const TString& algA , const TString& algB,
     gROOT->ProcessLine("gSystem->Load(\"./bisection_C.so\")");
 
     Bool_t passTransverseMassCut( const Float_t , const Float_t ,const Float_t ,const Float_t ,const Float_t ,const Float_t);
-    Float_t determineZeroBiasThresh( const TString&, const Float_t, const TString&, Int_t&);
+    Float_t determineZeroBiasThresh( const TString&, Int_t &,const Float_t, const TString&);
     Float_t computeThresh( const TH1F*, const Float_t);
     Float_t determineMuonEventsKeptCombined( const TString&, const Float_t, const TString&,
         const Float_t,const TString& );
@@ -41,7 +41,7 @@ TFile* threeEfficiencies( const TString& algA , const TString& algB,
     logFileParams->Print();
 
     //FILES
-    TString zerobiasFileName = logFileParams->get_zbFileName();
+    TString zerobiasFileName = logFileParams->get_passnoalgFileName();
     TString muonFilename = logFileParams->get_muonFileName();
 
     //THREEFF BENCHMARK
@@ -86,9 +86,7 @@ TFile* threeEfficiencies( const TString& algA , const TString& algB,
     myMuonTree->SetBranchAddress("mexrefmuon", &mexrefmuon);
     myMuonTree->SetBranchAddress("meyrefmuon", &meyrefmuon);
 
-
     std::cout << "MuonNentries: " << muonNentries << "\n" << std::endl;
-
     TString zerobiasFilePath = "../myData/"+ zerobiasFileName;
     TFile * zeroBiasFile = TFile::Open(zerobiasFilePath, "READ");
     TTree* zeroBiasTree = (TTree*)zeroBiasFile->Get("tree");
@@ -117,15 +115,14 @@ TFile* threeEfficiencies( const TString& algA , const TString& algB,
 
     //IN DETERMINE THRESH I COMPUTE THRESHOLD AFTER ALSO CUTTING ON METL1 TO MAKE HISTOGRAMS
     threeEfficienciesBenchmark->Start( "determine" + algA + "Thresh");
-
     Int_t numPassnoalgPassProcess1AlgA;
-    Float_t algAThresh = determineZeroBiasThresh(algA,frac,zerobiasFileName,numPassnoalgPassProcess1AlgA);
+    Float_t algAThresh = determineZeroBiasThresh(algA,numPassnoalgPassProcess1AlgA,frac,zerobiasFileName);
     threeEfficienciesBenchmark->Show( "determine" + algA + "Thresh");
     std::cout << "\n" << std::endl;
 
     threeEfficienciesBenchmark->Start( "determine" + algB + "Thresh");
     Int_t numPassnoalgPassProcess1AlgB;
-    Float_t algBThresh = determineZeroBiasThresh(algB,frac,zerobiasFileName,numPassnoalgPassProcess1AlgB);
+    Float_t algBThresh = determineZeroBiasThresh(algB,numPassnoalgPassProcess1AlgB,frac,zerobiasFileName);
     threeEfficienciesBenchmark->Show( "determine" + algB + "Thresh");
     std::cout << "\n" << std::endl;
 
@@ -156,8 +153,8 @@ TFile* threeEfficiencies( const TString& algA , const TString& algB,
     //keep the proper amount when combined
 
     Float_t bisectionIndividFrac;
-    Float_t individAThreshFinal;
-    Float_t individBThreshFinal;
+    Float_t CombinedThreshAlgA;
+    Float_t CombinedThreshAlgB;
 
 
     TNtuple* logFileData = new TNtuple("logFileData" , "Bisection Data" ,
@@ -167,8 +164,8 @@ TFile* threeEfficiencies( const TString& algA , const TString& algB,
     threeEfficienciesBenchmark->Start("Bisection");
 
     //run BISECTION
-    bisectionIndividFrac = bisection( algAMETHist , algBMETHist, binWidth, individAThreshFinal,
-    individBThreshFinal, NumbPassnoAlgPassProcess1WithActintCut , frac ,
+    bisectionIndividFrac = bisection( algAMETHist , algBMETHist, binWidth, CombinedThreshAlgA,
+    CombinedThreshAlgB, NumbPassnoAlgPassProcess1WithActintCut , frac ,
     logFileData,zeroBiasTree);
 
     //end bisection timer
@@ -178,7 +175,7 @@ TFile* threeEfficiencies( const TString& algA , const TString& algB,
     threeEfficienciesBenchmark->Show("ZeroBias Thresholds");
 
 
-    TString cstring = algA + " > " + Form(" %.2f", individAThreshFinal) + " and " + algB + " > " + Form(" %.2f", individBThreshFinal);
+    TString cstring = algA + " > " + Form(" %.2f", CombinedThreshAlgA) + " and " + algB + " > " + Form(" %.2f", CombinedThreshAlgB);
     TString astring = algA + " > " + Form(" %.2f", algAThresh);
     TString bstring = algB + " > " + Form(" %.2f", algBThresh);
     TString dstring = (TString) "L1 > " + Form(" %.2f" , metl1thresh);
@@ -225,7 +222,7 @@ TFile* threeEfficiencies( const TString& algA , const TString& algB,
 
                 Ateff->Fill((algAmuonMET > algAThresh) && (muonMetl1 > metl1thresh) && ( muonActint > actintCut ), metnomu);
         	    Bteff->Fill((algBmuonMET > algBThresh) && (muonMetl1 > metl1thresh)&& ( muonActint > actintCut ), metnomu);
-        	    Cteff->Fill(((algAmuonMET > individAThreshFinal) && (algBmuonMET > individBThreshFinal)
+        	    Cteff->Fill(((algAmuonMET > CombinedThreshAlgA) && (algBmuonMET > CombinedThreshAlgB)
                 && ( muonActint > actintCut )&& (muonMetl1 > metl1thresh)), metnomu);
                 Dteff->Fill((muonMetl1 >= metl1thresh) && ( muonActint > actintCut ), metnomu);
             }
@@ -260,7 +257,7 @@ TFile* threeEfficiencies( const TString& algA , const TString& algB,
     legend->Draw();
 
     //compute number muon events actually kept using external macro
-    Int_t muonEventsCombined = determineMuonEventsKeptCombined( algA, individAThreshFinal , algB , individBThreshFinal , muonFilename );
+    Int_t muonEventsCombined = determineMuonEventsKeptCombined( algA, CombinedThreshAlgA , algB , CombinedThreshAlgB , muonFilename );
 
     logFileParams->setNumPassNoAlgPassProcess1( NumbPassnoAlgPassProcess1WithActintCut );
     logFileParams->setNumMuonPassProcess1( NumMuonPassProcess1WithActintCut );
@@ -274,12 +271,16 @@ TFile* threeEfficiencies( const TString& algA , const TString& algB,
     logFileParams->setNumMuonPassProcess2AlgB( NumberMuonEventsProcess2AlgBActintCut);
 
 //TODO: need to obtain the passnoalg process2 num kept for combined alg
-    logFileParams->setNumPassnoalgPassProcess2Combined( NumberMuonEventsProcess2CombinedActintCut);
-    logFileParams->setNumPassnoalgPassProcess2AlgA( numPassnoalgPassProcess1AlgA);
-    logFileParams->setNumPassnoalgPassProcess2AlgB( numPassnoalgPassProcess1AlgB);
+    logFileParams->setNumPassNoAlgPassProcess2Combined( NumberMuonEventsProcess2CombinedActintCut);
+    logFileParams->setNumPassNoAlgPassProcess2AlgA( numPassnoalgPassProcess1AlgA);
+    logFileParams->setNumPassNoAlgPassProcess2AlgB( numPassnoalgPassProcess1AlgB);
 
-    logFileParams->setAlgAThresh( algAThresh);
-    logFileParams->setAlgBThresh( algBThresh );
+    logFileParams->setAlgAIndividThresh( algAThresh);
+    logFileParams->setAlgBIndividThresh( algBThresh );
+    logFileParams->setAlgACombinedThresh( CombinedThreshAlgA);
+    logFileParams->setAlgBCombinedThresh( CombinedThreshAlgB );
+
+
     logFileParams->setMuonNentries( muonNentries );
     logFileParams->set_PassnoalgNentries( zerobiasNentries );
     logFileParams->setNumMuonKeptCombinedAtThresh( muonEventsCombined );
