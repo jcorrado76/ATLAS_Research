@@ -1,8 +1,10 @@
+#include "userInfo.h"
 #include <iostream>
 #include "TObject.h"
 #include "TString.h"
-#include "userInfo.h"
 
+//ONE AND ONLY DEF OF GLOBAL PARAMS OBJECT HERE
+userInfo* logFileParams = new userInfo();
 
 //#if !defined(__CLING__)
 ClassImp(userInfo)
