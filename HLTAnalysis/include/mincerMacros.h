@@ -20,7 +20,6 @@
 #include "TBenchmark.h"
 #include "TObject.h"
 #include "TDatime.h"
-
 #include "userInfo.h"
 
 //TODO: definitely needs better name for this macro. actually make decriptive of what these helpers do
