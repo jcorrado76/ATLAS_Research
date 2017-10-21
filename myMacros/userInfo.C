@@ -9,10 +9,14 @@ ClassImp(userInfo)
 //#endif
 
 #ifdef __CLING__
-#pragma link C++ userInfo userInfo.h+;
+#pragma link C++ class userInfo+;
 #pragma link C++ global logFileParams;
 #pragma link C++ function threeEfficiencies;
-#pragma link C++ function mincerMacros;
+#pragma link C++ function computeMetNoMu;
+#pragma link C++ function passTransverseMassCut;
+#pragma link C++ function computeThresh;
+#pragma link C++ function determineZeroBiasThresh;
+#pragma link C++ function determineMuonEventsKeptCombined;
 #pragma link C++ function bisection;
 #endif
 
