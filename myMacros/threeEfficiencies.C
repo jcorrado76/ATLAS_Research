@@ -13,6 +13,9 @@
 #include "TBenchmark.h"
 #include "TNtuple.h"
 #include "userInfo.h"
+//#include "userInfo.C+"
+//#include "mincerMacros.C+"
+//#include "bisection.C+"
 
 TFile* threeEfficiencies( const TString& algA , const TString& algB,
         const Float_t frac = 0.00590, const TString folder = "" )

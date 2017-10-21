@@ -47,7 +47,6 @@ private:
 public:
     //default constructor
     userInfo();
-    userInfo(TString algA , TString algB);
     //destructor
     void Print(Option_t *option = "") const;
     //getters
@@ -94,7 +93,8 @@ public:
     ClassDef( userInfo, 1)
 };
 
-    extern userInfo* logFileParams;
-
+#ifndef __CINT__
+extern userInfo* logFileParams;
+#endif
 
 #endif
