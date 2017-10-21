@@ -202,29 +202,7 @@ namespace trkeff
         }
     }
 
-    //TODO: replace names of branches with relevant ones
-    const unsigned int& run();
-    const unsigned int& ls();
-    const unsigned int& event();
-    const std::vector<LorentzVectorD >& trks_p4();
-    const std::vector<double>& trks_d0();
-    const std::vector<double>& trks_dz();
-    const std::vector<double>& trks_pterr();
-    const std::vector<double>& trks_d0err();
-    const std::vector<double>& trks_dzerr();
-    const std::vector<double>& trks_chi2();
-    const std::vector<int>& trks_ndof();
-    const std::vector<int>& trks_nlayers();
-    const std::vector<bool>& trks_high_purity();
-    const std::vector<bool>& tps_matched();
-    const std::vector<int>& tps_pdgid();
-    const std::vector<LorentzVectorD >& tps_p4();
-    const std::vector<double>& tps_d0();
-    const std::vector<double>& tps_dz();
-    const std::vector<double>& tps_tip();
-    const std::vector<double>& tps_lip();
-    const std::vector<int>& tps_charge();
-    const std::vector<int>& tps_nhits();
+
 } // namespace trkeff
 
 
@@ -272,7 +250,7 @@ class ChainHandler
     private:
 
         // handles
-        //TODO: replace names 
+        //TODO: replace names
         trkeff::Handle< unsigned int > run_handle;
         trkeff::Handle< unsigned int > ls_handle;
         trkeff::Handle< unsigned int > event_handle;
@@ -299,7 +277,33 @@ class ChainHandler
 };
 
 
+namespace trkeff
+{
 
+    const unsigned int& run();
+    const unsigned int& ls();
+    const unsigned int& event();
+    const std::vector<LorentzVectorD >& trks_p4();
+    const std::vector<double>& trks_d0();
+    const std::vector<double>& trks_dz();
+    const std::vector<double>& trks_pterr();
+    const std::vector<double>& trks_d0err();
+    const std::vector<double>& trks_dzerr();
+    const std::vector<double>& trks_chi2();
+    const std::vector<int>& trks_ndof();
+    const std::vector<int>& trks_nlayers();
+    const std::vector<bool>& trks_high_purity();
+    const std::vector<bool>& tps_matched();
+    const std::vector<int>& tps_pdgid();
+    const std::vector<LorentzVectorD >& tps_p4();
+    const std::vector<double>& tps_d0();
+    const std::vector<double>& tps_dz();
+    const std::vector<double>& tps_tip();
+    const std::vector<double>& tps_lip();
+    const std::vector<int>& tps_charge();
+    const std::vector<int>& tps_nhits();
+
+} // namespace trkeff
 
 
 #ifndef __CINT__
