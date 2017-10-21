@@ -240,6 +240,7 @@ void HLTEfficiencyAnalysis::DoAnalysis( TChain& chain )
     // --------------------//
     // Event Loop/con
     // --------------------//
+    //TODO: pick up here where you left off in terms of porting your analysis into this one 
     for (long long entry = 0; entry < num_events; entry++)
     {
         if (m_verbose)
