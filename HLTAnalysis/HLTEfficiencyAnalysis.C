@@ -1,4 +1,7 @@
 #include "mincerMacros.h"
+#include "userInfo.h"
+#include "ChainHandler.h"
+
 
 // analysis class definition
 class HLTEfficiencyAnalysis
@@ -13,13 +16,13 @@ public:
     //destructor
     ~HLTEfficiencyAnalysis();
 
-    void DoAnalysis( TChain* chain );
-
 private:
     //analysis methods
     void Begin();
     void End();
-    void Analyze();
+    void DoAnalysis( TChain* chain );
+    void DetermineThresholds();
+    void AnalyzeEfficiencies();
 
     //data members
     userInfo* parameters;
@@ -61,6 +64,9 @@ HLTEfficiencyAnalysis::~HLTEfficiencyAnalysis()
 
 void HLTEfficiencyAnalysis::Begin()
 {
+
+    //TODO: all this stuff shouldn't be initialized here unless it is a private member variable, it won't
+    //      survive the scope of this function
     //FILES
     TString zerobiasFileName = logFileParams->get_passnoalgFileName();
     TString muonFilename = logFileParams->get_muonFileName();
@@ -218,6 +224,9 @@ void HLTEfficiencyAnalysis::End()
 
 void HLTEfficiencyAnalysis::DoAnalysis( TChain& chain )
 {
+    //TODO: make two different benchmarks, one for determining thresholds, and one for Determining
+    //      muon efficiencies
+
     // benchmark
     TBenchmark bmark;
     bmark.Start("benchmark");
@@ -230,7 +239,9 @@ void HLTEfficiencyAnalysis::DoAnalysis( TChain& chain )
     int per_mille_old = 0;
     long long num_events_processed = 0;
     num_events = (num_events > 0 ? std::min(chain.GetEntries(), num_events) : chain.GetEntries());
-    trkeff_obj.Init(chain);
+
+    //TODO: use the same object to read the threshold tree, and then to read the muon tree
+    ChainHandler_obj.Init(chain);
 
     // --------------------//
     // Run the Begin Job
@@ -240,7 +251,7 @@ void HLTEfficiencyAnalysis::DoAnalysis( TChain& chain )
     // --------------------//
     // Event Loop/con
     // --------------------//
-    //TODO: pick up here where you left off in terms of porting your analysis into this one 
+    //TODO: pick up here where you left off in terms of porting your analysis into this one
     for (long long entry = 0; entry < num_events; entry++)
     {
         if (m_verbose)
