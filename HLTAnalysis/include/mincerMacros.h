@@ -20,6 +20,7 @@
 #include "TBenchmark.h"
 #include "TObject.h"
 #include "TDatime.h"
+#include "TChain.h"
 
 #include "userInfo.h"
 

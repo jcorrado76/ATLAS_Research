@@ -4,8 +4,6 @@
 
 
 //TODO: probably don't need all of these
-#include "Math/LorentzVector.h"
-#include "Math/Point3D.h"
 #include "TMath.h"
 #include "TBranch.h"
 #include "TTree.h"
@@ -19,7 +17,7 @@
 
 
 
-namespace trkeff
+namespace treeReaderSpace
 {
     struct BranchType
     {
@@ -203,7 +201,7 @@ namespace trkeff
     }
 
 
-} // namespace trkeff
+} // namespace treeReaderSpace
 
 
 
@@ -251,33 +249,33 @@ class ChainHandler
 
         // handles
         //TODO: replace names
-        trkeff::Handle< unsigned int > run_handle;
-        trkeff::Handle< unsigned int > ls_handle;
-        trkeff::Handle< unsigned int > event_handle;
-        trkeff::Handle< std::vector<LorentzVectorD > > trks_p4_handle;
-        trkeff::Handle< std::vector<double> > trks_d0_handle;
-        trkeff::Handle< std::vector<double> > trks_dz_handle;
-        trkeff::Handle< std::vector<double> > trks_pterr_handle;
-        trkeff::Handle< std::vector<double> > trks_d0err_handle;
-        trkeff::Handle< std::vector<double> > trks_dzerr_handle;
-        trkeff::Handle< std::vector<double> > trks_chi2_handle;
-        trkeff::Handle< std::vector<int> > trks_ndof_handle;
-        trkeff::Handle< std::vector<int> > trks_nlayers_handle;
-        trkeff::Handle< std::vector<bool> > trks_high_purity_handle;
-        trkeff::Handle< std::vector<bool> > tps_matched_handle;
-        trkeff::Handle< std::vector<int> > tps_pdgid_handle;
-        trkeff::Handle< std::vector<LorentzVectorD > > tps_p4_handle;
-        trkeff::Handle< std::vector<double> > tps_d0_handle;
-        trkeff::Handle< std::vector<double> > tps_dz_handle;
-        trkeff::Handle< std::vector<double> > tps_tip_handle;
-        trkeff::Handle< std::vector<double> > tps_lip_handle;
-        trkeff::Handle< std::vector<int> > tps_charge_handle;
-        trkeff::Handle< std::vector<int> > tps_nhits_handle;
+        treeReaderSpace ::Handle< unsigned int > run_handle;
+        treeReaderSpace ::Handle< unsigned int > ls_handle;
+        treeReaderSpace ::Handle< unsigned int > event_handle;
+        treeReaderSpace ::Handle< std::vector<LorentzVectorD > > trks_p4_handle;
+        treeReaderSpace ::Handle< std::vector<double> > trks_d0_handle;
+        treeReaderSpace ::Handle< std::vector<double> > trks_dz_handle;
+        treeReaderSpace ::Handle< std::vector<double> > trks_pterr_handle;
+        treeReaderSpace ::Handle< std::vector<double> > trks_d0err_handle;
+        treeReaderSpace ::Handle< std::vector<double> > trks_dzerr_handle;
+        treeReaderSpace ::Handle< std::vector<double> > trks_chi2_handle;
+        treeReaderSpace ::Handle< std::vector<int> > trks_ndof_handle;
+        treeReaderSpace ::Handle< std::vector<int> > trks_nlayers_handle;
+        treeReaderSpace ::Handle< std::vector<bool> > trks_high_purity_handle;
+        treeReaderSpace ::Handle< std::vector<bool> > tps_matched_handle;
+        treeReaderSpace ::Handle< std::vector<int> > tps_pdgid_handle;
+        treeReaderSpace ::Handle< std::vector<LorentzVectorD > > tps_p4_handle;
+        treeReaderSpace ::Handle< std::vector<double> > tps_d0_handle;
+        treeReaderSpace ::Handle< std::vector<double> > tps_dz_handle;
+        treeReaderSpace ::Handle< std::vector<double> > tps_tip_handle;
+        treeReaderSpace ::Handle< std::vector<double> > tps_lip_handle;
+        treeReaderSpace ::Handle< std::vector<int> > tps_charge_handle;
+        treeReaderSpace ::Handle< std::vector<int> > tps_nhits_handle;
 
 };
 
 
-namespace trkeff
+namespace treeReaderSpace
 {
 
 //TODO: replace names
@@ -304,7 +302,7 @@ namespace trkeff
     const std::vector<int>& tps_charge();
     const std::vector<int>& tps_nhits();
 
-} // namespace trkeff
+} // namespace treeReaderSpace
 
 
 #ifndef __CINT__

@@ -20,9 +20,9 @@ private:
     //analysis methods
     void Begin();
     void End();
-    void DoAnalysis( TChain* chain );
+    void DoAnalysis();
     void DetermineThresholds();
-    void AnalyzeEfficiencies();
+    void AnalyzeMuon ();
 
     //data members
     userInfo* parameters;
@@ -34,7 +34,6 @@ private:
 
 
 };
-
 
 //constructor definition
 HLTEfficiencyAnalysis::HLTEfficiencyAnalysis()
@@ -67,23 +66,7 @@ void HLTEfficiencyAnalysis::Begin()
 
     //TODO: all this stuff shouldn't be initialized here unless it is a private member variable, it won't
     //      survive the scope of this function
-    //FILES
-    TString zerobiasFileName = logFileParams->get_passnoalgFileName();
-    TString muonFilename = logFileParams->get_muonFileName();
 
-    //ZB_FILE; ZB_TREE
-    TString zerobiasFilePath = "../myData/"+ zerobiasFileName;
-    TFile * zeroBiasFile = TFile::Open(zerobiasFilePath, "READ");
-    TTree* zeroBiasTree = (TTree*)zeroBiasFile->Get("tree");
-    Int_t zerobiasNentries = zeroBiasTree->GetEntries();
-    logFileParams->set_PassnoalgNentries( zerobiasNentries );
-
-    //MUON FILE; MUON TREE
-    TString muonFilePath = "../myData/"+muonFilename;
-    TFile * muonFile = TFile::Open(muonFilePath, "READ");
-    TTree* myMuonTree = (TTree*)muonFile->Get("tree");
-    Int_t muonNentries = myMuonTree->GetEntries();
-    logFileParams->setMuonNentries( muonNentries );
 
     //INITIALIZE
     Int_t muonNbins = 200;
@@ -221,12 +204,21 @@ void HLTEfficiencyAnalysis::End()
     rootFile->Close();
 }
 
+void HLTEfficiencyAnalysis::DetermineThresholds()
+{
+    using namespace treeReaderSpace;
+}
 
-void HLTEfficiencyAnalysis::DoAnalysis( TChain& chain )
+void HLTEfficiencyAnalysis::AnalyzeMuon()
+{
+
+}
+
+
+void HLTEfficiencyAnalysis::DoAnalysis()
 {
     //TODO: make two different benchmarks, one for determining thresholds, and one for Determining
     //      muon efficiencies
-
     // benchmark
     TBenchmark bmark;
     bmark.Start("benchmark");
@@ -235,49 +227,52 @@ void HLTEfficiencyAnalysis::DoAnalysis( TChain& chain )
     TTreeCache::SetLearnEntries(10);
     chain.SetCacheSize(128*1024*1024);
 
-    // events counts and max events
-    int per_mille_old = 0;
-    long long num_events_processed = 0;
-    num_events = (num_events > 0 ? std::min(chain.GetEntries(), num_events) : chain.GetEntries());
+    //FILES
+    TString zerobiasFileName = logFileParams->get_passnoalgFileName();
+    TString muonFilename = logFileParams->get_muonFileName();
+
+    //ZB_FILE; ZB_TREE
+    TString zerobiasFilePath = "../myData/"+ zerobiasFileName;
+    TFile * zeroBiasFile = TFile::Open(zerobiasFilePath, "READ");
+    TTree* zeroBiasTree = (TTree*)zeroBiasFile->Get("tree");
+    Int_t zerobiasNentries = zeroBiasTree->GetEntries();
+    logFileParams->set_PassnoalgNentries( zerobiasNentries );
+
+    //MUON FILE; MUON TREE
+    TString muonFilePath = "../myData/"+muonFilename;
+    TFile * muonFile = TFile::Open(muonFilePath, "READ");
+    TTree* myMuonTree = (TTree*)muonFile->Get("tree");
+    Int_t muonNentries = myMuonTree->GetEntries();
+    logFileParams->setMuonNentries( muonNentries );
+
 
     //TODO: use the same object to read the threshold tree, and then to read the muon tree
-    ChainHandler_obj.Init(chain);
+    //initialize reader with zb tree
+    ChainHandler_obj.Init(zeroBiasTree);
 
-    // --------------------//
-    // Run the Begin Job
-    // --------------------//
     Begin();
 
-    // --------------------//
-    // Event Loop/con
-    // --------------------//
     //TODO: pick up here where you left off in terms of porting your analysis into this one
-    for (long long entry = 0; entry < num_events; entry++)
+    for (long long entry = 0; entry < zerobiasNentries; entry++)
     {
-        if (m_verbose)
-        {
-            cout << "[TrackingEfficiencyAnalysis::DoAnalysis] Processing entry " << entry << "\n";
-            cout << "--------------------------\n" << endl;
-        }
-
-        // pogress
-        int per_mille = static_cast<int>(floor(1000.0 * static_cast<float>(num_events_processed)/static_cast<float>(num_events)));
-        cout << per_mille << "\t" << per_mille_old;
-        if (per_mille != per_mille_old)
-        {
-            printf("  \015\033[32m ---> \033[1m\033[31m%4.1f%%" "\033[0m\033[32m <---\033[0m\015", per_mille/10.0);
-            fflush(stdout);
-            per_mille_old = per_mille;
-        }
-
         // load the current event
-        trkeff_obj.GetEntry(entry);
+        ChainHandler_obj.GetEntry(entry);
+
+        // analyze the event
+        DetermineThresholds();
+
+    }
+
+    ChainHandler_obj.Init(myMuonTree);
+
+    for (long long entry = 0; entry < muonNentries; entry++)
+    {
+        // load the current event
+        ChainHandler_obj.GetEntry(entry);
 
         // analyze the event
         Analyze();
 
-        // increment counter
-        num_events_processed++;
     }
 
     // Done and benchmark results
