@@ -151,52 +151,37 @@ const std::vector<int>& ChainHandler::tps_nhits() {return tps_nhits_handle.get()
 
 
 
-/*static*/ void ChainHandler::progress(const int nEventsTotal, const int nEventsChain)
-{
-    int period = 1000;
-    if (nEventsTotal%1000 == 0)
-    {
-        // xterm magic from L. Vacavant and A. Cerri
-        if (isatty(1))
-        {
-            if ((nEventsChain - nEventsTotal) > period)
-            {
-                float frac = (float)nEventsTotal/(nEventsChain*0.01);
-                printf("\015\033[32m ---> \033[1m\033[31m%4.1f%%\033[0m\033[32m <---\033[0m\015", frac);
-                fflush(stdout);
-            }
-            else
-            {
-                printf("\015\033[32m ---> \033[1m\033[31m%4.1f%%\033[0m\033[32m <---\033[0m\015", 100.0);
-                std::cout << std::endl;
-            }
-        }
-    }
-}
+
 namespace trkeff
 {
-    //TODO: replace branches
-    const unsigned int& run() {return trkeff_obj.run();}
-    const unsigned int& ls() {return trkeff_obj.ls();}
-    const unsigned int& event() {return trkeff_obj.event();}
-    const std::vector<LorentzVectorD >& trks_p4() {return trkeff_obj.trks_p4();}
-    const std::vector<double>& trks_d0() {return trkeff_obj.trks_d0();}
-    const std::vector<double>& trks_dz() {return trkeff_obj.trks_dz();}
-    const std::vector<double>& trks_pterr() {return trkeff_obj.trks_pterr();}
-    const std::vector<double>& trks_d0err() {return trkeff_obj.trks_d0err();}
-    const std::vector<double>& trks_dzerr() {return trkeff_obj.trks_dzerr();}
-    const std::vector<double>& trks_chi2() {return trkeff_obj.trks_chi2();}
-    const std::vector<int>& trks_ndof() {return trkeff_obj.trks_ndof();}
-    const std::vector<int>& trks_nlayers() {return trkeff_obj.trks_nlayers();}
-    const std::vector<bool>& trks_high_purity() {return trkeff_obj.trks_high_purity();}
-    const std::vector<bool>& tps_matched() {return trkeff_obj.tps_matched();}
-    const std::vector<int>& tps_pdgid() {return trkeff_obj.tps_pdgid();}
-    const std::vector<LorentzVectorD >& tps_p4() {return trkeff_obj.tps_p4();}
-    const std::vector<double>& tps_d0() {return trkeff_obj.tps_d0();}
-    const std::vector<double>& tps_dz() {return trkeff_obj.tps_dz();}
-    const std::vector<double>& tps_tip() {return trkeff_obj.tps_tip();}
-    const std::vector<double>& tps_lip() {return trkeff_obj.tps_lip();}
-    const std::vector<int>& tps_charge() {return trkeff_obj.tps_charge();}
-    const std::vector<int>& tps_nhits() {return trkeff_obj.tps_nhits();}
+    const unsigned int& run() {return ChainHandler_obj .run();}
+    const unsigned int& ls() {return ChainHandler_obj .ls();}
+    const unsigned int& event() {return ChainHandler_obj .event();}
+    const Int_t& get_passrndm(){return ChainHandler_obj.passrndm();}
+    const Float_t& get_algA(){return ChainHandler_obj.algA();};
+    const Float_t& get_algB(){return ChainHandler_obj.algB();};
+    const Float_t& get_metl1(){return ChainHandler_obj.metl1();};
+    const Float_t& get_passnoalgL1XE10(){return ChainHandler_obj.passnoalgL1XE10();};
+    const Float_t& get_passnoalgL1XE30(){return ChainHandler_obj.passnoalgL1XE30();};
+    const Float_t& get_passnoalgL1XE40(){return ChainHandler_obj.passnoalgL1XE40();};
+    const Float_t& get_passnoalgL1XE45(){return ChainHandler_obj.passnoalgL1XE45();};
+    const Float_t& get_thresh_actint(){return ChainHandler_obj.thresh_actint();};
+    const Float_t& get_passmuon(){return ChainHandler_obj.passmuon();};
+    const Float_t& get_passmuvarmed(){return ChainHandler_obj.passmuvarmed();};
+    const Float_t& get_cleanCutsFlag(){return ChainHandler_obj.cleanCutsFlag();};
+    const Float_t& get_recalBrokeFlag(){return ChainHandler_obj.recalBrokeFlag();};
+    const Float_t& get_metoffrecal(){return ChainHandler_obj.metoffrecal();};
+    const Float_t& get_mexoffrecal(){return ChainHandler_obj.mexoffrecal();};
+    const Float_t& get_meyoffrecal(){return ChainHandler_obj.meyoffrecal();};
+    const Float_t& get_metoffrecalmuon(){return ChainHandler_obj.metoffrecalmuon();};
+    const Float_t& get_mexoffrecalmuon(){return ChainHandler_obj.mexoffrecalmuon();};
+    const Float_t& get_meyoffrecalmuon(){return ChainHandler_obj.meyoffrecalmuon();};
+    const Float_t& get_metrefmuon(){return ChainHandler_obj.metrefmuon();};
+    const Float_t& get_mexrefmuon(){return ChainHandler_obj.mexrefmuon();};
+    const Float_t& get_meyrefmuon(){return ChainHandler_obj.meyrefmuon();};
+    const Float_t& get_algAmuon(){return ChainHandler_obj.algAmuon();};
+    const Float_t& get_algBmuon(){return ChainHandler_obj.algBmuon();};
+    const Float_t& get_metl1muon(){return ChainHandler_obj.metl1muon();};
+    const Float_t& get_actintmuon(){return ChainHandler_obj.actintmuon();};
 
 } // namespace trkeff

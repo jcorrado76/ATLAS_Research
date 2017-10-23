@@ -207,11 +207,12 @@ void HLTEfficiencyAnalysis::End()
 void HLTEfficiencyAnalysis::DetermineThresholds()
 {
     using namespace treeReaderSpace;
+
 }
 
 void HLTEfficiencyAnalysis::AnalyzeMuon()
 {
-
+    using namespace treeReaderSpace;
 }
 
 

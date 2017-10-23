@@ -217,33 +217,37 @@ class ChainHandler
 		void LoadAllBranches();
 
 
-       	// static methods:
-       	static void progress(const int nEventsTotal, const int nEventsChain);
-
         // branch accessors
-        //TODO: replace names
         const unsigned int& run();
         const unsigned int& ls();
         const unsigned int& event();
-        const std::vector<LorentzVectorD >& trks_p4();
-        const std::vector<double>& trks_d0();
-        const std::vector<double>& trks_dz();
-        const std::vector<double>& trks_pterr();
-        const std::vector<double>& trks_d0err();
-        const std::vector<double>& trks_dzerr();
-        const std::vector<double>& trks_chi2();
-        const std::vector<int>& trks_ndof();
-        const std::vector<int>& trks_nlayers();
-        const std::vector<bool>& trks_high_purity();
-        const std::vector<bool>& tps_matched();
-        const std::vector<int>& tps_pdgid();
-        const std::vector<LorentzVectorD >& tps_p4();
-        const std::vector<double>& tps_d0();
-        const std::vector<double>& tps_dz();
-        const std::vector<double>& tps_tip();
-        const std::vector<double>& tps_lip();
-        const std::vector<int>& tps_charge();
-        const std::vector<int>& tps_nhits();
+        const Int_t passrndm();
+        const Float_t algA();
+        const Float_t algB();
+        const Float_t metl1();
+        const Float_t passnoalgL1XE10();
+        const Float_t passnoalgL1XE30();
+        const Float_t passnoalgL1XE40();
+        const Float_t passnoalgL1XE45();
+        const Float_t thresh_actint();
+        const Float_t passmuon();
+        const Float_t passmuvarmed();
+        const Float_t cleanCutsFlag();
+        const Float_t recalBrokeFlag();
+        const Float_t metoffrecal();
+        const Float_t mexoffrecal();
+        const Float_t meyoffrecal();
+        const Float_t metoffrecalmuon();
+        const Float_t mexoffrecalmuon();
+        const Float_t meyoffrecalmuon();
+        const Float_t metrefmuon();
+        const Float_t mexrefmuon();
+        const Float_t meyrefmuon();
+        const Float_t algAmuon();
+        const Float_t algBmuon();
+        const Float_t metl1muon();
+        const Float_t actintmuon();
+
 
     private:
 
@@ -252,55 +256,66 @@ class ChainHandler
         treeReaderSpace ::Handle< unsigned int > run_handle;
         treeReaderSpace ::Handle< unsigned int > ls_handle;
         treeReaderSpace ::Handle< unsigned int > event_handle;
-        treeReaderSpace ::Handle< std::vector<LorentzVectorD > > trks_p4_handle;
-        treeReaderSpace ::Handle< std::vector<double> > trks_d0_handle;
-        treeReaderSpace ::Handle< std::vector<double> > trks_dz_handle;
-        treeReaderSpace ::Handle< std::vector<double> > trks_pterr_handle;
-        treeReaderSpace ::Handle< std::vector<double> > trks_d0err_handle;
-        treeReaderSpace ::Handle< std::vector<double> > trks_dzerr_handle;
-        treeReaderSpace ::Handle< std::vector<double> > trks_chi2_handle;
-        treeReaderSpace ::Handle< std::vector<int> > trks_ndof_handle;
-        treeReaderSpace ::Handle< std::vector<int> > trks_nlayers_handle;
-        treeReaderSpace ::Handle< std::vector<bool> > trks_high_purity_handle;
-        treeReaderSpace ::Handle< std::vector<bool> > tps_matched_handle;
-        treeReaderSpace ::Handle< std::vector<int> > tps_pdgid_handle;
-        treeReaderSpace ::Handle< std::vector<LorentzVectorD > > tps_p4_handle;
-        treeReaderSpace ::Handle< std::vector<double> > tps_d0_handle;
-        treeReaderSpace ::Handle< std::vector<double> > tps_dz_handle;
-        treeReaderSpace ::Handle< std::vector<double> > tps_tip_handle;
-        treeReaderSpace ::Handle< std::vector<double> > tps_lip_handle;
-        treeReaderSpace ::Handle< std::vector<int> > tps_charge_handle;
-        treeReaderSpace ::Handle< std::vector<int> > tps_nhits_handle;
-
+        treeReaderSpace ::Handle< Int_t        > passrndm_handle;
+        treeReaderSpace ::Handle< Float_t      > algA_handle;
+        treeReaderSpace ::Handle< Float_t      > algB_handle;
+        treeReaderSpace ::Handle< Float_t      > metl1_handle;
+        treeReaderSpace ::Handle< Float_t      > passnoalgL1XE10_handle;
+        treeReaderSpace ::Handle< Float_t      > passnoalgL1XE30_handle;
+        treeReaderSpace ::Handle< Float_t      > passnoalgL1XE40_handle;
+        treeReaderSpace ::Handle< Float_t      > passnoalgL1XE45_handle;
+        treeReaderSpace ::Handle< Float_t      > thresh_actint_handle;
+        treeReaderSpace ::Handle< Float_t      > passmuon_handle;
+        treeReaderSpace ::Handle< Float_t      > passmuvarmed_handle;
+        treeReaderSpace ::Handle< Float_t      > cleanCutsFlag_handle;
+        treeReaderSpace ::Handle< Float_t      > recalBrokeFlag_handle;
+        treeReaderSpace ::Handle< Float_t      > metoffrecal_handle;
+        treeReaderSpace ::Handle< Float_t      > mexoffrecal_handle;
+        treeReaderSpace ::Handle< Float_t      > meyoffrecal_handle;
+        treeReaderSpace ::Handle< Float_t      > metoffrecalmuon_handle;
+        treeReaderSpace ::Handle< Float_t      > mexoffrecalmuon_handle;
+        treeReaderSpace ::Handle< Float_t      > meyoffrecalmuon_handle;
+        treeReaderSpace ::Handle< Float_t      > metrefmuon_handle;
+        treeReaderSpace ::Handle< Float_t      > mexrefmuon_handle;
+        treeReaderSpace ::Handle< Float_t      > meyrefmuon_handle;
+        treeReaderSpace ::Handle< Float_t      > algAmuon_handle;
+        treeReaderSpace ::Handle< Float_t      > algBmuon_handle;
+        treeReaderSpace ::Handle< Float_t      > metl1muon_handle;
+        treeReaderSpace ::Handle< Float_t      > actintmuon_handle;
 };
 
 
 namespace treeReaderSpace
 {
-
-//TODO: replace names
     const unsigned int& run();
     const unsigned int& ls();
     const unsigned int& event();
-    const std::vector<LorentzVectorD >& trks_p4();
-    const std::vector<double>& trks_d0();
-    const std::vector<double>& trks_dz();
-    const std::vector<double>& trks_pterr();
-    const std::vector<double>& trks_d0err();
-    const std::vector<double>& trks_dzerr();
-    const std::vector<double>& trks_chi2();
-    const std::vector<int>& trks_ndof();
-    const std::vector<int>& trks_nlayers();
-    const std::vector<bool>& trks_high_purity();
-    const std::vector<bool>& tps_matched();
-    const std::vector<int>& tps_pdgid();
-    const std::vector<LorentzVectorD >& tps_p4();
-    const std::vector<double>& tps_d0();
-    const std::vector<double>& tps_dz();
-    const std::vector<double>& tps_tip();
-    const std::vector<double>& tps_lip();
-    const std::vector<int>& tps_charge();
-    const std::vector<int>& tps_nhits();
+    const Int_t get_passrndm();
+    const Float_t get_algA();
+    const Float_t get_algB();
+    const Float_t get_metl1();
+    const Float_t get_passnoalgL1XE10();
+    const Float_t get_passnoalgL1XE30();
+    const Float_t get_passnoalgL1XE40();
+    const Float_t get_passnoalgL1XE45();
+    const Float_t get_thresh_actint();
+    const Float_t get_passmuon();
+    const Float_t get_passmuvarmed();
+    const Float_t get_cleanCutsFlag();
+    const Float_t get_recalBrokeFlag();
+    const Float_t get_metoffrecal();
+    const Float_t get_mexoffrecal();
+    const Float_t get_meyoffrecal();
+    const Float_t get_metoffrecalmuon();
+    const Float_t get_mexoffrecalmuon();
+    const Float_t get_meyoffrecalmuon();
+    const Float_t get_metrefmuon();
+    const Float_t get_mexrefmuon();
+    const Float_t get_meyrefmuon();
+    const Float_t get_algAmuon();
+    const Float_t get_algBmuon();
+    const Float_t get_metl1muon();
+    const Float_t get_actintmuon();
 
 } // namespace treeReaderSpace
 
