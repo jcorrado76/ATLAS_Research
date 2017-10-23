@@ -3,7 +3,6 @@
 #define CHAINHANDLER_H
 
 
-//TODO: probably don't need all of these
 #include "TMath.h"
 #include "TBranch.h"
 #include "TTree.h"
@@ -252,7 +251,6 @@ class ChainHandler
     private:
 
         // handles
-        //TODO: replace names
         treeReaderSpace ::Handle< unsigned int > run_handle;
         treeReaderSpace ::Handle< unsigned int > ls_handle;
         treeReaderSpace ::Handle< unsigned int > event_handle;

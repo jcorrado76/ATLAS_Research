@@ -36,29 +36,35 @@ ChainHandler::ChainHandler()
 
 void ChainHandler::Init(TTree& tree)
 {
-    //TODO: replace branches
     run_handle.Init(tree);
     ls_handle.Init(tree);
     event_handle.Init(tree);
-    trks_p4_handle.Init(tree);
-    trks_d0_handle.Init(tree);
-    trks_dz_handle.Init(tree);
-    trks_pterr_handle.Init(tree);
-    trks_d0err_handle.Init(tree);
-    trks_dzerr_handle.Init(tree);
-    trks_chi2_handle.Init(tree);
-    trks_ndof_handle.Init(tree);
-    trks_nlayers_handle.Init(tree);
-    trks_high_purity_handle.Init(tree);
-    tps_matched_handle.Init(tree);
-    tps_pdgid_handle.Init(tree);
-    tps_p4_handle.Init(tree);
-    tps_d0_handle.Init(tree);
-    tps_dz_handle.Init(tree);
-    tps_tip_handle.Init(tree);
-    tps_lip_handle.Init(tree);
-    tps_charge_handle.Init(tree);
-    tps_nhits_handle.Init(tree);
+    passrndm_handle.Init(tree) ;
+    algA_handle.Init(tree) ;
+    algB_handle.Init(tree) ;
+    metl1_handle.Init(tree) ;
+    passnoalgL1XE10_handle.Init(tree) ;
+    passnoalgL1XE30_handle.Init(tree) ;
+    passnoalgL1XE40_handle.Init(tree) ;
+    passnoalgL1XE45_handle.Init(tree) ;
+    thresh_actint_handle.Init(tree) ;
+    passmuon_handle.Init(tree) ;
+    passmuvarmed_handle.Init(tree) ;
+    cleanCutsFlag_handle.Init(tree) ;
+    recalBrokeFlag_handle.Init(tree) ;
+    metoffrecal_handle.Init(tree) ;
+    mexoffrecal_handle.Init(tree) ;
+    meyoffrecal_handle.Init(tree) ;
+    metoffrecalmuon_handle.Init(tree) ;
+    mexoffrecalmuon_handle.Init(tree) ;
+    meyoffrecalmuon_handle.Init(tree) ;
+    metrefmuon_handle.Init(tree) ;
+    mexrefmuon_handle.Init(tree) ;
+    meyrefmuon_handle.Init(tree) ;
+    algAmuon_handle.Init(tree) ;
+    algBmuon_handle.Init(tree) ;
+    metl1muon_handle.Init(tree) ;
+    actintmuon_handle.Init(tree) ;
 
 }
 
@@ -69,87 +75,103 @@ void ChainHandler::Init(TTree* const tree)
 
 void ChainHandler::GetEntry(const unsigned int entry)
 {
-    //TODO: replace branches
     run_handle.GetEntry(entry);
     ls_handle.GetEntry(entry);
     event_handle.GetEntry(entry);
-    trks_p4_handle.GetEntry(entry);
-    trks_d0_handle.GetEntry(entry);
-    trks_dz_handle.GetEntry(entry);
-    trks_pterr_handle.GetEntry(entry);
-    trks_d0err_handle.GetEntry(entry);
-    trks_dzerr_handle.GetEntry(entry);
-    trks_chi2_handle.GetEntry(entry);
-    trks_ndof_handle.GetEntry(entry);
-    trks_nlayers_handle.GetEntry(entry);
-    trks_high_purity_handle.GetEntry(entry);
-    tps_matched_handle.GetEntry(entry);
-    tps_pdgid_handle.GetEntry(entry);
-    tps_p4_handle.GetEntry(entry);
-    tps_d0_handle.GetEntry(entry);
-    tps_dz_handle.GetEntry(entry);
-    tps_tip_handle.GetEntry(entry);
-    tps_lip_handle.GetEntry(entry);
-    tps_charge_handle.GetEntry(entry);
-    tps_nhits_handle.GetEntry(entry);
+    passrndm_handle.GetEntry(entry) ;
+    algA_handle.GetEntry(entry) ;
+    algB_handle.GetEntry(entry) ;
+    metl1_handle.GetEntry(entry) ;
+    passnoalgL1XE10_handle.GetEntry(entry) ;
+    passnoalgL1XE30_handle.GetEntry(entry) ;
+    passnoalgL1XE40_handle.GetEntry(entry) ;
+    passnoalgL1XE45_handle.GetEntry(entry) ;
+    thresh_actint_handle.GetEntry(entry) ;
+    passmuon_handle.GetEntry(entry) ;
+    passmuvarmed_handle.GetEntry(entry) ;
+    cleanCutsFlag_handle.GetEntry(entry) ;
+    recalBrokeFlag_handle.GetEntry(entry) ;
+    metoffrecal_handle.GetEntry(entry) ;
+    mexoffrecal_handle.GetEntry(entry) ;
+    meyoffrecal_handle.GetEntry(entry) ;
+    metoffrecalmuon_handle.GetEntry(entry) ;
+    mexoffrecalmuon_handle.GetEntry(entry) ;
+    meyoffrecalmuon_handle.GetEntry(entry) ;
+    metrefmuon_handle.GetEntry(entry) ;
+    mexrefmuon_handle.GetEntry(entry) ;
+    meyrefmuon_handle.GetEntry(entry) ;
+    algAmuon_handle.GetEntry(entry) ;
+    algBmuon_handle.GetEntry(entry) ;
+    metl1muon_handle.GetEntry(entry) ;
+    actintmuon_handle.GetEntry(entry) ;
 
 }
 
 void ChainHandler::LoadAllBranches()
 {
-    //TODO: replace branches
     run_handle.Load();
     ls_handle.Load();
     event_handle.Load();
-    trks_p4_handle.Load();
-    trks_d0_handle.Load();
-    trks_dz_handle.Load();
-    trks_pterr_handle.Load();
-    trks_d0err_handle.Load();
-    trks_dzerr_handle.Load();
-    trks_chi2_handle.Load();
-    trks_ndof_handle.Load();
-    trks_nlayers_handle.Load();
-    trks_high_purity_handle.Load();
-    tps_matched_handle.Load();
-    tps_pdgid_handle.Load();
-    tps_p4_handle.Load();
-    tps_d0_handle.Load();
-    tps_dz_handle.Load();
-    tps_tip_handle.Load();
-    tps_lip_handle.Load();
-    tps_charge_handle.Load();
-    tps_nhits_handle.Load();
+    passrndm_handle.Load();
+    algA_handle.Load();
+    algB_handle.Load();
+    metl1_handle.Load();
+    passnoalgL1XE10_handle.Load();
+    passnoalgL1XE30_handle.Load();
+    passnoalgL1XE40_handle.Load();
+    passnoalgL1XE45_handle.Load();
+    thresh_actint_handle.Load();
+    passmuon_handle.Load();
+    passmuvarmed_handle.Load();
+    cleanCutsFlag_handle.Load();
+    recalBrokeFlag_handle.Load();
+    metoffrecal_handle.Load();
+    mexoffrecal_handle.Load();
+    meyoffrecal_handle.Load();
+    metoffrecalmuon_handle.Load();
+    mexoffrecalmuon_handle.Load();
+    meyoffrecalmuon_handle.Load();
+    metrefmuon_handle.Load();
+    mexrefmuon_handle.Load();
+    meyrefmuon_handle.Load();
+    algAmuon_handle.Load();
+    algBmuon_handle.Load();
+    metl1muon_handle.Load();
+    actintmuon_handle.Load();
 
 }
 
 // branch accessor methods:
-//TODO: replace branch
+//implement ChainHandler methods to call Handle objects' get method
 const unsigned int& ChainHandler::run() {return run_handle.get();}
 const unsigned int& ChainHandler::ls() {return ls_handle.get();}
 const unsigned int& ChainHandler::event() {return event_handle.get();}
-const std::vector<LorentzVectorD >& ChainHandler::trks_p4() {return trks_p4_handle.get();}
-const std::vector<double>& ChainHandler::trks_d0() {return trks_d0_handle.get();}
-const std::vector<double>& ChainHandler::trks_dz() {return trks_dz_handle.get();}
-const std::vector<double>& ChainHandler::trks_pterr() {return trks_pterr_handle.get();}
-const std::vector<double>& ChainHandler::trks_d0err() {return trks_d0err_handle.get();}
-const std::vector<double>& ChainHandler::trks_dzerr() {return trks_dzerr_handle.get();}
-const std::vector<double>& ChainHandler::trks_chi2() {return trks_chi2_handle.get();}
-const std::vector<int>& ChainHandler::trks_ndof() {return trks_ndof_handle.get();}
-const std::vector<int>& ChainHandler::trks_nlayers() {return trks_nlayers_handle.get();}
-const std::vector<bool>& ChainHandler::trks_high_purity() {return trks_high_purity_handle.get();}
-const std::vector<bool>& ChainHandler::tps_matched() {return tps_matched_handle.get();}
-const std::vector<int>& ChainHandler::tps_pdgid() {return tps_pdgid_handle.get();}
-const std::vector<LorentzVectorD >& ChainHandler::tps_p4() {return tps_p4_handle.get();}
-const std::vector<double>& ChainHandler::tps_d0() {return tps_d0_handle.get();}
-const std::vector<double>& ChainHandler::tps_dz() {return tps_dz_handle.get();}
-const std::vector<double>& ChainHandler::tps_tip() {return tps_tip_handle.get();}
-const std::vector<double>& ChainHandler::tps_lip() {return tps_lip_handle.get();}
-const std::vector<int>& ChainHandler::tps_charge() {return tps_charge_handle.get();}
-const std::vector<int>& ChainHandler::tps_nhits() {return tps_nhits_handle.get();}
-
-
-
+const Int_t& ChainHandler::passrndm() {return passrndm_handle.get();}
+const Float_t& ChainHandler::algA(){return algA_handle.get();};
+const Float_t& ChainHandler::algB(){return algB_handle.get();};
+const Float_t& ChainHandler::metl1(){return metl1_handle.get();};
+const Float_t& ChainHandler::passnoalgL1XE10(){return passnoalgL1XE10_handle.get();};
+const Float_t& ChainHandler::passnoalgL1XE30(){return passnoalgL1XE30_handle.get();};
+const Float_t& ChainHandler::passnoalgL1XE40(){return passnoalgL1XE40_handle.get();};
+const Float_t& ChainHandler::passnoalgL1XE45(){return passnoalgL1XE45_handle.get();};
+const Float_t& ChainHandler::thresh_actint()(){return thresh_actint_handle.get();};
+const Float_t& ChainHandler::passmuon(){return passmuon_handle.get();};
+const Float_t& ChainHandler::passmuvarmed(){return passmuvarmed_handle.get();};
+const Float_t& ChainHandler::cleanCutsFlag(){return cleanCutsFlag_handle.get();};
+const Float_t& ChainHandler::recalBrokeFlag(){return recalBrokeFlag_handle.get();};
+const Float_t& ChainHandler::metoffrecal(){return metoffrecal_handle.get();};
+const Float_t& ChainHandler::mexoffrecal(){return mexoffrecal_handle.get();};
+const Float_t& ChainHandler::meyoffrecal(){return meyoffrecal_handle.get();};
+const Float_t& ChainHandler::metoffrecalmuon(){return metoffrecalmuon_handle.get();};
+const Float_t& ChainHandler::mexoffrecalmuon(){return mexoffrecalmuon_handle.get();};
+const Float_t& ChainHandler::meyoffrecalmuon(){return meyoffrecalmuon_handle.get();};
+const Float_t& ChainHandler::metrefmuon(){return metrefmuon_handle.get();};
+const Float_t& ChainHandler::mexrefmuon(){return mexrefmuon_handle.get();};
+const Float_t& ChainHandler::meyrefmuon(){return meyrefmuon_handle.get();};
+const Float_t& ChainHandler::algAmuon(){return algAmuon_handle.get();};
+const Float_t& ChainHandler::algBmuon(){return algBmuon_handle.get();};
+const Float_t& ChainHandler::metl1muon(){return metl1muon_handle.get();};
+const Float_t& ChainHandler::actintmuon(){return actintmuon_handle.get();};
 
 
 namespace trkeff
