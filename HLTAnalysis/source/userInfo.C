@@ -5,6 +5,10 @@
 
 ClassImp(userInfo)
 
+//global parameters object
+userInfo* parameters;
+
+
 //TODO: add in a collection of TCut objects reflecting the parameters
 //      so that if we need to do some treee analysis, there's an easy way to draw the tree using a
 //      specific cut that was used during a given run without having to look into the file and see its
