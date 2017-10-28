@@ -304,6 +304,8 @@ void HLTEfficiencyAnalysis::DoAnalysis()
 
     //COMPUTE EFFICIENCIES
     ChainHandler_obj.Init(myMuonTree);
+    ChainHandler_obj.ZbBranchInit(zeroBiasTree)
+
     bmark.Start("Analyze Efficiencies");
     for (long long entry = 0; entry < muonNentries; entry++)
     {

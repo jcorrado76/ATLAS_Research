@@ -214,7 +214,7 @@ class ChainHandler
         void Init(TTree& tree);
         void GetEntry(const unsigned int entry);
 		void LoadAllBranches();
-
+        void ZbBranchInit(TTree& tree);
 
         // branch accessors
         const unsigned int& run();
@@ -228,7 +228,7 @@ class ChainHandler
         const Float_t passnoalgL1XE30();
         const Float_t passnoalgL1XE40();
         const Float_t passnoalgL1XE45();
-        const Float_t thresh_actint();
+        const Float_t actint();
         const Float_t passmuon();
         const Float_t passmuvarmed();
         const Float_t cleanCutsFlag();
@@ -242,10 +242,6 @@ class ChainHandler
         const Float_t metrefmuon();
         const Float_t mexrefmuon();
         const Float_t meyrefmuon();
-        const Float_t algAmuon();
-        const Float_t algBmuon();
-        const Float_t metl1muon();
-        const Float_t actintmuon();
 
 
     private:
@@ -262,7 +258,7 @@ class ChainHandler
         treeReaderSpace ::Handle< Float_t      > passnoalgL1XE30_handle;
         treeReaderSpace ::Handle< Float_t      > passnoalgL1XE40_handle;
         treeReaderSpace ::Handle< Float_t      > passnoalgL1XE45_handle;
-        treeReaderSpace ::Handle< Float_t      > thresh_actint_handle;
+        treeReaderSpace ::Handle< Float_t      > actint_handle;
         treeReaderSpace ::Handle< Float_t      > passmuon_handle;
         treeReaderSpace ::Handle< Float_t      > passmuvarmed_handle;
         treeReaderSpace ::Handle< Float_t      > cleanCutsFlag_handle;
@@ -276,10 +272,6 @@ class ChainHandler
         treeReaderSpace ::Handle< Float_t      > metrefmuon_handle;
         treeReaderSpace ::Handle< Float_t      > mexrefmuon_handle;
         treeReaderSpace ::Handle< Float_t      > meyrefmuon_handle;
-        treeReaderSpace ::Handle< Float_t      > algAmuon_handle;
-        treeReaderSpace ::Handle< Float_t      > algBmuon_handle;
-        treeReaderSpace ::Handle< Float_t      > metl1muon_handle;
-        treeReaderSpace ::Handle< Float_t      > actintmuon_handle;
 };
 
 
@@ -296,7 +288,7 @@ namespace treeReaderSpace
     const Float_t get_passnoalgL1XE30();
     const Float_t get_passnoalgL1XE40();
     const Float_t get_passnoalgL1XE45();
-    const Float_t get_thresh_actint();
+    const Float_t get_actint();
     const Float_t get_passmuon();
     const Float_t get_passmuvarmed();
     const Float_t get_cleanCutsFlag();
@@ -310,10 +302,6 @@ namespace treeReaderSpace
     const Float_t get_metrefmuon();
     const Float_t get_mexrefmuon();
     const Float_t get_meyrefmuon();
-    const Float_t get_algAmuon();
-    const Float_t get_algBmuon();
-    const Float_t get_metl1muon();
-    const Float_t get_actintmuon();
 
 } // namespace treeReaderSpace
 

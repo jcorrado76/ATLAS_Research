@@ -27,7 +27,7 @@ ChainHandler::ChainHandler()
     , passnoalgL1XE30_handle("passnoalgL1XE30")
     , passnoalgL1XE40_handle("passnoalgL1XE40")
     , passnoalgL1XE45_handle("passnoalgL1XE45")
-    , thresh_actint_handle("actint")
+    , actint_handle("actint")
     , passmuon_handle("passmuon")
     , passmuvarmed_handle("passmuvarmed")
     , cleanCutsFlag_handle("passcleancuts")
@@ -41,10 +41,6 @@ ChainHandler::ChainHandler()
     , metrefmuon_handle("metref")
     , mexrefmuon_handle("mexref")
     , meyrefmuon_handle("meyref")
-    , algAmuon_handle(algA)
-    , algBmuon_handle(algB)
-    , metl1muon_handle("metl1")
-    , actintmuon_handle("actint")
 }
 
 void ChainHandler::Init(TTree& tree)
@@ -60,7 +56,7 @@ void ChainHandler::Init(TTree& tree)
     passnoalgL1XE30_handle.Init(tree) ;
     passnoalgL1XE40_handle.Init(tree) ;
     passnoalgL1XE45_handle.Init(tree) ;
-    thresh_actint_handle.Init(tree) ;
+    actint_handle.Init(tree) ;
     passmuon_handle.Init(tree) ;
     passmuvarmed_handle.Init(tree) ;
     cleanCutsFlag_handle.Init(tree) ;
@@ -74,11 +70,6 @@ void ChainHandler::Init(TTree& tree)
     metrefmuon_handle.Init(tree) ;
     mexrefmuon_handle.Init(tree) ;
     meyrefmuon_handle.Init(tree) ;
-    algAmuon_handle.Init(tree) ;
-    algBmuon_handle.Init(tree) ;
-    metl1muon_handle.Init(tree) ;
-    actintmuon_handle.Init(tree) ;
-
 }
 
 void ChainHandler::Init(TTree* const tree)
@@ -99,7 +90,7 @@ void ChainHandler::GetEntry(const unsigned int entry)
     passnoalgL1XE30_handle.GetEntry(entry) ;
     passnoalgL1XE40_handle.GetEntry(entry) ;
     passnoalgL1XE45_handle.GetEntry(entry) ;
-    thresh_actint_handle.GetEntry(entry) ;
+    actint_handle.GetEntry(entry) ;
     passmuon_handle.GetEntry(entry) ;
     passmuvarmed_handle.GetEntry(entry) ;
     cleanCutsFlag_handle.GetEntry(entry) ;
@@ -113,10 +104,6 @@ void ChainHandler::GetEntry(const unsigned int entry)
     metrefmuon_handle.GetEntry(entry) ;
     mexrefmuon_handle.GetEntry(entry) ;
     meyrefmuon_handle.GetEntry(entry) ;
-    algAmuon_handle.GetEntry(entry) ;
-    algBmuon_handle.GetEntry(entry) ;
-    metl1muon_handle.GetEntry(entry) ;
-    actintmuon_handle.GetEntry(entry) ;
 
 }
 
@@ -133,7 +120,7 @@ void ChainHandler::LoadAllBranches()
     passnoalgL1XE30_handle.Load();
     passnoalgL1XE40_handle.Load();
     passnoalgL1XE45_handle.Load();
-    thresh_actint_handle.Load();
+    actint_handle.Load();
     passmuon_handle.Load();
     passmuvarmed_handle.Load();
     cleanCutsFlag_handle.Load();
@@ -147,10 +134,6 @@ void ChainHandler::LoadAllBranches()
     metrefmuon_handle.Load();
     mexrefmuon_handle.Load();
     meyrefmuon_handle.Load();
-    algAmuon_handle.Load();
-    algBmuon_handle.Load();
-    metl1muon_handle.Load();
-    actintmuon_handle.Load();
 
 }
 
@@ -167,7 +150,7 @@ const Float_t& ChainHandler::passnoalgL1XE10(){return passnoalgL1XE10_handle.get
 const Float_t& ChainHandler::passnoalgL1XE30(){return passnoalgL1XE30_handle.get();};
 const Float_t& ChainHandler::passnoalgL1XE40(){return passnoalgL1XE40_handle.get();};
 const Float_t& ChainHandler::passnoalgL1XE45(){return passnoalgL1XE45_handle.get();};
-const Float_t& ChainHandler::thresh_actint()(){return thresh_actint_handle.get();};
+const Float_t& ChainHandler::thresh_actint()(){return actint_handle.get();};
 const Float_t& ChainHandler::passmuon(){return passmuon_handle.get();};
 const Float_t& ChainHandler::passmuvarmed(){return passmuvarmed_handle.get();};
 const Float_t& ChainHandler::cleanCutsFlag(){return cleanCutsFlag_handle.get();};
@@ -181,17 +164,22 @@ const Float_t& ChainHandler::meyoffrecalmuon(){return meyoffrecalmuon_handle.get
 const Float_t& ChainHandler::metrefmuon(){return metrefmuon_handle.get();};
 const Float_t& ChainHandler::mexrefmuon(){return mexrefmuon_handle.get();};
 const Float_t& ChainHandler::meyrefmuon(){return meyrefmuon_handle.get();};
-const Float_t& ChainHandler::algAmuon(){return algAmuon_handle.get();};
-const Float_t& ChainHandler::algBmuon(){return algBmuon_handle.get();};
-const Float_t& ChainHandler::metl1muon(){return metl1muon_handle.get();};
-const Float_t& ChainHandler::actintmuon(){return actintmuon_handle.get();};
+
+const void ChainHandler::ZbBranchInit(TTree& zbTree){
+    metoffrecal_handle.Init(zbTree) ;
+    mexoffrecal_handle.Init(zbTree) ;
+    meyoffrecal_handle.Init(zbTree) ;
+    metref_handle.Init(zbTree) ;
+    mexref_handle.Init(zbTree) ;
+    meyref_handle.Init(zbTree) ;
+};
 
 
 namespace trkeff
 {
-    const unsigned int& run() {return ChainHandler_obj .run();}
-    const unsigned int& ls() {return ChainHandler_obj .ls();}
-    const unsigned int& event() {return ChainHandler_obj .event();}
+    const unsigned int& run() {return ChainHandler_obj.run();}
+    const unsigned int& ls() {return ChainHandler_obj.ls();}
+    const unsigned int& event() {return ChainHandler_obj.event();}
     const Int_t& get_passrndm(){return ChainHandler_obj.passrndm();}
     const Float_t& get_algA(){return ChainHandler_obj.algA();};
     const Float_t& get_algB(){return ChainHandler_obj.algB();};
@@ -200,7 +188,7 @@ namespace trkeff
     const Float_t& get_passnoalgL1XE30(){return ChainHandler_obj.passnoalgL1XE30();};
     const Float_t& get_passnoalgL1XE40(){return ChainHandler_obj.passnoalgL1XE40();};
     const Float_t& get_passnoalgL1XE45(){return ChainHandler_obj.passnoalgL1XE45();};
-    const Float_t& get_thresh_actint(){return ChainHandler_obj.thresh_actint();};
+    const Float_t& get_thresh_actint(){return ChainHandler_obj.actint();};
     const Float_t& get_passmuon(){return ChainHandler_obj.passmuon();};
     const Float_t& get_passmuvarmed(){return ChainHandler_obj.passmuvarmed();};
     const Float_t& get_cleanCutsFlag(){return ChainHandler_obj.cleanCutsFlag();};
@@ -214,9 +202,5 @@ namespace trkeff
     const Float_t& get_metrefmuon(){return ChainHandler_obj.metrefmuon();};
     const Float_t& get_mexrefmuon(){return ChainHandler_obj.mexrefmuon();};
     const Float_t& get_meyrefmuon(){return ChainHandler_obj.meyrefmuon();};
-    const Float_t& get_algAmuon(){return ChainHandler_obj.algAmuon();};
-    const Float_t& get_algBmuon(){return ChainHandler_obj.algBmuon();};
-    const Float_t& get_metl1muon(){return ChainHandler_obj.metl1muon();};
-    const Float_t& get_actintmuon(){return ChainHandler_obj.actintmuon();};
 
 } // namespace trkeff
