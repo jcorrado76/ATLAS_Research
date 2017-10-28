@@ -98,7 +98,7 @@ public:
 };
 
 #ifndef __CINT__
-extern userInfo* logFileParams;
+extern userInfo* parameters;
 #endif
 
 #endif
