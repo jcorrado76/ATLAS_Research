@@ -257,7 +257,7 @@ void HLTEfficiencyAnalysis::DoAnalysis()
         ChainHandler_obj.GetEntry(entry);
 
         // analyze the event
-        Analyze();
+        AnalyzeMuon();
 
     }
 
