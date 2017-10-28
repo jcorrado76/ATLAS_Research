@@ -24,6 +24,9 @@ Float_t Frac = 0.0059;
 Float_t actinTCut = 35.0;
 Int_t epson = 25;
 
+//will change based on actint cut
+Int_t numbToKeep = 1108;
+
 //default constructor
 userInfo::userInfo()
 {
@@ -64,6 +67,8 @@ userInfo::userInfo()
     numMuonKeptCombined = 0;
     numMuonDenominator = 0;
     now = TDatime();
+
+    numberEventsToKeep = numbToKeep;
 }
 
 void userInfo::Print(Option_t *option) const{

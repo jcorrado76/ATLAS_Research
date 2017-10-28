@@ -187,7 +187,17 @@ void HLTEfficiencyAnalysis::End()
 void HLTEfficiencyAnalysis::DetermineThresholds()
 {
     using namespace treeReaderSpace;
-    //TODO: CUTS GO IN HERE
+    //TODO: NEED TO CALL HANDLER EVERYWHERRE
+    //ANALOGY TO SETBRANCH ADDRESS
+
+    //filling the zb hists
+	if ( ( metl1 > metL1Thresh ) && ( passnoalg_actint > actintCut ) &&
+        ( passnoalgL1XE10 > 0.5 || passnoalgL1XE30 > 0.5 || passnoalgL1XE40 > 0.5 || passnoalgL1XE45 > 0.5 ) )
+	{
+		algAMETHist->Fill(algA);
+        algBMETHist->Fill(algB);
+	}
+
 }
 
 //TODO: fill out the
@@ -242,8 +252,15 @@ void HLTEfficiencyAnalysis::DoAnalysis()
 
         // analyze the event
         DetermineThresholds();
-
     }
+
+    TH1F *algATarget = (TH1F*) algAMETHist->GetCumulative(kFALSE);
+	parameters->setAlgAIndividThresh(computeThresh(algATarget, numberEventsToKeep));
+
+    TH1F *algBTarget = (TH1F*) algBMETHist->GetCumulative(kFALSE);
+	parameters->setAlgBIndividThresh(computeThresh(algBTarget, numberEventsToKeep));
+
+
 
     ChainHandler_obj.Init(myMuonTree);
 

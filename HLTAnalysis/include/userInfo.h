@@ -18,6 +18,8 @@ private:
     TString passNoAlgFile;
     TString muonFileName;
 
+    Int_t numberEventsToKeep;
+
     Int_t NumPassnoalgPassProcess1;
     Int_t NumMuonPassProcess1;
 
@@ -46,9 +48,9 @@ private:
 public:
     //default constructor
     userInfo();
-    //destructor
+
     void Print(Option_t *option = "") const;
-    //getters
+
     TString get_passnoalgFileName() const;
     TString get_muonFileName() const;
     Float_t getMetL1Thresh() const;
@@ -64,7 +66,6 @@ public:
     TString getAlgAName() const;
     TString getAlgBName() const;
 
-    //setters
     void setAlgAName( const TString algA );
     void setAlgBName( const TString algB );
 
