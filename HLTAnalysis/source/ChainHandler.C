@@ -1,5 +1,7 @@
 #include "ChainHandler.h"
 #include <iostream>
+#include "userInfo.h"
+
 
 // global object
 ChainHandler ChainHandler_obj;
@@ -9,6 +11,10 @@ ChainHandler ChainHandler_obj;
 
 //TODO: probably don't need to make separate handles for passnoalg vs muon. can probably
 //reiniaitlize the handle to be the muon tree version of the same column
+
+const TString algA = parameters->getAlgAName();
+const TString algB = parameters->getAlgBName();
+
 ChainHandler::ChainHandler()
     : run_handle("run")
     , ls_handle("ls")
