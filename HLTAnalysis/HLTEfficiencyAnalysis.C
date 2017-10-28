@@ -25,8 +25,6 @@ private:
     void AnalyzeMuon ();
 
     //data members
-    userInfo* parameters;
-
     TEfficiency* Ateff;
     TEfficiency* Bteff;
     TEfficiency* Cteff;
@@ -38,7 +36,6 @@ private:
 //constructor definition
 HLTEfficiencyAnalysis::HLTEfficiencyAnalysis()
 {
-    parameters = new userInfo();
     parameters->setAlgAName( algA );
     parameters->setAlgAName( algB );
 
@@ -191,7 +188,7 @@ void HLTEfficiencyAnalysis::End()
 void HLTEfficiencyAnalysis::DetermineThresholds()
 {
     using namespace treeReaderSpace;
-
+    //TODO: CUTS GO IN HERE
 }
 
 //TODO: fill out the
