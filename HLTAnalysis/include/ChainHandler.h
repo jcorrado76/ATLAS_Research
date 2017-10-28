@@ -81,7 +81,7 @@ namespace treeReaderSpace
     };
 
     template <typename T>
-    /*explicit*/ Handle<T>::Handle(const std::string& branch_name)
+    Handle<T>::Handle(const std::string& branch_name)
         : m_is_loaded(false)
         , m_entry(0)
         , m_branch_name(branch_name)

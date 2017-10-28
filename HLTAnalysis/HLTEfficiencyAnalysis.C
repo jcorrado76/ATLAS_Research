@@ -70,24 +70,8 @@ void HLTEfficiencyAnalysis::Begin()
 
     //INITIALIZE
     Int_t muonNbins = 200;
-    Float_t metl1thresh = logFileParams->getMetL1Thresh();
-    Float_t actintCut = logFileParams->getActintCut();
-    Int_t nbins = logFileParams->getNbins();
-    Double_t metMin = logFileParams->getMetMin();
-    Double_t metMax = logFileParams->getMetMax();
     TString xlabel = "MET [GeV]";
     TString yaxis = "Events";
-
-    //SET ZB BRANCHES
-    zeroBiasTree->SetBranchAddress("passrndm", &passRndm); // get pass rndm flag
-    zeroBiasTree->SetBranchAddress(algA,&algAMET);
-    zeroBiasTree->SetBranchAddress(algB,&algBMET);
-    zeroBiasTree->SetBranchAddress("metl1",&metl1);
-    zeroBiasTree->SetBranchAddress("passnoalgL1XE10",&passnoalgL1XE10);
-    zeroBiasTree->SetBranchAddress("passnoalgL1XE30",&passnoalgL1XE30);
-    zeroBiasTree->SetBranchAddress("passnoalgL1XE40",&passnoalgL1XE40);
-    zeroBiasTree->SetBranchAddress("passnoalgL1XE45",&passnoalgL1XE45);
-    zeroBiasTree->SetBranchAddress("actint",&zb_actint);
 
     //CREATE ZB INDIVID HISTS
     TH1F *algAMETHist = new TH1F(algA, "algA", nbins, metMin, metMax);
