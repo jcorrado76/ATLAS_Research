@@ -153,4 +153,4 @@ void userInfo::setNumMuonKeptCombinedAtThresh( const Int_t num ) { numMuonKeptCo
 void userInfo::setNumTotal( const Int_t num ) { numMuonDenominator = num; };
 void userInfo::setActintCut( const Float_t thresh ) { actintCut = thresh; };
 void userInfo::setEpsilon( const Int_t epson ) { epsilon = epson; };
-void userInfo::IncremenetNumMuonPassProcess1(){ NumMuonPassProcess1++; };
+void userInfo::IncrementNumMuonPassProcess1(){ NumMuonPassProcess1++; };

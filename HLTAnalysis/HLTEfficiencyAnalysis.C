@@ -191,19 +191,14 @@ void HLTEfficiencyAnalysis::DetermineThresholds()
 void HLTEfficiencyAnalysis::AnalyzeMuon()
 {
     using namespace treeReaderSpace;
-    using namespace userInfoAliases;
-
-
-    Bool_t isMuon;
-    Bool_t isClean;
     for (Int_t l = 0 ; l < muonNentries ; l++)
     {
         isMuon = (passmuvarmed > 0.1 || passmuon > 0.1);
         isClean = (cleanCutsFlag > 0.1) && (recalBrokeFlag < 0.1);
 
-        if ( isMuon && isClean && muonMetl1 > metl1thresh)
+        if ( IsMuon(passmuon,passmuvarmed) && IsClean(cleanCutsFlag,recalBrokeFlag) && muonMetl1 > metl1thresh)
         {
-            parameters->IncremenetNumMuonPassProcess1();
+            parameters->IncrementNumMuonPassProcess1();
         }
 
 

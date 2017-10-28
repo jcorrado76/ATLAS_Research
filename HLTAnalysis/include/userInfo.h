@@ -93,7 +93,7 @@ public:
     void setNumTotal( const Int_t num );
     void setActintCut( const Float_t thresh );
     void setEpsilon( const Int_t epsilon );
-    void IncremenetNumMuonPassProcess1();
+    void IncrementNumMuonPassProcess1();
 
     //this macro from Rtypes.h facilitates root I/O
     ClassDef( userInfo, 1)

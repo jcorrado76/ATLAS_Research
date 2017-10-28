@@ -27,6 +27,17 @@ Float_t computeThresh(const TH1F* target, const Float_t numberEventsToKeep)
     return(thresh);
 }
 
+Bool_t IsMuon( const Float_t passmuon , const Float_t passmuvarmed )
+{
+    return (passmuvarmed > 0.1 || passmuon > 0.1);
+}
+
+
+
+Bool_t IsClean( const Float_t cleancutsflag , const Float_t recalbrokeflag){
+    return ((cleanCutsFlag > 0.1) && (recalBrokeFlag < 0.1));
+}
+
 
 Float_t determineZeroBiasThresh( const TString& algName, Int_t & numPass , const Float_t frac = 0.00590,
     const TString& threshFileName = "PhysicsMain.All.noalgXEtriggers.2016.f731f758._m1659m1710.48Runs.root")
