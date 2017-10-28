@@ -3,25 +3,7 @@
 #include "TObject.h"
 #include "TString.h"
 
-//ONE AND ONLY DEF OF GLOBAL PARAMS OBJECT HERE
-userInfo* logFileParams = new userInfo();
-
-//#if !defined(__CLING__)
 ClassImp(userInfo)
-//#endif
-
-#ifdef __CLING__
-#pragma link C++ class userInfo+;
-#pragma link C++ global logFileParams;
-#pragma link C++ function threeEfficiencies;
-#pragma link C++ function computeMetNoMu;
-#pragma link C++ function passTransverseMassCut;
-#pragma link C++ function computeThresh;
-#pragma link C++ function determineZeroBiasThresh;
-#pragma link C++ function determineMuonEventsKeptCombined;
-#pragma link C++ function bisection;
-#endif
-
 
 //TODO: add in a collection of TCut objects reflecting the parameters
 //      so that if we need to do some treee analysis, there's an easy way to draw the tree using a
@@ -129,6 +111,10 @@ Float_t userInfo::getMetMin() const {return (metmin);}
 Float_t userInfo::getMetMax() const { return (metmax);}
 Int_t userInfo::getEpsilon() const {return(epsilon);}
 TDatime userInfo::getDate() const { now.Print();return(now);};
+TString userInfo::getAlgAName() const { return (algAName);}
+TString userInfo::getAlgBName() const { return (algBName);}
+Int_t userInfo::getMuonNentries() const { return(muonNentries);}
+Int_t userInfo::getThreshNentries() const { return (passnoAlgNentries) ; }
 
 
 //setters

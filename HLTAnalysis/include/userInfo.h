@@ -2,12 +2,11 @@
 #ifndef userInfo_h
 #define userInfo_h
 
-#include "TObject.h"
-#include "TString.h"
-#include "TDatime.h"
+#include "mincerMacros.h"
 
 
 class userInfo : public TObject {
+
 private:
     TString algAName;
     TString algBName;
@@ -59,7 +58,12 @@ public:
     Float_t getMetMax() const;
     Int_t getNbins() const;
     Int_t getEpsilon() const;
+    Int_t getMuonNentries() const;
+    Int_t getThreshNentries() const;
     TDatime getDate() const;
+    TString getAlgAName() const;
+    TString getAlgBName() const;
+
     //setters
     void setAlgAName( const TString algA );
     void setAlgBName( const TString algB );

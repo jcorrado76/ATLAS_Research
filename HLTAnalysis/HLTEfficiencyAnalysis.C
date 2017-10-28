@@ -210,7 +210,7 @@ void HLTEfficiencyAnalysis::DetermineThresholds()
 
 }
 
-//TODO: fill out the 
+//TODO: fill out the
 void HLTEfficiencyAnalysis::AnalyzeMuon()
 {
     using namespace treeReaderSpace;
