@@ -190,7 +190,16 @@ void HLTEfficiencyAnalysis::DetermineThresholds()
 //TODO: NEED TO FILL THIS IN
 void HLTEfficiencyAnalysis::AnalyzeMuon()
 {
+    //import aliases to access values of each branch at current entry
+
     using namespace treeReaderSpace;
+
+    const Float_t algAThresh = parameters->GetAlgAIndividThresh();
+    const Float_t algBThresh = parameters->GetAlgBIndividThresh();
+    const Float_t metl1thresh = parameters->getMetL1Thresh();
+    const Float_t actintCut = parameters->getActintCut();
+    const Float_t CombinedThreshAlgA = parameters->GetAlgACombinedThresh();
+    const Float_t CombinedThreshAlgB = parameters->GetAlgBCombinedThresh();
     const Float_t algAThresh = parameters->GetAlgAIndividThresh();
     const Float_t algBThresh = parameters->GetAlgBIndividThresh();
 
@@ -204,29 +213,29 @@ void HLTEfficiencyAnalysis::AnalyzeMuon()
     const Float_t metoffrecalmuon = get_metoffrecalmuon();
     const Float_t mexoffrecalmuon = get_mexoffrecalmuon();
     const Float_t meyoffrecalmuon = get_meyoffrecalmuon();
-    const Float_t muonMetl1 = get_metl1muon();
-    const Float_t muonActint = get_actintmuon();
-    const Float_t algAmuonMET = get_algAmuon();
-    const Float_t algBmuonMET = get_algBmuon();
+    const Float_t metl1 = get_metl1();
+    const Float_t actint = get_actint();
+    const Float_t algAMET = get_algA();
+    const Float_t algBMET = get_algB();
 
 
 
-    if ( IsMuon(passmuon,passmuvarmed) && IsClean(cleanCutsFlag,recalBrokeFlag) && muonMetl1 > metl1thresh)
+    if ( IsMuon(passmuon,passmuvarmed) && IsClean(cleanCutsFlag,recalBrokeFlag) && metl1 > metl1thresh)
     {
         parameters->IncrementNumMuonPassProcess1();
     }
 
-    if ( IsMuon(passmuon,passmuvarmed) && IsClean(cleanCutsFlag,recalBrokeFlag) && ( muonActint > actintCut ))
+    if ( IsMuon(passmuon,passmuvarmed) && IsClean(cleanCutsFlag,recalBrokeFlag) && ( actint > actintCut ))
     {
         if ( passTransverseMassCut(metoffrecal,mexoffrecal,meyoffrecal,metoffrecalmuon,mexoffrecalmuon,meyoffrecalmuon) )
         {
             Float_t metnomu = computeMetNoMu(  mexoffrecal , meyoffrecal , mexoffrecalmuon , meyoffrecalmuon );
 
-            Ateff->Fill((algAmuonMET > algAThresh) && (muonMetl1 > metl1thresh) && ( muonActint > actintCut ), metnomu);
-            Bteff->Fill((algBmuonMET > algBThresh) && (muonMetl1 > metl1thresh)&& ( muonActint > actintCut ), metnomu);
-            Cteff->Fill(((algAmuonMET > CombinedThreshAlgA) && (algBmuonMET > CombinedThreshAlgB)
-            && ( muonActint > actintCut )&& (muonMetl1 > metl1thresh)), metnomu);
-            Dteff->Fill((muonMetl1 >= metl1thresh) && ( muonActint > actintCut ), metnomu);
+            Ateff->Fill((algAMET > algAThresh) && (metl1 > metl1thresh) && ( actint > actintCut ), metnomu);
+            Bteff->Fill((algBMET > algBThresh) && (metl1 > metl1thresh)&& ( actint > actintCut ), metnomu);
+            Cteff->Fill(((algAMET > CombinedThreshAlgA) && (algBMET > CombinedThreshAlgB)
+            && ( actint > actintCut )&& (metl1 > metl1thresh)), metnomu);
+            Dteff->Fill((metl1 >= metl1thresh) && ( actint > actintCut ), metnomu);
         }
     }
     }

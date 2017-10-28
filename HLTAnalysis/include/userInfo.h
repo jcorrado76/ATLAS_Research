@@ -66,7 +66,9 @@ public:
     TString getAlgBName() const;
     Int_t getNumbToKeep() const;
     Float_t GetAlgAIndividThresh() const;
-    Float_t GetAlgBIndividThresh() const; 
+    Float_t GetAlgBIndividThresh() const;
+    Float_t GetAlgACombinedThresh() const;
+    Float_t GetAlgBCombinedThresh() const;
 
     void setAlgAName( const TString algA );
     void setAlgBName( const TString algB );

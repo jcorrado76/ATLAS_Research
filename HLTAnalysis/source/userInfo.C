@@ -127,6 +127,8 @@ Int_t userInfo::getThreshNentries() const { return (passnoAlgNentries) ; }
 Int_t userInfo::getNumbToKeep() const { return( numberEventsToKeep )};
 Float_t userInfo::GetAlgAIndividThresh() const { return ( algAIndividThresh ); }
 Float_t userInfo::GetAlgBIndividThresh() const { return ( algBIndividThresh ); }
+Float_t userInfo::GetAlgACombinedThresh() const {return ( algACombinedThresh );};
+Float_t userInfo::GetAlgBCombinedThresh() const {return ( algBCombinedThresh );};
 
 //setters
 void userInfo::setAlgAName( const TString algA ) { algAName = algA; };
