@@ -23,6 +23,7 @@ private:
     void DoAnalysis();
     void DetermineThresholds();
     void AnalyzeMuon ();
+    friend Float_t bisection();
 
     //TEfficiencies
     TEfficiency* Ateff;
@@ -101,6 +102,8 @@ void HLTEfficiencyAnalysis::End()
     Cteff->Draw("same");
     Dteff->Draw("same");
 
+    //TODO: need to define astring, bstring, cstring, and dstring
+
     //CREATE LEGEND
     TLegend *legend = new TLegend(0.57,0.15,0.9, 0.4 ,"","NDC");
     legend->AddEntry(Ateff, astring);
@@ -174,8 +177,16 @@ void HLTEfficiencyAnalysis::End()
 void HLTEfficiencyAnalysis::DetermineThresholds()
 {
     using namespace treeReaderSpace;
-    //TODO: NEED TO CALL HANDLER EVERYWHERRE
-    //ANALOGY TO SETBRANCH ADDRESS
+
+    const Float_t metl1Thresh = parameters->getMetL1Thresh();
+    const Float_t actintCut = parameters->getActintCut();
+
+    const Float_t algA = get_algA();
+    const Float_t algB = get_algB();
+    const Float_t passnoalgL1XE10 = get_passnoalgL1XE10();
+    const Float_t passnoalgL1XE30 = get_passnoalgL1XE30();
+    const Float_t passnoalgL1XE40 = get_passnoalgL1XE40();
+    const Float_t passnoalgL1XE45 = get_passnoalgL1XE45();
 
     //filling the zb hists
 	if ( ( metl1 > metL1Thresh ) && ( passnoalg_actint > actintCut ) &&
@@ -187,15 +198,12 @@ void HLTEfficiencyAnalysis::DetermineThresholds()
 
 }
 
-//TODO: NEED TO FILL THIS IN
 void HLTEfficiencyAnalysis::AnalyzeMuon()
 {
     //import aliases to access values of each branch at current entry
 
     using namespace treeReaderSpace;
 
-    const Float_t algAThresh = parameters->GetAlgAIndividThresh();
-    const Float_t algBThresh = parameters->GetAlgBIndividThresh();
     const Float_t metl1thresh = parameters->getMetL1Thresh();
     const Float_t actintCut = parameters->getActintCut();
     const Float_t CombinedThreshAlgA = parameters->GetAlgACombinedThresh();
@@ -238,7 +246,6 @@ void HLTEfficiencyAnalysis::AnalyzeMuon()
             Dteff->Fill((metl1 >= metl1thresh) && ( actint > actintCut ), metnomu);
         }
     }
-    }
 }
 
 //TODO: need to finish determine thresholds portion
@@ -271,7 +278,6 @@ void HLTEfficiencyAnalysis::DoAnalysis()
     logFileParams->setMuonNentries( muonNentries );
 
 
-    //TODO: use the same object to read the threshold tree, and then to read the muon tree
     //initialize reader with zb tree
     ChainHandler_obj.Init(zeroBiasTree);
 
@@ -283,7 +289,6 @@ void HLTEfficiencyAnalysis::DoAnalysis()
     //convenient alias
     Int_t numbKeep = parameters->getNumbToKeep();
 
-    //TODO: pick up here where you left off in terms of porting your analysis into this one
     for (long long entry = 0; entry < zerobiasNentries; entry++)
     {
         // load the current event
