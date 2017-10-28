@@ -4,7 +4,6 @@
 
 #include "mincerMacros.h"
 
-
 class userInfo : public TObject {
 
 private:
@@ -65,6 +64,7 @@ public:
     TDatime getDate() const;
     TString getAlgAName() const;
     TString getAlgBName() const;
+    Int_t getNumbToKeep() const;
 
     void setAlgAName( const TString algA );
     void setAlgBName( const TString algB );
@@ -93,6 +93,7 @@ public:
     void setNumTotal( const Int_t num );
     void setActintCut( const Float_t thresh );
     void setEpsilon( const Int_t epsilon );
+    void IncremenetNumMuonPassProcess1();
 
     //this macro from Rtypes.h facilitates root I/O
     ClassDef( userInfo, 1)

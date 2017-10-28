@@ -31,9 +31,14 @@ private:
     TEfficiency* Dteff;
 
     //passnoalg hists
-    TH1F *algAMETHist = new TH1F(algA, "algA", nbins, metMin, metMax);
-    TH1F *algBMETHist = new TH1F(algB, "algB", nbins, metMin, metMax);
-    TH1F *algCMETHist = new TH1F(algA + algB , "Combined" , nbins, metMin, metMax);
+    TH1F *algAMETHist;
+    TH1F *algBMETHist;
+    TH1F *algCMETHist;
+
+    //target passnoalg hists
+    TH1F *algATarget;
+    TH1F *algBTarget;
+    TH1F *algCTarget;
 
 };
 
@@ -64,35 +69,16 @@ HLTEfficiencyAnalysis::~HLTEfficiencyAnalysis()
 
 void HLTEfficiencyAnalysis::Begin()
 {
-
-    //TODO: all this stuff shouldn't be initialized here unless it is a private member variable, it won't
-    //      survive the scope of this function
-
-
-    //INITIALIZE
-    Int_t muonNbins = 200;
-    TString xlabel = "MET [GeV]";
-    TString yaxis = "Events";
-
-    //SET MUON BRANCHES
-    Float_t algAmuonMET = 0;
-    Float_t algBmuonMET = 0;
-    Float_t muonMetl1 = 0;
-    Float_t muonActint = 0;
-    Int_t NumMuonPassProcess1WithActintCut = 0 ;
-    Bool_t isMuon;
-    Bool_t isClean;
-    myMuonTree->SetBranchAddress(algA,&algAmuonMET);
-    myMuonTree->SetBranchAddress(algB,&algBmuonMET);
-    myMuonTree->SetBranchAddress("metl1",&muonMetl1);
-    myMuonTree->SetBranchAddress("actint", &muonActint);
+    //INITIALIZE HISTOGRAMS
+    algAMETHist = new TH1F(algA, "algA", nbins, metMin, metMax);
+    algBMETHist = new TH1F(algB, "algB", nbins, metMin, metMax);
+    algCMETHist = new TH1F(algA + algB , "Combined" , nbins, metMin, metMax);
 
     //INITIALIZE EFFICIENCIES
-    TEfficiency* Ateff  = new TEfficiency(algA , "Efficiency", muonNbins, metMin, metMax);
-    TEfficiency* Bteff  = new TEfficiency(algB , "Efficiency", muonNbins, metMin, metMax);
-    TEfficiency* Cteff  = new TEfficiency(algA + " " + algB,  "Efficiency", muonNbins, metMin, metMax);
-    TEfficiency* Dteff  = new TEfficiency("METL1",  "Efficiency", muonNbins, metMin, metMax);
-
+    Ateff  = new TEfficiency(algA , "Efficiency", muonNbins, metMin, metMax);
+    Bteff  = new TEfficiency(algB , "Efficiency", muonNbins, metMin, metMax);
+    Cteff  = new TEfficiency(algA + " " + algB,  "Efficiency", muonNbins, metMin, metMax);
+    Dteff  = new TEfficiency("METL1",  "Efficiency", muonNbins, metMin, metMax);
 }
 
 void HLTEfficiencyAnalysis::End()
@@ -184,6 +170,7 @@ void HLTEfficiencyAnalysis::End()
     rootFile->Close();
 }
 
+//TODO: need to finish this piece
 void HLTEfficiencyAnalysis::DetermineThresholds()
 {
     using namespace treeReaderSpace;
@@ -200,20 +187,48 @@ void HLTEfficiencyAnalysis::DetermineThresholds()
 
 }
 
-//TODO: fill out the
+//TODO: NEED TO FILL THIS IN
 void HLTEfficiencyAnalysis::AnalyzeMuon()
 {
     using namespace treeReaderSpace;
+    using namespace userInfoAliases;
+
+
+    Bool_t isMuon;
+    Bool_t isClean;
+    for (Int_t l = 0 ; l < muonNentries ; l++)
+    {
+        isMuon = (passmuvarmed > 0.1 || passmuon > 0.1);
+        isClean = (cleanCutsFlag > 0.1) && (recalBrokeFlag < 0.1);
+
+        if ( isMuon && isClean && muonMetl1 > metl1thresh)
+        {
+            parameters->IncremenetNumMuonPassProcess1();
+        }
+
+
+        if ( isMuon && isClean && ( muonActint > actintCut ))
+        {
+            if ( passTransverseMassCut(metoffrecal,mexoffrecal,meyoffrecal,metoffrecalmuon,mexoffrecalmuon,meyoffrecalmuon) )
+            {
+                Float_t metnomu = computeMetNoMu(  mexoffrecal , meyoffrecal , mexoffrecalmuon , meyoffrecalmuon );
+
+                Ateff->Fill((algAmuonMET > algAThresh) && (muonMetl1 > metl1thresh) && ( muonActint > actintCut ), metnomu);
+                Bteff->Fill((algBmuonMET > algBThresh) && (muonMetl1 > metl1thresh)&& ( muonActint > actintCut ), metnomu);
+                Cteff->Fill(((algAmuonMET > CombinedThreshAlgA) && (algBmuonMET > CombinedThreshAlgB)
+                && ( muonActint > actintCut )&& (muonMetl1 > metl1thresh)), metnomu);
+                Dteff->Fill((muonMetl1 >= metl1thresh) && ( muonActint > actintCut ), metnomu);
+            }
+        }
+    }
 }
 
-
+//TODO: need to finish determine thresholds portion
 void HLTEfficiencyAnalysis::DoAnalysis()
 {
-    //TODO: make two different benchmarks, one for determining thresholds, and one for Determining
-    //      muon efficiencies
     // benchmark
     TBenchmark bmark;
-    bmark.Start("benchmark");
+    bmark.Start("Determine Thresholds");
 
     // optimize
     TTreeCache::SetLearnEntries(10);
@@ -244,26 +259,43 @@ void HLTEfficiencyAnalysis::DoAnalysis()
 
     Begin();
 
+
+    //DETERMINE INDIVIDUAL ZB thresholds
+
+    //convenient alias
+    Int_t numbKeep = parameters->getNumbToKeep();
+
     //TODO: pick up here where you left off in terms of porting your analysis into this one
     for (long long entry = 0; entry < zerobiasNentries; entry++)
     {
         // load the current event
         ChainHandler_obj.GetEntry(entry);
 
-        // analyze the event
         DetermineThresholds();
     }
 
     TH1F *algATarget = (TH1F*) algAMETHist->GetCumulative(kFALSE);
-	parameters->setAlgAIndividThresh(computeThresh(algATarget, numberEventsToKeep));
+	parameters->setAlgAIndividThresh(computeThresh(algATarget, numbKeep));
 
     TH1F *algBTarget = (TH1F*) algBMETHist->GetCumulative(kFALSE);
-	parameters->setAlgBIndividThresh(computeThresh(algBTarget, numberEventsToKeep));
+	parameters->setAlgBIndividThresh(computeThresh(algBTarget, numbKeep));
+
+    //DETERMINE COMINED THRESHOLDS
+
+    bisection( algAMETHist , algBMETHist, binWidth, CombinedThreshAlgA,
+    CombinedThreshAlgB, NumbPassnoAlgPassProcess1WithActintCut , frac ,
+    logFileData,zeroBiasTree);
 
 
+    // Done and benchmark results
+    bmark.Stop("DetermineThresholds");
+    cout << "CPU  Time: " << Form("%.01f", bmark.GetCpuTime("DetermineThresholds" )) << endl;
+    cout << "Real Time: " << Form("%.01f", bmark.GetRealTime("DetermineThresholds")) << endl;
+    cout << endl;
 
+    //COMPUTE EFFICIENCIES
     ChainHandler_obj.Init(myMuonTree);
-
+    bmark.Start("Analyze Efficiencies");
     for (long long entry = 0; entry < muonNentries; entry++)
     {
         // load the current event
@@ -274,19 +306,12 @@ void HLTEfficiencyAnalysis::DoAnalysis()
 
     }
 
-    // Done and benchmark results
-    bmark.Stop("benchmark");
-    fflush(stdout);
-    cout << "[TrackingEfficiencyAnalysis::DoAnalysis] finished processing " << num_events << " events" << endl;
-    cout << "------------------------------" << endl;
-    cout << "CPU  Time: " << Form("%.01f", bmark.GetCpuTime("benchmark" )) << endl;
-    cout << "Real Time: " << Form("%.01f", bmark.GetRealTime("benchmark")) << endl;
+    bmark.Stop("Analyze Efficiencies");
+    cout << "CPU  Time: " << Form("%.01f", bmark.GetCpuTime("Analyze Efficiencies" )) << endl;
+    cout << "Real Time: " << Form("%.01f", bmark.GetRealTime("Analyze Efficiencies")) << endl;
     cout << endl;
 
-    // --------------------//
-    // Run the End Job
-    // --------------------//
-    EndJob();
+    End();
 }
 
 }

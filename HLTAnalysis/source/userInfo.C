@@ -124,7 +124,7 @@ TString userInfo::getAlgAName() const { return (algAName);}
 TString userInfo::getAlgBName() const { return (algBName);}
 Int_t userInfo::getMuonNentries() const { return(muonNentries);}
 Int_t userInfo::getThreshNentries() const { return (passnoAlgNentries) ; }
-
+Int_t userInfo::getNumbToKeep() const { return( numberEventsToKeep )};
 
 //setters
 void userInfo::setAlgAName( const TString algA ) { algAName = algA; };
@@ -153,3 +153,4 @@ void userInfo::setNumMuonKeptCombinedAtThresh( const Int_t num ) { numMuonKeptCo
 void userInfo::setNumTotal( const Int_t num ) { numMuonDenominator = num; };
 void userInfo::setActintCut( const Float_t thresh ) { actintCut = thresh; };
 void userInfo::setEpsilon( const Int_t epson ) { epsilon = epson; };
+void userInfo::IncremenetNumMuonPassProcess1(){ NumMuonPassProcess1++; };
