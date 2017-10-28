@@ -1,19 +1,16 @@
 #include "mincerMacros.h"
+#include "HLTEfficiencyAnalysis.h"
 
 
-//TODO: implement proof lite
-//TODO: use global calls to param list
-
-Float_t HLTEfficiencyAnalysis::bisection(TH1F* algAHist , TH1F* algBHist, const Float_t binWidth, Float_t &  individAThreshFinal , Float_t  & individBThreshFinal,
-    const Int_t numPassedProcess1WithActintCut = 0 , Float_t frac = 0.00590, TNtuple* logFileData = NULL, TTree* passnoalgTree = NULL)
+Float_t HLTEfficiencyAnalysis::bisection(TH1F* algAHist , TH1F* algBHist, const Float_t binWidth,
+    Float_t &  individAThreshFinal , Float_t  & individBThreshFinal,const Int_t numPassedProcess1WithActintCut = 0 ,
+    Float_t frac = 0.00590, TNtuple* logFileData = NULL, TTree* passnoalgTree = NULL)
 {
-    Float_t computeThresh( const TH1F*, const Float_t);
-    userInfo* logFileParams;
     //some useful parameters
-    frac = logFileParams->getFrac();
-    Float_t metl1thresh = logFileParams->getMetL1Thresh();
-    Float_t actintCut = logFileParams->getActintCut();
-    Int_t epsilon = logFileParams->getEpsilon();
+    frac = parameters->getFrac();
+    Float_t metl1thresh = parameters->getMetL1Thresh();
+    Float_t actintCut = parameters->getActintCut();
+    Int_t epsilon = parameters->getEpsilon();
 
     Int_t target = numPassedProcess1WithActintCut * frac;
 

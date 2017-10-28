@@ -1,47 +1,5 @@
-#include "mincerMacros.h"
-#include "userInfo.h"
-#include "ChainHandler.h"
+#include "HLTEfficiencyAnalysis.h"
 
-
-// analysis class definition
-class HLTEfficiencyAnalysis
-{
-public:
-    //constructor
-    HLTEfficiencyAnalysis(
-        const TString& algA ,
-        const TString& algB ,
-        const bool verbose=false);
-
-    //destructor
-    ~HLTEfficiencyAnalysis();
-
-private:
-    //analysis methods
-    void Begin();
-    void End();
-    void DoAnalysis();
-    void DetermineThresholds();
-    void AnalyzeMuon ();
-    friend Float_t bisection();
-
-    //TEfficiencies
-    TEfficiency* Ateff;
-    TEfficiency* Bteff;
-    TEfficiency* Cteff;
-    TEfficiency* Dteff;
-
-    //passnoalg hists
-    TH1F *algAMETHist;
-    TH1F *algBMETHist;
-    TH1F *algCMETHist;
-
-    //target passnoalg hists
-    TH1F *algATarget;
-    TH1F *algBTarget;
-    TH1F *algCTarget;
-
-};
 
 //constructor definition
 HLTEfficiencyAnalysis::HLTEfficiencyAnalysis()
