@@ -24,12 +24,16 @@ private:
     void DetermineThresholds();
     void AnalyzeMuon ();
 
-    //data members
+    //TEfficiencies
     TEfficiency* Ateff;
     TEfficiency* Bteff;
     TEfficiency* Cteff;
     TEfficiency* Dteff;
 
+    //passnoalg hists
+    TH1F *algAMETHist = new TH1F(algA, "algA", nbins, metMin, metMax);
+    TH1F *algBMETHist = new TH1F(algB, "algB", nbins, metMin, metMax);
+    TH1F *algCMETHist = new TH1F(algA + algB , "Combined" , nbins, metMin, metMax);
 
 };
 
@@ -69,11 +73,6 @@ void HLTEfficiencyAnalysis::Begin()
     Int_t muonNbins = 200;
     TString xlabel = "MET [GeV]";
     TString yaxis = "Events";
-
-    //CREATE ZB INDIVID HISTS
-    TH1F *algAMETHist = new TH1F(algA, "algA", nbins, metMin, metMax);
-    TH1F *algBMETHist = new TH1F(algB, "algB", nbins, metMin, metMax);
-
 
     //SET MUON BRANCHES
     Float_t algAmuonMET = 0;
