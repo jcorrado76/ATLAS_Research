@@ -191,30 +191,44 @@ void HLTEfficiencyAnalysis::DetermineThresholds()
 void HLTEfficiencyAnalysis::AnalyzeMuon()
 {
     using namespace treeReaderSpace;
-    for (Int_t l = 0 ; l < muonNentries ; l++)
+    const Float_t algAThresh = parameters->GetAlgAIndividThresh();
+    const Float_t algBThresh = parameters->GetAlgBIndividThresh();
+
+    const Float_t passmuon = get_passmuon();
+    const Float_t passmuvarmed = get_passmuvarmed();
+    const Float_t cleanCutsFlag = get_cleanCutsFlag();
+    const Float_t recalBrokeFlag = get_recalBrokeFlag();
+    const Float_t metoffrecal = get_metoffrecal();
+    const Float_t mexoffrecal = get_mexoffrecal();
+    const Float_t meyoffrecal = get_meyoffrecal();
+    const Float_t metoffrecalmuon = get_metoffrecalmuon();
+    const Float_t mexoffrecalmuon = get_mexoffrecalmuon();
+    const Float_t meyoffrecalmuon = get_meyoffrecalmuon();
+    const Float_t muonMetl1 = get_metl1muon();
+    const Float_t muonActint = get_actintmuon();
+    const Float_t algAmuonMET = get_algAmuon();
+    const Float_t algBmuonMET = get_algBmuon();
+
+
+
+    if ( IsMuon(passmuon,passmuvarmed) && IsClean(cleanCutsFlag,recalBrokeFlag) && muonMetl1 > metl1thresh)
     {
-        isMuon = (passmuvarmed > 0.1 || passmuon > 0.1);
-        isClean = (cleanCutsFlag > 0.1) && (recalBrokeFlag < 0.1);
+        parameters->IncrementNumMuonPassProcess1();
+    }
 
-        if ( IsMuon(passmuon,passmuvarmed) && IsClean(cleanCutsFlag,recalBrokeFlag) && muonMetl1 > metl1thresh)
+    if ( IsMuon(passmuon,passmuvarmed) && IsClean(cleanCutsFlag,recalBrokeFlag) && ( muonActint > actintCut ))
+    {
+        if ( passTransverseMassCut(metoffrecal,mexoffrecal,meyoffrecal,metoffrecalmuon,mexoffrecalmuon,meyoffrecalmuon) )
         {
-            parameters->IncrementNumMuonPassProcess1();
+            Float_t metnomu = computeMetNoMu(  mexoffrecal , meyoffrecal , mexoffrecalmuon , meyoffrecalmuon );
+
+            Ateff->Fill((algAmuonMET > algAThresh) && (muonMetl1 > metl1thresh) && ( muonActint > actintCut ), metnomu);
+            Bteff->Fill((algBmuonMET > algBThresh) && (muonMetl1 > metl1thresh)&& ( muonActint > actintCut ), metnomu);
+            Cteff->Fill(((algAmuonMET > CombinedThreshAlgA) && (algBmuonMET > CombinedThreshAlgB)
+            && ( muonActint > actintCut )&& (muonMetl1 > metl1thresh)), metnomu);
+            Dteff->Fill((muonMetl1 >= metl1thresh) && ( muonActint > actintCut ), metnomu);
         }
-
-
-        if ( isMuon && isClean && ( muonActint > actintCut ))
-        {
-            if ( passTransverseMassCut(metoffrecal,mexoffrecal,meyoffrecal,metoffrecalmuon,mexoffrecalmuon,meyoffrecalmuon) )
-            {
-                Float_t metnomu = computeMetNoMu(  mexoffrecal , meyoffrecal , mexoffrecalmuon , meyoffrecalmuon );
-
-                Ateff->Fill((algAmuonMET > algAThresh) && (muonMetl1 > metl1thresh) && ( muonActint > actintCut ), metnomu);
-                Bteff->Fill((algBmuonMET > algBThresh) && (muonMetl1 > metl1thresh)&& ( muonActint > actintCut ), metnomu);
-                Cteff->Fill(((algAmuonMET > CombinedThreshAlgA) && (algBmuonMET > CombinedThreshAlgB)
-                && ( muonActint > actintCut )&& (muonMetl1 > metl1thresh)), metnomu);
-                Dteff->Fill((muonMetl1 >= metl1thresh) && ( muonActint > actintCut ), metnomu);
-            }
-        }
+    }
     }
 }
 

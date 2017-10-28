@@ -26,7 +26,6 @@
 
 //TODO: definitely needs better name for this macro. actually make decriptive of what these helpers do
 
-
 //comptues the met offrecallibrated without muon term value
 Float_t computeMetNoMu( const Float_t mexoffrecal , const Float_t meyoffrecal , const Float_t mexoffrecalmuon , const Float_t meyoffrecalmuon );
 
@@ -37,8 +36,6 @@ Bool_t passTransverseMassCut( const Float_t metoffrecal , const Float_t mexoffre
 
 
 Bool_t IsMuon( const Float_t passmuon , const Float_t passmuvarmed );
-
-
 
 Bool_t IsClean( const Float_t cleancutsflag , const Float_t recalbrokeflag);
 

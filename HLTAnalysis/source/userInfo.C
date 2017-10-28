@@ -125,6 +125,8 @@ TString userInfo::getAlgBName() const { return (algBName);}
 Int_t userInfo::getMuonNentries() const { return(muonNentries);}
 Int_t userInfo::getThreshNentries() const { return (passnoAlgNentries) ; }
 Int_t userInfo::getNumbToKeep() const { return( numberEventsToKeep )};
+Float_t userInfo::GetAlgAIndividThresh() const { return ( algAIndividThresh ); }
+Float_t userInfo::GetAlgBIndividThresh() const { return ( algBIndividThresh ); }
 
 //setters
 void userInfo::setAlgAName( const TString algA ) { algAName = algA; };
