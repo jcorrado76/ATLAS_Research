@@ -2,7 +2,7 @@
 
 
 //constructor definition
-HLTEfficiencyAnalysis::HLTEfficiencyAnalysis()
+HLTEfficiencyAnalysis::HLTEfficiencyAnalysis( const TString& algA , const TString& algB )
 {
     parameters->setAlgAName( algA );
     parameters->setAlgAName( algB );
@@ -60,7 +60,18 @@ void HLTEfficiencyAnalysis::End()
     Cteff->Draw("same");
     Dteff->Draw("same");
 
-    //TODO: need to define astring, bstring, cstring, and dstring
+    const Float_t algAThresh = parameters->GetAlgAIndividThresh();
+    const Float_t algBThresh = parameters->GetAlgBIndividThresh();
+    const Float_t CombinedThreshAlgA = parameters->GetAlgACombinedThresh();
+    const Float_t CombinedThreshAlgB = parameters->GetAlgBCombinedThresh();
+    const Float_t metl1thresh = parameters->getMetL1Thresh();
+
+
+    TString astring = algA + " > " + Form(" %.2f", algAThresh);
+    TString bstring = algB + " > " + Form(" %.2f", algBThresh);
+    TString cstring = algA + " > " + Form(" %.2f", CombinedThreshAlgA) + " and " +
+    algB + " > " + Form(" %.2f", CombinedThreshAlgB);
+    TString dstring = (TString) "L1 > " + Form(" %.2f" , metl1thresh);
 
     //CREATE LEGEND
     TLegend *legend = new TLegend(0.57,0.15,0.9, 0.4 ,"","NDC");
@@ -71,11 +82,12 @@ void HLTEfficiencyAnalysis::End()
     legend->Draw();
 
     //compute number muon events actually kept using external macro
-    Int_t muonEventsCombined = determineMuonEventsKeptCombined( algA, CombinedThreshAlgA , algB , CombinedThreshAlgB , muonFilename );
+    Int_t muonEventsCombined = determineMuonEventsKeptCombined( algA, CombinedThreshAlgA , algB ,
+        CombinedThreshAlgB , muonFilename );
 
     //NUM PASS PROCESS 1
-    logFileParams->setNumPassNoAlgPassProcess1( NumbPassnoAlgPassProcess1WithActintCut );
-    logFileParams->setNumMuonPassProcess1( NumMuonPassProcess1WithActintCut );
+    parameters->setNumPassNoAlgPassProcess1( NumbPassnoAlgPassProcess1WithActintCut );
+    parameters->setNumMuonPassProcess1( NumMuonPassProcess1WithActintCut );
 
     //NUM MUONS PASS PROCESS 2
     Int_t NumberMuonEventsProcess2AlgAActintCut = (Ateff->GetPassedHistogram())->GetEntries() ;
@@ -83,23 +95,23 @@ void HLTEfficiencyAnalysis::End()
     Int_t NumberMuonEventsProcess2CombinedActintCut = (Cteff->GetPassedHistogram())->GetEntries() ;
 
     //SET NUM PASSNOALG PROCESS 2
-    logFileParams->setNumPassNoAlgPassProcess2Combined( NumberMuonEventsProcess2CombinedActintCut);
-    logFileParams->setNumPassNoAlgPassProcess2AlgA( numPassnoalgPassProcess1AlgA);
-    logFileParams->setNumPassNoAlgPassProcess2AlgB( numPassnoalgPassProcess1AlgB);
+    parameters->setNumPassNoAlgPassProcess2Combined( NumberMuonEventsProcess2CombinedActintCut);
+    parameters->setNumPassNoAlgPassProcess2AlgA( numPassnoalgPassProcess1AlgA);
+    parameters->setNumPassNoAlgPassProcess2AlgB( numPassnoalgPassProcess1AlgB);
 
     //SET NUM MUON PROCESS 2
-    logFileParams->setNumMuonPassProcess2Combined( NumberMuonEventsProcess2CombinedActintCut);
-    logFileParams->setNumMuonPassProcess2AlgA( NumberMuonEventsProcess2AlgAActintCut);
-    logFileParams->setNumMuonPassProcess2AlgB( NumberMuonEventsProcess2AlgBActintCut);
+    parameters->setNumMuonPassProcess2Combined( NumberMuonEventsProcess2CombinedActintCut);
+    parameters->setNumMuonPassProcess2AlgA( NumberMuonEventsProcess2AlgAActintCut);
+    parameters->setNumMuonPassProcess2AlgB( NumberMuonEventsProcess2AlgBActintCut);
 
     //SET THRESHOLDS
-    logFileParams->setAlgAIndividThresh( algAThresh);
-    logFileParams->setAlgBIndividThresh( algBThresh );
-    logFileParams->setAlgACombinedThresh( CombinedThreshAlgA);
-    logFileParams->setAlgBCombinedThresh( CombinedThreshAlgB );
+    parameters->setAlgAIndividThresh( algAThresh);
+    parameters->setAlgBIndividThresh( algBThresh );
+    parameters->setAlgACombinedThresh( CombinedThreshAlgA);
+    parameters->setAlgBCombinedThresh( CombinedThreshAlgB );
 
-    logFileParams->setNumMuonKeptCombinedAtThresh( muonEventsCombined );
-    logFileParams->setNumTotal((Ateff->GetTotalHistogram())->GetEntries());
+    parameters->setNumMuonKeptCombinedAtThresh( muonEventsCombined );
+    parameters->setNumTotal((Ateff->GetTotalHistogram())->GetEntries());
 
     TString fileName = "./TEfficienciesPics/" + folder + "/" + algA + "_" + algB + "Efficiencies.root";
     //if file already exists, not opened
@@ -125,14 +137,13 @@ void HLTEfficiencyAnalysis::End()
 
     logFileData->Write("bisectionData");
     efficiencyCanvas->Write("efficiencyCanvas");
-    logFileParams->Print();
-    logFileParams->Write("parameters");
+    parameters->Print();
+    parameters->Write("parameters");
 
     rootFile->Close();
 }
 
-//TODO: need to finish this piece
-void HLTEfficiencyAnalysis::DetermineThresholds()
+void HLTEfficiencyAnalysis::EvaluateIndividThresh()
 {
     using namespace treeReaderSpace;
 
@@ -145,13 +156,16 @@ void HLTEfficiencyAnalysis::DetermineThresholds()
     const Float_t passnoalgL1XE30 = get_passnoalgL1XE30();
     const Float_t passnoalgL1XE40 = get_passnoalgL1XE40();
     const Float_t passnoalgL1XE45 = get_passnoalgL1XE45();
+    const Float_t actint = get_actint();
+    const Float_t metl1 = get_metl1();
 
     //filling the zb hists
-	if ( ( metl1 > metL1Thresh ) && ( passnoalg_actint > actintCut ) &&
+	if ( ( metl1 > metL1Thresh ) && ( actint > actintCut ) &&
         ( passnoalgL1XE10 > 0.5 || passnoalgL1XE30 > 0.5 || passnoalgL1XE40 > 0.5 || passnoalgL1XE45 > 0.5 ) )
 	{
 		algAMETHist->Fill(algA);
         algBMETHist->Fill(algB);
+        parameters->IncrementNumPassnoalgPassProcess1();
 	}
 
 }
@@ -184,25 +198,18 @@ void HLTEfficiencyAnalysis::AnalyzeMuon()
     const Float_t algAMET = get_algA();
     const Float_t algBMET = get_algB();
 
-
-
-    if ( IsMuon(passmuon,passmuvarmed) && IsClean(cleanCutsFlag,recalBrokeFlag) && metl1 > metl1thresh)
+    if ( IsMuon(passmuon,passmuvarmed) && IsClean(cleanCutsFlag,recalBrokeFlag) && ( actint > actintCut )
+        && passTransverseMassCut(metoffrecal,mexoffrecal,meyoffrecal,metoffrecalmuon,mexoffrecalmuon,meyoffrecalmuon) )
     {
+        Float_t metnomu = computeMetNoMu(  mexoffrecal , meyoffrecal , mexoffrecalmuon , meyoffrecalmuon );
+        
         parameters->IncrementNumMuonPassProcess1();
-    }
 
-    if ( IsMuon(passmuon,passmuvarmed) && IsClean(cleanCutsFlag,recalBrokeFlag) && ( actint > actintCut ))
-    {
-        if ( passTransverseMassCut(metoffrecal,mexoffrecal,meyoffrecal,metoffrecalmuon,mexoffrecalmuon,meyoffrecalmuon) )
-        {
-            Float_t metnomu = computeMetNoMu(  mexoffrecal , meyoffrecal , mexoffrecalmuon , meyoffrecalmuon );
-
-            Ateff->Fill((algAMET > algAThresh) && (metl1 > metl1thresh) && ( actint > actintCut ), metnomu);
-            Bteff->Fill((algBMET > algBThresh) && (metl1 > metl1thresh)&& ( actint > actintCut ), metnomu);
-            Cteff->Fill(((algAMET > CombinedThreshAlgA) && (algBMET > CombinedThreshAlgB)
-            && ( actint > actintCut )&& (metl1 > metl1thresh)), metnomu);
-            Dteff->Fill((metl1 >= metl1thresh) && ( actint > actintCut ), metnomu);
-        }
+        Ateff->Fill((algAMET > algAThresh) && (metl1 > metl1thresh) && ( actint > actintCut ), metnomu);
+        Bteff->Fill((algBMET > algBThresh) && (metl1 > metl1thresh)&& ( actint > actintCut ), metnomu);
+        Cteff->Fill(((algAMET > CombinedThreshAlgA) && (algBMET > CombinedThreshAlgB)
+        && ( actint > actintCut )&& (metl1 > metl1thresh)), metnomu);
+        Dteff->Fill((metl1 >= metl1thresh) && ( actint > actintCut ), metnomu);
     }
 }
 
@@ -218,22 +225,22 @@ void HLTEfficiencyAnalysis::DoAnalysis()
     chain.SetCacheSize(128*1024*1024);
 
     //FILES
-    TString zerobiasFileName = logFileParams->get_passnoalgFileName();
-    TString muonFilename = logFileParams->get_muonFileName();
+    TString zerobiasFileName = parameters->get_passnoalgFileName();
+    TString muonFilename = parameters->get_muonFileName();
 
     //ZB_FILE; ZB_TREE
     TString zerobiasFilePath = "../myData/"+ zerobiasFileName;
     TFile * zeroBiasFile = TFile::Open(zerobiasFilePath, "READ");
     TTree* zeroBiasTree = (TTree*)zeroBiasFile->Get("tree");
     Int_t zerobiasNentries = zeroBiasTree->GetEntries();
-    logFileParams->set_PassnoalgNentries( zerobiasNentries );
+    parameters->set_PassnoalgNentries( zerobiasNentries );
 
     //MUON FILE; MUON TREE
     TString muonFilePath = "../myData/"+muonFilename;
     TFile * muonFile = TFile::Open(muonFilePath, "READ");
     TTree* myMuonTree = (TTree*)muonFile->Get("tree");
     Int_t muonNentries = myMuonTree->GetEntries();
-    logFileParams->setMuonNentries( muonNentries );
+    parameters->setMuonNentries( muonNentries );
 
 
     //initialize reader with zb tree
@@ -241,37 +248,37 @@ void HLTEfficiencyAnalysis::DoAnalysis()
 
     Begin();
 
-
-    //DETERMINE INDIVIDUAL ZB thresholds
-
-    //convenient alias
-    Int_t numbKeep = parameters->getNumbToKeep();
-
     for (long long entry = 0; entry < zerobiasNentries; entry++)
     {
         // load the current event
         ChainHandler_obj.GetEntry(entry);
-
-        DetermineThresholds();
+        EvaluateIndividThresh();
     }
 
-    TH1F *algATarget = (TH1F*) algAMETHist->GetCumulative(kFALSE);
+
+    //convenient alias
+    Int_t numbKeep = parameters->getNumbToKeep();
+
+    algATarget = (TH1F*) algAMETHist->GetCumulative(kFALSE);
 	parameters->setAlgAIndividThresh(computeThresh(algATarget, numbKeep));
 
-    TH1F *algBTarget = (TH1F*) algBMETHist->GetCumulative(kFALSE);
+    algBTarget = (TH1F*) algBMETHist->GetCumulative(kFALSE);
 	parameters->setAlgBIndividThresh(computeThresh(algBTarget, numbKeep));
 
     //DETERMINE COMINED THRESHOLDS
 
+
+    Float_t binWidth = (parameters->getMetMax() - parameters->getMetMin())/ parameters->getNbins();
+    Int_t NumbPassnoAlgPassProcess1WithActintCut  =parameters->GetNumPassNoAlgPassProcess1();
     bisection( algAMETHist , algBMETHist, binWidth, CombinedThreshAlgA,
     CombinedThreshAlgB, NumbPassnoAlgPassProcess1WithActintCut , frac ,
     logFileData,zeroBiasTree);
 
 
     // Done and benchmark results
-    bmark.Stop("DetermineThresholds");
-    cout << "CPU  Time: " << Form("%.01f", bmark.GetCpuTime("DetermineThresholds" )) << endl;
-    cout << "Real Time: " << Form("%.01f", bmark.GetRealTime("DetermineThresholds")) << endl;
+    bmark.Stop("EvaluateIndividThresh");
+    cout << "CPU  Time: " << Form("%.01f", bmark.GetCpuTime("EvaluateIndividThresh" )) << endl;
+    cout << "Real Time: " << Form("%.01f", bmark.GetRealTime("EvaluateIndividThresh")) << endl;
     cout << endl;
 
     //COMPUTE EFFICIENCIES

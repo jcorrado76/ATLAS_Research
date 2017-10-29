@@ -69,6 +69,7 @@ public:
     Float_t GetAlgBIndividThresh() const;
     Float_t GetAlgACombinedThresh() const;
     Float_t GetAlgBCombinedThresh() const;
+    Int_t GetNumPassNoAlgPassProcess1() const;
 
     void setAlgAName( const TString algA );
     void setAlgBName( const TString algB );
@@ -98,6 +99,8 @@ public:
     void setActintCut( const Float_t thresh );
     void setEpsilon( const Int_t epsilon );
     void IncrementNumMuonPassProcess1();
+    void IncrementNumPassnoalgPassProcess1();
+
 
     //this macro from Rtypes.h facilitates root I/O
     ClassDef( userInfo, 1)

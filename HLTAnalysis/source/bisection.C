@@ -1,4 +1,3 @@
-#include "mincerMacros.h"
 #include "HLTEfficiencyAnalysis.h"
 
 
@@ -27,24 +26,21 @@ Float_t HLTEfficiencyAnalysis::bisection(TH1F* algAHist , TH1F* algBHist, const 
     Float_t numKeepx2 = numPassedProcess1WithActintCut * initialGuess;
     Float_t numKeepx3 = numPassedProcess1WithActintCut * x3;
 
-    //compute the cumulative right hand sum hists
-    TH1F *algAMETtarget = (TH1F*) algAHist->GetCumulative(kFALSE);
-    TH1F *algBMETtarget = (TH1F*) algBHist->GetCumulative(kFALSE);
-    //rename for clarity later on
-    algAMETtarget->SetName(algAMETtarget->GetName() + (const TString)"A");
-    algBMETtarget->SetName(algBMETtarget->GetName() + (const TString)"B");
+        //rename for clarity later on
+    algATarget->SetName(algATarget->GetName() + (const TString)"A");
+    algBTarget->SetName(algBTarget->GetName() + (const TString)"B");
 
     //compute thresholds at boundaris to use
     Float_t algAMETx1thresh,algAMETx2thresh,algAMETx3thresh,algBMETx1thresh,algBMETx2thresh, algBMETx3thresh;
 
-    algAMETx1thresh = computeThresh(algAMETtarget, numKeepx1);
-    algBMETx1thresh = computeThresh(algBMETtarget, numKeepx1);
+    algAMETx1thresh = computeThresh(algATarget, numKeepx1);
+    algBMETx1thresh = computeThresh(algBTarget, numKeepx1);
 
-    algAMETx2thresh = computeThresh(algAMETtarget, numKeepx2);
-    algBMETx2thresh = computeThresh(algBMETtarget, numKeepx2);
+    algAMETx2thresh = computeThresh(algATarget, numKeepx2);
+    algBMETx2thresh = computeThresh(algBTarget, numKeepx2);
 
-    algAMETx3thresh = computeThresh(algAMETtarget, numKeepx3);
-    algBMETx3thresh = computeThresh(algBMETtarget, numKeepx3);
+    algAMETx3thresh = computeThresh(algATarget, numKeepx3);
+    algBMETx3thresh = computeThresh(algBTarget, numKeepx3);
 
     //print the status
     std::cout << "numPassedProcess1WithActintCut: " << numPassedProcess1WithActintCut << std::endl;
@@ -58,17 +54,17 @@ Float_t HLTEfficiencyAnalysis::bisection(TH1F* algAHist , TH1F* algBHist, const 
     std::cout << "Epsilon: " << epsilon << std::endl;
 
     //set the names of the histograms to also contain the letters A and B
-    algAMETtarget->SetName(algAMETtarget->GetName() + (const TString)"A");
-    algBMETtarget->SetName(algBMETtarget->GetName() + (const TString)"B");
+    algATarget->SetName(algATarget->GetName() + (const TString)"A");
+    algBTarget->SetName(algBTarget->GetName() + (const TString)"B");
 
 
     //compute initial thresholds at each of the extrema and first guess
-    algAMETx1thresh = computeThresh(algAMETtarget, numKeepx1);
-    algBMETx1thresh = computeThresh(algBMETtarget, numKeepx1);
-    algAMETx2thresh = computeThresh(algAMETtarget, numKeepx2);
-    algBMETx2thresh = computeThresh(algBMETtarget, numKeepx2);
-    algAMETx3thresh = computeThresh(algAMETtarget, numKeepx3);
-    algBMETx3thresh = computeThresh(algBMETtarget, numKeepx3);
+    algAMETx1thresh = computeThresh(algATarget, numKeepx1);
+    algBMETx1thresh = computeThresh(algBTarget, numKeepx1);
+    algAMETx2thresh = computeThresh(algATarget, numKeepx2);
+    algBMETx2thresh = computeThresh(algBTarget, numKeepx2);
+    algAMETx3thresh = computeThresh(algATarget, numKeepx3);
+    algBMETx3thresh = computeThresh(algBTarget, numKeepx3);
 
     std::cout << "algAx1Thresh: " << algAMETx1thresh << std::endl;
     std::cout << "algBx1Thresh: " << algBMETx1thresh << std::endl;
@@ -182,8 +178,8 @@ Float_t HLTEfficiencyAnalysis::bisection(TH1F* algAHist , TH1F* algBHist, const 
         std::cout << "numPassedProcess1WithActintCut: " << numPassedProcess1WithActintCut << std::endl;
         numKeepx2 = numPassedProcess1WithActintCut * initialGuess;
         std::cout << "numKeepx2: " << numKeepx2 << std::endl;
-        algAMETx2thresh = computeThresh(algAMETtarget, numKeepx2);
-        algBMETx2thresh = computeThresh(algBMETtarget, numKeepx2);
+        algAMETx2thresh = computeThresh(algATarget, numKeepx2);
+        algBMETx2thresh = computeThresh(algBTarget, numKeepx2);
 
         thresholdAarray[j+2] = (Float_t) algAMETx2thresh;
         thresholdBarray[j+2] = (Float_t) algBMETx2thresh;

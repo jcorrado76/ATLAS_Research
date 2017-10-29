@@ -129,6 +129,8 @@ Float_t userInfo::GetAlgAIndividThresh() const { return ( algAIndividThresh ); }
 Float_t userInfo::GetAlgBIndividThresh() const { return ( algBIndividThresh ); }
 Float_t userInfo::GetAlgACombinedThresh() const {return ( algACombinedThresh );};
 Float_t userInfo::GetAlgBCombinedThresh() const {return ( algBCombinedThresh );};
+Int_t userInfo::GetNumPassNoAlgPassProcess1() const { return ( NumPassnoalgPassProcess1);};
+
 
 //setters
 void userInfo::setAlgAName( const TString algA ) { algAName = algA; };
@@ -157,4 +159,5 @@ void userInfo::setNumMuonKeptCombinedAtThresh( const Int_t num ) { numMuonKeptCo
 void userInfo::setNumTotal( const Int_t num ) { numMuonDenominator = num; };
 void userInfo::setActintCut( const Float_t thresh ) { actintCut = thresh; };
 void userInfo::setEpsilon( const Int_t epson ) { epsilon = epson; };
+void userInfo::IncrementNumPassnoalgPassProcess1(){ NumPassnoalgPassProcess1++; };
 void userInfo::IncrementNumMuonPassProcess1(){ NumMuonPassProcess1++; };
