@@ -202,7 +202,7 @@ void HLTEfficiencyAnalysis::AnalyzeMuon()
         && passTransverseMassCut(metoffrecal,mexoffrecal,meyoffrecal,metoffrecalmuon,mexoffrecalmuon,meyoffrecalmuon) )
     {
         Float_t metnomu = computeMetNoMu(  mexoffrecal , meyoffrecal , mexoffrecalmuon , meyoffrecalmuon );
-        
+
         parameters->IncrementNumMuonPassProcess1();
 
         Ateff->Fill((algAMET > algAThresh) && (metl1 > metl1thresh) && ( actint > actintCut ), metnomu);
@@ -269,8 +269,9 @@ void HLTEfficiencyAnalysis::DoAnalysis()
 
 
     Float_t binWidth = (parameters->getMetMax() - parameters->getMetMin())/ parameters->getNbins();
-    Int_t NumbPassnoAlgPassProcess1WithActintCut  =parameters->GetNumPassNoAlgPassProcess1();
-    bisection( algAMETHist , algBMETHist, binWidth, CombinedThreshAlgA,
+    Int_t NumbPassnoAlgPassProcess1WithActintCut  = parameters->GetNumPassNoAlgPassProcess1();
+
+    bisection( binWidth, CombinedThreshAlgA,
     CombinedThreshAlgB, NumbPassnoAlgPassProcess1WithActintCut , frac ,
     logFileData,zeroBiasTree);
 
