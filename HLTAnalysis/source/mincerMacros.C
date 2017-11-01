@@ -1,7 +1,8 @@
 #include "mincerMacros.h"
 
 
-Float_t computeMetNoMu( const Float_t mexoffrecal , const Float_t meyoffrecal , const Float_t mexoffrecalmuon , const Float_t meyoffrecalmuon )
+Float_t computeMetNoMu( const Float_t mexoffrecal , const Float_t meyoffrecal ,
+    const Float_t mexoffrecalmuon , const Float_t meyoffrecalmuon )
 {
     Float_t metnomu = sqrt(((mexoffrecal - mexoffrecalmuon) * (mexoffrecal - mexoffrecalmuon)) +
     ((meyoffrecal - meyoffrecalmuon)*(meyoffrecal - meyoffrecalmuon))); //compute metnomu
@@ -39,8 +40,8 @@ Bool_t IsClean( const Float_t cleancutsflag , const Float_t recalbrokeflag){
 }
 
 
-Float_t determineZeroBiasThresh( const TString& algName, Int_t & numPass , const Float_t frac = 0.00590,
-    const TString& threshFileName = "PhysicsMain.All.noalgXEtriggers.2016.f731f758._m1659m1710.48Runs.root")
+Float_t determineZeroBiasThresh( const TString& algName, Int_t & numPass , const Float_t frac,
+    const TString& threshFileName )
 {
     //this function determines thresh to keep proper trigger rate for process 2 on algs A and B
     //these thresholds are used on both passnoalg and muon data
@@ -122,7 +123,7 @@ Float_t determineZeroBiasThresh( const TString& algName, Int_t & numPass , const
 
 Float_t determineMuonEventsKeptCombined( const TString& algA, const Float_t threshA,
                                          const TString& algB, Float_t threshB,
-                                         const TString& muonFileName = "PhysicsMain2016.Muons.noalgL1XE45R3073065R311481Runs9B.root")
+                                         const TString& muonFileName )
 {
 
     //this function determines process2 for muon events on combined alg
