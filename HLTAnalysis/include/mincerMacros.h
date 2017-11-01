@@ -1,26 +1,6 @@
 #ifndef MINCERMACROS_H
 #define MINCERMACROS_H
 
-#include <string>
-#include <iostream>
-#include <fstream>
-
-#include "TMath.h"
-#include "TH1.h"
-#include "TFile.h"
-#include "TTree.h"
-#include "TString.h"
-#include "TROOT.h"
-#include "TEfficiency.h"
-#include "TLegend.h"
-#include "TCanvas.h"
-#include "TSystem.h"
-#include "TF1.h"
-#include "TNtuple.h"
-#include "TBenchmark.h"
-#include "TObject.h"
-#include "TDatime.h"
-#include "TChain.h"
 #include "userInfo.h"
 
 //TODO: definitely needs better name for this macro. actually make decriptive of what these helpers do
