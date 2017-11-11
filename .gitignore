@@ -1,5 +1,5 @@
 *
 !.gitignore
-!./myMacros/
-!./HLTAnalysis/
+!**/myMacros/*.C
+!**/HLTAnalysis/*.C
 

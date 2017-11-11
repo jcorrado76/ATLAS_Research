@@ -41,7 +41,7 @@ ChainHandler::ChainHandler()
     , metrefmuon_handle("metref")
     , mexrefmuon_handle("mexref")
     , meyrefmuon_handle("meyref")
-}
+{}
 
 void ChainHandler::Init(TTree& tree)
 {
