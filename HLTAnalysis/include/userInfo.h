@@ -68,7 +68,8 @@ public:
     userInfo();
 
     void Print(Option_t *option = "") const;
-
+    
+    //GETTERS
     TString get_passnoalgFileName() const;
     TString get_muonFileName() const;
     Float_t getMetL1Thresh() const;
@@ -89,21 +90,23 @@ public:
     Float_t GetAlgACombinedThresh() const;
     Float_t GetAlgBCombinedThresh() const;
     Int_t GetNumPassNoAlgPassProcess1() const;
+    Int_t GetNumMuonPassProcess1() const; 
+    Int_t GetNumPassNoAlgPassProcess1AlgA() const;
+    Int_t GetNumPassNoAlgPassProcess1AlgB() const;
 
+
+
+    //SETTERS
     void setAlgAName( const TString algA );
     void setAlgBName( const TString algB );
-
     void setNumPassNoAlgPassProcess1( const Float_t num );
     void setNumMuonPassProcess1( const Float_t num );
-
     void setNumPassNoAlgPassProcess2AlgA( const Float_t num );
     void setNumPassNoAlgPassProcess2AlgB( const Float_t num );
     void setNumPassNoAlgPassProcess2Combined( const Float_t num );
-
     void setNumMuonPassProcess2AlgA( const Float_t num );
     void setNumMuonPassProcess2AlgB( const Float_t num );
     void setNumMuonPassProcess2Combined( const Float_t num );
-
     void setAlgAIndividThresh( const Float_t thresh );
     void setAlgBIndividThresh( const Float_t thresh );
     void setAlgACombinedThresh( const Float_t thresh );

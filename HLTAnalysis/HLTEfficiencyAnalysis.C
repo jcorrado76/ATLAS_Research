@@ -1,33 +1,35 @@
 #include "HLTEfficiencyAnalysis.h"
-
+#include<iostream>
 
 //constructor definition
 HLTEfficiencyAnalysis::HLTEfficiencyAnalysis( const TString& algA , const TString& algB )
 {
     parameters->setAlgAName( algA );
     parameters->setAlgAName( algB );
-
-    if (verbose)
-    {
-        std::cout << "[HLTEfficiencyAnalysis]" << std::endl;
-        std::cout << "HLTAnalysis has been initialized with the following parameters:" << std::endl;
-        parameters->Print();
-    }
+    bisection = new Bisection( parameters );
+    std::cout << "HLTAnalysis has been initialized with the following parameters:" << std::endl;
+    parameters->Print();
 };
 
 
 //destructor definition
 HLTEfficiencyAnalysis::~HLTEfficiencyAnalysis()
 {
-    if (verbose)
-    {
-        std::cout << "HLTAnalysis finished." << std::endl;
-    }
+    std::cout << "HLTAnalysis finished." << std::endl;
 }
 
 
 void HLTEfficiencyAnalysis::Begin()
 {
+    const TString algA = parameters->getAlgAName();
+    const TString algB = parameters->getAlgBName();
+
+    const Int_t nbins = parameters->getNbins();
+    const Float_t metMin = parameters->getMetMin();
+    const Float_t metMax = parameters->getMetMax();
+
+    const Int_t muonNbins = nbins;
+
     //INITIALIZE HISTOGRAMS
     algAMETHist = new TH1F(algA, "algA", nbins, metMin, metMax);
     algBMETHist = new TH1F(algB, "algB", nbins, metMin, metMax);
@@ -43,6 +45,10 @@ void HLTEfficiencyAnalysis::Begin()
 void HLTEfficiencyAnalysis::End()
 {
     //TCANVAS
+
+    const TString algA = parameters->getAlgAName();
+    const TString algB = parameters->getAlgBName();
+
     const TString canvName = algA + " and " + algB + " Combined Efficiency" + ";Offline Recalibrated MET w/o Muon term [GeV];Efficiency";
     TCanvas* efficiencyCanvas = new TCanvas("Efficiency Canvas", "Efficiency Canvas");
     efficiencyCanvas->RangeAxis(0,0,500,1.0);
@@ -65,6 +71,10 @@ void HLTEfficiencyAnalysis::End()
     const Float_t CombinedThreshAlgA = parameters->GetAlgACombinedThresh();
     const Float_t CombinedThreshAlgB = parameters->GetAlgBCombinedThresh();
     const Float_t metl1thresh = parameters->getMetL1Thresh();
+    const TString& muonFilename = parameters->get_muonFileName();
+    const Float_t NumbPassnoAlgPassProcess1WithActintCut = parameters->GetNumPassNoAlgPassProcess1();
+    const Float_t NumMuonPassProcess1WithActintCut = parameters->GetNumMuonPassProcess1();
+    const Float_t numPassnoalgPassProcess1AlgA = parameters->Get
 
 
     TString astring = algA + " > " + Form(" %.2f", algAThresh);
@@ -113,7 +123,7 @@ void HLTEfficiencyAnalysis::End()
     parameters->setNumMuonKeptCombinedAtThresh( muonEventsCombined );
     parameters->setNumTotal((Ateff->GetTotalHistogram())->GetEntries());
 
-    TString fileName = "./TEfficienciesPics/" + folder + "/" + algA + "_" + algB + "Efficiencies.root";
+    TString fileName = "./TEfficienciesPics/" + algA + "_" + algB + "Efficiencies.root";
     //if file already exists, not opened
     TFile* rootFile = new TFile(fileName,"CREATE");
 
@@ -135,7 +145,8 @@ void HLTEfficiencyAnalysis::End()
     Cteff->Write( cstring );
     Dteff->Write( "METL1" );
 
-    logFileData->Write("bisectionData");
+    efficiencyCanvas->Print("./plots/" + algA + "_" + algB + "_efficiency.tiff");
+    parameters->Write("bisectionData");
     efficiencyCanvas->Write("efficiencyCanvas");
     parameters->Print();
     parameters->Write("parameters");
@@ -158,6 +169,8 @@ void HLTEfficiencyAnalysis::EvaluateIndividThresh()
     const Float_t passnoalgL1XE45 = get_passnoalgL1XE45();
     const Float_t actint = get_actint();
     const Float_t metl1 = get_metl1();
+    
+    const Float_t metL1Thresh = parameters->getMetL1Thresh();
 
     //filling the zb hists
 	if ( ( metl1 > metL1Thresh ) && ( actint > actintCut ) &&
@@ -214,7 +227,7 @@ void HLTEfficiencyAnalysis::AnalyzeMuon()
 }
 
 //TODO: need to finish determine thresholds portion
-void HLTEfficiencyAnalysis::DoAnalysis()
+void HLTEfficiencyAnalysis::DoAnalysis(TChain& chain)
 {
     // benchmark
     TBenchmark bmark;
@@ -305,4 +318,3 @@ void HLTEfficiencyAnalysis::DoAnalysis()
     End();
 }
 
-}

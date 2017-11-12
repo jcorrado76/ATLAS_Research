@@ -1,80 +1,33 @@
-#include "HLTEfficiencyAnalysis.h"
+#include"bisection.h"
 
+Bisection::Bisection( userInfo* parameters ){
 
-Float_t HLTEfficiencyAnalysis::bisection(const Float_t binWidth,
-    Float_t &  individAThreshFinal , Float_t  & individBThreshFinal,const Int_t numPassedProcess1WithActintCut = 0 ,
-    Float_t frac = 0.00590, TNtuple* logFileData = NULL, TTree* passnoalgTree = NULL)
-{
-    //some useful parameters
     frac = parameters->getFrac();
-    Float_t metl1thresh = parameters->getMetL1Thresh();
-    Float_t actintCut = parameters->getActintCut();
-    Int_t epsilon = parameters->getEpsilon();
+    metl1thresh = parameters->getMetL1Thresh();
+    actintCut = parameters->getActintCut();
+    epsilon = parameters->getEpsilon();
 
-    Int_t target = numPassedProcess1WithActintCut * frac;
+    target = numPassedProcess1WithActintCut * frac;
 
-    Float_t lwrbnd = 0.5 * frac;
-    Float_t uprbnd = 0.13;
+    lwrbnd = 0.5 * frac;
+    uprbnd = 0.13;
 
-    Float_t x1,x3; //thresholds of individual algorithms
-    Float_t Process2FracX1WithActintCut,Process2FracX2WithActintCut,Process2FracX3WithActintCut = 0; //fractions of events kept out of passrndm
+    Process2FracX1WithActintCut,Process2FracX2WithActintCut,Process2FracX3WithActintCut = 0; //fractions of events kept out of passrndm
     x1 = lwrbnd;
     x3 = uprbnd;
-    Float_t initialGuess = ( x1 + x3 ) / 2.0;
-    Float_t firstGuess = initialGuess;
-    Float_t numKeepx1 = numPassedProcess1WithActintCut * x1;
-    Float_t numKeepx2 = numPassedProcess1WithActintCut * initialGuess;
-    Float_t numKeepx3 = numPassedProcess1WithActintCut * x3;
-
-        //rename for clarity later on
-    algATarget->SetName(algATarget->GetName() + (const TString)"A");
-    algBTarget->SetName(algBTarget->GetName() + (const TString)"B");
-
-    //compute thresholds at boundaris to use
-    Float_t algAMETx1thresh,algAMETx2thresh,algAMETx3thresh,algBMETx1thresh,algBMETx2thresh, algBMETx3thresh;
-
-    algAMETx1thresh = computeThresh(algATarget, numKeepx1);
-    algBMETx1thresh = computeThresh(algBTarget, numKeepx1);
-
-    algAMETx2thresh = computeThresh(algATarget, numKeepx2);
-    algBMETx2thresh = computeThresh(algBTarget, numKeepx2);
-
-    algAMETx3thresh = computeThresh(algATarget, numKeepx3);
-    algBMETx3thresh = computeThresh(algBTarget, numKeepx3);
-
-    //print the status
-    std::cout << "numPassedProcess1WithActintCut: " << numPassedProcess1WithActintCut << std::endl;
-    std::cout << "Process2 No Actint Cut Fraction: " << frac << std::endl;
-    std::cout << "Process 2 with Actint Cut Num to Keep: " << target << std::endl;
-
-    std::cout << "Entering bisection to determine individual fractions" << std::endl;
-    std::cout << "Lower Bound: " << lwrbnd << std::endl;
-    std::cout << "Midpoint: " << (lwrbnd+uprbnd)/2. << std::endl;
-    std::cout << "Upper Bound: " << uprbnd << std::endl;
-    std::cout << "Epsilon: " << epsilon << std::endl;
-
-    //set the names of the histograms to also contain the letters A and B
-    algATarget->SetName(algATarget->GetName() + (const TString)"A");
-    algBTarget->SetName(algBTarget->GetName() + (const TString)"B");
-
-
-    //compute initial thresholds at each of the extrema and first guess
-    algAMETx1thresh = computeThresh(algATarget, numKeepx1);
-    algBMETx1thresh = computeThresh(algBTarget, numKeepx1);
-    algAMETx2thresh = computeThresh(algATarget, numKeepx2);
-    algBMETx2thresh = computeThresh(algBTarget, numKeepx2);
-    algAMETx3thresh = computeThresh(algATarget, numKeepx3);
-    algBMETx3thresh = computeThresh(algBTarget, numKeepx3);
-
-    std::cout << "algAx1Thresh: " << algAMETx1thresh << std::endl;
-    std::cout << "algBx1Thresh: " << algBMETx1thresh << std::endl;
-    std::cout << "metl1thresh : " << metl1thresh << std::endl;
-    Float_t algAMET,algBMET, metl1;
-    Float_t passnoalg_actint = 0 ;
-    Int_t passnoalgL1XE10,passnoalgL1XE30,passnoalgL1XE40,passnoalgL1XE45;
-
-    TString algA = algAHist->GetName();
-    TString algB = algBHist->GetName();
+    initialGuess = ( x1 + x3 ) / 2.0;
+    firstGuess = initialGuess;
+    numKeepx1 = numPassedProcess1WithActintCut * x1;
+    numKeepx2 = numPassedProcess1WithActintCut * initialGuess;
+    numKeepx3 = numPassedProcess1WithActintCut * x3;
+    
+    //compute the cumulative right hand sum hists
+    algAMETtarget = (TH1F*) algAHist->GetCumulative(kFALSE);
+    algBMETtarget = (TH1F*) algBHist->GetCumulative(kFALSE);
+   
+    //rename for clarity later on
+    algAMETtarget->SetName(algAMETtarget->GetName() + (const TString)"A");
+    algBMETtarget->SetName(algBMETtarget->GetName() + (const TString)"B");
 
     passnoalgTree->SetBranchAddress(algA,&algAMET);
     passnoalgTree->SetBranchAddress(algB,&algBMET);
@@ -92,6 +45,41 @@ Float_t HLTEfficiencyAnalysis::bisection(const Float_t binWidth,
     Int_t passnoalgNentries = passnoalgTree->GetEntries();
     Bool_t passedProcess1ActintCut;
     Bool_t isPassnoalg;
+} 
+
+
+void Bisection::ComputeInitialExtremaThresh(){
+
+    algAMETx1thresh = computeThresh(algATarget, numKeepx1);
+    algBMETx1thresh = computeThresh(algBTarget, numKeepx1);
+
+    algAMETx2thresh = computeThresh(algATarget, numKeepx2);
+    algBMETx2thresh = computeThresh(algBTarget, numKeepx2);
+
+    algAMETx3thresh = computeThresh(algATarget, numKeepx3);
+    algBMETx3thresh = computeThresh(algBTarget, numKeepx3);
+}
+
+void Bisection::PrintParameters(){
+
+    std::cout << "numPassedProcess1WithActintCut: " << numPassedProcess1WithActintCut << std::endl;
+    std::cout << "Process2 Fraction: " << frac << std::endl;
+    std::cout << "Process 2 with Actint Cut Num to Keep: " << target << std::endl;
+
+    std::cout << "Entering bisection to determine individual fractions" << std::endl;
+    std::cout << "Lower Bound: " << lwrbnd << std::endl;
+    std::cout << "Midpoint: " << (lwrbnd+uprbnd)/2. << std::endl;
+    std::cout << "Upper Bound: " << uprbnd << std::endl;
+    std::cout << "Epsilon: " << epsilon << std::endl;
+
+    std::cout << "algAx1Thresh: " << algAMETx1thresh << std::endl;
+    std::cout << "algBx1Thresh: " << algBMETx1thresh << std::endl;
+    std::cout << "metl1thresh : " << metl1thresh << std::endl;
+}
+
+    TString algA = algAHist->GetName();
+    TString algB = algBHist->GetName();
+
 
     //compute number of noalg events that pass process 2 at initial 3 guesses of individ fractions
     for (Int_t i  = 0 ; i < passnoalgNentries ;i++) //determine events kept at each guess

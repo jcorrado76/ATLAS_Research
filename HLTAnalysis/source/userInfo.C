@@ -55,6 +55,7 @@ userInfo::userInfo()
     //thresholds to separately keep trigger rate
     Float_t algAIndividThresh = 0;
     Float_t algBIndividThresh = 0;
+
     //thresholds such that combined keep trigger rate
     Float_t algACombinedThresh = 0;
     Float_t algBCombinedThresh = 0;
@@ -124,12 +125,15 @@ TString userInfo::getAlgAName() const { return (algAName);}
 TString userInfo::getAlgBName() const { return (algBName);}
 Int_t userInfo::getMuonNentries() const { return(muonNentries);}
 Int_t userInfo::getThreshNentries() const { return (passnoAlgNentries) ; }
-Int_t userInfo::getNumbToKeep() const { return( numberEventsToKeep )};
+Int_t userInfo::getNumbToKeep() const { return( numberEventsToKeep );}
 Float_t userInfo::GetAlgAIndividThresh() const { return ( algAIndividThresh ); }
 Float_t userInfo::GetAlgBIndividThresh() const { return ( algBIndividThresh ); }
 Float_t userInfo::GetAlgACombinedThresh() const {return ( algACombinedThresh );};
 Float_t userInfo::GetAlgBCombinedThresh() const {return ( algBCombinedThresh );};
 Int_t userInfo::GetNumPassNoAlgPassProcess1() const { return ( NumPassnoalgPassProcess1);};
+Int_t userInfo::GetNumMuonPassProcess1() const { return (NumMuonPassProcess1);}
+Int_t userInfo::GetNumPassNoAlgPassProcess1AlgA() const;
+Int_t userInfo::GetNumPassNoAlgPassProcess1AlgB() const;
 
 
 //setters
