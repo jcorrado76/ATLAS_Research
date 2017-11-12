@@ -17,9 +17,11 @@ bool compile(const std::string& option = "")
     //compile and load source
 
     //compile each one; k means keep shared library after session end; call it "libHistTools", send to "lib"
-    if (gSystem->CompileMacro("source/threeEfficiencies.C", (option + "k-").c_str(), "libThreeEfficiencies", "lib") == 0) {return false;}
+    if (gSystem->CompileMacro("./HLTEfficiencyAnalysis.C", (option + "k-").c_str(), "libThreeEfficiencies", "lib") == 0) {return false;}
     if (gSystem->CompileMacro("source/mincerMacros.C", (option + "k-").c_str(), "libMincerMacros", "lib") == 0) {return false;}
     if (gSystem->CompileMacro("source/userInfo.C", (option + "k-").c_str(), "libUserInfo", "lib") == 0) {return false;}
+    if (gSystem->CompileMacro("source/BisectionClass.C", (option + "k-").c_str(), "libBisection", "lib") == 0) {return false;}
+    if (gSystem->CompileMacro("source/ChainHandler.C", (option + "k-").c_str(), "libChainHandler", "lib") == 0) {return false;}
 
     //successfully compiled dependencies
     return true;
