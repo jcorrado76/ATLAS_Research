@@ -1,0 +1,9 @@
+Need to figure out how to pass the parameters around the program using the same global object
+
+Need to rewrite the code to generate a logfile because the streamer for the parameters object doesn't work
+
+Need to figure out how to create an object that can be saved to a root file that inherits from TObject
+
+Need to finish the OOP version of the project so it can be parallelized
+
+

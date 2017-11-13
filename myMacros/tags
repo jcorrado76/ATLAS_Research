@@ -210,7 +210,7 @@ filename1	Practice Macros/openMultipleFiles.c	/^char filename1[350], filename2[3
 filename2	Practice Macros/openMultipleFiles.c	/^char filename1[350], filename2[350], filename3[350];$/;"	v
 filename3	Practice Macros/openMultipleFiles.c	/^char filename1[350], filename2[350], filename3[350];$/;"	v
 frac	userInfo.h	/^    Float_t frac;$/;"	m	class:userInfo
-generateEfficiencies	Practice Macros/generateEfficiencies.C	/^Int_t generateEfficiencies(const Float_t frac = 0.00590,$/;"	f
+generateEfficiencies	generateEfficiencies.C	/^Int_t generateEfficiencies(const Float_t frac = 0.00590,$/;"	f
 generateL1Analysis	Practice Macros/generateL1Analysis.C	/^Int_t generateL1Analysis()$/;"	f
 generatePlots	Practice Macros/generatePlots.C	/^void generatePlots()$/;"	f
 generateRightHandCumSum	Practice Macros/generateRightHandCumSum.C	/^Int_t generateRightHandCumSum()$/;"	f
