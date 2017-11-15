@@ -22,7 +22,7 @@
 #include "TObject.h"
 #include "TDatime.h"
 #include "TChain.h"
-
+#include"TCut.h"
 class userInfo : public TObject {
 
 private:
@@ -35,6 +35,9 @@ private:
     Float_t frac;
     TString passNoAlgFile;
     TString muonFileName;
+
+    TString zerobiasFileName;
+    TString muonFilename;
 
     Int_t NumPassnoalgPassProcess1;
     Int_t NumMuonPassProcess1;
@@ -85,6 +88,9 @@ public:
     //setters
     void setAlgAName( const TString algA );
     void setAlgBName( const TString algB );
+    
+    void setThresholdFile( const TString file );
+    void setMuonFile( const TString file );
 
     void setNumPassNoAlgPassProcess1( const Float_t num );
     void setNumMuonPassProcess1( const Float_t num );

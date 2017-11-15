@@ -105,6 +105,11 @@ Int_t userInfo::getThreshNentries() const { return (passnoAlgNentries) ; }
 //setters
 void userInfo::setAlgAName( const TString algA ) { algAName = algA; };
 void userInfo::setAlgBName( const TString algB ) { algBName = algB; };
+
+//change file names
+void userInfo::setThresholdFile( const TString file ) { zerobiasFileName = file; };
+void userInfo::setMuonFile( const TString file ){ muonFilename = file;} ;
+
 //set all process 1's, they're same across 3 algs for passnoalgs and muons, respectively
 void userInfo::setNumPassNoAlgPassProcess1( const Float_t num ) {NumPassnoalgPassProcess1 = num;};
 void userInfo::setNumMuonPassProcess1( const Float_t num ) {NumMuonPassProcess1 = num;};

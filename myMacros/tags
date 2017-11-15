@@ -304,6 +304,7 @@ meytopoclpuc	Practice Macros/zbAnalysis.h	/^   TTreeReaderValue<Float_t> meytopo
 multipleAnalysis	Practice Macros/multipleAnalysis.c	/^int multipleAnalysis(){	$/;"	f
 muonFileName	userInfo.h	/^    TString muonFileName;$/;"	m	class:userInfo
 muonFilename	userInfo.C	/^TString muonFilename = "PhysicsMain.L1KFmuontriggers.2016.f731f758_m1659m1710.Run309759.48Runs.root";$/;"	v
+muonFilename	userInfo.h	/^    TString muonFilename;$/;"	m	class:userInfo
 muonMetMax	Practice Macros/plotsComparison.C	/^    Float_t muonMetMax = 300;$/;"	m	namespace:myConstants	file:
 muonMetMin	Practice Macros/plotsComparison.C	/^    Float_t muonMetMin = metMin;$/;"	m	namespace:myConstants	file:
 muonNbins	Practice Macros/plotsComparison.C	/^    Int_t muonNbins = 200;$/;"	m	namespace:myConstants	file:
@@ -357,6 +358,7 @@ plotEfficiency	Practice Macros/plotEfficiency.c	/^Int_t plotEfficiency(TString& 
 plotsComparison	Practice Macros/plotsComparison.C	/^Int_t plotsComparison( const TString& algA , const TString& algB,$/;"	f
 practiceClassMain	Practice Macros/practiceClassMain.C	/^void practiceClassMain(){$/;"	f
 print5Efficiencies	Practice Macros/print5Efficiencies.C	/^Int_t print5Efficiencies( const TString& zerobiasFileName = "PhysicsMain.All.noalgXEtriggers.2016.f731f758._m1659m1710.48Runs.root" ,$/;"	f
+print7Efficiencies	print7Efficiencies.C	/^Int_t print7Efficiencies(const TString& muonFileName = "PhysicsMain.L1KFmuontriggers.2016.f731f758_m1659m1710.Run309759.48Runs.root")$/;"	f
 ratiobg7test	Practice Macros/turnoncurvesE4L1cut0.c	/^    Double_t* zvalbg7test, sumitbg7test, ratiobg7test;$/;"	v
 recalbroke	Practice Macros/zbAnalysis.h	/^   TTreeReaderValue<Int_t> recalbroke = {fReader, "recalbroke"};$/;"	m	class:zbAnalysis
 reffinal_met	Practice Macros/turnoncurvesE4L1cut0.c	/^  Double_t reffinal_met,l1_met,l2_met,ef_met_cell,ef_met_tclcw;$/;"	v
@@ -373,6 +375,7 @@ setAlgBCombinedThresh	userInfo.C	/^void userInfo::setAlgBCombinedThresh( const F
 setAlgBIndividThresh	userInfo.C	/^void userInfo::setAlgBIndividThresh( const Float_t thresh ) { algBIndividThresh = thresh; };$/;"	f	class:userInfo
 setAlgBName	userInfo.C	/^void userInfo::setAlgBName( const TString algB ) { algBName = algB; };$/;"	f	class:userInfo
 setEpsilon	userInfo.C	/^void userInfo::setEpsilon( const Int_t epson ) { epsilon = epson; };$/;"	f	class:userInfo
+setMuonFile	userInfo.C	/^void userInfo::setMuonFile( const TString file ){ muonFilename = file;} ;$/;"	f	class:userInfo
 setMuonNentries	userInfo.C	/^void userInfo::setMuonNentries( const Int_t num ) { muonNentries = num; };$/;"	f	class:userInfo
 setNumMuonKeptCombinedAtThresh	userInfo.C	/^void userInfo::setNumMuonKeptCombinedAtThresh( const Int_t num ) { numMuonKeptCombined = num; };$/;"	f	class:userInfo
 setNumMuonPassProcess1	userInfo.C	/^void userInfo::setNumMuonPassProcess1( const Float_t num ) {NumMuonPassProcess1 = num;};$/;"	f	class:userInfo
@@ -384,6 +387,7 @@ setNumPassNoAlgPassProcess2AlgA	userInfo.C	/^void userInfo::setNumPassNoAlgPassP
 setNumPassNoAlgPassProcess2AlgB	userInfo.C	/^void userInfo::setNumPassNoAlgPassProcess2AlgB( const Float_t num ) {NumPassnoalgProcess2AlgB = num;};$/;"	f	class:userInfo
 setNumPassNoAlgPassProcess2Combined	userInfo.C	/^void userInfo::setNumPassNoAlgPassProcess2Combined( const Float_t num ) {NumPassnoalgProcess2AlgCombined = num;};$/;"	f	class:userInfo
 setNumTotal	userInfo.C	/^void userInfo::setNumTotal( const Int_t num ) { numMuonDenominator = num; };$/;"	f	class:userInfo
+setThresholdFile	userInfo.C	/^void userInfo::setThresholdFile( const TString file ) { zerobiasFileName = file; };$/;"	f	class:userInfo
 set_PassnoalgNentries	userInfo.C	/^void userInfo::set_PassnoalgNentries( const Int_t num ) { passnoAlgNentries = num; };$/;"	f	class:userInfo
 setcell	Practice Macros/zbAnalysis.h	/^   TTreeReaderValue<Float_t> setcell = {fReader, "setcell"};$/;"	m	class:zbAnalysis
 setl1	Practice Macros/zbAnalysis.h	/^   TTreeReaderValue<Float_t> setl1 = {fReader, "setl1"};$/;"	m	class:zbAnalysis
@@ -404,6 +408,7 @@ temp3	Practice Macros/openMultipleFiles.c	/^double temp1, temp2, temp3;$/;"	v
 test	Practice Macros/test.C	/^Int_t test()$/;"	f
 thistree	Practice Macros/turnoncurvesE4L1cut0.c	/^  TTree *thistree = (TTree*)firsttest->Get("tree_AS");$/;"	v
 threeEfficiencies	threeEfficiencies.C	/^TFile* threeEfficiencies( const TString& algA , const TString& algB,$/;"	f
+threeEfficienciesL1	threeEfficienciesL1.C	/^TFile* threeEfficienciesL1( const TString& algA , const TString& algB,$/;"	f
 thresh	Practice Macros/zbAnalysis.h	/^   Float_t          thresh = 0 ; \/\/resulting thresholds to return$/;"	m	class:zbAnalysis
 totnumbg7test	Practice Macros/turnoncurvesE4L1cut0.c	/^    Double_t* totnumbg7test = l1metbg7test->GetEntries();$/;"	v
 twoscales	Practice Macros/twoScales.c	/^void twoscales() $/;"	f
@@ -417,6 +422,7 @@ zbAnalysis	Practice Macros/zbAnalysis.h	/^class zbAnalysis : public TSelector {$
 zbAnalysis_cxx	Practice Macros/zbAnalysis.C	1;"	d	file:
 zbAnalysis_h	Practice Macros/zbAnalysis.h	9;"	d
 zerobiasFileName	userInfo.C	/^TString zerobiasFileName = "PhysicsMain.All.noalgXEtriggers.2016.f731f758._m1659m1710.48Runs.root";$/;"	v
+zerobiasFileName	userInfo.h	/^    TString zerobiasFileName;$/;"	m	class:userInfo
 zvalbg7test	Practice Macros/turnoncurvesE4L1cut0.c	/^    Double_t* zvalbg7test, sumitbg7test, ratiobg7test;$/;"	v
 ~ProofFirst	Practice Macros/ProofFirst.C	/^ProofFirst::~ProofFirst()$/;"	f	class:ProofFirst
 ~zbAnalysis	Practice Macros/zbAnalysis.h	/^   virtual ~zbAnalysis() { }$/;"	f	class:zbAnalysis

@@ -3,7 +3,7 @@
 
 //TODO: implement proof lite
 //TODO: use global calls to param list
-
+//TODO: need to change file to the L1KF zerobias file; find a way to do it globally
 Float_t bisection(TH1F* algAHist , TH1F* algBHist, const Float_t binWidth, Float_t &  individAThreshFinal , Float_t  & individBThreshFinal,
     const Int_t numPassedProcess1WithActintCut , Float_t frac, TNtuple* logFileData, TTree* passnoalgTree)
 {
