@@ -1,5 +1,8 @@
 /*
-
+*.pcm
+*.d
+*.so
 !.gitignore
 !myMacros/
 !HLTAnalysis/
+

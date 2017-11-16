@@ -62,7 +62,7 @@ private:
     Float_t actintCut;
     TDatime now;
     Float_t BinWidth;
-
+    Float_t passnoalgcut;
 
 
 public:
@@ -92,6 +92,7 @@ public:
     Float_t Get_BinWidth()            const;
 
 
+    void Read_Parameter_File                   ( const TString FilePath );
     void Set_AlgAName                          ( const TString algA );
     void Set_AlgBName                          ( const TString algB );
     void Set_ThresholdFile                     ( const TString file );

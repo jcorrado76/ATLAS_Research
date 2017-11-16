@@ -1,16 +1,24 @@
 #include "userInfo.h"
 ClassImp(userInfo)
 
-const TString FileForThresh = "PhysicsMain.All.noalgXEtriggers.2016.f731f758._m1659m1710.48Runs.root";
+//const TString FileForThresh = "PhysicsMain.All.noalgXEtriggers.2016.f731f758._m1659m1710.48Runs.root";
+const TString FileForThresh = "ZeroBiasKF2016R307195R311481Runs51.root";
 const TString FileForSignal = "PhysicsMain.L1KFmuontriggers.2016.f731f758_m1659m1710.Run309759.48Runs.root";
 Int_t Nbins = 1200;
 Float_t metMin = 0.0;
 Float_t metMax = 300.0;
-Float_t metl1Thresh = 50.0;
+//Float_t metl1Thresh = 50.0;
+Float_t metl1Thresh = 0.0;
 Float_t Frac = 0.0059;
-Float_t actinTCut = 35.0;
+//Float_t actinTCut = 35.0;
+Float_t actinTCut = 0.0;
 Int_t epson = 25;
-Int_t numbtokeep  = 1108;
+//Int_t numbtokeep  = 1108;
+Int_t numbtokeep  = 5600;
+//Float_t passnoalgcut = 0.5;
+Float_t m_passnoalgcut = 0.0;
+
+
 
 //default constructor
 userInfo::userInfo()
@@ -42,14 +50,29 @@ userInfo::userInfo()
     numMuonKeptCombined(0),
     numMuonDenominator(0),
     now(TDatime()),
+    passnoalgcut(m_passnoalgcut),
     numberEventsToKeep(numbtokeep)
 {
     BinWidth = (metMax - metMin)/ nbins;
 }
 
-void userInfo::Print(Option_t *option) const{
-    std::cout << "Printing the data members for the userInfo struct: \n" << std::endl;
 
+
+
+void userInfo::Read_Parameter_File( const TString FilePath ) {
+    
+    std::ifstream Parameter_File;
+
+
+   if (!Parameter_File){
+       std::cerr<<"Could not open parameter file";
+   }
+
+}
+
+
+void userInfo::Print(Option_t *option) const{
+    std::cout << "Printing the data members for the userInfo struct: " << std::endl;
     now.Print();
     std::cout << "Alg A Name: " << algAName << std::endl;
     std::cout << "Alg B Name: " << algBName << std::endl;

@@ -7,6 +7,8 @@ TFile* threeEfficiencies( const TString& AlgAName , const TString& AlgBName,
 
     //GLOBAL DEFINITION 
     userInfo* parameters = new userInfo();
+    parameters->Read_Parameter_File("./parameters.txt");
+
     parameters->Print();
 
     //FILES

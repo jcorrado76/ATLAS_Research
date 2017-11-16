@@ -1,0 +1,3 @@
+Created: 11/16/17 by Joseph Corrado
+Parameters for L1 Analysis:
+=================================================

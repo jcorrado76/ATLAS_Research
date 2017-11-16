@@ -22,7 +22,6 @@ bool compile(const std::string& option = "")
     if (gSystem->CompileMacro("mincerMacros.C", (option + "k-").c_str(), "libMincerMacros","./lib") == 0) {return false;}
     if (gSystem->CompileMacro("bisection.C", (option + "k-").c_str(), "libBisection","./lib") == 0) {return false;}
     if (gSystem->CompileMacro("generateEfficiencies.C", (option + "k-").c_str(), "libGenEff","./lib") == 0) {return false;}
-    if (gSystem->CompileMacro("threeEfficienciesL1.C", (option + "k-").c_str(), "libThreeEffL1","./lib") == 0) {return false;}
     //successfully compiled dependencies
     return true;
 

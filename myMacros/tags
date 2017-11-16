@@ -7,6 +7,7 @@
 AlgAIndividThresh	userInfo.h	/^    Float_t AlgAIndividThresh;$/;"	m	class:userInfo
 AlgBIndividThresh	userInfo.h	/^    Float_t AlgBIndividThresh;$/;"	m	class:userInfo
 Begin	Practice Macros/zbAnalysis.C	/^void zbAnalysis::Begin(TTree * \/*tree*\/)$/;"	f	class:zbAnalysis
+BinWidth	userInfo.h	/^    Float_t BinWidth;$/;"	m	class:userInfo
 EFEFF	Practice Macros/turnoncurvesE4L1cut0.c	/^  TCanvas *EFEFF = new TCanvas("EFEFF","EFEFF");$/;"	v
 EFF_EF_CELL_10	Practice Macros/turnoncurvesE4L1cut0.c	/^    TEfficiency *EFF_EF_CELL_10 = new TEfficiency$/;"	v
 EFF_EF_CELL_100	Practice Macros/turnoncurvesE4L1cut0.c	/^    TEfficiency *EFF_EF_CELL_100 = new TEfficiency$/;"	v
@@ -100,6 +101,9 @@ GetOutputList	Practice Macros/zbAnalysis.h	/^   virtual TList  *GetOutputList() 
 Get_ActintCut	userInfo.C	/^Float_t userInfo::Get_ActintCut() const { return( actintCut);}$/;"	f	class:userInfo
 Get_AlgAName	userInfo.C	/^TString userInfo::Get_AlgAName() const { return (algAName);}$/;"	f	class:userInfo
 Get_AlgBName	userInfo.C	/^TString userInfo::Get_AlgBName() const { return (algBName);}$/;"	f	class:userInfo
+Get_BinWidth	userInfo.C	/^Float_t userInfo::Get_BinWidth() const { return(BinWidth); }$/;"	f	class:userInfo
+Get_CombinedAlgAThresh	userInfo.C	/^Float_t userInfo::Get_CombinedAlgAThresh()  const { return (algACombinedThresh); }$/;"	f	class:userInfo
+Get_CombinedAlgBThresh	userInfo.C	/^Float_t userInfo::Get_CombinedAlgBThresh()  const {return (algBCombinedThresh); }$/;"	f	class:userInfo
 Get_Date	userInfo.C	/^TDatime userInfo::Get_Date() const { now.Print();return(now);}$/;"	f	class:userInfo
 Get_Epsilon	userInfo.C	/^Int_t userInfo::Get_Epsilon() const {return(epsilon);}$/;"	f	class:userInfo
 Get_Frac	userInfo.C	/^Float_t userInfo::Get_Frac() const { return (frac); }$/;"	f	class:userInfo
@@ -416,7 +420,6 @@ temp3	Practice Macros/openMultipleFiles.c	/^double temp1, temp2, temp3;$/;"	v
 test	Practice Macros/test.C	/^Int_t test()$/;"	f
 thistree	Practice Macros/turnoncurvesE4L1cut0.c	/^  TTree *thistree = (TTree*)firsttest->Get("tree_AS");$/;"	v
 threeEfficiencies	threeEfficiencies.C	/^TFile* threeEfficiencies( const TString& AlgAName , const TString& AlgBName,$/;"	f
-threeEfficienciesL1	threeEfficienciesL1.C	/^TFile* threeEfficienciesL1( const TString& algA , const TString& algB,$/;"	f
 thresh	Practice Macros/zbAnalysis.h	/^   Float_t          thresh = 0 ; \/\/resulting thresholds to return$/;"	m	class:zbAnalysis
 totnumbg7test	Practice Macros/turnoncurvesE4L1cut0.c	/^    Double_t* totnumbg7test = l1metbg7test->GetEntries();$/;"	v
 twoscales	Practice Macros/twoScales.c	/^void twoscales() $/;"	f
