@@ -23,6 +23,8 @@
 #include "TDatime.h"
 #include "TChain.h"
 #include"TCut.h"
+
+
 class userInfo : public TObject {
 
 private:
@@ -33,28 +35,23 @@ private:
     Float_t metmax;
     Float_t metl1thresh;
     Float_t frac;
-    TString passNoAlgFile;
-    TString muonFileName;
-
+    TString ThreshFileName;
+    TString MuonFileName;
+    Int_t numberEventsToKeep;
     TString zerobiasFileName;
+    Float_t AlgAIndividThresh;
+    Float_t AlgBIndividThresh;
     TString muonFilename;
-
     Int_t NumPassnoalgPassProcess1;
     Int_t NumMuonPassProcess1;
-
     Int_t NumPassnoalgProcess2AlgA;
     Int_t NumPassnoalgProcess2AlgB;
     Int_t NumPassnoalgProcess2AlgCombined;
-
     Int_t NumMuonPassProcess2AlgA;
     Int_t NumMuonPassProcess2AlgB;
     Int_t NumMuonPassProcess2Combined;
-
-    //passnoalg thresholds are being used on muon algs as well
-    //thresholds to separately keep trigger rate
     Float_t algAIndividThresh;
     Float_t algBIndividThresh;
-    //thresholds such that combined keep trigger rate
     Float_t algACombinedThresh;
     Float_t algBCombinedThresh;
     Int_t muonNentries;
@@ -64,60 +61,60 @@ private:
     Int_t epsilon;
     Float_t actintCut;
     TDatime now;
+
 public:
     //default constructor
     userInfo();
-    //destructor
     void Print(Option_t *option = "") const;
-    //getters
-    TString get_passnoalgFileName() const;
-    TString get_muonFileName() const;
-    Float_t getMetL1Thresh() const;
-    Float_t getActintCut() const;
-    Float_t getFrac() const;
-    Float_t getMetMin() const;
-    Float_t getMetMax() const;
-    Int_t getNbins() const;
-    Int_t getEpsilon() const;
-    Int_t getMuonNentries() const;
-    Int_t getThreshNentries() const;
-    TDatime getDate() const;
-    TString getAlgAName() const;
-    TString getAlgBName() const;
+    TString Get_PassnoalgFileName()   const;
+    TString Get_MuonFileName()        const;
+    Float_t Get_MetL1Thresh()         const;
+    Float_t Get_ActintCut()           const;
+    Float_t Get_Frac()                const;
+    Float_t Get_MetMin()              const;
+    Float_t Get_MetMax()              const;
+    Int_t   Get_Nbins()               const;
+    Int_t   Get_Epsilon()             const;
+    Int_t   Get_MuonNentries()        const;
+    Int_t   Get_ThreshNentries()      const;
+    TDatime Get_Date()                const;
+    TString Get_AlgAName()            const;
+    TString Get_AlgBName()            const;
+    Int_t   Get_NumberEventsToKeep()  const;
+    Float_t Get_IndividAlgAThresh()   const;
+    Float_t Get_IndividAlgBThresh()   const;
+    TString Get_ThreshFileName()      const;
+    TString Get_MuonFileName()        const;
 
-    //setters
-    void setAlgAName( const TString algA );
-    void setAlgBName( const TString algB );
-    
-    void setThresholdFile( const TString file );
-    void setMuonFile( const TString file );
 
-    void setNumPassNoAlgPassProcess1( const Float_t num );
-    void setNumMuonPassProcess1( const Float_t num );
 
-    void setNumPassNoAlgPassProcess2AlgA( const Float_t num );
-    void setNumPassNoAlgPassProcess2AlgB( const Float_t num );
-    void setNumPassNoAlgPassProcess2Combined( const Float_t num );
 
-    void setNumMuonPassProcess2AlgA( const Float_t num );
-    void setNumMuonPassProcess2AlgB( const Float_t num );
-    void setNumMuonPassProcess2Combined( const Float_t num );
+    void Set_AlgAName                          ( const TString algA );
+    void Set_AlgBName                          ( const TString algB );
+    void Set_ThresholdFile                     ( const TString file );
+    void Set_MuonFile                          ( const TString file );
+    void Set_NumPassNoAlgPassProcess1          ( const Float_t num );
+    void Set_NumMuonPassProcess1               ( const Float_t num );
+    void Set_NumPassNoAlgPassProcess2AlgA      ( const Float_t num );
+    void Set_NumPassNoAlgPassProcess2AlgB      ( const Float_t num );
+    void Set_NumPassNoAlgPassProcess2Combined  ( const Float_t num );
+    void Set_NumMuonPassProcess2AlgA           ( const Float_t num );
+    void Set_NumMuonPassProcess2AlgB           ( const Float_t num );
+    void Set_NumMuonPassProcess2Combined       ( const Float_t num );
+    void Set_AlgAIndividThresh                 ( const Float_t thresh );
+    void Set_AlgBIndividThresh                 ( const Float_t thresh );
+    void Set_AlgACombinedThresh                ( const Float_t thresh );
+    void Set_AlgBCombinedThresh                ( const Float_t thresh );
+    void Set_MuonNentries                      ( const Int_t num );
+    void Set_PassnoalgNentries                 ( const Int_t num );
+    void Set_NumMuonKeptCombinedAtThresh       ( const Int_t num );
+    void Set_Num_PassProcess2AlgA              ( const Int_t num );
+    void Set_Num_PassProcess2AlgB              ( const Int_t num );
+    void Set_Num_PassProcess2Combined          ( const Int_t num );
+    void Set_NumTotal                          ( const Int_t num );
+    void Set_ActintCut                         ( const Float_t thresh );
+    void Set_Epsilon                           ( const Int_t epsilon );
 
-    void setAlgAIndividThresh( const Float_t thresh );
-    void setAlgBIndividThresh( const Float_t thresh );
-    void setAlgACombinedThresh( const Float_t thresh );
-    void setAlgBCombinedThresh( const Float_t thresh );
-    void setMuonNentries( const Int_t num );
-    void set_PassnoalgNentries( const Int_t num );
-    void setNumMuonKeptCombinedAtThresh( const Int_t num );
-    void setNum_PassProcess2AlgA( const Int_t num );
-    void setNum_PassProcess2AlgB( const Int_t num );
-    void setNum_PassProcess2Combined( const Int_t num );
-    void setNumTotal( const Int_t num );
-    void setActintCut( const Float_t thresh );
-    void setEpsilon( const Int_t epsilon );
-
-    //this macro from Rtypes.h facilitates root I/O
     ClassDef( userInfo, 1)
 };
 

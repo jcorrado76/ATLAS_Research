@@ -1,7 +1,7 @@
 #include "mincerMacros.h"
 
 
-TFile* threeEfficiencies( const TString& algA , const TString& algB,
+TFile* threeEfficiencies( const TString& AlgAName , const TString& AlgBName,
         const Float_t frac = 0.00590, const TString folder = "" )
 {
 
@@ -10,8 +10,8 @@ TFile* threeEfficiencies( const TString& algA , const TString& algB,
     parameters->Print();
 
     //FILES
-    TString zerobiasFileName = parameters->get_passnoalgFileName();
-    TString muonFilename = parameters->get_muonFileName();
+    TString zerobiasFileName = parameters->Get_ThreshFileName();
+    TString muonFilename = parameters->Get_MuonFileName();
 
     //THREEFF BENCHMARK
     TBenchmark* threeEfficienciesBenchmark = new TBenchmark();
@@ -27,20 +27,20 @@ TFile* threeEfficiencies( const TString& algA , const TString& algB,
     std::cout << "Muon Data being used to compute algorithm efficiency: " << muonFilePath << std::endl;
 
     //initialize variables to be used later
-    Float_t metl1thresh = parameters->getMetL1Thresh();
-    Float_t actintCut = parameters->getActintCut();
+    Float_t metl1thresh = parameters->Get_MetL1Thresh();
+    Float_t actintCut = parameters->Get_ActintCut();
     Int_t muonNentries = myMuonTree->GetEntries();
     Int_t muonNbins = 200;
-    Int_t nbins = parameters->getNbins();
-    Double_t metMin = parameters->getMetMin();
-    Double_t metMax = parameters->getMetMax();
+    Int_t nbins = parameters->Get_Nbins();
+    Double_t metMin = parameters->Get_MetMin();
+    Double_t metMax = parameters->Get_MetMax();
     Int_t NumbPassnoAlgPassProcess1WithActintCut = 0; Int_t counter1 = 0; Int_t counter2 = 0; Int_t counter3 = 0;
-  //initialize some more variables
     Int_t passRndm, numPassMuon,passmuon,passmuvarmed,cleanCutsFlag,recalBrokeFlag;
     Float_t algAMET,algBMET,metoffrecal,mexoffrecal,meyoffrecal,mexoffrecalmuon, zb_actint,
             meyoffrecalmuon, metl1,metcell,metrefmuon,mexrefmuon,meyrefmuon,metoffrecalmuon;
     Int_t passnoalgL1XE10,passnoalgL1XE30,passnoalgL1XE40,passnoalgL1XE45;
-  //initialize branch addresses to the local variables
+
+    
     myMuonTree->SetBranchAddress("passmu26med", &passmuon);
     myMuonTree->SetBranchAddress("passmu26varmed", &passmuvarmed);
     myMuonTree->SetBranchAddress("passcleancuts", &cleanCutsFlag);
@@ -85,27 +85,20 @@ TFile* threeEfficiencies( const TString& algA , const TString& algB,
     threeEfficienciesBenchmark->Start("ZeroBias Thresholds");
 
     //IN DETERMINE THRESH I COMPUTE THRESHOLD AFTER ALSO CUTTING ON METL1 TO MAKE HISTOGRAMS
-    threeEfficienciesBenchmark->Start( "determine" + algA + "Thresh");
     Int_t numPassnoalgPassProcess1AlgA=0;
        
-    Float_t algAThresh = determineZeroBiasThresh(algA,numPassnoalgPassProcess1AlgA,frac,zerobiasFileName);
+    determineZeroBiasThresh( parameters );
 
-    threeEfficienciesBenchmark->Show( "determine" + algA + "Thresh");
-    std::cout << "\n" << std::endl;
-
-    threeEfficienciesBenchmark->Start( "determine" + algB + "Thresh");
-    Int_t numPassnoalgPassProcess1AlgB;
-    Float_t algBThresh = determineZeroBiasThresh(algB,numPassnoalgPassProcess1AlgB,frac,zerobiasFileName);
-    threeEfficienciesBenchmark->Show( "determine" + algB + "Thresh");
-    std::cout << "\n" << std::endl;
+    Float_t AlgAIndividThresh = parameters->Get_IndividAlgAThresh(); 
+    Float_t AlgBIndividThresh = parameters->Get_IndividAlgBThresh(); 
 
 
     std::cout << "AlgAThresh: " << algAThresh << std::endl;
     std::cout << "AlgBThresh: " << algBThresh << std::endl;
     //FINISHED COMPUTING INDIVIDUAL THRESHOLDS; NOW DO THEM TOGETHER
     std::cout << "Returned to threeEfficiencies.C" << std::endl;
-    std::cout << "algAThresh: " << algAThresh << std::endl;
-    std::cout << "algBThresh: " << algBThresh << std::endl;
+    std::cout << "algAThresh: " << AlgAIndividThresh << std::endl;
+    std::cout << "algBThresh: " << AlgBIndividThresh << std::endl;
     std::cout << "Using METL1THRESH: " << metl1thresh << std::endl;
 
     //determine NumbPassnoAlgPassProcess1WithActintCut and fill histograms
@@ -290,7 +283,7 @@ TFile* threeEfficiencies( const TString& algA , const TString& algB,
     //print the canvas itself to a picture in the TEfficiencies pics folder
     efficiencyCanvas->Print("./pictures/" + folder + "/" + algA + "_" + algB + "_efficiencies.tiff");
     //write the TEfficiency objects to root file using the names as the key
-    Ateff->Write( astring );
+    Ateff->Write( AlgAName + " Efficiency" );
     Bteff->Write( bstring );
     Cteff->Write( cstring );
     Dteff->Write( "METL1" );

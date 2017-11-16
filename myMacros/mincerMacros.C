@@ -28,82 +28,102 @@ Float_t computeThresh(const TH1F* target, const Float_t numberEventsToKeep)
 }
 
 
-Float_t determineZeroBiasThresh( const TString& algName, Int_t & numPass , const Float_t frac ,
-    const TString& threshFileName)
+Float_t determineZeroBiasThresh( userInfo* parameters )
 {
     //this function determines thresh to keep proper trigger rate for process 2 on algs A and B
     //these thresholds are used on both passnoalg and muon data
-    userInfo* parameters = new userInfo();
     parameters->Print();
-    const Float_t metL1Thresh = parameters->getMetL1Thresh();
-    const Float_t actintCut = parameters->getActintCut();
-
-    //get passnoalg tree
+    const Float_t metL1Thresh      = parameters->Get_MetL1Thresh();
+    const Float_t actintCut        = parameters->Get_ActintCut();
+    const TString threshFileName   = parameters->Get_PassnoalgFileName();
+    const TString algAName         = parameters->Get_AlgAName();
+    const TString algBName         = parameters->Get_AlgBName();
+    const Float_t frac             = parameters->Get_Frac();
+	const Double_t metMin          = parameters->Get_MetMin();
+	const Double_t metMax          = parameters->Get_MetMax();
+    const Int_t numberEventsToKeep = parameters->Get_NumberEventsToKeep();
+	const Int_t nbins              = parameters->Get_Nbins();
+    
     const TString threshFilePath = "../myData/" + threshFileName;
 	TFile *threshFileHandle = TFile::Open(threshFilePath, "READ");
 	TTree *threshTree = (TTree*)(threshFileHandle->Get("tree"));
     const Int_t passnoAlgNentries = threshTree->GetEntries();
-    Float_t passnoalg_actint = 0;
-
-    //display inputs
+    
+    Float_t actint = 0;
+    Float_t algAMET,algBMET=0;
+	Float_t metl1, algMET;
+    Int_t numberEventsAlgAKept, numberEventsAlgBKept = 0;
+    Int_t passnoalgL1XE10 , passnoalgL1XE30 , passnoalgL1XE40 , passnoalgL1XE45;
+    
     std::cout << "DETERMINETHRESH.C" << std::endl;
     std::cout << "using passnoalg datafile: " << threshFileName << std::endl;
-    std::cout << "alg: " << algName << std::endl;
+    std::cout << "algA: " << algAName << std::endl;
+    std::cout << "algB: " << algBName << std::endl;
     std::cout << "using L1 thresh: " << metL1Thresh << std::endl;
     std::cout << "fraction of events to keep: " << frac << std::endl;
     std::cout << "passnoalg nentries: " << passnoAlgNentries << std::endl;
 
-    //intialize parameters
-    //numberEventsToKeep CHANGES BASED ON THE ACTINT CUT
-    //TODO: maybe recompute this number based on actint cut every time. not sure
-    const Int_t numberEventsToKeep = 1108;
-	const Int_t nbins = parameters->getNbins();
-	const Double_t metMin = parameters->getMetMin();
-	const Double_t metMax = parameters->getMetMax();
-	Float_t metl1, algMET;
-    Int_t numberEventsKept = 0;
-    Int_t passnoalgL1XE10 , passnoalgL1XE30 , passnoalgL1XE40 , passnoalgL1XE45;
-    TH1F *indeterminateHist = new TH1F(algName, algName, nbins, metMin, metMax);
+    TH1F *AlgAHist = new TH1F(algAName, algAName, nbins, metMin, metMax);
+    TH1F *AlgBHist = new TH1F(algBName, algBName, nbins, metMin, metMax);
 
     //set branch address for zerobias branches
-	threshTree->SetBranchAddress(algName,&algMET);
+	threshTree->SetBranchAddress(algAName,&algAMET);
+	threshTree->SetBranchAddress(algBName,&algBMET);
 	threshTree->SetBranchAddress("metl1",&metl1);
     threshTree->SetBranchAddress("passnoalgL1XE10",&passnoalgL1XE10);
     threshTree->SetBranchAddress("passnoalgL1XE30",&passnoalgL1XE30);
     threshTree->SetBranchAddress("passnoalgL1XE40",&passnoalgL1XE40);
     threshTree->SetBranchAddress("passnoalgL1XE45",&passnoalgL1XE45);
-    threshTree->SetBranchAddress("actint",&passnoalg_actint);
+    threshTree->SetBranchAddress("actint",&actint);
 
     for (Int_t k = 0; k < passnoAlgNentries; k++)
 	{
 		threshTree->GetEntry(k);
-		if ( ( metl1 > metL1Thresh ) && ( passnoalg_actint > actintCut ) &&
+		if ( ( metl1 > metL1Thresh ) && ( actint > actintCut ) &&
             ( passnoalgL1XE10 > 0.5 || passnoalgL1XE30 > 0.5 || passnoalgL1XE40 > 0.5 || passnoalgL1XE45 > 0.5 ) )
 		{
-			indeterminateHist->Fill(algMET);
+		    AlgAHist->Fill(algAMET);
+		    AlgBHist->Fill(algBMET);
 		}
     }
 
     //compute the threshold to keep appropriate fraction
-    TH1F *indeterminatetarget = (TH1F*) indeterminateHist->GetCumulative(kFALSE);
-	Float_t indeterminateThresh = computeThresh(indeterminatetarget, numberEventsToKeep);
-	std::cout << algName << "threshold: " << indeterminateThresh << std::endl;
+    TH1F *AlgAtarget = (TH1F*) AlgAHist->GetCumulative(kFALSE);
+    TH1F *AlgBtarget = (TH1F*) AlgBHist->GetCumulative(kFALSE);
+	Float_t AlgAThresh = computeThresh(AlgAtarget, numberEventsToKeep);
+	Float_t AlgBThresh = computeThresh(AlgBtarget, numberEventsToKeep);
+
+    std::cout << algAName << " threshold: " << AlgAThresh << std::endl;
+	std::cout << algBName << " threshold: " << AlgBThresh << std::endl;
 	std::cout << "target number events to keep: " << numberEventsToKeep << std::endl;
 
+    
     //determine number of events kept at determined threshold (gives idea of error due to binning)
 	for (Int_t l = 0 ; l < passnoAlgNentries ; l++)
 	{
 		threshTree->GetEntry(l);
-		if ( (algMET > indeterminateThresh) && (metl1 > metL1Thresh) && ( passnoalg_actint > actintCut ) &&
+		if ((metl1 > metL1Thresh) && ( actint > actintCut ) &&
            ( passnoalgL1XE10 > 0.5 || passnoalgL1XE30 > 0.5 || passnoalgL1XE40 > 0.5 || passnoalgL1XE45 > 0.5 ) )
 		{
-			numberEventsKept++;
+            if (algAMET > AlgAThresh){
+                numberEventsAlgAKept++;
+            }
+            if (algBMET > AlgBThresh){
+                numberEventsAlgBKept++;
+            }
 		}
 	}
-    std::cout << "number of events kept at threshold: " << numberEventsKept << std::endl;
+
+    std::cout << "number of events " << algAName << " kept at threshold: " << numberEventsAlgAKept << std::endl;
+    std::cout << "number of events " << algBName << " kept at threshold: " << numberEventsAlgBKept << std::endl;
+
+
+    
+    parameters->Set_AlgAIndividThresh( AlgAThresh );
+    parameters->Set_AlgBIndividThresh( AlgBThresh );
+
     threshFileHandle->Close();
-    numPass = numberEventsKept;
-	return(indeterminateThresh);
+	return(0);
 }
 
 Float_t determineMuonEventsKeptCombined( const TString& algA, const Float_t threshA,
