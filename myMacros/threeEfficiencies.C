@@ -85,12 +85,12 @@ TFile* threeEfficiencies( const TString& AlgAName , const TString& AlgBName,
     threeEfficienciesBenchmark->Start("ZeroBias Thresholds");
 
     //IN DETERMINE THRESH I COMPUTE THRESHOLD AFTER ALSO CUTTING ON METL1 TO MAKE HISTOGRAMS
-    Int_t numPassnoalgPassProcess1AlgA=0;
+    Int_t numPassnoalgPassProcess1AlgA = 0;
        
     determineZeroBiasThresh( parameters );
 
-    Float_t AlgAIndividThresh = parameters->Get_IndividAlgAThresh(); 
-    Float_t AlgBIndividThresh = parameters->Get_IndividAlgBThresh(); 
+    const Float_t AlgAIndividThresh = parameters->Get_IndividAlgAThresh(); 
+    const Float_t AlgBIndividThresh = parameters->Get_IndividAlgBThresh(); 
 
 
     std::cout << "Returned to threeEfficiencies.C" << std::endl;
@@ -112,14 +112,11 @@ TFile* threeEfficiencies( const TString& AlgAName , const TString& AlgBName,
 	    }
 	}
 
-    Float_t binWidth = (metMax - metMin)/ nbins;
 
     //the individual fraction needed such that when both algs constrained to keep the same fraction individually,
     //keep the proper amount when combined
 
     Float_t bisectionIndividFrac;
-    Float_t CombinedThreshAlgA;
-    Float_t CombinedThreshAlgB;
 
 
     TNtuple* logFileData = new TNtuple("logFileData" , "Bisection Data" ,
@@ -129,9 +126,12 @@ TFile* threeEfficiencies( const TString& AlgAName , const TString& AlgBName,
     threeEfficienciesBenchmark->Start("Bisection");
 
     //run BISECTION
-    bisectionIndividFrac = bisection( algAMETHist , algBMETHist, binWidth, CombinedThreshAlgA,
-    CombinedThreshAlgB, NumbPassnoAlgPassProcess1WithActintCut , frac ,
-    logFileData,zeroBiasTree);
+    bisection( parameters , algAMETHist, algBMETHist , zeroBiasTree );
+
+
+
+    const Float_t CombinedThreshAlgA = parameters->Get_CombinedAlgAThresh();
+    const Float_t CombinedThreshAlgB = parameters->Get_CombinedAlgBThresh();
 
     //end bisection timer
     threeEfficienciesBenchmark->Show("Bisection");
@@ -240,8 +240,6 @@ TFile* threeEfficiencies( const TString& AlgAName , const TString& AlgBName,
     //parameters->setNumPassNoAlgPassProcess2AlgA( numPassnoalgPassProcess2AlgA);
     //parameters->setNumPassNoAlgPassProcess2AlgB( numPassnoalgPassProcess2AlgB);
 
-    parameters->Set_AlgAIndividThresh( algAThresh);
-    parameters->Set_AlgBIndividThresh( algBThresh );
     parameters->Set_AlgACombinedThresh( CombinedThreshAlgA);
     parameters->Set_AlgBCombinedThresh( CombinedThreshAlgB );
 

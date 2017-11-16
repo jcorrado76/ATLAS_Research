@@ -61,12 +61,15 @@ private:
     Int_t epsilon;
     Float_t actintCut;
     TDatime now;
+    Float_t BinWidth;
+
+
 
 public:
     //default constructor
     userInfo();
     void Print(Option_t *option = "") const;
-    TString Get_PassnoalgFileName()   const;
+    TString Get_ThreshFileName()      const;
     TString Get_MuonFileName()        const;
     Float_t Get_MetL1Thresh()         const;
     Float_t Get_ActintCut()           const;
@@ -83,10 +86,10 @@ public:
     Int_t   Get_NumberEventsToKeep()  const;
     Float_t Get_IndividAlgAThresh()   const;
     Float_t Get_IndividAlgBThresh()   const;
-    TString Get_ThreshFileName()      const;
-    TString Get_MuonFileName()        const;
-
-
+    Float_t Get_CombinedAlgAThresh()  const;
+    Float_t Get_CombinedAlgBThresh()  const;
+    Int_t Get_NumThreshPassProcess1() const;
+    Float_t Get_BinWidth()            const;
 
 
     void Set_AlgAName                          ( const TString algA );
@@ -118,8 +121,8 @@ public:
     ClassDef( userInfo, 1)
 };
 
-#ifndef __CINT__
+/*#ifndef __CINT__
 extern userInfo* parameters;
-#endif
+#endif*/
 
 #endif

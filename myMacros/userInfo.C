@@ -1,8 +1,8 @@
 #include "userInfo.h"
 ClassImp(userInfo)
 
-TString zerobiasFileName = "PhysicsMain.All.noalgXEtriggers.2016.f731f758._m1659m1710.48Runs.root";
-TString muonFilename = "PhysicsMain.L1KFmuontriggers.2016.f731f758_m1659m1710.Run309759.48Runs.root";
+const TString FileForThresh = "PhysicsMain.All.noalgXEtriggers.2016.f731f758._m1659m1710.48Runs.root";
+const TString FileForSignal = "PhysicsMain.L1KFmuontriggers.2016.f731f758_m1659m1710.Run309759.48Runs.root";
 Int_t Nbins = 1200;
 Float_t metMin = 0.0;
 Float_t metMax = 300.0;
@@ -13,14 +13,14 @@ Int_t epson = 25;
 Int_t numbtokeep  = 1108;
 
 //default constructor
-userInfo::userInfo():
-    nbins(Nbins),
+userInfo::userInfo()
+    :nbins(Nbins),
     metmin(metMin),
     metmax(metMax),
     metl1thresh(metl1Thresh),
     frac(Frac),
-    passNoAlgFile(zerobiasFileName),
-    muonFileName(muonFilename),
+    ThreshFileName( FileForThresh ),
+    MuonFileName( FileForSignal ),
     actintCut(actinTCut),
     epsilon(epson),
     NumPassnoalgPassProcess1(0),
@@ -42,7 +42,10 @@ userInfo::userInfo():
     numMuonKeptCombined(0),
     numMuonDenominator(0),
     now(TDatime()),
-    numberEventsToKeep(numbtokeep){}
+    numberEventsToKeep(numbtokeep)
+{
+    BinWidth = (metMax - metMin)/ nbins;
+}
 
 void userInfo::Print(Option_t *option) const{
     std::cout << "Printing the data members for the userInfo struct: \n" << std::endl;
@@ -55,8 +58,8 @@ void userInfo::Print(Option_t *option) const{
     std::cout << "MetMax: " << metmax << std::endl;
     std::cout << "METL1 thresh used: " << metl1thresh << std::endl;
     std::cout << "Process 2 target frac: " << frac << std::endl;
-    std::cout << "Passnoalg File: " << passNoAlgFile << std::endl;
-    std::cout << "Muon File: " << muonFileName << std::endl;
+    std::cout << "Passnoalg File: " << ThreshFileName << std::endl;
+    std::cout << "Muon File: " << MuonFileName << std::endl;
     std::cout << "Number of passnoalg events that passed process1: " << NumPassnoalgPassProcess1 << std::endl;
     std::cout << "Numb passnoalg passed process2 for alg A: " << NumPassnoalgProcess2AlgA << std::endl;
     std::cout << "Numb passnoalg passed process2 for alg B: " << NumPassnoalgProcess2AlgB << std::endl;
@@ -102,6 +105,12 @@ Float_t userInfo::Get_IndividAlgAThresh() const { return (AlgAIndividThresh);}
 Float_t userInfo::Get_IndividAlgBThresh() const { return (AlgBIndividThresh);} 
 TString userInfo::Get_ThreshFileName() const { return (ThreshFileName);}
 TString userInfo::Get_MuonFileName() const { return(MuonFileName);}
+Int_t userInfo::Get_NumThreshPassProcess1() const { return (NumPassnoalgPassProcess1); }
+Float_t userInfo::Get_BinWidth() const { return(BinWidth); }
+Float_t userInfo::Get_CombinedAlgAThresh()  const { return (algACombinedThresh); }
+Float_t userInfo::Get_CombinedAlgBThresh()  const {return (algBCombinedThresh); }
+
+
 
 
 //setters

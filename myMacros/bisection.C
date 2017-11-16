@@ -1,17 +1,17 @@
 #include "mincerMacros.h"
 
 
-Float_t bisection(TH1F* algAHist , TH1F* algBHist, const Float_t binWidth, Float_t &  individAThreshFinal , Float_t  & individBThreshFinal,
-    const Int_t numPassedProcess1WithActintCut , Float_t frac, TNtuple* logFileData, TTree* passnoalgTree)
+Float_t bisection( userInfo* parameters , TH1F* algAHist , TH1F* algBHist, TTree* passnoalgTree )
 {
-    userInfo* parameters = new userInfo();
-    //some useful parameters
-    frac = parameters->getFrac();
-    Float_t metl1thresh = parameters->getMetL1Thresh();
-    Float_t actintCut = parameters->getActintCut();
-    Int_t epsilon = parameters->getEpsilon();
+    const Float_t frac = parameters->Get_Frac();
+    Float_t metl1thresh = parameters->Get_MetL1Thresh();
+    Float_t actintCut = parameters->Get_ActintCut();
+    Int_t epsilon = parameters->Get_Epsilon();
 
-    Int_t target = numPassedProcess1WithActintCut * frac;
+    const Int_t NumPassNoAlgPassedProcess1 = parameters->Get_NumThreshPassProcess1();
+    const Float_t BinWidth = parameters->Get_BinWidth();
+
+    Int_t target = NumPassNoAlgPassedProcess1 * frac;
 
     Float_t lwrbnd = 0.5 * frac;
     Float_t uprbnd = 0.13;
@@ -22,9 +22,9 @@ Float_t bisection(TH1F* algAHist , TH1F* algBHist, const Float_t binWidth, Float
     x3 = uprbnd;
     Float_t initialGuess = ( x1 + x3 ) / 2.0;
     Float_t firstGuess = initialGuess;
-    Float_t numKeepx1 = numPassedProcess1WithActintCut * x1;
-    Float_t numKeepx2 = numPassedProcess1WithActintCut * initialGuess;
-    Float_t numKeepx3 = numPassedProcess1WithActintCut * x3;
+    Float_t numKeepx1 = NumPassNoAlgPassedProcess1* x1;
+    Float_t numKeepx2 = NumPassNoAlgPassedProcess1* initialGuess;
+    Float_t numKeepx3 = NumPassNoAlgPassedProcess1* x3;
 
     //compute the cumulative right hand sum hists
     TH1F *algAMETtarget = (TH1F*) algAHist->GetCumulative(kFALSE);
@@ -46,7 +46,7 @@ Float_t bisection(TH1F* algAHist , TH1F* algBHist, const Float_t binWidth, Float
     algBMETx3thresh = computeThresh(algBMETtarget, numKeepx3);
 
     //print the status
-    std::cout << "numPassedProcess1WithActintCut: " << numPassedProcess1WithActintCut << std::endl;
+    std::cout << "numPassedProcess1WithActintCut: " << NumPassNoAlgPassedProcess1 << std::endl;
     std::cout << "Process2 No Actint Cut Fraction: " << frac << std::endl;
     std::cout << "Process 2 with Actint Cut Num to Keep: " << target << std::endl;
 
@@ -121,9 +121,9 @@ Float_t bisection(TH1F* algAHist , TH1F* algBHist, const Float_t binWidth, Float
     }
 
     //compute fractions kept at initial guesses
-    Process2FracX1WithActintCut = (Float_t) numPassedProcess2WithActintCutX1 / (Float_t) numPassedProcess1WithActintCut;
-    Process2FracX2WithActintCut = (Float_t) numPassedProcess2WithActintCutX2 / (Float_t) numPassedProcess1WithActintCut;
-    Process2FracX3WithActintCut = (Float_t) numPassedProcess2WithActintCutX3 / (Float_t) numPassedProcess1WithActintCut;
+    Process2FracX1WithActintCut = (Float_t) numPassedProcess2WithActintCutX1 / (Float_t) NumPassNoAlgPassedProcess1;
+    Process2FracX2WithActintCut = (Float_t) numPassedProcess2WithActintCutX2 / (Float_t) NumPassNoAlgPassedProcess1;
+    Process2FracX3WithActintCut = (Float_t) numPassedProcess2WithActintCutX3 / (Float_t) NumPassNoAlgPassedProcess1; 
 
     std::cout << "At x1 = " << x1 << " numPassedProcess2WithActintCutX1: " << numPassedProcess2WithActintCutX1 << " events " << std::endl;
     std::cout << "Process2FracX1WithActintCut: " << Process2FracX1WithActintCut << std::endl;
@@ -178,8 +178,8 @@ Float_t bisection(TH1F* algAHist , TH1F* algBHist, const Float_t binWidth, Float
         initialGuess = ( x1 + x3 ) / 2.0;
         inputArray[j+2] = initialGuess;
         std::cout << "New Guess: " << initialGuess << std::endl;
-        std::cout << "numPassedProcess1WithActintCut: " << numPassedProcess1WithActintCut << std::endl;
-        numKeepx2 = numPassedProcess1WithActintCut * initialGuess;
+        std::cout << "numPassedProcess1WithActintCut: " << NumPassNoAlgPassedProcess1 << std::endl;
+        numKeepx2 = NumPassNoAlgPassedProcess1 * initialGuess;
         std::cout << "numKeepx2: " << numKeepx2 << std::endl;
         algAMETx2thresh = computeThresh(algAMETtarget, numKeepx2);
         algBMETx2thresh = computeThresh(algBMETtarget, numKeepx2);
@@ -205,7 +205,7 @@ Float_t bisection(TH1F* algAHist , TH1F* algBHist, const Float_t binWidth, Float
         std::cout << "algAMETx2thresh: " << algAMETx2thresh << std::endl;
         std::cout << "algBMETx2thresh: " << algBMETx2thresh << std::endl;
         std::cout << "Counter2: " << numPassedProcess2WithActintCutX2 << std::endl;
-        Process2FracX2WithActintCut = (Float_t) numPassedProcess2WithActintCutX2 / (Float_t) numPassedProcess1WithActintCut;
+        Process2FracX2WithActintCut = (Float_t) numPassedProcess2WithActintCutX2 / (Float_t) NumPassNoAlgPassedProcess1;
         std::cout << "Process2FracX2WithActintCut: " << Process2FracX2WithActintCut << std::endl;
         std::cout << "Condition: " << abs(target - numPassedProcess2WithActintCutX2) << " > " << epsilon << std::endl;
         outputArray[j+2] = Process2FracX2WithActintCut;
@@ -223,17 +223,17 @@ Float_t bisection(TH1F* algAHist , TH1F* algBHist, const Float_t binWidth, Float
       std::cout << "algA previous threshold: " << Form("%.7f",thresholdAarray[j+1]) << std::endl;
       std::cout << "algB current threshold: " << Form("%.7f",thresholdBarray[j+2]) << std::endl;
       std::cout << "algB previous threshold: " << Form("%.7f",thresholdBarray[j+1]) << std::endl;
-      std::cout << "binWidth: " << binWidth << "\n" << std::endl;
+      std::cout << "BinWidth: " << BinWidth << "\n" << std::endl;
 
 
 
-    }while ( abs( numPassedProcess2WithActintCutX2 - (target) ) > epsilon && (abs(algAThreshDiff) > binWidth) && (abs(algBThreshDiff) > binWidth) && ( j <= imax ) );
+    }while ( abs( numPassedProcess2WithActintCutX2 - (target) ) > epsilon && (abs(algAThreshDiff) > BinWidth) && (abs(algBThreshDiff) > BinWidth) && ( j <= imax ) );
 
-      if ( abs( numPassedProcess2WithActintCutX2 - (target) ) <= epsilon || abs(algAThreshDiff) <= binWidth || abs(algBThreshDiff) <= binWidth)
+      if ( abs( numPassedProcess2WithActintCutX2 - (target) ) <= epsilon || abs(algAThreshDiff) <= BinWidth || abs(algBThreshDiff) <= BinWidth)
       {
-        std::cout << "A root at x = " <<  initialGuess << " was found to within one bin: " << binWidth << " GeV"
+        std::cout << "A root at x = " <<  initialGuess << " was found to within one bin: " << BinWidth << " GeV"
                   << " in " << j << " iterations" << std::endl;
-        std::cout << "The number of combined events kept is  " << Process2FracX2WithActintCut * numPassedProcess1WithActintCut << std::endl;
+        std::cout << "The number of combined events kept is  " << Process2FracX2WithActintCut * NumPassNoAlgPassedProcess1 << std::endl;
         std::cout << "The fraction of combined events kept is  " << Process2FracX2WithActintCut << std::endl;
       }
       else{
@@ -241,8 +241,9 @@ Float_t bisection(TH1F* algAHist , TH1F* algBHist, const Float_t binWidth, Float
       }
 
 
-    individAThreshFinal = algAMETx2thresh;
-    individBThreshFinal = algBMETx2thresh;
+
+    parameters->Set_AlgACombinedThresh(algAMETx2thresh);
+    parameters->Set_AlgBCombinedThresh(algBMETx2thresh);
 
     //fill TNtuple with the numerical logfile data:
     Int_t k = 0;

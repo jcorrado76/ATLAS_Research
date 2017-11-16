@@ -21,8 +21,7 @@ Float_t computeThresh(const TH1F* target, const Float_t numberEventsToKeep);
 
 
 //determine thresh to keep appropriate frac of process 1 events
-Float_t determineZeroBiasThresh( const TString& algName, Int_t & numPass , const Float_t frac = 0.00590,
-    const TString& threshFileName = "PhysicsMain.All.noalgXEtriggers.2016.f731f758._m1659m1710.48Runs.root");
+Float_t determineZeroBiasThresh( userInfo* parameters );
 
 
 //simply counts how many muon events passed algs at thresholds
@@ -31,8 +30,7 @@ const TString& muonFileName = "PhysicsMain2016.Muons.noalgL1XE45R3073065R311481R
 
 
 //determines thresholds to use on two algorithms such that keeps proper fraction of process 1 events when used together
-Float_t bisection(TH1F* algAHist , TH1F* algBHist, const Float_t binWidth, Float_t &  individAThreshFinal , Float_t  & individBThreshFinal,
-    const Int_t numPassedProcess1WithActintCut = 0 , Float_t frac = 0.00590, TNtuple* logFileData = NULL, TTree* passnoalgTree = NULL);
+Float_t bisection(  userInfo* parameters , TH1F* algAHist , TH1F* algBHist, TTree* passnoalgTree );
 
 
 
