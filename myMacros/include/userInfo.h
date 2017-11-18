@@ -96,7 +96,7 @@ public:
 
     void Fill_Bisection_Data                   ( const Float_t input , const Float_t output ,
                                                  const Int_t numEvents,const Float_t threshA,
-                                                 const Float_t threshB )
+                                                 const Float_t threshB );
     void Read_Parameter_File                   ( const TString FilePath );
     void Set_AlgAName                          ( const TString algA );
     void Set_AlgBName                          ( const TString algB );

@@ -1,8 +1,7 @@
 #include "mincerMacros.h"
 
 
-TFile* threeEfficiencies( const TString& AlgAName , const TString& AlgBName,
-        const Float_t frac = 0.00590, const TString folder = "" )
+TFile* threeEfficiencies( const TString& AlgAName , const TString& AlgBName ) 
 {
 
     //GLOBAL DEFINITION 
@@ -254,7 +253,7 @@ TFile* threeEfficiencies( const TString& AlgAName , const TString& AlgBName,
     parameters->Set_AlgAName(AlgAName);
     parameters->Set_AlgBName(AlgBName);
 
-    TString fileName = "./TEfficienciesPics/" + folder + "/" + AlgAName + "_" + AlgBName + "Efficiencies.root";
+    TString fileName = "./RootFiles/" + AlgAName + "_" + AlgBName + "Efficiencies.root";
     //if file already exists, not opened
     TFile* rootFile = new TFile(fileName,"CREATE");
 
@@ -273,12 +272,11 @@ TFile* threeEfficiencies( const TString& AlgAName , const TString& AlgBName,
         } 
     std::cout << "Root file successfully opened" << std::endl;
 
-    efficiencyCanvas->Print("./pictures/" + folder + "/" + AlgAName + "_" + AlgBName + "_efficiencies.tiff");
+    efficiencyCanvas->Print("./Pictures/" + AlgAName + "_" + AlgBName + "_efficiencies.tiff");
     Ateff->Write( AlgAName + " Efficiency" );
     Bteff->Write( bstring );
     Cteff->Write( cstring );
     Dteff->Write( "METL1" );
-    logFileData->Write("bisectionData");
     efficiencyCanvas->Write("efficiencyCanvas");
     
     parameters->Print();

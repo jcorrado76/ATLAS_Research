@@ -12,9 +12,9 @@ Int_t generateEfficiencies( const TString& folderName = "")
     TString algArray[4] = {"metl1","metl1kf","metl1mht","metl1mhtkf"};
     
     
-    for (Int_t i = 0 ; i < sizeof(algArray) ; i++)
+    for ( std::size_t i = 0 ; i < sizeof(algArray) ; i++)
     {
-    	for (Int_t j = i+1 ; j < sizeof(algArray) ; j++)
+    	for ( std::size_t j = i+1 ; j < sizeof(algArray) ; j++)
     	{
     	    gROOT->ProcessLine(".x threeEfficiencies.C(\"" + algArray[i] + "\",\"" + algArray[j] );
     	}
