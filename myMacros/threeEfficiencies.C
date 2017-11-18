@@ -241,9 +241,6 @@ TFile* threeEfficiencies( const TString& AlgAName , const TString& AlgBName )
     //parameters->setNumPassNoAlgPassProcess2AlgA( numPassnoalgPassProcess2AlgA);
     //parameters->setNumPassNoAlgPassProcess2AlgB( numPassnoalgPassProcess2AlgB);
 
-    parameters->Set_AlgACombinedThresh( CombinedThreshAlgA);
-    parameters->Set_AlgBCombinedThresh( CombinedThreshAlgB );
-
 
     parameters->Set_MuonNentries( muonNentries );
     parameters->Set_PassnoalgNentries( zerobiasNentries );
