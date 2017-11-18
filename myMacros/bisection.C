@@ -7,10 +7,10 @@ Float_t bisection( userInfo* parameters , TH1F* algAHist , TH1F* algBHist, TTree
     Float_t metl1thresh = parameters->Get_MetL1Thresh();
     Float_t actintCut = parameters->Get_ActintCut();
     Int_t epsilon = parameters->Get_Epsilon();
-
+    Float_t passrndmcut = parameters->Get_Passrndmcut();
     const Int_t NumPassNoAlgPassedProcess1 = parameters->Get_NumThreshPassProcess1();
     const Float_t BinWidth = parameters->Get_BinWidth();
-
+    const Float_t passnoalgcut     = parameters->Get_Passnoalgcut(); 
     Int_t target = NumPassNoAlgPassedProcess1 * frac;
 
     Float_t lwrbnd = 0.5 * frac;
@@ -74,7 +74,7 @@ Float_t bisection( userInfo* parameters , TH1F* algAHist , TH1F* algBHist, TTree
     std::cout << "metl1thresh : " << metl1thresh << std::endl;
     Float_t algAMET,algBMET, metl1;
     Float_t passnoalg_actint = 0 ;
-    Int_t passnoalgL1XE10,passnoalgL1XE30,passnoalgL1XE40,passnoalgL1XE45;
+    Int_t passnoalgL1XE10,passnoalgL1XE30,passnoalgL1XE40,passnoalgL1XE45, passrndm;
 
     TString algA = algAHist->GetName();
     TString algB = algBHist->GetName();
@@ -87,6 +87,7 @@ Float_t bisection( userInfo* parameters , TH1F* algAHist , TH1F* algBHist, TTree
     passnoalgTree->SetBranchAddress("passnoalgL1XE40",&passnoalgL1XE40);
     passnoalgTree->SetBranchAddress("passnoalgL1XE45",&passnoalgL1XE45);
     passnoalgTree->SetBranchAddress("actint",&passnoalg_actint);
+    passnoalgTree->SetBranchAddress("passrndm",&passrndm);
 
     Int_t numPassedProcess2WithActintCutX1 = 0;
     Int_t numPassedProcess2WithActintCutX2 = 0;
@@ -101,9 +102,10 @@ Float_t bisection( userInfo* parameters , TH1F* algAHist , TH1F* algBHist, TTree
     {
         passnoalgTree->GetEntry(i);
         passedProcess1ActintCut = ( metl1 > metl1thresh ) && (passnoalg_actint > actintCut);
-        isPassnoalg = ( passnoalgL1XE10 > 0.5 || passnoalgL1XE30 > 0.5 || passnoalgL1XE40 > 0.5 || passnoalgL1XE45 > 0.5  );
+        isPassnoalg = ( passnoalgL1XE10 >  passnoalgcut || passnoalgL1XE30 > passnoalgcut || passnoalgL1XE40 > passnoalgcut || passnoalgL1XE45 > passnoalgcut );
+        Bool_t isRndm = passrndm > passrndmcut;
 
-        if ( isPassnoalg && passedProcess1ActintCut )
+        if ( (isPassnoalg || isRndm )&& passedProcess1ActintCut )
         {
             if ((algAMET > algAMETx1thresh) && (algBMET > algBMETx1thresh))
             {
@@ -193,6 +195,11 @@ Float_t bisection( userInfo* parameters , TH1F* algAHist , TH1F* algBHist, TTree
     	for (Int_t i  = 0 ; i < passnoalgNentries ;i++)
     	{
     	  passnoalgTree->GetEntry(i);
+          
+
+
+
+
     	  if ((algAMET > algAMETx2thresh) && (algBMET > algBMETx2thresh) && (metl1 > metl1thresh)&& (passnoalg_actint > actintCut) &&
           ( passnoalgL1XE10 > 0.5 || passnoalgL1XE30 > 0.5 || passnoalgL1XE40 > 0.5 || passnoalgL1XE45 > 0.5  ) )
     	  {

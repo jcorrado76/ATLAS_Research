@@ -62,7 +62,7 @@ private:
     Float_t M_BinWidth;
     Float_t M_Passnoalgcut;
     TNtuple* M_BisectionData;
-
+    Float_t M_Passrndmcut;
 
 
 
@@ -91,8 +91,8 @@ public:
     Float_t Get_CombinedAlgBThresh()  const;
     Int_t Get_NumThreshPassProcess1() const;
     Float_t Get_BinWidth()            const;
-
-
+    Float_t Get_Passnoalgcut()        const;
+    Float_t Get_Passrndmcut()         const;
 
     void Fill_Bisection_Data                   ( const Float_t input , const Float_t output ,
                                                  const Int_t numEvents,const Float_t threshA,

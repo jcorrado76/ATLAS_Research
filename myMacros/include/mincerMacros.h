@@ -11,7 +11,6 @@ Bool_t passTransverseMassCut( const Float_t metoffrecal , const Float_t mexoffre
     const Float_t metoffrecalmuon , const Float_t mexoffrecalmuon , const Float_t meyoffrecalmuon );
 
 
-
 Bool_t IsMuon( const Float_t passmuon , const Float_t passmuvarmed );
 
 Bool_t IsClean( const Float_t cleancutsflag , const Float_t recalbrokeflag);
@@ -21,7 +20,7 @@ Float_t computeThresh(const TH1F* target, const Float_t numberEventsToKeep);
 
 
 //determine thresh to keep appropriate frac of process 1 events
-Float_t determineZeroBiasThresh( userInfo* parameters );
+Float_t determineZeroBiasThresh( userInfo* parameters , const TString verbose = false );
 
 
 //simply counts how many muon events passed algs at thresholds

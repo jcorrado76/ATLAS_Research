@@ -24,24 +24,53 @@ TFile* threeEfficiencies( const TString& AlgAName , const TString& AlgBName )
     TString muonFilePath = "../myData/"+muonFilename;
     TFile * muonFile = TFile::Open(muonFilePath, "READ");
     TTree* myMuonTree = (TTree*)muonFile->Get("tree");
+    Int_t muonNentries = myMuonTree->GetEntries();
+    parameters->Set_MuonNentries( muonNentries );
 
-    std::cout << "Muon Data being used to compute algorithm efficiency: " << muonFilePath << std::endl;
+    //ZBTREE
+    std::cout << "MuonNentries: " << muonNentries << "\n" << std::endl;
+    TString zerobiasFilePath = "../myData/"+ zerobiasFileName;
+    TFile * zeroBiasFile = TFile::Open(zerobiasFilePath, "READ");
+    TTree* zeroBiasTree = (TTree*)zeroBiasFile->Get("tree");
+    Int_t zerobiasNentries = zeroBiasTree->GetEntries();
+    parameters->Set_PassnoalgNentries( zerobiasNentries );
+
+
+    Float_t passnoalgcut = parameters->Get_Passnoalgcut();
+    Float_t passrndmcut = parameters->Get_Passrndmcut();
+
+    TString xlabel = "MET [GeV]";
+    TString yaxis = "Events";
+
+
 
     //initialize variables to be used later
     Float_t metl1thresh = parameters->Get_MetL1Thresh();
     Float_t actintCut = parameters->Get_ActintCut();
-    Int_t muonNentries = myMuonTree->GetEntries();
     Int_t muonNbins = 200;
     Int_t nbins = parameters->Get_Nbins();
     Double_t metMin = parameters->Get_MetMin();
     Double_t metMax = parameters->Get_MetMax();
     Int_t NumbPassnoAlgPassProcess1WithActintCut = 0; Int_t counter1 = 0; Int_t counter2 = 0; Int_t counter3 = 0;
-    Int_t passRndm, numPassMuon,passmuon,passmuvarmed,cleanCutsFlag,recalBrokeFlag;
+    Int_t passrndm, numPassMuon,passmuon,passmuvarmed,cleanCutsFlag,recalBrokeFlag;
     Float_t algAMET,algBMET,metoffrecal,mexoffrecal,meyoffrecal,mexoffrecalmuon, zb_actint,
             meyoffrecalmuon, metl1,metcell,metrefmuon,mexrefmuon,meyrefmuon,metoffrecalmuon;
     Int_t passnoalgL1XE10,passnoalgL1XE30,passnoalgL1XE40,passnoalgL1XE45;
+    Float_t algAMETx1thresh,algBMETx1thresh;
+    Float_t algAMETx2thresh,algBMETx2thresh;
 
-    
+
+    //ZB BRANCHES
+    zeroBiasTree->SetBranchAddress("passrndm", &passrndm);
+    zeroBiasTree->SetBranchAddress(AlgAName,&algAMET);
+    zeroBiasTree->SetBranchAddress(AlgBName,&algBMET);
+    zeroBiasTree->SetBranchAddress("metl1",&metl1);
+    zeroBiasTree->SetBranchAddress("passnoalgL1XE10",&passnoalgL1XE10);
+    zeroBiasTree->SetBranchAddress("passnoalgL1XE30",&passnoalgL1XE30);
+    zeroBiasTree->SetBranchAddress("passnoalgL1XE40",&passnoalgL1XE40);
+    zeroBiasTree->SetBranchAddress("passnoalgL1XE45",&passnoalgL1XE45);
+    zeroBiasTree->SetBranchAddress("actint",&zb_actint);
+    //MUON BRANCHES
     myMuonTree->SetBranchAddress("passmu26med", &passmuon);
     myMuonTree->SetBranchAddress("passmu26varmed", &passmuvarmed);
     myMuonTree->SetBranchAddress("passcleancuts", &cleanCutsFlag);
@@ -56,29 +85,7 @@ TFile* threeEfficiencies( const TString& AlgAName , const TString& AlgBName )
     myMuonTree->SetBranchAddress("mexrefmuon", &mexrefmuon);
     myMuonTree->SetBranchAddress("meyrefmuon", &meyrefmuon);
 
-
-    //ZBTREE
-    std::cout << "MuonNentries: " << muonNentries << "\n" << std::endl;
-    TString zerobiasFilePath = "../myData/"+ zerobiasFileName;
-    TFile * zeroBiasFile = TFile::Open(zerobiasFilePath, "READ");
-    TTree* zeroBiasTree = (TTree*)zeroBiasFile->Get("tree");
-    Int_t zerobiasNentries = zeroBiasTree->GetEntries();
-   
-
-    Float_t algAMETx1thresh,algBMETx1thresh;
-    Float_t algAMETx2thresh,algBMETx2thresh;
-    Float_t algAMETx3thresh,algBMETx3thresh;
-    TString xlabel = "MET [GeV]";
-    TString yaxis = "Events";
-    zeroBiasTree->SetBranchAddress("passrndm", &passRndm); // get pass rndm flag
-    zeroBiasTree->SetBranchAddress(AlgAName,&algAMET);
-    zeroBiasTree->SetBranchAddress(AlgBName,&algBMET);
-    zeroBiasTree->SetBranchAddress("metl1",&metl1);
-    zeroBiasTree->SetBranchAddress("passnoalgL1XE10",&passnoalgL1XE10);
-    zeroBiasTree->SetBranchAddress("passnoalgL1XE30",&passnoalgL1XE30);
-    zeroBiasTree->SetBranchAddress("passnoalgL1XE40",&passnoalgL1XE40);
-    zeroBiasTree->SetBranchAddress("passnoalgL1XE45",&passnoalgL1XE45);
-    zeroBiasTree->SetBranchAddress("actint",&zb_actint);
+    //ZB INDIVID HISTS
     TH1F *algAMETHist = new TH1F(AlgAName, "algA", nbins, metMin, metMax);
     TH1F *algBMETHist = new TH1F(AlgBName, "algB", nbins, metMin, metMax);
 
@@ -87,7 +94,7 @@ TFile* threeEfficiencies( const TString& AlgAName , const TString& AlgBName )
 
     //IN DETERMINE THRESH I COMPUTE THRESHOLD AFTER ALSO CUTTING ON METL1 TO MAKE HISTOGRAMS
     Int_t numPassnoalgPassProcess1AlgA = 0;
-       
+     
     determineZeroBiasThresh( parameters );
 
     const Float_t AlgAIndividThresh = parameters->Get_IndividAlgAThresh(); 
@@ -103,10 +110,14 @@ TFile* threeEfficiencies( const TString& AlgAName , const TString& AlgBName )
 	for (Int_t k = 0; k < zerobiasNentries; k++)
 	{
 	    zeroBiasTree->GetEntry(k);
-	    if ( (metl1 > metl1thresh) && (zb_actint > actintCut) &&
-         ( passnoalgL1XE10 > 0.5 || passnoalgL1XE30 > 0.5 ||
-        passnoalgL1XE40 > 0.5 || passnoalgL1XE45 > 0.5  ))
-	    {
+        Bool_t isL1 = metl1 > metl1thresh;
+        Bool_t isactint = zb_actint > actintCut;
+        Bool_t isPassnoalg = passnoalgL1XE10 > passnoalgcut || passnoalgL1XE30 > passnoalgcut ||
+        passnoalgL1XE40 > passnoalgcut || passnoalgL1XE45 > passnoalgcut;
+        Bool_t isPassrndm = passrndm > passrndmcut;
+
+	    if ( ( isL1 ) && ( isactint ) && (isPassnoalg || isPassrndm)) 
+        {
     		algAMETHist->Fill(algAMET);
     		algBMETHist->Fill(algBMET);
             NumbPassnoAlgPassProcess1WithActintCut++;
@@ -119,18 +130,12 @@ TFile* threeEfficiencies( const TString& AlgAName , const TString& AlgBName )
 
     Float_t bisectionIndividFrac;
 
-
-    TNtuple* logFileData = new TNtuple("logFileData" , "Bisection Data" ,
-    "Individual Fraction:Combined Fraction: Numb Events Kept:" + AlgAName + " Threshold:" + AlgBName + " Threshold");
-
     //start bisection timer
     threeEfficienciesBenchmark->Start("Bisection");
 
     //run BISECTION
     bisection( parameters , algAMETHist, algBMETHist , zeroBiasTree );
-
-
-
+    
     const Float_t CombinedThreshAlgA = parameters->Get_CombinedAlgAThresh();
     const Float_t CombinedThreshAlgB = parameters->Get_CombinedAlgBThresh();
 
@@ -242,8 +247,6 @@ TFile* threeEfficiencies( const TString& AlgAName , const TString& AlgBName )
     //parameters->setNumPassNoAlgPassProcess2AlgB( numPassnoalgPassProcess2AlgB);
 
 
-    parameters->Set_MuonNentries( muonNentries );
-    parameters->Set_PassnoalgNentries( zerobiasNentries );
     parameters->Set_NumMuonKeptCombinedAtThresh( muonEventsCombined );
     parameters->Set_NumTotal((Ateff->GetTotalHistogram())->GetEntries());
     parameters->Set_ActintCut(actintCut);

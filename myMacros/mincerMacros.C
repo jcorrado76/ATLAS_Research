@@ -28,7 +28,7 @@ Float_t computeThresh(const TH1F* target, const Float_t numberEventsToKeep)
 }
 
 
-Float_t determineZeroBiasThresh( userInfo* parameters )
+Float_t determineZeroBiasThresh( userInfo* parameters, const TString verbose )
 {
     //this function determines thresh to keep proper trigger rate for process 2 on algs A and B
     //these thresholds are used on both passnoalg and muon data
@@ -43,7 +43,8 @@ Float_t determineZeroBiasThresh( userInfo* parameters )
 	const Double_t metMax          = parameters->Get_MetMax();
     const Int_t numberEventsToKeep = parameters->Get_NumberEventsToKeep();
 	const Int_t nbins              = parameters->Get_Nbins();
-    
+    const Float_t passnoalgcut     = parameters->Get_Passnoalgcut(); 
+    const Float_t passrndmcut      = parameters->Get_Passrndmcut(); 
     const TString threshFilePath = "../myData/" + threshFileName;
 	TFile *threshFileHandle = TFile::Open(threshFilePath, "READ");
 	TTree *threshTree = (TTree*)(threshFileHandle->Get("tree"));
@@ -54,15 +55,19 @@ Float_t determineZeroBiasThresh( userInfo* parameters )
 	Float_t metl1, algMET;
     Int_t numberEventsAlgAKept = 0;
     Int_t numberEventsAlgBKept = 0;
-    Int_t passnoalgL1XE10 , passnoalgL1XE30 , passnoalgL1XE40 , passnoalgL1XE45;
-    
-    std::cout << "DETERMINETHRESH.C" << std::endl;
-    std::cout << "using passnoalg datafile: " << threshFileName << std::endl;
-    std::cout << "algA: " << algAName << std::endl;
-    std::cout << "algB: " << algBName << std::endl;
-    std::cout << "using L1 thresh: " << metL1Thresh << std::endl;
-    std::cout << "fraction of events to keep: " << frac << std::endl;
-    std::cout << "passnoalg nentries: " << passnoAlgNentries << std::endl;
+    Int_t passnoalgL1XE10 , passnoalgL1XE30 , passnoalgL1XE40 , passnoalgL1XE45,passrndm;
+   
+
+    if (verbose){
+        std::cout << "DETERMINETHRESH.C" << std::endl;
+        std::cout << "using passnoalg datafile: " << threshFileName << std::endl;
+        std::cout << "algA: " << algAName << std::endl;
+        std::cout << "algB: " << algBName << std::endl;
+        std::cout << "using L1 thresh: " << metL1Thresh << std::endl;
+        std::cout << "fraction of events to keep: " << frac << std::endl;
+        std::cout << "passnoalg nentries: " << passnoAlgNentries << std::endl;
+    }
+
 
     TH1F *AlgAHist = new TH1F(algAName, algAName, nbins, metMin, metMax);
     TH1F *AlgBHist = new TH1F(algBName, algBName, nbins, metMin, metMax);
@@ -76,12 +81,17 @@ Float_t determineZeroBiasThresh( userInfo* parameters )
     threshTree->SetBranchAddress("passnoalgL1XE40",&passnoalgL1XE40);
     threshTree->SetBranchAddress("passnoalgL1XE45",&passnoalgL1XE45);
     threshTree->SetBranchAddress("actint",&actint);
+    threshTree->SetBranchAddress("passrndm",&passrndm);
 
     for (Int_t k = 0; k < passnoAlgNentries; k++)
 	{
 		threshTree->GetEntry(k);
-		if ( ( metl1 > metL1Thresh ) && ( actint > actintCut ) &&
-            ( passnoalgL1XE10 > 0.5 || passnoalgL1XE30 > 0.5 || passnoalgL1XE40 > 0.5 || passnoalgL1XE45 > 0.5 ) )
+        Bool_t passl1 = metl1 > metL1Thresh ;
+        Bool_t passactint = actint > actintCut;
+        Bool_t isPassnoalg = passnoalgL1XE10 > passnoalgcut || passnoalgL1XE30 > passnoalgcut || passnoalgL1XE40 > passnoalgcut || passnoalgL1XE45 > passnoalgcut;
+        Bool_t isPassrndm = passrndm > passrndmcut;
+
+		if ( ( passl1 ) && ( passactint ) && ( isPassnoalg || isPassrndm ))
 		{
 		    AlgAHist->Fill(algAMET);
 		    AlgBHist->Fill(algBMET);
@@ -94,17 +104,24 @@ Float_t determineZeroBiasThresh( userInfo* parameters )
 	Float_t AlgAThresh = computeThresh(AlgAtarget, numberEventsToKeep);
 	Float_t AlgBThresh = computeThresh(AlgBtarget, numberEventsToKeep);
 
-    std::cout << algAName << " threshold: " << AlgAThresh << std::endl;
-	std::cout << algBName << " threshold: " << AlgBThresh << std::endl;
-	std::cout << "target number events to keep: " << numberEventsToKeep << std::endl;
 
+    if (verbose){
+        std::cout << algAName << " threshold: " << AlgAThresh << std::endl;
+        std::cout << algBName << " threshold: " << AlgBThresh << std::endl;
+        std::cout << "target number events to keep: " << numberEventsToKeep << std::endl;
+    }
     
     //determine number of events kept at determined threshold (gives idea of error due to binning)
 	for (Int_t l = 0 ; l < passnoAlgNentries ; l++)
 	{
 		threshTree->GetEntry(l);
-		if ((metl1 > metL1Thresh) && ( actint > actintCut ) &&
-           ( passnoalgL1XE10 > 0.5 || passnoalgL1XE30 > 0.5 || passnoalgL1XE40 > 0.5 || passnoalgL1XE45 > 0.5 ) )
+        Bool_t passl1 = metl1 > metL1Thresh ;
+        Bool_t passactint = actint > actintCut;
+        Bool_t isPassnoalg = passnoalgL1XE10 > passnoalgcut || passnoalgL1XE30 > passnoalgcut || passnoalgL1XE40 > passnoalgcut || passnoalgL1XE45 > passnoalgcut;
+        Bool_t isPassrndm = passrndm > passrndmcut;
+
+
+		if (( passl1 ) && ( passactint ) && ( isPassnoalg || isPassrndm ) )
 		{
             if (algAMET > AlgAThresh){
                 numberEventsAlgAKept++;
@@ -115,9 +132,11 @@ Float_t determineZeroBiasThresh( userInfo* parameters )
 		}
 	}
 
-    std::cout << "number of events " << algAName << " kept at threshold: " << numberEventsAlgAKept << std::endl;
-    std::cout << "number of events " << algBName << " kept at threshold: " << numberEventsAlgBKept << std::endl;
 
+    if (verbose){
+        std::cout << "number of events " << algAName << " kept at threshold: " << numberEventsAlgAKept << std::endl;
+        std::cout << "number of events " << algBName << " kept at threshold: " << numberEventsAlgBKept << std::endl;
+    }
 
     
     parameters->Set_AlgAIndividThresh( AlgAThresh );

@@ -55,6 +55,8 @@ userInfo::userInfo()
     M_BisectionData(NULL)
 {
     M_BinWidth = (metMax - metMin)/ M_Nbins;
+    M_BisectionData = new TNtuple("logFileData" , "Bisection Data" ,
+    "Individual Fraction:Combined Fraction: Numb Events Kept:AlgAThreshold:AlgBThreshold");
 }
 
 void userInfo::Fill_Bisection_Data(const Float_t input , const Float_t output, const Int_t numEvents,
@@ -124,14 +126,14 @@ void userInfo::Read_Parameter_File( const TString FilePath ) {
 void userInfo::Print(Option_t *option) const{
     std::cout << "Printing the data members for the userInfo struct: " << std::endl;
     M_Now.Print();
-    std::cout << "Alg A Name: " << M_AlgAName << std::endl;
-    std::cout << "Alg B Name: " << M_AlgBName << std::endl;
-    std::cout << "nbins: " << M_Nbins << std::endl;
-    std::cout << "MetMin: " << M_Metmin << std::endl;
-    std::cout << "MetMax: " << M_Metmax << std::endl;
-    std::cout << "METL1 thresh used: " << M_Metl1thresh << std::endl;
-    std::cout << "Process 2 target frac: " << M_Frac << std::endl;
-    std::cout << "Passnoalg File: " << M_ThreshFileName << std::endl;
+    std::cout << "ALGA: " << M_AlgAName << std::endl;
+    std::cout << "ALGB: " << M_AlgBName << std::endl;
+    std::cout << "NBINS: " << M_Nbins << std::endl;
+    std::cout << "METMIN: " << M_Metmin << std::endl;
+    std::cout << "METMAX: " << M_Metmax << std::endl;
+    std::cout << "L1 THRESH: " << M_Metl1thresh << std::endl;
+    std::cout << "TARGET FRAC: " << M_Frac << std::endl;
+    std::cout << "Thresh File: " << M_ThreshFileName << std::endl;
     std::cout << "Muon File: " << M_MuonFileName << std::endl;
     std::cout << "Number of passnoalg events that passed process1: " << M_NumPassnoalgPassProcess1 << std::endl;
     std::cout << "Numb passnoalg passed process2 for alg A: " << M_NumPassnoalgProcess2AlgA << std::endl;
@@ -182,8 +184,8 @@ Int_t userInfo::Get_NumThreshPassProcess1() const { return (M_NumPassnoalgPassPr
 Float_t userInfo::Get_BinWidth() const { return(M_BinWidth); }
 Float_t userInfo::Get_CombinedAlgAThresh()  const { return (M_AlgACombinedThresh); }
 Float_t userInfo::Get_CombinedAlgBThresh()  const {return (M_AlgBCombinedThresh); }
-
-
+Float_t userInfo::Get_Passnoalgcut() const {return (M_Passnoalgcut);}
+Float_t userInfo::Get_Passrndmcut() const { return (M_Passrndmcut);}
 
 
 //setters
