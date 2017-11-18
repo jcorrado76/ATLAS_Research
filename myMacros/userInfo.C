@@ -51,12 +51,17 @@ userInfo::userInfo()
     M_NumMuonDenominator(0),
     M_Now(TDatime()),
     M_Passnoalgcut(m_passnoalgcut),
-    M_NumberEventsToKeep(numbtokeep)
+    M_NumberEventsToKeep(numbtokeep),
+    M_BisectionData(NULL)
 {
     M_BinWidth = (metMax - metMin)/ M_Nbins;
 }
 
-
+void userInfo::Fill_Bisection_Data(const Float_t input , const Float_t output, const Int_t numEvents,
+                                   const Float_t threshA, const Float_t threshB )
+{
+    M_BisectionData->Fill( input , output, numEvents, threshA, threshB ); 
+}
 
 
 void userInfo::Read_Parameter_File( const TString FilePath ) {

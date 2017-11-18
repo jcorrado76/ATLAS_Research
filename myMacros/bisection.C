@@ -249,7 +249,8 @@ Float_t bisection( userInfo* parameters , TH1F* algAHist , TH1F* algBHist, TTree
     Int_t k = 0;
     while ( inputArray[k] )
     {
-        logFileData->Fill(inputArray[k],outputArray[k],numEventsArray[k],thresholdAarray[k],thresholdBarray[k]);
+        //write a setter that calls tntuple's fill method on the stuff 
+        parameters->Fill_Bisection_Data(inputArray[k],outputArray[k],numEventsArray[k],thresholdAarray[k],thresholdBarray[k]);
         k++;
     }
 

@@ -9,9 +9,9 @@ bool compile(const std::string& option = "")
 {
     //set up include path
     TString include_path = gSystem->GetIncludePath();
-    if (!include_path.Contains("-Iinclude"))
+    if (!include_path.Contains("-I./include"))
     {
-        gSystem->AddIncludePath("-Iinclude");
+        gSystem->AddIncludePath("-I./include");
     }
 
     //compile and load source

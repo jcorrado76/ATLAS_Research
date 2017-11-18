@@ -35,7 +35,7 @@ Float_t determineZeroBiasThresh( userInfo* parameters )
     parameters->Print();
     const Float_t metL1Thresh      = parameters->Get_MetL1Thresh();
     const Float_t actintCut        = parameters->Get_ActintCut();
-    const TString threshFileName   = parameters->Get_PassnoalgFileName();
+    const TString threshFileName   = parameters->Get_ThreshFileName();
     const TString algAName         = parameters->Get_AlgAName();
     const TString algBName         = parameters->Get_AlgBName();
     const Float_t frac             = parameters->Get_Frac();
@@ -52,7 +52,8 @@ Float_t determineZeroBiasThresh( userInfo* parameters )
     Float_t actint = 0;
     Float_t algAMET,algBMET=0;
 	Float_t metl1, algMET;
-    Int_t numberEventsAlgAKept, numberEventsAlgBKept = 0;
+    Int_t numberEventsAlgAKept = 0;
+    Int_t numberEventsAlgBKept = 0;
     Int_t passnoalgL1XE10 , passnoalgL1XE30 , passnoalgL1XE40 , passnoalgL1XE45;
     
     std::cout << "DETERMINETHRESH.C" << std::endl;
