@@ -3,7 +3,11 @@
 *.d
 *.so
 *.swp
+*.un
 !.gitignore
+myMacros/pictures/
+myMacros/lib/
+myMacros/Practice\ Macros
+myMacros/Analysis
 !myMacros/
 !HLTAnalysis/
-

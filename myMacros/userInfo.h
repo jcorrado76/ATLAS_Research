@@ -28,41 +28,39 @@
 class userInfo : public TObject {
 
 private:
-    TString algAName;
-    TString algBName;
-    Int_t nbins;
-    Float_t metmin;
-    Float_t metmax;
-    Float_t metl1thresh;
-    Float_t frac;
-    TString ThreshFileName;
-    TString MuonFileName;
-    Int_t numberEventsToKeep;
-    TString zerobiasFileName;
-    Float_t AlgAIndividThresh;
-    Float_t AlgBIndividThresh;
-    TString muonFilename;
-    Int_t NumPassnoalgPassProcess1;
-    Int_t NumMuonPassProcess1;
-    Int_t NumPassnoalgProcess2AlgA;
-    Int_t NumPassnoalgProcess2AlgB;
-    Int_t NumPassnoalgProcess2AlgCombined;
-    Int_t NumMuonPassProcess2AlgA;
-    Int_t NumMuonPassProcess2AlgB;
-    Int_t NumMuonPassProcess2Combined;
-    Float_t algAIndividThresh;
-    Float_t algBIndividThresh;
-    Float_t algACombinedThresh;
-    Float_t algBCombinedThresh;
-    Int_t muonNentries;
-    Int_t passnoAlgNentries;
-    Int_t numMuonKeptCombined;
-    Int_t numMuonDenominator;
-    Int_t epsilon;
-    Float_t actintCut;
-    TDatime now;
-    Float_t BinWidth;
-    Float_t passnoalgcut;
+    TString M_AlgAName;
+    TString M_AlgBName;
+    Int_t M_Nbins;
+    Float_t M_Metmin;
+    Float_t M_Metmax;
+    Float_t M_Metl1thresh;
+    Float_t M_Frac;
+    TString M_ThreshFileName;
+    TString M_MuonFileName;
+    Int_t M_NumberEventsToKeep;
+    TString M_ZerobiasFileName;
+    TString M_MuonFilename;
+    Int_t M_NumPassnoalgPassProcess1;
+    Int_t M_NumMuonPassProcess1;
+    Int_t M_NumPassnoalgProcess2AlgA;
+    Int_t M_NumPassnoalgProcess2AlgB;
+    Int_t M_NumPassnoalgProcess2AlgCombined;
+    Int_t M_NumMuonPassProcess2AlgA;
+    Int_t M_NumMuonPassProcess2AlgB;
+    Int_t M_NumMuonPassProcess2Combined;
+    Float_t M_AlgAIndividThresh;
+    Float_t M_AlgBIndividThresh;
+    Float_t M_AlgACombinedThresh;
+    Float_t M_AlgBCombinedThresh;
+    Int_t M_MuonNentries;
+    Int_t M_PassnoAlgNentries;
+    Int_t M_NumMuonKeptCombined;
+    Int_t M_NumMuonDenominator;
+    Int_t M_Epsilon;
+    Float_t M_ActintCut;
+    TDatime M_Now;
+    Float_t M_BinWidth;
+    Float_t M_Passnoalgcut;
 
 
 public:
