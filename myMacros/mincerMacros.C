@@ -94,7 +94,7 @@ Float_t determineZeroBiasThresh( userInfo* parameters, const Bool_t verbose )
         || passnoalgL1XE40 > passnoalgcut || passnoalgL1XE45 > passnoalgcut;
         Bool_t isPassrndm = passrndm > passrndmcut;
 
-		if ( /*( passl1 ) && ( passactint ) && ( isPassnoalg || */ isPassrndm ))
+		if ( /*( passl1 ) && ( passactint ) && ( isPassnoalg || */ isPassrndm /*)*/)
 		{
 		    AlgAHist->Fill(algAMET);
 		    AlgBHist->Fill(algBMET);
