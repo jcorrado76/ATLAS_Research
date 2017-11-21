@@ -16,7 +16,7 @@ Int_t generateEfficiencies( const TString& folderName = "")
     {
     	for ( std::size_t j = i+1 ; j < sizeof(algArray) ; j++)
     	{
-    	    gROOT->ProcessLine(".x threeEfficiencies.C(\"" + algArray[i] + "\",\"" + algArray[j] );
+    	    gROOT->ProcessLine(".x threeEfficiencies.C(\"" + algArray[i] + "\",\"" + algArray[j]+"\")" );
     	}
     }
 

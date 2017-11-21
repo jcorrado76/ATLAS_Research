@@ -1,14 +1,17 @@
 #include "mincerMacros.h"
 
 
+//#include "TreeHandler.h"
+
 TFile* threeEfficiencies( const TString& AlgAName , const TString& AlgBName ) 
 {
 
     //GLOBAL DEFINITION 
     userInfo* parameters = new userInfo();
-    parameters->Read_Parameter_File("./parameters.txt");
+    parameters->Set_AlgAName(AlgAName);
+    parameters->Set_AlgBName(AlgBName);
 
-    parameters->Print();
+    parameters->Read_Parameter_File("./parameters.txt");
 
     //FILES
     TString zerobiasFileName = parameters->Get_ThreshFileName();
@@ -28,21 +31,17 @@ TFile* threeEfficiencies( const TString& AlgAName , const TString& AlgBName )
     parameters->Set_MuonNentries( muonNentries );
 
     //ZBTREE
-    std::cout << "MuonNentries: " << muonNentries << "\n" << std::endl;
     TString zerobiasFilePath = "../myData/"+ zerobiasFileName;
     TFile * zeroBiasFile = TFile::Open(zerobiasFilePath, "READ");
     TTree* zeroBiasTree = (TTree*)zeroBiasFile->Get("tree");
     Int_t zerobiasNentries = zeroBiasTree->GetEntries();
     parameters->Set_PassnoalgNentries( zerobiasNentries );
 
-
     Float_t passnoalgcut = parameters->Get_Passnoalgcut();
     Float_t passrndmcut = parameters->Get_Passrndmcut();
 
     TString xlabel = "MET [GeV]";
     TString yaxis = "Events";
-
-
 
     //initialize variables to be used later
     Float_t metl1thresh = parameters->Get_MetL1Thresh();
@@ -65,10 +64,12 @@ TFile* threeEfficiencies( const TString& AlgAName , const TString& AlgBName )
     zeroBiasTree->SetBranchAddress(AlgAName,&algAMET);
     zeroBiasTree->SetBranchAddress(AlgBName,&algBMET);
     zeroBiasTree->SetBranchAddress("metl1",&metl1);
+/*
     zeroBiasTree->SetBranchAddress("passnoalgL1XE10",&passnoalgL1XE10);
     zeroBiasTree->SetBranchAddress("passnoalgL1XE30",&passnoalgL1XE30);
     zeroBiasTree->SetBranchAddress("passnoalgL1XE40",&passnoalgL1XE40);
     zeroBiasTree->SetBranchAddress("passnoalgL1XE45",&passnoalgL1XE45);
+    */
     zeroBiasTree->SetBranchAddress("actint",&zb_actint);
     //MUON BRANCHES
     myMuonTree->SetBranchAddress("passmu26med", &passmuon);
@@ -116,7 +117,7 @@ TFile* threeEfficiencies( const TString& AlgAName , const TString& AlgBName )
         passnoalgL1XE40 > passnoalgcut || passnoalgL1XE45 > passnoalgcut;
         Bool_t isPassrndm = passrndm > passrndmcut;
 
-	    if ( ( isL1 ) && ( isactint ) && (isPassnoalg || isPassrndm)) 
+	    if ( ( isL1 ) && ( isactint ) && (/*isPassnoalg || */isPassrndm)) 
         {
     		algAMETHist->Fill(algAMET);
     		algBMETHist->Fill(algBMET);
@@ -249,9 +250,6 @@ TFile* threeEfficiencies( const TString& AlgAName , const TString& AlgBName )
 
     parameters->Set_NumMuonKeptCombinedAtThresh( muonEventsCombined );
     parameters->Set_NumTotal((Ateff->GetTotalHistogram())->GetEntries());
-    parameters->Set_ActintCut(actintCut);
-    parameters->Set_AlgAName(AlgAName);
-    parameters->Set_AlgBName(AlgBName);
 
     TString fileName = "./RootFiles/" + AlgAName + "_" + AlgBName + "Efficiencies.root";
     //if file already exists, not opened

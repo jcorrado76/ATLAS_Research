@@ -32,6 +32,7 @@ Float_t determineZeroBiasThresh( userInfo* parameters, const TString verbose )
 {
     //this function determines thresh to keep proper trigger rate for process 2 on algs A and B
     //these thresholds are used on both passnoalg and muon data
+    std::cout << "Entering determinezerobiasthresh" << std::endl;
     parameters->Print();
     const Float_t metL1Thresh      = parameters->Get_MetL1Thresh();
     const Float_t actintCut        = parameters->Get_ActintCut();
@@ -76,10 +77,12 @@ Float_t determineZeroBiasThresh( userInfo* parameters, const TString verbose )
 	threshTree->SetBranchAddress(algAName,&algAMET);
 	threshTree->SetBranchAddress(algBName,&algBMET);
 	threshTree->SetBranchAddress("metl1",&metl1);
+    /*
     threshTree->SetBranchAddress("passnoalgL1XE10",&passnoalgL1XE10);
     threshTree->SetBranchAddress("passnoalgL1XE30",&passnoalgL1XE30);
     threshTree->SetBranchAddress("passnoalgL1XE40",&passnoalgL1XE40);
     threshTree->SetBranchAddress("passnoalgL1XE45",&passnoalgL1XE45);
+    */
     threshTree->SetBranchAddress("actint",&actint);
     threshTree->SetBranchAddress("passrndm",&passrndm);
 
@@ -91,7 +94,7 @@ Float_t determineZeroBiasThresh( userInfo* parameters, const TString verbose )
         Bool_t isPassnoalg = passnoalgL1XE10 > passnoalgcut || passnoalgL1XE30 > passnoalgcut || passnoalgL1XE40 > passnoalgcut || passnoalgL1XE45 > passnoalgcut;
         Bool_t isPassrndm = passrndm > passrndmcut;
 
-		if ( ( passl1 ) && ( passactint ) && ( isPassnoalg || isPassrndm ))
+		if ( ( passl1 ) && ( passactint ) && ( /*isPassnoalg || */ isPassrndm ))
 		{
 		    AlgAHist->Fill(algAMET);
 		    AlgBHist->Fill(algBMET);
@@ -121,7 +124,7 @@ Float_t determineZeroBiasThresh( userInfo* parameters, const TString verbose )
         Bool_t isPassrndm = passrndm > passrndmcut;
 
 
-		if (( passl1 ) && ( passactint ) && ( isPassnoalg || isPassrndm ) )
+		if (( passl1 ) && ( passactint ) && ( /*isPassnoalg || */isPassrndm ) )
 		{
             if (algAMET > AlgAThresh){
                 numberEventsAlgAKept++;
