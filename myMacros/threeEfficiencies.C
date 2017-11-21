@@ -3,10 +3,10 @@
 
 //#include "TreeHandler.h"
 
-TFile* threeEfficiencies( const TString& AlgAName , const TString& AlgBName ) 
+TFile* threeEfficiencies( const TString& AlgAName , const TString& AlgBName )
 {
 
-    //GLOBAL DEFINITION 
+    //GLOBAL DEFINITION
     userInfo* parameters = new userInfo();
     parameters->Set_AlgAName(AlgAName);
     parameters->Set_AlgBName(AlgBName);
@@ -95,11 +95,11 @@ TFile* threeEfficiencies( const TString& AlgAName , const TString& AlgBName )
 
     //IN DETERMINE THRESH I COMPUTE THRESHOLD AFTER ALSO CUTTING ON METL1 TO MAKE HISTOGRAMS
     Int_t numPassnoalgPassProcess1AlgA = 0;
-     
-    determineZeroBiasThresh( parameters );
 
-    const Float_t AlgAIndividThresh = parameters->Get_IndividAlgAThresh(); 
-    const Float_t AlgBIndividThresh = parameters->Get_IndividAlgBThresh(); 
+    Float_t returns = determineZeroBiasThresh( parameters , true);
+
+    const Float_t AlgAIndividThresh = parameters->Get_IndividAlgAThresh();
+    const Float_t AlgBIndividThresh = parameters->Get_IndividAlgBThresh();
 
 
     std::cout << "Returned to threeEfficiencies.C" << std::endl;
@@ -117,7 +117,7 @@ TFile* threeEfficiencies( const TString& AlgAName , const TString& AlgBName )
         passnoalgL1XE40 > passnoalgcut || passnoalgL1XE45 > passnoalgcut;
         Bool_t isPassrndm = passrndm > passrndmcut;
 
-	    if ( ( isL1 ) && ( isactint ) && (/*isPassnoalg || */isPassrndm)) 
+	    if ( ( isL1 ) && ( isactint ) && (/*isPassnoalg || */isPassrndm))
         {
     		algAMETHist->Fill(algAMET);
     		algBMETHist->Fill(algBMET);
@@ -136,7 +136,7 @@ TFile* threeEfficiencies( const TString& AlgAName , const TString& AlgBName )
 
     //run BISECTION
     bisection( parameters , algAMETHist, algBMETHist , zeroBiasTree );
-    
+
     const Float_t CombinedThreshAlgA = parameters->Get_CombinedAlgAThresh();
     const Float_t CombinedThreshAlgB = parameters->Get_CombinedAlgBThresh();
 
@@ -267,7 +267,7 @@ TFile* threeEfficiencies( const TString& AlgAName , const TString& AlgBName )
             fileName.Insert( (fileName.Length()-5),suffix);
             //try again, but this time if user inputs, can overwrite
             rootFile->Open( fileName ,"RECREATE");
-        } 
+        }
     std::cout << "Root file successfully opened" << std::endl;
 
     efficiencyCanvas->Print("./Pictures/" + AlgAName + "_" + AlgBName + "_efficiencies.tiff");
@@ -276,10 +276,10 @@ TFile* threeEfficiencies( const TString& AlgAName , const TString& AlgBName )
     Cteff->Write( cstring );
     Dteff->Write( "METL1" );
     efficiencyCanvas->Write("efficiencyCanvas");
-    
+
     parameters->Print();
     parameters->Write("parameters");
-  
+
     Float_t realtime, cputime;
     threeEfficienciesBenchmark->Summary(realtime ,cputime);
 

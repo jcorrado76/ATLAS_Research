@@ -28,7 +28,7 @@ Float_t computeThresh(const TH1F* target, const Float_t numberEventsToKeep)
 }
 
 
-Float_t determineZeroBiasThresh( userInfo* parameters, const TString verbose )
+Float_t determineZeroBiasThresh( userInfo* parameters, const Bool_t verbose )
 {
     //this function determines thresh to keep proper trigger rate for process 2 on algs A and B
     //these thresholds are used on both passnoalg and muon data
@@ -44,20 +44,20 @@ Float_t determineZeroBiasThresh( userInfo* parameters, const TString verbose )
 	const Double_t metMax          = parameters->Get_MetMax();
     const Int_t numberEventsToKeep = parameters->Get_NumberEventsToKeep();
 	const Int_t nbins              = parameters->Get_Nbins();
-    const Float_t passnoalgcut     = parameters->Get_Passnoalgcut(); 
-    const Float_t passrndmcut      = parameters->Get_Passrndmcut(); 
+    const Float_t passnoalgcut     = parameters->Get_Passnoalgcut();
+    const Float_t passrndmcut      = parameters->Get_Passrndmcut();
     const TString threshFilePath = "../myData/" + threshFileName;
 	TFile *threshFileHandle = TFile::Open(threshFilePath, "READ");
 	TTree *threshTree = (TTree*)(threshFileHandle->Get("tree"));
     const Int_t passnoAlgNentries = threshTree->GetEntries();
-    
+
     Float_t actint = 0;
     Float_t algAMET,algBMET=0;
 	Float_t metl1, algMET;
     Int_t numberEventsAlgAKept = 0;
     Int_t numberEventsAlgBKept = 0;
     Int_t passnoalgL1XE10 , passnoalgL1XE30 , passnoalgL1XE40 , passnoalgL1XE45,passrndm;
-   
+
 
     if (verbose){
         std::cout << "DETERMINETHRESH.C" << std::endl;
@@ -113,7 +113,7 @@ Float_t determineZeroBiasThresh( userInfo* parameters, const TString verbose )
         std::cout << algBName << " threshold: " << AlgBThresh << std::endl;
         std::cout << "target number events to keep: " << numberEventsToKeep << std::endl;
     }
-    
+
     //determine number of events kept at determined threshold (gives idea of error due to binning)
 	for (Int_t l = 0 ; l < passnoAlgNentries ; l++)
 	{
@@ -141,7 +141,7 @@ Float_t determineZeroBiasThresh( userInfo* parameters, const TString verbose )
         std::cout << "number of events " << algBName << " kept at threshold: " << numberEventsAlgBKept << std::endl;
     }
 
-    
+
     parameters->Set_AlgAIndividThresh( AlgAThresh );
     parameters->Set_AlgBIndividThresh( AlgBThresh );
 

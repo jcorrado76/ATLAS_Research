@@ -20,7 +20,7 @@ Float_t computeThresh(const TH1F* target, const Float_t numberEventsToKeep);
 
 
 //determine thresh to keep appropriate frac of process 1 events
-Float_t determineZeroBiasThresh( userInfo* parameters , const TString verbose = false );
+Float_t determineZeroBiasThresh( userInfo* parameters , const Bool_t verbose = false );
 
 
 //simply counts how many muon events passed algs at thresholds
