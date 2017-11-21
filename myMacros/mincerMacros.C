@@ -32,7 +32,6 @@ Float_t determineZeroBiasThresh( userInfo* parameters, const Bool_t verbose )
 {
     //this function determines thresh to keep proper trigger rate for process 2 on algs A and B
     //these thresholds are used on both passnoalg and muon data
-    std::cout << "Entering determinezerobiasthresh" << std::endl;
     parameters->Print();
     const Float_t metL1Thresh      = parameters->Get_MetL1Thresh();
     const Float_t actintCut        = parameters->Get_ActintCut();
@@ -91,7 +90,8 @@ Float_t determineZeroBiasThresh( userInfo* parameters, const Bool_t verbose )
 		threshTree->GetEntry(k);
         Bool_t passl1 = metl1 > metL1Thresh ;
         Bool_t passactint = actint > actintCut;
-        Bool_t isPassnoalg = passnoalgL1XE10 > passnoalgcut || passnoalgL1XE30 > passnoalgcut || passnoalgL1XE40 > passnoalgcut || passnoalgL1XE45 > passnoalgcut;
+        Bool_t isPassnoalg = passnoalgL1XE10 > passnoalgcut || passnoalgL1XE30 > passnoalgcut
+        || passnoalgL1XE40 > passnoalgcut || passnoalgL1XE45 > passnoalgcut;
         Bool_t isPassrndm = passrndm > passrndmcut;
 
 		if ( ( passl1 ) && ( passactint ) && ( /*isPassnoalg || */ isPassrndm ))
@@ -120,7 +120,8 @@ Float_t determineZeroBiasThresh( userInfo* parameters, const Bool_t verbose )
 		threshTree->GetEntry(l);
         Bool_t passl1 = metl1 > metL1Thresh ;
         Bool_t passactint = actint > actintCut;
-        Bool_t isPassnoalg = passnoalgL1XE10 > passnoalgcut || passnoalgL1XE30 > passnoalgcut || passnoalgL1XE40 > passnoalgcut || passnoalgL1XE45 > passnoalgcut;
+        Bool_t isPassnoalg = passnoalgL1XE10 > passnoalgcut || passnoalgL1XE30 > passnoalgcut ||
+        passnoalgL1XE40 > passnoalgcut || passnoalgL1XE45 > passnoalgcut;
         Bool_t isPassrndm = passrndm > passrndmcut;
 
 

@@ -96,7 +96,7 @@ TFile* threeEfficiencies( const TString& AlgAName , const TString& AlgBName )
     //IN DETERMINE THRESH I COMPUTE THRESHOLD AFTER ALSO CUTTING ON METL1 TO MAKE HISTOGRAMS
     Int_t numPassnoalgPassProcess1AlgA = 0;
 
-    Float_t returns = determineZeroBiasThresh( parameters , true);
+    Float_t returns = determineZeroBiasThresh( parameters );
 
     const Float_t AlgAIndividThresh = parameters->Get_IndividAlgAThresh();
     const Float_t AlgBIndividThresh = parameters->Get_IndividAlgBThresh();
