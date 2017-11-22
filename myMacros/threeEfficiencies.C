@@ -165,7 +165,7 @@ TFile* threeEfficiencies( const TString& AlgAName , const TString& AlgBName )
     Float_t muonActint = 0;
     myMuonTree->SetBranchAddress(AlgAName,&algAmuonMET);
     myMuonTree->SetBranchAddress(AlgBName,&algBmuonMET);
-    myMuonTree->SetBranchAddress("metl1",&muonMetl1);
+    //myMuonTree->SetBranchAddress("metl1",&muonMetl1);
     myMuonTree->SetBranchAddress("actint", &muonActint);
 
     std::cout << "Starting to fill TEfficiencies.." << std::endl;
@@ -180,7 +180,7 @@ TFile* threeEfficiencies( const TString& AlgAName , const TString& AlgBName )
         isMuon = (passmuvarmed > 0.1 || passmuon > 0.1);
         isClean = (cleanCutsFlag > 0.1) && (recalBrokeFlag < 0.1);
 
-        if ( isMuon && isClean && muonMetl1 > metl1thresh)
+        if ( isMuon && isClean /*&& muonMetl1 > metl1thresh*/)
         {
             NumMuonPassProcess1WithActintCut++;
         }
@@ -192,11 +192,11 @@ TFile* threeEfficiencies( const TString& AlgAName , const TString& AlgBName )
             {
         	    Float_t metnomu = computeMetNoMu(  mexoffrecal , meyoffrecal , mexoffrecalmuon , meyoffrecalmuon );
 
-                Ateff->Fill((algAmuonMET > AlgAIndividThresh ) && (muonMetl1 > metl1thresh) && ( muonActint > actintCut ), metnomu);
-        	    Bteff->Fill((algBmuonMET > AlgBIndividThresh ) && (muonMetl1 > metl1thresh)&& ( muonActint > actintCut ), metnomu);
+                Ateff->Fill((algAmuonMET > AlgAIndividThresh ) /*&& (muonMetl1 > metl1thresh)*/ && ( muonActint > actintCut ), metnomu);
+        	    Bteff->Fill((algBmuonMET > AlgBIndividThresh ) /*&& (muonMetl1 > metl1thresh)*/&& ( muonActint > actintCut ), metnomu);
         	    Cteff->Fill(((algAmuonMET > CombinedThreshAlgA) && (algBmuonMET > CombinedThreshAlgB)
-                && ( muonActint > actintCut )&& (muonMetl1 > metl1thresh)), metnomu);
-                Dteff->Fill((muonMetl1 >= metl1thresh) && ( muonActint > actintCut ), metnomu);
+                && ( muonActint > actintCut )/*&& (muonMetl1 > metl1thresh)*/), metnomu);
+                Dteff->Fill(/*(muonMetl1 >= metl1thresh) &&*/ ( muonActint > actintCut ), metnomu);
             }
     	}
     }
