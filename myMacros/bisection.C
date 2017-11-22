@@ -26,6 +26,10 @@ Float_t bisection( userInfo* parameters , TH1F* algAHist , TH1F* algBHist, TTree
     Float_t numKeepx2 = NumPassNoAlgPassedProcess1* initialGuess;
     Float_t numKeepx3 = NumPassNoAlgPassedProcess1* x3;
 
+
+    std::cout << "algAHist nentries: " << algAHist->GetEntries() << std::endl;
+    std::cout << "algBHist nentries: " << algBHist->GetEntries() << std::endl;
+
     //compute the cumulative right hand sum hists
     TH1F *algAMETtarget = (TH1F*) algAHist->GetCumulative(kFALSE);
     TH1F *algBMETtarget = (TH1F*) algBHist->GetCumulative(kFALSE);
@@ -69,8 +73,13 @@ Float_t bisection( userInfo* parameters , TH1F* algAHist , TH1F* algBHist, TTree
     algAMETx3thresh = computeThresh(algAMETtarget, numKeepx3);
     algBMETx3thresh = computeThresh(algBMETtarget, numKeepx3);
 
+    std::cout << "Passrndmcut: " << passrndmcut << std::endl;
     std::cout << "algAx1Thresh: " << algAMETx1thresh << std::endl;
     std::cout << "algBx1Thresh: " << algBMETx1thresh << std::endl;
+    std::cout << "algAx2Thresh: " << algAMETx2thresh << std::endl;
+    std::cout << "algBx2Thresh: " << algBMETx2thresh << std::endl;
+    std::cout << "algAx3Thresh: " << algAMETx3thresh << std::endl;
+    std::cout << "algBx3Thresh: " << algBMETx3thresh << std::endl;
     std::cout << "metl1thresh : " << metl1thresh << std::endl;
     Float_t algAMET,algBMET, metl1;
     Float_t passnoalg_actint = 0 ;
