@@ -10,7 +10,7 @@ Float_t bisection( userInfo* parameters , TH1F* algAHist , TH1F* algBHist, TTree
     Float_t passrndmcut = parameters->Get_Passrndmcut();
     const Int_t NumPassNoAlgPassedProcess1 = parameters->Get_NumThreshPassProcess1();
     const Float_t BinWidth = parameters->Get_BinWidth();
-    const Float_t passnoalgcut     = parameters->Get_Passnoalgcut(); 
+    const Float_t passnoalgcut     = parameters->Get_Passnoalgcut();
     Int_t target = NumPassNoAlgPassedProcess1 * frac;
 
     Float_t lwrbnd = 0.5 * frac;
@@ -103,11 +103,11 @@ Float_t bisection( userInfo* parameters , TH1F* algAHist , TH1F* algBHist, TTree
     for (Int_t i  = 0 ; i < passnoalgNentries ;i++) //determine events kept at each guess
     {
         passnoalgTree->GetEntry(i);
-        passedProcess1ActintCut = ( metl1 > metl1thresh ) && (passnoalg_actint > actintCut);
-        isPassnoalg = ( passnoalgL1XE10 >  passnoalgcut || passnoalgL1XE30 > passnoalgcut || passnoalgL1XE40 > passnoalgcut || passnoalgL1XE45 > passnoalgcut );
+        //passedProcess1ActintCut = ( metl1 > metl1thresh ) && (passnoalg_actint > actintCut);
+        //isPassnoalg = ( passnoalgL1XE10 >  passnoalgcut || passnoalgL1XE30 > passnoalgcut || passnoalgL1XE40 > passnoalgcut || passnoalgL1XE45 > passnoalgcut );
         Bool_t isRndm = passrndm > passrndmcut;
 
-        if ( (/*isPassnoalg || */isRndm )&& passedProcess1ActintCut )
+        if ( /*(isPassnoalg || */isRndm /*)&& passedProcess1ActintCut */)
         {
             if ((algAMET > algAMETx1thresh) && (algBMET > algBMETx1thresh))
             {
@@ -127,7 +127,7 @@ Float_t bisection( userInfo* parameters , TH1F* algAHist , TH1F* algBHist, TTree
     //compute fractions kept at initial guesses
     Process2FracX1WithActintCut = (Float_t) numPassedProcess2WithActintCutX1 / (Float_t) NumPassNoAlgPassedProcess1;
     Process2FracX2WithActintCut = (Float_t) numPassedProcess2WithActintCutX2 / (Float_t) NumPassNoAlgPassedProcess1;
-    Process2FracX3WithActintCut = (Float_t) numPassedProcess2WithActintCutX3 / (Float_t) NumPassNoAlgPassedProcess1; 
+    Process2FracX3WithActintCut = (Float_t) numPassedProcess2WithActintCutX3 / (Float_t) NumPassNoAlgPassedProcess1;
 
     std::cout << "At x1 = " << x1 << " numPassedProcess2WithActintCutX1: " << numPassedProcess2WithActintCutX1 << " events " << std::endl;
     std::cout << "Process2FracX1WithActintCut: " << Process2FracX1WithActintCut << std::endl;
@@ -197,9 +197,10 @@ Float_t bisection( userInfo* parameters , TH1F* algAHist , TH1F* algBHist, TTree
     	for (Int_t i  = 0 ; i < passnoalgNentries ;i++)
     	{
     	  passnoalgTree->GetEntry(i);
-          
-    	  if ((algAMET > algAMETx2thresh) && (algBMET > algBMETx2thresh) && (metl1 > metl1thresh)&& (passnoalg_actint > actintCut) &&
-          ( passrndm > passrndmcut /*|| passnoalgL1XE10 > passnoalgcut || passnoalgL1XE30 > passnoalgcut || passnoalgL1XE40 > passnoalgcut || passnoalgL1XE45 > passnoalgcut  */) )
+
+    	  if ((algAMET > algAMETx2thresh) && (algBMET > algBMETx2thresh) /*&& (metl1 > metl1thresh)&& (passnoalg_actint > actintCut)*/ &&
+          ( passrndm > passrndmcut /*|| passnoalgL1XE10 > passnoalgcut || passnoalgL1XE30 > passnoalgcut || passnoalgL1XE40 > passnoalgcut
+              || passnoalgL1XE45 > passnoalgcut  */) )
     	  {
     	    numPassedProcess2WithActintCutX2++;
     	  }
@@ -254,7 +255,7 @@ Float_t bisection( userInfo* parameters , TH1F* algAHist , TH1F* algBHist, TTree
     Int_t k = 0;
     while ( inputArray[k] )
     {
-        //write a setter that calls tntuple's fill method on the stuff 
+        //write a setter that calls tntuple's fill method on the stuff
         parameters->Fill_Bisection_Data(inputArray[k],outputArray[k],numEventsArray[k],thresholdAarray[k],thresholdBarray[k]);
         k++;
     }

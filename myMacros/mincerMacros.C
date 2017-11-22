@@ -118,14 +118,14 @@ Float_t determineZeroBiasThresh( userInfo* parameters, const Bool_t verbose )
 	for (Int_t l = 0 ; l < passnoAlgNentries ; l++)
 	{
 		threshTree->GetEntry(l);
-        Bool_t passl1 = metl1 > metL1Thresh ;
+        //Bool_t passl1 = metl1 > metL1Thresh ;
         Bool_t passactint = actint > actintCut;
         Bool_t isPassnoalg = passnoalgL1XE10 > passnoalgcut || passnoalgL1XE30 > passnoalgcut ||
         passnoalgL1XE40 > passnoalgcut || passnoalgL1XE45 > passnoalgcut;
         Bool_t isPassrndm = passrndm > passrndmcut;
 
 
-		if (( passl1 ) && ( passactint ) && ( /*isPassnoalg || */isPassrndm ) )
+		if (/*( passl1 ) && ( passactint ) && ( isPassnoalg || */isPassrndm /*)*/ )
 		{
             if (algAMET > AlgAThresh){
                 numberEventsAlgAKept++;
