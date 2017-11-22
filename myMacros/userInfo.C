@@ -62,12 +62,12 @@ userInfo::userInfo()
 void userInfo::Fill_Bisection_Data(const Float_t input , const Float_t output, const Int_t numEvents,
                                    const Float_t threshA, const Float_t threshB )
 {
-    M_BisectionData->Fill( input , output, numEvents, threshA, threshB ); 
+    M_BisectionData->Fill( input , output, numEvents, threshA, threshB );
 }
 
 
 void userInfo::Read_Parameter_File( const TString FilePath ) {
-    
+
     std::ifstream Parameter_File;
     Parameter_File.open(FilePath);
     if (!Parameter_File){
@@ -75,13 +75,13 @@ void userInfo::Read_Parameter_File( const TString FilePath ) {
     }
 
 
-    std::string header1, header2,header3,FIELD,threshfile,signalfile, nbins, epsilon, numeventskeep, metmin, 
-        metmax, metl1thresh, actintcut,passnoalg, frac;
+    std::string header1, header2,header3,FIELD,threshfile,signalfile, nbins, epsilon, numeventskeep, metmin,
+        metmax, metl1thresh, actintcut,passnoalg, frac,passrndm;
 
     getline(Parameter_File,header1);
     getline(Parameter_File,header2);
     getline(Parameter_File,header3);
-    
+
     getline(Parameter_File,FIELD);
     getline(Parameter_File,threshfile);
     getline(Parameter_File,FIELD);
@@ -104,7 +104,8 @@ void userInfo::Read_Parameter_File( const TString FilePath ) {
     getline(Parameter_File,numeventskeep);
     getline(Parameter_File,FIELD);
     getline(Parameter_File,passnoalg);
-
+    getline(Parameter_File,FIELD);
+    getline(Parameter_File,passrndm);
 
     M_ThreshFileName = threshfile;
     M_MuonFileName = signalfile;
@@ -117,6 +118,7 @@ void userInfo::Read_Parameter_File( const TString FilePath ) {
     M_Epsilon = atoi(epsilon.c_str());
     M_NumberEventsToKeep = atoi(numeventskeep.c_str());
     M_Passnoalgcut = atof(passnoalg.c_str());
+    M_Passrndmcut = atof(passrndm.c_str());
 
 
 
@@ -177,7 +179,7 @@ Int_t userInfo::Get_MuonNentries() const { return(M_MuonNentries);}
 Int_t userInfo::Get_ThreshNentries() const { return (M_PassnoAlgNentries) ; }
 Int_t userInfo::Get_NumberEventsToKeep() const { return (M_NumberEventsToKeep) ;}
 Float_t userInfo::Get_IndividAlgAThresh() const { return (M_AlgAIndividThresh);}
-Float_t userInfo::Get_IndividAlgBThresh() const { return (M_AlgBIndividThresh);} 
+Float_t userInfo::Get_IndividAlgBThresh() const { return (M_AlgBIndividThresh);}
 TString userInfo::Get_ThreshFileName() const { return (M_ThreshFileName);}
 TString userInfo::Get_MuonFileName() const { return(M_MuonFileName);}
 Int_t userInfo::Get_NumThreshPassProcess1() const { return (M_NumPassnoalgPassProcess1); }
@@ -210,12 +212,3 @@ void userInfo::Set_NumMuonKeptCombinedAtThresh( const Int_t num ) { M_NumMuonKep
 void userInfo::Set_NumTotal( const Int_t num ) { M_NumMuonDenominator = num; };
 void userInfo::Set_ActintCut( const Float_t thresh ) { M_ActintCut = thresh; };
 void userInfo::Set_Epsilon( const Int_t epson ) { M_Epsilon = epson; };
-
-
-
-
-
-
-
-
-
