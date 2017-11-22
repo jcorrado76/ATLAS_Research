@@ -139,6 +139,8 @@ void userInfo::Print(Option_t *option) const{
     std::cout << "PROCESS2 FRAC TO KEEP: " << M_Frac << std::endl;
     std::cout << "Thresh File: " << M_ThreshFileName << std::endl;
     std::cout << "Muon File: " << M_MuonFileName << std::endl;
+    std::cout << "Muon Nentries: " << M_MuonNentries << std::endl;
+    std::cout << "Passnoalg Nentries: " << M_PassnoAlgNentries << std::endl;
 
     std::cout << "Number of passnoalg events that passed process1: " << M_NumPassnoalgPassProcess1 << std::endl;
     std::cout << "Numb passnoalg passed process2 for alg A: " << M_NumPassnoalgProcess2AlgA << std::endl;
@@ -149,18 +151,13 @@ void userInfo::Print(Option_t *option) const{
     std::cout << "Individ Threshold needed on " + M_AlgAName + ": " << M_AlgAIndividThresh << std::endl;
     std::cout << "Individ Threshold needed on " + M_AlgBName + ": " << M_AlgBIndividThresh << std::endl;
 
-
-
-
-    
     std::cout << "Thresholds needed to keep the proper trigger rate when combined: " << std::endl;
     std::cout << "Combined Threshold needed on " + M_AlgAName + ": " << M_AlgACombinedThresh << std::endl;
     std::cout << "Combined Threshold needed on " + M_AlgBName + ": " << M_AlgBCombinedThresh << std::endl;
-    std::cout << "Muon Nentries: " << M_MuonNentries << std::endl;
-    std::cout << "Passnoalg Nentries: " << M_PassnoAlgNentries << std::endl;
-    std::cout << "Number of entries kept using combined thresholds: " <<  M_NumMuonKeptCombined << std::endl;
-    std::cout << "Numb passed process 2 for " + M_AlgAName + " separately: "
-    << M_NumMuonPassProcess2AlgA << std::endl;
+
+
+    std::cout << "Number muon events kept combined: " <<  M_NumMuonKeptCombined << std::endl;
+    std::cout << "NIndividPassProcess2AlgA: " << M_NumMuonPassProcess2AlgA << std::endl;
     std::cout << "Numb passed process 2 for " + M_AlgBName + " separately: "
     << M_NumMuonPassProcess2AlgB << std::endl;
     std::cout << "Numb passed process 2 Combined: "

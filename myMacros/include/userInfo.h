@@ -41,10 +41,10 @@ private:
     TString M_ZerobiasFileName;
     TString M_MuonFilename;
     Int_t M_NumPassnoalgPassProcess1;
-    Int_t M_NumMuonPassProcess1;
     Int_t M_NumPassnoalgProcess2AlgA;
     Int_t M_NumPassnoalgProcess2AlgB;
     Int_t M_NumPassnoalgProcess2AlgCombined;
+    Int_t M_NumMuonPassProcess1;
     Int_t M_NumMuonPassProcess2AlgA;
     Int_t M_NumMuonPassProcess2AlgB;
     Int_t M_NumMuonPassProcess2Combined;

@@ -22,7 +22,9 @@ Float_t computeThresh(const TH1F* target, const Float_t numberEventsToKeep)
 {
     Int_t nbin = 0;
     //target is a right hand cumulative sum histogram
-    target->GetBinWithContent( numberEventsToKeep , nbin , 5 , -1 , 20000 ); //if firstx<=0{firstx=1}; if lastx<firstx{lastx=fXaxis.GetNbinsX()};
+    target->GetBinWithContent( numberEventsToKeep , nbin , 5 , -1 , 5000 ); //if firstx<=0{firstx=1}; if lastx<firstx{lastx=fXaxis.GetNbinsX()};
+    std::cout << "bin corresponding to thresh: " << nbin << std::endl;
+    std::cout << "bincontent at thresh: " << target->GetBinContent(nbin) << std::endl;
     Float_t thresh = (target->GetXaxis())->GetBinCenter(nbin);
     return(thresh);
 }
