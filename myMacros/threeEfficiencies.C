@@ -50,7 +50,7 @@ TFile* threeEfficiencies( const TString& AlgAName , const TString& AlgBName )
     Int_t nbins = parameters->Get_Nbins();
     Double_t metMin = parameters->Get_MetMin();
     Double_t metMax = parameters->Get_MetMax();
-    Int_t NumbPassnoAlgPassProcess1WithActintCut = 0; Int_t counter1 = 0; Int_t counter2 = 0; Int_t counter3 = 0;
+    Int_t NumbRndmProcess1 = 0; Int_t counter1 = 0; Int_t counter2 = 0; Int_t counter3 = 0;
     Int_t passrndm, numPassMuon,passmuon,passmuvarmed,cleanCutsFlag,recalBrokeFlag;
     Float_t algAMET,algBMET,metoffrecal,mexoffrecal,meyoffrecal,mexoffrecalmuon, zb_actint,
             meyoffrecalmuon, metl1,metcell,metrefmuon,mexrefmuon,meyrefmuon,metoffrecalmuon;
@@ -107,7 +107,7 @@ TFile* threeEfficiencies( const TString& AlgAName , const TString& AlgBName )
     std::cout << "AlgBThresh: " << AlgBIndividThresh << std::endl;
     std::cout << "Using METL1THRESH: " << metl1thresh << std::endl;
 
-    NumbPassnoAlgPassProcess1WithActintCut = 0 ;
+    NumbRndmProcess1 = 0 ;
 	for (Int_t k = 0; k < zerobiasNentries; k++)
 	{
 	    zeroBiasTree->GetEntry(k);
@@ -121,9 +121,11 @@ TFile* threeEfficiencies( const TString& AlgAName , const TString& AlgBName )
         {
     		algAMETHist->Fill(algAMET);
     		algBMETHist->Fill(algBMET);
-            NumbPassnoAlgPassProcess1WithActintCut++;
+            NumbRndmProcess1++;
 	    }
 	}
+
+    parameters->Set_NumPassNoAlgPassProcess1(NumbRndmProcess1);
 
 
     //the individual fraction needed such that when both algs constrained to keep the same fraction individually,
@@ -231,7 +233,7 @@ TFile* threeEfficiencies( const TString& AlgAName , const TString& AlgBName )
     //compute number muon events actually kept using external macro
     Int_t muonEventsCombined = determineMuonEventsKeptCombined( AlgAName , CombinedThreshAlgA , AlgBName , CombinedThreshAlgB , muonFilename );
 
-    parameters->Set_NumPassNoAlgPassProcess1( NumbPassnoAlgPassProcess1WithActintCut );
+    parameters->Set_NumPassNoAlgPassProcess1( NumbRndmProcess1 );
     parameters->Set_NumMuonPassProcess1( NumMuonPassProcess1WithActintCut );
 
     Int_t NumberMuonEventsProcess2CombinedActintCut = (Cteff->GetPassedHistogram())->GetEntries() ;

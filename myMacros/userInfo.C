@@ -131,12 +131,15 @@ void userInfo::Print(Option_t *option) const{
     std::cout << "ALGA: " << M_AlgAName << std::endl;
     std::cout << "ALGB: " << M_AlgBName << std::endl;
     std::cout << "NBINS: " << M_Nbins << std::endl;
+    std::cout << "BINWIDTH: " << M_BinWidth << std::endl;
     std::cout << "METMIN: " << M_Metmin << std::endl;
     std::cout << "METMAX: " << M_Metmax << std::endl;
-    std::cout << "L1 THRESH: " << M_Metl1thresh << std::endl;
-    std::cout << "TARGET FRAC: " << M_Frac << std::endl;
+    std::cout << "PROCESS 1 L1 THRESH: " << M_Metl1thresh << std::endl;
+    std::cout << "Actint cut: " << M_ActintCut << std::endl;
+    std::cout << "PROCESS2 FRAC TO KEEP: " << M_Frac << std::endl;
     std::cout << "Thresh File: " << M_ThreshFileName << std::endl;
     std::cout << "Muon File: " << M_MuonFileName << std::endl;
+
     std::cout << "Number of passnoalg events that passed process1: " << M_NumPassnoalgPassProcess1 << std::endl;
     std::cout << "Numb passnoalg passed process2 for alg A: " << M_NumPassnoalgProcess2AlgA << std::endl;
     std::cout << "Numb passnoalg passed process2 for alg B: " << M_NumPassnoalgProcess2AlgB << std::endl;
@@ -145,6 +148,11 @@ void userInfo::Print(Option_t *option) const{
     std::cout << "Thresholds needed to keep trigger rate individually: " << std::endl;
     std::cout << "Individ Threshold needed on " + M_AlgAName + ": " << M_AlgAIndividThresh << std::endl;
     std::cout << "Individ Threshold needed on " + M_AlgBName + ": " << M_AlgBIndividThresh << std::endl;
+
+
+
+
+    
     std::cout << "Thresholds needed to keep the proper trigger rate when combined: " << std::endl;
     std::cout << "Combined Threshold needed on " + M_AlgAName + ": " << M_AlgACombinedThresh << std::endl;
     std::cout << "Combined Threshold needed on " + M_AlgBName + ": " << M_AlgBCombinedThresh << std::endl;
@@ -159,7 +167,7 @@ void userInfo::Print(Option_t *option) const{
     << M_NumMuonPassProcess2Combined << std::endl;
     std::cout << "Nentries Efficiency Denominator: " << M_NumMuonDenominator << std::endl;
     std::cout << "Epsilon tolerance on number events used for bisection: " << M_Epsilon << std::endl;
-    std::cout << "Actint cut: " << M_ActintCut << "\n" << std::endl;
+
 
 }
 

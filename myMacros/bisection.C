@@ -13,9 +13,12 @@ Float_t bisection( userInfo* parameters , TH1F* algAHist , TH1F* algBHist, TTree
     const Float_t passnoalgcut     = parameters->Get_Passnoalgcut();
     Int_t target = NumPassNoAlgPassedProcess1 * frac;
 
+    std::cout << "NumPassNoAlgPassedProcess1: " << NumPassNoAlgPassedProcess1 << std::endl;
+    std::cout << "algAHist nentries: " << algAHist->GetEntries() << std::endl;
+    std::cout << "algBHist nentries: " << algBHist->GetEntries() << std::endl;
+
     Float_t lwrbnd = 0.5 * frac;
     Float_t uprbnd = 0.13;
-
     Float_t x1,x3; //thresholds of individual algorithms
     Float_t Process2FracX1WithActintCut,Process2FracX2WithActintCut,Process2FracX3WithActintCut = 0; //fractions of events kept out of passrndm
     x1 = lwrbnd;
@@ -25,10 +28,6 @@ Float_t bisection( userInfo* parameters , TH1F* algAHist , TH1F* algBHist, TTree
     Float_t numKeepx1 = NumPassNoAlgPassedProcess1* x1;
     Float_t numKeepx2 = NumPassNoAlgPassedProcess1* initialGuess;
     Float_t numKeepx3 = NumPassNoAlgPassedProcess1* x3;
-
-
-    std::cout << "algAHist nentries: " << algAHist->GetEntries() << std::endl;
-    std::cout << "algBHist nentries: " << algBHist->GetEntries() << std::endl;
 
     //compute the cumulative right hand sum hists
     TH1F *algAMETtarget = (TH1F*) algAHist->GetCumulative(kFALSE);
@@ -64,6 +63,9 @@ Float_t bisection( userInfo* parameters , TH1F* algAHist , TH1F* algBHist, TTree
     algAMETtarget->SetName(algAMETtarget->GetName() + (const TString)"A");
     algBMETtarget->SetName(algBMETtarget->GetName() + (const TString)"B");
 
+    std::cout << "numKeepx1: " << numKeepx1 << std::endl;
+    std::cout << "numKeepx2: " << numKeepx2 << std::endl;
+    std::cout << "numKeepx3: " << numKeepx3 << std::endl;
 
     //compute initial thresholds at each of the extrema and first guess
     algAMETx1thresh = computeThresh(algAMETtarget, numKeepx1);
