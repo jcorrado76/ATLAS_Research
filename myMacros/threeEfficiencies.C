@@ -117,7 +117,7 @@ TFile* threeEfficiencies( const TString& AlgAName , const TString& AlgBName )
         passnoalgL1XE40 > passnoalgcut || passnoalgL1XE45 > passnoalgcut;
         Bool_t isPassrndm = passrndm > passrndmcut;
 
-	    if ( ( isL1 ) && ( isactint ) && (/*isPassnoalg || */isPassrndm))
+	    if ( /*( isL1 ) && ( isactint ) && (/*isPassnoalg || */isPassrndm/*)*/)
         {
     		algAMETHist->Fill(algAMET);
     		algBMETHist->Fill(algBMET);
