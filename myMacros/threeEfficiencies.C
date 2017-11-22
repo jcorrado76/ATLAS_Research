@@ -135,7 +135,7 @@ TFile* threeEfficiencies( const TString& AlgAName , const TString& AlgBName )
     threeEfficienciesBenchmark->Start("Bisection");
 
     //run BISECTION
-    bisection( parameters , algAMETHist, algBMETHist , zeroBiasTree );
+    Float_t number = bisection( parameters , algAMETHist, algBMETHist , zeroBiasTree );
 
     const Float_t CombinedThreshAlgA = parameters->Get_CombinedAlgAThresh();
     const Float_t CombinedThreshAlgB = parameters->Get_CombinedAlgBThresh();
