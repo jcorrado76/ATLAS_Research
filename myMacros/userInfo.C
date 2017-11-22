@@ -145,7 +145,7 @@ void userInfo::Print(Option_t *option) const{
     std::cout << "Thresholds needed to keep trigger rate individually: " << std::endl;
     std::cout << "Individ Threshold needed on " + M_AlgAName + ": " << M_AlgAIndividThresh << std::endl;
     std::cout << "Individ Threshold needed on " + M_AlgBName + ": " << M_AlgBIndividThresh << std::endl;
-    std::cout << "\nThresholds needed to keep the proper trigger rate when combined: " << std::endl;
+    std::cout << "Thresholds needed to keep the proper trigger rate when combined: " << std::endl;
     std::cout << "Combined Threshold needed on " + M_AlgAName + ": " << M_AlgACombinedThresh << std::endl;
     std::cout << "Combined Threshold needed on " + M_AlgBName + ": " << M_AlgBCombinedThresh << std::endl;
     std::cout << "Muon Nentries: " << M_MuonNentries << std::endl;
