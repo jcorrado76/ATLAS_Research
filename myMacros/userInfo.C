@@ -156,12 +156,13 @@ void userInfo::Print(Option_t *option) const{
     std::cout << "Combined Threshold needed on " + M_AlgBName + ": " << M_AlgBCombinedThresh << std::endl;
 
 
-    std::cout << "Number muon events kept combined: " <<  M_NumMuonKeptCombined << std::endl;
+
     std::cout << "NIndividPassProcess2AlgA: " << M_NumMuonPassProcess2AlgA << std::endl;
-    std::cout << "Numb passed process 2 for " + M_AlgBName + " separately: "
-    << M_NumMuonPassProcess2AlgB << std::endl;
+    std::cout << "NIndividPassProcess2AlgB: " << M_NumMuonPassProcess2AlgB << std::endl;
     std::cout << "Numb passed process 2 Combined: "
     << M_NumMuonPassProcess2Combined << std::endl;
+    std::cout << "Number muon events kept combined, as computed by external macro: " 
+    <<  M_NumMuonKeptCombined << std::endl;
     std::cout << "Nentries Efficiency Denominator: " << M_NumMuonDenominator << std::endl;
     std::cout << "Epsilon tolerance on number events used for bisection: " << M_Epsilon << std::endl;
 

@@ -32,12 +32,29 @@ Float_t bisection( userInfo* parameters , TH1F* algAHist , TH1F* algBHist, TTree
     //compute the cumulative right hand sum hists
     TH1F *algAMETtarget = (TH1F*) algAHist->GetCumulative(kFALSE);
     TH1F *algBMETtarget = (TH1F*) algBHist->GetCumulative(kFALSE);
+
+    TCanvas* c1 = new TCanvas();
+    algAHist->Draw();
+    algBHist->Draw("SAME");
+    c1->Draw();
+
+    TCanvas* c2 = new TCanvas();
+    algAMETtarget->Draw();
+    algBMETtarget->Draw("SAME");
+    c2->Draw();
+
+
+
     //rename for clarity later on
     algAMETtarget->SetName(algAMETtarget->GetName() + (const TString)"A");
     algBMETtarget->SetName(algBMETtarget->GetName() + (const TString)"B");
 
     //compute thresholds at boundaris to use
     Float_t algAMETx1thresh,algAMETx2thresh,algAMETx3thresh,algBMETx1thresh,algBMETx2thresh, algBMETx3thresh;
+
+    std::cout << "NumKeepx1: " << numKeepx1 << std::endl;
+    std::cout << "NumKeepx2: " << numKeepx2 << std::endl;
+    std::cout << "NumKeepx3: " << numKeepx3 << std::endl;
 
     algAMETx1thresh = computeThresh(algAMETtarget, numKeepx1);
     algBMETx1thresh = computeThresh(algBMETtarget, numKeepx1);
