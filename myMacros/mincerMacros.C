@@ -77,6 +77,7 @@ Float_t determineZeroBiasThresh( userInfo* parameters, const Bool_t verbose )
     //set branch address for zerobias branches
 	threshTree->SetBranchAddress(algAName,&algAMET);
 	threshTree->SetBranchAddress(algBName,&algBMET);
+    
 	//threshTree->SetBranchAddress("metl1",&metl1);
     /*
     threshTree->SetBranchAddress("passnoalgL1XE10",&passnoalgL1XE10);
@@ -84,6 +85,7 @@ Float_t determineZeroBiasThresh( userInfo* parameters, const Bool_t verbose )
     threshTree->SetBranchAddress("passnoalgL1XE40",&passnoalgL1XE40);
     threshTree->SetBranchAddress("passnoalgL1XE45",&passnoalgL1XE45);
     */
+
     threshTree->SetBranchAddress("actint",&actint);
     threshTree->SetBranchAddress("passrndm",&passrndm);
 
@@ -96,13 +98,19 @@ Float_t determineZeroBiasThresh( userInfo* parameters, const Bool_t verbose )
         || passnoalgL1XE40 > passnoalgcut || passnoalgL1XE45 > passnoalgcut;
         Bool_t isPassrndm = passrndm > passrndmcut;
 
-		if ( /*( passl1 ) && ( passactint ) && ( isPassnoalg || */ isPassrndm /*)*/)
+		if (/* ( passl1 ) && ( passactint ) && ( isPassnoalg || */ isPassrndm/* )*/)
 		{
 		    AlgAHist->Fill(algAMET);
 		    AlgBHist->Fill(algBMET);
 		}
     }
 
+/*
+    ZBKFThresh* FillHists;
+    
+    FillHists->Begin(threshTree,parameters); 
+*/
+    
     //compute the threshold to keep appropriate fraction
     TH1F *AlgAtarget = (TH1F*) AlgAHist->GetCumulative(kFALSE);
     TH1F *AlgBtarget = (TH1F*) AlgBHist->GetCumulative(kFALSE);

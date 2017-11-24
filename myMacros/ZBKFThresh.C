@@ -29,12 +29,20 @@
 #include <TH2.h>
 #include <TStyle.h>
 
-void ZBKFThresh::Begin(TTree * /*tree*/, userInfo* M_Parameters)
+void ZBKFThresh::Begin(TTree * /*tree*/, userInfo* parameters)
 {
    // The Begin() function is called at the start of the query.
    // When running with PROOF Begin() is only called on the client.
    // The tree argument is deprecated (on PROOF 0 is passed).
    TString option = GetOption();
+
+   // Readers to access the data (delete the ones you do not need).
+  M_Parameters = parameters; 
+   Passrndm = {fReader, "passrndm"};
+   AlgAMET = {fReader, M_Parameters->Get_AlgAName()};
+   AlgBMET = {fReader, M_Parameters->Get_AlgBName()};
+   AlgAThresh = M_Parameters->Get_IndividAlgAThresh();
+   AlgBThresh = M_Parameters->Get_IndividAlgBThresh();
 }
 
 void ZBKFThresh::SlaveBegin(TTree * /*tree*/)
@@ -75,10 +83,10 @@ Bool_t ZBKFThresh::Process(Long64_t entry)
 
    fReader.SetEntry(entry);
     
-   if (*(passrndm.Get()) > 0.5){
-       AlgAHist->Fill();
-       AlgBHist->Fill();
-
+   if (*(Passrndm.Get()) > 0.5){
+       AlgAHist->Fill(*(AlgAMET.Get()) > AlgAThresh);
+       AlgBHist->Fill(*(AlgBMET.Get()) > AlgBThresh);
+   }
 
 
 

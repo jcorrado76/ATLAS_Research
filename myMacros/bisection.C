@@ -33,17 +33,6 @@ Float_t bisection( userInfo* parameters , TH1F* algAHist , TH1F* algBHist, TTree
     TH1F *algAMETtarget = (TH1F*) algAHist->GetCumulative(kFALSE);
     TH1F *algBMETtarget = (TH1F*) algBHist->GetCumulative(kFALSE);
 
-    TCanvas* c1 = new TCanvas();
-    algAHist->Draw();
-    algBHist->Draw("SAME");
-    c1->Draw();
-
-    TCanvas* c2 = new TCanvas();
-    algAMETtarget->Draw();
-    algBMETtarget->Draw("SAME");
-    c2->Draw();
-
-
 
     //rename for clarity later on
     algAMETtarget->SetName(algAMETtarget->GetName() + (const TString)"A");

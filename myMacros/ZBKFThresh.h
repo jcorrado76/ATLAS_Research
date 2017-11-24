@@ -26,13 +26,12 @@ public :
     userInfo*       M_Parameters = 0; //PARAMETERS OBJECT
     TH1* AlgAHist = 0;
     TH1* AlgBHist = 0;
-
-   // Readers to access the data (delete the ones you do not need).
-   TTreeReaderValue<Float_t> Passrndm = {fReader, "passrndm"};
-   TTreeReaderValue<Float_t> AlgAMET= {fReader, };
-   TTreeReaderValue<Float_t> AlgBMET = {fReader, "avint"};
    
-
+   TTreeReaderValue<Float_t> Passrndm;
+   TTreeReaderValue<Float_t> AlgAMET;
+   TTreeReaderValue<Float_t> AlgBMET;
+    Float_t AlgAThresh;
+    Float_t AlgBThresh;
 
    ZBKFThresh(TTree * /*tree*/ =0, userInfo* parameters ) { }
    virtual ~ZBKFThresh() { }
