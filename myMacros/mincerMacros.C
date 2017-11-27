@@ -21,8 +21,27 @@ Bool_t passTransverseMassCut( const Float_t metoffrecal , const Float_t mexoffre
 Float_t computeThresh(const TH1F* target, const Float_t numberEventsToKeep)
 {
     Int_t nbin = 0;
-    //target is a right hand cumulative sum histogram
-    target->GetBinWithContent( numberEventsToKeep , nbin , 5 , -1 , 5000 ); //if firstx<=0{firstx=1}; if lastx<firstx{lastx=fXaxis.GetNbinsX()};
+    /*
+    Double_t GetBinWithContent(Double_t c, Int_t binx, Int_t firstx = 0, Int_t lastx = 0, Double_t
+    maxdiff = 0) const
+    
+    target is a right hand cumulative sum histogram
+    
+    compute first binx in the range [firstx,lastx] for which
+     diff = abs(bin_content-c) <= maxdiff
+     In case several bins in the specified range with diff=0 are found
+     the first bin found is returned in binx.
+     In case several bins in the specified range satisfy diff <=maxdiff
+     the bin with the smallest difference is returned in binx.
+     In all cases the function returns the smallest difference.
+
+     NOTE1: if firstx <= 0, firstx is set to bin 1
+            if (lastx < firstx then firstx is set to the number of bins
+            ie if firstx=0 and lastx=0 (default) the search is on all bins.
+     NOTE2: if maxdiff=0 (default), the first bin with content=c is returned.
+ */
+    Int_t numberOfBins = target->GetNbinsX();
+    target->GetBinWithContent( numberEventsToKeep , nbin , 5 , numberOfBins , 500 ); 
     std::cout << "bin corresponding to thresh: " << nbin << std::endl;
     std::cout << "bincontent at thresh: " << target->GetBinContent(nbin) << std::endl;
     Float_t thresh = (target->GetXaxis())->GetBinCenter(nbin);
