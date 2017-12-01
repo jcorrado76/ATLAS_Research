@@ -43,7 +43,10 @@ Float_t computeThresh(const TH1F* target, const Float_t numberEventsToKeep)
     Int_t numberOfBins = target->GetNbinsX();
     std::cout << target->GetName() << " : " << target->GetEntries() << std::endl;
     std::cout << "Lastx for computeThresh: " << numberOfBins << std::endl;
-    target->GetBinWithContent( numberEventsToKeep , nbin , 5 , numberOfBins , 500 ); 
+    //THE PROBLEM WHERE RETURNED ZERO BIN WAS SOLVED BY LETTING TOLERANCE BE SOME LARGE NUMBER
+    //THERE WAS NO BIN WHOSE VALUE WAS WITHIN THE PREVIOUS TOLERANCE OF THE numberEventsToKeep, SO
+    //RETURNED ZERO
+    target->GetBinWithContent( numberEventsToKeep , nbin , 5 , numberOfBins , 2000000 ); 
     std::cout << "bin corresponding to thresh: " << nbin << std::endl;
     std::cout << "bincontent at thresh: " << target->GetBinContent(nbin) << std::endl;
     Float_t thresh = (target->GetXaxis())->GetBinCenter(nbin);
