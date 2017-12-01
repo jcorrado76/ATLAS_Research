@@ -41,6 +41,8 @@ Float_t computeThresh(const TH1F* target, const Float_t numberEventsToKeep)
      NOTE2: if maxdiff=0 (default), the first bin with content=c is returned.
  */
     Int_t numberOfBins = target->GetNbinsX();
+    std::cout << target->GetName() << " : " << target->GetEntries() << std::endl;
+    std::cout << "Lastx for computeThresh: " << numberOfBins << std::endl;
     target->GetBinWithContent( numberEventsToKeep , nbin , 5 , numberOfBins , 500 ); 
     std::cout << "bin corresponding to thresh: " << nbin << std::endl;
     std::cout << "bincontent at thresh: " << target->GetBinContent(nbin) << std::endl;

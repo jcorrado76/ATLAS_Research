@@ -4,8 +4,14 @@
 !_TAG_PROGRAM_NAME	Exuberant Ctags	//
 !_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
 !_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+AlgAHist	include/ZBKFThresh.h	/^    TH1* AlgAHist = 0;$/;"	m	class:ZBKFThresh
+AlgAMET	include/ZBKFThresh.h	/^   TTreeReaderValue<Float_t> AlgAMET;$/;"	m	class:ZBKFThresh
+AlgAThresh	include/ZBKFThresh.h	/^    Float_t AlgAThresh;$/;"	m	class:ZBKFThresh
+AlgBHist	include/ZBKFThresh.h	/^    TH1* AlgBHist = 0;$/;"	m	class:ZBKFThresh
+AlgBMET	include/ZBKFThresh.h	/^   TTreeReaderValue<Float_t> AlgBMET;$/;"	m	class:ZBKFThresh
+AlgBThresh	include/ZBKFThresh.h	/^    Float_t AlgBThresh;$/;"	m	class:ZBKFThresh
 BUILTIN	include/TreeHandler.h	/^        enum value_type { CLASS, BUILTIN, NOT_SET, static_size };$/;"	e	enum:TTreeReaderSpace::BranchType::value_type
-Begin	ZBKFThresh.C	/^void ZBKFThresh::Begin(TTree * \/*tree*\/)$/;"	f	class:ZBKFThresh
+Begin	ZBKFThresh.C	/^void ZBKFThresh::Begin(TTree * \/*tree*\/, userInfo* parameters)$/;"	f	class:ZBKFThresh
 BranchHandle	include/TreeHandler.h	/^    class BranchHandle$/;"	c	namespace:TTreeReaderSpace
 BranchType	include/TreeHandler.h	/^    struct BranchType$/;"	s	namespace:TTreeReaderSpace
 CLASS	include/TreeHandler.h	/^        enum value_type { CLASS, BUILTIN, NOT_SET, static_size };$/;"	e	enum:TTreeReaderSpace::BranchType::value_type
@@ -16,10 +22,10 @@ Fill_Bisection_Data	userInfo.C	/^void userInfo::Fill_Bisection_Data(const Float_
 Frac	userInfo.C	/^Float_t Frac = 0.0059;$/;"	v
 Get	include/TreeHandler.h	/^    const T& Handle<T>::Get()$/;"	f	class:TTreeReaderSpace::Handle
 GetEntry	TreeHandler.C	/^void TTreeReader::GetEntry(const unsigned int entry)$/;"	f	class:TTreeReader
-GetEntry	ZBKFThresh.h	/^   virtual Int_t   GetEntry(Long64_t entry, Int_t getall = 0) { return fChain ? fChain->GetTree()->GetEntry(entry, getall) : 0; }$/;"	f	class:ZBKFThresh
 GetEntry	include/TreeHandler.h	/^    void Handle<T>::GetEntry(const unsigned int entry)$/;"	f	class:TTreeReaderSpace::Handle
+GetEntry	include/ZBKFThresh.h	/^   virtual Int_t   GetEntry(Long64_t entry, Int_t getall = 0) { return fChain ? fChain->GetTree()->GetEntry(entry, getall) : 0; }$/;"	f	class:ZBKFThresh
 GetIsLoaded	include/TreeHandler.h	/^    void Handle<T>::GetIsLoaded() const$/;"	f	class:TTreeReaderSpace::Handle
-GetOutputList	ZBKFThresh.h	/^   virtual TList  *GetOutputList() const { return fOutput; }$/;"	f	class:ZBKFThresh
+GetOutputList	include/ZBKFThresh.h	/^   virtual TList  *GetOutputList() const { return fOutput; }$/;"	f	class:ZBKFThresh
 Get_ActintCut	userInfo.C	/^Float_t userInfo::Get_ActintCut() const { return( M_ActintCut);}$/;"	f	class:userInfo
 Get_AlgAName	userInfo.C	/^TString userInfo::Get_AlgAName() const { return (M_AlgAName);}$/;"	f	class:userInfo
 Get_AlgBName	userInfo.C	/^TString userInfo::Get_AlgBName() const { return (M_AlgBName);}$/;"	f	class:userInfo
@@ -69,8 +75,8 @@ Handle	include/TreeHandler.h	/^            Handle() {}$/;"	f	class:TTreeReaderSp
 Handle	include/TreeHandler.h	/^    Handle<T>::Handle(const std::string& branch_name)$/;"	f	class:TTreeReaderSpace::Handle
 Init	TreeHandler.C	/^void TTreeReader::Init(TTree& tree)$/;"	f	class:TTreeReader
 Init	TreeHandler.C	/^void TTreeReader::Init(TTree* const tree)$/;"	f	class:TTreeReader
-Init	ZBKFThresh.h	/^void ZBKFThresh::Init(TTree *tree)$/;"	f	class:ZBKFThresh
 Init	include/TreeHandler.h	/^    void Handle<T>::Init(TTree& tree)$/;"	f	class:TTreeReaderSpace::Handle
+Init	include/ZBKFThresh.h	/^void ZBKFThresh::Init(TTree *tree)$/;"	f	class:ZBKFThresh
 Load	include/TreeHandler.h	/^    void Handle<T>::Load()$/;"	f	class:TTreeReaderSpace::Handle
 LoadAllBranches	TreeHandler.C	/^void TTreeReader::LoadAllBranches()$/;"	f	class:TTreeReader
 MINCERMACROS_H	include/mincerMacros.h	2;"	d
@@ -104,6 +110,7 @@ M_NumPassnoalgProcess2AlgA	include/userInfo.h	/^    Int_t M_NumPassnoalgProcess2
 M_NumPassnoalgProcess2AlgB	include/userInfo.h	/^    Int_t M_NumPassnoalgProcess2AlgB;$/;"	m	class:userInfo
 M_NumPassnoalgProcess2AlgCombined	include/userInfo.h	/^    Int_t M_NumPassnoalgProcess2AlgCombined;$/;"	m	class:userInfo
 M_NumberEventsToKeep	include/userInfo.h	/^    Int_t M_NumberEventsToKeep;$/;"	m	class:userInfo
+M_Parameters	include/ZBKFThresh.h	/^    userInfo*       M_Parameters = 0; \/\/PARAMETERS OBJECT$/;"	m	class:ZBKFThresh
 M_PassnoAlgNentries	include/userInfo.h	/^    Int_t M_PassnoAlgNentries;$/;"	m	class:userInfo
 M_Passnoalgcut	include/userInfo.h	/^    Float_t M_Passnoalgcut;$/;"	m	class:userInfo
 M_Passrndmcut	include/userInfo.h	/^    Float_t M_Passrndmcut;$/;"	m	class:userInfo
@@ -111,14 +118,15 @@ M_ThreshFileName	include/userInfo.h	/^    TString M_ThreshFileName;$/;"	m	class:
 M_ZerobiasFileName	include/userInfo.h	/^    TString M_ZerobiasFileName;$/;"	m	class:userInfo
 NOT_SET	include/TreeHandler.h	/^        enum value_type { CLASS, BUILTIN, NOT_SET, static_size };$/;"	e	enum:TTreeReaderSpace::BranchType::value_type
 Nbins	userInfo.C	/^Int_t Nbins = 1200;$/;"	v
-Notify	ZBKFThresh.h	/^Bool_t ZBKFThresh::Notify()$/;"	f	class:ZBKFThresh
+Notify	include/ZBKFThresh.h	/^Bool_t ZBKFThresh::Notify()$/;"	f	class:ZBKFThresh
+Passrndm	include/ZBKFThresh.h	/^   TTreeReaderValue<Float_t> Passrndm;$/;"	m	class:ZBKFThresh
 Print	userInfo.C	/^void userInfo::Print(Option_t *option) const{$/;"	f	class:userInfo
 Process	ZBKFThresh.C	/^Bool_t ZBKFThresh::Process(Long64_t entry)$/;"	f	class:ZBKFThresh
 Read_Parameter_File	userInfo.C	/^void userInfo::Read_Parameter_File( const TString FilePath ) {$/;"	f	class:userInfo
 SetBranchType	include/TreeHandler.h	/^    void Handle<T>::SetBranchType(const std::string& branch_class)$/;"	f	class:TTreeReaderSpace::Handle
-SetInputList	ZBKFThresh.h	/^   virtual void    SetInputList(TList *input) { fInput = input; }$/;"	f	class:ZBKFThresh
-SetObject	ZBKFThresh.h	/^   virtual void    SetObject(TObject *obj) { fObject = obj; }$/;"	f	class:ZBKFThresh
-SetOption	ZBKFThresh.h	/^   virtual void    SetOption(const char *option) { fOption = option; }$/;"	f	class:ZBKFThresh
+SetInputList	include/ZBKFThresh.h	/^   virtual void    SetInputList(TList *input) { fInput = input; }$/;"	f	class:ZBKFThresh
+SetObject	include/ZBKFThresh.h	/^   virtual void    SetObject(TObject *obj) { fObject = obj; }$/;"	f	class:ZBKFThresh
+SetOption	include/ZBKFThresh.h	/^   virtual void    SetOption(const char *option) { fOption = option; }$/;"	f	class:ZBKFThresh
 Set_ActintCut	userInfo.C	/^void userInfo::Set_ActintCut( const Float_t thresh ) { M_ActintCut = thresh; };$/;"	f	class:userInfo
 Set_AlgACombinedThresh	userInfo.C	/^void userInfo::Set_AlgACombinedThresh( const Float_t thresh ) { M_AlgACombinedThresh = thresh; };$/;"	f	class:userInfo
 Set_AlgAIndividThresh	userInfo.C	/^void userInfo::Set_AlgAIndividThresh( const Float_t thresh ) { M_AlgAIndividThresh = thresh; };$/;"	f	class:userInfo
@@ -151,20 +159,17 @@ ThreeEfficiencies_Analysis	threeEfficiencies_Obj.C	/^class ThreeEfficiencies_Ana
 TreeHandler	TreeHandler.C	/^TreeHandler::TreeHandler(const userInfo* parameters )$/;"	f	class:TreeHandler
 TreeHandler	include/TreeHandler.h	/^class TreeHandler$/;"	c
 TreeHandler_Obj	TreeHandler.C	/^TreeHandler TreeHandler_Obj;$/;"	v
-Version	ZBKFThresh.h	/^   virtual Int_t   Version() const { return 2; }$/;"	f	class:ZBKFThresh
-ZBKFThresh	ZBKFThresh.h	/^   ZBKFThresh(TTree * \/*tree*\/ =0) { }$/;"	f	class:ZBKFThresh
-ZBKFThresh	ZBKFThresh.h	/^class ZBKFThresh : public TSelector {$/;"	c
+Version	include/ZBKFThresh.h	/^   virtual Int_t   Version() const { return 2; }$/;"	f	class:ZBKFThresh
+ZBKFThresh	include/ZBKFThresh.h	/^   ZBKFThresh(TTree * \/*tree*\/ =0, userInfo* parameters ) { }$/;"	f	class:ZBKFThresh
+ZBKFThresh	include/ZBKFThresh.h	/^class ZBKFThresh : public TSelector {$/;"	c
 ZBKFThresh_cxx	ZBKFThresh.C	1;"	d	file:
-ZBKFThresh_h	ZBKFThresh.h	9;"	d
+ZBKFThresh_h	include/ZBKFThresh.h	9;"	d
 actinTCut	userInfo.C	/^Float_t actinTCut = 0.0;$/;"	v
-actint	ZBKFThresh.h	/^   TTreeReaderValue<Float_t> actint = {fReader, "actint"};$/;"	m	class:ZBKFThresh
 actint_handle	include/TreeHandler.h	/^        TTreeReaderSpace ::Handle< Float_t      > actint_handle;$/;"	m	class:TreeHandler
 algA	TreeHandler.C	/^const Float_t& TreeHandler::algA(){return algA_handle.get();};$/;"	f	class:TreeHandler
 algA_handle	include/TreeHandler.h	/^        TTreeReaderSpace ::Handle< Float_t      > algA_handle;$/;"	m	class:TreeHandler
 algB	TreeHandler.C	/^const Float_t& TreeHandler::algB(){return algB_handle.get();};$/;"	f	class:TreeHandler
 algB_handle	include/TreeHandler.h	/^        TTreeReaderSpace ::Handle< Float_t      > algB_handle;$/;"	m	class:TreeHandler
-avint	ZBKFThresh.h	/^   TTreeReaderValue<Float_t> avint = {fReader, "avint"};$/;"	m	class:ZBKFThresh
-bcid	ZBKFThresh.h	/^   TTreeReaderValue<Int_t> bcid = {fReader, "bcid"};$/;"	m	class:ZBKFThresh
 bisection	bisection.C	/^Float_t bisection( userInfo* parameters , TH1F* algAHist , TH1F* algBHist, TTree* passnoalgTree )$/;"	f
 clean	compile.C	/^void clean()$/;"	f
 cleanCutsFlag	TreeHandler.C	/^const Float_t& TreeHandler::cleanCutsFlag(){return cleanCutsFlag_handle.get();};$/;"	f	class:TreeHandler
@@ -178,9 +183,8 @@ epson	userInfo.C	/^Int_t epson = 25;$/;"	v
 event	TreeHandler.C	/^    const unsigned int& event() {return TreeHandler_Obj.event();}$/;"	f	namespace:TTreeReaderSpace
 event	TreeHandler.C	/^const unsigned int& TreeHandler::event() {return event_handle.get();}$/;"	f	class:TreeHandler
 event_handle	include/TreeHandler.h	/^        TTreeReaderSpace ::Handle< unsigned int > event_handle;$/;"	m	class:TreeHandler
-eventnum	ZBKFThresh.h	/^   TTreeReaderValue<Int_t> eventnum = {fReader, "eventnum"};$/;"	m	class:ZBKFThresh
-fChain	ZBKFThresh.h	/^   TTree          *fChain = 0;   \/\/!pointer to the analyzed TTree or TChain$/;"	m	class:ZBKFThresh
-fReader	ZBKFThresh.h	/^   TTreeReader     fReader;  \/\/!the tree reader$/;"	m	class:ZBKFThresh
+fChain	include/ZBKFThresh.h	/^   TTree          *fChain = 0;   \/\/!pointer to the analyzed TTree or TChain$/;"	m	class:ZBKFThresh
+fReader	include/ZBKFThresh.h	/^   TTreeReader     fReader;  \/\/!the tree reader$/;"	m	class:ZBKFThresh
 generateEfficiencies	generateEfficiencies.C	/^Int_t generateEfficiencies( const TString& folderName = "")$/;"	f
 ls	TreeHandler.C	/^    const unsigned int& ls() {return TreeHandler_Obj.ls();}$/;"	f	namespace:TTreeReaderSpace
 ls	TreeHandler.C	/^const unsigned int& TreeHandler::ls() {return ls_handle.get();}$/;"	f	class:TreeHandler
@@ -195,85 +199,29 @@ m_object_ptr	include/TreeHandler.h	/^            T*                     m_object
 m_passnoalgcut	userInfo.C	/^Float_t m_passnoalgcut = 0.0;$/;"	v
 metMax	userInfo.C	/^Float_t metMax = 300.0;$/;"	v
 metMin	userInfo.C	/^Float_t metMin = 0.0;$/;"	v
-metcell	ZBKFThresh.h	/^   TTreeReaderValue<Float_t> metcell = {fReader, "metcell"};$/;"	m	class:ZBKFThresh
 metl1	TreeHandler.C	/^const Float_t& TreeHandler::metl1(){return metl1_handle.get();};$/;"	f	class:TreeHandler
-metl1	ZBKFThresh.h	/^   TTreeReaderValue<Float_t> metl1 = {fReader, "metl1"};$/;"	m	class:ZBKFThresh
 metl1Thresh	userInfo.C	/^Float_t metl1Thresh = 0.0;$/;"	v
 metl1_handle	include/TreeHandler.h	/^        TTreeReaderSpace ::Handle< Float_t      > metl1_handle;$/;"	m	class:TreeHandler
-metl1kf	ZBKFThresh.h	/^   TTreeReaderValue<Float_t> metl1kf = {fReader, "metl1kf"};$/;"	m	class:ZBKFThresh
-metl1mht	ZBKFThresh.h	/^   TTreeReaderValue<Float_t> metl1mht = {fReader, "metl1mht"};$/;"	m	class:ZBKFThresh
-metl1mhtkf	ZBKFThresh.h	/^   TTreeReaderValue<Float_t> metl1mhtkf = {fReader, "metl1mhtkf"};$/;"	m	class:ZBKFThresh
-metl2feb	ZBKFThresh.h	/^   TTreeReaderValue<Float_t> metl2feb = {fReader, "metl2feb"};$/;"	m	class:ZBKFThresh
-metmht	ZBKFThresh.h	/^   TTreeReaderValue<Float_t> metmht = {fReader, "metmht"};$/;"	m	class:ZBKFThresh
 metoffrecal	TreeHandler.C	/^const Float_t& TreeHandler::metoffrecal(){return metoffrecal_handle.get();};$/;"	f	class:TreeHandler
-metoffrecal	ZBKFThresh.h	/^   TTreeReaderValue<Float_t> metoffrecal = {fReader, "metoffrecal"};$/;"	m	class:ZBKFThresh
 metoffrecal_handle	include/TreeHandler.h	/^        TTreeReaderSpace ::Handle< Float_t      > metoffrecal_handle;$/;"	m	class:TreeHandler
 metoffrecalmuon	TreeHandler.C	/^const Float_t& TreeHandler::metoffrecalmuon(){return metoffrecalmuon_handle.get();};$/;"	f	class:TreeHandler
-metoffrecalmuon	ZBKFThresh.h	/^   TTreeReaderValue<Float_t> metoffrecalmuon = {fReader, "metoffrecalmuon"};$/;"	m	class:ZBKFThresh
 metoffrecalmuon_handle	include/TreeHandler.h	/^        TTreeReaderSpace ::Handle< Float_t      > metoffrecalmuon_handle;$/;"	m	class:TreeHandler
-metoffrecaltrksft	ZBKFThresh.h	/^   TTreeReaderValue<Float_t> metoffrecaltrksft = {fReader, "metoffrecaltrksft"};$/;"	m	class:ZBKFThresh
 metrefmuon	TreeHandler.C	/^const Float_t& TreeHandler::metrefmuon(){return metrefmuon_handle.get();};$/;"	f	class:TreeHandler
-metrefmuon	ZBKFThresh.h	/^   TTreeReaderValue<Float_t> metrefmuon = {fReader, "metrefmuon"};$/;"	m	class:ZBKFThresh
 metrefmuon_handle	include/TreeHandler.h	/^        TTreeReaderSpace ::Handle< Float_t      > metrefmuon_handle;$/;"	m	class:TreeHandler
-metrefwmuon	ZBKFThresh.h	/^   TTreeReaderValue<Float_t> metrefwmuon = {fReader, "metrefwmuon"};$/;"	m	class:ZBKFThresh
-mettopocl	ZBKFThresh.h	/^   TTreeReaderValue<Float_t> mettopocl = {fReader, "mettopocl"};$/;"	m	class:ZBKFThresh
-mettopoclem	ZBKFThresh.h	/^   TTreeReaderValue<Float_t> mettopoclem = {fReader, "mettopoclem"};$/;"	m	class:ZBKFThresh
-mettopoclps	ZBKFThresh.h	/^   TTreeReaderValue<Float_t> mettopoclps = {fReader, "mettopoclps"};$/;"	m	class:ZBKFThresh
-mettopoclpuc	ZBKFThresh.h	/^   TTreeReaderValue<Float_t> mettopoclpuc = {fReader, "mettopoclpuc"};$/;"	m	class:ZBKFThresh
-mexcell	ZBKFThresh.h	/^   TTreeReaderValue<Float_t> mexcell = {fReader, "mexcell"};$/;"	m	class:ZBKFThresh
-mexl1	ZBKFThresh.h	/^   TTreeReaderValue<Float_t> mexl1 = {fReader, "mexl1"};$/;"	m	class:ZBKFThresh
-mexl1kf	ZBKFThresh.h	/^   TTreeReaderValue<Float_t> mexl1kf = {fReader, "mexl1kf"};$/;"	m	class:ZBKFThresh
-mexl1mht	ZBKFThresh.h	/^   TTreeReaderValue<Float_t> mexl1mht = {fReader, "mexl1mht"};$/;"	m	class:ZBKFThresh
-mexl1mhtkf	ZBKFThresh.h	/^   TTreeReaderValue<Float_t> mexl1mhtkf = {fReader, "mexl1mhtkf"};$/;"	m	class:ZBKFThresh
-mexl2feb	ZBKFThresh.h	/^   TTreeReaderValue<Float_t> mexl2feb = {fReader, "mexl2feb"};$/;"	m	class:ZBKFThresh
-mexmht	ZBKFThresh.h	/^   TTreeReaderValue<Float_t> mexmht = {fReader, "mexmht"};$/;"	m	class:ZBKFThresh
 mexoffrecal	TreeHandler.C	/^const Float_t& TreeHandler::mexoffrecal(){return mexoffrecal_handle.get();};$/;"	f	class:TreeHandler
-mexoffrecal	ZBKFThresh.h	/^   TTreeReaderValue<Float_t> mexoffrecal = {fReader, "mexoffrecal"};$/;"	m	class:ZBKFThresh
 mexoffrecal_handle	include/TreeHandler.h	/^        TTreeReaderSpace ::Handle< Float_t      > mexoffrecal_handle;$/;"	m	class:TreeHandler
 mexoffrecalmuon	TreeHandler.C	/^const Float_t& TreeHandler::mexoffrecalmuon(){return mexoffrecalmuon_handle.get();};$/;"	f	class:TreeHandler
-mexoffrecalmuon	ZBKFThresh.h	/^   TTreeReaderValue<Float_t> mexoffrecalmuon = {fReader, "mexoffrecalmuon"};$/;"	m	class:ZBKFThresh
 mexoffrecalmuon_handle	include/TreeHandler.h	/^        TTreeReaderSpace ::Handle< Float_t      > mexoffrecalmuon_handle;$/;"	m	class:TreeHandler
-mexoffrecaltrksft	ZBKFThresh.h	/^   TTreeReaderValue<Float_t> mexoffrecaltrksft = {fReader, "mexoffrecaltrksft"};$/;"	m	class:ZBKFThresh
 mexrefmuon	TreeHandler.C	/^const Float_t& TreeHandler::mexrefmuon(){return mexrefmuon_handle.get();};$/;"	f	class:TreeHandler
-mexrefmuon	ZBKFThresh.h	/^   TTreeReaderValue<Float_t> mexrefmuon = {fReader, "mexrefmuon"};$/;"	m	class:ZBKFThresh
 mexrefmuon_handle	include/TreeHandler.h	/^        TTreeReaderSpace ::Handle< Float_t      > mexrefmuon_handle;$/;"	m	class:TreeHandler
-mexrefwmuon	ZBKFThresh.h	/^   TTreeReaderValue<Float_t> mexrefwmuon = {fReader, "mexrefwmuon"};$/;"	m	class:ZBKFThresh
-mextopocl	ZBKFThresh.h	/^   TTreeReaderValue<Float_t> mextopocl = {fReader, "mextopocl"};$/;"	m	class:ZBKFThresh
-mextopoclem	ZBKFThresh.h	/^   TTreeReaderValue<Float_t> mextopoclem = {fReader, "mextopoclem"};$/;"	m	class:ZBKFThresh
-mextopoclmuon	ZBKFThresh.h	/^   TTreeReaderValue<Float_t> mextopoclmuon = {fReader, "mextopoclmuon"};$/;"	m	class:ZBKFThresh
-mextopoclps	ZBKFThresh.h	/^   TTreeReaderValue<Float_t> mextopoclps = {fReader, "mextopoclps"};$/;"	m	class:ZBKFThresh
-mextopoclpuc	ZBKFThresh.h	/^   TTreeReaderValue<Float_t> mextopoclpuc = {fReader, "mextopoclpuc"};$/;"	m	class:ZBKFThresh
-meycell	ZBKFThresh.h	/^   TTreeReaderValue<Float_t> meycell = {fReader, "meycell"};$/;"	m	class:ZBKFThresh
-meyl1	ZBKFThresh.h	/^   TTreeReaderValue<Float_t> meyl1 = {fReader, "meyl1"};$/;"	m	class:ZBKFThresh
-meyl1kf	ZBKFThresh.h	/^   TTreeReaderValue<Float_t> meyl1kf = {fReader, "meyl1kf"};$/;"	m	class:ZBKFThresh
-meyl1mht	ZBKFThresh.h	/^   TTreeReaderValue<Float_t> meyl1mht = {fReader, "meyl1mht"};$/;"	m	class:ZBKFThresh
-meyl1mhtkf	ZBKFThresh.h	/^   TTreeReaderValue<Float_t> meyl1mhtkf = {fReader, "meyl1mhtkf"};$/;"	m	class:ZBKFThresh
-meyl2feb	ZBKFThresh.h	/^   TTreeReaderValue<Float_t> meyl2feb = {fReader, "meyl2feb"};$/;"	m	class:ZBKFThresh
-meymht	ZBKFThresh.h	/^   TTreeReaderValue<Float_t> meymht = {fReader, "meymht"};$/;"	m	class:ZBKFThresh
 meyoffrecal	TreeHandler.C	/^const Float_t& TreeHandler::meyoffrecal(){return meyoffrecal_handle.get();};$/;"	f	class:TreeHandler
-meyoffrecal	ZBKFThresh.h	/^   TTreeReaderValue<Float_t> meyoffrecal = {fReader, "meyoffrecal"};$/;"	m	class:ZBKFThresh
 meyoffrecal_handle	include/TreeHandler.h	/^        TTreeReaderSpace ::Handle< Float_t      > meyoffrecal_handle;$/;"	m	class:TreeHandler
 meyoffrecalmuon	TreeHandler.C	/^const Float_t& TreeHandler::meyoffrecalmuon(){return meyoffrecalmuon_handle.get();};$/;"	f	class:TreeHandler
-meyoffrecalmuon	ZBKFThresh.h	/^   TTreeReaderValue<Float_t> meyoffrecalmuon = {fReader, "meyoffrecalmuon"};$/;"	m	class:ZBKFThresh
 meyoffrecalmuon_handle	include/TreeHandler.h	/^        TTreeReaderSpace ::Handle< Float_t      > meyoffrecalmuon_handle;$/;"	m	class:TreeHandler
-meyoffrecaltrksft	ZBKFThresh.h	/^   TTreeReaderValue<Float_t> meyoffrecaltrksft = {fReader, "meyoffrecaltrksft"};$/;"	m	class:ZBKFThresh
 meyrefmuon	TreeHandler.C	/^const Float_t& TreeHandler::meyrefmuon(){return meyrefmuon_handle.get();};$/;"	f	class:TreeHandler
-meyrefmuon	ZBKFThresh.h	/^   TTreeReaderValue<Float_t> meyrefmuon = {fReader, "meyrefmuon"};$/;"	m	class:ZBKFThresh
 meyrefmuon_handle	include/TreeHandler.h	/^        TTreeReaderSpace ::Handle< Float_t      > meyrefmuon_handle;$/;"	m	class:TreeHandler
-meyrefwmuon	ZBKFThresh.h	/^   TTreeReaderValue<Float_t> meyrefwmuon = {fReader, "meyrefwmuon"};$/;"	m	class:ZBKFThresh
-meytopocl	ZBKFThresh.h	/^   TTreeReaderValue<Float_t> meytopocl = {fReader, "meytopocl"};$/;"	m	class:ZBKFThresh
-meytopoclem	ZBKFThresh.h	/^   TTreeReaderValue<Float_t> meytopoclem = {fReader, "meytopoclem"};$/;"	m	class:ZBKFThresh
-meytopoclmuon	ZBKFThresh.h	/^   TTreeReaderValue<Float_t> meytopoclmuon = {fReader, "meytopoclmuon"};$/;"	m	class:ZBKFThresh
-meytopoclps	ZBKFThresh.h	/^   TTreeReaderValue<Float_t> meytopoclps = {fReader, "meytopoclps"};$/;"	m	class:ZBKFThresh
-meytopoclpuc	ZBKFThresh.h	/^   TTreeReaderValue<Float_t> meytopoclpuc = {fReader, "meytopoclpuc"};$/;"	m	class:ZBKFThresh
-npv	ZBKFThresh.h	/^   TTreeReaderValue<Int_t> npv = {fReader, "npv"};$/;"	m	class:ZBKFThresh
 numbtokeep	userInfo.C	/^Int_t numbtokeep  = 5600;$/;"	v
 passTransverseMassCut	mincerMacros.C	/^Bool_t passTransverseMassCut( const Float_t metoffrecal , const Float_t mexoffrecal  , const Float_t meyoffrecal ,$/;"	f
-passcleancuts	ZBKFThresh.h	/^   TTreeReaderValue<Int_t> passcleancuts = {fReader, "passcleancuts"};$/;"	m	class:ZBKFThresh
-passmu24med	ZBKFThresh.h	/^   TTreeReaderValue<Int_t> passmu24med = {fReader, "passmu24med"};$/;"	m	class:ZBKFThresh
-passmu24varmed	ZBKFThresh.h	/^   TTreeReaderValue<Int_t> passmu24varmed = {fReader, "passmu24varmed"};$/;"	m	class:ZBKFThresh
-passmu26med	ZBKFThresh.h	/^   TTreeReaderValue<Int_t> passmu26med = {fReader, "passmu26med"};$/;"	m	class:ZBKFThresh
-passmu26varmed	ZBKFThresh.h	/^   TTreeReaderValue<Int_t> passmu26varmed = {fReader, "passmu26varmed"};$/;"	m	class:ZBKFThresh
 passmuon	TreeHandler.C	/^const Float_t& TreeHandler::passmuon(){return passmuon_handle.get();};$/;"	f	class:TreeHandler
 passmuon_handle	include/TreeHandler.h	/^        TTreeReaderSpace ::Handle< Float_t      > passmuon_handle;$/;"	m	class:TreeHandler
 passmuvarmed	TreeHandler.C	/^const Float_t& TreeHandler::passmuvarmed(){return passmuvarmed_handle.get();};$/;"	f	class:TreeHandler
@@ -285,30 +233,15 @@ passnoalgL1XE30_handle	include/TreeHandler.h	/^        TTreeReaderSpace ::Handle
 passnoalgL1XE40	TreeHandler.C	/^const Float_t& TreeHandler::passnoalgL1XE40(){return passnoalgL1XE40_handle.get();};$/;"	f	class:TreeHandler
 passnoalgL1XE40_handle	include/TreeHandler.h	/^        TTreeReaderSpace ::Handle< Float_t      > passnoalgL1XE40_handle;$/;"	m	class:TreeHandler
 passnoalgL1XE45	TreeHandler.C	/^const Float_t& TreeHandler::passnoalgL1XE45(){return passnoalgL1XE45_handle.get();};$/;"	f	class:TreeHandler
-passnoalgL1XE45	ZBKFThresh.h	/^   TTreeReaderValue<Int_t> passnoalgL1XE45 = {fReader, "passnoalgL1XE45"};$/;"	m	class:ZBKFThresh
 passnoalgL1XE45_handle	include/TreeHandler.h	/^        TTreeReaderSpace ::Handle< Float_t      > passnoalgL1XE45_handle;$/;"	m	class:TreeHandler
 passrndm	TreeHandler.C	/^const Int_t& TreeHandler::passrndm() {return passrndm_handle.get();}$/;"	f	class:TreeHandler
-passrndm	ZBKFThresh.h	/^   TTreeReaderValue<Int_t> passrndm = {fReader, "passrndm"};$/;"	m	class:ZBKFThresh
 passrndm_handle	include/TreeHandler.h	/^        TTreeReaderSpace ::Handle< Int_t        > passrndm_handle;$/;"	m	class:TreeHandler
-passrndmj40	ZBKFThresh.h	/^   TTreeReaderValue<Int_t> passrndmj40 = {fReader, "passrndmj40"};$/;"	m	class:ZBKFThresh
 print7Efficiencies	print7Efficiencies.C	/^Int_t print7Efficiencies(const TString& muonFileName = "PhysicsMain.L1KFmuontriggers.2016.f731f758_m1659m1710.Run309759.48Runs.root")$/;"	f
 recalBrokeFlag	TreeHandler.C	/^const Float_t& TreeHandler::recalBrokeFlag(){return recalBrokeFlag_handle.get();};$/;"	f	class:TreeHandler
 recalBrokeFlag_handle	include/TreeHandler.h	/^        TTreeReaderSpace ::Handle< Float_t      > recalBrokeFlag_handle;$/;"	m	class:TreeHandler
-recalbroke	ZBKFThresh.h	/^   TTreeReaderValue<Int_t> recalbroke = {fReader, "recalbroke"};$/;"	m	class:ZBKFThresh
 run	TreeHandler.C	/^    const unsigned int& run() {return TreeHandler_Obj.run();}$/;"	f	namespace:TTreeReaderSpace
 run	TreeHandler.C	/^const unsigned int& TreeHandler::run() {return run_handle.get();}$/;"	f	class:TreeHandler
 run_handle	include/TreeHandler.h	/^        TTreeReaderSpace ::Handle< unsigned int > run_handle;$/;"	m	class:TreeHandler
-runnum	ZBKFThresh.h	/^   TTreeReaderValue<Int_t> runnum = {fReader, "runnum"};$/;"	m	class:ZBKFThresh
-setcell	ZBKFThresh.h	/^   TTreeReaderValue<Float_t> setcell = {fReader, "setcell"};$/;"	m	class:ZBKFThresh
-setl1	ZBKFThresh.h	/^   TTreeReaderValue<Float_t> setl1 = {fReader, "setl1"};$/;"	m	class:ZBKFThresh
-setl2feb	ZBKFThresh.h	/^   TTreeReaderValue<Float_t> setl2feb = {fReader, "setl2feb"};$/;"	m	class:ZBKFThresh
-setmht	ZBKFThresh.h	/^   TTreeReaderValue<Float_t> setmht = {fReader, "setmht"};$/;"	m	class:ZBKFThresh
-setoffrecal	ZBKFThresh.h	/^   TTreeReaderValue<Float_t> setoffrecal = {fReader, "setoffrecal"};$/;"	m	class:ZBKFThresh
-setrefwmuon	ZBKFThresh.h	/^   TTreeReaderValue<Float_t> setrefwmuon = {fReader, "setrefwmuon"};$/;"	m	class:ZBKFThresh
-settopocl	ZBKFThresh.h	/^   TTreeReaderValue<Float_t> settopocl = {fReader, "settopocl"};$/;"	m	class:ZBKFThresh
-settopoclem	ZBKFThresh.h	/^   TTreeReaderValue<Float_t> settopoclem = {fReader, "settopoclem"};$/;"	m	class:ZBKFThresh
-settopoclps	ZBKFThresh.h	/^   TTreeReaderValue<Float_t> settopoclps = {fReader, "settopoclps"};$/;"	m	class:ZBKFThresh
-settopoclpuc	ZBKFThresh.h	/^   TTreeReaderValue<Float_t> settopoclpuc = {fReader, "settopoclpuc"};$/;"	m	class:ZBKFThresh
 static_size	include/TreeHandler.h	/^        enum value_type { CLASS, BUILTIN, NOT_SET, static_size };$/;"	e	enum:TTreeReaderSpace::BranchType::value_type
 threeEfficiencies	threeEfficiencies.C	/^TFile* threeEfficiencies( const TString& AlgAName , const TString& AlgBName )$/;"	f
 thresh_actint	TreeHandler.C	/^const Float_t& TreeHandler::thresh_actint()(){return actint_handle.get();};$/;"	f	class:TreeHandler
@@ -318,4 +251,4 @@ userInfo	userInfo.C	/^userInfo::userInfo()$/;"	f	class:userInfo
 userInfo_h	include/userInfo.h	3;"	d
 value_type	include/TreeHandler.h	/^        enum value_type { CLASS, BUILTIN, NOT_SET, static_size };$/;"	g	struct:TTreeReaderSpace::BranchType
 ~BranchHandle	include/TreeHandler.h	/^            virtual ~BranchHandle(){}$/;"	f	class:TTreeReaderSpace::BranchHandle
-~ZBKFThresh	ZBKFThresh.h	/^   virtual ~ZBKFThresh() { }$/;"	f	class:ZBKFThresh
+~ZBKFThresh	include/ZBKFThresh.h	/^   virtual ~ZBKFThresh() { }$/;"	f	class:ZBKFThresh
