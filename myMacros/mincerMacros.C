@@ -186,17 +186,16 @@ Float_t determineZeroBiasThresh( userInfo* parameters, const Bool_t verbose )
 
 Float_t determineMuonEventsKeptCombined( const TString& algA, const Float_t threshA,
                                          const TString& algB, Float_t threshB,
-                                         const TString& muonFileName)
+                                         const TString& muonFileName, const Float_t metl1thresh)
 {
 
     //this function determines process2 for muon events on combined alg
 
 
     //TODO: proof lite this
-    const Float_t metL1Thresh = 50.0;
     //display algs and thresholds
     std::cout << "Determining fraction of muon events kept when using combined algorithm of " << algA << " at: " << threshA << ", "
-    << algB << " at: " << threshB << " and metl1 at: " << metL1Thresh << std::endl;
+    << algB << " at: " << threshB /*<< " and metl1 at: " << metL1Thresh*/ << std::endl;
 
     //get muon tree
     TString muonFilePath = "../myData/"+muonFileName;
@@ -217,7 +216,7 @@ Float_t determineMuonEventsKeptCombined( const TString& algA, const Float_t thre
     muonTree->SetBranchAddress("recalbroke",&recalBrokeFlag);
     muonTree->SetBranchAddress("passcleancuts",&cleanCutsFlag);
     muonTree->SetBranchAddress(algA,&algAMET);
-    muonTree->SetBranchAddress("metl1",&metl1);
+    //muonTree->SetBranchAddress("metl1",&metl1);
     muonTree->SetBranchAddress("metoffrecal", &metoffrecal);
     muonTree->SetBranchAddress("mexoffrecal", &mexoffrecal);
     muonTree->SetBranchAddress("meyoffrecal", &meyoffrecal);
@@ -247,7 +246,7 @@ Float_t determineMuonEventsKeptCombined( const TString& algA, const Float_t thre
             {
               numberMuonEvents++;
             }
-                if (((algAMET > threshA) && (algBMET > threshB) && (metl1 > metL1Thresh)))
+                if (((algAMET > threshA) && (algBMET > threshB) /*&& (metl1 > metl1thresh)*/))
                 {
                     numbPassedEvents++;
                 }

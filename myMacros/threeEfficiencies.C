@@ -231,7 +231,7 @@ TFile* threeEfficiencies( const TString& AlgAName , const TString& AlgBName )
     legend->Draw();
 
     //compute number muon events actually kept using external macro
-    Int_t muonEventsCombined = determineMuonEventsKeptCombined( AlgAName , CombinedThreshAlgA , AlgBName , CombinedThreshAlgB , muonFilename );
+    Int_t muonEventsCombined = determineMuonEventsKeptCombined( AlgAName , CombinedThreshAlgA , AlgBName , CombinedThreshAlgB , muonFilename , metl1thresh );
 
     parameters->Set_NumPassNoAlgPassProcess1( NumbRndmProcess1 );
     parameters->Set_NumMuonPassProcess1( NumMuonPassProcess1WithActintCut );

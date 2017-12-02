@@ -25,7 +25,7 @@ Float_t determineZeroBiasThresh( userInfo* parameters , const Bool_t verbose = f
 
 //simply counts how many muon events passed algs at thresholds
 Float_t determineMuonEventsKeptCombined( const TString& algA, const Float_t threshA,const TString& algB, Float_t threshB,
-const TString& muonFileName = "PhysicsMain2016.Muons.noalgL1XE45R3073065R311481Runs9B.root");
+const TString& muonFileName = "PhysicsMain2016.Muons.noalgL1XE45R3073065R311481Runs9B.root", Float_t metl1thresh = 0.0);
 
 
 //determines thresholds to use on two algorithms such that keeps proper fraction of process 1 events when used together

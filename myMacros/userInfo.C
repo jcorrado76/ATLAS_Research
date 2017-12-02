@@ -205,6 +205,7 @@ void userInfo::Set_NumPassNoAlgPassProcess1( const Float_t num ) {M_NumPassnoalg
 void userInfo::Set_NumPassNoAlgPassProcess2AlgA( const Float_t num ) {M_NumPassnoalgProcess2AlgA = num;};
 void userInfo::Set_NumPassNoAlgPassProcess2AlgB( const Float_t num ) {M_NumPassnoalgProcess2AlgB = num;};
 void userInfo::Set_NumPassNoAlgPassProcess2Combined( const Float_t num ) {M_NumPassnoalgProcess2AlgCombined = num;};
+void userInfo::Set_NumMuonPassProcess1( const Float_t num ) {M_NumMuonPassProcess1 = num;};
 void userInfo::Set_NumMuonPassProcess2AlgA( const Float_t num ) {M_NumMuonPassProcess2AlgA = num;};
 void userInfo::Set_NumMuonPassProcess2AlgB( const Float_t num ) {M_NumMuonPassProcess2AlgB = num;};
 void userInfo::Set_NumMuonPassProcess2Combined( const Float_t num ) {M_NumMuonPassProcess2Combined = num;};
