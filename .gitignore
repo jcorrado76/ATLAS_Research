@@ -5,7 +5,8 @@
 *.swp
 *.un
 !.gitignore
-myMacros/pictures/
+myMacros/Pictures/
+myMacros/RootFiles
 myMacros/lib/
 myMacros/Practice\ Macros
 myMacros/Analysis
