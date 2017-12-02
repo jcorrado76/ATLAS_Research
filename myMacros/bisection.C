@@ -69,10 +69,6 @@ Float_t bisection( userInfo* parameters , TH1F* algAHist , TH1F* algBHist, TTree
     algAMETtarget->SetName(algAMETtarget->GetName() + (const TString)"A");
     algBMETtarget->SetName(algBMETtarget->GetName() + (const TString)"B");
 
-    std::cout << "numKeepx1: " << numKeepx1 << std::endl;
-    std::cout << "numKeepx2: " << numKeepx2 << std::endl;
-    std::cout << "numKeepx3: " << numKeepx3 << std::endl;
-
     //compute initial thresholds at each of the extrema and first guess
     algAMETx1thresh = computeThresh(algAMETtarget, numKeepx1);
     algBMETx1thresh = computeThresh(algBMETtarget, numKeepx1);
@@ -81,6 +77,7 @@ Float_t bisection( userInfo* parameters , TH1F* algAHist , TH1F* algBHist, TTree
     algAMETx3thresh = computeThresh(algAMETtarget, numKeepx3);
     algBMETx3thresh = computeThresh(algBMETtarget, numKeepx3);
 
+    /*
     std::cout << "Passrndmcut: " << passrndmcut << std::endl;
     std::cout << "algAx1Thresh: " << algAMETx1thresh << std::endl;
     std::cout << "algBx1Thresh: " << algBMETx1thresh << std::endl;
@@ -89,6 +86,7 @@ Float_t bisection( userInfo* parameters , TH1F* algAHist , TH1F* algBHist, TTree
     std::cout << "algAx3Thresh: " << algAMETx3thresh << std::endl;
     std::cout << "algBx3Thresh: " << algBMETx3thresh << std::endl;
     std::cout << "metl1thresh : " << metl1thresh << std::endl;
+    */
     Float_t algAMET,algBMET, metl1;
     Float_t passnoalg_actint = 0 ;
     Int_t passnoalgL1XE10,passnoalgL1XE30,passnoalgL1XE40,passnoalgL1XE45, passrndm;
