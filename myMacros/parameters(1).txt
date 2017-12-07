@@ -1,4 +1,4 @@
-Created: 12/7/17 by Joseph Corrado
+Created: 11/16/17 by Joseph Corrado
 Parameters for L1 Analysis:
 =================================================
 THRESHOLDFILE:
@@ -13,8 +13,8 @@ METMAX:
 300.0
 METL1THRESH:
 0.0
-TRIGGERRATE:
-0.000085469
+PROCESS2FRAC:
+0.0059
 ACTINTCUT:
 0.0
 EPSILON:
