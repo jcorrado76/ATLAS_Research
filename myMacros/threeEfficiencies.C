@@ -272,7 +272,7 @@ TFile* threeEfficiencies( const TString& AlgAName , const TString& AlgBName )
         }
     std::cout << "Root file successfully opened" << std::endl;
 
-    efficiencyCanvas->Print("./Pictures/" + AlgAName + "_" + AlgBName + "_efficiencies.tiff");
+    efficiencyCanvas->Print("./Pictures/" + AlgAName + "_" + AlgBName + "_efficiencies.jpg");
     Ateff->Write( AlgAName + " Efficiency" );
     Bteff->Write( bstring );
     Cteff->Write( cstring );
