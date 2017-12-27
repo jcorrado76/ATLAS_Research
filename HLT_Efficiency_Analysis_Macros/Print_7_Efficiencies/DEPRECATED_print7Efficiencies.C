@@ -9,7 +9,6 @@ Int_t print7Efficiencies(const TString& muonFileName = "PhysicsMain.L1KFmuontrig
     3 individually: metmht ; metcell ; mettopoclpuc
     */
 
-//    gROOT->ProcessLine("gSystem->Load(\"./mincerMacros_C.so\")");
     Bool_t passTransverseMassCut( const Float_t , const Float_t ,const Float_t ,const Float_t ,const Float_t ,const Float_t);
 
 
