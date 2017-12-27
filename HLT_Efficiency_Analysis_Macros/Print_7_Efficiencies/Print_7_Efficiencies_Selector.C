@@ -42,23 +42,28 @@ Bool_t Print_7_Efficiencies_Selector::Process(Long64_t entry)
 
 
 
-   if ( PassTransverseMassCut() && Is_Clean() && Is_Muon() )
+   if ( PassTransverseMassCut() && Is_Clean() && Is_Muon() && *actint > actintCut )
    {
 
 
-                    cellTeff->Fill( ( *metcell > cellThresh) &&  ( *metl1 > metl1thresh) , metnomu);
+                    cellTeff->Fill( ( *metcell > cellThresh) &&  ( *metl1 > metl1thresh) &&
+                                        ( *actint > actintCut), metnomu);
 
-                    mhtTeff->Fill( ( *metmht > mhtThresh) && ( *metl1 > metl1thresh) , metnomu);
+                    mhtTeff->Fill( ( *metmht > mhtThresh) && ( *metl1 > metl1thresh) &&
+                                        ( *actint > actintCut), metnomu);
 
-                    topoclpucTeff->Fill( ( *mettopoclpuc > topoclpucThresh) &&  ( *metl1 > metl1thresh) ,  metnomu);
+                    topoclpucTeff->Fill( ( *mettopoclpuc > topoclpucThresh) &&  ( *metl1 > metl1thresh) &&
+                                        ( *actint > actintCut),  metnomu);
 
                     cellmhtTeff->Fill( ( *metcell > cellCombinedThresh) && 
                             ( *metmht > mhtCombinedThresh)&& 
-                            ( *metl1 > metl1thresh) , metnomu );
+                            ( *metl1 > metl1thresh) &&
+                                        ( *actint > actintCut), metnomu );
 
                     mhttopoclpucTeff->Fill( ( ( *metmht > mhtCombined2Thresh) && 
                                 ( *mettopoclpuc > topoclpucCombinedThresh) && 
-                                ( *metl1 > metl1thresh)), metnomu);
+                                ( *metl1 > metl1thresh))&&
+                                        ( *actint > actintCut) , metnomu);
    }
 
    return kTRUE;
