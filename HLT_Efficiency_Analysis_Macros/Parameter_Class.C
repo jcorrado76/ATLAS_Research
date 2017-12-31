@@ -45,6 +45,7 @@ userInfo::userInfo()
     M_AlgBCombinedThresh(0),
     M_AlgAName(" [not entered yet] "),
     M_AlgBName(" [not entered yet] "),
+    M_Name("parameters"),
     M_MuonNentries(0),
     M_PassnoAlgNentries(0),
     M_NumMuonKeptCombined(0),
@@ -194,6 +195,7 @@ Float_t userInfo::Get_CombinedAlgAThresh()  const { return (M_AlgACombinedThresh
 Float_t userInfo::Get_CombinedAlgBThresh()  const {return (M_AlgBCombinedThresh); }
 Float_t userInfo::Get_Passnoalgcut() const {return (M_Passnoalgcut);}
 Float_t userInfo::Get_Passrndmcut() const { return (M_Passrndmcut);}
+TString userInfo::GetName() const { return (M_Name);}
 
 
 //setters

@@ -28,6 +28,7 @@
 class userInfo : public TObject {
 
 private:
+    TString M_Name;
     TString M_AlgAName;
     TString M_AlgBName;
     Int_t M_Nbins;
@@ -69,6 +70,7 @@ private:
 public:
     //default constructor
     userInfo();
+    TString GetName() const;
     void Print(Option_t *option = "") const;
     TString Get_ThreshFileName()      const;
     TString Get_MuonFileName()        const;
