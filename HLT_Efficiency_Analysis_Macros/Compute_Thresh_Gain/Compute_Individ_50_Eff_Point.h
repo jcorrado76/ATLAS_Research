@@ -1,12 +1,12 @@
 //////////////////////////////////////////////////////////
 // This class has been automatically generated on
 // Sun Dec 31 14:30:06 2017 by ROOT version 6.13/01
-// from TTree tree/tree
+// from TTree Compute_Individ_50_Eff_Point/tree
 // found on file: /home/joseph/Programs/MyData/PhysicsMain.L1KFmuontriggers.2016.f731f758_m1659m1710.Run309759.48Runs.root
 //////////////////////////////////////////////////////////
 
-#ifndef tree_h
-#define tree_h
+#ifndef Computer_Individ_50_Eff_Point_h
+#define Computer_Individ_50_Eff_Point_h
 
 #include <TROOT.h>
 #include <TChain.h>
@@ -15,14 +15,16 @@
 #include <TTreeReader.h>
 #include <TTreeReaderValue.h>
 #include <TTreeReaderArray.h>
+#include "Parameter_Class.h"
 
 // Headers needed by this particular selector
 
 
-class tree : public TSelector {
+class Compute_Individ_50_Eff_Point : public TSelector {
 public :
-   TTreeReader     fReader;  //!the tree reader
+   TTreeReader     fReader;  //!the Compute_Individ_50_Eff_Point reader
    TTree          *fChain = 0;   //!pointer to the analyzed TTree or TChain
+   TString          AlgName;
 
    // Readers to access the data (delete the ones you do not need).
    TTreeReaderValue<Float_t> metl1 = {fReader, "metl1"};
@@ -126,8 +128,8 @@ public :
    TTreeReaderValue<Float_t> avint = {fReader, "avint"};
 
 
-   tree(TTree * /*tree*/ =0) { }
-   virtual ~tree() { }
+   Compute_Individ_50_Eff_Point(TTree * /*tree*/ =0) { }
+   virtual ~Compute_Individ_50_Eff_Point() { }
    virtual Int_t   Version() const { return 2; }
    virtual void    Begin(TTree *tree);
    virtual void    SlaveBegin(TTree *tree);
@@ -142,17 +144,17 @@ public :
    virtual void    SlaveTerminate();
    virtual void    Terminate();
 
-   ClassDef(tree,0);
+   ClassDef(Compute_Individ_50_Eff_Point,0);
 
 };
 
 #endif
 
-#ifdef tree_cxx
-void tree::Init(TTree *tree)
+#ifdef Compute_Individ_50_Eff_Point_cxx
+void Compute_Individ_50_Eff_Point::Init(TTree *tree)
 {
    // The Init() function is called when the selector needs to initialize
-   // a new tree or chain. Typically here the reader is initialized.
+   // a new Compute_Individ_50_Eff_Point or chain. Typically here the reader is initialized.
    // It is normally not necessary to make changes to the generated
    // code, but the routine can be extended by the user if needed.
    // Init() will be called many times when running on PROOF
@@ -161,7 +163,7 @@ void tree::Init(TTree *tree)
    fReader.SetTree(tree);
 }
 
-Bool_t tree::Notify()
+Bool_t Compute_Individ_50_Eff_Point::Notify()
 {
    // The Notify() function is called when a new file is opened. This
    // can be either for a new TTree in a TChain or when when a new TTree

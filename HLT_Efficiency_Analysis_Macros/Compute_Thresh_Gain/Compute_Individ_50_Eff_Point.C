@@ -1,5 +1,5 @@
-#define tree_cxx
-#include "tree.h"
+#define Compute_Individ_50_Eff_Point_cxx
+#include "Compute_Individ_50_Eff_Point.h"
 #include <TH2.h>
 #include <TStyle.h>
 
@@ -7,13 +7,14 @@ void tree::Begin(TTree * /*tree*/)
 {
   userInfo* parameters =
      dynamic_cast<userInfo*>(fInput->FindObject("parameters"));
+  AlgName = parameters->Get_AlgAName();
+
 
    TString option = GetOption();
 }
 
 void tree::SlaveBegin(TTree * /*tree*/)
 {
-
    TString option = GetOption();
 
 }

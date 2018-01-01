@@ -1,8 +1,10 @@
 
 //.x Run_PROOF_Print_7_Eff_TSelector.C
 
-{
-    userInfo* parameters = new userInfo()
+int Run_Compute_Thresh_TSelector(const TString AlgName) {
+    userInfo* parameters = new userInfo();
+    parameters->Read_Parameter_File("../parameter_files/HLTAnalysisParameters.txt");
+    parameters->Set_AlgAName(AlgName);
     TProof* proof = TProof::Open("");
     proof->AddInput( parameters );
     TChain* mychain = new TChain( "tree" , "Individ Eff Thresh Chain" );
