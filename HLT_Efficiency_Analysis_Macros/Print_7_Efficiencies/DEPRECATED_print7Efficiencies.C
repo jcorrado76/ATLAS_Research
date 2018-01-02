@@ -1,17 +1,4 @@
-#include "TMath.h"
-#include "TH1.h"
-#include "TFile.h"
-#include "TTree.h"
-#include "TString.h"
-#include "TEfficiency.h"
-#include "TLegend.h"
-#include <iostream>
-#include <fstream>
-#include "TROOT.h"
-#include "TCanvas.h"
-#include "TSystem.h"
-#include "TF1.h"
-
+#include"mincerMacros.h"
 
 Int_t print7Efficiencies(const TString& muonFileName = "PhysicsMain.L1KFmuontriggers.2016.f731f758_m1659m1710.Run309759.48Runs.root")
 {
@@ -22,19 +9,22 @@ Int_t print7Efficiencies(const TString& muonFileName = "PhysicsMain.L1KFmuontrig
     3 individually: metmht ; metcell ; mettopoclpuc
     */
 
-    gROOT->ProcessLine("gSystem->Load(\"./mincerMacros_C.so\")");
     Bool_t passTransverseMassCut( const Float_t , const Float_t ,const Float_t ,const Float_t ,const Float_t ,const Float_t);
+
+
+
 
     //parameters
     Int_t nbins = 300;
     Float_t metMin = 0.0;
     Float_t metMax = 300.0;
     Float_t metl1thresh = 50.0;
+    Float_t actintCut = 35.0;
 
     //individual thresholds
-    Float_t cellThresh = 100.0;
-    Float_t mhtThresh = 139.88;
-    Float_t topoclpucThresh = 122.62;
+    Float_t cellThresh = 94.88;
+    Float_t mhtThresh = 144.38;
+    Float_t topoclpucThresh = 121.62;
 
     //combined pairs of threhsolds
     Float_t cellCombinedThresh = 81.12;
@@ -62,7 +52,7 @@ Int_t print7Efficiencies(const TString& muonFileName = "PhysicsMain.L1KFmuontrig
 
 
     Float_t metcell,metmht,metl1,mettopocl,mettopoclps,mettopoclpuc,metoffrecal,mexoffrecal,
-    meyoffrecal,metoffrecalmuon,mexoffrecalmuon,meyoffrecalmuon;
+    meyoffrecal,metoffrecalmuon,mexoffrecalmuon,meyoffrecalmuon,actint;
     Int_t passmuon,passmuvarmed,cleanCutsFlag,recalBrokeFlag;
 
     //assign branch variables to locations
@@ -83,38 +73,53 @@ Int_t print7Efficiencies(const TString& muonFileName = "PhysicsMain.L1KFmuontrig
     myMuonTree->SetBranchAddress("metoffrecalmuon", &metoffrecalmuon);
     myMuonTree->SetBranchAddress("mexoffrecalmuon", &mexoffrecalmuon);
     myMuonTree->SetBranchAddress("meyoffrecalmuon", &meyoffrecalmuon);
+    myMuonTree->SetBranchAddress("actint", &actint);
 
-    /*
-    Int_t numbPassAllCutsndL1 = 0;
+    Bool_t isMuon,isClean;
+
     for (Int_t l = 0 ; l < muonNentries ; l++)
     {
         myMuonTree->GetEntry(l);
+
+        isMuon = (passmuvarmed > 0.1 || passmuon > 0.1);
+        isClean = (cleanCutsFlag > 0.1) && (recalBrokeFlag < 0.1);
         {
-            if ((passmuvarmed > 0.1 || passmuon > 0.1) && cleanCutsFlag > 0.1 && recalBrokeFlag < 0.1)
+            if (isMuon && isClean && actint > actintCut )
             {
                 if ( passTransverseMassCut(metoffrecal,mexoffrecal,meyoffrecal,metoffrecalmuon,mexoffrecalmuon,meyoffrecalmuon) )
                 {
-                    if ( metl1 > metl1thresh )
-                    {
-                        numbPassAllCutsndL1++;
-                    }
-                    Float_t metnomu = sqrt(((mexoffrecal - mexoffrecalmuon) * (mexoffrecal - mexoffrecalmuon)) +
-                    ((meyoffrecal - meyoffrecalmuon)*(meyoffrecal - meyoffrecalmuon))); //compute metnomu
-                    cellTeff->Fill( (metcell > cellThresh) && (metl1 > metl1thresh), metnomu);
-                    mhtTeff->Fill( (metmht > mhtThresh) && (metl1 > metl1thresh), metnomu);
-                    topoclpucTeff->Fill( (mettopoclpuc > topoclpucThresh) && (metl1 > metl1thresh) , metnomu);
-
-                    cellmhtTeff->Fill( (metcell > cellCombinedThresh) && (metmht > mhtCombinedThresh)&& (metl1 > metl1thresh), metnomu );
-                    mhttopoclpucTeff->Fill( ( (metmht > mhtCombined2Thresh) && (mettopoclpuc > topoclpucCombinedThresh) && (metl1 > metl1thresh)), metnomu);
+        	        Float_t metnomu = computeMetNoMu(  mexoffrecal , meyoffrecal , mexoffrecalmuon , meyoffrecalmuon );
+                    
+               //metcell         
+                    cellTeff->Fill( (metcell > cellThresh) && 
+                                      (metl1 > metl1thresh)&&
+                                        (actint > actintCut), metnomu);
+//memht
+                    mhtTeff->Fill( (metmht > mhtThresh) && 
+                            (metl1 > metl1thresh)&&
+                            (actint > actintCut), metnomu);
+//mettopoclpuc
+                    topoclpucTeff->Fill( (mettopoclpuc > topoclpucThresh) && 
+                            (metl1 > metl1thresh)&&
+                            (actint > actintCut),  metnomu);
+//metcell && metmht
+                    cellmhtTeff->Fill( (metcell > cellCombinedThresh) && 
+                            (metmht > mhtCombinedThresh)&& 
+                            (metl1 > metl1thresh)&&
+                            (actint > actintCut), metnomu );
+//metmht && mettopoclpuc 
+                    mhttopoclpucTeff->Fill( ( (metmht > mhtCombined2Thresh) && 
+                                (mettopoclpuc > topoclpucCombinedThresh) && 
+                                (metl1 > metl1thresh)&&
+                                (actint > actintCut)), metnomu);
+           
                 }
             }
         }
     }
 
-    std::cout << "Number of events that passed all cuts, except for the cut on the alg itself (includes L1, etc.) "
-    << numbPassAllCutsndL1 << std::endl;
+    std::cout << "Number of events that passed all cuts, except for the cut on the alg itself (includes L1, etc.) ";
 
-*/
     TCanvas* efficiencyCanvas = new TCanvas("myCanv", "Efficiency Canvas");
     efficiencyCanvas->RangeAxis(0,0,500,1.0);
 
@@ -144,8 +149,8 @@ Int_t print7Efficiencies(const TString& muonFileName = "PhysicsMain.L1KFmuontrig
     legend->AddEntry(mhttopoclpucTeff, "mht and topoclpuc");
     legend->Draw();
 
-    TString folderPath = "./TEfficienciesPics/Print5Efficiencies/BestCombinationefficiencies.tiff";
-    TString bestCombinationRootFileName = "./TEfficienciesPics/Print5Efficiencies/EfficiencyBestCombination.root";
+    TString folderPath = "./pictures/BestCombinationefficiencies.tiff";
+    TString bestCombinationRootFileName = "./pictures/EfficiencyBestCombination.root";
     TFile rootFile(bestCombinationRootFileName,"CREATE");
 
     if ( !( rootFile.IsOpen() ) )

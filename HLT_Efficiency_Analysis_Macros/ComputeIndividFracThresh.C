@@ -1,5 +1,5 @@
-#define ZBKFThresh_cxx
-// The class definition in ZBKFThresh.h has been generated automatically
+#define tree_cxx
+// The class definition in tree.h has been generated automatically
 // by the ROOT utility TTree::MakeSelector(). This class is derived
 // from the ROOT class TSelector. For more information on the TSelector
 // framework see $ROOTSYS/README/README.SELECTOR or the ROOT User Manual.
@@ -19,51 +19,43 @@
 //
 // To use this file, try the following session on your Tree T:
 //
-// root> T->Process("ZBKFThresh.C")
-// root> T->Process("ZBKFThresh.C","some options")
-// root> T->Process("ZBKFThresh.C+")
+// root> T->Process("tree.C")
+// root> T->Process("tree.C","some options")
+// root> T->Process("tree.C+")
 //
 
 
-#include "ZBKFThresh.h"
+#include "tree.h"
 #include <TH2.h>
 #include <TStyle.h>
+#include"TH1.h"
 
-void ZBKFThresh::Begin(TTree * /*tree*/, userInfo* parameters)
+
+
+void tree::Begin(TTree * /*tree*/)
 {
    // The Begin() function is called at the start of the query.
    // When running with PROOF Begin() is only called on the client.
    // The tree argument is deprecated (on PROOF 0 is passed).
-   TString option = GetOption();
 
-   // Readers to access the data (delete the ones you do not need).
-  M_Parameters = parameters; 
-   Passrndm = {fReader, "passrndm"};
-   AlgAMET = {fReader, M_Parameters->Get_AlgAName()};
-   AlgBMET = {fReader, M_Parameters->Get_AlgBName()};
-   AlgAThresh = M_Parameters->Get_IndividAlgAThresh();
-   AlgBThresh = M_Parameters->Get_IndividAlgBThresh();
+   TString option = GetOption();
 }
 
-void ZBKFThresh::SlaveBegin(TTree * /*tree*/)
+void tree::SlaveBegin(TTree * /*tree*/)
 {
    // The SlaveBegin() function is called after the Begin() function.
    // When running with PROOF SlaveBegin() is called on each slave server.
    // The tree argument is deprecated (on PROOF 0 is passed).
 
+    TH1F AlgAHist = new TH1F("AlgAHist" , "AlgAHist" , 1200 , 0.0 , 300.0 );
+    TH1F AlgBHist = new TH1F("AlgBHist" , "AlgBHist" , 1200 , 0.0 , 300.0 );
+    fOutput->Add("AlgAHist");
+    fOutput->Add("AlgBHist");
    TString option = GetOption();
-   const TString algAName = M_Parameters->Get_AlgAName();
-   const TString algBName = M_Parameters->Get_AlgBName();
-    const Int_t nbins = M_Parameters->Get_Nbins();
-    const Float_t metMin = M_Parameters->Get_MetMin();
-    const Float_t metMax = M_Parameters->Get_MetMax();
-    TH1F *AlgAHist = new TH1F(algAName, algAName, nbins, metMin, metMax);
-    TH1F *AlgBHist = new TH1F(algBName, algBName, nbins, metMin, metMax);
-
 
 }
 
-Bool_t ZBKFThresh::Process(Long64_t entry)
+Bool_t tree::Process(Long64_t entry)
 {
    // The Process() function is called for each entry in the tree (or possibly
    // keyed object in the case of PROOF) to be processed. The entry argument
@@ -83,17 +75,13 @@ Bool_t ZBKFThresh::Process(Long64_t entry)
 
    fReader.SetEntry(entry);
     
-   if (*(Passrndm.Get()) > 0.5){
-       AlgAHist->Fill(*(AlgAMET.Get()) > AlgAThresh);
-       AlgBHist->Fill(*(AlgBMET.Get()) > AlgBThresh);
-   }
 
-
-
+   AlgAHist->Fill();
+   AlgBHist->Fill();
    return kTRUE;
 }
 
-void ZBKFThresh::SlaveTerminate()
+void tree::SlaveTerminate()
 {
    // The SlaveTerminate() function is called after all entries or objects
    // have been processed. When running with PROOF SlaveTerminate() is called
@@ -101,7 +89,7 @@ void ZBKFThresh::SlaveTerminate()
 
 }
 
-void ZBKFThresh::Terminate()
+void tree::Terminate()
 {
    // The Terminate() function is the last function to be called during
    // a query. It always runs on the client, it can be used to present

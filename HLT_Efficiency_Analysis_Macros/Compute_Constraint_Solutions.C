@@ -1,52 +1,86 @@
-#ifndef BISECTIONCLASS_H
-#define BISECTIONCLASS_H
 
-#include "mincerMacros.h"
-#include "bisection.h"
 
-Float_t HLTEfficiencyAnalysis::bisection(const Float_t binWidth,
-    Float_t &  individAThreshFinal , Float_t  & individBThreshFinal,const Int_t numPassedProcess1WithActintCut = 0 ,
-    Float_t frac = 0.00590, TNtuple* logFileData = NULL, TTree* passnoalgTree = NULL)
+
+
+
+int Compute_Constraint_Solutions( const TString AlgAName, const TString AlgBName )
 {
-    //some useful parameters
-    frac = parameters->getFrac();
-    Float_t metl1thresh = parameters->getMetL1Thresh();
-    Float_t actintCut = parameters->getActintCut();
-    Int_t epsilon = parameters->getEpsilon();
+    userInfo* parameters = new userInfo();
+    parameters->Set_AlgAName(AlgAName);
+    parameters->Set_AlgBName(AlgBName);
 
-    Int_t target = numPassedProcess1WithActintCut * frac;
+    parameters->Read_Parameter_File("./parameters.txt");
+    float FracAVals[100];
+
+    for (int i =0 ; i < 100;i++)
+    {
+        FracAVals[i] = 0.0029 + ( i * 0.001271 );
+    }
+
+    float FracBVals[100];
+
+    const Float_t frac = parameters->Get_Frac();
+    const Float_t metl1thresh = parameters->Get_MetL1Thresh();
+    const Float_t actintCut = parameters->Get_ActintCut();
+    const Int_t epsilon = parameters->Get_Epsilon();
+    const Float_t passrndmcut = parameters->Get_Passrndmcut();
+    const Float_t BinWidth = parameters->Get_BinWidth();
+    const Float_t passnoalgcut     = parameters->Get_Passnoalgcut();
+    const Int_t target = NumPassNoAlgPassedProcess1 * frac;
+
+    std::cout << "NumPassNoAlgPassedProcess1: " << NumPassNoAlgPassedProcess1 << std::endl;
+    std::cout << "algAHist nentries: " << algAHist->GetEntries() << std::endl;
+    std::cout << "algBHist nentries: " << algBHist->GetEntries() << std::endl;
 
     Float_t lwrbnd = 0.5 * frac;
     Float_t uprbnd = 0.13;
-
     Float_t x1,x3; //thresholds of individual algorithms
     Float_t Process2FracX1WithActintCut,Process2FracX2WithActintCut,Process2FracX3WithActintCut = 0; //fractions of events kept out of passrndm
     x1 = lwrbnd;
     x3 = uprbnd;
     Float_t initialGuess = ( x1 + x3 ) / 2.0;
     Float_t firstGuess = initialGuess;
-    Float_t numKeepx1 = numPassedProcess1WithActintCut * x1;
-    Float_t numKeepx2 = numPassedProcess1WithActintCut * initialGuess;
-    Float_t numKeepx3 = numPassedProcess1WithActintCut * x3;
 
-        //rename for clarity later on
-    algATarget->SetName(algATarget->GetName() + (const TString)"A");
-    algBTarget->SetName(algBTarget->GetName() + (const TString)"B");
+
+
+    //this is not true anymore, if the two algs keep differrent fractions, the number kept
+    //by cutting both of them at their respective fractions is not simply this sum; you
+    //need to empirically compute what is kept in a loop 
+    
+    for (int i = 0 ; i < nentries ;i++)
+    {
+
+    Float_t numKeepx1 = NumPassNoAlgPassedProcess1* x1;
+    Float_t numKeepx2 = NumPassNoAlgPassedProcess1* initialGuess;
+    Float_t numKeepx3 = NumPassNoAlgPassedProcess1* x3;
+
+    //compute the cumulative right hand sum hists
+    TH1F *algAMETtarget = (TH1F*) algAHist->GetCumulative(kFALSE);
+    TH1F *algBMETtarget = (TH1F*) algBHist->GetCumulative(kFALSE);
+
+
+    //rename for clarity later on
+    algAMETtarget->SetName(algAMETtarget->GetName() + (const TString)"A");
+    algBMETtarget->SetName(algBMETtarget->GetName() + (const TString)"B");
 
     //compute thresholds at boundaris to use
     Float_t algAMETx1thresh,algAMETx2thresh,algAMETx3thresh,algBMETx1thresh,algBMETx2thresh, algBMETx3thresh;
 
-    algAMETx1thresh = computeThresh(algATarget, numKeepx1);
-    algBMETx1thresh = computeThresh(algBTarget, numKeepx1);
+    std::cout << "NumKeepx1: " << numKeepx1 << std::endl;
+    std::cout << "NumKeepx2: " << numKeepx2 << std::endl;
+    std::cout << "NumKeepx3: " << numKeepx3 << std::endl;
 
-    algAMETx2thresh = computeThresh(algATarget, numKeepx2);
-    algBMETx2thresh = computeThresh(algBTarget, numKeepx2);
+    algAMETx1thresh = computeThresh(algAMETtarget, numKeepx1);
+    algBMETx1thresh = computeThresh(algBMETtarget, numKeepx1);
 
-    algAMETx3thresh = computeThresh(algATarget, numKeepx3);
-    algBMETx3thresh = computeThresh(algBTarget, numKeepx3);
+    algAMETx2thresh = computeThresh(algAMETtarget, numKeepx2);
+    algBMETx2thresh = computeThresh(algBMETtarget, numKeepx2);
+
+    algAMETx3thresh = computeThresh(algAMETtarget, numKeepx3);
+    algBMETx3thresh = computeThresh(algBMETtarget, numKeepx3);
 
     //print the status
-    std::cout << "numPassedProcess1WithActintCut: " << numPassedProcess1WithActintCut << std::endl;
+    std::cout << "numPassedProcess1WithActintCut: " << NumPassNoAlgPassedProcess1 << std::endl;
     std::cout << "Process2 No Actint Cut Fraction: " << frac << std::endl;
     std::cout << "Process 2 with Actint Cut Num to Keep: " << target << std::endl;
 
@@ -57,36 +91,28 @@ Float_t HLTEfficiencyAnalysis::bisection(const Float_t binWidth,
     std::cout << "Epsilon: " << epsilon << std::endl;
 
     //set the names of the histograms to also contain the letters A and B
-    algATarget->SetName(algATarget->GetName() + (const TString)"A");
-    algBTarget->SetName(algBTarget->GetName() + (const TString)"B");
-
+    algAMETtarget->SetName(algAMETtarget->GetName() + (const TString)"A");
+    algBMETtarget->SetName(algBMETtarget->GetName() + (const TString)"B");
 
     //compute initial thresholds at each of the extrema and first guess
-    algAMETx1thresh = computeThresh(algATarget, numKeepx1);
-    algBMETx1thresh = computeThresh(algBTarget, numKeepx1);
-    algAMETx2thresh = computeThresh(algATarget, numKeepx2);
-    algBMETx2thresh = computeThresh(algBTarget, numKeepx2);
-    algAMETx3thresh = computeThresh(algATarget, numKeepx3);
-    algBMETx3thresh = computeThresh(algBTarget, numKeepx3);
+    algAMETx1thresh = computeThresh(algAMETtarget, numKeepx1);
+    algBMETx1thresh = computeThresh(algBMETtarget, numKeepx1);
+    algAMETx2thresh = computeThresh(algAMETtarget, numKeepx2);
+    algBMETx2thresh = computeThresh(algBMETtarget, numKeepx2);
+    algAMETx3thresh = computeThresh(algAMETtarget, numKeepx3);
+    algBMETx3thresh = computeThresh(algBMETtarget, numKeepx3);
 
-    std::cout << "algAx1Thresh: " << algAMETx1thresh << std::endl;
-    std::cout << "algBx1Thresh: " << algBMETx1thresh << std::endl;
-    std::cout << "metl1thresh : " << metl1thresh << std::endl;
     Float_t algAMET,algBMET, metl1;
     Float_t passnoalg_actint = 0 ;
-    Int_t passnoalgL1XE10,passnoalgL1XE30,passnoalgL1XE40,passnoalgL1XE45;
+    Int_t passnoalgL1XE10,passnoalgL1XE30,passnoalgL1XE40,passnoalgL1XE45, passrndm;
 
     TString algA = algAHist->GetName();
     TString algB = algBHist->GetName();
 
     passnoalgTree->SetBranchAddress(algA,&algAMET);
     passnoalgTree->SetBranchAddress(algB,&algBMET);
-    passnoalgTree->SetBranchAddress("metl1",&metl1);
-    passnoalgTree->SetBranchAddress("passnoalgL1XE10",&passnoalgL1XE10);
-    passnoalgTree->SetBranchAddress("passnoalgL1XE30",&passnoalgL1XE30);
-    passnoalgTree->SetBranchAddress("passnoalgL1XE40",&passnoalgL1XE40);
-    passnoalgTree->SetBranchAddress("passnoalgL1XE45",&passnoalgL1XE45);
     passnoalgTree->SetBranchAddress("actint",&passnoalg_actint);
+    passnoalgTree->SetBranchAddress("passrndm",&passrndm);
 
     Int_t numPassedProcess2WithActintCutX1 = 0;
     Int_t numPassedProcess2WithActintCutX2 = 0;
@@ -100,10 +126,9 @@ Float_t HLTEfficiencyAnalysis::bisection(const Float_t binWidth,
     for (Int_t i  = 0 ; i < passnoalgNentries ;i++) //determine events kept at each guess
     {
         passnoalgTree->GetEntry(i);
-        passedProcess1ActintCut = ( metl1 > metl1thresh ) && (passnoalg_actint > actintCut);
-        isPassnoalg = ( passnoalgL1XE10 > 0.5 || passnoalgL1XE30 > 0.5 || passnoalgL1XE40 > 0.5 || passnoalgL1XE45 > 0.5  );
+        Bool_t isRndm = passrndm > passrndmcut;
 
-        if ( isPassnoalg && passedProcess1ActintCut )
+        if ( isRndm)
         {
             if ((algAMET > algAMETx1thresh) && (algBMET > algBMETx1thresh))
             {
@@ -121,17 +146,9 @@ Float_t HLTEfficiencyAnalysis::bisection(const Float_t binWidth,
     }
 
     //compute fractions kept at initial guesses
-    Process2FracX1WithActintCut = (Float_t) numPassedProcess2WithActintCutX1 / (Float_t) numPassedProcess1WithActintCut;
-    Process2FracX2WithActintCut = (Float_t) numPassedProcess2WithActintCutX2 / (Float_t) numPassedProcess1WithActintCut;
-    Process2FracX3WithActintCut = (Float_t) numPassedProcess2WithActintCutX3 / (Float_t) numPassedProcess1WithActintCut;
-
-    std::cout << "At x1 = " << x1 << " numPassedProcess2WithActintCutX1: " << numPassedProcess2WithActintCutX1 << " events " << std::endl;
-    std::cout << "Process2FracX1WithActintCut: " << Process2FracX1WithActintCut << std::endl;
-    std::cout << "At x2 = " << initialGuess << " numPassedProcess2WithActintCutX2: " << numPassedProcess2WithActintCutX2 << " events " << std::endl;
-    std::cout << "Process2FracX2WithActintCut: " << Process2FracX2WithActintCut << std::endl;
-    std::cout << "At x3 = " << x3 << " numPassedProcess2WithActintCutX3: " << numPassedProcess2WithActintCutX3 << " events " << std::endl;
-    std::cout << "Process2FracX3WithActintCut: " << Process2FracX3WithActintCut << std::endl;
-
+    Process2FracX1WithActintCut = (Float_t) numPassedProcess2WithActintCutX1 / (Float_t) NumPassNoAlgPassedProcess1;
+    Process2FracX2WithActintCut = (Float_t) numPassedProcess2WithActintCutX2 / (Float_t) NumPassNoAlgPassedProcess1;
+    Process2FracX3WithActintCut = (Float_t) numPassedProcess2WithActintCutX3 / (Float_t) NumPassNoAlgPassedProcess1;
 
     Float_t inputArray[100];
     Float_t outputArray[100];
@@ -178,11 +195,11 @@ Float_t HLTEfficiencyAnalysis::bisection(const Float_t binWidth,
         initialGuess = ( x1 + x3 ) / 2.0;
         inputArray[j+2] = initialGuess;
         std::cout << "New Guess: " << initialGuess << std::endl;
-        std::cout << "numPassedProcess1WithActintCut: " << numPassedProcess1WithActintCut << std::endl;
-        numKeepx2 = numPassedProcess1WithActintCut * initialGuess;
+        std::cout << "numPassedProcess1WithActintCut: " << NumPassNoAlgPassedProcess1 << std::endl;
+        numKeepx2 = NumPassNoAlgPassedProcess1 * initialGuess;
         std::cout << "numKeepx2: " << numKeepx2 << std::endl;
-        algAMETx2thresh = computeThresh(algATarget, numKeepx2);
-        algBMETx2thresh = computeThresh(algBTarget, numKeepx2);
+        algAMETx2thresh = computeThresh(algAMETtarget, numKeepx2);
+        algBMETx2thresh = computeThresh(algBMETtarget, numKeepx2);
 
         thresholdAarray[j+2] = (Float_t) algAMETx2thresh;
         thresholdBarray[j+2] = (Float_t) algBMETx2thresh;
@@ -193,8 +210,10 @@ Float_t HLTEfficiencyAnalysis::bisection(const Float_t binWidth,
     	for (Int_t i  = 0 ; i < passnoalgNentries ;i++)
     	{
     	  passnoalgTree->GetEntry(i);
-    	  if ((algAMET > algAMETx2thresh) && (algBMET > algBMETx2thresh) && (metl1 > metl1thresh)&& (passnoalg_actint > actintCut) &&
-          ( passnoalgL1XE10 > 0.5 || passnoalgL1XE30 > 0.5 || passnoalgL1XE40 > 0.5 || passnoalgL1XE45 > 0.5  ) )
+
+    	  if ((algAMET > algAMETx2thresh) && (algBMET > algBMETx2thresh) /*&& (metl1 > metl1thresh)&& (passnoalg_actint > actintCut)*/ &&
+          ( passrndm > passrndmcut /*|| passnoalgL1XE10 > passnoalgcut || passnoalgL1XE30 > passnoalgcut || passnoalgL1XE40 > passnoalgcut
+              || passnoalgL1XE45 > passnoalgcut  */) )
     	  {
     	    numPassedProcess2WithActintCutX2++;
     	  }
@@ -205,7 +224,7 @@ Float_t HLTEfficiencyAnalysis::bisection(const Float_t binWidth,
         std::cout << "algAMETx2thresh: " << algAMETx2thresh << std::endl;
         std::cout << "algBMETx2thresh: " << algBMETx2thresh << std::endl;
         std::cout << "Counter2: " << numPassedProcess2WithActintCutX2 << std::endl;
-        Process2FracX2WithActintCut = (Float_t) numPassedProcess2WithActintCutX2 / (Float_t) numPassedProcess1WithActintCut;
+        Process2FracX2WithActintCut = (Float_t) numPassedProcess2WithActintCutX2 / (Float_t) NumPassNoAlgPassedProcess1;
         std::cout << "Process2FracX2WithActintCut: " << Process2FracX2WithActintCut << std::endl;
         std::cout << "Condition: " << abs(target - numPassedProcess2WithActintCutX2) << " > " << epsilon << std::endl;
         outputArray[j+2] = Process2FracX2WithActintCut;
@@ -223,17 +242,17 @@ Float_t HLTEfficiencyAnalysis::bisection(const Float_t binWidth,
       std::cout << "algA previous threshold: " << Form("%.7f",thresholdAarray[j+1]) << std::endl;
       std::cout << "algB current threshold: " << Form("%.7f",thresholdBarray[j+2]) << std::endl;
       std::cout << "algB previous threshold: " << Form("%.7f",thresholdBarray[j+1]) << std::endl;
-      std::cout << "binWidth: " << binWidth << "\n" << std::endl;
+      std::cout << "BinWidth: " << BinWidth << "\n" << std::endl;
 
 
 
-    }while ( abs( numPassedProcess2WithActintCutX2 - (target) ) > epsilon && (abs(algAThreshDiff) > binWidth) && (abs(algBThreshDiff) > binWidth) && ( j <= imax ) );
+    }while ( abs( numPassedProcess2WithActintCutX2 - (target) ) > epsilon && (abs(algAThreshDiff) > BinWidth) && (abs(algBThreshDiff) > BinWidth) && ( j <= imax ) );
 
-      if ( abs( numPassedProcess2WithActintCutX2 - (target) ) <= epsilon || abs(algAThreshDiff) <= binWidth || abs(algBThreshDiff) <= binWidth)
+      if ( abs( numPassedProcess2WithActintCutX2 - (target) ) <= epsilon || abs(algAThreshDiff) <= BinWidth || abs(algBThreshDiff) <= BinWidth)
       {
-        std::cout << "A root at x = " <<  initialGuess << " was found to within one bin: " << binWidth << " GeV"
+        std::cout << "A root at x = " <<  initialGuess << " was found to within one bin: " << BinWidth << " GeV"
                   << " in " << j << " iterations" << std::endl;
-        std::cout << "The number of combined events kept is  " << Process2FracX2WithActintCut * numPassedProcess1WithActintCut << std::endl;
+        std::cout << "The number of combined events kept is  " << Process2FracX2WithActintCut * NumPassNoAlgPassedProcess1 << std::endl;
         std::cout << "The fraction of combined events kept is  " << Process2FracX2WithActintCut << std::endl;
       }
       else{
@@ -241,17 +260,9 @@ Float_t HLTEfficiencyAnalysis::bisection(const Float_t binWidth,
       }
 
 
-    individAThreshFinal = algAMETx2thresh;
-    individBThreshFinal = algBMETx2thresh;
 
-    //fill TNtuple with the numerical logfile data:
-    Int_t k = 0;
-    while ( inputArray[k] )
-    {
-        logFileData->Fill(inputArray[k],outputArray[k],numEventsArray[k],thresholdAarray[k],thresholdBarray[k]);
-        k++;
-    }
+    parameters->Set_AlgACombinedThresh(algAMETx2thresh);
+    parameters->Set_AlgBCombinedThresh(algBMETx2thresh);
 
-    return( initialGuess );
 }
-#endif//BISECTIONCLASS_H
+

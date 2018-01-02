@@ -5,10 +5,9 @@
 *.swp
 *.un
 !.gitignore
-myMacros/Pictures/
-myMacros/RootFiles
-myMacros/lib/
-myMacros/Practice\ Macros
-myMacros/Analysis
-!myMacros/
-!HLTAnalysis/
+HLT_Efficiency_Analysis_Macros/Pictures/
+HLT_Efficiency_Analysis_Macros/RootFiles
+HLT_Efficiency_Analysis_Macros/lib/
+HLT_Efficiency_Analysis_Macros/Practice\ Macros
+HLT_Efficiency_Analysis_Macros/Analysis
+!HLT_Efficiency_Analysis_Macros/
