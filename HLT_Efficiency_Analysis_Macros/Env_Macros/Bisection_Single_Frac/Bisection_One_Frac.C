@@ -1,8 +1,17 @@
-#include "mincerMacros.h"
+
+#include "Efficiency_Library.h"
 
 
-Float_t bisection( userInfo* parameters , TH1F* algAHist , TH1F* algBHist, TTree* passnoalgTree )
+Float_t bisection_one_frac( userInfo* parameters , TH1F* algAHist , TH1F* algBHist, TTree* passnoalgTree )
 {
+    /*
+    This macro should take in two alg names, a tree, and a single fraction as a given, and 
+    compute the other fraction needed to satisfy the trigger rate 
+
+    The fact that it's easier to pass the tree to this makes me think that it would be easier
+    to just use the TSelector framework from the outset
+    */
+
     const Float_t frac = parameters->Get_Frac();
     Float_t metl1thresh = parameters->Get_MetL1Thresh();
     Float_t actintCut = parameters->Get_ActintCut();

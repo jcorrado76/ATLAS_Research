@@ -35,6 +35,12 @@
                               "libHelpers"          ,
                               "./lib") 
                     == 0) {return false;}
+
+    if (gSystem->CompileMacro("Env_Macros/Histo_Bisection.C",
+                              "k-"                  , 
+                              "libBisection"          ,
+                              "./lib") 
+                    == 0) {return false;}
     
     std::cout << "Environment successfully compiled" << std::endl;
 }
