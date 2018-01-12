@@ -1,11 +1,11 @@
 #include "Efficiency_Library.h"
-Float_t computeMetNoMu( const Float_t mexoffrecal , const Float_t meyoffrecal , const Float_t mexoffrecalmuon , const Float_t meyoffrecalmuon )//{{{
+Float_t Efficiency_Lib::computeMetNoMu( const Float_t mexoffrecal , const Float_t meyoffrecal , const Float_t mexoffrecalmuon , const Float_t meyoffrecalmuon )//{{{
 {
     Float_t metnomu = sqrt(((mexoffrecal - mexoffrecalmuon) * (mexoffrecal - mexoffrecalmuon)) +
     ((meyoffrecal - meyoffrecalmuon)*(meyoffrecal - meyoffrecalmuon))); //compute metnomu
     return (metnomu);
 }//}}}
-Bool_t passTransverseMassCut( const Float_t metoffrecal , const Float_t mexoffrecal  , const Float_t meyoffrecal ,//{{{
+Bool_t Efficiency_Lib::passTransverseMassCut( const Float_t metoffrecal , const Float_t mexoffrecal  , const Float_t meyoffrecal ,//{{{
                               const Float_t metoffrecalmuon , const Float_t mexoffrecalmuon , const Float_t meyoffrecalmuon )
 {
     Float_t wLowerbnd = 40.0;
@@ -14,7 +14,7 @@ Bool_t passTransverseMassCut( const Float_t metoffrecal , const Float_t mexoffre
                            ( metoffrecal * metoffrecalmuon ) ) ) );
     return( (( wValue >= wLowerbnd ) && ( wValue <= wUpperbnd )) );
 }//}}}
-Float_t computeThresh(const TH1F* target, const Float_t numberEventsToKeep)//{{{
+Float_t Efficiency_Lib::computeThresh(const TH1F* target, const Float_t numberEventsToKeep)//{{{
 {
     Int_t nbin = 0;
     /*
@@ -44,7 +44,7 @@ Float_t computeThresh(const TH1F* target, const Float_t numberEventsToKeep)//{{{
     Float_t thresh = (target->GetXaxis())->GetBinCenter(nbin);
     return(thresh);
 }//}}}
-Float_t determineZeroBiasThresh( userInfo* parameters, const Bool_t verbose )//{{{
+Float_t Efficiency_Lib::determineZeroBiasThresh( userInfo* parameters, const Bool_t verbose )//{{{
 {
     //this function determines thresh to keep proper trigger rate for process 2 on algs A and B
     //these thresholds are used on both passnoalg and muon data
@@ -168,7 +168,7 @@ Float_t determineZeroBiasThresh( userInfo* parameters, const Bool_t verbose )//{
     threshFileHandle->Close();
 	return(0);
 }//}}}
-Float_t determineMuonEventsKeptCombined( const TString& algA, const Float_t threshA,//{{{
+Float_t Efficiency_Lib::determineMuonEventsKeptCombined( const TString& algA, const Float_t threshA,//{{{
                                          const TString& algB, Float_t threshB,
                                          const TString& muonFileName, const Float_t metl1thresh)
 {

@@ -28,8 +28,6 @@ class Bisection_Selector : public TSelector {
 public :
    TTreeReader     fReader;  //!the tree reader
    TTree          *fChain = 0;   //!pointer to the analyzed TTree or TChain
-
-
    // Readers to access the data (delete the ones you do not need). {{{
    TTreeReaderValue<Float_t> metl1 = {fReader, "metl1"};
    TTreeReaderValue<Float_t> mexl1 = {fReader, "mexl1"};
@@ -162,10 +160,7 @@ public :
     } //}}}
     Float_t Compute_MetNoMu() //{{{
     {
-       Float_t metnomu  = sqrt( ( ( *mexoffrecal - *mexoffrecalmuon) * (*mexoffrecal - *mexoffrecalmuon)) +
-        ((*meyoffrecal - *meyoffrecalmuon)*(*meyoffrecal - *meyoffrecalmuon ) ) ); 
-
-        return (metnomu);
+        return (  computeMetNoMu(const Float_t mexoffrecal , const Float_t meyoffrecal , const Float_t mexoffrecalmuon , const Float_t meyoffrecalmuon)   );
     } //}}}
    ClassDef(Bisection_Selector,0);
 };
