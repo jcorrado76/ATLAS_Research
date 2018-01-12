@@ -195,7 +195,7 @@ Float_t userInfo::Get_CombinedAlgAThresh()  const { return (M_AlgACombinedThresh
 Float_t userInfo::Get_CombinedAlgBThresh()  const {return (M_AlgBCombinedThresh); }
 Float_t userInfo::Get_Passnoalgcut() const {return (M_Passnoalgcut);}
 Float_t userInfo::Get_Passrndmcut() const { return (M_Passrndmcut);}
-TString userInfo::GetName() const { return (M_Name);}
+const char *userInfo::GetName() const { return (M_Name);}
 
 
 //setters
