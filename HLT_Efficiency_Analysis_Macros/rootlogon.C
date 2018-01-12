@@ -4,7 +4,6 @@
 
 {
     std::cout << "Started ATLAS_Research Environmnet" << std::endl;
-    gROOT->ProcessLine
 }
 
 

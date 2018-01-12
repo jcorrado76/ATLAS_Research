@@ -1,10 +1,8 @@
 
-
-
-
-
 int Compute_Constraint_Solutions( const TString AlgAName, const TString AlgBName )
 {
+     /*This macro is going to compute solutions to the constraint equation for
+      * combinations of the individual fractions that we are able to try */
     userInfo* parameters = new userInfo();
     parameters->Set_AlgAName(AlgAName);
     parameters->Set_AlgBName(AlgBName);
