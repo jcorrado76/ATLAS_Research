@@ -42,7 +42,7 @@ int Compute_Trigger_Rate(){
 
     std::cout << "Number of metl1 > 50.0 ( process 2 ) entries: " << MetL1Hist->GetEntries() << std::endl;
 
-    std::cout << "Trigger rate = ( numb kept process 1 ) / ( numb kept process 2 ): " << ((MetL1Hist->GetEntries())/(RandomHist->GetEntries())) << std::endl;
+    std::cout << "Trigger rate = ( numb kept process 2 ) / ( numb kept process 1 ): " << ((MetL1Hist->GetEntries())/(RandomHist->GetEntries())) << std::endl;
 
     return 0;
 }

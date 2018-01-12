@@ -24,13 +24,13 @@
             (requires - option as well)
             }}}*/
 
-    if (gSystem->CompileMacro("Parameter_Class.C" , 
+    if (gSystem->CompileMacro("Env_Macros/Parameter_Class.C" , 
                               "k-"         , 
                               "libUserInfo",
                               "./lib")
                     == 0) {return false;}
 
-    if (gSystem->CompileMacro("Efficiency_Library.C",
+    if (gSystem->CompileMacro("Env_Macros/Efficiency_Library.C",
                               "k-"                  , 
                               "libHelpers"          ,
                               "./lib") 
