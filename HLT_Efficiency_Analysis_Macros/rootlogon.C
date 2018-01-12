@@ -5,6 +5,38 @@
 
 {
     std::cout << "Started ATLAS_Research Environmnet" << std::endl;
+
+    //set up include path
+    TString include_path = gSystem->GetIncludePath();
+
+    //add include directory to include path
+    if (!include_path.Contains("-I./include"))
+    {
+        gSystem->AddIncludePath("-I./include");
+    }
+    std::cout << "Added local include directory to the include path" << std::endl;
+    
+    /*CompileMacroSyntax {{{
+            k option - keep shared library after session end 
+            - option - use flat builddir structure 
+            3rd arg specifies name of lib
+            4th arg specifies location of generated lib
+            (requires - option as well)
+            }}}*/
+
+    if (gSystem->CompileMacro("Parameter_Class.C" , 
+                              "k-"         , 
+                              "libUserInfo",
+                              "./lib")
+                    == 0) {return false;}
+
+    if (gSystem->CompileMacro("Efficiency_Library.C",
+                              "k-"                  , 
+                              "libHelpers"          ,
+                              "./lib") 
+                    == 0) {return false;}
+    
+    std::cout << "Environment successfully compiled" << std::endl;
 }
 
 
