@@ -44,7 +44,7 @@
 
     if (gSystem->CompileMacro("Env_Macros/Bisection_Single_Frac/Bisection_One_Frac_Fixed.C",
                               "k-"                  , 
-                              "libBisection"          ,
+                              "libBisectionOneFracFixed"          ,
                               "./lib") 
                     == 0) {return false;}
     
