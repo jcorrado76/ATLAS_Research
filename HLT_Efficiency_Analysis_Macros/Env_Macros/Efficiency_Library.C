@@ -51,7 +51,8 @@ Float_t Efficiency_Lib::determineZeroBiasThresh( userInfo* parameters, const Boo
     parameters->Print();
     const Float_t metL1Thresh      = parameters->Get_MetL1Thresh();
     const Float_t actintCut        = parameters->Get_ActintCut();
-    const TString threshFileName   = parameters->Get_ThreshFileName();
+    const TString threshFileName = "ZeroBiasL1KF2016R307195R311481.51Runs.root"; 
+    //const TString threshFileName   = parameters->Get_ThreshFileName();
     const TString algAName         = parameters->Get_AlgAName();
     const TString algBName         = parameters->Get_AlgBName();
     const Float_t frac             = parameters->Get_Frac();
@@ -61,7 +62,8 @@ Float_t Efficiency_Lib::determineZeroBiasThresh( userInfo* parameters, const Boo
 	const Int_t nbins              = parameters->Get_Nbins();
     const Float_t passnoalgcut     = parameters->Get_Passnoalgcut();
     const Float_t passrndmcut      = parameters->Get_Passrndmcut();
-    const TString threshFilePath = "../myData/" + threshFileName;
+    std::cout << "threshfilename: " << threshFileName << std::endl;
+    const TString threshFilePath = "../../ATLAS_DATA/" + threshFileName;
 	TFile *threshFileHandle = TFile::Open(threshFilePath, "READ");
 	TTree *threshTree = (TTree*)(threshFileHandle->Get("tree"));
     const Int_t passnoAlgNentries = threshTree->GetEntries();

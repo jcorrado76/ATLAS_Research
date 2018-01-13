@@ -1,7 +1,7 @@
 #include "Efficiency_Library.h"
 
 
-Float_t bisection( userInfo* parameters , TH1F* algAHist , TH1F* algBHist, TTree* passnoalgTree )
+Float_t Efficiency_Lib::bisection( userInfo* parameters , TH1F* algAHist , TH1F* algBHist, TTree* passnoalgTree )
 {
     // Get Parameters from UserInfo {{{
     const Float_t frac = parameters->Get_Frac();
@@ -46,14 +46,14 @@ Float_t bisection( userInfo* parameters , TH1F* algAHist , TH1F* algBHist, TTree
     std::cout << "NumKeepx3: " << numKeepx3 << std::endl;
     //}}}
     //Compute Thresholds to keep each of the numbers {{{
-    algAMETx1thresh = computeThresh(algAMETtarget, numKeepx1);
-    algBMETx1thresh = computeThresh(algBMETtarget, numKeepx1);
+    algAMETx1thresh = Efficiency_Lib::computeThresh(algAMETtarget, numKeepx1);
+    algBMETx1thresh = Efficiency_Lib::computeThresh(algBMETtarget, numKeepx1);
 
-    algAMETx2thresh = computeThresh(algAMETtarget, numKeepx2);
-    algBMETx2thresh = computeThresh(algBMETtarget, numKeepx2);
+    algAMETx2thresh = Efficiency_Lib::computeThresh(algAMETtarget, numKeepx2);
+    algBMETx2thresh = Efficiency_Lib::computeThresh(algBMETtarget, numKeepx2);
 
-    algAMETx3thresh = computeThresh(algAMETtarget, numKeepx3);
-    algBMETx3thresh = computeThresh(algBMETtarget, numKeepx3);
+    algAMETx3thresh = Efficiency_Lib::computeThresh(algAMETtarget, numKeepx3);
+    algBMETx3thresh = Efficiency_Lib::computeThresh(algBMETtarget, numKeepx3);
     //}}}
     //Display parameters of bisection {{{
     std::cout << "numPassedProcess1WithActintCut: " << NumPassNoAlgPassedProcess1 << std::endl;
@@ -71,12 +71,12 @@ Float_t bisection( userInfo* parameters , TH1F* algAHist , TH1F* algBHist, TTree
     algBMETtarget->SetName(algBMETtarget->GetName() + (const TString)"B");
     //}}}
     //compute initial thresholds at each of the extrema and first guess{{{
-    algAMETx1thresh = computeThresh(algAMETtarget, numKeepx1);
-    algBMETx1thresh = computeThresh(algBMETtarget, numKeepx1);
-    algAMETx2thresh = computeThresh(algAMETtarget, numKeepx2);
-    algBMETx2thresh = computeThresh(algBMETtarget, numKeepx2);
-    algAMETx3thresh = computeThresh(algAMETtarget, numKeepx3);
-    algBMETx3thresh = computeThresh(algBMETtarget, numKeepx3);
+    algAMETx1thresh = Efficiency_Lib::computeThresh(algAMETtarget, numKeepx1);
+    algBMETx1thresh = Efficiency_Lib::computeThresh(algBMETtarget, numKeepx1);
+    algAMETx2thresh = Efficiency_Lib::computeThresh(algAMETtarget, numKeepx2);
+    algBMETx2thresh = Efficiency_Lib::computeThresh(algBMETtarget, numKeepx2);
+    algAMETx3thresh = Efficiency_Lib::computeThresh(algAMETtarget, numKeepx3);
+    algBMETx3thresh = Efficiency_Lib::computeThresh(algBMETtarget, numKeepx3);
     //}}}
     /*{{{
     std::cout << "Passrndmcut: " << passrndmcut << std::endl;
@@ -203,8 +203,8 @@ Float_t bisection( userInfo* parameters , TH1F* algAHist , TH1F* algBHist, TTree
         std::cout << "numPassedProcess1WithActintCut: " << NumPassNoAlgPassedProcess1 << std::endl;
         numKeepx2 = NumPassNoAlgPassedProcess1 * initialGuess;
         std::cout << "numKeepx2: " << numKeepx2 << std::endl;
-        algAMETx2thresh = computeThresh(algAMETtarget, numKeepx2);
-        algBMETx2thresh = computeThresh(algBMETtarget, numKeepx2);
+        algAMETx2thresh = Efficiency_Lib::computeThresh(algAMETtarget, numKeepx2);
+        algBMETx2thresh = Efficiency_Lib::computeThresh(algBMETtarget, numKeepx2);
 
         thresholdAarray[j+2] = (Float_t) algAMETx2thresh;
         thresholdBarray[j+2] = (Float_t) algBMETx2thresh;

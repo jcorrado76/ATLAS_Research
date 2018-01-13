@@ -36,7 +36,13 @@
                               "./lib") 
                     == 0) {return false;}
 
-    if (gSystem->CompileMacro("Env_Macros/Histo_Bisection.C",
+    if (gSystem->CompileMacro("Env_Macros/Bisection/[DEPRECT.]Histo_Bisection.C",
+                              "k-"                  , 
+                              "libBisection"          ,
+                              "./lib") 
+                    == 0) {return false;}
+
+    if (gSystem->CompileMacro("Env_Macros/Bisection_Single_Frac/Bisection_One_Frac_Fixed.C",
                               "k-"                  , 
                               "libBisection"          ,
                               "./lib") 
