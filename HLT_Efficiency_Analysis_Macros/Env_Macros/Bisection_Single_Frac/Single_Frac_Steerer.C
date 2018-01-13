@@ -7,7 +7,7 @@ void Single_Frac_Steerer(){
     userInfo* parameters = new userInfo();
     parameters->Set_AlgAName( AlgAName );
     parameters->Set_AlgBName( AlgBName );
-    parameters->Read_Parameter_File( "../../parameter_files/HLTAnalysisParameters.txt" );
+    parameters->Read_Parameter_File( "parameter_files/HLTAnalysisParameters.txt" );
 
     TString zbfilename = parameters->Get_ThreshFileName();
 
