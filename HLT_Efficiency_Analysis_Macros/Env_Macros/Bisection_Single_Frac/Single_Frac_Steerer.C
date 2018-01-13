@@ -71,7 +71,7 @@ void Single_Frac_Steerer(){
     for ( int i = 0 ; i < N_SOLNS ; i++ )
     {
 
-            Efficiency_Lib::bisection_one_frac_fixed( AlgAInputArray[i]  ,parameters  ); 
+            Efficiency_Lib::bisection_one_frac_fixed( AlgAInputArray[i]  ,parameters , algAMETHist , algBMETHist, zeroBiasTree ); 
 
     }
 

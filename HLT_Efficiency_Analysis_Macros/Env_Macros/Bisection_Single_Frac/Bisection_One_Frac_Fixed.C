@@ -1,6 +1,6 @@
 #include "Efficiency_Library.h"
 
-Float_t Efficiency_Lib::bisection_one_frac_fixed(const float fracA, const userInfo* parameters ){
+Float_t Efficiency_Lib::bisection_one_frac_fixed(const float fracA, userInfo* parameters, const TH1F* AlgAHist , const TH1F* AlgBHist , TTree* passnoalgTree  ){
     /*
     This macro is going to do a bisection given one fixed fraction as a parameter 
     fraction A will be the one held constant
@@ -17,8 +17,8 @@ Float_t Efficiency_Lib::bisection_one_frac_fixed(const float fracA, const userIn
     Int_t target                                    = NumPassNoAlgPassedProcess1 * trigger_rate;
     //}}}
     std::cout << "NumPassNoAlgPassedProcess1: " << NumPassNoAlgPassedProcess1 << std::endl;//{{{
-    std::cout << "algAHist nentries: " << algAHist->GetEntries() << std::endl;
-    std::cout << "algBHist nentries: " << algBHist->GetEntries() << std::endl;//}}}
+    std::cout << "AlgAHist->GetEntries() << std::endl";
+    std::cout << "AlgBHist nentries: " << AlgBHist->GetEntries() << std::endl;//}}}
     Float_t lwrbnd = 0.5 * trigger_rate;//{{{
     Float_t uprbnd = 0.13;
     Float_t x1,x3; //thresholds of individual algorithms
@@ -33,15 +33,15 @@ Float_t Efficiency_Lib::bisection_one_frac_fixed(const float fracA, const userIn
     Float_t numKeepA = NumPassNoAlgPassedProcess1 * fracA;
     //}}}
     //compute the cumulative right hand sum hists {{{
-    TH1F *algAMETtarget = (TH1F*) algAHist->GetCumulative(kFALSE);
-    TH1F *algBMETtarget = (TH1F*) algBHist->GetCumulative(kFALSE);
+    TH1F *algAMETtarget = (TH1F*) AlgAHist->GetCumulative(kFALSE);
+    TH1F *algBMETtarget = (TH1F*) AlgBHist->GetCumulative(kFALSE);
     //}}}
     //rename for clarity later on {{{
     algAMETtarget->SetName(algAMETtarget->GetName() + (const TString)"A");
     algBMETtarget->SetName(algBMETtarget->GetName() + (const TString)"B");
     //}}}
     //compute thresholds at boundaris to use
-    Float_t algAMETthresh,algAMETthresh,algAMETthresh,algBMETx1thresh,algBMETx2thresh, algBMETx3thresh;
+    Float_t algAMETthresh,algBMETx1thresh,algBMETx2thresh, algBMETx3thresh;
     std::cout << "NumKeepx1: " << numKeepx1 << std::endl;//{{{
     std::cout << "NumKeepx2: " << numKeepx2 << std::endl;
     std::cout << "NumKeepx3: " << numKeepx3 << std::endl;
@@ -90,8 +90,8 @@ Float_t Efficiency_Lib::bisection_one_frac_fixed(const float fracA, const userIn
     Float_t passnoalg_actint = 0 ;
     Int_t passnoalgL1XE10,passnoalgL1XE30,passnoalgL1XE40,passnoalgL1XE45, passrndm;
 
-    TString algA = algAHist->GetName();
-    TString algB = algBHist->GetName();
+    TString algA = AlgAHist->GetName();
+    TString algB = AlgBHist->GetName();
 
     passnoalgTree->SetBranchAddress(algA,&algAMET);
     passnoalgTree->SetBranchAddress(algB,&algBMET);
@@ -242,7 +242,7 @@ Float_t Efficiency_Lib::bisection_one_frac_fixed(const float fracA, const userIn
       std::cout << "algA previous threshold: " << Form("%.7f",thresholdAarray[j+1]) << std::endl;
       std::cout << "algB current threshold: " << Form("%.7f",thresholdBarray[j+2]) << std::endl;
       std::cout << "algB previous threshold: " << Form("%.7f",thresholdBarray[j+1]) << std::endl;
-      std::cout << "BinWidth: " << BinWidth << "\n" << std::endl;
+      std::cout << "BinWidth: " << BinWidth << std::endl;
 
 
 
@@ -273,12 +273,6 @@ Float_t Efficiency_Lib::bisection_one_frac_fixed(const float fracA, const userIn
         k++;
     }
 
-
-
-
-
-
-
-
+   return(1.0); 
 
 }
