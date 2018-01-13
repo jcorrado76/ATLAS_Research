@@ -147,7 +147,7 @@ public :
    //}}}
     Bool_t PassTransverseMassCut() //{{{
     {
-        return( passTransverseMassCut( *metoffrecal , *mexoffrecal  , *meyoffrecal ,
+        return( Efficiency_Lib::passTransverseMassCut( *metoffrecal , *mexoffrecal  , *meyoffrecal ,
                               *metoffrecalmuon , *mexoffrecalmuon , *meyoffrecalmuon  );
     } //}}}
     Bool_t Is_Clean() //{{{
@@ -160,7 +160,7 @@ public :
     } //}}}
     Float_t Compute_MetNoMu() //{{{
     {
-        return (  computeMetNoMu(const Float_t mexoffrecal , const Float_t meyoffrecal , const Float_t mexoffrecalmuon , const Float_t meyoffrecalmuon)   );
+        return (  Efficiency_Lib::computeMetNoMu(const Float_t mexoffrecal , const Float_t meyoffrecal , const Float_t mexoffrecalmuon , const Float_t meyoffrecalmuon)   );
     } //}}}
    ClassDef(Bisection_Selector,0);
 };
