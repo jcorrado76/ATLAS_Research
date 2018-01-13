@@ -1,24 +1,25 @@
 #include "Efficiency_Library.h"
 
-
-
 int Bisection_One_Frac_Fixed(const float fracA, const userInfo* parameters ){
-
-    const Float_t frac = parameters->Get_Frac();
-    Float_t metl1thresh = parameters->Get_MetL1Thresh();
-    Float_t actintCut = parameters->Get_ActintCut();
-    Int_t epsilon = parameters->Get_Epsilon();
-    Float_t passrndmcut = parameters->Get_Passrndmcut();
-    const Int_t NumPassNoAlgPassedProcess1 = parameters->Get_NumThreshPassProcess1();
-    const Float_t BinWidth = parameters->Get_BinWidth();
-    const Float_t passnoalgcut     = parameters->Get_Passnoalgcut();
-    Int_t target = NumPassNoAlgPassedProcess1 * frac;
-
-    std::cout << "NumPassNoAlgPassedProcess1: " << NumPassNoAlgPassedProcess1 << std::endl;
+    /*
+    This macro is going to do a bisection given one fixed fraction as a parameter 
+    fraction A will be the one held constant
+    */
+    //{{{
+    const Float_t trigger_rate                      = parameters->Get_Frac();
+    Float_t metl1thresh                             = parameters->Get_MetL1Thresh();
+    Float_t actintCut                               = parameters->Get_ActintCut();
+    Int_t epsilon                                   = parameters->Get_Epsilon();
+    Float_t passrndmcut                             = parameters->Get_Passrndmcut();
+    const Int_t NumPassNoAlgPassedProcess1          = parameters->Get_NumThreshPassProcess1();
+    const Float_t BinWidth                          = parameters->Get_BinWidth();
+    const Float_t passnoalgcut                      = parameters->Get_Passnoalgcut();
+    Int_t target                                    = NumPassNoAlgPassedProcess1 * trigger_rate;
+    //}}}
+    std::cout << "NumPassNoAlgPassedProcess1: " << NumPassNoAlgPassedProcess1 << std::endl;//{{{
     std::cout << "algAHist nentries: " << algAHist->GetEntries() << std::endl;
-    std::cout << "algBHist nentries: " << algBHist->GetEntries() << std::endl;
-
-    Float_t lwrbnd = 0.5 * frac;
+    std::cout << "algBHist nentries: " << algBHist->GetEntries() << std::endl;//}}}
+    Float_t lwrbnd = 0.5 * trigger_rate;//{{{
     Float_t uprbnd = 0.13;
     Float_t x1,x3; //thresholds of individual algorithms
     Float_t Process2FracX1WithActintCut,Process2FracX2WithActintCut,Process2FracX3WithActintCut = 0; //fractions of events kept out of passrndm
@@ -29,35 +30,37 @@ int Bisection_One_Frac_Fixed(const float fracA, const userInfo* parameters ){
     Float_t numKeepx1 = NumPassNoAlgPassedProcess1* x1;
     Float_t numKeepx2 = NumPassNoAlgPassedProcess1* initialGuess;
     Float_t numKeepx3 = NumPassNoAlgPassedProcess1* x3;
+    //}}}
 
-    //compute the cumulative right hand sum hists
+    //compute the cumulative right hand sum hists {{{
     TH1F *algAMETtarget = (TH1F*) algAHist->GetCumulative(kFALSE);
     TH1F *algBMETtarget = (TH1F*) algBHist->GetCumulative(kFALSE);
+    //}}}
 
-
-    //rename for clarity later on
+    //rename for clarity later on {{{
     algAMETtarget->SetName(algAMETtarget->GetName() + (const TString)"A");
     algBMETtarget->SetName(algBMETtarget->GetName() + (const TString)"B");
+    //}}}
 
     //compute thresholds at boundaris to use
     Float_t algAMETx1thresh,algAMETx2thresh,algAMETx3thresh,algBMETx1thresh,algBMETx2thresh, algBMETx3thresh;
 
-    std::cout << "NumKeepx1: " << numKeepx1 << std::endl;
+    std::cout << "NumKeepx1: " << numKeepx1 << std::endl;//{{{
     std::cout << "NumKeepx2: " << numKeepx2 << std::endl;
     std::cout << "NumKeepx3: " << numKeepx3 << std::endl;
+    //}}}
 
-    algAMETx1thresh = computeThresh(algAMETtarget, numKeepx1);
+    //{{{
+    algAMETthresh = computeThresh(algAMETtarget, numKeepA);
+
     algBMETx1thresh = computeThresh(algBMETtarget, numKeepx1);
-
-    algAMETx2thresh = computeThresh(algAMETtarget, numKeepx2);
     algBMETx2thresh = computeThresh(algBMETtarget, numKeepx2);
-
-    algAMETx3thresh = computeThresh(algAMETtarget, numKeepx3);
     algBMETx3thresh = computeThresh(algBMETtarget, numKeepx3);
+    //}}}
 
-    //print the status
+    //print the status{{{
     std::cout << "numPassedProcess1WithActintCut: " << NumPassNoAlgPassedProcess1 << std::endl;
-    std::cout << "Process2 No Actint Cut Fraction: " << frac << std::endl;
+    std::cout << "Process2 No Actint Cut Fraction: " << trigger_rate << std::endl;
     std::cout << "Process 2 with Actint Cut Num to Keep: " << target << std::endl;
 
     std::cout << "Entering bisection to determine individual fractions" << std::endl;
@@ -65,18 +68,21 @@ int Bisection_One_Frac_Fixed(const float fracA, const userInfo* parameters ){
     std::cout << "Midpoint: " << (lwrbnd+uprbnd)/2. << std::endl;
     std::cout << "Upper Bound: " << uprbnd << std::endl;
     std::cout << "Epsilon: " << epsilon << std::endl;
+    //}}}
 
-    //set the names of the histograms to also contain the letters A and B
+    //set the names of the histograms to also contain the letters A and B {{{
     algAMETtarget->SetName(algAMETtarget->GetName() + (const TString)"A");
     algBMETtarget->SetName(algBMETtarget->GetName() + (const TString)"B");
+    //}}}
 
-    //compute initial thresholds at each of the extrema and first guess
+    //compute initial thresholds at each of the extrema and first guess{{{
     algAMETx1thresh = computeThresh(algAMETtarget, numKeepx1);
     algBMETx1thresh = computeThresh(algBMETtarget, numKeepx1);
     algAMETx2thresh = computeThresh(algAMETtarget, numKeepx2);
     algBMETx2thresh = computeThresh(algBMETtarget, numKeepx2);
     algAMETx3thresh = computeThresh(algAMETtarget, numKeepx3);
     algBMETx3thresh = computeThresh(algBMETtarget, numKeepx3);
+    //}}}
 
     /*
     std::cout << "Passrndmcut: " << passrndmcut << std::endl;
@@ -183,7 +189,7 @@ int Bisection_One_Frac_Fixed(const float fracA, const userInfo* parameters ){
     do{
         j++;
         std::cout << "Inside iteration number: " << j << std::endl;
-        if ( (Process2FracX1WithActintCut-frac)*(Process2FracX2WithActintCut-frac) < 0 ) //root is in left half of interval
+        if ( (Process2FracX1WithActintCut-trigger_rate)*(Process2FracX2WithActintCut-trigger_rate) < 0 ) //root is in left half of interval
         {
           std::cout << "Root is to the left of " << initialGuess << std::endl;
           Process2FracX3WithActintCut = Process2FracX2WithActintCut;
