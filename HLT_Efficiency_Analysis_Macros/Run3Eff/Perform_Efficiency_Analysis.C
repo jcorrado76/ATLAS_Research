@@ -4,18 +4,20 @@
 TFile* threeEfficiencies( const TString& AlgAName , const TString& AlgBName )
 {
 
-    const TString DATA_PATH( "../../../ATLAS_DATA/" );
+    TString DATA_PATH =  "../../ATLAS_DATA/" ;
+    std::cout << "Data Path: " << DATA_PATH << std::endl;
 
     //GLOBAL DEFINITION
     userInfo* parameters = new userInfo();
     parameters->Set_AlgAName(AlgAName);
     parameters->Set_AlgBName(AlgBName);
-
+    //read the parameter file for HLT analysis
     parameters->Read_Parameter_File("./parameters.txt");
 
     //FILES
     TString zerobiasFileName = parameters->Get_ThreshFileName();
-    TString muonFilename = parameters->Get_MuonFileName();
+    const TString muonFilename = parameters->Get_MuonFileName();
+    std::cout << "Muon filename: " << muonFilename << std::endl;
 
     //THREEFF BENCHMARK
     TBenchmark* threeEfficienciesBenchmark = new TBenchmark();
@@ -24,7 +26,8 @@ TFile* threeEfficiencies( const TString& AlgAName , const TString& AlgBName )
     threeEfficienciesBenchmark->Start("Three Efficiencies");
 
     //MUON FILE; MUON TREE
-    TString muonFilePath = DATA_PATH + muonFilename;
+    const TString muonFilePath = DATA_PATH + muonFilename;
+    std::cout << "MuonFilePath: " << muonFilePath << std::endl;
     TFile * muonFile = TFile::Open(muonFilePath, "READ");
     TTree* myMuonTree = (TTree*)muonFile->Get("tree");
     Int_t muonNentries = myMuonTree->GetEntries();
