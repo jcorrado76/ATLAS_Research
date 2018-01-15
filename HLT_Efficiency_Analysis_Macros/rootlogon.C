@@ -36,7 +36,7 @@
                               "./lib") 
                     == 0) {return false;}
 
-    if (gSystem->CompileMacro("Env_Macros/Bisection/[DEPRECT.]Histo_Bisection.C",
+    if (gSystem->CompileMacro("Env_Macros/Bisection/Bisection.C",
                               "k-"                  , 
                               "libBisection"          ,
                               "./lib") 

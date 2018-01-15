@@ -22,7 +22,7 @@ TFile* threeEfficiencies( const TString& AlgAName , const TString& AlgBName )
     threeEfficienciesBenchmark->Start("Three Efficiencies");
 
     //MUON FILE; MUON TREE
-    TString muonFilePath = "../myData/"+muonFilename;
+    TString muonFilePath = "../myData/" + muonFilename;
     TFile * muonFile = TFile::Open(muonFilePath, "READ");
     TTree* myMuonTree = (TTree*)muonFile->Get("tree");
     Int_t muonNentries = myMuonTree->GetEntries();
@@ -94,7 +94,7 @@ TFile* threeEfficiencies( const TString& AlgAName , const TString& AlgBName )
     //IN DETERMINE THRESH I COMPUTE THRESHOLD AFTER ALSO CUTTING ON METL1 TO MAKE HISTOGRAMS
     Int_t numPassnoalgPassProcess1AlgA = 0;
 
-    Float_t returns = determineZeroBiasThresh( parameters, true );
+    Float_t returns = Efficiency_Lib::determineZeroBiasThresh( parameters, true );
 
     const Float_t AlgAIndividThresh = parameters->Get_IndividAlgAThresh();
     const Float_t AlgBIndividThresh = parameters->Get_IndividAlgBThresh();
@@ -135,7 +135,7 @@ TFile* threeEfficiencies( const TString& AlgAName , const TString& AlgBName )
     threeEfficienciesBenchmark->Start("Bisection");
 
     //run BISECTION
-    Float_t number = bisection( parameters , algAMETHist, algBMETHist , zeroBiasTree );
+    Float_t number = Efficiency_Lib::bisection( parameters , algAMETHist, algBMETHist , zeroBiasTree );
 
     const Float_t CombinedThreshAlgA = parameters->Get_CombinedAlgAThresh();
     const Float_t CombinedThreshAlgB = parameters->Get_CombinedAlgBThresh();
@@ -188,9 +188,9 @@ TFile* threeEfficiencies( const TString& AlgAName , const TString& AlgBName )
 
         if ( isMuon && isClean && ( muonActint > actintCut ))
     	{
-            if ( passTransverseMassCut(metoffrecal,mexoffrecal,meyoffrecal,metoffrecalmuon,mexoffrecalmuon,meyoffrecalmuon) )
+            if ( Efficiency_Lib::passTransverseMassCut(metoffrecal,mexoffrecal,meyoffrecal,metoffrecalmuon,mexoffrecalmuon,meyoffrecalmuon) )
             {
-        	    Float_t metnomu = computeMetNoMu(  mexoffrecal , meyoffrecal , mexoffrecalmuon , meyoffrecalmuon );
+        	    Float_t metnomu = Efficiency_Lib::computeMetNoMu(  mexoffrecal , meyoffrecal , mexoffrecalmuon , meyoffrecalmuon );
 
                 Ateff->Fill((algAmuonMET > AlgAIndividThresh ) /*&& (muonMetl1 > metl1thresh)*/ && ( muonActint > actintCut ), metnomu);
         	    Bteff->Fill((algBmuonMET > AlgBIndividThresh ) /*&& (muonMetl1 > metl1thresh)*/&& ( muonActint > actintCut ), metnomu);
@@ -229,7 +229,7 @@ TFile* threeEfficiencies( const TString& AlgAName , const TString& AlgBName )
     legend->Draw();
 
     //compute number muon events actually kept using external macro
-    Int_t muonEventsCombined = determineMuonEventsKeptCombined( AlgAName , CombinedThreshAlgA , AlgBName , CombinedThreshAlgB , muonFilename , metl1thresh );
+    Int_t muonEventsCombined = Efficiency_Lib::determineMuonEventsKeptCombined( AlgAName , CombinedThreshAlgA , AlgBName , CombinedThreshAlgB , muonFilename , metl1thresh );
 
     parameters->Set_NumPassNoAlgPassProcess1( NumbRndmProcess1 );
     parameters->Set_NumMuonPassProcess1( NumMuonPassProcess1WithActintCut );
