@@ -4,6 +4,8 @@
 TFile* threeEfficiencies( const TString& AlgAName , const TString& AlgBName )
 {
 
+    const TString DATA_PATH( "../../../ATLAS_DATA/" );
+
     //GLOBAL DEFINITION
     userInfo* parameters = new userInfo();
     parameters->Set_AlgAName(AlgAName);
@@ -22,14 +24,14 @@ TFile* threeEfficiencies( const TString& AlgAName , const TString& AlgBName )
     threeEfficienciesBenchmark->Start("Three Efficiencies");
 
     //MUON FILE; MUON TREE
-    TString muonFilePath = "../myData/" + muonFilename;
+    TString muonFilePath = DATA_PATH + muonFilename;
     TFile * muonFile = TFile::Open(muonFilePath, "READ");
     TTree* myMuonTree = (TTree*)muonFile->Get("tree");
     Int_t muonNentries = myMuonTree->GetEntries();
     parameters->Set_MuonNentries( muonNentries );
 
     //ZBTREE
-    TString zerobiasFilePath = "../myData/"+ zerobiasFileName;
+    TString zerobiasFilePath = DATA_PATH + zerobiasFileName;
     TFile * zeroBiasFile = TFile::Open(zerobiasFilePath, "READ");
     TTree* zeroBiasTree = (TTree*)zeroBiasFile->Get("tree");
     Int_t zerobiasNentries = zeroBiasTree->GetEntries();
