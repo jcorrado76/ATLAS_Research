@@ -9,12 +9,11 @@ void Compute_Trigger_Rate_TSelector::Begin(TTree * /*tree*/)
 
 void Compute_Trigger_Rate_TSelector::SlaveBegin(TTree * /*tree*/)
 {
-
     MetL1Hist = new TH1F("h1","Process 2 Histogram", 1200, 0.,300.);
     RandomHist = new TH1F("h2","Process 1 Histogram", 1200, 0.,300.);
     fOutput->Add( MetL1Hist );
     fOutput->Add( RandomHist );
-   TString option = GetOption();
+    TString option = GetOption();
 }
 
 
