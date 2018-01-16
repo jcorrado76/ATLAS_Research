@@ -43,9 +43,6 @@ TFile* threeEfficiencies( const TString& AlgAName , const TString& AlgBName )
     Float_t passnoalgcut = parameters->Get_Passnoalgcut();
     Float_t passrndmcut = parameters->Get_Passrndmcut();
 
-    TString xlabel = "MET [GeV]";
-    TString yaxis = "Events";
-
     //initialize variables to be used later
     Float_t metl1thresh = parameters->Get_MetL1Thresh();
     Float_t actintCut = parameters->Get_ActintCut();
