@@ -85,6 +85,10 @@ TFile* threeEfficiencies( const TString& AlgAName , const TString& AlgBName )
     myMuonTree->SetBranchAddress("metrefmuon", &metrefmuon);
     myMuonTree->SetBranchAddress("mexrefmuon", &mexrefmuon);
     myMuonTree->SetBranchAddress("meyrefmuon", &meyrefmuon);
+    myMuonTree->SetBranchAddress(AlgAName,&algAmuonMET);
+    myMuonTree->SetBranchAddress(AlgBName,&algBmuonMET);
+    //myMuonTree->SetBranchAddress("metl1",&muonMetl1);
+    myMuonTree->SetBranchAddress("actint", &muonActint);
     //}}}
 
     //ZB INDIVID HISTS
@@ -170,12 +174,8 @@ TFile* threeEfficiencies( const TString& AlgAName , const TString& AlgBName )
     Float_t algBmuonMET = 0;
     Float_t muonMetl1 = 0;
     Float_t muonActint = 0;
-    myMuonTree->SetBranchAddress(AlgAName,&algAmuonMET);
-    myMuonTree->SetBranchAddress(AlgBName,&algBmuonMET);
-    //myMuonTree->SetBranchAddress("metl1",&muonMetl1);
-    myMuonTree->SetBranchAddress("actint", &muonActint);
 
-    std::cout << "Starting to fill TEfficiencies.." << std::endl;
+    std::cout << "Starting to fill TEfficiencies.." << std::endl;//{{{
 
     Int_t NumMuonPassProcess1WithActintCut = 0 ;
 
@@ -192,7 +192,6 @@ TFile* threeEfficiencies( const TString& AlgAName , const TString& AlgBName )
             NumMuonPassProcess1WithActintCut++;
         }
 
-
         if ( isMuon && isClean && ( muonActint > actintCut ))
     	{
             if ( Efficiency_Lib::passTransverseMassCut(metoffrecal,mexoffrecal,meyoffrecal,metoffrecalmuon,mexoffrecalmuon,meyoffrecalmuon) )
@@ -207,6 +206,7 @@ TFile* threeEfficiencies( const TString& AlgAName , const TString& AlgBName )
             }
     	}
     }
+    //}}}
 
     threeEfficienciesBenchmark->Show("Fill TEfficiencies");
 
