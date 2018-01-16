@@ -24,20 +24,21 @@ TFile* threeEfficiencies( const TString& AlgAName , const TString& AlgBName )
     //TOTAL TIMER
     threeEfficienciesBenchmark->Start("Three Efficiencies");
 
-    //MUON FILE; MUON TREE
+    //MUON FILE; MUON TREE{{{
     const TString muonFilePath = DATA_PATH + muonFilename;
     TFile * muonFile = TFile::Open(muonFilePath, "READ");
     TTree* myMuonTree = (TTree*)muonFile->Get("tree");
     Int_t muonNentries = myMuonTree->GetEntries();
     parameters->Set_MuonNentries( muonNentries );
-
-    //ZBTREE
+    //}}}
+    //ZBTREE{{{
     TString zerobiasFilePath = DATA_PATH + zerobiasFileName;
     TFile * zeroBiasFile = TFile::Open(zerobiasFilePath, "READ");
     TTree* zeroBiasTree = (TTree*)zeroBiasFile->Get("tree");
     Int_t zerobiasNentries = zeroBiasTree->GetEntries();
     parameters->Set_PassnoalgNentries( zerobiasNentries );
-
+    //}}}
+    
     Float_t passnoalgcut = parameters->Get_Passnoalgcut();
     Float_t passrndmcut = parameters->Get_Passrndmcut();
 
@@ -57,7 +58,7 @@ TFile* threeEfficiencies( const TString& AlgAName , const TString& AlgBName )
     Float_t algAMETx2thresh,algBMETx2thresh;
 
 
-    //ZB BRANCHES
+    //ZB BRANCHES{{{
     zeroBiasTree->SetBranchAddress("passrndm", &passrndm);
     zeroBiasTree->SetBranchAddress(AlgAName,&algAMET);
     zeroBiasTree->SetBranchAddress(AlgBName,&algBMET);
@@ -69,7 +70,8 @@ TFile* threeEfficiencies( const TString& AlgAName , const TString& AlgBName )
     zeroBiasTree->SetBranchAddress("passnoalgL1XE45",&passnoalgL1XE45);
     */
     zeroBiasTree->SetBranchAddress("actint",&zb_actint);
-    //MUON BRANCHES
+    //}}}
+    //MUON BRANCHES{{{
     myMuonTree->SetBranchAddress("passmu26med", &passmuon);
     myMuonTree->SetBranchAddress("passmu26varmed", &passmuvarmed);
     myMuonTree->SetBranchAddress("passcleancuts", &cleanCutsFlag);
@@ -83,6 +85,7 @@ TFile* threeEfficiencies( const TString& AlgAName , const TString& AlgBName )
     myMuonTree->SetBranchAddress("metrefmuon", &metrefmuon);
     myMuonTree->SetBranchAddress("mexrefmuon", &mexrefmuon);
     myMuonTree->SetBranchAddress("meyrefmuon", &meyrefmuon);
+    //}}}
 
     //ZB INDIVID HISTS
     TH1F *algAMETHist = new TH1F(AlgAName, "algA", nbins, metMin, metMax);
@@ -100,11 +103,13 @@ TFile* threeEfficiencies( const TString& AlgAName , const TString& AlgBName )
     const Float_t AlgBIndividThresh = parameters->Get_IndividAlgBThresh();
 
 
-    std::cout << "Returned to threeEfficiencies.C" << std::endl;
+    std::cout << "Returned to threeEfficiencies.C" << std::endl; //{{{
     std::cout << "AlgAThresh: " << AlgAIndividThresh << std::endl;
     std::cout << "AlgBThresh: " << AlgBIndividThresh << std::endl;
     std::cout << "Using METL1THRESH: " << metl1thresh << std::endl;
+    //}}}
 
+    //Loop to fill hist rndm {{{
     NumbRndmProcess1 = 0 ;
 	for (Int_t k = 0; k < zerobiasNentries; k++)
 	{
@@ -122,6 +127,7 @@ TFile* threeEfficiencies( const TString& AlgAName , const TString& AlgBName )
             NumbRndmProcess1++;
 	    }
 	}
+    //}}}
 
     parameters->Set_NumPassNoAlgPassProcess1(NumbRndmProcess1);
 
@@ -146,7 +152,7 @@ TFile* threeEfficiencies( const TString& AlgAName , const TString& AlgBName )
     //END ZEROBIAS TIMER
     threeEfficienciesBenchmark->Show("ZeroBias Thresholds");
 
-
+    //Initialize TEfficiencies {{{
     TString astring = AlgAName + " > " + Form(" %.2f", AlgAIndividThresh );
     TString bstring = AlgBName + " > " + Form(" %.2f", AlgBIndividThresh );
     TString cstring = AlgAName+ " > " + Form(" %.2f", CombinedThreshAlgA) + " and " + AlgBName + " > " + Form(" %.2f", CombinedThreshAlgB);
@@ -156,6 +162,7 @@ TFile* threeEfficiencies( const TString& AlgAName , const TString& AlgBName )
     TEfficiency* Bteff  = new TEfficiency(bstring , "Efficiency", muonNbins, metMin, metMax);
     TEfficiency* Cteff  = new TEfficiency(cstring,  "Efficiency", muonNbins, metMin, metMax);
     TEfficiency* Dteff  = new TEfficiency(dstring,  "Efficiency", muonNbins, metMin, metMax);//combined just L1 cut, 0 on others
+    //}}}
 
     threeEfficienciesBenchmark->Start("Fill TEfficiencies");
 
