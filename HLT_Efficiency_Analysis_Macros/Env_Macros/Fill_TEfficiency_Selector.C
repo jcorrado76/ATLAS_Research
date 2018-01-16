@@ -6,7 +6,9 @@ void TEfficiency_Selector::Begin(TTree * /*tree*/)
 {
    TString option = GetOption();
    std::cout << "Starting to fill TEfficiencies.." << std::endl;
-   ACTINT_CUT = ;
+   M_Parameters = fInput->(userInfo*) FindObject("parameters");
+   ACTINT_CUT = M_Parameters->Get_ActintCut();
+   METL1_CUT = M_Parameters->Get_MetL1Thresh();
 }
 
 void TEfficiency_Selector::SlaveBegin(TTree * /*tree*/)

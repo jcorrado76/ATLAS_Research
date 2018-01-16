@@ -26,6 +26,7 @@ public :
    TTree          *fChain = 0;   //!pointer to the analyzed TTree or TChain
    userInfo		  *M_Parameters;
    Float_t 			ACTINT_CUT=0.0;
+   Float_t 			METL1_CUT=0.0;
 
    // Readers to access the data (delete the ones you do not need){{{
    TTreeReaderValue<Float_t> metl1 = {fReader, "metl1"};
