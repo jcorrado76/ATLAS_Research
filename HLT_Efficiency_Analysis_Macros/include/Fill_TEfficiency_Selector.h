@@ -15,6 +15,9 @@
 #include <TTreeReader.h>
 #include <TTreeReaderValue.h>
 #include <TTreeReaderArray.h>
+#include <TH2.h>
+#include <TStyle.h>
+#include "Efficiency_Lib.h"
 
 
 class TEfficiency_Selector : public TSelector {
@@ -125,8 +128,7 @@ public :
    TTreeReaderValue<Float_t> actint = {fReader, "actint"};
    TTreeReaderValue<Float_t> avint = {fReader, "avint"};
    //}}}
-   
-   TEfficiency_Selector(TTree * /*tree*/ =0) { }
+   TEfficiency_Selector(TTree * /*tree*/ =0) { }//{{{
    virtual ~TEfficiency_Selector() { }
    virtual Int_t   Version() const { return 2; }
    virtual void    Begin(TTree *tree);
@@ -141,7 +143,7 @@ public :
    virtual TList  *GetOutputList() const { return fOutput; }
    virtual void    SlaveTerminate();
    virtual void    Terminate();
-
+   //}}}
 
     Bool_t IsMuon(){
             return( *passmuvarmed > 0.1 || *passmuon > 0.1 );
