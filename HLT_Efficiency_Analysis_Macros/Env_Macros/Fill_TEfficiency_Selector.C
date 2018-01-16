@@ -40,7 +40,7 @@ void TEfficiency_Selector::SlaveBegin(TTree * /*tree*/)
    TString option = GetOption();
    TString astring = AlgAName + " > " + Form(" %.2f", AlgAIndividThresh );
    TString bstring = AlgBName + " > " + Form(" %.2f", AlgBIndividThresh );
-   TString cstring = AlgAName+ " > " + Form(" %.2f", CombinedThreshAlgA) + " and " + AlgBName + " > " + Form(" %.2f", CombinedThreshAlgB);
+   TString cstring = AlgAName + " > " + Form(" %.2f", CombinedThreshAlgA) + " and " + AlgBName + " > " + Form(" %.2f", CombinedThreshAlgB);
    TString dstring = (TString) "L1 > " + Form(" %.2f" , metl1thresh);
 
    TEfficiency* Ateff  = new TEfficiency(astring , "Efficiency", muonNbins, metMin, metMax);
@@ -57,11 +57,13 @@ void TEfficiency_Selector::SlaveBegin(TTree * /*tree*/)
 Bool_t TEfficiency_Selector::Process(Long64_t entry)
 {
    fReader.SetEntry(entry);
-
-   Ateff->Fill((algAmuonMET > AlgAIndividThresh ) && (muonMetl1 > metl1thresh) && ( muonActint >     actintCut ), metnomu);
-   Bteff->Fill((algBmuonMET > AlgBIndividThresh ) && (muonMetl1 > metl1thresh) && ( muonActint >     actintCut ), metnomu);
-   Cteff->Fill(((algAmuonMET > CombinedThreshAlgA) && (algBmuonMET > CombinedThreshAlgB) && ( muonActint > actintCut ) && (muonMetl1 > metl1thresh) ), metnomu);
-   Dteff->Fill( (muonMetl1 >= metl1thresh) && ( muonActint > actintCut ), metnomu);
+    if ( IsMuon && IsClean && PassActintCut && PassTransverseMassCut ){
+           Float_t metnomu = ComputeMetnomu;
+           Ateff->Fill((algAmuonMET > AlgAIndividThresh ) && (muonMetl1 > metl1thresh)          && ( muonActint >     actintCut )                          , metnomu);
+           Bteff->Fill((algBmuonMET > AlgBIndividThresh ) && (muonMetl1 > metl1thresh)          && ( muonActint >     actintCut )                          , metnomu);
+           Cteff->Fill((algAmuonMET > CombinedThreshAlgA) && (algBmuonMET > CombinedThreshAlgB) && ( muonActint > actintCut ) && (muonMetl1 > metl1thresh) , metnomu);
+           Dteff->Fill((muonMetl1 >= metl1thresh)         && ( muonActint > actintCut )                                                                    , metnomu);
+    }
    return kTRUE;
 }
 

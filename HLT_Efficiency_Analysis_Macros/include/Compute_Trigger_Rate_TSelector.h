@@ -29,7 +29,7 @@ public :
     TH1F* MetL1Hist;
     TH1F* RandomHist;
 
-   // Readers to access the data (delete the ones you do not need).
+   // Readers to access the data (delete the ones you do not need){{{
    TTreeReaderValue<Float_t> metl1 = {fReader, "metl1"};
    TTreeReaderValue<Float_t> mexl1 = {fReader, "mexl1"};
    TTreeReaderValue<Float_t> meyl1 = {fReader, "meyl1"};
@@ -129,6 +129,7 @@ public :
    TTreeReaderValue<Int_t> bcid = {fReader, "bcid"};
    TTreeReaderValue<Float_t> actint = {fReader, "actint"};
    TTreeReaderValue<Float_t> avint = {fReader, "avint"};
+   //}}}
 
 
    Compute_Trigger_Rate_TSelector(TTree * /*tree*/ =0) { }

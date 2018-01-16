@@ -16,15 +16,13 @@
 #include <TTreeReaderValue.h>
 #include <TTreeReaderArray.h>
 
-// Headers needed by this particular selector
-
 
 class TEfficiency_Selector : public TSelector {
 public :
    TTreeReader     fReader;  //!the tree reader
    TTree          *fChain = 0;   //!pointer to the analyzed TTree or TChain
 
-   // Readers to access the data (delete the ones you do not need).
+   // Readers to access the data (delete the ones you do not need){{{
    TTreeReaderValue<Float_t> metl1 = {fReader, "metl1"};
    TTreeReaderValue<Float_t> mexl1 = {fReader, "mexl1"};
    TTreeReaderValue<Float_t> meyl1 = {fReader, "meyl1"};
@@ -124,8 +122,8 @@ public :
    TTreeReaderValue<Int_t> bcid = {fReader, "bcid"};
    TTreeReaderValue<Float_t> actint = {fReader, "actint"};
    TTreeReaderValue<Float_t> avint = {fReader, "avint"};
-
-
+   //}}}
+   //
    TEfficiency_Selector(TTree * /*tree*/ =0) { }
    virtual ~TEfficiency_Selector() { }
    virtual Int_t   Version() const { return 2; }
@@ -141,6 +139,9 @@ public :
    virtual TList  *GetOutputList() const { return fOutput; }
    virtual void    SlaveTerminate();
    virtual void    Terminate();
+
+
+   
 
    ClassDef(TEfficiency_Selector,0);
 
