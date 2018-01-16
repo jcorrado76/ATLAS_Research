@@ -58,10 +58,10 @@ Bool_t TEfficiency_Selector::Process(Long64_t entry)
 {
    fReader.SetEntry(entry);
 
-   Ateff->Fill((algAmuonMET > AlgAIndividThresh ) /*&& (muonMetl1 > metl1thresh)*/ && ( muonActint >     actintCut ), metnomu);
-   Bteff->Fill((algBmuonMET > AlgBIndividThresh ) /*&& (muonMetl1 > metl1thresh)*/&& ( muonActint >     actintCut ), metnomu);
-   Cteff->Fill(((algAmuonMET > CombinedThreshAlgA) && (algBmuonMET > CombinedThreshAlgB) && ( muonActint > actintCut )/*&& (muonMetl1 > metl1thresh)*/), metnomu);
-   Dteff->Fill(/*(muonMetl1 >= metl1thresh) &&*/ ( muonActint > actintCut ), metnomu);
+   Ateff->Fill((algAmuonMET > AlgAIndividThresh ) && (muonMetl1 > metl1thresh) && ( muonActint >     actintCut ), metnomu);
+   Bteff->Fill((algBmuonMET > AlgBIndividThresh ) && (muonMetl1 > metl1thresh) && ( muonActint >     actintCut ), metnomu);
+   Cteff->Fill(((algAmuonMET > CombinedThreshAlgA) && (algBmuonMET > CombinedThreshAlgB) && ( muonActint > actintCut ) && (muonMetl1 > metl1thresh) ), metnomu);
+   Dteff->Fill( (muonMetl1 >= metl1thresh) && ( muonActint > actintCut ), metnomu);
    return kTRUE;
 }
 
