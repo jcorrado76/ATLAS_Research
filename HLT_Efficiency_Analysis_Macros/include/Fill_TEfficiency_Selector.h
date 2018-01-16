@@ -21,6 +21,8 @@ class TEfficiency_Selector : public TSelector {
 public :
    TTreeReader     fReader;  //!the tree reader
    TTree          *fChain = 0;   //!pointer to the analyzed TTree or TChain
+   userInfo		  *M_Parameters;
+   Float_t 			ACTINT_CUT=0.0;
 
    // Readers to access the data (delete the ones you do not need){{{
    TTreeReaderValue<Float_t> metl1 = {fReader, "metl1"};
@@ -123,7 +125,7 @@ public :
    TTreeReaderValue<Float_t> actint = {fReader, "actint"};
    TTreeReaderValue<Float_t> avint = {fReader, "avint"};
    //}}}
-   //
+   
    TEfficiency_Selector(TTree * /*tree*/ =0) { }
    virtual ~TEfficiency_Selector() { }
    virtual Int_t   Version() const { return 2; }
@@ -141,7 +143,31 @@ public :
    virtual void    Terminate();
 
 
-   
+    Bool_t IsMuon(){
+            return( *passmuvarmed > 0.1 || *passmuon > 0.1 );
+    }
+
+    Bool_t IsClean(){
+            return( *passcleancuts > 0.1 && *recalbroke < 0.1 );
+    }
+
+    Bool_t PassActintCut(){
+            return( *actint > ACTINT_CUT );
+    } 
+
+	Bool_t PassTransverseMassCut(){
+			return( Efficiency_Lib::passTransverseMassCut( *metoffrecal , *mexoffrecal  , *meyoffrecal ,
+									*metoffrecalmuon , *mexoffrecalmuon , *meyoffrecalmuon ) );
+	}
+
+	Bool_t PassL1Cut(){
+			return( *metl1 > METL1_CUT );
+	}
+
+	Float_t ComputeMetnomu(){
+			return( Efficiency_Lib::computeMetNoMu( *mexoffrecal , *meyoffrecal , *mexoffrecalmuon , *meyoffrecalmuon ) );
+	}
+
 
    ClassDef(TEfficiency_Selector,0);
 
@@ -152,24 +178,11 @@ public :
 #ifdef TEfficiency_Selector_cxx
 void TEfficiency_Selector::Init(TTree *tree)
 {
-   // The Init() function is called when the selector needs to initialize
-   // a new tree or chain. Typically here the reader is initialized.
-   // It is normally not necessary to make changes to the generated
-   // code, but the routine can be extended by the user if needed.
-   // Init() will be called many times when running on PROOF
-   // (once per file to be processed).
-
    fReader.SetTree(tree);
 }
 
 Bool_t TEfficiency_Selector::Notify()
 {
-   // The Notify() function is called when a new file is opened. This
-   // can be either for a new TTree in a TChain or when when a new TTree
-   // is started when using PROOF. It is normally not necessary to make changes
-   // to the generated code, but the routine can be extended by the
-   // user if needed. The return value is currently not used.
-
    return kTRUE;
 }
 

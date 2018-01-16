@@ -5,8 +5,7 @@
 #include <TStyle.h>
 
 
-std::cout << "Starting to fill TEfficiencies.." << std::endl;
-Int_t NumMuonPassProcess1WithActintCut = 0;
+Int_t NumMuonPassProcess1 = 0;
 
 Bool_t isMuon;
 Bool_t isClean;
@@ -33,6 +32,8 @@ for (Int_t l = 0; i < muonNentries ; l++){
 void TEfficiency_Selector::Begin(TTree * /*tree*/)
 {
    TString option = GetOption();
+   std::cout << "Starting to fill TEfficiencies.." << std::endl;
+   ACTINT_CUT = ;
 }
 
 void TEfficiency_Selector::SlaveBegin(TTree * /*tree*/)
@@ -57,11 +58,11 @@ void TEfficiency_Selector::SlaveBegin(TTree * /*tree*/)
 Bool_t TEfficiency_Selector::Process(Long64_t entry)
 {
    fReader.SetEntry(entry);
-    if ( IsMuon && IsClean && PassActintCut && PassTransverseMassCut ){
-           Float_t metnomu = ComputeMetnomu;
-           Ateff->Fill((algAmuonMET > AlgAIndividThresh ) && (muonMetl1 > metl1thresh)          && ( muonActint >     actintCut )                          , metnomu);
-           Bteff->Fill((algBmuonMET > AlgBIndividThresh ) && (muonMetl1 > metl1thresh)          && ( muonActint >     actintCut )                          , metnomu);
-           Cteff->Fill((algAmuonMET > CombinedThreshAlgA) && (algBmuonMET > CombinedThreshAlgB) && ( muonActint > actintCut ) && (muonMetl1 > metl1thresh) , metnomu);
+    if ( IsMuon() && IsClean() && PassActintCut() && PassTransverseMassCut() ){
+           Float_t metnomu = ComputeMetnomu();
+           Ateff->Fill((algAmuonMET > AlgAIndividThresh ) && ( PassL1Cut() )          && ( PassActintCut() )                          , metnomu);
+           Bteff->Fill((algBmuonMET > AlgBIndividThresh ) && ( PassL1Cut() )          && ( PassActintCut() )                          , metnomu);
+           Cteff->Fill((algAmuonMET > CombinedThreshAlgA) && (algBmuonMET > CombinedThreshAlgB) && ( PassL1Cut() ) && ( PassActintCut() )  , metnomu);
            Dteff->Fill((muonMetl1 >= metl1thresh)         && ( muonActint > actintCut )                                                                    , metnomu);
     }
    return kTRUE;
