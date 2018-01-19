@@ -70,7 +70,7 @@ private:
 public:
     //default constructor
     userInfo();
-    TString GetName() const;
+    const char *GetName() const;
     void Print(Option_t *option = "") const;
     TString Get_ThreshFileName()      const;
     TString Get_MuonFileName()        const;

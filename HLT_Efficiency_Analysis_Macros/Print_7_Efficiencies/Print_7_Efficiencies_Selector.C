@@ -46,24 +46,24 @@ Bool_t Print_7_Efficiencies_Selector::Process(Long64_t entry)
    {
 
 
-                    cellTeff->Fill( ( *metcell > cellThresh) &&  ( *metl1 > metl1thresh) &&
-                                        ( *actint > actintCut), metnomu);
+    cellTeff->Fill( ( *metcell > cellThresh) &&  ( *metl1 > metl1thresh) &&
+                        ( *actint > actintCut), metnomu);
 
-                    mhtTeff->Fill( ( *metmht > mhtThresh) && ( *metl1 > metl1thresh) &&
-                                        ( *actint > actintCut), metnomu);
+    mhtTeff->Fill( ( *metmht > mhtThresh) && ( *metl1 > metl1thresh) &&
+                        ( *actint > actintCut), metnomu);
 
-                    topoclpucTeff->Fill( ( *mettopoclpuc > topoclpucThresh) &&  ( *metl1 > metl1thresh) &&
-                                        ( *actint > actintCut),  metnomu);
+    topoclpucTeff->Fill( ( *mettopoclpuc > topoclpucThresh) &&  ( *metl1 > metl1thresh) &&
+                        ( *actint > actintCut),  metnomu);
 
-                    cellmhtTeff->Fill( ( *metcell > cellCombinedThresh) && 
-                            ( *metmht > mhtCombinedThresh)&& 
-                            ( *metl1 > metl1thresh) &&
-                                        ( *actint > actintCut), metnomu );
+    cellmhtTeff->Fill( ( *metcell > cellCombinedThresh) && 
+            ( *metmht > mhtCombinedThresh)&& 
+            ( *metl1 > metl1thresh) &&
+                        ( *actint > actintCut), metnomu );
 
-                    mhttopoclpucTeff->Fill( ( ( *metmht > mhtCombined2Thresh) && 
-                                ( *mettopoclpuc > topoclpucCombinedThresh) && 
-                                ( *metl1 > metl1thresh))&&
-                                        ( *actint > actintCut) , metnomu);
+    mhttopoclpucTeff->Fill( ( ( *metmht > mhtCombined2Thresh) && 
+                ( *mettopoclpuc > topoclpucCombinedThresh) && 
+                ( *metl1 > metl1thresh))&&
+                        ( *actint > actintCut) , metnomu);
    }
 
    return kTRUE;

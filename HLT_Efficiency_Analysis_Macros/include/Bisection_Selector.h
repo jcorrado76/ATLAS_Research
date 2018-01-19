@@ -5,8 +5,8 @@
 // found on file: ../../MyData/PhysicsMain.L1KFmuontriggers.2016.f731f758_m1659m1710.Run309759.48Runs.root
 //////////////////////////////////////////////////////////
 
-#ifndef Print_7_Efficiencies_Selector_h
-#define Print_7_Efficiencies_Selector_h
+#ifndef Bisection_Selector_h
+#define Bisection_Selector_h
 
 #include <TROOT.h>
 #include <TChain.h>
@@ -19,52 +19,16 @@
 #include <TH1.h>
 #include <TCanvas.h>
 #include <TLegend.h>
+#include "Efficiency_Library.h"
 
 // Headers needed by this particular selector
 
 
-class Print_7_Efficiencies_Selector : public TSelector {
+class Bisection_Selector : public TSelector {
 public :
    TTreeReader     fReader;  //!the tree reader
    TTree          *fChain = 0;   //!pointer to the analyzed TTree or TChain
-   //transverse mass bounds
-    Float_t wLowerbnd = 40.0;
-    Float_t wUpperbnd = 100.0;
-
-
-    Float_t metnomu = 0;
-
-    //parameters
-    Int_t nbins = 1200;
-    Float_t metMin = 0.0;
-    Float_t metMax = 300.0;
-    Float_t metl1thresh = 50.0;
-    Float_t actintCut = 35.0;
-
-    //individual thresholds
-    Float_t cellThresh = 94.88;
-    Float_t mhtThresh = 144.38;
-    Float_t topoclpucThresh = 121.62;
-
-    //combined pairs of threhsolds
-    Float_t cellCombinedThresh = 81.12;
-    Float_t mhtCombinedThresh = 116.62;
-    Float_t mhtCombined2Thresh = 123.62;
-    Float_t topoclpucCombinedThresh = 106.38;
-
-
-    //individuals
-    TEfficiency* cellTeff;
-    TEfficiency* mhtTeff;
-    TEfficiency* topoclpucTeff;
-
-    ///combined algs
-    TEfficiency* cellmhtTeff;
-    TEfficiency* mhttopoclpucTeff;
-
-
-
-   // Readers to access the data (delete the ones you do not need).
+   // Readers to access the data (delete the ones you do not need). {{{
    TTreeReaderValue<Float_t> metl1 = {fReader, "metl1"};
    TTreeReaderValue<Float_t> mexl1 = {fReader, "mexl1"};
    TTreeReaderValue<Float_t> meyl1 = {fReader, "meyl1"};
@@ -164,10 +128,9 @@ public :
    TTreeReaderValue<Int_t> bcid = {fReader, "bcid"};
    TTreeReaderValue<Float_t> actint = {fReader, "actint"};
    TTreeReaderValue<Float_t> avint = {fReader, "avint"};
-
-
-   Print_7_Efficiencies_Selector(TTree * /*tree*/ =0) { }
-   virtual ~Print_7_Efficiencies_Selector() { }
+//}}}
+   Bisection_Selector(TTree * /*tree*/ =0) { } //{{{
+   virtual ~Bisection_Selector() { }
    virtual Int_t   Version() const { return 2; }
    virtual void    Begin(TTree *tree);
    virtual void    SlaveBegin(TTree *tree);
@@ -181,54 +144,36 @@ public :
    virtual TList  *GetOutputList() const { return fOutput; }
    virtual void    SlaveTerminate();
    virtual void    Terminate();
-
-    Bool_t PassTransverseMassCut()
+   //}}}
+    Bool_t PassTransverseMassCut() //{{{
     {
-        Float_t wValue = sqrt( 2.0 * (*metoffrecal) * (*metoffrecalmuon) * ( 1. + ( ( (*mexoffrecal) * (*mexoffrecalmuon) + (*meyoffrecal) * (*meyoffrecalmuon) ) /
-                               ( (*metoffrecal) * (*metoffrecalmuon) ) ) ) );
-        return( (( wValue >= wLowerbnd ) && ( wValue <= wUpperbnd )) );
-    }
-
-    Bool_t Is_Clean()
+        return( Efficiency_Lib::passTransverseMassCut( *metoffrecal , *mexoffrecal  , *meyoffrecal ,
+                              *metoffrecalmuon , *mexoffrecalmuon , *meyoffrecalmuon  );
+    } //}}}
+    Bool_t Is_Clean() //{{{
     {
         return ( ( *passcleancuts >  0.1) && ( *recalbroke < 0.1) );
-    }
-
-
-    Bool_t Is_Muon()
+    } //}}}
+    Bool_t Is_Muon() //{{{
     {
         return( (*passmu26varmed > 0.1 || *passmu26med > 0.1) );
-    }
-
-
-    Float_t Compute_MetNoMu()
+    } //}}}
+    Float_t Compute_MetNoMu() //{{{
     {
-       Float_t metnomu  = sqrt( ( ( *mexoffrecal - *mexoffrecalmuon) * (*mexoffrecal - *mexoffrecalmuon)) +
-        ((*meyoffrecal - *meyoffrecalmuon)*(*meyoffrecal - *meyoffrecalmuon ) ) ); 
-
-        return (metnomu);
-    }
-
-   ClassDef(Print_7_Efficiencies_Selector,0);
-
+        return (  Efficiency_Lib::computeMetNoMu(const Float_t mexoffrecal , const Float_t meyoffrecal , const Float_t mexoffrecalmuon , const Float_t meyoffrecalmuon)   );
+    } //}}}
+   ClassDef(Bisection_Selector,0);
 };
 
 #endif
 
-#ifdef Print_7_Efficiencies_Selector_cxx
-void Print_7_Efficiencies_Selector::Init(TTree *tree)
+#ifdef Bisection_Selector_cxx
+void Bisection_Selector::Init(TTree *tree) //{{{
 {
-   // The Init() function is called when the selector needs to initialize
-   // a new tree or chain. Typically here the reader is initialized.
-   // It is normally not necessary to make changes to the generated
-   // code, but the routine can be extended by the user if needed.
-   // Init() will be called many times when running on PROOF
-   // (once per file to be processed).
 
    fReader.SetTree(tree);
-}
-
-Bool_t Print_7_Efficiencies_Selector::Notify()
+} //}}}
+Bool_t Bisection_Selector::Notify() //{{{
 {
    // The Notify() function is called when a new file is opened. This
    // can be either for a new TTree in a TChain or when when a new TTree
@@ -237,7 +182,6 @@ Bool_t Print_7_Efficiencies_Selector::Notify()
    // user if needed. The return value is currently not used.
 
    return kTRUE;
-}
+} //}}}
 
-
-#endif // #ifdef Print_7_Efficiencies_Selector_cxx
+#endif // #ifdef Bisection_Selector_cxx

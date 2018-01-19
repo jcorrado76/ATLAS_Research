@@ -1,8 +1,9 @@
 #ifndef MINCERMACROS_H
 #define MINCERMACROS_H
 
-#include "userInfo.h"
-//#include "ZBKFThresh.h"
+#include "Parameter_Class.h"
+namespace Efficiency_Lib{
+
 //comptues the met offrecallibrated without muon term value
 Float_t computeMetNoMu( const Float_t mexoffrecal , const Float_t meyoffrecal , const Float_t mexoffrecalmuon , const Float_t meyoffrecalmuon );
 
@@ -31,6 +32,8 @@ const TString& muonFileName = "PhysicsMain2016.Muons.noalgL1XE45R3073065R311481R
 //determines thresholds to use on two algorithms such that keeps proper fraction of process 1 events when used together
 Float_t bisection(  userInfo* parameters , TH1F* algAHist , TH1F* algBHist, TTree* passnoalgTree );
 
+Float_t bisection_one_frac_fixed( const float fracA , userInfo* parameters, const TH1F* AlgAHist , const TH1F* AlgBHist, TTree* zbtree );
 
+}
 
 #endif //MINCERMACROS_H

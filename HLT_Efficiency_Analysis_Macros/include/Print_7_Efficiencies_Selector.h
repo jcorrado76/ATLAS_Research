@@ -1,16 +1,13 @@
 //////////////////////////////////////////////////////////
 // This class has been automatically generated on
-// Tue Dec 26 21:41:19 2017 by ROOT version 6.13/01
+// Tue Dec 26 20:38:15 2017 by ROOT version 6.13/01
 // from TTree tree/tree
 // found on file: ../../MyData/PhysicsMain.L1KFmuontriggers.2016.f731f758_m1659m1710.Run309759.48Runs.root
 //////////////////////////////////////////////////////////
 
-#ifndef Compute_Trigger_Rate_TSelector_h
-#define Compute_Trigger_Rate_TSelector_h
+#ifndef Print_7_Efficiencies_Selector_h
+#define Print_7_Efficiencies_Selector_h
 
-#include <TH2.h>
-#include <TStyle.h>
-#include <TH1.h>
 #include <TROOT.h>
 #include <TChain.h>
 #include <TFile.h>
@@ -18,18 +15,56 @@
 #include <TTreeReader.h>
 #include <TTreeReaderValue.h>
 #include <TTreeReaderArray.h>
+#include <TEfficiency.h>
+#include <TH1.h>
+#include <TCanvas.h>
+#include <TLegend.h>
 
 // Headers needed by this particular selector
 
 
-class Compute_Trigger_Rate_TSelector : public TSelector {
+class Print_7_Efficiencies_Selector : public TSelector {
 public :
    TTreeReader     fReader;  //!the tree reader
    TTree          *fChain = 0;   //!pointer to the analyzed TTree or TChain
-    TH1F* MetL1Hist;
-    TH1F* RandomHist;
+   //transverse mass bounds
+    Float_t wLowerbnd = 40.0;
+    Float_t wUpperbnd = 100.0;
 
-   // Readers to access the data (delete the ones you do not need).
+
+    Float_t metnomu = 0;
+
+    //parameters
+    Int_t nbins = 1200;
+    Float_t metMin = 0.0;
+    Float_t metMax = 300.0;
+    Float_t metl1thresh = 50.0;
+    Float_t actintCut = 35.0;
+
+    //individual thresholds
+    Float_t cellThresh = 94.88;
+    Float_t mhtThresh = 144.38;
+    Float_t topoclpucThresh = 121.62;
+
+    //combined pairs of threhsolds
+    Float_t cellCombinedThresh = 81.12;
+    Float_t mhtCombinedThresh = 116.62;
+    Float_t mhtCombined2Thresh = 123.62;
+    Float_t topoclpucCombinedThresh = 106.38;
+
+
+    //individuals
+    TEfficiency* cellTeff;
+    TEfficiency* mhtTeff;
+    TEfficiency* topoclpucTeff;
+
+    ///combined algs
+    TEfficiency* cellmhtTeff;
+    TEfficiency* mhttopoclpucTeff;
+
+
+
+   // Readers to access the data (delete the ones you do not need){{{
    TTreeReaderValue<Float_t> metl1 = {fReader, "metl1"};
    TTreeReaderValue<Float_t> mexl1 = {fReader, "mexl1"};
    TTreeReaderValue<Float_t> meyl1 = {fReader, "meyl1"};
@@ -129,10 +164,11 @@ public :
    TTreeReaderValue<Int_t> bcid = {fReader, "bcid"};
    TTreeReaderValue<Float_t> actint = {fReader, "actint"};
    TTreeReaderValue<Float_t> avint = {fReader, "avint"};
+   //}}}
 
 
-   Compute_Trigger_Rate_TSelector(TTree * /*tree*/ =0) { }
-   virtual ~Compute_Trigger_Rate_TSelector() { }
+   Print_7_Efficiencies_Selector(TTree * /*tree*/ =0) { }//{{{
+   virtual ~Print_7_Efficiencies_Selector() { }
    virtual Int_t   Version() const { return 2; }
    virtual void    Begin(TTree *tree);
    virtual void    SlaveBegin(TTree *tree);
@@ -146,15 +182,43 @@ public :
    virtual TList  *GetOutputList() const { return fOutput; }
    virtual void    SlaveTerminate();
    virtual void    Terminate();
+   //}}}
 
-   ClassDef(Compute_Trigger_Rate_TSelector,0);
+    Bool_t PassTransverseMassCut()
+    {
+        Float_t wValue = sqrt( 2.0 * (*metoffrecal) * (*metoffrecalmuon) * ( 1. + ( ( (*mexoffrecal) * (*mexoffrecalmuon) + (*meyoffrecal) * (*meyoffrecalmuon) ) /
+                               ( (*metoffrecal) * (*metoffrecalmuon) ) ) ) );
+        return( (( wValue >= wLowerbnd ) && ( wValue <= wUpperbnd )) );
+    }
+
+    Bool_t Is_Clean()
+    {
+        return ( ( *passcleancuts >  0.1) && ( *recalbroke < 0.1) );
+    }
+
+
+    Bool_t Is_Muon()
+    {
+        return( (*passmu26varmed > 0.1 || *passmu26med > 0.1) );
+    }
+
+
+    Float_t Compute_MetNoMu()
+    {
+       Float_t metnomu  = sqrt( ( ( *mexoffrecal - *mexoffrecalmuon) * (*mexoffrecal - *mexoffrecalmuon)) +
+        ((*meyoffrecal - *meyoffrecalmuon)*(*meyoffrecal - *meyoffrecalmuon ) ) ); 
+
+        return (metnomu);
+    }
+
+   ClassDef(Print_7_Efficiencies_Selector,0);
 
 };
 
 #endif
 
-#ifdef Compute_Trigger_Rate_TSelector_cxx
-void Compute_Trigger_Rate_TSelector::Init(TTree *tree)
+#ifdef Print_7_Efficiencies_Selector_cxx
+void Print_7_Efficiencies_Selector::Init(TTree *tree)
 {
    // The Init() function is called when the selector needs to initialize
    // a new tree or chain. Typically here the reader is initialized.
@@ -166,7 +230,7 @@ void Compute_Trigger_Rate_TSelector::Init(TTree *tree)
    fReader.SetTree(tree);
 }
 
-Bool_t Compute_Trigger_Rate_TSelector::Notify()
+Bool_t Print_7_Efficiencies_Selector::Notify()
 {
    // The Notify() function is called when a new file is opened. This
    // can be either for a new TTree in a TChain or when when a new TTree
@@ -178,4 +242,4 @@ Bool_t Compute_Trigger_Rate_TSelector::Notify()
 }
 
 
-#endif // #ifdef Compute_Trigger_Rate_TSelector_cxx
+#endif // #ifdef Print_7_Efficiencies_Selector_cxx

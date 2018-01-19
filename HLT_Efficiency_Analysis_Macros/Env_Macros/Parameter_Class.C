@@ -1,8 +1,8 @@
-#include "userInfo.h"
+#include "Parameter_Class.h"
 ClassImp(userInfo)
 
 //const TString FileForThresh = "PhysicsMain.All.noalgXEtriggers.2016.f731f758._m1659m1710.48Runs.root";
-const TString FileForThresh = "ZeroBiasKF2016R307195R311481Runs51.root";
+const TString FileForThresh = "ZeroBiasL1KF2016R307195R311481.51Runs.root";
 const TString FileForSignal = "PhysicsMain.L1KFmuontriggers.2016.f731f758_m1659m1710.Run309759.48Runs.root";
 Int_t Nbins = 1200;
 Float_t metMin = 0.0;
@@ -195,7 +195,7 @@ Float_t userInfo::Get_CombinedAlgAThresh()  const { return (M_AlgACombinedThresh
 Float_t userInfo::Get_CombinedAlgBThresh()  const {return (M_AlgBCombinedThresh); }
 Float_t userInfo::Get_Passnoalgcut() const {return (M_Passnoalgcut);}
 Float_t userInfo::Get_Passrndmcut() const { return (M_Passrndmcut);}
-TString userInfo::GetName() const { return (M_Name);}
+const char *userInfo::GetName() const { return (M_Name);}
 
 
 //setters

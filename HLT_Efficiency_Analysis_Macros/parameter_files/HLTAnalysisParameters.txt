@@ -1,8 +1,8 @@
-Created: 11/16/17 by Joseph Corrado
-Parameters for L1 Analysis:
+Created: 1/15/18 by Joseph Corrado
+Parameters for HLT Analysis:
 =================================================
 THRESHOLDFILE:
-ZeroBiasKF2016R307195R311481Runs51.root
+ZeroBiasL1KF2016R307195R311481.51Runs.root
 SIGNALFILE:
 PhysicsMain.L1KFmuontriggers.2016.f731f758_m1659m1710.Run309759.48Runs.root
 NBINS:

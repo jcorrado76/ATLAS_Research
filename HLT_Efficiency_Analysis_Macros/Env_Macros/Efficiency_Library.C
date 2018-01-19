@@ -1,14 +1,11 @@
-#include "mincerMacros.h"
-
-Float_t computeMetNoMu( const Float_t mexoffrecal , const Float_t meyoffrecal , const Float_t mexoffrecalmuon , const Float_t meyoffrecalmuon )
+#include "Efficiency_Library.h"
+Float_t Efficiency_Lib::computeMetNoMu( const Float_t mexoffrecal , const Float_t meyoffrecal , const Float_t mexoffrecalmuon , const Float_t meyoffrecalmuon )//{{{
 {
     Float_t metnomu = sqrt(((mexoffrecal - mexoffrecalmuon) * (mexoffrecal - mexoffrecalmuon)) +
     ((meyoffrecal - meyoffrecalmuon)*(meyoffrecal - meyoffrecalmuon))); //compute metnomu
     return (metnomu);
-}
-
-
-Bool_t passTransverseMassCut( const Float_t metoffrecal , const Float_t mexoffrecal  , const Float_t meyoffrecal ,
+}//}}}
+Bool_t Efficiency_Lib::passTransverseMassCut( const Float_t metoffrecal , const Float_t mexoffrecal  , const Float_t meyoffrecal ,//{{{
                               const Float_t metoffrecalmuon , const Float_t mexoffrecalmuon , const Float_t meyoffrecalmuon )
 {
     Float_t wLowerbnd = 40.0;
@@ -16,9 +13,8 @@ Bool_t passTransverseMassCut( const Float_t metoffrecal , const Float_t mexoffre
     Float_t wValue = sqrt( 2.0 * metoffrecal * metoffrecalmuon * ( 1 + ( ( mexoffrecal * mexoffrecalmuon + meyoffrecal * meyoffrecalmuon ) /
                            ( metoffrecal * metoffrecalmuon ) ) ) );
     return( (( wValue >= wLowerbnd ) && ( wValue <= wUpperbnd )) );
-}
-
-Float_t computeThresh(const TH1F* target, const Float_t numberEventsToKeep)
+}//}}}
+Float_t Efficiency_Lib::computeThresh(const TH1F* target, const Float_t numberEventsToKeep)//{{{
 {
     Int_t nbin = 0;
     /*
@@ -47,17 +43,16 @@ Float_t computeThresh(const TH1F* target, const Float_t numberEventsToKeep)
     target->GetBinWithContent( numberEventsToKeep , nbin , 5 , numberOfBins , 2000000 ); 
     Float_t thresh = (target->GetXaxis())->GetBinCenter(nbin);
     return(thresh);
-}
-
-
-Float_t determineZeroBiasThresh( userInfo* parameters, const Bool_t verbose )
+}//}}}
+Float_t Efficiency_Lib::determineZeroBiasThresh( userInfo* parameters, const Bool_t verbose )//{{{
 {
     //this function determines thresh to keep proper trigger rate for process 2 on algs A and B
     //these thresholds are used on both passnoalg and muon data
     parameters->Print();
     const Float_t metL1Thresh      = parameters->Get_MetL1Thresh();
     const Float_t actintCut        = parameters->Get_ActintCut();
-    const TString threshFileName   = parameters->Get_ThreshFileName();
+    const TString threshFileName = "ZeroBiasL1KF2016R307195R311481.51Runs.root"; 
+    //const TString threshFileName   = parameters->Get_ThreshFileName();
     const TString algAName         = parameters->Get_AlgAName();
     const TString algBName         = parameters->Get_AlgBName();
     const Float_t frac             = parameters->Get_Frac();
@@ -67,7 +62,8 @@ Float_t determineZeroBiasThresh( userInfo* parameters, const Bool_t verbose )
 	const Int_t nbins              = parameters->Get_Nbins();
     const Float_t passnoalgcut     = parameters->Get_Passnoalgcut();
     const Float_t passrndmcut      = parameters->Get_Passrndmcut();
-    const TString threshFilePath = "../myData/" + threshFileName;
+    std::cout << "threshfilename: " << threshFileName << std::endl;
+    const TString threshFilePath = "../../ATLAS_DATA/" + threshFileName;
 	TFile *threshFileHandle = TFile::Open(threshFilePath, "READ");
 	TTree *threshTree = (TTree*)(threshFileHandle->Get("tree"));
     const Int_t passnoAlgNentries = threshTree->GetEntries();
@@ -125,11 +121,6 @@ Float_t determineZeroBiasThresh( userInfo* parameters, const Bool_t verbose )
 		}
     }
 
-/*
-    ZBKFThresh* FillHists;
-    
-    FillHists->Begin(threshTree,parameters); 
-*/
     
     //compute the threshold to keep appropriate fraction
     TH1F *AlgAtarget = (TH1F*) AlgAHist->GetCumulative(kFALSE);
@@ -178,9 +169,8 @@ Float_t determineZeroBiasThresh( userInfo* parameters, const Bool_t verbose )
 
     threshFileHandle->Close();
 	return(0);
-}
-
-Float_t determineMuonEventsKeptCombined( const TString& algA, const Float_t threshA,
+}//}}}
+Float_t Efficiency_Lib::determineMuonEventsKeptCombined( const TString& algA, const Float_t threshA,//{{{
                                          const TString& algB, Float_t threshB,
                                          const TString& muonFileName, const Float_t metl1thresh)
 {
@@ -257,4 +247,4 @@ Float_t determineMuonEventsKeptCombined( const TString& algA, const Float_t thre
 
 
     return(numbPassedEvents);
-}
+}//}}}
