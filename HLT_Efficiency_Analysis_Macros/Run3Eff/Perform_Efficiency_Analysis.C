@@ -273,9 +273,10 @@ TFile* threeEfficiencies( const TString& AlgAName , const TString& AlgBName )
             //try again, but this time if user inputs, can overwrite
             rootFile->Open( fileName ,"RECREATE");
         }
+
     std::cout << "Root file successfully opened" << std::endl;
 
-    efficiencyCanvas->Print("./Pictures/" + AlgAName + "_" + AlgBName + "_efficiencies.tiff");
+    efficiencyCanvas->Print("./Pictures/" + AlgAName + "_" + AlgBName + "_efficiencies.jpg");
     Ateff->Write( AlgAName + " Efficiency" );
     Bteff->Write( bstring );
     Cteff->Write( cstring );
