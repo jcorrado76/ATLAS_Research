@@ -57,7 +57,6 @@ TFile* threeEfficiencies( const TString& AlgAName , const TString& AlgBName )
     Float_t algAMETx1thresh,algBMETx1thresh;
     Float_t algAMETx2thresh,algBMETx2thresh;
 
-
     //ZB BRANCHES{{{
     zeroBiasTree->SetBranchAddress("passrndm", &passrndm);
     zeroBiasTree->SetBranchAddress(AlgAName,&algAMET);
@@ -106,7 +105,6 @@ TFile* threeEfficiencies( const TString& AlgAName , const TString& AlgBName )
     const Float_t AlgAIndividThresh = parameters->Get_IndividAlgAThresh();
     const Float_t AlgBIndividThresh = parameters->Get_IndividAlgBThresh();
 
-
     std::cout << "Returned to threeEfficiencies.C" << std::endl; //{{{
     std::cout << "AlgAThresh: " << AlgAIndividThresh << std::endl;
     std::cout << "AlgBThresh: " << AlgBIndividThresh << std::endl;
@@ -134,7 +132,6 @@ TFile* threeEfficiencies( const TString& AlgAName , const TString& AlgBName )
     //}}}
 
     parameters->Set_NumPassNoAlgPassProcess1(NumbRndmProcess1);
-
 
     //the individual fraction needed such that when both algs constrained to keep the same fraction individually,
     //keep the proper amount when combined
@@ -218,7 +215,7 @@ TFile* threeEfficiencies( const TString& AlgAName , const TString& AlgBName )
 
     efficiencyCanvas->SetTitle(canvName);
 
-    Ateff->SetLineColor(kBlue);
+    Ateff->SetLineColor(kBlue);//{{{
     Cteff->SetLineColor(kRed);
     Bteff->SetLineColor(kGreen);
     Dteff->SetLineColor(kBlack);
@@ -234,6 +231,7 @@ TFile* threeEfficiencies( const TString& AlgAName , const TString& AlgBName )
     legend->AddEntry(Cteff, cstring);
     legend->AddEntry(Dteff, dstring);
     legend->Draw();
+    //}}}
 
     //compute number muon events actually kept using external macro
     Int_t muonEventsCombined = Efficiency_Lib::determineMuonEventsKeptCombined( AlgAName , CombinedThreshAlgA , AlgBName , CombinedThreshAlgB , muonFilename , metl1thresh );
