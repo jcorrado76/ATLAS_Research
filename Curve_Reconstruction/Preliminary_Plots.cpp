@@ -1,5 +1,4 @@
 {
-    gROOT->Reset();
     TString zb_path = "$(DATA)/ZeroBiasL1KF2016R307195R311481.51Runs.root";    
 
     if (!gSystem->AccessPathName( zb_path ) ){
@@ -15,15 +14,19 @@
     
 
     Float_t metcell = 0;
+    Int_t passrndm = 0;
     zb_tree->SetBranchAddress( "metcell" , &metcell );
+    zb_tree->SetBranchAddress( "passrndm" , &passrndm );
 
 
-    TH1F *MetCellHist = new TH1F( "histo" , "Metcell Hist" , 300 , 0.0 , 300.0 );
+    TH1F *MetCellHist = new TH1F( "histo" , "Metcell Hist" , 300 , 0.0 , 100.0 );
 
 
     for ( Int_t i = 0 ; i < zb_nentries ; i++ ) {
         zb_tree->GetEntry(i);
-        MetCellHist->Fill( metcell );
+        if (passrndm){
+            MetCellHist->Fill( metcell );
+        }
     }
 
 
