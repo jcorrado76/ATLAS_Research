@@ -15,17 +15,42 @@
 
     Float_t metcell = 0;
     Int_t passrndm = 0;
+    Int_t passnoalgL1XE10 = 0;
+    Int_t passnoalgL1XE30 = 0;
+    Int_t passnoalgL1XE40 = 0;
+    Int_t passnoalgL1XE45 = 0;
     zb_tree->SetBranchAddress( "metcell" , &metcell );
     zb_tree->SetBranchAddress( "passrndm" , &passrndm );
+    zb_tree->SetBranchAddress( "passnoalgL1XE10" , &passnoalgL1XE10);
+    zb_tree->SetBranchAddress( "passnoalgL1XE30" , &passnoalgL1XE30);
+    zb_tree->SetBranchAddress( "passnoalgL1XE40" , &passnoalgL1XE40);
+    zb_tree->SetBranchAddress( "passnoalgL1XE45" , &passnoalgL1XE45);
 
 
-    TH1F *MetCellHist = new TH1F( "histo" , "Metcell Hist" , 300 , 0.0 , 100.0 );
+    TH1F *MetCellHist = new TH1F( "histo0" , "Metcell Hist" , 300 , 0.0 , 80.0 );
+    TH1F *MetCellHistPNA10 = new TH1F( "histo1" , "Metcell PNA 10" , 300 , 0.0 , 80.0 );
+    TH1F *MetCellHistPNA30 = new TH1F( "histo2" , "Metcell PNA 30" , 300 , 0.0 , 80.0 );
+    TH1F *MetCellHistPNA40 = new TH1F( "histo3" , "Metcell PNA 40" , 300 , 0.0 , 80.0 );
+    TH1F *MetCellHistPNA45 = new TH1F( "histo4" , "Metcell PNA 45" , 300 , 0.0 , 80.0 );
 
 
     for ( Int_t i = 0 ; i < zb_nentries ; i++ ) {
         zb_tree->GetEntry(i);
         if (passrndm){
             MetCellHist->Fill( metcell );
+
+            if ( passnoalgL1XE10 > 0.5 ){
+                MetCellHistPNA10->Fill( metcell );
+            }
+            if ( passnoalgL1XE30 > 0.5 ){
+                MetCellHistPNA30->Fill( metcell );
+            }
+            if ( passnoalgL1XE40 > 0.5 ){
+                MetCellHistPNA40->Fill( metcell );
+            }
+            if ( passnoalgL1XE45 > 0.5 ){
+                MetCellHistPNA45->Fill( metcell );
+            }
         }
     }
 
@@ -34,7 +59,22 @@
     TCanvas *mycanv = new TCanvas( "mycanv" , "Preliminary Plots Canvas");
     TLegend *legend = new TLegend();
     legend->AddEntry( MetCellHist );
+    legend->AddEntry( MetCellHistPNA10 );
+    legend->AddEntry( MetCellHistPNA30 );
+    legend->AddEntry( MetCellHistPNA40 );
+    legend->AddEntry( MetCellHistPNA45 );
+
+    MetCellHist->SetLineColor(kBlue);
+    MetCellHistPNA10->SetLineColor(kGreen);
+    MetCellHistPNA30->SetLineColor(kRed);
+    MetCellHistPNA40->SetLineColor(kTeal);
+    MetCellHistPNA45->SetLineColor(kBlack);
+
     MetCellHist->Draw();
+    MetCellHistPNA10->Draw("SAME");
+    MetCellHistPNA30->Draw("SAME");
+    MetCellHistPNA40->Draw("SAME");
+    MetCellHistPNA45->Draw("SAME");
     legend->Draw();
     mycanv->Draw();
 
