@@ -1,6 +1,6 @@
 {
     TString zb_path  = "$(DATA)/ZeroBiasL1KF2016R307195R311481.51Runs.root";
-    TString sig_path = "$(DATA)/PhysicsMain.L1KFmuontriggers.2016.f731f758_m1659m1710.Run309759.48Runs.root";
+    TString sig_path = "$(DATA)/PhysicsMain.L1KFnoalgXEtriggers.2016.f731f758_m1659m1710.Run309759.48Runs.root";
 
 
     if (!gSystem->AccessPathName( zb_path ) ){

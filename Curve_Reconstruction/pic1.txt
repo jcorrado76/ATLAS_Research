@@ -1,0 +1,41 @@
+TString zb_path  = "$(DATA)/ZeroBiasL1KF2016R307195R311481.51Runs.root";
+TString sig_path = "$(DATA)/PhysicsMain.L1KFnoalgXEtriggers.2016.f731f758_m1659m1710.Run309759.48Runs.root";
+
+zb_tree->SetBranchAddress( "metcell" , &metcell );
+zb_tree->SetBranchAddress( "passrndm" , &passrndm );
+sig_tree->SetBranchAddress( "metcell" , &sig_metcell );
+sig_tree->SetBranchAddress( "passnoalgL1XE10" , &passnoalgL1XE10);
+sig_tree->SetBranchAddress( "passnoalgL1XE30" , &passnoalgL1XE30);
+sig_tree->SetBranchAddress( "passnoalgL1XE40" , &passnoalgL1XE40);
+sig_tree->SetBranchAddress( "passnoalgL1XE45" , &passnoalgL1XE45);
+
+
+
+for ( Int_t i = 0 ; i < zb_nentries ; i++ ) {
+    zb_tree->GetEntry(i);
+    if (passrndm){
+        MetCellHist->Fill( metcell );
+    }
+}
+
+for ( Int_t i = 0 ; i < sig_nentries ; i++ ) {
+    sig_tree->GetEntry(i);
+    if ( passnoalgL1XE10 > 0.5 ){
+        MetCellHistPNA10->Fill( sig_metcell );
+    }
+    if ( passnoalgL1XE30 > 0.5 ){
+        MetCellHistPNA30->Fill( sig_metcell );
+    }
+    if ( passnoalgL1XE40 > 0.5 ){
+        MetCellHistPNA40->Fill( sig_metcell );
+    }
+    if ( passnoalgL1XE45 > 0.5 ){
+        MetCellHistPNA45->Fill( sig_metcell );
+    }
+}
+
+MetCellHist->SetLineColor(kBlue);
+MetCellHistPNA10->SetLineColor(kGreen);
+MetCellHistPNA30->SetLineColor(kRed);
+MetCellHistPNA40->SetLineColor(kTeal);
+MetCellHistPNA45->SetLineColor(kBlack);
