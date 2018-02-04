@@ -22,6 +22,7 @@
     
 
     Float_t metcell = 0;
+    Float_t sig_metcell = 0;
     Int_t passrndm = 0;
     Int_t passnoalgL1XE10 = 0;
     Int_t passnoalgL1XE30 = 0;
@@ -30,6 +31,7 @@
 
     zb_tree->SetBranchAddress( "metcell" , &metcell );
     zb_tree->SetBranchAddress( "passrndm" , &passrndm );
+    sig_tree->SetBranchAddress( "metcell" , &sig_metcell );
     sig_tree->SetBranchAddress( "passnoalgL1XE10" , &passnoalgL1XE10);
     sig_tree->SetBranchAddress( "passnoalgL1XE30" , &passnoalgL1XE30);
     sig_tree->SetBranchAddress( "passnoalgL1XE40" , &passnoalgL1XE40);
@@ -45,24 +47,26 @@
 
     for ( Int_t i = 0 ; i < zb_nentries ; i++ ) {
         zb_tree->GetEntry(i);
-        sig_tree->GetEntry(i);
         if (passrndm){
             MetCellHist->Fill( metcell );
         }
-        if ( passnoalgL1XE10 > 0.5 ){
-            MetCellHistPNA10->Fill( metcell );
-        }
-        if ( passnoalgL1XE30 > 0.5 ){
-            MetCellHistPNA30->Fill( metcell );
-        }
-        if ( passnoalgL1XE40 > 0.5 ){
-            MetCellHistPNA40->Fill( metcell );
-        }
-        if ( passnoalgL1XE45 > 0.5 ){
-            MetCellHistPNA45->Fill( metcell );
-        }
     }
 
+    for ( Int_t i = 0 ; i < sig_nentries ; i++ ) {
+        sig_tree->GetEntry(i);
+        if ( passnoalgL1XE10 > 0.5 ){
+            MetCellHistPNA10->Fill( sig_metcell );
+        }
+        if ( passnoalgL1XE30 > 0.5 ){
+            MetCellHistPNA30->Fill( sig_metcell );
+        }
+        if ( passnoalgL1XE40 > 0.5 ){
+            MetCellHistPNA40->Fill( sig_metcell );
+        }
+        if ( passnoalgL1XE45 > 0.5 ){
+            MetCellHistPNA45->Fill( sig_metcell );
+        }
+    }
 
 
     TCanvas *mycanv = new TCanvas( "mycanv" , "Preliminary Plots Canvas");
