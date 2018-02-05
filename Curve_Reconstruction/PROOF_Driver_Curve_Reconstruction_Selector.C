@@ -1,6 +1,3 @@
-
-
-
 {
     gSystem->Setenv("DATA", "~/ATLAS_DATA");
 
@@ -14,24 +11,12 @@
 
         TFile* zb_file = TFile::Open(  zb_pathname );
 
-        std::cout << "Successfully opened data file" << std::endl;
-
-
-        tree->Process("Curve_Reconstruction_Selector.C");
-
-
-
-
-
-
-/*
-        TProof* proof = TProof::Open("");
         TChain* mychain = new TChain( "tree" , "Curve_Reconst_Chain" );
         mychain->Add( zb_pathname );
+        TProof* proof = TProof::Open("");
         mychain->SetProof();
         proof->SetParameter("PROOF_UseTreeCache", (Int_t)0);
-        mychain->Process( "Curve_Reconstruction_Selector.C+");
-        */
+        mychain->Process("Curve_Reconstruction_Selector.C+");
 
     }
     else{
