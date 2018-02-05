@@ -14,11 +14,12 @@
         TProof* proof = TProof::Open("");
         mychain->SetProof();
         proof->SetParameter("PROOF_UseTreeCache" , (Int_t)0);
-        mychain->Process("Curve_Reconstruction_Selector.C+");
+        mychain->Process("ZB_Eff_Selector.C+");
 
     }
     else{
         std::cout << "Could not access filename " << std::endl;
         std::cout << "Filename:\n" << zb_pathname << std::endl;
     }
+
 }

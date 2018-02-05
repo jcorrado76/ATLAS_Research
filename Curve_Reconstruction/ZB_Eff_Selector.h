@@ -1,5 +1,12 @@
-#ifndef Curve_Reconstruction_Selector_h
-#define Curve_Reconstruction_Selector_h
+//////////////////////////////////////////////////////////
+// This class has been automatically generated on
+// Mon Feb  5 16:06:14 2018 by ROOT version 6.13/01
+// from TTree tree/tree
+// found on file: /home/joseph/ATLAS_DATA/ZeroBiasL1KF2016R307195R311481.51Runs.root
+//////////////////////////////////////////////////////////
+
+#ifndef ZB_Eff_Selector_h
+#define ZB_Eff_Selector_h
 
 #include <TROOT.h>
 #include <TChain.h>
@@ -8,20 +15,26 @@
 #include <TTreeReader.h>
 #include <TTreeReaderValue.h>
 #include <TTreeReaderArray.h>
-#include <TH1F.h>
-#include <TLegend.h>
+#include <TH2.h>
+#include <TStyle.h>
+#include <TH1.h>
+#include <TEfficiency.h>
 #include <TCanvas.h>
+#include <TLegend.h>
 
 // Headers needed by this particular selector
 
 
-class Curve_Reconstruction_Selector : public TSelector {
+class ZB_Eff_Selector : public TSelector {
 public :
    TTreeReader     fReader;  //!the tree reader
    TTree          *fChain = 0;   //!pointer to the analyzed TTree or TChain
-   TH1F           *histo;
+   TH1F* histo1;
+   TH1F* histo2;
+   TEfficiency* XE_Ratio;
 
-   // Readers to access the data (delete the ones you do not need){{{
+
+   // Readers to access the data (delete the ones you do not need).
    TTreeReaderValue<Float_t> metl1 = {fReader, "metl1"};
    TTreeReaderValue<Float_t> mexl1 = {fReader, "mexl1"};
    TTreeReaderValue<Float_t> meyl1 = {fReader, "meyl1"};
@@ -120,10 +133,11 @@ public :
    TTreeReaderValue<Int_t> eventnum = {fReader, "eventnum"};
    TTreeReaderValue<Int_t> bcid = {fReader, "bcid"};
    TTreeReaderValue<Float_t> actint = {fReader, "actint"};
-   TTreeReaderValue<Float_t> avint = {fReader, "avint"};//}}}
+   TTreeReaderValue<Float_t> avint = {fReader, "avint"};
 
-   Curve_Reconstruction_Selector(TTree * /*tree*/ =0) { }//{{{
-   virtual ~Curve_Reconstruction_Selector() { }
+
+   ZB_Eff_Selector(TTree * /*tree*/ =0) { }
+   virtual ~ZB_Eff_Selector() { }
    virtual Int_t   Version() const { return 2; }
    virtual void    Begin(TTree *tree);
    virtual void    SlaveBegin(TTree *tree);
@@ -138,22 +152,35 @@ public :
    virtual void    SlaveTerminate();
    virtual void    Terminate();
 
-   ClassDef(Curve_Reconstruction_Selector,0);
+   ClassDef(ZB_Eff_Selector,0);
 
-};//}}}
+};
 
 #endif
 
-#ifdef Curve_Reconstruction_Selector_cxx
-void Curve_Reconstruction_Selector::Init(TTree *tree)
+#ifdef ZB_Eff_Selector_cxx
+void ZB_Eff_Selector::Init(TTree *tree)
 {
+   // The Init() function is called when the selector needs to initialize
+   // a new tree or chain. Typically here the reader is initialized.
+   // It is normally not necessary to make changes to the generated
+   // code, but the routine can be extended by the user if needed.
+   // Init() will be called many times when running on PROOF
+   // (once per file to be processed).
+
    fReader.SetTree(tree);
 }
 
-Bool_t Curve_Reconstruction_Selector::Notify()
+Bool_t ZB_Eff_Selector::Notify()
 {
+   // The Notify() function is called when a new file is opened. This
+   // can be either for a new TTree in a TChain or when when a new TTree
+   // is started when using PROOF. It is normally not necessary to make changes
+   // to the generated code, but the routine can be extended by the
+   // user if needed. The return value is currently not used.
+
    return kTRUE;
 }
 
 
-#endif // #ifdef Curve_Reconstruction_Selector_cxx
+#endif // #ifdef ZB_Eff_Selector_cxx
