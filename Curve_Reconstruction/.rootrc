@@ -1,1 +1,2 @@
-Unix.*.Root.MacroPath:.:$work/drivers:$work/src
+Unix.*.Root.MacroPath:        .:~/ATLAS_Research/Curve_Reconstruction/src:~/ATLAS_Research/Curve_Reconstruction/drivers
+Unix.*.Root.DynamicPath:        .:~/ATLAS_Research/Curve_Reconstruction/include
