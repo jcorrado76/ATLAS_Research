@@ -1,33 +1,31 @@
-#define Curve_Reconstruction_Selector_cxx
+#define ZB_Eff_Selector_cxx
 
-#include "Curve_Reconstruction_Selector.h"
-#include <TH2.h>
-#include <TStyle.h>
+#include "ZB_Eff_Selector.h"
 
-void Curve_Reconstruction_Selector::Begin(TTree * /*tree*/)
+void ZB_Eff_Selector::Begin(TTree * /*tree*/)
 {
    TString option = GetOption();
 }
 
-void Curve_Reconstruction_Selector::SlaveBegin(TTree * /*tree*/)
+void ZB_Eff_Selector::SlaveBegin(TTree * /*tree*/)
 {
    TString option = GetOption();
    histo = new TH1F( "histo", "Unbiased Curves" , 400 , 0.0 , 300.0 );
    fOutput->Add( histo );
 }
 
-Bool_t Curve_Reconstruction_Selector::Process(Long64_t entry)
+Bool_t ZB_Eff_Selector::Process(Long64_t entry)
 {
    fReader.SetEntry(entry);
    histo->Fill( *metcell );
    return kTRUE;
 }
 
-void Curve_Reconstruction_Selector::SlaveTerminate()
+void ZB_Eff_Selector::SlaveTerminate()
 {
 }
 
-void Curve_Reconstruction_Selector::Terminate()
+void ZB_Eff_Selector::Terminate()
 {
     TCanvas* Histo_Canv = new TCanvas( "mycanv" , "Random Trigger Curves" );
     TString alg_name = "metcell";
