@@ -38,16 +38,22 @@ void ZB_Eff_Selector::SlaveTerminate()
 void ZB_Eff_Selector::Terminate()
 {
     TCanvas* random_canv = new TCanvas( "mycanv" , "Random Trigger Curves" );
+    random_canv->Divide(2,1);
+    random_canv->cd(1);
     gStyle->SetOptStat(kFALSE);
     TString alg_name = "metcell";
     random_canv->RangeAxis( 1.0 , 1.0 , 500.0 , 1.0 );
     histo1->SetLineColor(kBlue);
     histo2->SetLineColor(kMagenta);
+    XE_Ratio->SetLineColor(kRed);
     histo2->SetAxisRange(1.0,5.0e5,"Y");
-    random_canv->SetLogy();
+    gPad->SetLogy();
     histo1->Draw();
     histo2->Draw("SAME");
 
+    random_canv->cd(2);
+    XE_Ratio->Draw();
+    
     
     TLegend *legend = new TLegend( 0.57, 0.12 , 0.9, 0.4 , "" , "NDC");
     legend->AddEntry( histo1 , "Metcell Random");
