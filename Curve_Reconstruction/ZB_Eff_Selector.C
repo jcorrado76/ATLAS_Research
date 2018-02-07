@@ -52,7 +52,7 @@ void ZB_Eff_Selector::Terminate()
     TLegend *legend = new TLegend( 0.57, 0.12 , 0.9, 0.4 , "" , "NDC");
     legend->AddEntry( histo1 , "Metcell Random");
     legend->AddEntry( histo2 , "Metcell Random XE20");
-    legend->AddEntry( XE_Ratio , "Efficiency of ZBXE20 to ZB );
+    legend->AddEntry( XE_Ratio , "Efficiency of ZBXE20 to ZB" );
     legend->Draw();
     random_canv->Draw();
 }
