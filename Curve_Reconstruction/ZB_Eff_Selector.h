@@ -21,6 +21,8 @@
 #include <TEfficiency.h>
 #include <TCanvas.h>
 #include <TLegend.h>
+#include "TAxis.h"
+#include "TGaxis.h"
 
 // Headers needed by this particular selector
 
