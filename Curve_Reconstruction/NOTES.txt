@@ -1,0 +1,14 @@
+When you are trying to scale a histogram, use:{{{
+
+hist->Scale(8);
+It is faster, as operator* creates a temporary copy of the whole histogram
+}}}
+There are two pictures here. There is the picture where I determine the
+efficiency of the ZeroBias data that also passes XE20 to just the ZeroBias data.
+Then there is the picture of the different passnoalg plots, which we want to
+correct in each bin by the corresponding ratio from the efficiency, so that it
+looks like the zerobias data  
+
+
+
+
