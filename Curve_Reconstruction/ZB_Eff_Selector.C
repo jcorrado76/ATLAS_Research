@@ -44,27 +44,9 @@ void ZB_Eff_Selector::Terminate()
     histo1->SetLineColor(kBlue);
     histo2->SetLineColor(kMagenta);
     histo2->SetAxisRange(1.0,5.0e5,"Y");
-    //random_canv->SetLogy();
+    random_canv->SetLogy();
     histo1->Draw();
     histo2->Draw("SAME");
-
-
-    TH1F* teff_passed_histo = (TH1F*) XE_Ratio->GetCopyPassedHisto();
-    Float_t rightmax = 1.1*teff_passed_histo->GetMaximum();
-    Float_t scale = gPad->GetUymax() / rightmax;
-    teff_passed_histo->Scale(scale);
-    teff_passed_histo->SetLineColor(kRed);
-    teff_passed_histo->Draw("SAME");
-    
-    TGaxis *axis = new TGaxis( gPad->GetUxmax() , gPad->GetUymin() , 
-            gPad->GetUxmax() , gPad->GetUymax() , 0 , rightmax , 510 , "+L");
-
-    //axis->SetLogy();
-    axis->SetLineColor(kRed);
-    axis->SetTextColor(kRed);
-    axis->Draw();
-
-
 
     
     TLegend *legend = new TLegend( 0.57, 0.12 , 0.9, 0.4 , "" , "NDC");
