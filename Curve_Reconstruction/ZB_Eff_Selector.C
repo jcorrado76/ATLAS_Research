@@ -23,8 +23,10 @@ Bool_t ZB_Eff_Selector::Process(Long64_t entry)
    fReader.SetEntry(entry);
    if (*passrndm > 0.5 ){
        histo1->Fill( *metcell );
-       histo2->Fill( *metcell );
        XE_Ratio->Fill( *metl1 > 20.0 , *metcell );
+       if ( *metl1>20.0 ){
+           histo2->Fill( *metcell );
+       }
    }
    return kTRUE;
 }
@@ -38,16 +40,19 @@ void ZB_Eff_Selector::Terminate()
     TCanvas* random_canv = new TCanvas( "mycanv" , "Random Trigger Curves" );
     TString alg_name = "metcell";
     random_canv->RangeAxis( 0.0 , 0.0 , 500.0 , 1.0 );
+    random_canv->Divide(2,1);
     histo1->SetLineColor(kBlue);
     histo2->SetLineColor(kTeal);
     XE_Ratio->SetLineColor(kRed);
+    random_canv->cd(1);
     histo1->Draw();
     histo2->Draw();
+    random_canv->cd(2);
     XE_Ratio->Draw();
     TLegend *legend = new TLegend( 0.57, 0.12 , 0.9, 0.4 , "" , "NDC");
-    legend->AddEntry( histo1 , "metcell plot");
-    legend->AddEntry( histo2 , "metcell plot");
-    legend->AddEntry( XE_Ratio , "Efficiency of ZB to ZBXE20");
+    legend->AddEntry( histo1 , "Metcell Random");
+    legend->AddEntry( histo2 , "Metcell Random XE20");
+    legend->AddEntry( XE_Ratio , "Efficiency of ZBXE20 to ZB );
     legend->Draw();
     random_canv->Draw();
 }
