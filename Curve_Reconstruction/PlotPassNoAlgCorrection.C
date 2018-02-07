@@ -1,6 +1,8 @@
 {
 
-    
+   
+
+
     gSystem->Setenv("DATA", "~/ATLAS_DATA");
 
     TString zb_pathname = "$DATA/ZeroBiasL1KF2016R307195R311481.51Runs.root";
@@ -29,28 +31,29 @@
     else {
         std::cout << "Unable to open zerobias file" << std::endl;
         return;
+    }
 
 
-    TList* object_list = proof->GetOutputList();
-
-    object_list->GetObjectRef(histo1);
+    //WRITE THE OBJECTS TO FILE IN ZB_EFF_SELECTOR, AND READ THEM HERE SO YOU CAN PLOT THEM
 
     histo1->Draw();
 
 
-    if ( gSystem->AccessPathName( pna_pathname ) ){
-         
-        TFile* pna_file = TFile::Open( pna_pathname );
+	//MOVE ON TO MAKING THIS WORK AFTER YOU HAVE SUCCESSFULLY READ AND PLOTTED THE TOTAL RANDOM ZB CURVE`
 
-        TChain* pna_chain = new TChain( "tree" , "Curve_reconst_Chain" );
-        pna_chain->Add( pna_pathname );
-        pna_chain->SetProof();
-        proof->SetParameter("PROOF_UseTreeCache" , (Int_t)0);
-        pna_chain->Process(".C+");
-    }
-    else {
-        std::cout << "Unable to open passnoalg file" << std::endl;
-        return;
+    //if ( gSystem->AccessPathName( pna_pathname ) ){
+         
+        //TFile* pna_file = TFile::Open( pna_pathname );
+
+        //TChain* pna_chain = new TChain( "tree" , "Curve_reconst_Chain" );
+        //pna_chain->Add( pna_pathname );
+        //pna_chain->SetProof();
+        //proof->SetParameter("PROOF_UseTreeCache" , (Int_t)0);
+        //pna_chain->Process(".C+");
+    //}
+    //else {
+        //std::cout << "Unable to open passnoalg file" << std::endl;
+        //return;
     
 //need to plot the curves with passsnoalg cuts
 //
