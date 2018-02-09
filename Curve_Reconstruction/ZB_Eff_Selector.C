@@ -64,6 +64,7 @@ void ZB_Eff_Selector::Terminate()
     legend->AddEntry( histo1 , "Metcell Random");
     legend->AddEntry( histo2 , "Metcell Random XE20");
     legend->AddEntry( XE_Ratio , "Efficiency of ZBXE20 to ZB" );
+    random_canv->cd(1); //change back to pad 1 to put tlegend on lhs of diagram
     legend->Draw();
     random_canv->Draw();
 }
