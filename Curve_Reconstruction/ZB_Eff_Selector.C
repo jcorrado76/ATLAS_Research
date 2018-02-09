@@ -9,15 +9,11 @@ void ZB_Eff_Selector::Begin(TTree * /*tree*/)
 
 void ZB_Eff_Selector::SlaveBegin(TTree * /*tree*/)
 {
+   TString option = GetOption();
    Float_t metmax = 200.0;
    Float_t metmin = 0.0;
    Float_t binwidth = 10.0
    Int_t nbins = (metmax - metmin) / binwidth;
-
-
-
-
-   TString option = GetOption();
    histo1 = new TH1F( "histo1", "Random Trigger" , nbins , metmin , metmax );
    histo2 = new TH1F( "histo2", "Random Trigger XE20" , nbins , metmin , metmax );
    XE_Ratio = new TEfficiency( "teff" , "Efficiency" , nbins , metmin , metmax );
