@@ -1,0 +1,9 @@
+The left hand side of this picture is the histograms of the energy for metcell
+if passrndm on zerobias data either with the L1>20 cut (XE20) or without. The
+one without the cut is obviously the higher one, as it kept more events. 
+
+The right hand side of this picture is the efficiency curve of the XE20 cut on
+metcell, as a function of zerobias metcell. 
+
+The right hand side looks hazy at higher energies as a result of already not
+having enough statistics to compute the efficiency properly.
