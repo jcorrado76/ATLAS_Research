@@ -13,7 +13,7 @@ void ZB_Eff_Selector::SlaveBegin(TTree * /*tree*/)
    Float_t metmax = 200.0;
    Float_t metmin = 0.0;
    Int_t histnbins = 400;
-   Float_t eff_binwidth = 10.0;
+   Float_t eff_binwidth = 1.0;
    Int_t eff_nbins = (metmax - metmin) / eff_binwidth;
    histo1 = new TH1F( "histo1", "Passrndm Trigger" , histnbins , metmin , metmax );
    histo2 = new TH1F( "histo2", "Passrndm Trigger XE20" , histnbins, metmin , metmax );
@@ -33,17 +33,17 @@ Bool_t ZB_Eff_Selector::Process(Long64_t entry)
 {
    fReader.SetEntry(entry);
    if (*passrndm > 0.5 ){
-       histo1->Fill( *mettopoclpuc );
-       XE_Ratio->Fill( *metl1 > 20.0 , *mettopoclpuc );
+       histo1->Fill( *metcell );
+       XE_Ratio->Fill( *metl1 > 20.0 , *metcell );
        if ( *metl1>20.0 ){
-           histo2->Fill( *mettopoclpuc );
+           histo2->Fill( *metcell );
        }
    }
    if (*passrndmj40 > 0.5 ){
-       histo1j40->Fill( *mettopoclpuc );
-       XE_Ratioj40->Fill( *metl1 > 20.0 , *mettopoclpuc );
+       histo1j40->Fill( *metcell );
+       XE_Ratioj40->Fill( *metl1 > 20.0 , *metcell );
        if ( *metl1>20.0 ){
-           histo2j40->Fill( *mettopoclpuc );
+           histo2j40->Fill( *metcell );
        }
    }
    return kTRUE;
@@ -55,11 +55,24 @@ void ZB_Eff_Selector::SlaveTerminate()
 
 void ZB_Eff_Selector::Terminate()
 {
+
+    TFile* tempfile = new TFile("temp.root","RECREATE");
+
+
+    if ( tempfile->IsOpen() ) printf("File opened successfully\n");
+    histo1->Write();
+    histo2->Write();
+    XE_Ratio->Write();
+    histo1j40->Write();
+    histo2j40->Write();
+    XE_Ratioj40->Write();
+    tempfile->Close();
+
     TCanvas* random_canv = new TCanvas( "mycanv" , "Random Trigger Curves" );
     random_canv->Divide(2,1);
     random_canv->cd(1);
     gStyle->SetOptStat(kFALSE);
-    TString alg_name = "mettopoclpuc";
+    TString alg_name = "metcell";
     random_canv->RangeAxis( 1.0 , 1.0 , 500.0 , 1.0 );
 
     histo1->SetLineColor(kBlue);
@@ -88,12 +101,12 @@ void ZB_Eff_Selector::Terminate()
     
     
     TLegend *legend = new TLegend( 0.57, 0.12 , 0.9, 0.4 , "" , "NDC");
-    legend->AddEntry( histo1 , "mettopoclpuc Random");
-    legend->AddEntry( histo2 , "mettopoclpuc Random XE20");
+    legend->AddEntry( histo1 , "metcell Random");
+    legend->AddEntry( histo2 , "metcell Random XE20");
     legend->AddEntry( XE_Ratio , "Efficiency of ZBXE20 to ZB" );
 
-    legend->AddEntry( histo1j40 , "mettopoclpuc passrndmj40");
-    legend->AddEntry( histo2j40 , "mettopoclpuc passrndmj40 XE20");
+    legend->AddEntry( histo1j40 , "metcell passrndmj40");
+    legend->AddEntry( histo2j40 , "metcell passrndmj40 XE20");
     legend->AddEntry( XE_Ratioj40 , "Efficiency of passrndmj40 ZBXE20 to ZB" );
     random_canv->cd(1); //change back to pad 1 to put tlegend on lhs of diagram
     legend->Draw();
