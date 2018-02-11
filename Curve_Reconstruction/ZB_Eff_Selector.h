@@ -34,6 +34,9 @@ public :
    TH1F* histo1;
    TH1F* histo2;
    TEfficiency* XE_Ratio;
+   TH1F* histo1j40;
+   TH1F* histo2j40;
+   TEfficiency* XE_Ratioj40;
 
 
    // Readers to access the data (delete the ones you do not need).

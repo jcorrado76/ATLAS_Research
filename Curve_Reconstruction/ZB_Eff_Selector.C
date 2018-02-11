@@ -15,17 +15,30 @@ void ZB_Eff_Selector::SlaveBegin(TTree * /*tree*/)
    Int_t histnbins = 400;
    Float_t eff_binwidth = 10.0;
    Int_t eff_nbins = (metmax - metmin) / eff_binwidth;
-   histo1 = new TH1F( "histo1", "Random Trigger" , histnbins , metmin , metmax );
-   histo2 = new TH1F( "histo2", "Random Trigger XE20" , histnbins, metmin , metmax );
-   XE_Ratio = new TEfficiency( "teff" , "Efficiency" , eff_nbins, metmin , metmax );
+   histo1 = new TH1F( "histo1", "Passrndm Trigger" , histnbins , metmin , metmax );
+   histo2 = new TH1F( "histo2", "Passrndm Trigger XE20" , histnbins, metmin , metmax );
+   XE_Ratio = new TEfficiency( "teff" , "Passrndm Efficiency" , eff_nbins, metmin , metmax );
+   histo1j40= new TH1F( "histo1j40", "Passrndmj40 Trigger" , histnbins , metmin , metmax );
+   histo2j40 = new TH1F( "histo2j40", "Passrndmj40 Trigger XE20" , histnbins, metmin , metmax );
+   XE_Ratioj40 = new TEfficiency( "teffj40" , "Passrndmj40 Efficiency" , eff_nbins, metmin , metmax );
    fOutput->Add( histo1 );
    fOutput->Add( histo2 );
    fOutput->Add( XE_Ratio );
+   fOutput->Add( histo1j40 );
+   fOutput->Add( histo2j40 );
+   fOutput->Add( XE_Ratioj40 );
 }
 
 Bool_t ZB_Eff_Selector::Process(Long64_t entry)
 {
    fReader.SetEntry(entry);
+   if (*passrndm > 0.5 ){
+       histo1->Fill( *mettopoclpuc );
+       XE_Ratio->Fill( *metl1 > 20.0 , *mettopoclpuc );
+       if ( *metl1>20.0 ){
+           histo2->Fill( *mettopoclpuc );
+       }
+   }
    if (*passrndmj40 > 0.5 ){
        histo1->Fill( *mettopoclpuc );
        XE_Ratio->Fill( *metl1 > 20.0 , *mettopoclpuc );
@@ -48,22 +61,40 @@ void ZB_Eff_Selector::Terminate()
     gStyle->SetOptStat(kFALSE);
     TString alg_name = "mettopoclpuc";
     random_canv->RangeAxis( 1.0 , 1.0 , 500.0 , 1.0 );
+
     histo1->SetLineColor(kBlue);
     histo2->SetLineColor(kMagenta);
     XE_Ratio->SetLineColor(kRed);
+
+    histo1j40->SetLineColor(kBlue);
+    histo2j40->SetLineColor(kMagenta);
+    XE_Ratioj40->SetLineColor(kRed);
+
+    histo1j40->SetLineStyle(10);
+    histo2j40->SetLineStyle(10);
+    XE_Ratioj40->SetLineStyle(10);
+
     histo2->SetAxisRange(1.0,5.0e5,"Y");
     gPad->SetLogy();
     histo1->Draw();
     histo2->Draw("SAME");
+    histo1j40->Draw("SAME");
+    histo2j40->Draw("SAME");
+
 
     random_canv->cd(2);
     XE_Ratio->Draw();
+    XE_Ratioj40->Draw("SAME");
     
     
     TLegend *legend = new TLegend( 0.57, 0.12 , 0.9, 0.4 , "" , "NDC");
     legend->AddEntry( histo1 , "mettopoclpuc Random");
     legend->AddEntry( histo2 , "mettopoclpuc Random XE20");
     legend->AddEntry( XE_Ratio , "Efficiency of ZBXE20 to ZB" );
+
+    legend->AddEntry( histo1j40 , "mettopoclpuc passrndmj40");
+    legend->AddEntry( histo2j40 , "mettopoclpuc passrndmj40 XE20");
+    legend->AddEntry( XE_Ratioj40 , "Efficiency of passrndmj40 ZBXE20 to ZB" );
     random_canv->cd(1); //change back to pad 1 to put tlegend on lhs of diagram
     legend->Draw();
     random_canv->Draw();
