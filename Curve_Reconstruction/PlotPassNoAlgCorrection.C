@@ -1,8 +1,4 @@
 {
-
-   
-
-
     gSystem->Setenv("DATA", "~/ATLAS_DATA");
 
     TString zb_pathname = "$DATA/ZeroBiasL1KF2016R307195R311481.51Runs.root";
