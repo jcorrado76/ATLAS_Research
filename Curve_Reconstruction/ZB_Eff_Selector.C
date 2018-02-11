@@ -40,10 +40,10 @@ Bool_t ZB_Eff_Selector::Process(Long64_t entry)
        }
    }
    if (*passrndmj40 > 0.5 ){
-       histo1->Fill( *mettopoclpuc );
-       XE_Ratio->Fill( *metl1 > 20.0 , *mettopoclpuc );
+       histo1j40->Fill( *mettopoclpuc );
+       XE_Ratioj40->Fill( *metl1 > 20.0 , *mettopoclpuc );
        if ( *metl1>20.0 ){
-           histo2->Fill( *mettopoclpuc );
+           histo2j40->Fill( *mettopoclpuc );
        }
    }
    return kTRUE;
@@ -66,13 +66,13 @@ void ZB_Eff_Selector::Terminate()
     histo2->SetLineColor(kMagenta);
     XE_Ratio->SetLineColor(kRed);
 
-    histo1j40->SetLineColor(kBlue);
-    histo2j40->SetLineColor(kMagenta);
-    XE_Ratioj40->SetLineColor(kRed);
+    histo1j40->SetLineColor(7);
+    histo2j40->SetLineColor(12);
+    XE_Ratioj40->SetLineColor(8);
 
-    histo1j40->SetLineStyle(10);
-    histo2j40->SetLineStyle(10);
-    XE_Ratioj40->SetLineStyle(10);
+    histo1j40->SetLineStyle(9);
+    histo2j40->SetLineStyle(9);
+    XE_Ratioj40->SetLineStyle(9);
 
     histo2->SetAxisRange(1.0,5.0e5,"Y");
     gPad->SetLogy();
