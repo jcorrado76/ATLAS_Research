@@ -27,10 +27,10 @@ Bool_t ZB_Eff_Selector::Process(Long64_t entry)
 {
    fReader.SetEntry(entry);
    if (*passrndm > 0.5 ){
-       histo1->Fill( *metcell );
-       XE_Ratio->Fill( *metl1 > 20.0 , *metcell );
+       histo1->Fill( *metmht );
+       XE_Ratio->Fill( *metl1 > 20.0 , *metmht );
        if ( *metl1>20.0 ){
-           histo2->Fill( *metcell );
+           histo2->Fill( *metmht );
        }
    }
    return kTRUE;
@@ -46,7 +46,7 @@ void ZB_Eff_Selector::Terminate()
     random_canv->Divide(2,1);
     random_canv->cd(1);
     gStyle->SetOptStat(kFALSE);
-    TString alg_name = "metcell";
+    TString alg_name = "metmht";
     random_canv->RangeAxis( 1.0 , 1.0 , 500.0 , 1.0 );
     histo1->SetLineColor(kBlue);
     histo2->SetLineColor(kMagenta);
@@ -61,8 +61,8 @@ void ZB_Eff_Selector::Terminate()
     
     
     TLegend *legend = new TLegend( 0.57, 0.12 , 0.9, 0.4 , "" , "NDC");
-    legend->AddEntry( histo1 , "Metcell Random");
-    legend->AddEntry( histo2 , "Metcell Random XE20");
+    legend->AddEntry( histo1 , "metmht Random");
+    legend->AddEntry( histo2 , "metmht Random XE20");
     legend->AddEntry( XE_Ratio , "Efficiency of ZBXE20 to ZB" );
     random_canv->cd(1); //change back to pad 1 to put tlegend on lhs of diagram
     legend->Draw();
