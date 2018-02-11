@@ -1,0 +1,3 @@
+All of these runs are copies of metcell(2) for the other hlt algorithms since
+professor mincer wanted to see what they would look like. The efficiencies look
+funny since they don't go to 1
