@@ -26,7 +26,7 @@ void ZB_Eff_Selector::SlaveBegin(TTree * /*tree*/)
 Bool_t ZB_Eff_Selector::Process(Long64_t entry)
 {
    fReader.SetEntry(entry);
-   if (*passrndm > 0.5 ){
+   if (*passrndmj40 > 0.5 ){
        histo1->Fill( *mettopoclpuc );
        XE_Ratio->Fill( *metl1 > 20.0 , *mettopoclpuc );
        if ( *metl1>20.0 ){
