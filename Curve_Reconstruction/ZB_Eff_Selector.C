@@ -13,7 +13,7 @@ void ZB_Eff_Selector::SlaveBegin(TTree * /*tree*/)
    Float_t metmax = 200.0;
    Float_t metmin = 0.0;
    Int_t histnbins = 400;
-   Float_t eff_binwidth = 1.0;
+   Float_t eff_binwidth = 10.0;
    Int_t eff_nbins = (metmax - metmin) / eff_binwidth;
    histo1 = new TH1F( "histo1", "Passrndm Trigger" , histnbins , metmin , metmax );
    histo2 = new TH1F( "histo2", "Passrndm Trigger XE20" , histnbins, metmin , metmax );

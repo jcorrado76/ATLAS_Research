@@ -22,7 +22,8 @@ void efficiency_fitter(){
     //I set the range of the Tf1 to be up to 60 GeV because beyond that the error bars are so large those points don't
     //work to pull the fit at all
 
-    TF1* erf = new TF1( "fit" , fit , 0.0 , 105.0 , 3);
+    //TF1* erf = new TF1( "fit" , fit , 0.0 , 105.0 , 3);
+    TF1* erf = new TF1( "fit" , fit , 0.0 , 200.0 , 3);
 
     //set the normalization to 1
     erf->SetParameter(0, 1.);
