@@ -36,6 +36,14 @@ void efficiency_fitter(){
     //"R" tells the fit function from BinomialEfficiency::Fit to use the range of the TF1 as the fitting range
     eff->Fit( erf, "R" );
 
+    std::cout << "Value of fit for a: " << erf->GetParameter(0) << std::endl;
+    std::cout << "Value of error on a: " << erf->GetParError(0) << std::endl;
+    std::cout << "Value of fit for b: " << erf->GetParameter(1) << std::endl;
+    std::cout << "Value of error on b: " << erf->GetParError(1) << std::endl;
+    std::cout << "Value of fit for sigma: " << erf->GetParameter(2) << std::endl;
+    std::cout << "Value of error on sigma: " << erf->GetParError(2) << std::endl;
+
+
     eff->Draw();
 
 
