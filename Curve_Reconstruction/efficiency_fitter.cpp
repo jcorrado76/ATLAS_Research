@@ -2,10 +2,16 @@
     Float_t PI = TMath::Pi();
     Double_t fit( Float_t *x , Float_t* par )
     {
-        Float_t hltcut = 20.0;
-        return(TMath::Exp(-(par[1]+par[0]*x[0])*(par[1]+par[0]*x[0])/(2*par[3]*par[3]))/(par[3]*TMath::Sqrt(2.0*PI)) * TMath::Erf( x[0] * ( ( 2.0*par[1] + 2.0*par[0]*hltcut - x[0] ) / (2.0*par[3]*par[3])  )));
-    }
+        par[0] = 1.0;
+        par[1] = 0.0;
+        par[2] = 1.0;
 
+        Float_t l1cut = 20.0;
+        Double_t arg = ( l1cut  - par[0]*x[0]+ par[1])/(par[2]*TMath::Sqrt(2.0));
+        Double_t fitval = (1./(2*par[2]*TMath::Sqrt(2*TMath::Pi())))-(1/TMath::Sqrt(TMath::Pi()))*TMath::Erf(arg);
+
+        return(fitval );
+    }
 
 
 void efficiency_fitter(){
