@@ -12,9 +12,10 @@
     UInt_t RunNumber;
 
 
+    Int_t nbins = 10000;
 
-    TH1F* mincerhist = new TH1F("histo1" , "Mincer Hist" , 200 , 0.0 , 200.0);
-    TH1F* burrhist = new TH1F("histo2" , "Jburr Hist" , 200 , 0.0 , 200.0);
+    TH1F* mincerhist = new TH1F("histo1" , "Mincer Hist" , nbins , 0.0 , 200.0);
+    TH1F* burrhist = new TH1F("histo2" , "Jburr Hist" , nbins , 0.0 , 200.0);
 
 
     mincertree->SetBranchAddress("runnum",&mincerRunNumber);
@@ -30,18 +31,16 @@
     for ( Int_t i = 0 ; i < mincerentries ; i++){
         mincertree->GetEntry(i);
         if (mincerpassrndm > 0.5 ){
-        mincerhist->Fill(mincermetcell);
+        mincerhist->Fill(mincerRunNumber);
         }
     }
 
     for ( Int_t i = 0 ; i < burrentries; i++){
         burrtree->GetEntry(i);
         if (jburrpassrndm && RunNumber < 311481 && RunNumber > 307195 ){
-        burrhist->Fill(jburrmetcell);
+        burrhist->Fill(RunNumber);
         }
     }
-
-
 
     mincerhist->SetLineColor(kRed);
     burrhist->SetLineColor(kBlue);
