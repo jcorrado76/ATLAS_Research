@@ -12,6 +12,9 @@
     UInt_t RunNumber;
     Int_t MincerRunNumber;
 
+    Int_t mincerRunHigh = 310000;
+    Int_t jburrRunLow = 307195;
+    Int_t jburrRunLow = 311481;
 
 
     TH1F* mincerhist = new TH1F("histo1" , "Mincer Hist" , 200 , 0.0 , 200.0);
@@ -32,14 +35,14 @@
 
     for ( Int_t i = 0 ; i < mincerentries ; i++){
         mincertree->GetEntry(i);
-        if (mincerpassrndm > 0.5 && mincerRunNumber < 310000 ){
+        if (mincerpassrndm > 0.5 && mincerRunNumber < mincerRunHigh ){
         mincerhist->Fill(mincermetcell);
         }
     }
 
     for ( Int_t i = 0 ; i < burrentries; i++){
         burrtree->GetEntry(i);
-        if (jburrpassrndm && RunNumber < 311481 && RunNumber > 307195 ){
+        if (jburrpassrndm && RunNumber < jburrRunLow && RunNumber > jburrRunLow ){
         burrhist->Fill(jburrmetcell);
         }
     }
