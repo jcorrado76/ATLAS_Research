@@ -16,9 +16,11 @@
     Int_t jburrRunLow = 307195;
     Int_t jburrRunHigh = 311481;
 
+    Float_t metlow = 0.0;
+    Float_t methigh = 200.0;
 
-    TH1F* mincerhist = new TH1F("histo1" , "Mincer Hist" , 200 , jburrRunLow, mincerRunHigh );
-    TH1F* burrhist = new TH1F("histo2" , "Jburr Hist" , 200 , jburrRunLow, jburrRunHigh);
+    TH1F* mincerhist = new TH1F("histo1" , "Mincer Hist" , 200 , metlow , methigh );
+    TH1F* burrhist = new TH1F("histo2" , "Jburr Hist" , 200 , metlow , methigh);
 
 
     mincertree->SetBranchAddress("metcell",&mincermetcell);
