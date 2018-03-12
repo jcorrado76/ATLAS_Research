@@ -37,5 +37,7 @@ void FindingPassrndm::SlaveTerminate()
 
 void FindingPassrndm::Terminate()
 {
+    fHistogram->SetLineColor(kBlue);
+
 
 }
