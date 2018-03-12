@@ -1,6 +1,6 @@
 {
     TFile* mincerfile = TFile::Open("$DATA/ZeroBiasL1KF2016R307195R311481.51Runs.root","READ");  
-    TFile* jburrfile = TFile::Open("./user.jburr.2017_11_17.data16.ZB/totalntuple.root","READ");
+    TFile* jburrfile = TFile::Open("data/totalntuple16.root","READ");
 
     TTree* mincertree = (TTree*) mincerfile->Get("tree");
     TTree* burrtree = (TTree*) jburrfile->Get("METTree");
@@ -10,15 +10,15 @@
     Int_t mincerpassrndm;
     Bool_t jburrpassrndm;
     UInt_t RunNumber;
-    Int_t MincerRunNumber;
+    Int_t mincerRunNumber;
 
     Int_t mincerRunHigh = 310000;
     Int_t jburrRunLow = 307195;
-    Int_t jburrRunLow = 311481;
+    Int_t jburrRunHigh = 311481;
 
 
-    TH1F* mincerhist = new TH1F("histo1" , "Mincer Hist" , 200 , 0.0 , 200.0);
-    TH1F* burrhist = new TH1F("histo2" , "Jburr Hist" , 200 , 0.0 , 200.0);
+    TH1F* mincerhist = new TH1F("histo1" , "Mincer Hist" , 200 , jburrRunLow, mincerRunHigh );
+    TH1F* burrhist = new TH1F("histo2" , "Jburr Hist" , 200 , jburrRunLow, jburrRunHigh);
 
 
     mincertree->SetBranchAddress("metcell",&mincermetcell);
@@ -68,7 +68,7 @@
 
     TImage* img = TImage::Create();
     img->FromPad(mycanv);
-    img->WriteImage("2016ZBDataComparisonWpassrndmWRunNumberCut.png");
+    img->WriteImage("pictures/2016ZBDataComparisonWpassrndmWRunNumberCutWMincerRunNumbCut.png");
 
 
 }
