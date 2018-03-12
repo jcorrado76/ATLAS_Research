@@ -44,7 +44,7 @@
 
     for ( Int_t i = 0 ; i < burrentries; i++){
         burrtree->GetEntry(i);
-        if (jburrpassrndm && RunNumber < jburrRunLow && RunNumber > jburrRunLow ){
+        if (jburrpassrndm && RunNumber < jburrRunHigh && RunNumber > jburrRunLow ){
         burrhist->Fill(jburrmetcell);
         }
     }
