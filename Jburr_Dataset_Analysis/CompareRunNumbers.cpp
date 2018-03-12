@@ -31,7 +31,7 @@
 
     for ( Int_t i = 0 ; i < mincerentries ; i++){
         mincertree->GetEntry(i);
-        if (mincerpassrndm > 0.5 ){
+        if (mincerpassrndm > 0.5 && mincerRunNumber < 310000 ){
         mincerhist->Fill(mincerRunNumber);
         }
     }
@@ -62,7 +62,7 @@
 
     TImage* img = TImage::Create();
     img->FromPad(mycanv);
-    img->WriteImage("pictures/2016ZBRunNumberComparison.png");
+    img->WriteImage("pictures/2016ZBRunNumberComparisonWMincerRunnumCut.png");
 
 
 }
