@@ -6,14 +6,18 @@
     TTree* burrtree = (TTree*) jburrfile->Get("METTree");
 
 
+    Float_t mincerRunNumber, jburrRunNumber;
     Int_t mincerpassrndm;
     Bool_t jburrpassrndm;
     UInt_t RunNumber;
+
+
 
     TH1F* mincerhist = new TH1F("histo1" , "Mincer Hist" , 200 , 0.0 , 200.0);
     TH1F* burrhist = new TH1F("histo2" , "Jburr Hist" , 200 , 0.0 , 200.0);
 
 
+    mincertree->SetBranchAddress("runnum",&mincerRunNumber);
     mincertree->SetBranchAddress("passrndm",&mincerpassrndm);
     burrtree->SetBranchAddress("HLT_noalg_zb_L1ZB.passed",&jburrpassrndm);
     burrtree->SetBranchAddress("RunNumber",&RunNumber);
@@ -25,21 +29,25 @@
 
     for ( Int_t i = 0 ; i < mincerentries ; i++){
         mincertree->GetEntry(i);
-        mincerhist->Fill(mincerpassrndm);
+        if (mincerpassrndm > 0.5 ){
+        mincerhist->Fill(mincermetcell);
+        }
     }
 
     for ( Int_t i = 0 ; i < burrentries; i++){
         burrtree->GetEntry(i);
-        if ( RunNumber < 311481 && RunNumber > 307195){
-        burrhist->Fill(jburrpassrndm);
+        if (jburrpassrndm && RunNumber < 311481 && RunNumber > 307195 ){
+        burrhist->Fill(jburrmetcell);
         }
     }
+
+
 
     mincerhist->SetLineColor(kRed);
     burrhist->SetLineColor(kBlue);
 
 
-    TCanvas* mycanv = new TCanvas("c1" , "Passrndm Check");
+    TCanvas* mycanv = new TCanvas("c1" , "2016 Data Cell Distribution Comparison");
     mincerhist->Draw();
     burrhist->Draw("SAME");
 
@@ -48,12 +56,13 @@
     legend->AddEntry(burrhist);
     legend->Draw();
 
-    mycanv->SetTitle("Finding Passrndm");
+    mycanv->SetTitle("Comparison of Mincer 2016 Data to Jburr 2016 Data with passrndm");
+    mycanv->SetLogy();
     mycanv->Draw();
 
     TImage* img = TImage::Create();
     img->FromPad(mycanv);
-    img->WriteImage("FindingpassrndmWRunNumberCut.png");
+    img->WriteImage("2016ZBDataComparisonWpassrndmWRunNumberCut.png");
 
 
 }
