@@ -1,12 +1,12 @@
 {
     TFile* mincerfile = TFile::Open("$DATA/ZeroBiasL1KF2016R307195R311481.51Runs.root","READ");  
-    TFile* jburrfile = TFile::Open("./user.jburr.2017_11_17.data16.ZB/totalntuple.root","READ");
+    TFile* jburrfile = TFile::Open("data/totalntuple16.root","READ");
 
     TTree* mincertree = (TTree*) mincerfile->Get("tree");
     TTree* burrtree = (TTree*) jburrfile->Get("METTree");
 
 
-    Float_t mincerRunNumber, jburrRunNumber;
+    Int_t mincerRunNumber, jburrRunNumber;
     Int_t mincerpassrndm;
     Bool_t jburrpassrndm;
     UInt_t RunNumber;
@@ -46,7 +46,7 @@
     burrhist->SetLineColor(kBlue);
 
 
-    TCanvas* mycanv = new TCanvas("c1" , "2016 Data Cell Distribution Comparison");
+    TCanvas* mycanv = new TCanvas("c1" , "2016 Data Run Number Distribution Comparison");
     mincerhist->Draw();
     burrhist->Draw("SAME");
 
@@ -61,7 +61,7 @@
 
     TImage* img = TImage::Create();
     img->FromPad(mycanv);
-    img->WriteImage("2016ZBDataComparisonWpassrndmWRunNumberCut.png");
+    img->WriteImage("pictures/2016ZBRunNumberComparison.png");
 
 
 }
