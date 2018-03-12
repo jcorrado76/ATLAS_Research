@@ -25,8 +25,9 @@ class FindingPassrndm : public TSelector {
 public :
    TTreeReader     fReader;  //!the tree reader
    TTree          *fChain = 0;   //!pointer to the analyzed TTree or TChain
+   TH1F           *fHistogram = 0;
 
-   // Readers to access the data (delete the ones you do not need).
+   // Readers to access the data (delete the ones you do not need).{{{
    TTreeReaderValue<UInt_t> RunNumber = {fReader, "RunNumber"};
    TTreeReaderValue<ULong64_t> EventNumber = {fReader, "EventNumber"};
    TTreeReaderValue<UInt_t> LumiBlock = {fReader, "LumiBlock"};
@@ -245,9 +246,8 @@ public :
    TTreeReaderArray<float> CalAntiKt4EMTopoJets_eta = {fReader, "CalAntiKt4EMTopoJets.eta"};
    TTreeReaderArray<float> CalAntiKt4EMTopoJets_phi = {fReader, "CalAntiKt4EMTopoJets.phi"};
    TTreeReaderArray<float> CalAntiKt4EMTopoJets_m = {fReader, "CalAntiKt4EMTopoJets.m"};
-
-
-   FindingPassrndm(TTree * /*tree*/ =0) { }
+//}}}
+   FindingPassrndm(TTree * /*tree*/ =0) { }//{{{
    virtual ~FindingPassrndm() { }
    virtual Int_t   Version() const { return 2; }
    virtual void    Begin(TTree *tree);
@@ -265,30 +265,19 @@ public :
 
    ClassDef(FindingPassrndm,0);
 
-};
+};//}}}
 
 #endif
 
 #ifdef FindingPassrndm_cxx
 void FindingPassrndm::Init(TTree *tree)
 {
-   // The Init() function is called when the selector needs to initialize
-   // a new tree or chain. Typically here the reader is initialized.
-   // It is normally not necessary to make changes to the generated
-   // code, but the routine can be extended by the user if needed.
-   // Init() will be called many times when running on PROOF
-   // (once per file to be processed).
 
    fReader.SetTree(tree);
 }
 
 Bool_t FindingPassrndm::Notify()
 {
-   // The Notify() function is called when a new file is opened. This
-   // can be either for a new TTree in a TChain or when when a new TTree
-   // is started when using PROOF. It is normally not necessary to make changes
-   // to the generated code, but the routine can be extended by the
-   // user if needed. The return value is currently not used.
 
    return kTRUE;
 }
