@@ -9,13 +9,14 @@
     Int_t mincerRunNumber, jburrRunNumber;
     Int_t mincerpassrndm;
     Bool_t jburrpassrndm;
+    
     UInt_t RunNumber;
-
-
+    Int_t runLow = 307195;
+    Int_t runHigh = 311481;
     Int_t nbins = 10000;
 
-    TH1F* mincerhist = new TH1F("histo1" , "Mincer Hist" , nbins , 0.0 , 200.0);
-    TH1F* burrhist = new TH1F("histo2" , "Jburr Hist" , nbins , 0.0 , 200.0);
+    TH1F* mincerhist = new TH1F("histo1" , "Mincer Hist" , nbins , runLow , runHigh );
+    TH1F* burrhist = new TH1F("histo2" , "Jburr Hist" , nbins , runLow , runHigh);
 
 
     mincertree->SetBranchAddress("runnum",&mincerRunNumber);
@@ -37,7 +38,7 @@
 
     for ( Int_t i = 0 ; i < burrentries; i++){
         burrtree->GetEntry(i);
-        if (jburrpassrndm && RunNumber < 311481 && RunNumber > 307195 ){
+        if (jburrpassrndm && RunNumber < runHigh && RunNumber > runLow){
         burrhist->Fill(RunNumber);
         }
     }
