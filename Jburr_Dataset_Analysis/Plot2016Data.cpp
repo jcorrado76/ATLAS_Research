@@ -10,6 +10,7 @@
     Int_t mincerpassrndm;
     Bool_t jburrpassrndm;
     UInt_t RunNumber;
+    Int_t MincerRunNumber;
 
 
 
@@ -19,6 +20,7 @@
 
     mincertree->SetBranchAddress("metcell",&mincermetcell);
     mincertree->SetBranchAddress("passrndm",&mincerpassrndm);
+    mincertree->SetBranchAddress("runnum",&mincerRunNumber);
     burrtree->SetBranchAddress("cell.met",&jburrmetcell);
     burrtree->SetBranchAddress("HLT_noalg_zb_L1ZB.passed",&jburrpassrndm);
     burrtree->SetBranchAddress("RunNumber",&RunNumber);
@@ -30,7 +32,7 @@
 
     for ( Int_t i = 0 ; i < mincerentries ; i++){
         mincertree->GetEntry(i);
-        if (mincerpassrndm > 0.5 ){
+        if (mincerpassrndm > 0.5 && mincerRunNumber < 310000 ){
         mincerhist->Fill(mincermetcell);
         }
     }
