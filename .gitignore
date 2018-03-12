@@ -1,14 +1,16 @@
-/*
 *.pcm
 *.d
 *.so
 *.swp
 *.un
+*.root
+*.root.2
 !.gitignore
-HLT_Efficiency_Analysis_Macros/Pictures/
-HLT_Efficiency_Analysis_Macros/RootFiles
-HLT_Efficiency_Analysis_Macros/lib/
-HLT_Efficiency_Analysis_Macros/Practice\ Macros
-HLT_Efficiency_Analysis_Macros/Analysis
+HLT_Efficiency_Analysis_Macros/Pictures/*
+HLT_Efficiency_Analysis_Macros/RootFiles/*
+HLT_Efficiency_Analysis_Macros/lib/*
+HLT_Efficiency_Analysis_Macros/Practice\ Macros/*
+HLT_Efficiency_Analysis_Macros/Analysis/*
 !HLT_Efficiency_Analysis_Macros/
 !Curve_Reconstruction/
+!Jburr_Dataset_Analysis/
