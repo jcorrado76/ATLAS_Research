@@ -32,7 +32,7 @@
     for ( Int_t i = 0 ; i < mincerentries ; i++){
         mincertree->GetEntry(i);
         if (mincerpassrndm > 0.5 && mincerRunNumber < 310000 ){
-        mincerhist->Fill(mincerRunNumber + 50.);
+        mincerhist->Fill(mincerRunNumber + 5.);
         }
     }
 
