@@ -1,0 +1,7 @@
+Rint.Logon: rootlogon.C
+
+
+
+ACLiC.BuildDir: /lib
+ACLiC.IncludePaths: -I/include
+.include include
