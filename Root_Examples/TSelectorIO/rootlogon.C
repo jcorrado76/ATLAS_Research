@@ -7,6 +7,6 @@
     
     //shouldn't need this line because i've included it in rootrc
     //gSystem->AddIncludePath(" -I/include ");
-    gSystem->AddLinkedLibs("-L/src/TSelector_C.so");
+    //gSystem->AddLinkedLibs("-L/src/TSelector_C.so");
 }
     
