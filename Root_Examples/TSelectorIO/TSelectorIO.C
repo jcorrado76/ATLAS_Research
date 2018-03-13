@@ -33,4 +33,5 @@ void TSelectorIO::SlaveTerminate()
 void TSelectorIO::Terminate()
 {
 
+    std::cout << "Successfully ran TSelectorIO" << std::endl;
 }
