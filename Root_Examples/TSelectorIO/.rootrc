@@ -1,4 +1,5 @@
 Rint.Logon: rootlogon.C
-ACLiC.IncludePaths: -I/$examples/include
-Unix.*.Root.MacroPath: .:$examples/run
-Unix.*.Root.DynamicPath: .:$examples/lib
+Unix.*.Root.MacroPath:      .:$(ROOTSYS)/macros:./src
+Unix.*.Root.DynamicPath:    .:./rootmacros:$(ROOTSYS)/lib
+ACLiC.IncludePaths: -I$(examples)/include
+ACLiC.BuildDir: ./lib

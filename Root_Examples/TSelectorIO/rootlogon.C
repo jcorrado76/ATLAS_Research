@@ -1,7 +1,8 @@
 {
     std::cout << "Loaded TSelectorIO Env" << std::endl;
     //shouldn't need this line because i've included it in rootrc
-    //gROOT->ProcessLine(".include ./include");
+    gROOT->ProcessLine(".include $examples/include");
+
 
     //gROOT->ProcessLine(".L /myLib/sharedlib.so");
     
