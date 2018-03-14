@@ -21,6 +21,7 @@
 
     TH1F* mincerhist = new TH1F("histo1" , "Mincer Hist" , nbins , runLow , runHigh );
     TH1F* burrhist = new TH1F("histo2" , "Jburr Hist" , nbins , runLow , runHigh);
+    TH1F* diffhist= new TH1F("histo3" , "Diff Hist" , nbins , runLow , runHigh);
 
 
     mincertree->SetBranchAddress("runnum",&mincerRunNumber);
@@ -47,11 +48,18 @@
         }
     }
 
+
+    diffhist->Add(mincerhist,burrhist,1.,-1.);
+
+
     mincerhist->SetLineColor(kRed);
     burrhist->SetLineColor(kBlue);
+    diffhist->SetLineColor(kTeal);
 
 
     TCanvas* mycanv = new TCanvas("c1" , "Differences between mincer data and jburr data");
+    mycanv->Divide(2,1);
+    mycanv->cd(1);
     mincerhist->Draw();
     burrhist->Draw("SAME");
 
@@ -60,13 +68,16 @@
     legend->AddEntry(burrhist);
     legend->Draw();
 
+    mycanv->cd(2);
+    diffhist->Draw();
+
     mycanv->SetTitle("Difference of Mincer Data to Jburr Data");
     mycanv->SetLogy();
     mycanv->Draw();
 
     TImage* img = TImage::Create();
     img->FromPad(mycanv);
-    img->WriteImage("pictures/2016ZBRunNumberComparisonWStaggeredMincerRunnumCut.png");
+    img->WriteImage("pictures/DifferencePlot.png");
 
 
 }
