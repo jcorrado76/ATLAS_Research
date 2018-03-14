@@ -3,14 +3,20 @@
 #include <TProof.h>
 #include <TList.h>
 #include <TH1F.h>
+#include <TROOT.h>
+#include <TFile.h>
+#include <iostream>
+#include "Jburr_Selector.h"
+#include "Mincer_Selector.h"
 
 
 
 
 
+void Plot_Driver(){
+    gROOT->ProcessLine(".L Jburr_Selector.C+");
+    gROOT->ProcessLine(".L Mincer_Selector.C+");
 
-{
-    gROOT->Reset();
     TString mincer_zbpath= "$DATA/ZeroBiasL1KF2016R307195R311481.51Runs.root";
     TString jburr_zbpath = "$work/../Jburr_Dataset_Analysis/data/totalntuple16.root";
 
@@ -40,7 +46,7 @@
     TChain* mincerchain = new TChain( "tree" , "Mincer_Chain" );
     mincerchain->Add( mincer_zbpath );
     TChain* jburrchain = new TChain( "METTree" , "Jburr_Chain" );
-    jburr_chain->Add( jburr_zbpath );
+    jburrchain->Add( jburr_zbpath );
 
     TProof* proof = TProof::Open("");
 
@@ -49,7 +55,7 @@
     TList* minceroutput = mincer_analysis->GetOutputList();
 
 
-    jburr_chain->SetProof();
+    jburrchain->SetProof();
     jburrchain->Process(jburr_analysis);
     TList* jburroutput = jburr_analysis->GetOutputList();
 

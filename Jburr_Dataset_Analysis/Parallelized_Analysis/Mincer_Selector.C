@@ -36,7 +36,7 @@ void Mincer_Selector::Begin(TTree * /*tree*/)
    // The tree argument is deprecated (on PROOF 0 is passed).
 
    TString option = GetOption();
-   histo1 = new TH1F("histo1","MincerHist");
+   histo1 = new TH1F("histo1","MincerHist",200,0.0,200.0);
    fOutput->Add(histo1);
 }
 
