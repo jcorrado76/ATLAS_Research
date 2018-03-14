@@ -1,4 +1,11 @@
-{
+#include <TFile.h>
+#include <TTree.h>
+#include <TH1F.h>
+#include <TLegend.h>
+#include <TCanvas.h>
+#include <TImage.h>
+
+void GenerateTableDifferences(){
     /* this macro needs to compute the histograms for the two data sets, and compute their difference and generate a new
      * histogram, and perhaps a table with the most interesting differences */
 
@@ -20,6 +27,7 @@
     Int_t nbins = 10000;
 
     TH1F* mincerhist = new TH1F("histo1" , "Mincer Hist" , nbins , runLow , runHigh );
+    TH1F* mincerhist_staggered = new TH1F("histo1_staggered" , "Mincer Hist Staggered" , nbins , runLow , runHigh );
     TH1F* burrhist = new TH1F("histo2" , "Jburr Hist" , nbins , runLow , runHigh);
     TH1F* diffhist= new TH1F("histo3" , "Diff Hist" , nbins , runLow , runHigh);
 
@@ -38,6 +46,7 @@
         mincertree->GetEntry(i);
         if (mincerpassrndm > 0.5 && mincerRunNumber < 310000 ){
         mincerhist->Fill(mincerRunNumber);
+        mincerhist_staggered->Fill(mincerRunNumber + 10.0);
         }
     }
 
@@ -75,6 +84,7 @@
     TFile* outputfile = new TFile("RunNumberHists.root","RECREATE");
 
     mincerhist->Write();
+    mincerhist_staggered->Write();
     burrhist->Write();
     diffhist->Write();
 
