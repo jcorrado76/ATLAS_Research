@@ -36,7 +36,7 @@
     for ( Int_t i = 0 ; i < mincerentries ; i++){
         mincertree->GetEntry(i);
         if (mincerpassrndm > 0.5 && mincerRunNumber < 310000 ){
-        mincerhist->Fill(mincerRunNumber + 10.);
+        mincerhist->Fill(mincerRunNumber);
         }
     }
 
@@ -51,7 +51,7 @@
     burrhist->SetLineColor(kBlue);
 
 
-    TCanvas* mycanv = new TCanvas("c1" , "2016 Data Run Number Distribution Comparison");
+    TCanvas* mycanv = new TCanvas("c1" , "Differences between mincer data and jburr data");
     mincerhist->Draw();
     burrhist->Draw("SAME");
 
@@ -60,7 +60,7 @@
     legend->AddEntry(burrhist);
     legend->Draw();
 
-    mycanv->SetTitle("Comparison of Mincer 2016 Data to Jburr 2016 Data with passrndm");
+    mycanv->SetTitle("Difference of Mincer Data to Jburr Data");
     mycanv->SetLogy();
     mycanv->Draw();
 
