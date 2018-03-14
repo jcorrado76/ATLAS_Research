@@ -19,6 +19,11 @@ void HistListDiffRunNumbers(){
 
     UInt_t RunNumber;
     //TODO: needs to be changed to maximum and minimum event number...
+    Int_t MincerEventNumMinimum = 958225964;
+    Int_t MincerEventNumMaximum = ;
+    Int_t JburrEventNumMinimum = 4981632;
+    Int_t JburrEventNumMaximum = 7.04e9;
+
     Int_t runLow = 307195;
     Int_t runHigh = 311481;
     Int_t nbins = 10000;
@@ -47,8 +52,8 @@ void HistListDiffRunNumbers(){
         mincerhistname += j;
         burrhistname += j;
 
-        mincerhist = new TH1F( mincerhistname , mincerhistname , nbins , runLow , runHigh );
-        burrhist = new TH1F( burrhistname , burrhistname , nbins , runLow , runHigh);
+        mincerhist = new TH1F( mincerhistname , mincerhistname , nbins , MincerEventNumMinimum, MincerEventNumMaximum);
+        burrhist = new TH1F( burrhistname , burrhistname , nbins , JburrEventNumMinimum, JburrEventNumMaximum);
 
 
     }
