@@ -10,12 +10,9 @@
 #include "Mincer_Selector.h"
 
 
-
-
-
 void Plot_Driver(){
-    gROOT->ProcessLine(".L Jburr_Selector.C+");
-    gROOT->ProcessLine(".L Mincer_Selector.C+");
+    gSystem->Load("Jburr_Selector_C.so");
+    gSystem->Load("Mincer_Selector_C.so");
 
     TString mincer_zbpath= "$DATA/ZeroBiasL1KF2016R307195R311481.51Runs.root";
     TString jburr_zbpath = "$work/../Jburr_Dataset_Analysis/data/totalntuple16.root";
@@ -66,6 +63,4 @@ void Plot_Driver(){
 
     mincerhist->Draw();
     jburrhist->Draw("SAME");
-
-
 }
