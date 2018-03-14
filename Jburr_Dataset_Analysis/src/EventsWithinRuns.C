@@ -10,8 +10,10 @@ void EventsWithinRuns(){
     /* This macro takes in a histogram containing the difference between two other histograms, and displays the bin
      * number, number of entries in that bin, and the run number in which there is a nonzero difference */
 
+	TString pathname = "$jburr/RunNumberHists.root";
 
-    TFile* diffhistfile = TFile::Open("$jburr/RunNumberHists.root");
+    TFile* diffhistfile = TFile::Open( pathname );
+	std::cout << "Opening file: " << pathname << std::endl;
 
     //histo3 is the difference between jburr and mincer hists
     TH1F* diffhist = (TH1F*)diffhistfile->Get("histo3");
@@ -38,17 +40,7 @@ void EventsWithinRuns(){
 
     nonzeroRuns->Scan();
   
-    TList* histlist = 0;
-
-    TString histname = "hist";
-    TH1F* histTemp = 0;
-    for ( Int j = 0 ; j < nonzeroRuns->GetEntries() ; j++ ){
-        histname += j;
-        histTemp = new TH1F(histname,histname,5000);
-
-
-
-
+	//TODO: write this ntuple to a file to be used to generate list of histograms for runs that differ in numb events 
 
 
 
