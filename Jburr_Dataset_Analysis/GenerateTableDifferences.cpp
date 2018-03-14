@@ -51,7 +51,6 @@
 
     mincerhist->SetLineColor(kRed);
     burrhist->SetLineColor(kBlue);
-    TH1F* diffhist = 0;
 
     diffhist->Add(mincerhist,burrhist,1.,-1.);
 
