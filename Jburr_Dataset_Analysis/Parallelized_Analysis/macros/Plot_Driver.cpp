@@ -6,13 +6,12 @@
 #include <TROOT.h>
 #include <TFile.h>
 #include <iostream>
+#include "Plot_Driver.h"
 #include "Jburr_Selector.h"
 #include "Mincer_Selector.h"
 
 
 void Plot_Driver(){
-    gSystem->Load("Jburr_Selector_C.so");
-    gSystem->Load("Mincer_Selector_C.so");
 
     TString mincer_zbpath= "$DATA/ZeroBiasL1KF2016R307195R311481.51Runs.root";
     TString jburr_zbpath = "$work/../Jburr_Dataset_Analysis/data/totalntuple16.root";
