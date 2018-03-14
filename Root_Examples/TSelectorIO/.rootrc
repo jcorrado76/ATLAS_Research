@@ -1,5 +1,0 @@
-Rint.Logon: rootlogon.C
-Unix.*.Root.MacroPath:      .:$(ROOTSYS)/macros:./src
-Unix.*.Root.DynamicPath:    .:./rootmacros:$(ROOTSYS)/lib
-ACLiC.IncludePaths: -I$(examples)/include
-ACLiC.BuildDir: ./lib
