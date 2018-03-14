@@ -23,6 +23,7 @@ class Mincer_Selector : public TSelector {
 public :
    TTreeReader     fReader;  //!the tree reader
    TTree          *fChain = 0;   //!pointer to the analyzed TTree or TChain
+   TH1F * histo1 = 0;
 
    // Readers to access the data (delete the ones you do not need).
    TTreeReaderValue<Float_t> metl1 = {fReader, "metl1"};

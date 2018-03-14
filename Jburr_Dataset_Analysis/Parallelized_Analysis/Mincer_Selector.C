@@ -36,6 +36,8 @@ void Mincer_Selector::Begin(TTree * /*tree*/)
    // The tree argument is deprecated (on PROOF 0 is passed).
 
    TString option = GetOption();
+   histo1 = new TH1F("histo1","MincerHist");
+   fOutput->Add(histo1);
 }
 
 void Mincer_Selector::SlaveBegin(TTree * /*tree*/)
@@ -67,6 +69,8 @@ Bool_t Mincer_Selector::Process(Long64_t entry)
    // The return value is currently not used.
 
    fReader.SetEntry(entry);
+
+   histo1->Fill(*metcell);
 
    return kTRUE;
 }

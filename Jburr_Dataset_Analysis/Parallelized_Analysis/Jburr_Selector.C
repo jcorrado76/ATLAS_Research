@@ -35,6 +35,8 @@ void Jburr_Selector::Begin(TTree * /*tree*/)
    // When running with PROOF Begin() is only called on the client.
    // The tree argument is deprecated (on PROOF 0 is passed).
 
+   histo1 = new TH1F("histo1","Jburrhist");
+   fOutput->Add(histo1);
    TString option = GetOption();
 }
 
@@ -67,6 +69,7 @@ Bool_t Jburr_Selector::Process(Long64_t entry)
    // The return value is currently not used.
 
    fReader.SetEntry(entry);
+   histo1->Fill(*RunNumber);
 
    return kTRUE;
 }

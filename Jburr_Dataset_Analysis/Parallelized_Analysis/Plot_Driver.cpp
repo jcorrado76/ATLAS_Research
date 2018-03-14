@@ -1,3 +1,14 @@
+#include <TChain.h>
+#include <TTree.h>
+#include <TProof.h>
+#include <TList.h>
+#include <TH1F.h>
+
+
+
+
+
+
 {
     gROOT->Reset();
     TString mincer_zbpath= "$DATA/ZeroBiasL1KF2016R307195R311481.51Runs.root";
@@ -23,35 +34,32 @@
         std::cout << "Filename:\n" << jburr_zbpath << std::endl;
     }
 
-    TTree* mincertree = (TTree*)mincer_file->Get("tree");
-    TTree* jburrtree= (TTree*)jburr_file->Get("METTree");
-
-
     Jburr_Selector* jburr_analysis = new Jburr_Selector();
     Mincer_Selector* mincer_analysis = new Mincer_Selector();
-
-
-
 
     TChain* mincerchain = new TChain( "tree" , "Mincer_Chain" );
     mincerchain->Add( mincer_zbpath );
     TChain* jburrchain = new TChain( "METTree" , "Jburr_Chain" );
     jburr_chain->Add( jburr_zbpath );
+
     TProof* proof = TProof::Open("");
-    mychain->SetProof();
-    proof->SetParameter("PROOF_UseTreeCache" , (Int_t)0);
-    mychain->Process("ZB_Eff_Selector.C+");
+
+    mincerchain->SetProof();
+    mincerchain->Process(mincer_analysis);
+    TList* minceroutput = mincer_analysis->GetOutputList();
 
 
+    jburr_chain->SetProof();
+    jburrchain->Process(jburr_analysis);
+    TList* jburroutput = jburr_analysis->GetOutputList();
+
+    
+    TH1F* mincerhist = dynamic_cast<TH1F*>(minceroutput->FindObject("histo1"));
+    TH1F* jburrhist = dynamic_cast<TH1F*>(jburroutput->FindObject("histo1"));
 
 
-
-
-
-
-
-
-
+    mincerhist->Draw();
+    jburrhist->Draw("SAME");
 
 
 }
