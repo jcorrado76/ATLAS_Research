@@ -1,4 +1,8 @@
 {
+    /* this macro needs to compute the histograms for the two data sets, and compute their difference and generate a new
+     * histogram, and perhaps a table with the most interesting differences */
+
+
     TFile* mincerfile = TFile::Open("$DATA/ZeroBiasL1KF2016R307195R311481.51Runs.root","READ");  
     TFile* jburrfile = TFile::Open("data/totalntuple16.root","READ");
 
