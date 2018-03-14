@@ -45,7 +45,9 @@ void PlotEventNumbOverlap(){
     Int_t burrentries = burrtree->GetEntries();
 
     //well, what you should do it figure out what the distribution of event numbers looks like after you cut on the run
-    //number because that might cut it down a lot and make the event numbers match up 
+    //number because that might cut it down a lot and make the event numbers match up. this way should also make the
+    //numbers match up. but its probably better to just cut on run number first, because it's also a smaller dataset to
+    //work with
 
     //plot the intersection of event numbers, so constrain mincer's data by jburrs event numbers and jburrs data by
     //mincers event numbers 
