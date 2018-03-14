@@ -1,1 +1,2 @@
 Rint.Logon: rootlogon.C
+Unix.*.Root.DynamicPath: .:./lib

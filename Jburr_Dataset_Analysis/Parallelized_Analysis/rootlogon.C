@@ -17,7 +17,12 @@
                           "k-",
                           "libMincerSelector",
                           "lib") ==0) {return false;}
-    if (gSystem->CompileMacro("macros/Plot_Driver.cpp",
+
+    gSystem->Load("lib/libMincerSelector.so");
+    gSystem->Load("lib/libJburrSelector.so");
+
+
+    if (gSystem->CompileMacro("src/Plot_Driver.cpp",
                           "k-",
                           "libPlotDriver",
                           "lib") ==0) {return false;}

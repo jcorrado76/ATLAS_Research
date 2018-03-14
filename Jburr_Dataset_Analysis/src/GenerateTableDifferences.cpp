@@ -61,7 +61,7 @@ void GenerateTableDifferences(){
     mincerhist->SetLineColor(kRed);
     burrhist->SetLineColor(kBlue);
 
-    diffhist->Add(mincerhist,burrhist,-1.,1.);
+    diffhist->Add(mincerhist,burrhist,1.,-1.);
 
     diffhist->SetLineColor(kMagenta);
 
