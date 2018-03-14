@@ -1,0 +1,38 @@
+{
+    gROOT->Reset();
+    TString mincer_zbpath= "$DATA/ZeroBiasL1KF2016R307195R311481.51Runs.root";
+
+    if ( gSystem->AccessPathName( zb_pathname ) ){
+         
+        TFile* zb_file = TFile::Open( zb_pathname );
+
+    }
+    else{
+        std::cout << "Could not access filename " << std::endl;
+        std::cout << "Filename:\n" << zb_pathname << std::endl;
+    }
+
+
+
+
+
+    TChain* mychain = new TChain( "tree" , "Curve_reconst_Chain" );
+    mychain->Add( zb_pathname );
+    TProof* proof = TProof::Open("");
+    mychain->SetProof();
+    proof->SetParameter("PROOF_UseTreeCache" , (Int_t)0);
+    mychain->Process("ZB_Eff_Selector.C+");
+
+
+
+
+
+
+
+
+
+
+
+
+
+}
