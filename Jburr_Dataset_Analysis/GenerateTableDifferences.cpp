@@ -51,6 +51,9 @@
 
     mincerhist->SetLineColor(kRed);
     burrhist->SetLineColor(kBlue);
+    TH1F* diffhist = 0;
+
+    diffhist->Add(mincerhist,burrhist,1.,-1.);
 
 
     TCanvas* mycanv = new TCanvas("c1" , "Differences between mincer data and jburr data");
@@ -74,6 +77,7 @@
 
     mincerhist->Write();
     burrhist->Write();
+    diffhist->Write();
 
 }
 
