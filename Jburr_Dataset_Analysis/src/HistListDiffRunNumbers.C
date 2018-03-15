@@ -13,16 +13,17 @@ void HistListDiffRunNumbers(){
     
     TFile* mincerfile = TFile::Open("$DATA/ZeroBiasL1KF2016R307195R311481.51Runs.root","READ");  
     TFile* jburrfile = TFile::Open("data/totalntuple16.root","READ");
+    TFile* nonzerorunNumFile = TFile::Open("NonZeroRunNumbers.root","READ");
 
     TTree* mincertree = (TTree*) mincerfile->Get("tree");
     TTree* burrtree = (TTree*) jburrfile->Get("METTree");
+    TNtuple* NonZeroRunNumbers = (TNtuple*) nonzerorunNumFile->Get("ntuple");
 
     UInt_t RunNumber;
-    //TODO: needs to be changed to maximum and minimum event number...
-    Int_t MincerEventNumMinimum = 958225964;
-    Int_t MincerEventNumMaximum = ;
-    Int_t JburrEventNumMinimum = 4981632;
-    Int_t JburrEventNumMaximum = 7.04e9;
+    Int_t MincerEventNumMinimum = -2.1474832e9;
+    Int_t MincerEventNumMaximum = 2.1474833e9;
+    Int_t JburrEventNumMinimum = 32452;
+    Int_t JburrEventNumMaximum = 7.040243e9;
 
     Int_t runLow = 307195;
     Int_t runHigh = 311481;
@@ -40,8 +41,14 @@ void HistListDiffRunNumbers(){
     TH1F* mincerhist = 0;    
     TH1F* burrhist = 0;  
 
+
+    Int_t RunNumber = 0;
+
+    NonZeroRunNumbers->SetBranchAddress("Run_Number",&RunNumber);
+
+
     TString* mincerhistname = "mincerhist";
-    TString* burrhistname = "burrhist"
+    TString* burrhistname = "burrhist";
    
     for ( Int j = 0 ; j < nonzeroRuns->GetEntries() ; j++ ){
         //for each nonzero run number, fill 2 histograms with events distributed by event number 

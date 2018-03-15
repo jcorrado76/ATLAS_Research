@@ -8,7 +8,7 @@ void PlotEventNumbOverlap(){
 
     TFile* mincerfile = TFile::Open("$DATA/ZeroBiasL1KF2016R307195R311481.51Runs.root","READ");  
     TFile* jburrfile = TFile::Open("data/totalntuple16.root","READ");
-    TFile* NonzerodiffRunsfile = TFile::Open("$jburr/RunNumberHists.root");
+    TFile* NonzerodiffRunsfile = TFile::Open("$jburr/NonZeroRunNumbers.root");
 
     TTree* mincertree = (TTree*) mincerfile->Get("tree");
     TTree* burrtree = (TTree*) jburrfile->Get("METTree");
