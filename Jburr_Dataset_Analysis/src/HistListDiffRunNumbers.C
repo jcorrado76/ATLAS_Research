@@ -61,7 +61,8 @@ void HistListDiffRunNumbers(){
     TString mincerstaggeredhistname = "staggered_mincerhist";
     TString burrhistname = "burrhist";
     TString diffhistname = "diffhist";
-    TString canvname = "canv";
+    TString canvname = "CanvRun";
+    TString canvtitle = "Run Number: ";
 
     Int_t mincerentries = mincertree->GetEntries();
     Int_t burrentries = burrtree->GetEntries();
@@ -77,9 +78,10 @@ void HistListDiffRunNumbers(){
 
         mincerhistname += j;
         burrhistname += j;
-        canvname += j;
         mincerstaggeredhistname += j;
         diffhistname += j;
+        canvname += TargetRunNumber;
+        canvtitle += TargetRunNumber;
 
         mincerhist = new TH1F( mincerhistname , mincerhistname , nbins , MincerEventNumMinimum, MincerEventNumMaximum);
         mincerstaggeredhist = new TH1F( mincerstaggeredhistname , mincerstaggeredhistname, nbins , MincerEventNumMinimum, MincerEventNumMaximum);
@@ -106,9 +108,19 @@ void HistListDiffRunNumbers(){
 
         mincerstaggeredhist->SetLineColor(kRed);
         burrhist->SetLineColor(kBlue);
+        diffhist->SetLineColor(kTeal);
 
+        canv->Divide(1,2);
+        canv->cd(1);
         mincerstaggeredhist->Draw();
-        burrhist->Draw();
+        burrhist->Draw("SAME");
+
+
+        canv->cd(2);
+        diffhist->Draw();
+
+        canv->SetTitle( canvtitle );
+
 
         
         mincerhistlist->Add(mincerhist);
@@ -121,7 +133,8 @@ void HistListDiffRunNumbers(){
         mincerstaggeredhistname = "staggered_mincerhist";
         burrhistname = "burrhist";
         diffhistname = "diffhist";
-        canvname = "canv";
+        canvname = "CanRun";
+        canvtitle = "Run Number: ";
 
     }
 
