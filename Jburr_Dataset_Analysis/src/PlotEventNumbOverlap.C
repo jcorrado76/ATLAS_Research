@@ -30,7 +30,7 @@ void PlotEventNumbOverlap(){
 
     TH1F* mincerhist = new TH1F("histo1" , "Mincer Hist" , nbins , runLow , runHigh );
     TH1F* burrhist = new TH1F("histo2" , "Jburr Hist" , nbins , runLow , runHigh);
-    TH1F* diffhist = 0;
+    TH1F* diffhist = new TH1F("diffhist","Diff_Hist", nbins,runLow,runHigh);
 
 
     mincertree->SetBranchAddress("runnum",&mincerRunNumber);
@@ -54,14 +54,14 @@ void PlotEventNumbOverlap(){
     for ( Int_t i = 0 ; i < mincerentries ; i++){
         mincertree->GetEntry(i);
         if (mincerpassrndm > 0.5 && mincerRunNumber < 310000 && mincereventnumber > jburreventnumberlow && mincereventnumber < jburreventnumberhigh ){
-        mincerhist->Fill(mincerRunNumber + 10.);
+        mincerhist->Fill( mincereventnumber+ 10.);
         }
     }
 
     for ( Int_t i = 0 ; i < burrentries; i++){
         burrtree->GetEntry(i);
         if (jburrpassrndm && RunNumber < runHigh && RunNumber > runLow && jburreventnumber > mincereventnumberlow && jburreventnumber < mincereventnumberhigh ){
-        burrhist->Fill(RunNumber);
+        burrhist->Fill(jburreventnumber);
         }
     }
 
