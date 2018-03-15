@@ -2,6 +2,8 @@
 #include <TList.h>
 #include <TFile.h>
 #include <TCanvas.h>
+#include <TTree.h>
+#include <TNtuple.h>
 
 void HistListDiffRunNumbers(){
 
@@ -18,10 +20,10 @@ void HistListDiffRunNumbers(){
     TNtuple* NonZeroRunNumbers = (TNtuple*) nonzerorunNumFile->Get("ntuple");
 
     UInt_t RunNumber;
-    Int_t MincerEventNumMinimum = -2.1474832e9;
-    Int_t MincerEventNumMaximum = 2.1474833e9;
-    Int_t JburrEventNumMinimum = 32452;
-    Int_t JburrEventNumMaximum = 7.040243e9;
+    long long int MincerEventNumMinimum = -2.1474832e9;
+    long long int MincerEventNumMaximum = 2.1474833e9;
+    long long int JburrEventNumMinimum = 32452;
+    long long int JburrEventNumMaximum = 7.040243e9;
 
     Int_t runLow = 307195;
     Int_t runHigh = 311481;
@@ -127,10 +129,10 @@ void HistListDiffRunNumbers(){
 
     //create a new file containing the Tlists of jburr hists, mincer hists, diff hists, and combined tcanvases
     TFile* outfile = TFile::Open("HistList.root", "RECREATE");
-    mincerhistlist->Write("MincerHistList", option = 1);
-    burrhistlist->Write("BurrHistList" , option = 1);
-    staggeredmincerhistlist->Write("StaggeredMincerHistList", option =1 );
-    canvaslist->Write("CanvasList", option =1 );
-    diffhistlist->Write("DiffHistList", option=1);
+    mincerhistlist->Write("MincerHistList", 1);
+    burrhistlist->Write("BurrHistList" , 1);
+    staggeredmincerhistlist->Write("StaggeredMincerHistList", 1 );
+    canvaslist->Write("CanvasList", 1 );
+    diffhistlist->Write("DiffHistList", 1);
 
 }
