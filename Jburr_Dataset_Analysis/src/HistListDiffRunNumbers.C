@@ -1,9 +1,7 @@
 #include <TH1F.h>
 #include <TList.h>
-
-
-
-
+#include <TFile.h>
+#include <TCanvas.h>
 
 void HistListDiffRunNumbers(){
 
@@ -30,7 +28,8 @@ void HistListDiffRunNumbers(){
     Int_t nbins = 10000;
 
     Int_t mincerRunNumber, jburrRunNumber;
-    Int_t mincerEventNumber , jburrEventNumber;
+    Int_t mincerEventNumber;
+    ULong64_t jburrEventNumber;
     Int_t mincerpassrndm;
     Bool_t jburrpassrndm;
 
@@ -46,7 +45,7 @@ void HistListDiffRunNumbers(){
     TH1F* diffhist = 0;
     TCanvas* canv = 0;
 
-    Int_t TargetRunNumber = 0;
+    Float_t TargetRunNumber = 0;
 
     NonZeroRunNumbers->SetBranchAddress("Run_Number",&TargetRunNumber);
     mincertree->SetBranchAddress("eventnum",&mincerEventNumber);
@@ -56,16 +55,16 @@ void HistListDiffRunNumbers(){
     burrtree->SetBranchAddress("HLT_noalg_zb_L1ZB.passed",&jburrpassrndm);
     burrtree->SetBranchAddress("RunNumber",&RunNumber);
 
-    TString* mincerhistname = "mincerhist";
-    TString& mincerstaggeredhistname = "staggered_mincerhist";
-    TString* burrhistname = "burrhist";
-    TString* diffhistname = "diffhist";
-    TString* canvname = "canv";
+    TString mincerhistname = "mincerhist";
+    TString mincerstaggeredhistname = "staggered_mincerhist";
+    TString burrhistname = "burrhist";
+    TString diffhistname = "diffhist";
+    TString canvname = "canv";
 
     Int_t mincerentries = mincertree->GetEntries();
     Int_t burrentries = burrtree->GetEntries();
    
-    for ( Int j = 0 ; j < NonZeroRunNumbers->GetEntries() ; j++ ){
+    for ( Int_t j = 0 ; j < NonZeroRunNumbers->GetEntries() ; j++ ){
         //for each nonzero run number, fill 2 histograms with events distributed by event number 
         //append each hist to the corresponding tlist
         //then make the difference hist ; add to corresponding tlist
@@ -103,7 +102,7 @@ void HistListDiffRunNumbers(){
 
         diffhist->Add(mincerhist,burrhist,1.,-1.);
 
-        mincerstggeredhist->SetLineColor(kRed);
+        mincerstaggeredhist->SetLineColor(kRed);
         burrhist->SetLineColor(kBlue);
 
         mincerstaggeredhist->Draw();
@@ -121,7 +120,7 @@ void HistListDiffRunNumbers(){
 
 
     //create a new file containing the Tlists of jburr hists, mincer hists, diff hists, and combined tcanvases
-    TFile* outfile = new TFile::Open("HistList.root", "RECREATE");
+    TFile* outfile = TFile::Open("HistList.root", "RECREATE");
     mincerhistlist->Write("MincerHistList");
     burrhistlist->Write("BurrHistList");
     staggeredmincerhistlist->Write("StaggeredMincerHistList");
