@@ -115,16 +115,22 @@ void HistListDiffRunNumbers(){
         canvaslist->Add(canv);
         diffhistlist->Add(diffhist);
 
+        mincerhistname = "mincerhist";
+        mincerstaggeredhistname = "staggered_mincerhist";
+        burrhistname = "burrhist";
+        diffhistname = "diffhist";
+        canvname = "canv";
+
     }
 
 
 
     //create a new file containing the Tlists of jburr hists, mincer hists, diff hists, and combined tcanvases
     TFile* outfile = TFile::Open("HistList.root", "RECREATE");
-    mincerhistlist->Write("MincerHistList");
-    burrhistlist->Write("BurrHistList");
-    staggeredmincerhistlist->Write("StaggeredMincerHistList");
-    canvaslist->Write("CanvasList");
-    diffhistlist->Write("DiffHistList");
+    mincerhistlist->Write("MincerHistList", option = 1);
+    burrhistlist->Write("BurrHistList" , option = 1);
+    staggeredmincerhistlist->Write("StaggeredMincerHistList", option =1 );
+    canvaslist->Write("CanvasList", option =1 );
+    diffhistlist->Write("DiffHistList", option=1);
 
 }
