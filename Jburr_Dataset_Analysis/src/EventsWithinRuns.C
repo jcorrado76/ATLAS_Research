@@ -7,8 +7,7 @@
 
 
 void EventsWithinRuns(){
-    /* This macro takes in a histogram containing the difference between two other histograms, and displays the bin
-     * number, number of entries in that bin, and the run number in which there is a nonzero difference */
+    /* This macro takes in a histogram containing the difference between two other histograms, and displays the bin * number, number of entries in that bin, and the run number in which there is a nonzero difference */
 
 	TString pathname = "$jburr/RunNumberHists.root";
 
@@ -40,7 +39,11 @@ void EventsWithinRuns(){
 
     nonzeroRuns->Scan();
   
-	//TODO: write this ntuple to a file to be used to generate list of histograms for runs that differ in numb events 
+    TFile* outfile = TFile::Open("$jburr/NonZeroRunNumbers.root","RECREATE");
+    //need this line or else there is a ttree write error with the baskets because the ttree was affiliated with the
+    //directory of the input file 
+    nonzeroRuns->SetDirectory(outfile);
+    nonzeroRuns->Write();
 
 
 
