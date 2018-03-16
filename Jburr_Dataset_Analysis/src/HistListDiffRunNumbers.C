@@ -1,4 +1,4 @@
-#include <TH1F.h>
+#include <TH1D.h>
 #include <TList.h>
 #include <TFile.h>
 #include <TCanvas.h>
@@ -27,7 +27,7 @@ void HistListDiffRunNumbers(){
 
     Int_t runLow = 307195;
     Int_t runHigh = 311481;
-    Int_t nbins = 10000;
+    Int_t nbins = 100000000;
 
     Int_t mincerRunNumber, jburrRunNumber;
     Int_t mincerEventNumber;
@@ -41,10 +41,10 @@ void HistListDiffRunNumbers(){
     TList* canvaslist = new TList();
     TList* diffhistlist = new TList();
 
-    TH1F* mincerhist = 0;    
-    TH1F* mincerstaggeredhist = 0;
-    TH1F* burrhist = 0;  
-    TH1F* diffhist = 0;
+    TH1D* mincerhist = 0;    
+    TH1D* mincerstaggeredhist = 0;
+    TH1D* burrhist = 0;  
+    TH1D* diffhist = 0;
     TCanvas* canv = 0;
 
     Float_t TargetRunNumber = 0;
@@ -83,10 +83,10 @@ void HistListDiffRunNumbers(){
         canvname += TargetRunNumber;
         canvtitle += TargetRunNumber;
 
-        mincerhist = new TH1F( mincerhistname , mincerhistname , nbins , MincerEventNumMinimum, MincerEventNumMaximum);
-        mincerstaggeredhist = new TH1F( mincerstaggeredhistname , mincerstaggeredhistname, nbins , MincerEventNumMinimum, MincerEventNumMaximum);
-        burrhist = new TH1F( burrhistname , burrhistname , nbins , JburrEventNumMinimum, JburrEventNumMaximum);
-        diffhist = new TH1F( diffhistname , diffhistname , nbins, MincerEventNumMinimum , MincerEventNumMaximum);
+        mincerhist = new TH1D( mincerhistname , mincerhistname , nbins , MincerEventNumMinimum, MincerEventNumMaximum);
+        mincerstaggeredhist = new TH1D( mincerstaggeredhistname , mincerstaggeredhistname, nbins , MincerEventNumMinimum, MincerEventNumMaximum);
+        burrhist = new TH1D( burrhistname , burrhistname , nbins , JburrEventNumMinimum, JburrEventNumMaximum);
+        diffhist = new TH1D( diffhistname , diffhistname , nbins, MincerEventNumMinimum , MincerEventNumMaximum);
         canv = new TCanvas(canvname , canvname);
 
         for ( Int_t i = 0 ; i < mincerentries ; i++){
@@ -148,4 +148,5 @@ void HistListDiffRunNumbers(){
     canvaslist->Write("CanvasList", 1 );
     diffhistlist->Write("DiffHistList", 1);
 
+    outfile->Close();
 }
