@@ -10,8 +10,8 @@
 {
     TProof::Open("");
     TChain* mychain = new TChain( "tree" , "Print_7_Eff_Chain" );
-    mychain->Add("../../../MyData/PhysicsMain.L1KFmuontriggers.2016.f731f758_m1659m1710.Run309759.48Runs.root");
+    mychain->Add("../../../ATLAS_DATA/PhysicsMain.L1KFmuontriggers.2016.f731f758_m1659m1710.Run309759.48Runs.root");
     mychain->SetProof();
-    mychain->Process("Print_7_Efficiencies/Print_7_Efficiencies_Selector.C+");
+    mychain->Process("Print_7_Efficiencies_Selector.C+");
 }
 

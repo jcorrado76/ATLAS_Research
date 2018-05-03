@@ -54,13 +54,13 @@ public :
 
 
     //individuals
-    TEfficiency* cellTeff;
-    TEfficiency* mhtTeff;
-    TEfficiency* topoclpucTeff;
+    TEfficiency* cellTeff = 0;
+    TEfficiency* mhtTeff = 0;
+    TEfficiency* topoclpucTeff = 0;
 
     ///combined algs
-    TEfficiency* cellmhtTeff;
-    TEfficiency* mhttopoclpucTeff;
+    TEfficiency* cellmhtTeff = 0;
+    TEfficiency* mhttopoclpucTeff = 0;
 
 
 
