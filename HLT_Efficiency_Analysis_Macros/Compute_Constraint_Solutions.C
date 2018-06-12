@@ -3,6 +3,12 @@ int Compute_Constraint_Solutions( const TString AlgAName, const TString AlgBName
 {
      /*This macro is going to compute solutions to the constraint equation for
       * combinations of the individual fractions that we are able to try */
+
+    /* ^ that was a terrible docstring.
+     * This macro is going to take in two algorithms, and return the pairs of points lying on the PPF curve. 
+     */
+
+
     userInfo* parameters = new userInfo();
     parameters->Set_AlgAName(AlgAName);
     parameters->Set_AlgBName(AlgBName);
@@ -256,8 +262,6 @@ int Compute_Constraint_Solutions( const TString AlgAName, const TString AlgBName
       else{
         std::cout << "No root found; max iterations exceeded" << std::endl;
       }
-
-
 
     parameters->Set_AlgACombinedThresh(algAMETx2thresh);
     parameters->Set_AlgBCombinedThresh(algBMETx2thresh);

@@ -6,7 +6,6 @@ void Plot2016Data(){
     TTree* mincertree = (TTree*) mincerfile->Get("tree");
     TTree* burrtree = (TTree*) jburrfile->Get("METTree");
 
-
     Float_t mincermetcell, jburrmetcell;
     Int_t mincerpassrndm;
     Bool_t jburrpassrndm;

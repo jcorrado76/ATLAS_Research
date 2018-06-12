@@ -12,7 +12,6 @@
 
 
 void Plot_Driver(){
-
     TString mincer_zbpath= "$DATA/ZeroBiasL1KF2016R307195R311481.51Runs.root";
     TString jburr_zbpath = "$work/../Jburr_Dataset_Analysis/data/totalntuple16.root";
 
