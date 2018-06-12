@@ -19,6 +19,8 @@
 #include <TStyle.h>
 #include <TCanvas.h>
 #include <TH1.h>
+#include <TLegend.h>
+#include <THStack.h>
 
 // Headers needed by this particular selector
 #include <vector>
