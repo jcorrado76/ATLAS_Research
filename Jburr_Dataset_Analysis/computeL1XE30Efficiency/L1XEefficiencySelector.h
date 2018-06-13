@@ -30,7 +30,7 @@ public :
    TTreeReader     fReader;  //!the tree reader
    TTree          *fChain = 0;   //!pointer to the analyzed TTree or TChain
    Float_t XE = 30.0;
-   TString alg_name = "cell.met"; // alg for which to compute efficiency 
+   TString alg_name = "HLT_noalg_L1XE30.prescale"; // alg for which to compute efficiency 
    TString zb_alg_name = "HLT_noalg_zb_L1ZB.prescale";
    // initialize pointers to 0
    TEfficiency*            MET_Algmu0thru10Efficiency = 0;
@@ -56,6 +56,7 @@ public :
    // alg to compute efficiency of
    TTreeReaderValue<Float_t> AlgForEfficiency = {fReader, alg_name};
    TTreeReaderValue<Float_t> ZB_Alg = {fReader, zb_alg_name };
+
    TTreeReaderValue<Float_t> L1_MET = {fReader, "L1.met"};
 
    L1XEefficiencySelector(TTree * /*tree*/ =0) { }
