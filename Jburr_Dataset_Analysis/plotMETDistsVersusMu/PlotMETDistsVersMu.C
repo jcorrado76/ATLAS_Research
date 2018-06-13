@@ -9,13 +9,13 @@ void PlotMETDistsVersMu::Begin(TTree * /*tree*/)
     Int_t nbins = 1000;
     Float_t gevLow = 0.0;
     Float_t gevHigh = 300.0;
-    L1ZBmu0thru10 = new TH1F("l1zbmu0thru10","L1ZB Data for actint between 0 and 10", nbins , gevLow , gevHigh );
-    L1ZBmu10thru20 = new TH1F("l1zbmu10thru20","L1ZB Data for actint between 10 and 20", nbins , gevLow , gevHigh );
-    L1ZBmu20thru30 = new TH1F("l1zbmu20thru30","L1ZB Data for actint between 20 and 30", nbins , gevLow , gevHigh );
-    L1ZBmu30thru40 = new TH1F("l1zbmu30thru40","L1ZB Data for actint between 30 and 40", nbins , gevLow , gevHigh );
-    L1ZBmu40thru50 = new TH1F("l1zbmu40thru50","L1ZB Data for actint between 40 and 50", nbins , gevLow , gevHigh );
-    L1ZBmu50thru60 = new TH1F("l1zbmu50thru60","L1ZB Data for actint between 50 and 60", nbins , gevLow , gevHigh );
-    L1ZBmu60thru70 = new TH1F("l1zbmu60thru70","L1ZB Data for actint between 60 and 70", nbins , gevLow , gevHigh );
+    MET_Datamu0thru10 = new TH1F("l1zbmu0thru10","L1ZB Data for actint between 0 and 10", nbins , gevLow , gevHigh );
+    MET_Datamu10thru20 = new TH1F("l1zbmu10thru20","L1ZB Data for actint between 10 and 20", nbins , gevLow , gevHigh );
+    MET_Datamu20thru30 = new TH1F("l1zbmu20thru30","L1ZB Data for actint between 20 and 30", nbins , gevLow , gevHigh );
+    MET_Datamu30thru40 = new TH1F("l1zbmu30thru40","L1ZB Data for actint between 30 and 40", nbins , gevLow , gevHigh );
+    MET_Datamu40thru50 = new TH1F("l1zbmu40thru50","L1ZB Data for actint between 40 and 50", nbins , gevLow , gevHigh );
+    MET_Datamu50thru60 = new TH1F("l1zbmu50thru60","L1ZB Data for actint between 50 and 60", nbins , gevLow , gevHigh );
+    MET_Datamu60thru70 = new TH1F("l1zbmu60thru70","L1ZB Data for actint between 60 and 70", nbins , gevLow , gevHigh );
 }
 
 void PlotMETDistsVersMu::SlaveBegin(TTree * /*tree*/)
@@ -30,25 +30,25 @@ Bool_t PlotMETDistsVersMu::Process(Long64_t entry)
 
    if (*RunNumber != 33023 && *RunNumber != 331975 && *RunNumber != 334487 ){
        if ( *InTimePileup > 0.0 && *InTimePileup < 10.0  ){
-           L1ZBmu0thru10->Fill(*MET_Data);
+           MET_Datamu0thru10->Fill(*MET_Data);
        }
        if ( *InTimePileup > 10.0 && *InTimePileup < 20.0  ){
-           L1ZBmu10thru20->Fill(*MET_Data);
+           MET_Datamu10thru20->Fill(*MET_Data);
        }
        if ( *InTimePileup > 20.0 && *InTimePileup < 30.0  ){
-           L1ZBmu20thru30->Fill(*MET_Data);
+           MET_Datamu20thru30->Fill(*MET_Data);
        }
        if ( *InTimePileup > 30.0 && *InTimePileup < 40.0  ){
-           L1ZBmu30thru40->Fill(*MET_Data);
+           MET_Datamu30thru40->Fill(*MET_Data);
        }
        if ( *InTimePileup > 40.0 && *InTimePileup < 50.0  ){
-           L1ZBmu40thru50->Fill(*MET_Data);
+           MET_Datamu40thru50->Fill(*MET_Data);
        }
        if ( *InTimePileup > 50.0 && *InTimePileup < 60.0  ){
-           L1ZBmu50thru60->Fill(*MET_Data);
+           MET_Datamu50thru60->Fill(*MET_Data);
        }
        if ( *InTimePileup > 60.0 && *InTimePileup < 70.0  ){
-           L1ZBmu60thru70->Fill(*MET_Data);
+           MET_Datamu60thru70->Fill(*MET_Data);
        }
    }
    return kTRUE;
@@ -60,57 +60,57 @@ void PlotMETDistsVersMu::SlaveTerminate()
 
 void PlotMETDistsVersMu::Terminate()
 {
-    TCanvas* mycanv = new TCanvas("l1zbMuSlices", "L1ZB MET Slices in Mu");
-    THStack* muSlicesStack = new THStack("muStack","L1ZB MET Hists in Mu Slices After Removing Runs 33023, 331975, and 334487");
+    TCanvas* mycanv = new TCanvas("MET_AlgMuSlices", "MET Slices in Mu");
+    THStack* muSlicesStack = new THStack("muStack","MET Hists in Mu Slices After Removing Runs 33023, 331975, and 334487");
 
     // color the histograms so we can see difference 
-    L1ZBmu0thru10->SetLineColor(1);
-    L1ZBmu10thru20->SetLineColor(2);
-    L1ZBmu20thru30->SetLineColor(3);
-    L1ZBmu30thru40->SetLineColor(4);
-    L1ZBmu40thru50->SetLineColor(12);
-    L1ZBmu50thru60->SetLineColor(6);
-    L1ZBmu60thru70->SetLineColor(9);
+    MET_Datamu0thru10->SetLineColor(1);
+    MET_Datamu10thru20->SetLineColor(2);
+    MET_Datamu20thru30->SetLineColor(3);
+    MET_Datamu30thru40->SetLineColor(4);
+    MET_Datamu40thru50->SetLineColor(12);
+    MET_Datamu50thru60->SetLineColor(6);
+    MET_Datamu60thru70->SetLineColor(9);
 
     // normalize histograms to 1 so we can compare shapes 
-    Int_t L1ZBmu0thru10Nentries = L1ZBmu0thru10->GetEntries();
-    Int_t L1ZBmu10thru20Nentries = L1ZBmu10thru20->GetEntries();
-    Int_t L1ZBmu20thru30Nentries = L1ZBmu20thru30->GetEntries();
-    Int_t L1ZBmu30thru40Nentries = L1ZBmu30thru40->GetEntries();
-    Int_t L1ZBmu40thru50Nentries = L1ZBmu40thru50->GetEntries();
-    Int_t L1ZBmu50thru60Nentries = L1ZBmu50thru60->GetEntries();
-    Int_t L1ZBmu60thru70Nentries = L1ZBmu60thru70->GetEntries();
+    Int_t MET_Datamu0thru10Nentries = MET_Datamu0thru10->GetEntries();
+    Int_t MET_Datamu10thru20Nentries = MET_Datamu10thru20->GetEntries();
+    Int_t MET_Datamu20thru30Nentries = MET_Datamu20thru30->GetEntries();
+    Int_t MET_Datamu30thru40Nentries = MET_Datamu30thru40->GetEntries();
+    Int_t MET_Datamu40thru50Nentries = MET_Datamu40thru50->GetEntries();
+    Int_t MET_Datamu50thru60Nentries = MET_Datamu50thru60->GetEntries();
+    Int_t MET_Datamu60thru70Nentries = MET_Datamu60thru70->GetEntries();
 
-    L1ZBmu0thru10->Scale( 1. / L1ZBmu0thru10Nentries );
-    L1ZBmu10thru20->Scale( 1. / L1ZBmu10thru20Nentries );
-    L1ZBmu20thru30->Scale( 1. / L1ZBmu20thru30Nentries );
-    L1ZBmu30thru40->Scale( 1. / L1ZBmu30thru40Nentries );
-    L1ZBmu40thru50->Scale( 1. / L1ZBmu40thru50Nentries );
-    L1ZBmu50thru60->Scale( 1. / L1ZBmu50thru60Nentries );
-    L1ZBmu60thru70->Scale( 1. / L1ZBmu60thru70Nentries );
+    MET_Datamu0thru10->Scale( 1. / MET_Datamu0thru10Nentries );
+    MET_Datamu10thru20->Scale( 1. / MET_Datamu10thru20Nentries );
+    MET_Datamu20thru30->Scale( 1. / MET_Datamu20thru30Nentries );
+    MET_Datamu30thru40->Scale( 1. / MET_Datamu30thru40Nentries );
+    MET_Datamu40thru50->Scale( 1. / MET_Datamu40thru50Nentries );
+    MET_Datamu50thru60->Scale( 1. / MET_Datamu50thru60Nentries );
+    MET_Datamu60thru70->Scale( 1. / MET_Datamu60thru70Nentries );
 
     // draw stacked hists, because i want y axis to adjust
     // better than Drawing "SAME" for stacking hists 
-    muSlicesStack->Add(L1ZBmu0thru10);
-    muSlicesStack->Add(L1ZBmu10thru20);
-    muSlicesStack->Add(L1ZBmu20thru30);
-    muSlicesStack->Add(L1ZBmu30thru40);
-    muSlicesStack->Add(L1ZBmu40thru50);
-    muSlicesStack->Add(L1ZBmu50thru60);
-    muSlicesStack->Add(L1ZBmu60thru70);
+    muSlicesStack->Add(MET_Datamu0thru10);
+    muSlicesStack->Add(MET_Datamu10thru20);
+    muSlicesStack->Add(MET_Datamu20thru30);
+    muSlicesStack->Add(MET_Datamu30thru40);
+    muSlicesStack->Add(MET_Datamu40thru50);
+    muSlicesStack->Add(MET_Datamu50thru60);
+    muSlicesStack->Add(MET_Datamu60thru70);
 
     muSlicesStack->Draw();
     
     mycanv->SetTitle("L1ZB Slices in Mu");
     gPad->SetLogy();
     TLegend* legend = new TLegend();
-    legend->AddEntry(L1ZBmu0thru10);
-    legend->AddEntry(L1ZBmu10thru20);
-    legend->AddEntry(L1ZBmu20thru30);
-    legend->AddEntry(L1ZBmu30thru40);
-    legend->AddEntry(L1ZBmu40thru50);
-    legend->AddEntry(L1ZBmu50thru60);
-    legend->AddEntry(L1ZBmu60thru70);
+    legend->AddEntry(MET_Datamu0thru10);
+    legend->AddEntry(MET_Datamu10thru20);
+    legend->AddEntry(MET_Datamu20thru30);
+    legend->AddEntry(MET_Datamu30thru40);
+    legend->AddEntry(MET_Datamu40thru50);
+    legend->AddEntry(MET_Datamu50thru60);
+    legend->AddEntry(MET_Datamu60thru70);
     legend->Draw("SAME");
     gStyle->SetOptStat(0);
 }
