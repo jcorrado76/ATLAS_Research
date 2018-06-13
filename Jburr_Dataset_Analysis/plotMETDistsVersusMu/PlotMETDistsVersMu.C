@@ -9,13 +9,13 @@ void PlotMETDistsVersMu::Begin(TTree * /*tree*/)
     Int_t nbins = 1000;
     Float_t gevLow = 0.0;
     Float_t gevHigh = 100.0;
-    L1ZBmu0thru10 = new TH1F("cellmu0thru10","L1ZB Data for actint between 0 and 10", nbins , gevLow , gevHigh );
-    L1ZBmu10thru20 = new TH1F("cellmu10thru20","L1ZB Data for actint between 10 and 20", nbins , gevLow , gevHigh );
-    L1ZBmu20thru30 = new TH1F("cellmu20thru30","L1ZB Data for actint between 20 and 30", nbins , gevLow , gevHigh );
-    L1ZBmu30thru40 = new TH1F("cellmu30thru40","L1ZB Data for actint between 30 and 40", nbins , gevLow , gevHigh );
-    L1ZBmu40thru50 = new TH1F("cellmu40thru50","L1ZB Data for actint between 40 and 50", nbins , gevLow , gevHigh );
-    L1ZBmu50thru60 = new TH1F("cellmu50thru60","L1ZB Data for actint between 50 and 60", nbins , gevLow , gevHigh );
-    L1ZBmu60thru70 = new TH1F("cellmu60thru70","L1ZB Data for actint between 60 and 70", nbins , gevLow , gevHigh );
+    L1ZBmu0thru10 = new TH1F("l1zbmu0thru10","L1ZB Data for actint between 0 and 10", nbins , gevLow , gevHigh );
+    L1ZBmu10thru20 = new TH1F("l1zbmu10thru20","L1ZB Data for actint between 10 and 20", nbins , gevLow , gevHigh );
+    L1ZBmu20thru30 = new TH1F("l1zbmu20thru30","L1ZB Data for actint between 20 and 30", nbins , gevLow , gevHigh );
+    L1ZBmu30thru40 = new TH1F("l1zbmu30thru40","L1ZB Data for actint between 30 and 40", nbins , gevLow , gevHigh );
+    L1ZBmu40thru50 = new TH1F("l1zbmu40thru50","L1ZB Data for actint between 40 and 50", nbins , gevLow , gevHigh );
+    L1ZBmu50thru60 = new TH1F("l1zbmu50thru60","L1ZB Data for actint between 50 and 60", nbins , gevLow , gevHigh );
+    L1ZBmu60thru70 = new TH1F("l1zbmu60thru70","L1ZB Data for actint between 60 and 70", nbins , gevLow , gevHigh );
 }
 
 void PlotMETDistsVersMu::SlaveBegin(TTree * /*tree*/)
@@ -60,8 +60,8 @@ void PlotMETDistsVersMu::SlaveTerminate()
 
 void PlotMETDistsVersMu::Terminate()
 {
-    TCanvas* mycanv = new TCanvas("cellMuSlices", "MET Cell Slices in Mu");
-    THStack* muSlicesStack = new THStack("muStack","CELL MET Hists in Mu Slices without runs 33023, 331975, and 334487");
+    TCanvas* mycanv = new TCanvas("l1zbMuSlices", "L1ZB MET Slices in Mu");
+    THStack* muSlicesStack = new THStack("muStack","L1ZB MET Hists in Mu Slices After Removing 33023, 331975, and 334487");
 
     // color the histograms so we can see difference 
     L1ZBmu0thru10->SetLineColor(1);
