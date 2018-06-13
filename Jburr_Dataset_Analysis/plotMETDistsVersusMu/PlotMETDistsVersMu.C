@@ -27,26 +27,29 @@ Bool_t PlotMETDistsVersMu::Process(Long64_t entry)
 {
    fReader.SetEntry(entry);
 
-   if ( *InTimePileup > 0.0 && *InTimePileup < 10.0  ){
-       metcellmu0thru10->Fill(*cell_met);
-   }
-   if ( *InTimePileup > 10.0 && *InTimePileup < 20.0  ){
-       metcellmu10thru20->Fill(*cell_met);
-   }
-   if ( *InTimePileup > 20.0 && *InTimePileup < 30.0  ){
-       metcellmu20thru30->Fill(*cell_met);
-   }
-   if ( *InTimePileup > 30.0 && *InTimePileup < 40.0  ){
-       metcellmu30thru40->Fill(*cell_met);
-   }
-   if ( *InTimePileup > 40.0 && *InTimePileup < 50.0  ){
-       metcellmu40thru50->Fill(*cell_met);
-   }
-   if ( *InTimePileup > 50.0 && *InTimePileup < 60.0  ){
-       metcellmu50thru60->Fill(*cell_met);
-   }
-   if ( *InTimePileup > 60.0 && *InTimePileup < 70.0  ){
-       metcellmu60thru70->Fill(*cell_met);
+
+   if (*RunNumber != 33023 && *RunNumber != 331975 && *RunNumber != 334487 ){
+       if ( *InTimePileup > 0.0 && *InTimePileup < 10.0  ){
+           metcellmu0thru10->Fill(*cell_met);
+       }
+       if ( *InTimePileup > 10.0 && *InTimePileup < 20.0  ){
+           metcellmu10thru20->Fill(*cell_met);
+       }
+       if ( *InTimePileup > 20.0 && *InTimePileup < 30.0  ){
+           metcellmu20thru30->Fill(*cell_met);
+       }
+       if ( *InTimePileup > 30.0 && *InTimePileup < 40.0  ){
+           metcellmu30thru40->Fill(*cell_met);
+       }
+       if ( *InTimePileup > 40.0 && *InTimePileup < 50.0  ){
+           metcellmu40thru50->Fill(*cell_met);
+       }
+       if ( *InTimePileup > 50.0 && *InTimePileup < 60.0  ){
+           metcellmu50thru60->Fill(*cell_met);
+       }
+       if ( *InTimePileup > 60.0 && *InTimePileup < 70.0  ){
+           metcellmu60thru70->Fill(*cell_met);
+       }
    }
    return kTRUE;
 }
@@ -58,7 +61,7 @@ void PlotMETDistsVersMu::SlaveTerminate()
 void PlotMETDistsVersMu::Terminate()
 {
     TCanvas* mycanv = new TCanvas("cellMuSlices", "MET Cell Slices in Mu");
-    THStack* muSlicesStack = new THStack("muStack","CELL MET Hists in Mu Slices");
+    THStack* muSlicesStack = new THStack("muStack","CELL MET Hists in Mu Slices without runs 33023, 331975, and 334487");
 
     metcellmu0thru10->SetLineColor(1);
     metcellmu10thru20->SetLineColor(2);
