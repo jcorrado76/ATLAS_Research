@@ -63,6 +63,7 @@ void PlotMETDistsVersMu::Terminate()
     TCanvas* mycanv = new TCanvas("cellMuSlices", "MET Cell Slices in Mu");
     THStack* muSlicesStack = new THStack("muStack","CELL MET Hists in Mu Slices without runs 33023, 331975, and 334487");
 
+    // color the histograms so we can see difference 
     metcellmu0thru10->SetLineColor(1);
     metcellmu10thru20->SetLineColor(2);
     metcellmu20thru30->SetLineColor(3);
@@ -70,6 +71,23 @@ void PlotMETDistsVersMu::Terminate()
     metcellmu40thru50->SetLineColor(12);
     metcellmu50thru60->SetLineColor(6);
     metcellmu60thru70->SetLineColor(9);
+
+    // normalize histograms to 1 so we can compare shapes 
+    Int_t metcellmu0thru10Nentries = metcellmu0thru10->GetEntries();
+    Int_t metcellmu10thru20Nentries = metcellmu10thru20->GetEntries();
+    Int_t metcellmu20thru30Nentries = metcellmu20thru30->GetEntries();
+    Int_t metcellmu30thru40Nentries = metcellmu30thru40->GetEntries();
+    Int_t metcellmu40thru50Nentries = metcellmu40thru50->GetEntries();
+    Int_t metcellmu50thru60Nentries = metcellmu50thru60->GetEntries();
+    Int_t metcellmu60thru70Nentries = metcellmu60thru70->GetEntries();
+
+    metcellmu0thru10->Scale( 1. / metcellmu0thru10Nentries );
+    metcellmu10thru20->Scale( 1. / metcellmu10thru20Nentries );
+    metcellmu20thru30->Scale( 1. / metcellmu20thru30Nentries );
+    metcellmu30thru40->Scale( 1. / metcellmu30thru40Nentries );
+    metcellmu40thru50->Scale( 1. / metcellmu40thru50Nentries );
+    metcellmu50thru60->Scale( 1. / metcellmu50thru60Nentries );
+    metcellmu60thru70->Scale( 1. / metcellmu60thru70Nentries );
 
     // draw stacked hists, because i want y axis to adjust
     // better than Drawing "SAME" for stacking hists 

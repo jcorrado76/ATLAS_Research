@@ -40,17 +40,10 @@ public :
    TTreeReaderValue<UInt_t> LumiBlock = {fReader, "LumiBlock"};
    TTreeReaderValue<Float_t> InTimePileup = {fReader, "InTimePileup"};
    TTreeReaderValue<Float_t> OutOfTimePileup = {fReader, "OutOfTimePileup"};
-   TTreeReaderValue<Float_t> cell_sumet = {fReader, "cell.sumet"};
    TTreeReaderValue<Float_t> cell_met = {fReader, "cell.met"};
-   TTreeReaderValue<Bool_t> HLT_noalg_zb_L1ZB_passed = {fReader, "HLT_noalg_zb_L1ZB.passed"};
    TTreeReaderValue<Float_t> HLT_noalg_zb_L1ZB_prescale = {fReader, "HLT_noalg_zb_L1ZB.prescale"};
-   TTreeReaderValue<UInt_t> HLT_noalg_zb_L1ZB_passBits = {fReader, "HLT_noalg_zb_L1ZB.passBits"};
-   TTreeReaderValue<Bool_t> HLT_j40_L1ZB_passed = {fReader, "HLT_j40_L1ZB.passed"};
-   TTreeReaderValue<Float_t> HLT_j40_L1ZB_prescale = {fReader, "HLT_j40_L1ZB.prescale"};
-   TTreeReaderValue<UInt_t> HLT_j40_L1ZB_passBits = {fReader, "HLT_j40_L1ZB.passBits"};
-   TTreeReaderValue<Bool_t> HLT_noalg_L1XE30_passed = {fReader, "HLT_noalg_L1XE30.passed"};
+   // get efficiency of L1XE 30 
    TTreeReaderValue<Float_t> HLT_noalg_L1XE30_prescale = {fReader, "HLT_noalg_L1XE30.prescale"};
-   TTreeReaderValue<UInt_t> HLT_noalg_L1XE30_passBits = {fReader, "HLT_noalg_L1XE30.passBits"};
 
    L1XEefficiencySelector(TTree * /*tree*/ =0) { }
    virtual ~L1XEefficiencySelector() { }
