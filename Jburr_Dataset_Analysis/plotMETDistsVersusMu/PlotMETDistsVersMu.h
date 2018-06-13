@@ -15,12 +15,12 @@
 #include <TTreeReader.h>
 #include <TTreeReaderValue.h>
 #include <TTreeReaderArray.h>
-#include <TH2.h>
 #include <TStyle.h>
 #include <TCanvas.h>
 #include <TH1.h>
 #include <TLegend.h>
 #include <THStack.h>
+#include <TString.h>
 
 // Headers needed by this particular selector
 #include <vector>
@@ -29,7 +29,7 @@ class PlotMETDistsVersMu : public TSelector {
 public :
    TTreeReader     fReader;  //!the tree reader
    TTree          *fChain = 0;   //!pointer to the analyzed TTree or TChain
-   TString alg_name("HLT_noalg_zb_L1ZB.prescale");
+   TString alg_name = "cell.met"; //CHANGE THIS FOR WHICH MET DISTRIBUTION YOU WANT TO USE 
    TH1F*            MET_Datamu0thru10 = 0;
    TH1F*            MET_Datamu10thru20 = 0;
    TH1F*            MET_Datamu20thru30 = 0;
