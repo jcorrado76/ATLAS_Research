@@ -15,9 +15,12 @@
 #include <TTreeReader.h>
 #include <TTreeReaderValue.h>
 #include <TTreeReaderArray.h>
-#include <TH2.h>
 #include <TEfficiency.h>
 #include <TStyle.h>
+#include <TString.h>
+#include <TCanvas.h>
+#include <THStack.h>
+#include <TLegend.h>
 
 // Headers needed by this particular selector
 #include <vector>
@@ -26,24 +29,34 @@ class L1XEefficiencySelector : public TSelector {
 public :
    TTreeReader     fReader;  //!the tree reader
    TTree          *fChain = 0;   //!pointer to the analyzed TTree or TChain
+   Float_t XE = 30.0;
+   TString alg_name = "cell.met"; // alg for which to compute efficiency 
+   TString zb_alg_name = "HLT_noalg_zb_L1ZB.prescale";
    // initialize pointers to 0
-   TEfficiency*            metcellmu0thru10 = 0;
-   TEfficiency*            metcellmu10thru20 = 0;
-   TEfficiency*            metcellmu20thru30 = 0;
-   TEfficiency*            metcellmu30thru40 = 0;
-   TEfficiency*            metcellmu40thru50 = 0;
-   TEfficiency*            metcellmu50thru60 = 0;
-   TEfficiency*            metcellmu60thru70 = 0;
+   TEfficiency*            MET_Algmu0thru10Efficiency = 0;
+   TEfficiency*            MET_Algmu10thru20Efficiency = 0;
+   TEfficiency*            MET_Algmu20thru30Efficiency = 0;
+   TEfficiency*            MET_Algmu30thru40Efficiency = 0;
+   TEfficiency*            MET_Algmu40thru50Efficiency = 0;
+   TEfficiency*            MET_Algmu50thru60Efficiency = 0;
+   TEfficiency*            MET_Algmu60thru70Efficiency = 0;
 
    // Readers to access the data (delete the ones you do not need).{{{
    TTreeReaderValue<UInt_t> RunNumber = {fReader, "RunNumber"};
    TTreeReaderValue<UInt_t> LumiBlock = {fReader, "LumiBlock"};
    TTreeReaderValue<Float_t> InTimePileup = {fReader, "InTimePileup"};
    TTreeReaderValue<Float_t> OutOfTimePileup = {fReader, "OutOfTimePileup"};
+
    TTreeReaderValue<Float_t> cell_met = {fReader, "cell.met"};
+   // this is the reference point what we want efficiency as a function of 
    TTreeReaderValue<Float_t> HLT_noalg_zb_L1ZB_prescale = {fReader, "HLT_noalg_zb_L1ZB.prescale"};
-   // get efficiency of L1XE 30 
+   // this is the algorithm we want to know the efficiency of 
    TTreeReaderValue<Float_t> HLT_noalg_L1XE30_prescale = {fReader, "HLT_noalg_L1XE30.prescale"};
+
+   // alg to compute efficiency of
+   TTreeReaderValue<Float_t> AlgForEfficiency = {fReader, alg_name};
+   TTreeReaderValue<Float_t> ZB_Alg = {fReader, zb_alg_name };
+   TTreeReaderValue<Float_t> L1_MET = {fReader, "L1.met"};
 
    L1XEefficiencySelector(TTree * /*tree*/ =0) { }
    virtual ~L1XEefficiencySelector() { }
