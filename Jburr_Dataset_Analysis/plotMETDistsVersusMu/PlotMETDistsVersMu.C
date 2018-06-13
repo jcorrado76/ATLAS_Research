@@ -9,13 +9,13 @@ void PlotMETDistsVersMu::Begin(TTree * /*tree*/)
     Int_t nbins = 1000;
     Float_t gevLow = 0.0;
     Float_t gevHigh = 300.0;
-    MET_Datamu0thru10 = new TH1F("metmu0thru10","L1ZB Data for actint between 0 and 10", nbins , gevLow , gevHigh );
-    MET_Datamu10thru20 = new TH1F("metmu10thru20","L1ZB Data for actint between 10 and 20", nbins , gevLow , gevHigh );
-    MET_Datamu20thru30 = new TH1F("metmu20thru30","L1ZB Data for actint between 20 and 30", nbins , gevLow , gevHigh );
-    MET_Datamu30thru40 = new TH1F("metmu30thru40","L1ZB Data for actint between 30 and 40", nbins , gevLow , gevHigh );
-    MET_Datamu40thru50 = new TH1F("metmu40thru50","L1ZB Data for actint between 40 and 50", nbins , gevLow , gevHigh );
-    MET_Datamu50thru60 = new TH1F("metmu50thru60","L1ZB Data for actint between 50 and 60", nbins , gevLow , gevHigh );
-    MET_Datamu60thru70 = new TH1F("metmu60thru70","L1ZB Data for actint between 60 and 70", nbins , gevLow , gevHigh );
+    MET_Datamu0thru10 = new TH1F("metmu0thru10","MET Data for actint between 0 and 10", nbins , gevLow , gevHigh );
+    MET_Datamu10thru20 = new TH1F("metmu10thru20","MET Data for actint between 10 and 20", nbins , gevLow , gevHigh );
+    MET_Datamu20thru30 = new TH1F("metmu20thru30","MET Data for actint between 20 and 30", nbins , gevLow , gevHigh );
+    MET_Datamu30thru40 = new TH1F("metmu30thru40","MET Data for actint between 30 and 40", nbins , gevLow , gevHigh );
+    MET_Datamu40thru50 = new TH1F("metmu40thru50","MET Data for actint between 40 and 50", nbins , gevLow , gevHigh );
+    MET_Datamu50thru60 = new TH1F("metmu50thru60","MET Data for actint between 50 and 60", nbins , gevLow , gevHigh );
+    MET_Datamu60thru70 = new TH1F("metmu60thru70","MET Data for actint between 60 and 70", nbins , gevLow , gevHigh );
 }
 
 void PlotMETDistsVersMu::SlaveBegin(TTree * /*tree*/)
@@ -101,7 +101,7 @@ void PlotMETDistsVersMu::Terminate()
 
     muSlicesStack->Draw();
     
-    mycanv->SetTitle("L1ZB Slices in Mu");
+    mycanv->SetTitle("MET Slices in Mu");
     gPad->SetLogy();
     TLegend* legend = new TLegend();
     legend->AddEntry(MET_Datamu0thru10);
