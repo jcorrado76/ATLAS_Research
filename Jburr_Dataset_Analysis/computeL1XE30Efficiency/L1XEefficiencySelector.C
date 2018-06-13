@@ -7,7 +7,7 @@ void L1XEefficiencySelector::Begin(TTree * /*tree*/)
     Float_t gevLow = 0.0;
     Float_t gevHigh = 300.0;
     Float_t width = 20.0; //want 20 GeV bins
-    Int_t nbins = (gevHigh - gevLow) / width; // we want coarse binning 
+    Int_t nbins = (gevHigh - gevLow) / width; // compute nbins as function of preferred width
     MET_Algmu0thru10Efficiency = new TEfficiency("metmu0thru10Efficiency","MET Alg Efficiency for actint between 0 and 10", nbins , gevLow , gevHigh );
     MET_Algmu10thru20Efficiency = new TEfficiency("metmu10thru20Efficiency","MET Alg Efficiency for actint between 10 and 20", nbins , gevLow , gevHigh );
     MET_Algmu20thru30Efficiency = new TEfficiency("metmu20thru30Efficiency","MET Alg Efficiency for actint between 20 and 30", nbins , gevLow , gevHigh );
@@ -70,6 +70,14 @@ void L1XEefficiencySelector::Terminate()
     MET_Algmu50thru60Efficiency->SetLineColor(6);
     MET_Algmu60thru70Efficiency->SetLineColor(9);
 
+
+    // set titles and axis labels. 
+    TString title = alg_name + " Efficiency";
+    TString xaxis = zb_alg_name + " [GeV]";
+    TString yaxis = "efficiency";
+    MET_Algmu0thru10Efficiency->SetTitle(  title + ";" + xaxis + ";" +  yaxis  );
+
+
     MET_Algmu0thru10Efficiency->Draw();
     MET_Algmu10thru20Efficiency->Draw("SAME");
     MET_Algmu20thru30Efficiency->Draw("SAME");
@@ -78,7 +86,7 @@ void L1XEefficiencySelector::Terminate()
     MET_Algmu50thru60Efficiency->Draw("SAME");
     MET_Algmu60thru70Efficiency->Draw("SAME");
     
-    mycanv->SetTitle("Cell Slices in Mu");
+    mycanv->SetTitle("MET Slices in Mu");
     gPad->SetLogy();
     TLegend* legend = new TLegend();
     legend->AddEntry(MET_Algmu0thru10Efficiency);
