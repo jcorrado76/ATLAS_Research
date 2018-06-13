@@ -29,6 +29,7 @@ class PlotMETDistsVersMu : public TSelector {
 public :
    TTreeReader     fReader;  //!the tree reader
    TTree          *fChain = 0;   //!pointer to the analyzed TTree or TChain
+   TString alg_name("HLT_noalg_zb_L1ZB.prescale");
    TH1F*            L1ZBmu0thru10 = 0;
    TH1F*            L1ZBmu10thru20 = 0;
    TH1F*            L1ZBmu20thru30 = 0;
@@ -44,7 +45,7 @@ public :
    TTreeReaderValue<UInt_t> NPrimaryVertices = {fReader, "NPrimaryVertices"};
    TTreeReaderValue<Float_t> InTimePileup = {fReader, "InTimePileup"};
    TTreeReaderValue<Float_t> OutOfTimePileup = {fReader, "OutOfTimePileup"};
-   TTreeReaderValue<Float_t> HLT_noalg_zb_L1ZB_prescale = {fReader, "HLT_noalg_zb_L1ZB.prescale"};
+   TTreeReaderValue<Float_t> MET_Data = {fReader, alg_name };
 
 
    PlotMETDistsVersMu(TTree * /*tree*/ =0) { }

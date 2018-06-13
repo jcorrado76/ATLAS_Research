@@ -8,7 +8,7 @@ void PlotMETDistsVersMu::Begin(TTree * /*tree*/)
    TString option = GetOption();
     Int_t nbins = 1000;
     Float_t gevLow = 0.0;
-    Float_t gevHigh = 100.0;
+    Float_t gevHigh = 300.0;
     L1ZBmu0thru10 = new TH1F("l1zbmu0thru10","L1ZB Data for actint between 0 and 10", nbins , gevLow , gevHigh );
     L1ZBmu10thru20 = new TH1F("l1zbmu10thru20","L1ZB Data for actint between 10 and 20", nbins , gevLow , gevHigh );
     L1ZBmu20thru30 = new TH1F("l1zbmu20thru30","L1ZB Data for actint between 20 and 30", nbins , gevLow , gevHigh );
@@ -30,25 +30,25 @@ Bool_t PlotMETDistsVersMu::Process(Long64_t entry)
 
    if (*RunNumber != 33023 && *RunNumber != 331975 && *RunNumber != 334487 ){
        if ( *InTimePileup > 0.0 && *InTimePileup < 10.0  ){
-           L1ZBmu0thru10->Fill(*HLT_noalg_zb_L1ZB_prescale);
+           L1ZBmu0thru10->Fill(*MET_Data);
        }
        if ( *InTimePileup > 10.0 && *InTimePileup < 20.0  ){
-           L1ZBmu10thru20->Fill(*HLT_noalg_zb_L1ZB_prescale);
+           L1ZBmu10thru20->Fill(*MET_Data);
        }
        if ( *InTimePileup > 20.0 && *InTimePileup < 30.0  ){
-           L1ZBmu20thru30->Fill(*HLT_noalg_zb_L1ZB_prescale);
+           L1ZBmu20thru30->Fill(*MET_Data);
        }
        if ( *InTimePileup > 30.0 && *InTimePileup < 40.0  ){
-           L1ZBmu30thru40->Fill(*HLT_noalg_zb_L1ZB_prescale);
+           L1ZBmu30thru40->Fill(*MET_Data);
        }
        if ( *InTimePileup > 40.0 && *InTimePileup < 50.0  ){
-           L1ZBmu40thru50->Fill(*HLT_noalg_zb_L1ZB_prescale);
+           L1ZBmu40thru50->Fill(*MET_Data);
        }
        if ( *InTimePileup > 50.0 && *InTimePileup < 60.0  ){
-           L1ZBmu50thru60->Fill(*HLT_noalg_zb_L1ZB_prescale);
+           L1ZBmu50thru60->Fill(*MET_Data);
        }
        if ( *InTimePileup > 60.0 && *InTimePileup < 70.0  ){
-           L1ZBmu60thru70->Fill(*HLT_noalg_zb_L1ZB_prescale);
+           L1ZBmu60thru70->Fill(*MET_Data);
        }
    }
    return kTRUE;
@@ -61,7 +61,7 @@ void PlotMETDistsVersMu::SlaveTerminate()
 void PlotMETDistsVersMu::Terminate()
 {
     TCanvas* mycanv = new TCanvas("l1zbMuSlices", "L1ZB MET Slices in Mu");
-    THStack* muSlicesStack = new THStack("muStack","L1ZB MET Hists in Mu Slices After Removing 33023, 331975, and 334487");
+    THStack* muSlicesStack = new THStack("muStack","L1ZB MET Hists in Mu Slices After Removing Runs 33023, 331975, and 334487");
 
     // color the histograms so we can see difference 
     L1ZBmu0thru10->SetLineColor(1);
@@ -101,7 +101,7 @@ void PlotMETDistsVersMu::Terminate()
 
     muSlicesStack->Draw();
     
-    mycanv->SetTitle("Cell Slices in Mu");
+    mycanv->SetTitle("L1ZB Slices in Mu");
     gPad->SetLogy();
     TLegend* legend = new TLegend();
     legend->AddEntry(L1ZBmu0thru10);
