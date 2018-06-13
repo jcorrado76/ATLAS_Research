@@ -44,7 +44,7 @@ public :
    TTreeReaderValue<UInt_t> NPrimaryVertices = {fReader, "NPrimaryVertices"};
    TTreeReaderValue<Float_t> InTimePileup = {fReader, "InTimePileup"};
    TTreeReaderValue<Float_t> OutOfTimePileup = {fReader, "OutOfTimePileup"};
-   TTreeReaderValue<Float_t> cell_met = {fReader, "cell.met"};
+   TTreeReaderValue<Float_t> HLT_noalg_zb_L1ZB_prescale = {fReader, "HLT_noalg_zb_L1ZB.prescale"};
 
 
    PlotMETDistsVersMu(TTree * /*tree*/ =0) { }
