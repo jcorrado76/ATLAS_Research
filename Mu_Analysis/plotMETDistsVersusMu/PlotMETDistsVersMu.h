@@ -29,7 +29,7 @@ class PlotMETDistsVersMu : public TSelector {
 public :
    TTreeReader     fReader;  //!the tree reader
    TTree          *fChain = 0;   //!pointer to the analyzed TTree or TChain
-   TString alg_name = "HLT_noalg_zb_L1ZB.prescale"; //CHANGE THIS FOR WHICH MET DISTRIBUTION YOU WANT TO USE 
+   TString alg_name = "HLT_noalg_L1XE30.prescale"; //CHANGE THIS FOR WHICH MET DISTRIBUTION YOU WANT TO USE 
    TH1F*            MET_Datamu0thru10 = 0;
    TH1F*            MET_Datamu10thru20 = 0;
    TH1F*            MET_Datamu20thru30 = 0;
