@@ -81,6 +81,15 @@ void PlotMETDistsVersMu::Terminate()
     Int_t MET_Datamu50thru60Nentries = MET_Datamu50thru60->GetEntries();
     Int_t MET_Datamu60thru70Nentries = MET_Datamu60thru70->GetEntries();
 
+    // need to compute error bars correctly before scaling hist
+    Int_t MET_Datamu0thru10Nentries->Sumw2();
+    Int_t MET_Datamu10thru20Nentries->Sumw2();
+    Int_t MET_Datamu20thru30Nentries->Sumw2();
+    Int_t MET_Datamu30thru40Nentries->Sumw2();
+    Int_t MET_Datamu40thru50Nentries->Sumw2();
+    Int_t MET_Datamu50thru60Nentries->Sumw2();
+    Int_t MET_Datamu60thru70Nentries->Sumw2();
+
     MET_Datamu0thru10->Scale( 1. / MET_Datamu0thru10Nentries );
     MET_Datamu10thru20->Scale( 1. / MET_Datamu10thru20Nentries );
     MET_Datamu20thru30->Scale( 1. / MET_Datamu20thru30Nentries );
