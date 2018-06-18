@@ -21,7 +21,7 @@ class FittingRoutine{
         FittingRoutine();
         ~FittingRoutine();
         Double_t fit( Double_t *x , Double_t *par );
-        TF1* generateFitFunction( Int_t sliceNdx );
+        TF1* generateFitFunction();
         void fit_efficiencies();
         void getTEfficiencyArray( TString );
         void writeFitsToFile( TString fileName = "./EfficiencyFits.root" );
