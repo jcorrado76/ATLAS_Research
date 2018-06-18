@@ -7,7 +7,7 @@ Double_t FittingRoutine::fit( Double_t *x , Double_t *par )
     return(fitval);
 }
 
-TF1* FittingRoutine::generateFitFunction( Int_t sliceNdx ){
+TF1* FittingRoutine::generateFitFunction(){
     // initialize the TEfficiency object that will hold each TEfficiency on each iteration 
     TEfficiency* efficiencyObject = 0;
     TF1* fitErrorFunction = new TF1( "fit" , fit , 0.0 , 105.0 , 3);
@@ -22,7 +22,7 @@ TF1* FittingRoutine::generateFitFunction( Int_t sliceNdx ){
 
     fitErrorFunction->SetParNames("Slope","Translation","Sigma");
     // get the efficiency from the tclones array
-    efficiencyObject = (TEfficiency*)efficiencyArray->ConstructedAt(i);
+    efficiencyObject = (TEfficiency*)efficiencyArray->ConstructedAt(sliceNdx);
     //"R" tells the fit function from BinomialEfficiency::Fit to use the range of the TF1 as the fitting range
     efficiencyObject->Fit( fitErrorFunction, "R" );
 
@@ -39,9 +39,9 @@ void FittingRoutine::fit_efficiencies(){
     fprint("Number of objects in TEfficiency File: %d", numberSlices);
     EfficiencyArray = new TClonesArray( "TEfficiency", numberSlices );
     FitArray = new TClonesArray( "TF1", numberSlices );
-    for ( int i = 0 ; i < numberSlices ; i++){
+    for ( sliceNdx ; sliceNdx  < numberSlices ; sliceNdx++){
         TEfficiency* currTEfficiency = (TEfficiency*) EfficiencyArray->ConstructedAt(i);
-        generateFitFunction( i ) = (TF1*) FitArray->ConstructedAt(i);
+        generateFitFunction() = (TF1*) FitArray->ConstructedAt(i);
 
 
     }

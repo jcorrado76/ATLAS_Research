@@ -14,6 +14,7 @@ class FittingRoutine{
         TClonesArray* EfficiencyArray = 0;
         TClonesArray* FitArray = 0;
         Int_t numberSlices = 0;
+        Int_t sliceNdx = 0;
 
     public:
         Double_t fit( Double_t *x , Double_t *par );
