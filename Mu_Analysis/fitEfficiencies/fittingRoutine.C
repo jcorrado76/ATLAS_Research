@@ -1,5 +1,17 @@
 #include "fittingRoutine.h"
 
+
+Double_t FittingRoutine::myfunction(){
+    Float_t xx = x[0];
+    Double_t l1cut = 30.0;
+    Double_t f = (1./2.)*(1.+TMath::Erf((par[0]*x[0]+par[1]-l1cut)/(par[2]*TMath::Sqrt(2.))));
+    return f;
+
+}
+
+
+
+
 Double_t FittingRoutine::fit( Double_t *x , Double_t *par )
 {
     Float_t l1cut = 30.0;
@@ -9,7 +21,8 @@ Double_t FittingRoutine::fit( Double_t *x , Double_t *par )
 
 TF1* FittingRoutine::generateFitFunction(){
     // initialize the TEfficiency object that will hold each TEfficiency on each iteration 
-    TF1* fitErrorFunction = new TF1( "fit" , fit , 0.0 , 105.0 , 3);
+    TF1* fitErrorFunction = (TF1*)gROOT->GetFunction("fit")
+    // new TF1( "fit" , fit(double* x,double* par) , 0.0 , 105.0 , 3);
 
     //set the normalization to 1
     //set the x translation to 0
@@ -40,7 +53,7 @@ void FittingRoutine::fit_efficiencies(){
     FitArray = new TClonesArray( "TF1", numberSlices );
     for ( sliceNdx ; sliceNdx  < numberSlices ; sliceNdx++){
         printf("Current slice: %d" , sliceNdx);
-        TEfficiency* currTEfficiency = (TEfficiency*) EfficiencyArray->ConstructedAt( sliceNdx );
+        currTEfficiencyObj = (TEfficiency*) EfficiencyArray->ConstructedAt( sliceNdx );
         currFitFunc = generateFitFunction();
         currFitFunc = (TF1*) FitArray->ConstructedAt( sliceNdx );
     }
