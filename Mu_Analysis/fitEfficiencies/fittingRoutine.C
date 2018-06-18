@@ -7,7 +7,7 @@ Double_t FittingRoutine::fit( Double_t *x , Double_t *par )
     return(fitval);
 }
 
-TF1* FittingRoutine::generateFitFunction(){
+TF1* FittingRoutine::generateFitFunction( Int_t sliceNdx ){
     // initialize the TEfficiency object that will hold each TEfficiency on each iteration 
     TEfficiency* efficiencyObject = 0;
     TF1* fitErrorFunction = new TF1( "fit" , fit , 0.0 , 105.0 , 3);
@@ -41,7 +41,7 @@ void FittingRoutine::fit_efficiencies(){
     FitArray = new TClonesArray( "TF1", numberSlices );
     for ( int i = 0 ; i < numberSlices ; i++){
         TEfficiency* currTEfficiency = (TEfficiency*) EfficiencyArray->ConstructedAt(i);
-        generateFitFunction() = (TF1*) FitArray->ConstructedAt(i);
+        generateFitFunction( i ) = (TF1*) FitArray->ConstructedAt(i);
 
 
     }

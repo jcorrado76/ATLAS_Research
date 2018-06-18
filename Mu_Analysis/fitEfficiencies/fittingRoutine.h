@@ -17,7 +17,7 @@ class FittingRoutine{
 
     public:
         Double_t fit( Double_t *x , Double_t *par );
-        TF1* generateFitFunction();
+        TF1* generateFitFunction( Int_t sliceNdx );
         void fit_efficiencies();
         void getTEfficiencyArray( TString );
 
