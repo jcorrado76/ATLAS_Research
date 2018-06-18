@@ -11,7 +11,7 @@ Double_t FittingRoutine::myfunction(Double_t *x , Double_t *par ){
 
 void FittingRoutine::myfunc()
 {
-   TF1 *f1 = new TF1("myfunc",myfunction,0.0,105.0,3);
+   TF1 *fitErrorFunction = new TF1("myfunc",myfunction,0.0,105.0,3);
     //set the normalization to 1
     //set the x translation to 0
     //initialize sigma to 10
@@ -22,22 +22,14 @@ void FittingRoutine::myfunc()
     fitErrorFunction->SetParNames("Slope","Translation","Sigma");
 }
 
-/*
-Double_t FittingRoutine::fit( Double_t *x , Double_t *par )
-{
-    Float_t l1cut = 30.0;
-    Double_t fitval = (1./2.)*(1.+TMath::Erf((par[0]*x[0]+par[1]-l1cut)/(par[2]*TMath::Sqrt(2.))));
-    return(fitval);
-}
-*/
 
 TF1* FittingRoutine::generateFitFunction(){
     // initialize the TEfficiency object that will hold each TEfficiency on each iteration 
-    TF1* fitErrorFunction = (TF1*)gROOT->GetFunction("myfunc")
+    TF1* fitErrorFunction = (TF1*)gROOT->GetFunction("myfunc");
     // get the efficiency from the tclones array
     currTEfficiencyObj = (TEfficiency*)EfficiencyArray->ConstructedAt(sliceNdx);
     //"R" tells the fit function from BinomialEfficiency::Fit to use the range of the TF1 as the fitting range
-    currTEfficiencyObj->Fit( "myfunc" , "R" );
+    currTEfficiencyObj->Fit( fitErrorFunction  , "R" );
 
     std::cout << "Value of fit for a: " << fitErrorFunction->GetParameter(0) << std::endl;
     std::cout << "Value of error on a: " << fitErrorFunction->GetParError(0) << std::endl;

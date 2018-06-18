@@ -26,7 +26,7 @@ class FittingRoutine{
         void fit_efficiencies();
         void getTEfficiencyArray( TString );
         void writeFitsToFile( TString fileName = "./EfficiencyFits.root" );
-        Double_t myfunction();
+        static Double_t myfunction(Double_t *x , Double_t *par );
         void myfunc();
         
         
