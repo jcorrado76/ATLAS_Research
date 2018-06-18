@@ -40,8 +40,8 @@ void FittingRoutine::fit_efficiencies(){
     FitArray = new TClonesArray( "TF1", numberSlices );
     for ( sliceNdx ; sliceNdx  < numberSlices ; sliceNdx++){
         printf("Current slice: %d" , sliceNdx);
-        TEfficiency* currTEfficiency = (TEfficiency*) EfficiencyArray->ConstructedAt(i);
-        generateFitFunction() = (TF1*) FitArray->ConstructedAt(i);
+        TEfficiency* currTEfficiency = (TEfficiency*) EfficiencyArray->ConstructedAt( sliceNdx );
+        generateFitFunction() = (TF1*) FitArray->ConstructedAt( sliceNdx );
     }
 }
 
