@@ -52,5 +52,5 @@ void FittingRoutine::fit_efficiencies(){
 
 void FittingRoutine::getTEfficiencyArray( TString filePath ){
     EfficiencyFile = TFile::Open( filePath );
-
+    EfficiencyArray = (TClonesArray*) EfficiencyFile->Get("TEfficiencyArray");
 }
