@@ -36,7 +36,6 @@ TF1* FittingRoutine::generateFitFunction(){
 }
 
 void FittingRoutine::fit_efficiencies(){
-    numberSlices = EfficiencyArray->GetEntries();
     fprint("Number of objects in TEfficiency File: %d", numberSlices);
     EfficiencyArray = new TClonesArray( "TEfficiency", numberSlices );
     FitArray = new TClonesArray( "TF1", numberSlices );
@@ -52,4 +51,6 @@ void FittingRoutine::getTEfficiencyArray( TString filePath ){
     // load TEfficiency TClonesArray into memory 
     EfficiencyFile = TFile::Open( filePath );
     EfficiencyArray = (TClonesArray*) EfficiencyFile->Get("TEfficiencyArray");
+    numberSlices = EfficiencyArray->GetEntries();
+
 }
