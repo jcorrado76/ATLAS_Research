@@ -10,6 +10,8 @@ Double_t fit( Double_t *x , Double_t *par )
     return(fitval);
 }
 
+
+
 void fit_efficiencies(){
     // suppose there exists a root file containing a TClonesArray of Efficiency Curves
     TFile* efficiencyCurveFile = TFile::Open("efficiencyCurves.root");
@@ -34,6 +36,8 @@ void fit_efficiencies(){
         //initializing parameters reasonably is important because it is a maximum likelihood fit
 
         fitErrorFunction->SetParNames("Slope","Translation","Sigma");
+        // get the efficiency from the tclones array
+        efficiencyObject = (TEfficiency*)efficiencyArray->ConstructedAt(i);
         //"R" tells the fit function from BinomialEfficiency::Fit to use the range of the TF1 as the fitting range
         efficiencyObject->Fit( fitErrorFunction, "R" );
 
@@ -44,7 +48,6 @@ void fit_efficiencies(){
         std::cout << "Value of fit for sigma: " << fitErrorFunction->GetParameter(2) << std::endl;
         std::cout << "Value of error on sigma: " << fitErrorFunction->GetParError(2) << std::endl;
 
-        efficiencyObject = (TEfficiency*)efficiencyArray->ConstructedAt(i);
         
     }
 
