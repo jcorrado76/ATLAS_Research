@@ -3,7 +3,7 @@
 Double_t FittingRoutine::fit( Double_t *x , Double_t *par )
 {
     Float_t l1cut = 30.0;
-    Double_t fitval = (1./2.)*(1.+TMath::fitErrorFunction((par[0]*x[0]+par[1]-l1cut)/(par[2]*TMath::Sqrt(2.))));
+    Double_t fitval = (1./2.)*(1.+TMath::Erf((par[0]*x[0]+par[1]-l1cut)/(par[2]*TMath::Sqrt(2.))));
     return(fitval);
 }
 
