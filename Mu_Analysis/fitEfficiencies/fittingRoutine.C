@@ -12,10 +12,10 @@ TF1* FittingRoutine::generateFitFunction(){
     TF1* fitErrorFunction = new TF1( "fit" , fit , 0.0 , 105.0 , 3);
 
     //set the normalization to 1
-    fitErrorFunction->SetParameter(0, 1.);
     //set the x translation to 0
-    fitErrorFunction->SetParameter(1, 0.);
     //initialize sigma to 10
+    fitErrorFunction->SetParameter(0, 1.);
+    fitErrorFunction->SetParameter(1, 0.);
     fitErrorFunction->SetParameter(2, 10.);
     //initializing parameters reasonably is important because it is a maximum likelihood fit
 
