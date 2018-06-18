@@ -64,3 +64,4 @@ FittingRoutine::FittingRoutine()
     :EfficiencyFile(0),FitFile(0), EfficiencyArray(0),FitArray(0), numberSlices(0), sliceNdx(0), currTEfficiencyObj(0)
 {}
 
+FittingRoutine::~FittingRoutine(){}
