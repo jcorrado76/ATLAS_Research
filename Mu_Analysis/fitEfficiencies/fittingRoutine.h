@@ -16,6 +16,7 @@ class FittingRoutine{
         Int_t numberSlices = 0;
         Int_t sliceNdx = 0;
         TEfficiency* currTEfficiencyObj = 0;
+        TF1* currFitFunc = 0;
 
     public:
         FittingRoutine();

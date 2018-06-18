@@ -21,7 +21,7 @@ TF1* FittingRoutine::generateFitFunction(){
 
     fitErrorFunction->SetParNames("Slope","Translation","Sigma");
     // get the efficiency from the tclones array
-    currTEfficiencyObj = (TEfficiency*)efficiencyArray->ConstructedAt(sliceNdx);
+    currTEfficiencyObj = (TEfficiency*)EfficiencyArray->ConstructedAt(sliceNdx);
     //"R" tells the fit function from BinomialEfficiency::Fit to use the range of the TF1 as the fitting range
     currTEfficiencyObj->Fit( fitErrorFunction, "R" );
 
@@ -41,7 +41,8 @@ void FittingRoutine::fit_efficiencies(){
     for ( sliceNdx ; sliceNdx  < numberSlices ; sliceNdx++){
         printf("Current slice: %d" , sliceNdx);
         TEfficiency* currTEfficiency = (TEfficiency*) EfficiencyArray->ConstructedAt( sliceNdx );
-        generateFitFunction() = (TF1*) FitArray->ConstructedAt( sliceNdx );
+        currFitFunc = generateFitFunction();
+        currFitFunc = (TF1*) FitArray->ConstructedAt( sliceNdx );
     }
 }
 
