@@ -5,9 +5,9 @@
 #include <TF1.h>
 #include <TEfficiency.h>
 #include <TClonesArray.h>
+
 class FittingRoutine{
     private:
-
         TFile* EfficiencyFile = 0;
         TFile* FitFile = 0;
         TClonesArray* EfficiencyArray = 0;
@@ -16,8 +16,7 @@ class FittingRoutine{
     public:
         Double_t fit( Double_t *x , Double_t *par );
         TF1* generateFitFunction();
-        void fit_efficiencies(){
-
+        void fit_efficiencies();
 
 };
 #endif //FITTING_ROUTINE_

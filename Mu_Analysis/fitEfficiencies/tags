@@ -1,0 +1,15 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+EfficiencyArray	fittingRoutine.h	/^        TClonesArray* EfficiencyArray = 0;$/;"	m	class:FittingRoutine
+EfficiencyFile	fittingRoutine.h	/^        TFile* EfficiencyFile = 0;$/;"	m	class:FittingRoutine
+FITTING_ROUTINE_H	fittingRoutine.h	2;"	d
+FitArray	fittingRoutine.h	/^        TClonesArray* FitArray = 0;$/;"	m	class:FittingRoutine
+FitFile	fittingRoutine.h	/^        TFile* FitFile = 0;$/;"	m	class:FittingRoutine
+FittingRoutine	fittingRoutine.h	/^class FittingRoutine{$/;"	c
+fit	fittingRoutine.C	/^Double_t FittingRoutine::fit( Double_t *x , Double_t *par )$/;"	f	class:FittingRoutine
+fit_efficiencies	fittingRoutine.C	/^void FittingRoutine::fit_efficiencies(){$/;"	f	class:FittingRoutine
+generateFitFunction	fittingRoutine.C	/^TF1* FittingRoutine::generateFitFunction(){$/;"	f	class:FittingRoutine
