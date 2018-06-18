@@ -1,4 +1,10 @@
+#ifndef FITTING_ROUTINE_H
+#define FITTING_ROUTINE_H
 
+#include <TFile.h>
+#include <TF1.h>
+#include <TEfficiency.h>
+#include <TClonesArray.h>
 class FittingRoutine{
     private:
 
@@ -33,3 +39,4 @@ class FittingRoutine{
         }
 
 };«»
+#endif //FITTING_ROUTINE_
