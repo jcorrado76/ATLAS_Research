@@ -9,7 +9,6 @@ Double_t FittingRoutine::fit( Double_t *x , Double_t *par )
 
 TF1* FittingRoutine::generateFitFunction(){
     // initialize the TEfficiency object that will hold each TEfficiency on each iteration 
-    TEfficiency* efficiencyObject = 0;
     TF1* fitErrorFunction = new TF1( "fit" , fit , 0.0 , 105.0 , 3);
 
     //set the normalization to 1
@@ -22,9 +21,9 @@ TF1* FittingRoutine::generateFitFunction(){
 
     fitErrorFunction->SetParNames("Slope","Translation","Sigma");
     // get the efficiency from the tclones array
-    efficiencyObject = (TEfficiency*)efficiencyArray->ConstructedAt(sliceNdx);
+    currTEfficiencyObj = (TEfficiency*)efficiencyArray->ConstructedAt(sliceNdx);
     //"R" tells the fit function from BinomialEfficiency::Fit to use the range of the TF1 as the fitting range
-    efficiencyObject->Fit( fitErrorFunction, "R" );
+    currTEfficiencyObj->Fit( fitErrorFunction, "R" );
 
     std::cout << "Value of fit for a: " << fitErrorFunction->GetParameter(0) << std::endl;
     std::cout << "Value of error on a: " << fitErrorFunction->GetParError(0) << std::endl;
