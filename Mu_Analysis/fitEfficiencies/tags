@@ -9,6 +9,7 @@ EfficiencyFile	fittingRoutine.h	/^        TFile* EfficiencyFile = 0;$/;"	m	class
 FITTING_ROUTINE_H	fittingRoutine.h	2;"	d
 FitArray	fittingRoutine.h	/^        TClonesArray* FitArray = 0;$/;"	m	class:FittingRoutine
 FitFile	fittingRoutine.h	/^        TFile* FitFile = 0;$/;"	m	class:FittingRoutine
+FittingRoutine	fittingRoutine.C	/^FittingRoutine::FittingRoutine()$/;"	f	class:FittingRoutine
 FittingRoutine	fittingRoutine.h	/^class FittingRoutine{$/;"	c
 currTEfficiencyObj	fittingRoutine.h	/^        TEfficiency* currTEfficiencyObj = 0;$/;"	m	class:FittingRoutine
 fit	fittingRoutine.C	/^Double_t FittingRoutine::fit( Double_t *x , Double_t *par )$/;"	f	class:FittingRoutine
@@ -18,3 +19,4 @@ getTEfficiencyArray	fittingRoutine.C	/^void FittingRoutine::getTEfficiencyArray(
 numberSlices	fittingRoutine.h	/^        Int_t numberSlices = 0;$/;"	m	class:FittingRoutine
 sliceNdx	fittingRoutine.h	/^        Int_t sliceNdx = 0;$/;"	m	class:FittingRoutine
 writeFitsToFile	fittingRoutine.C	/^void FittingRoutine::writeFitsToFile( TString fileName ){$/;"	f	class:FittingRoutine
+~FittingRoutine	fittingRoutine.C	/^FittingRoutine::~FittingRoutine(){}$/;"	f	class:FittingRoutine
