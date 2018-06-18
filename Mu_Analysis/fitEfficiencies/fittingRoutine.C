@@ -21,15 +21,6 @@ void FittingRoutine::myfunc()
     //initializing parameters reasonably is important because it is a maximum likelihood fit
     fitErrorFunction->SetParNames("Slope","Translation","Sigma");
 }
-void myfit()
-{
-   TH1F *h1=new TH1F("h1","test",100,0,10);
-   h1->FillRandom("myfunc",20000);
-   TF1 *f1 = (TF1 *)gROOT->GetFunction("myfunc");
-   f1->SetParameters(800,1);
-   h1->Fit("myfunc");
-}
-
 
 /*
 Double_t FittingRoutine::fit( Double_t *x , Double_t *par )
@@ -43,21 +34,10 @@ Double_t FittingRoutine::fit( Double_t *x , Double_t *par )
 TF1* FittingRoutine::generateFitFunction(){
     // initialize the TEfficiency object that will hold each TEfficiency on each iteration 
     TF1* fitErrorFunction = (TF1*)gROOT->GetFunction("myfunc")
-    // new TF1( "fit" , fit(double* x,double* par) , 0.0 , 105.0 , 3);
-
-    //set the normalization to 1
-    //set the x translation to 0
-    //initialize sigma to 10
-    fitErrorFunction->SetParameter(0, 1.);
-    fitErrorFunction->SetParameter(1, 0.);
-    fitErrorFunction->SetParameter(2, 10.);
-    //initializing parameters reasonably is important because it is a maximum likelihood fit
-
-    fitErrorFunction->SetParNames("Slope","Translation","Sigma");
     // get the efficiency from the tclones array
     currTEfficiencyObj = (TEfficiency*)EfficiencyArray->ConstructedAt(sliceNdx);
     //"R" tells the fit function from BinomialEfficiency::Fit to use the range of the TF1 as the fitting range
-    currTEfficiencyObj->Fit( fitErrorFunction, "R" );
+    currTEfficiencyObj->Fit( "myfunc" , "R" );
 
     std::cout << "Value of fit for a: " << fitErrorFunction->GetParameter(0) << std::endl;
     std::cout << "Value of error on a: " << fitErrorFunction->GetParError(0) << std::endl;
