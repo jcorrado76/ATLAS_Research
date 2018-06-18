@@ -34,6 +34,7 @@ TF1* FittingRoutine::generateFitFunction(){
     std::cout << "Value of error on sigma: " << fitErrorFunction->GetParError(2) << std::endl;
     return fitErrorFunction;
 }
+
 void FittingRoutine::fit_efficiencies(){
     // suppose there exists a root file containing a TClonesArray of Efficiency Curves
     TFile* efficiencyCurveFile = TFile::Open("efficiencyCurves.root");
@@ -46,9 +47,5 @@ void FittingRoutine::fit_efficiencies(){
 
     for ( int i = 0 ; i < numberSlices ; i++){
 
-
-        
     }
-
-
 }
