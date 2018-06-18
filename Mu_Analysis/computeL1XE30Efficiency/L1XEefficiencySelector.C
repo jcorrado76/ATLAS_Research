@@ -99,3 +99,16 @@ void L1XEefficiencySelector::Terminate()
     legend->Draw("SAME");
     gStyle->SetOptStat(0);
 }
+#ifdef L1XEefficiencySelector_cxx
+void L1XEefficiencySelector::Init(TTree *tree)
+{
+   fReader.SetTree(tree);
+}
+
+Bool_t L1XEefficiencySelector::Notify()
+{
+   return kTRUE;
+}
+
+
+#endif // #ifdef L1XEefficiencySelector_cxx
