@@ -36,15 +36,14 @@ TF1* FittingRoutine::generateFitFunction(){
 }
 
 void FittingRoutine::fit_efficiencies(){
-    // get number of slices 
     Int_t numberSlices = EfficiencyArray->GetEntries();
-    fprint("Number of objects in EfficiencyArray: %d", numberSlices);
-    // initialize TClonesArray to hold the efficiency curves
+    fprint("Number of objects in TEfficiency File: %d", numberSlices);
     EfficiencyArray = new TClonesArray( "TEfficiency", numberSlices );
-    // initialize TClonesArray to hold the fit objects 
     FitArray = new TClonesArray( "TF1", numberSlices );
-
     for ( int i = 0 ; i < numberSlices ; i++){
+        TEfficiency* currTEfficiency = (TEfficiency*) EfficiencyArray->ConstructedAt(i);
+        generateFitFunction() = (TF1*) FitArray->ConstructedAt(i);
+
 
     }
 }
