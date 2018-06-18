@@ -20,12 +20,9 @@ void fit_efficiencies(){
     // initialize TClonesArray to hold the fit objects 
     TClonesArray* efficiencyFitArray = new TClonesArray( "TF1", numberSlices );
 
-    // initialize the iterator to loop through the clones array 
-    TIter next(efficiencyArray);
     // initialize the TEfficiency object that will hold each TEfficiency on each iteration 
     TEfficiency* efficiencyObject = 0;
-    // for each nonzero entry in the array (while iterator returns non-null)
-    while ( efficiencyObject = (TEfficiency*) next() ){
+    for ( int i = 0 ; i < numberSlices ; i++){
         TF1* fitErrorFunction = new TF1( "fit" , fit , 0.0 , 105.0 , 3);
 
         //set the normalization to 1
@@ -47,13 +44,9 @@ void fit_efficiencies(){
         std::cout << "Value of fit for sigma: " << fitErrorFunction->GetParameter(2) << std::endl;
         std::cout << "Value of error on sigma: " << fitErrorFunction->GetParError(2) << std::endl;
 
+        efficiencyObject = (TEfficiency*)efficiencyArray->ConstructedAt(i);
         
     }
-
-
-
-
-
 
 
 }
