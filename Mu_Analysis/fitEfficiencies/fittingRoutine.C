@@ -36,10 +36,9 @@ TF1* FittingRoutine::generateFitFunction(){
 }
 
 void FittingRoutine::fit_efficiencies(){
-    // suppose there exists a root file containing a TClonesArray of Efficiency Curves
-    TFile* efficiencyCurveFile = TFile::Open("efficiencyCurves.root");
-    // how many efficiency curves to fit
-    Int_t numberSlices = 7;
+    // get number of slices 
+    Int_t numberSlices = EfficiencyArray->GetEntries();
+    fprint("Number of objects in EfficiencyArray: %d", numberSlices);
     // initialize TClonesArray to hold the efficiency curves
     EfficiencyArray = new TClonesArray( "TEfficiency", numberSlices );
     // initialize TClonesArray to hold the fit objects 
@@ -51,6 +50,7 @@ void FittingRoutine::fit_efficiencies(){
 }
 
 void FittingRoutine::getTEfficiencyArray( TString filePath ){
+    // load TEfficiency TClonesArray into memory 
     EfficiencyFile = TFile::Open( filePath );
     EfficiencyArray = (TClonesArray*) EfficiencyFile->Get("TEfficiencyArray");
 }
