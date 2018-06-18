@@ -25,8 +25,9 @@ class PlotInParallel : public TSelector {
 public :
    TTreeReader     fReader;  //!the tree reader
    TTree          *fChain = 0;   //!pointer to the analyzed TTree or TChain
+   TH1F* METHist = 0;
 
-   // Readers to access the data (delete the ones you do not need).
+   // Readers to access the data (delete the ones you do not need).{{{
    TTreeReaderValue<UInt_t> RunNumber = {fReader, "RunNumber"};
    TTreeReaderValue<ULong64_t> EventNumber = {fReader, "EventNumber"};
    TTreeReaderValue<UInt_t> LumiBlock = {fReader, "LumiBlock"};
@@ -245,7 +246,7 @@ public :
    TTreeReaderArray<float> CalAntiKt4EMTopoJets_eta = {fReader, "CalAntiKt4EMTopoJets.eta"};
    TTreeReaderArray<float> CalAntiKt4EMTopoJets_phi = {fReader, "CalAntiKt4EMTopoJets.phi"};
    TTreeReaderArray<float> CalAntiKt4EMTopoJets_m = {fReader, "CalAntiKt4EMTopoJets.m"};
-
+   // }}}
 
    PlotInParallel(TTree * /*tree*/ =0) { }
    virtual ~PlotInParallel() { }
