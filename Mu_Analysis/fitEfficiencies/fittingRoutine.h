@@ -18,6 +18,8 @@ class FittingRoutine{
         TEfficiency* currTEfficiencyObj = 0;
 
     public:
+        FittingRoutine();
+        ~FittingRoutine();
         Double_t fit( Double_t *x , Double_t *par );
         TF1* generateFitFunction( Int_t sliceNdx );
         void fit_efficiencies();
