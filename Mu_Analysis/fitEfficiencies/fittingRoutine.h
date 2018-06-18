@@ -5,6 +5,7 @@
 #include <TF1.h>
 #include <TEfficiency.h>
 #include <TClonesArray.h>
+#include <TString.h>
 
 class FittingRoutine{
     private:
@@ -17,6 +18,7 @@ class FittingRoutine{
         Double_t fit( Double_t *x , Double_t *par );
         TF1* generateFitFunction();
         void fit_efficiencies();
+        void getTEfficiencyArray( TString );
 
 };
 #endif //FITTING_ROUTINE_
