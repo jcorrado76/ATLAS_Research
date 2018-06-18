@@ -59,6 +59,4 @@ void FittingRoutine::writeFitsToFile( TString fileName ){
     FitArray->Write();
 
     FitFile->Close();
-
-
 }
