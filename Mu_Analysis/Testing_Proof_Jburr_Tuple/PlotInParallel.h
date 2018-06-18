@@ -5,8 +5,8 @@
 // found on file: /home/joseph/ATLAS_DATA/totalJburrTuple.root
 //////////////////////////////////////////////////////////
 
-#ifndef PlotInParallel.C_h
-#define PlotInParallel.C_h
+#ifndef PlotInParallel_h
+#define PlotInParallel_h
 
 #include <TROOT.h>
 #include <TChain.h>
@@ -21,7 +21,7 @@
 
 
 
-class PlotInParallel.C : public TSelector {
+class PlotInParallel : public TSelector {
 public :
    TTreeReader     fReader;  //!the tree reader
    TTree          *fChain = 0;   //!pointer to the analyzed TTree or TChain
@@ -247,8 +247,8 @@ public :
    TTreeReaderArray<float> CalAntiKt4EMTopoJets_m = {fReader, "CalAntiKt4EMTopoJets.m"};
 
 
-   PlotInParallel.C(TTree * /*tree*/ =0) { }
-   virtual ~PlotInParallel.C() { }
+   PlotInParallel(TTree * /*tree*/ =0) { }
+   virtual ~PlotInParallel() { }
    virtual Int_t   Version() const { return 2; }
    virtual void    Begin(TTree *tree);
    virtual void    SlaveBegin(TTree *tree);
@@ -263,35 +263,22 @@ public :
    virtual void    SlaveTerminate();
    virtual void    Terminate();
 
-   ClassDef(PlotInParallel.C,0);
+   ClassDef(PlotInParallel,0);
 
 };
 
 #endif
 
-#ifdef PlotInParallel.C_cxx
-void PlotInParallel.C::Init(TTree *tree)
+#ifdef PlotInParallel_cxx
+void PlotInParallel::Init(TTree *tree)
 {
-   // The Init() function is called when the selector needs to initialize
-   // a new tree or chain. Typically here the reader is initialized.
-   // It is normally not necessary to make changes to the generated
-   // code, but the routine can be extended by the user if needed.
-   // Init() will be called many times when running on PROOF
-   // (once per file to be processed).
-
    fReader.SetTree(tree);
 }
 
-Bool_t PlotInParallel.C::Notify()
+Bool_t PlotInParallel::Notify()
 {
-   // The Notify() function is called when a new file is opened. This
-   // can be either for a new TTree in a TChain or when when a new TTree
-   // is started when using PROOF. It is normally not necessary to make changes
-   // to the generated code, but the routine can be extended by the
-   // user if needed. The return value is currently not used.
-
    return kTRUE;
 }
 
 
-#endif // #ifdef PlotInParallel.C_cxx
+#endif // #ifdef PlotInParallel_cxx
