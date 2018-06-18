@@ -53,3 +53,12 @@ void FittingRoutine::getTEfficiencyArray( TString filePath ){
     numberSlices = EfficiencyArray->GetEntries();
 
 }
+
+void FittingRoutine::writeFitsToFile( TString fileName ){
+    FitFile = TFile::Open( fileName );
+    FitArray->Write();
+
+    FitFile->Close();
+
+
+}
