@@ -16,7 +16,7 @@ void PlotInParallel::SlaveBegin(TTree * /*tree*/)
 Bool_t PlotInParallel::Process(Long64_t entry)
 {
    fReader.SetEntry(entry);
-   METHist->Fill(*cell.met);
+   METHist->Fill(*cell_met);
    return kTRUE;
 }
 
