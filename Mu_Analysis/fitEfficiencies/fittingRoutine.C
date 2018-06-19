@@ -60,7 +60,6 @@ void FittingRoutine::getTEfficiencyArray( TString filePath ){
     MET_Algmu40thru50Efficiency = (TEfficiency*) EfficiencyFile->Get("")
     MET_Algmu50thru60Efficiency = (TEfficiency*) EfficiencyFile->Get("")
     MET_Algmu60thru70Efficiency = (TEfficiency*) EfficiencyFile->Get("")
-    EfficiencyArray = (TClonesArray*) EfficiencyFile->Get("TEfficiencyArray");
     numberSlices = EfficiencyArray->GetEntries();
 
 }
