@@ -114,6 +114,8 @@ void PlotMETDistsVersMu::Terminate()
     muSlicesStack->Add(MET_Datamu60thru70);
 
     muSlicesStack->Draw();
+    muSlicesStack->GetXaxis()->SetTitle( xaxisTitle );
+    muSlicesStack->GetYaxis()->SetTitle( yaxisTitle );
     
     mycanv->SetTitle("MET Slices in Mu");
     gPad->SetLogy();
