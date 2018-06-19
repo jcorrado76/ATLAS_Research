@@ -81,7 +81,7 @@ public :
 
    ClassDef(L1XEefficiencySelector,0);
 
-};//}}}
+};
 
 #endif
 
