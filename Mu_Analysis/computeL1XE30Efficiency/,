@@ -28,19 +28,19 @@ Bool_t L1XEefficiencySelector::Process(Long64_t entry)
        if ( inMuRange(10.0, 20.0) ){
            MET_Algmu10thru20Efficiency->Fill(*L1_MET > XE, *cell_met);
        }
-       if ( inMuRange(20.0, 30.0) ){
+       if ( inMuRange(20.0, 30.0)  ){
            MET_Algmu20thru30Efficiency->Fill(*L1_MET > XE, *cell_met);
        }
-       if ( inMuRange(30.0, 40.0)  ){
+       if ( *InTimePileup > 30.0 && *InTimePileup < 40.0  ){
            MET_Algmu30thru40Efficiency->Fill(*L1_MET > XE, *cell_met);
        }
-       if ( inMuRange(40.0, 50.0) ){
+       if ( *InTimePileup > 40.0 && *InTimePileup < 50.0  ){
            MET_Algmu40thru50Efficiency->Fill(*L1_MET > XE, *cell_met);
        }
-       if ( inMuRange(50.0, 60.0) ){
+       if ( *InTimePileup > 50.0 && *InTimePileup < 60.0  ){
            MET_Algmu50thru60Efficiency->Fill(*L1_MET > XE, *cell_met);
        }
-       if ( inMuRange(60.0, 70.0) ){
+       if ( *InTimePileup > 60.0 && *InTimePileup < 70.0  ){
            MET_Algmu60thru70Efficiency->Fill(*L1_MET > XE, *cell_met);
        }
    }
@@ -48,7 +48,9 @@ Bool_t L1XEefficiencySelector::Process(Long64_t entry)
    return kTRUE;
 }
 
-void L1XEefficiencySelector::SlaveTerminate(){}
+void L1XEefficiencySelector::SlaveTerminate()
+{
+}
 
 void L1XEefficiencySelector::Terminate() // Plotting {{{
 {
@@ -62,6 +64,8 @@ void L1XEefficiencySelector::Terminate() // Plotting {{{
     MET_Algmu50thru60Efficiency->SetLineColor(6);
     MET_Algmu60thru70Efficiency->SetLineColor(9);
 
+    MET_Algmu0thru10Efficiency->SetTitle(  title + ";" + xaxis + ";" +  yaxis  );
+
     MET_Algmu0thru10Efficiency->Draw();
     MET_Algmu10thru20Efficiency->Draw("SAME");
     MET_Algmu20thru30Efficiency->Draw("SAME");
@@ -69,7 +73,6 @@ void L1XEefficiencySelector::Terminate() // Plotting {{{
     MET_Algmu40thru50Efficiency->Draw("SAME");
     MET_Algmu50thru60Efficiency->Draw("SAME");
     MET_Algmu60thru70Efficiency->Draw("SAME");
-
     
     mycanv->SetTitle("MET Slices in Mu");
     gPad->SetLogy();
@@ -95,19 +98,19 @@ Bool_t L1XEefficiencySelector::Notify() // {{{
    return kTRUE;
 } // }}}
 
-Bool_t L1XEefficiencySelector::isGoodRun(){ // {{{
+Bool_t PlotMETDistsVersMu::isGoodRun(){ // {{{
     return (*RunNumber != 33023 && *RunNumber != 331975 && *RunNumber != 334487);
 } // }}}
 
-Bool_t L1XEefficiencySelector::passedL1ZB(){ // {{{ 
+Bool_t PlotMETDistsVersMu::passedL1ZB(){ // {{{ 
     return (*HLT_noalg_zb_L1ZB_passed);
 } // }}}
 
-Bool_t L1XEefficiencySelector::isPassnoAlgXE30(){ // {{{
+Bool_t PlotMETDistsVersMu::isPassnoAlgXE30(){ // {{{
     return (*HLT_noalg_L1XE30_passed);
 } // }}}
 
-Bool_t L1XEefficiencySelector::inMuRange( Float_t a , Float_t b ){ //{{{
+Bool_t PlotMETDistsVersMu::inMuRange( Float_t a , Float_t b ){ //{{{
     return ( *InTimePileup > a && *InTimePileup < b );
 } //}}}
 
