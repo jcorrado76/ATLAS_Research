@@ -45,18 +45,9 @@ public :
    TEfficiency*            MET_Algmu50thru60Efficiency = 0;
    TEfficiency*            MET_Algmu60thru70Efficiency = 0;
 
-   // Readers to access the data (delete the ones you do not need).{{{
    TTreeReaderValue<UInt_t> RunNumber = {fReader, "RunNumber"};
-   TTreeReaderValue<UInt_t> LumiBlock = {fReader, "LumiBlock"};
    TTreeReaderValue<Float_t> InTimePileup = {fReader, "InTimePileup"};
-   TTreeReaderValue<Float_t> OutOfTimePileup = {fReader, "OutOfTimePileup"};
-
    TTreeReaderValue<Float_t> cell_met = {fReader, "cell.met"};
-   // this is the reference point what we want efficiency as a function of 
-   TTreeReaderValue<Float_t> HLT_noalg_zb_L1ZB_prescale = {fReader, "HLT_noalg_zb_L1ZB.prescale"};
-   // this is the algorithm we want to know the efficiency of 
-   TTreeReaderValue<Float_t> HLT_noalg_L1XE30_prescale = {fReader, "HLT_noalg_L1XE30.prescale"};
-
    TTreeReaderValue<Float_t> L1_MET = {fReader, "L1.met"};
 
    L1XEefficiencySelector(TTree * /*tree*/ =0) { }
