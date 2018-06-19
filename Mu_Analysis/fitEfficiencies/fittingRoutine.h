@@ -29,7 +29,7 @@ class FittingRoutine{
         Double_t fit( Double_t *x , Double_t *par );
         TF1* generateFitFunction();
         void fit_efficiencies();
-        void getTEfficiencyArray( TString );
+        void getTEfficiencyObjects( TString );
         void writeFitsToFile( TString fileName = "./EfficiencyFits.root" );
         static Double_t myfunction(Double_t *x , Double_t *par );
         void myfunc();
