@@ -52,7 +52,7 @@ void L1XEefficiencySelector::SlaveTerminate()
 {
 }
 
-void L1XEefficiencySelector::Terminate()
+void L1XEefficiencySelector::Terminate() // Plotting {{{
 {
     TCanvas* mycanv = new TCanvas("metMuSlices", "MET Slices in Mu");
     THStack* muSlicesStack = new THStack("muStack","MET Hists in Mu Slices without runs 33023, 331975, and 334487");
@@ -93,17 +93,27 @@ void L1XEefficiencySelector::Terminate()
     legend->AddEntry(MET_Algmu60thru70Efficiency);
     legend->Draw("SAME");
     gStyle->SetOptStat(0);
-}
-#ifdef L1XEefficiencySelector_cxx
+} //}}}
+
 void L1XEefficiencySelector::Init(TTree *tree)
 {
    fReader.SetTree(tree);
 }
 
-Bool_t L1XEefficiencySelector::Notify()
+Bool_t L1XEefficiencySelector::Notify() // {{{
 {
    return kTRUE;
-}
+} // }}}
 
+Bool_t PlotMETDistsVersMu::isGoodRun(){ // {{{
+    return (*RunNumber != 33023 && *RunNumber != 331975 && *RunNumber != 334487);
+} // }}}
 
-#endif // #ifdef L1XEefficiencySelector_cxx
+Bool_t PlotMETDistsVersMu::passedL1ZB(){ // {{{ 
+    return (*HLT_noalg_zb_L1ZB_passed);
+} // }}}
+
+Bool_t PlotMETDistsVersMu::isPassnoAlgXE30(){ // {{{
+    return (*HLT_noalg_L1XE30_passed);
+} // }}}
+

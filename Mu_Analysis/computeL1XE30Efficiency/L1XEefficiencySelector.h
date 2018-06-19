@@ -65,6 +65,9 @@ public :
    virtual TList  *GetOutputList() const { return fOutput; }
    virtual void    SlaveTerminate();
    virtual void    Terminate();
+   Bool_t isGoodRun();
+   Bool_t passedL1ZB();
+   Bool_t isPassnoAlgXE30();
 
    ClassDef(L1XEefficiencySelector,0);
 
