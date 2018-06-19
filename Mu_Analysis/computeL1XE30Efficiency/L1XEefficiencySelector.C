@@ -82,6 +82,18 @@ void L1XEefficiencySelector::Terminate() // Plotting {{{
     legend->AddEntry(MET_Algmu60thru70Efficiency);
     legend->Draw("SAME");
     gStyle->SetOptStat(0);
+
+
+    TFile* efficiencyObjFile = TFile::Open("EfficiencyFits.root");
+    MET_Algmu0thru10Efficiency->Write();
+    MET_Algmu10thru20Efficiency->Write();
+    MET_Algmu20thru30Efficiency->Write();
+    MET_Algmu30thru40Efficiency->Write();
+    MET_Algmu40thru50Efficiency->Write();
+    MET_Algmu50thru60Efficiency->Write();
+    MET_Algmu60thru70Efficiency->Write();
+
+
 } //}}}
 
 void L1XEefficiencySelector::Init(TTree *tree) /// {{{

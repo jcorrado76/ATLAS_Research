@@ -1,12 +1,10 @@
 #include "fittingRoutine.h"
 
-
 Double_t FittingRoutine::myfunction(Double_t *x , Double_t *par ){
     Float_t xx = x[0];
     Double_t l1cut = 30.0;
     Double_t f = (1./2.)*(1.+TMath::Erf((par[0]*x[0]+par[1]-l1cut)/(par[2]*TMath::Sqrt(2.))));
     return f;
-
 }
 
 void FittingRoutine::myfunc()
