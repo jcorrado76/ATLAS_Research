@@ -1,7 +1,7 @@
 #include "fittingRoutine.h"
 
 {
-    TString filePath = "";
+    TString filePath = "../computeL1XE30Efficiency/EfficiencyFits.root";
     
     FittingRoutine* MyFittingRoutine = new FittingRoutine();
     MyFittingRoutine->getTEfficiencyArray( filePath );
