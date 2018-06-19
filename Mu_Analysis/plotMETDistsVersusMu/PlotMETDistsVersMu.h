@@ -49,7 +49,7 @@ public :
    TTreeReaderValue<Float_t> InTimePileup = {fReader, "InTimePileup"};
    TTreeReaderValue<Float_t> OutOfTimePileup = {fReader, "OutOfTimePileup"};
    TTreeReaderValue<Float_t> MET_Data = {fReader, alg_name };
-   TTreeReaderValue<Float_t> HLT_noalg_zb_L1ZB_passed = {fReader, "HLT_noalg_zb_L1ZB.passed"};
+   TTreeReaderValue<Bool_t> HLT_noalg_zb_L1ZB_passed = {fReader, "HLT_noalg_zb_L1ZB.passed"};
 
 
    PlotMETDistsVersMu(TTree * =0) { }
