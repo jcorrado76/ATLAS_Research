@@ -38,6 +38,10 @@ public :
     Int_t nbins = 1000;
     Float_t gevLow = 0.0;
     Float_t gevHigh = 100.0;
+    TString xaxisTitle = alg_name + " [GeV]";
+    TString yaxisTitle = "Number of Entries";
+    TCanvas* mycanv = new TCanvas("MET_AlgMuSlices", "MET Slices in Mu");
+    THStack* muSlicesStack = new THStack("muStack","MET Hists in Mu Slices After Removing Runs 33023, 331975, and 334487");
 
    // Readers to access the data (delete the ones you do not need).{{{
    TTreeReaderValue<UInt_t> RunNumber = {fReader, "RunNumber"};

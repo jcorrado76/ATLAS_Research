@@ -57,11 +57,6 @@ void PlotMETDistsVersMu::SlaveTerminate()
 
 void PlotMETDistsVersMu::Terminate()
 {
-    TString xaxisTitle = alg_name + " [GeV]";
-    TString yaxisTitle = "Number of Entries";
-    TCanvas* mycanv = new TCanvas("MET_AlgMuSlices", "MET Slices in Mu");
-    THStack* muSlicesStack = new THStack("muStack","MET Hists in Mu Slices After Removing Runs 33023, 331975, and 334487");
-
     // color the histograms so we can see difference 
     MET_Datamu0thru10->SetLineColor(1);
     MET_Datamu10thru20->SetLineColor(2);
@@ -70,7 +65,6 @@ void PlotMETDistsVersMu::Terminate()
     MET_Datamu40thru50->SetLineColor(12);
     MET_Datamu50thru60->SetLineColor(6);
     MET_Datamu60thru70->SetLineColor(9);
-
 
     // normalize histograms to 1 so we can compare shapes 
     Int_t MET_Datamu0thru10Nentries = MET_Datamu0thru10->GetEntries();
