@@ -19,17 +19,14 @@
 #include <TCanvas.h>
 #include <TH1.h>
 #include <TLegend.h>
-#include <THStack.h>
 #include <TString.h>
-
-// Headers needed by this particular selector
 #include <vector>
+#include <THStack.h>
 
 class PlotMETDistsVersMu : public TSelector {
 public :
    TTreeReader     fReader;  //!the tree reader
    TTree          *fChain = 0;   //!pointer to the analyzed TTree or TChain
-   TString alg_name = "cell.met"; //CHANGE THIS FOR WHICH MET DISTRIBUTION YOU WANT TO USE 
    TH1F*            MET_Datamu0thru10 = 0;
    TH1F*            MET_Datamu10thru20 = 0;
    TH1F*            MET_Datamu20thru30 = 0;
@@ -37,18 +34,17 @@ public :
    TH1F*            MET_Datamu40thru50 = 0;
    TH1F*            MET_Datamu50thru60 = 0;
    TH1F*            MET_Datamu60thru70 = 0;
+   TString alg_name = "cell.met"; 
 
    // Readers to access the data (delete the ones you do not need).{{{
    TTreeReaderValue<UInt_t> RunNumber = {fReader, "RunNumber"};
    TTreeReaderValue<ULong64_t> EventNumber = {fReader, "EventNumber"};
-   TTreeReaderValue<UInt_t> LumiBlock = {fReader, "LumiBlock"};
-   TTreeReaderValue<UInt_t> NPrimaryVertices = {fReader, "NPrimaryVertices"};
    TTreeReaderValue<Float_t> InTimePileup = {fReader, "InTimePileup"};
    TTreeReaderValue<Float_t> OutOfTimePileup = {fReader, "OutOfTimePileup"};
    TTreeReaderValue<Float_t> MET_Data = {fReader, alg_name };
 
 
-   PlotMETDistsVersMu(TTree * /*tree*/ =0) { }
+   PlotMETDistsVersMu(TTree * =0) { }
    virtual ~PlotMETDistsVersMu() { }
    virtual Int_t   Version() const { return 2; }
    virtual void    Begin(TTree *tree);
@@ -71,16 +67,3 @@ public :
 
 #endif
 
-#ifdef PlotMETDistsVersMu_cxx
-void PlotMETDistsVersMu::Init(TTree *tree)
-{
-   fReader.SetTree(tree);
-}
-
-Bool_t PlotMETDistsVersMu::Notify()
-{
-   return kTRUE;
-}
-
-
-#endif // #ifdef PlotMETDistsVersMu_cxx

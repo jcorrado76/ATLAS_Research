@@ -124,3 +124,12 @@ void PlotMETDistsVersMu::Terminate()
     gStyle->SetOptStat(0);
 }
 
+void PlotMETDistsVersMu::Init(TTree *tree)
+{
+   fReader.SetTree(tree);
+}
+
+Bool_t PlotMETDistsVersMu::Notify()
+{
+   return kTRUE;
+}
