@@ -28,7 +28,7 @@ Bool_t PlotMETDistsVersMu::Process(Long64_t entry)
    fReader.SetEntry(entry);
 
 
-   if ( (*HLT_noalg_zb_L1ZB_passed) && (*RunNumber != 33023 && *RunNumber != 331975 && *RunNumber != 334487) ){
+   if ( (*HLT_noalg_zb_L1ZB_passed) && isGoodRun() ){
        if ( *InTimePileup > 0.0 && *InTimePileup < 10.0  ){
            MET_Datamu0thru10->Fill(*MET_Data);
        }
@@ -138,4 +138,12 @@ void PlotMETDistsVersMu::Init(TTree *tree)
 Bool_t PlotMETDistsVersMu::Notify()
 {
    return kTRUE;
+}
+
+Bool_t PlotMETDistsVersMu::isGoodRun(){
+    return (*RunNumber != 33023 && *RunNumber != 331975 && *RunNumber != 334487);
+}
+
+Boolt_t PlotMETDistsVersMu::passedL1ZB(){
+    return (*HLT_noalg_zb_L1ZB_passed);
 }

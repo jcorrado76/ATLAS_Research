@@ -60,6 +60,7 @@ public :
    virtual TList  *GetOutputList() const { return fOutput; }
    virtual void    SlaveTerminate();
    virtual void    Terminate();
+   Bool_t isGoodRun();
 
    ClassDef(PlotMETDistsVersMu,0);
 
