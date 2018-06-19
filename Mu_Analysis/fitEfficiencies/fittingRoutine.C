@@ -53,15 +53,14 @@ void FittingRoutine::fit_efficiencies(){
 void FittingRoutine::getTEfficiencyArray( TString filePath ){
     // load TEfficiency TClonesArray into memory 
     EfficiencyFile = TFile::Open( filePath );
-    MET_Algmu0thru10Efficiency = (TEfficiency*) EfficiencyFile->Get("");
-    MET_Algmu10thru20Efficiency = (TEfficiency*) EfficiencyFile->Get("")
-    MET_Algmu20thru30Efficiency = (TEfficiency*) EfficiencyFile->Get("")
-    MET_Algmu30thru40Efficiency = (TEfficiency*) EfficiencyFile->Get("")
-    MET_Algmu40thru50Efficiency = (TEfficiency*) EfficiencyFile->Get("")
-    MET_Algmu50thru60Efficiency = (TEfficiency*) EfficiencyFile->Get("")
-    MET_Algmu60thru70Efficiency = (TEfficiency*) EfficiencyFile->Get("")
+    MET_Algmu0thru10Efficiency = (TEfficiency*) EfficiencyFile->Get("metmu0thru10Efficiency");
+    MET_Algmu10thru20Efficiency = (TEfficiency*) EfficiencyFile->Get("metmu10thru20Efficiency")
+    MET_Algmu20thru30Efficiency = (TEfficiency*) EfficiencyFile->Get("metmu20thru30Efficiency")
+    MET_Algmu30thru40Efficiency = (TEfficiency*) EfficiencyFile->Get("metmu30thru40Efficiency")
+    MET_Algmu40thru50Efficiency = (TEfficiency*) EfficiencyFile->Get("metmu40thru50Efficiency")
+    MET_Algmu50thru60Efficiency = (TEfficiency*) EfficiencyFile->Get("metmu50thru60Efficiency")
+    MET_Algmu60thru70Efficiency = (TEfficiency*) EfficiencyFile->Get("metmu60thru70Efficiency")
     numberSlices = EfficiencyArray->GetEntries();
-
 }
 
 void FittingRoutine::writeFitsToFile( TString fileName ){
