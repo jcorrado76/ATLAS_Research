@@ -51,6 +51,7 @@ public :
    TTreeReaderValue<Float_t> MET_Data = {fReader, alg_name };
    TTreeReaderValue<Bool_t> HLT_noalg_zb_L1ZB_passed = {fReader, "HLT_noalg_zb_L1ZB.passed"};
    TTreeReaderValue<Bool_t> HLT_noalg_L1XE30_passed = {fReader, "HLT_noalg_L1XE30.passed"};
+   TTreeReaderValue<Float_t> HLT_noalg_zb_L1ZB_prescale = {fReader, "HLT_noalg_zb_L1ZB.prescale"};
 
 
    PlotMETDistsVersMu(TTree * =0) { }
