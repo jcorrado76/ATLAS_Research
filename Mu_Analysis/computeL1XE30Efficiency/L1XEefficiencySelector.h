@@ -21,6 +21,7 @@
 #include <TCanvas.h>
 #include <THStack.h>
 #include <TLegend.h>
+#include <TPaveText.h>
 
 // Headers needed by this particular selector
 #include <vector>

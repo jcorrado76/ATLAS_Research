@@ -48,13 +48,15 @@ Bool_t L1XEefficiencySelector::Process(Long64_t entry)
    return kTRUE;
 }
 
-void L1XEefficiencySelector::SlaveTerminate()
-{
-}
+void L1XEefficiencySelector::SlaveTerminate(){}
 
 void L1XEefficiencySelector::Terminate() // Plotting {{{
 {
     TCanvas* mycanv = new TCanvas("metMuSlices", "MET Slices in Mu");
+    TPaveText *pt = new TPaveText(0.05,0.1,0.95,0.8);
+
+    pt->AddText("L1 Efficiency");
+    pt->Draw();
 
     MET_Algmu0thru10Efficiency->SetLineColor(1);
     MET_Algmu10thru20Efficiency->SetLineColor(2);
