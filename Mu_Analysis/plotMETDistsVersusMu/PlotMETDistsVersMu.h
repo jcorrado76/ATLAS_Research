@@ -70,7 +70,7 @@ public :
    virtual void    Terminate();
    Bool_t isGoodRun();
    Bool_t passedL1ZB();
-   Boolt_ isPassnoAlg30();
+   Bool_t isPassnoAlg30();
 
    ClassDef(PlotMETDistsVersMu,0);
 
