@@ -35,6 +35,9 @@ public :
    TH1F*            MET_Datamu50thru60 = 0;
    TH1F*            MET_Datamu60thru70 = 0;
    TString alg_name = "cell.met"; 
+    Int_t nbins = 1000;
+    Float_t gevLow = 0.0;
+    Float_t gevHigh = 100.0;
 
    // Readers to access the data (delete the ones you do not need).{{{
    TTreeReaderValue<UInt_t> RunNumber = {fReader, "RunNumber"};
@@ -61,6 +64,7 @@ public :
    virtual void    SlaveTerminate();
    virtual void    Terminate();
    Bool_t isGoodRun();
+   Bool_t passedL1ZB();
 
    ClassDef(PlotMETDistsVersMu,0);
 
