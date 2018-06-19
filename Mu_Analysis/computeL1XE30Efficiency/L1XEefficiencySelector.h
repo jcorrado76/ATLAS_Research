@@ -78,6 +78,7 @@ public :
    Bool_t isGoodRun();
    Bool_t passedL1ZB();
    Bool_t isPassnoAlgXE30();
+   Bool_t inMuRange( Float_t , Float_t );
 
    ClassDef(L1XEefficiencySelector,0);
 

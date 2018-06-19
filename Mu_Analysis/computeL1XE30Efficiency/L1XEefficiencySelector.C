@@ -110,3 +110,7 @@ Bool_t PlotMETDistsVersMu::isPassnoAlgXE30(){ // {{{
     return (*HLT_noalg_L1XE30_passed);
 } // }}}
 
+Bool_t PlotMETDistsVersMu::inMuRange( Float_t a , Float_t b ){ //{{{
+    return ( *InTimePileup > a && *InTimePileup < b );
+} //}}}
+
