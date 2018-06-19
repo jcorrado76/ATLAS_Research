@@ -28,7 +28,7 @@ Bool_t PlotMETDistsVersMu::Process(Long64_t entry)
    fReader.SetEntry(entry);
 
 
-   if (*RunNumber != 33023 && *RunNumber != 331975 && *RunNumber != 334487 ){
+   if ( (*HLT_noalg_zb_L1ZB_passed) && (*RunNumber != 33023 && *RunNumber != 331975 && *RunNumber != 334487) ){
        if ( *InTimePileup > 0.0 && *InTimePileup < 10.0  ){
            MET_Datamu0thru10->Fill(*MET_Data);
        }
@@ -64,8 +64,6 @@ void PlotMETDistsVersMu::Terminate()
     TString yaxisTitle = "Number of Entries";
     TCanvas* mycanv = new TCanvas("MET_AlgMuSlices", "MET Slices in Mu");
     THStack* muSlicesStack = new THStack("muStack","MET Hists in Mu Slices After Removing Runs 33023, 331975, and 334487");
-    muSlicesStack->GetXaxis()->SetTitle( xaxisTitle );
-    muSlicesStack->GetYaxis()->SetTitle( yaxisTitle );
 
     // color the histograms so we can see difference 
     MET_Datamu0thru10->SetLineColor(1);
@@ -95,6 +93,7 @@ void PlotMETDistsVersMu::Terminate()
     MET_Datamu50thru60->Sumw2();
     MET_Datamu60thru70->Sumw2();
 
+    // normalize to 1 
     MET_Datamu0thru10->Scale( 1. / MET_Datamu0thru10Nentries );
     MET_Datamu10thru20->Scale( 1. / MET_Datamu10thru20Nentries );
     MET_Datamu20thru30->Scale( 1. / MET_Datamu20thru30Nentries );
