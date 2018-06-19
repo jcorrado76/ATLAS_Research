@@ -43,7 +43,6 @@ public :
     TCanvas* mycanv = new TCanvas("MET_AlgMuSlices", "MET Slices in Mu");
     THStack* muSlicesStack = new THStack("muStack","MET Hists in Mu Slices After Removing Runs 33023, 331975, and 334487");
 
-   // Readers to access the data (delete the ones you do not need).{{{
    TTreeReaderValue<UInt_t> RunNumber = {fReader, "RunNumber"};
    TTreeReaderValue<ULong64_t> EventNumber = {fReader, "EventNumber"};
    TTreeReaderValue<Float_t> InTimePileup = {fReader, "InTimePileup"};
@@ -76,7 +75,6 @@ public :
    ClassDef(PlotMETDistsVersMu,0);
 
 };
-// }}}
 
 #endif
 
