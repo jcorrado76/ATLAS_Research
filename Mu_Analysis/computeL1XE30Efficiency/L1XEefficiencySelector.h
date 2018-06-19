@@ -30,6 +30,10 @@ public :
    TTreeReader     fReader;  //!the tree reader
    TTree          *fChain = 0;   //!pointer to the analyzed TTree or TChain
    Float_t XE = 30.0;
+    Float_t gevLow = 0.0;
+    Float_t gevHigh = 300.0;
+    Float_t width = 20.0; //want 20 GeV bins
+    Int_t nbins = (gevHigh - gevLow) / width; // compute nbins as function of preferred width
    TString alg_name = "HLT_noalg_L1XE30.prescale"; // alg for which to compute efficiency 
    TString zb_alg_name = "HLT_noalg_zb_L1ZB.prescale";
    // initialize pointers to 0

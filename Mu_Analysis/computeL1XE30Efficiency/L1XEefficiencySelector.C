@@ -4,10 +4,6 @@
 void L1XEefficiencySelector::Begin(TTree * /*tree*/)
 {
    TString option = GetOption();
-    Float_t gevLow = 0.0;
-    Float_t gevHigh = 300.0;
-    Float_t width = 20.0; //want 20 GeV bins
-    Int_t nbins = (gevHigh - gevLow) / width; // compute nbins as function of preferred width
     MET_Algmu0thru10Efficiency = new TEfficiency("metmu0thru10Efficiency","MET Alg Efficiency for actint between 0 and 10", nbins , gevLow , gevHigh );
     MET_Algmu10thru20Efficiency = new TEfficiency("metmu10thru20Efficiency","MET Alg Efficiency for actint between 10 and 20", nbins , gevLow , gevHigh );
     MET_Algmu20thru30Efficiency = new TEfficiency("metmu20thru30Efficiency","MET Alg Efficiency for actint between 20 and 30", nbins , gevLow , gevHigh );
