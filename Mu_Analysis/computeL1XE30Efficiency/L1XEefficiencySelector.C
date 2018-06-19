@@ -21,7 +21,7 @@ void L1XEefficiencySelector::SlaveBegin(TTree * /*tree*/)// {{{
 Bool_t L1XEefficiencySelector::Process(Long64_t entry)
 {
    fReader.SetEntry(entry);
-   if (*RunNumber != 33023 && *RunNumber != 331975 && *RunNumber != 334487 ){
+   if ( isGoodRun() ){
        if ( *InTimePileup > 0.0 && *InTimePileup < 10.0  ){
            MET_Algmu0thru10Efficiency->Fill(*L1_MET > XE, *cell_met);
        }
@@ -55,7 +55,6 @@ void L1XEefficiencySelector::SlaveTerminate()
 void L1XEefficiencySelector::Terminate() // Plotting {{{
 {
     TCanvas* mycanv = new TCanvas("metMuSlices", "MET Slices in Mu");
-    THStack* muSlicesStack = new THStack("muStack","MET Hists in Mu Slices without runs 33023, 331975, and 334487");
 
     MET_Algmu0thru10Efficiency->SetLineColor(1);
     MET_Algmu10thru20Efficiency->SetLineColor(2);
@@ -65,13 +64,7 @@ void L1XEefficiencySelector::Terminate() // Plotting {{{
     MET_Algmu50thru60Efficiency->SetLineColor(6);
     MET_Algmu60thru70Efficiency->SetLineColor(9);
 
-
-    // set titles and axis labels. 
-    TString title = alg_name + " Efficiency";
-    TString xaxis = zb_alg_name + " [GeV]";
-    TString yaxis = "efficiency";
     MET_Algmu0thru10Efficiency->SetTitle(  title + ";" + xaxis + ";" +  yaxis  );
-
 
     MET_Algmu0thru10Efficiency->Draw();
     MET_Algmu10thru20Efficiency->Draw("SAME");

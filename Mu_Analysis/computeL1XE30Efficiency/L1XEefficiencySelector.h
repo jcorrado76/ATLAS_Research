@@ -34,8 +34,14 @@ public :
     Float_t gevHigh = 300.0;
     Float_t width = 20.0; //want 20 GeV bins
     Int_t nbins = (gevHigh - gevLow) / width; // compute nbins as function of preferred width
-   TString alg_name = "HLT_noalg_L1XE30.prescale"; // alg for which to compute efficiency 
-   TString zb_alg_name = "HLT_noalg_zb_L1ZB.prescale";
+   TString alg_name = "L1.met"; // these two must match branches in jburr tree
+   TString zb_alg_name = "cell.met";
+
+    // set titles and axis labels. 
+    TString title = alg_name + " Efficiency";
+    TString xaxis = zb_alg_name + " [GeV]";
+    TString yaxis = "efficiency";
+
    // initialize pointers to 0
    TEfficiency*            MET_Algmu0thru10Efficiency = 0;
    TEfficiency*            MET_Algmu10thru20Efficiency = 0;
@@ -47,8 +53,12 @@ public :
 
    TTreeReaderValue<UInt_t> RunNumber = {fReader, "RunNumber"};
    TTreeReaderValue<Float_t> InTimePileup = {fReader, "InTimePileup"};
-   TTreeReaderValue<Float_t> cell_met = {fReader, "cell.met"};
-   TTreeReaderValue<Float_t> L1_MET = {fReader, "L1.met"};
+   TTreeReaderValue<Float_t> cell_met = {fReader, zb_alg_name };
+   TTreeReaderValue<Float_t> L1_MET = {fReader, alg_name };
+   TTreeReaderValue<Bool_t> HLT_noalg_zb_L1ZB_passed = {fReader, "HLT_noalg_zb_L1ZB.passed"};
+   TTreeReaderValue<Float_t> HLT_noalg_zb_L1ZB_prescale = {fReader, "HLT_noalg_zb_L1ZB.prescale"};
+   TTreeReaderValue<Bool_t> HLT_noalg_L1XE30_passed = {fReader, "HLT_noalg_L1XE30.passed"};
+   TTreeReaderValue<Float_t> HLT_noalg_L1XE30_prescale = {fReader, "HLT_noalg_L1XE30.prescale"};
 
    L1XEefficiencySelector(TTree * /*tree*/ =0) { }
    virtual ~L1XEefficiencySelector() { }
