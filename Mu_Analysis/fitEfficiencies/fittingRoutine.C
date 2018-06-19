@@ -53,6 +53,13 @@ void FittingRoutine::fit_efficiencies(){
 void FittingRoutine::getTEfficiencyArray( TString filePath ){
     // load TEfficiency TClonesArray into memory 
     EfficiencyFile = TFile::Open( filePath );
+    MET_Algmu0thru10Efficiency = (TEfficiency*) EfficiencyFile->Get("");
+    MET_Algmu10thru20Efficiency = (TEfficiency*) EfficiencyFile->Get("")
+    MET_Algmu20thru30Efficiency = (TEfficiency*) EfficiencyFile->Get("")
+    MET_Algmu30thru40Efficiency = (TEfficiency*) EfficiencyFile->Get("")
+    MET_Algmu40thru50Efficiency = (TEfficiency*) EfficiencyFile->Get("")
+    MET_Algmu50thru60Efficiency = (TEfficiency*) EfficiencyFile->Get("")
+    MET_Algmu60thru70Efficiency = (TEfficiency*) EfficiencyFile->Get("")
     EfficiencyArray = (TClonesArray*) EfficiencyFile->Get("TEfficiencyArray");
     numberSlices = EfficiencyArray->GetEntries();
 
