@@ -54,7 +54,6 @@ void L1XEefficiencySelector::Terminate() // Plotting {{{
 {
     TCanvas* mycanv = new TCanvas("metMuSlices", "MET Slices in Mu");
 
-
     MET_Algmu0thru10Efficiency->SetLineColor(1);
     MET_Algmu10thru20Efficiency->SetLineColor(2);
     MET_Algmu20thru30Efficiency->SetLineColor(3);
@@ -63,8 +62,6 @@ void L1XEefficiencySelector::Terminate() // Plotting {{{
     MET_Algmu50thru60Efficiency->SetLineColor(6);
     MET_Algmu60thru70Efficiency->SetLineColor(9);
 
-    MET_Algmu0thru10Efficiency->SetTitle(  title + ";" + xaxis + ";" +  yaxis  );
-
     MET_Algmu0thru10Efficiency->Draw();
     MET_Algmu10thru20Efficiency->Draw("SAME");
     MET_Algmu20thru30Efficiency->Draw("SAME");
@@ -72,6 +69,9 @@ void L1XEefficiencySelector::Terminate() // Plotting {{{
     MET_Algmu40thru50Efficiency->Draw("SAME");
     MET_Algmu50thru60Efficiency->Draw("SAME");
     MET_Algmu60thru70Efficiency->Draw("SAME");
+
+    MET_Algmu0thru10Efficiency->GetPaintedGraph()->GetXaxis()->SetTitle(xaxis);
+    MET_Algmu0thru10Efficiency->GetPaintedGraph()->GetYaxis()->SetTitle(yaxis);
     
     mycanv->SetTitle("MET Slices in Mu");
     gPad->SetLogy();

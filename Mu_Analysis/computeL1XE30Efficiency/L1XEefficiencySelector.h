@@ -22,6 +22,7 @@
 #include <THStack.h>
 #include <TLegend.h>
 #include <TPaveText.h>
+#include <TGraphAsymmErrors.h>
 
 // Headers needed by this particular selector
 #include <vector>
