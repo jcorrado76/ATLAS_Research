@@ -50,6 +50,7 @@ public :
    TTreeReaderValue<Float_t> OutOfTimePileup = {fReader, "OutOfTimePileup"};
    TTreeReaderValue<Float_t> MET_Data = {fReader, alg_name };
    TTreeReaderValue<Bool_t> HLT_noalg_zb_L1ZB_passed = {fReader, "HLT_noalg_zb_L1ZB.passed"};
+   TTreeReaderValue<Bool_t> HLT_noalg_L1XE30_passed = {fReader, "HLT_noalg_L1XE30.passed"};
 
 
    PlotMETDistsVersMu(TTree * =0) { }
@@ -69,6 +70,7 @@ public :
    virtual void    Terminate();
    Bool_t isGoodRun();
    Bool_t passedL1ZB();
+   Boolt_ isPassnoAlg30();
 
    ClassDef(PlotMETDistsVersMu,0);
 

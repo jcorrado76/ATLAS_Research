@@ -24,7 +24,7 @@ Bool_t PlotMETDistsVersMu::Process(Long64_t entry)
 {
    fReader.SetEntry(entry);
 
-   if ( passedL1ZB()  && isGoodRun() ){
+   if ( isPassnoAlg30() && passedL1ZB()  && isGoodRun() ){
        if ( *InTimePileup > 0.0 && *InTimePileup < 10.0  ){
            MET_Datamu0thru10->Fill(*MET_Data);
        }
@@ -134,4 +134,8 @@ Bool_t PlotMETDistsVersMu::isGoodRun(){
 
 Bool_t PlotMETDistsVersMu::passedL1ZB(){
     return (*HLT_noalg_zb_L1ZB_passed);
+}
+
+Bool_t PlotMETDistsVersMu::isPassnoAlg30(){
+    return (*HLT_noalg_L1XE30_passed);
 }
