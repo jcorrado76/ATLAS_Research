@@ -8,7 +8,7 @@ void PlotMETDistsVersMu::Begin(TTree * /*tree*/)
    TString option = GetOption();
     Int_t nbins = 1000;
     Float_t gevLow = 0.0;
-    Float_t gevHigh = 150.0;
+    Float_t gevHigh = 100.0;
     MET_Datamu0thru10 = new TH1F("metmu0thru10","MET Data for actint between 0 and 10", nbins , gevLow , gevHigh );
     MET_Datamu10thru20 = new TH1F("metmu10thru20","MET Data for actint between 10 and 20", nbins , gevLow , gevHigh );
     MET_Datamu20thru30 = new TH1F("metmu20thru30","MET Data for actint between 20 and 30", nbins , gevLow , gevHigh );
