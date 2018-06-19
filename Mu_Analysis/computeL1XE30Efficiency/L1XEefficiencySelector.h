@@ -29,7 +29,7 @@ class L1XEefficiencySelector : public TSelector {
 public :
    TTreeReader     fReader;  //!the tree reader
    TTree          *fChain = 0;   //!pointer to the analyzed TTree or TChain
-   Float_t XE = 30.0;
+   Float_t XE = 30.0; // L1 cut
     Float_t gevLow = 0.0;
     Float_t gevHigh = 300.0;
     Float_t width = 20.0; //want 20 GeV bins
@@ -56,10 +56,6 @@ public :
    TTreeReaderValue<Float_t> HLT_noalg_zb_L1ZB_prescale = {fReader, "HLT_noalg_zb_L1ZB.prescale"};
    // this is the algorithm we want to know the efficiency of 
    TTreeReaderValue<Float_t> HLT_noalg_L1XE30_prescale = {fReader, "HLT_noalg_L1XE30.prescale"};
-
-   // alg to compute efficiency of
-   TTreeReaderValue<Float_t> AlgForEfficiency = {fReader, alg_name};
-   TTreeReaderValue<Float_t> ZB_Alg = {fReader, zb_alg_name };
 
    TTreeReaderValue<Float_t> L1_MET = {fReader, "L1.met"};
 

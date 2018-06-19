@@ -13,36 +13,35 @@ void L1XEefficiencySelector::Begin(TTree * /*tree*/)
     MET_Algmu60thru70Efficiency = new TEfficiency("metmu60thru70Efficiency","MET Alg Efficiency for actint between 60 and 70", nbins , gevLow , gevHigh );
 }
 
-void L1XEefficiencySelector::SlaveBegin(TTree * /*tree*/)
+void L1XEefficiencySelector::SlaveBegin(TTree * /*tree*/)// {{{
 {
    TString option = GetOption();
-
-}
+}// }}}
 
 Bool_t L1XEefficiencySelector::Process(Long64_t entry)
 {
    fReader.SetEntry(entry);
    if (*RunNumber != 33023 && *RunNumber != 331975 && *RunNumber != 334487 ){
        if ( *InTimePileup > 0.0 && *InTimePileup < 10.0  ){
-           MET_Algmu0thru10Efficiency->Fill(*AlgForEfficiency > XE, *ZB_Alg);
+           MET_Algmu0thru10Efficiency->Fill(*L1_MET > XE, *ZB_Alg);
        }
        if ( *InTimePileup > 10.0 && *InTimePileup < 20.0  ){
-           MET_Algmu10thru20Efficiency->Fill(*AlgForEfficiency > XE, *ZB_Alg);
+           MET_Algmu10thru20Efficiency->Fill(*L1_MET > XE, *ZB_Alg);
        }
        if ( *InTimePileup > 20.0 && *InTimePileup < 30.0  ){
-           MET_Algmu20thru30Efficiency->Fill(*AlgForEfficiency > XE, *ZB_Alg);
+           MET_Algmu20thru30Efficiency->Fill(*L1_MET > XE, *ZB_Alg);
        }
        if ( *InTimePileup > 30.0 && *InTimePileup < 40.0  ){
-           MET_Algmu30thru40Efficiency->Fill(*AlgForEfficiency > XE, *ZB_Alg);
+           MET_Algmu30thru40Efficiency->Fill(*L1_MET > XE, *ZB_Alg);
        }
        if ( *InTimePileup > 40.0 && *InTimePileup < 50.0  ){
-           MET_Algmu40thru50Efficiency->Fill(*AlgForEfficiency > XE, *ZB_Alg);
+           MET_Algmu40thru50Efficiency->Fill(*L1_MET > XE, *ZB_Alg);
        }
        if ( *InTimePileup > 50.0 && *InTimePileup < 60.0  ){
-           MET_Algmu50thru60Efficiency->Fill(*AlgForEfficiency > XE, *ZB_Alg);
+           MET_Algmu50thru60Efficiency->Fill(*L1_MET > XE, *ZB_Alg);
        }
        if ( *InTimePileup > 60.0 && *InTimePileup < 70.0  ){
-           MET_Algmu60thru70Efficiency->Fill(*AlgForEfficiency > XE, *ZB_Alg);
+           MET_Algmu60thru70Efficiency->Fill(*L1_MET > XE, *ZB_Alg);
        }
    }
 
