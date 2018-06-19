@@ -1,7 +1,6 @@
-#define L1XEefficiencySelector_cxx
 #include "L1XEefficiencySelector.h"
 
-void L1XEefficiencySelector::Begin(TTree * /*tree*/)
+void L1XEefficiencySelector::Begin(TTree * )
 {
    TString option = GetOption();
     MET_Algmu0thru10Efficiency = new TEfficiency("metmu0thru10Efficiency","MET Alg Efficiency for actint between 0 and 10", nbins , gevLow , gevHigh );
@@ -21,7 +20,7 @@ void L1XEefficiencySelector::SlaveBegin(TTree * /*tree*/)// {{{
 Bool_t L1XEefficiencySelector::Process(Long64_t entry)
 {
    fReader.SetEntry(entry);
-   if ( isGoodRun() ){
+   if ( isGoodRun() && passedL1ZB() /*&& isPassnoAlgXE30()*/ ){
        if ( inMuRange(0.0,10.0)  ){
            MET_Algmu0thru10Efficiency->Fill(*L1_MET > XE, *cell_met);
        }
