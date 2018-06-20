@@ -42,6 +42,30 @@ Bool_t L1XEefficiencySelector::Process(Long64_t entry)
        if ( inMuRange(60.0, 70.0) ){
            MET_Algmu60thru70Efficiency->Fill(*L1_MET > XE, *cell_met);
        }
+
+       // fill weighted
+
+       //if ( inMuRange(0.0,10.0)  ){
+           //MET_Algmu0thru10Efficiency->FillWeighted(*L1_MET > XE, *HLT_noalg_zb_L1ZB_prescale,*cell_met);
+       //}
+       //if ( inMuRange(10.0, 20.0) ){
+           //MET_Algmu10thru20Efficiency->FillWeighted(*L1_MET > XE, *HLT_noalg_zb_L1ZB_prescale,*cell_met);
+       //}
+       //if ( inMuRange(20.0, 30.0) ){
+           //MET_Algmu20thru30Efficiency->FillWeighted(*L1_MET > XE,*HLT_noalg_zb_L1ZB_prescale, *cell_met);
+       //}
+       //if ( inMuRange(30.0, 40.0)  ){
+           //MET_Algmu30thru40Efficiency->FillWeighted(*L1_MET > XE,*HLT_noalg_zb_L1ZB_prescale, *cell_met);
+       //}
+       //if ( inMuRange(40.0, 50.0) ){
+           //MET_Algmu40thru50Efficiency->FillWeighted(*L1_MET > XE, *HLT_noalg_zb_L1ZB_prescale,*cell_met);
+       //}
+       //if ( inMuRange(50.0, 60.0) ){
+           //MET_Algmu50thru60Efficiency->FillWeighted(*L1_MET > XE, *HLT_noalg_zb_L1ZB_prescale,*cell_met);
+       //}
+       //if ( inMuRange(60.0, 70.0) ){
+           //MET_Algmu60thru70Efficiency->FillWeighted(*L1_MET > XE, *HLT_noalg_zb_L1ZB_prescale*cell_met);
+       //}
    }
 
    return kTRUE;

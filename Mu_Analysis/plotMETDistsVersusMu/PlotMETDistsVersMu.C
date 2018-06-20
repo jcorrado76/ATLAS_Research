@@ -73,37 +73,45 @@ void PlotMETDistsVersMu::Terminate() // Plotting{{{
     Int_t MET_Datamu60thru70Nentries = MET_Datamu60thru70->GetEntries();
 
     // need to compute error bars correctly before filling hist to tell it to store errors
-    MET_Datamu0thru10->Sumw2();
-    MET_Datamu10thru20->Sumw2();
-    MET_Datamu20thru30->Sumw2();
-    MET_Datamu30thru40->Sumw2();
-    MET_Datamu40thru50->Sumw2();
-    MET_Datamu50thru60->Sumw2();
-    MET_Datamu60thru70->Sumw2();
+    //MET_Datamu0thru10->Sumw2();
+    //MET_Datamu10thru20->Sumw2();
+    //MET_Datamu20thru30->Sumw2();
+    //MET_Datamu30thru40->Sumw2();
+    //MET_Datamu40thru50->Sumw2();
+    //MET_Datamu50thru60->Sumw2();
+    //MET_Datamu60thru70->Sumw2();
 
     // normalize to 1 
-    MET_Datamu0thru10->SetNormFactor(1);
-    MET_Datamu10thru20->SetNormFactor(1);
-    MET_Datamu20thru30->SetNormFactor(1);
-    MET_Datamu30thru40->SetNormFactor(1);
-    MET_Datamu40thru50->SetNormFactor(1);
-    MET_Datamu50thru60->SetNormFactor(1);
-    MET_Datamu60thru70->SetNormFactor(1);
+    MET_Datamu0thru10->SetNormFactor(1.);
+    MET_Datamu10thru20->SetNormFactor(1.);
+    MET_Datamu20thru30->SetNormFactor(1.);
+    MET_Datamu30thru40->SetNormFactor(1.);
+    MET_Datamu40thru50->SetNormFactor(1.);
+    MET_Datamu50thru60->SetNormFactor(1.);
+    MET_Datamu60thru70->SetNormFactor(1.);
 
+    MET_Datamu0thru10->Draw();
+    MET_Datamu10thru20->Draw("SAME");
+    MET_Datamu20thru30->Draw("SAME");
+    MET_Datamu30thru40->Draw("SAME");
+    MET_Datamu40thru50->Draw("SAME");
+    MET_Datamu50thru60->Draw("SAME");
+    MET_Datamu60thru70->Draw("SAME");
     // draw stacked hists, because i want y axis to adjust
     // better than Drawing "SAME" for stacking hists 
-    muSlicesStack->Add(MET_Datamu0thru10);
-    muSlicesStack->Add(MET_Datamu10thru20);
-    muSlicesStack->Add(MET_Datamu20thru30);
-    muSlicesStack->Add(MET_Datamu30thru40);
-    muSlicesStack->Add(MET_Datamu40thru50);
-    muSlicesStack->Add(MET_Datamu50thru60);
-    muSlicesStack->Add(MET_Datamu60thru70);
+    //muSlicesStack->Add(MET_Datamu0thru10);
+    //muSlicesStack->Add(MET_Datamu10thru20);
+    //muSlicesStack->Add(MET_Datamu20thru30);
+    //muSlicesStack->Add(MET_Datamu30thru40);
+    //muSlicesStack->Add(MET_Datamu40thru50);
+    //muSlicesStack->Add(MET_Datamu50thru60);
+    //muSlicesStack->Add(MET_Datamu60thru70);
 
-    muSlicesStack->Draw();
-    muSlicesStack->GetXaxis()->SetTitle( xaxisTitle );
-    muSlicesStack->GetYaxis()->SetTitle( yaxisTitle );
+    //muSlicesStack->Draw();
+    //muSlicesStack->GetXaxis()->SetTitle( xaxisTitle );
+    //muSlicesStack->GetYaxis()->SetTitle( yaxisTitle );
     
+    //MET_Datamu0thru10->Draw();
     mycanv->SetTitle("MET Slices in Mu");
     gPad->SetLogy();
     TLegend* legend = new TLegend();
@@ -129,7 +137,7 @@ Bool_t PlotMETDistsVersMu::Notify() //{{{
 } //}}}
 
 Bool_t PlotMETDistsVersMu::isGoodRun(){
-    return (*RunNumber != 33023 && *RunNumber != 331975 && *RunNumber != 334487);
+    return (*RunNumber != 330203 && *RunNumber != 331975 && *RunNumber != 334487);
 }
 
 Bool_t PlotMETDistsVersMu::passedL1ZB(){
