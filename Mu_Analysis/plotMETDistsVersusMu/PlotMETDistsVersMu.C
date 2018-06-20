@@ -82,13 +82,13 @@ void PlotMETDistsVersMu::Terminate() // Plotting{{{
     MET_Datamu60thru70->Sumw2();
 
     // normalize to 1 
-    MET_Datamu0thru10->Scale( 1. / MET_Datamu0thru10Nentries );
-    MET_Datamu10thru20->Scale( 1. / MET_Datamu10thru20Nentries );
-    MET_Datamu20thru30->Scale( 1. / MET_Datamu20thru30Nentries );
-    MET_Datamu30thru40->Scale( 1. / MET_Datamu30thru40Nentries );
-    MET_Datamu40thru50->Scale( 1. / MET_Datamu40thru50Nentries );
-    MET_Datamu50thru60->Scale( 1. / MET_Datamu50thru60Nentries );
-    MET_Datamu60thru70->Scale( 1. / MET_Datamu60thru70Nentries );
+    MET_Datamu0thru10->SetNormFactor(1);
+    MET_Datamu10thru20->SetNormFactor(1);
+    MET_Datamu20thru30->SetNormFactor(1);
+    MET_Datamu30thru40->SetNormFactor(1);
+    MET_Datamu40thru50->SetNormFactor(1);
+    MET_Datamu50thru60->SetNormFactor(1);
+    MET_Datamu60thru70->SetNormFactor(1);
 
     // draw stacked hists, because i want y axis to adjust
     // better than Drawing "SAME" for stacking hists 
