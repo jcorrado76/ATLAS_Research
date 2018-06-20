@@ -44,16 +44,17 @@ void FittingRoutine::fit_efficiencies(){
     FitArray = new TClonesArray( "TF1", numberSlices );
     for ( sliceNdx ; sliceNdx  < numberSlices ; sliceNdx++){
         printf("Current slice: %d" , sliceNdx);
+        // get TEfficiency from file reading in
         currTEfficiencyObj = (TEfficiency*) EfficiencyArray->ConstructedAt( sliceNdx );
         currFitFunc = generateFitFunction();
+        // construct a fit object in output array 
         currFitFunc = (TF1*) FitArray->ConstructedAt( sliceNdx );
     }
 }
 
 void FittingRoutine::getTEfficiencyObjects( TString filePath ){
-    // load TEfficiency Array into memory file path needs to be passed in from program.
-    EfficiencyFile = TFile::Open( filePath );
-    TEfficiencyArray = (TClonesArray*) EfficiencyFile->Get("TEfficiencyArray");
+    // load TEfficiency objects into TClonesArray into memory; file path needs to be passed in from program.
+    EfficiencyFile = TFile::Open( filePath, "READ" );
     numberSlices = TEfficiencyArray->GetEntries();
 }
 
