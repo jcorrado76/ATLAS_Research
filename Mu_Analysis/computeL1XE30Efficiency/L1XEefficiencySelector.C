@@ -20,7 +20,7 @@ void L1XEefficiencySelector::SlaveBegin(TTree * /*tree*/)// {{{
 Bool_t L1XEefficiencySelector::Process(Long64_t entry)
 {
    fReader.SetEntry(entry);
-   if ( isGoodRun() && passedL1ZB() /*&& isPassnoAlgXE30()*/ ){
+   if ( isGoodRun() && passedL1ZB()  ){
        if ( inMuRange(0.0,10.0)  ){
            MET_Algmu0thru10Efficiency->Fill(*L1_MET > XE, *cell_met);
        }
