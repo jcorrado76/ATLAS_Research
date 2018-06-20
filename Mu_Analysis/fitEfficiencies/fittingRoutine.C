@@ -55,11 +55,22 @@ void FittingRoutine::fit_efficiencies(){
 void FittingRoutine::getTEfficiencyObjects( TString filePath ){
     // load TEfficiency objects into TClonesArray into memory; file path needs to be passed in from program.
     EfficiencyFile = TFile::Open( filePath, "READ" );
-    numberSlices = TEfficiencyArray->GetEntries();
+    TList* TFileKeyList = EfficiencyFile->GetListOfKeys();
+    numberSlices = TFileKeyList->GetEntries();
+    TIter* keyIter = new TIter( TFileKeyList );
+    TKey* key = 0;
+    while ( key = (TKey*) keyIter->Next()){
+        TClass* cl = gROOT->GetClass( key->GetClassName() );
+        if ( !cl->InheritsFrom("TEfficiency")){
+            continue;
+        }
+
+    }«»
 }
 
 void FittingRoutine::writeFitsToFile( TString fileName ){
     FitFile = TFile::Open( fileName, "RECREATE" );
+    // this will write each object separately to file
     FitArray->Write();
     FitFile->Close();
 }
