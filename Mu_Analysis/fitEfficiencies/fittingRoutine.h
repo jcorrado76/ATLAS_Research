@@ -9,19 +9,14 @@
 
 class FittingRoutine{
     private:
-        TFile* EfficiencyFile = 0;
-        TFile* FitFile = 0;
-        Int_t numberSlices = 0;
-        Int_t sliceNdx = 0;
-        TEfficiency* currTEfficiencyObj = 0;
-        TF1* currFitFunc = 0;
-        TEfficiency*            MET_Algmu0thru10Efficiency = 0;
-        TEfficiency*            MET_Algmu10thru20Efficiency = 0;
-        TEfficiency*            MET_Algmu20thru30Efficiency = 0;
-        TEfficiency*            MET_Algmu30thru40Efficiency = 0;
-        TEfficiency*            MET_Algmu40thru50Efficiency = 0;
-        TEfficiency*            MET_Algmu50thru60Efficiency = 0;
-        TEfficiency*            MET_Algmu60thru70Efficiency = 0;
+        TFile* EfficiencyFile;
+        TFile* FitFile;
+        Int_t numberSlices;
+        Int_t sliceNdx;
+        TEfficiency* currTEfficiencyObj;
+        TF1* currFitFunc;
+        TClonesArray* TEfficiencyArray;
+        TClonesArray* FitArray;
 
     public:
         FittingRoutine();

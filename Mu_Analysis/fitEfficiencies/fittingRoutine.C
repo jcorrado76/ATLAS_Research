@@ -51,32 +51,20 @@ void FittingRoutine::fit_efficiencies(){
 }
 
 void FittingRoutine::getTEfficiencyObjects( TString filePath ){
-    // load TEfficiency objects into memory file path needs to be passed in from program.
+    // load TEfficiency Array into memory file path needs to be passed in from program.
     EfficiencyFile = TFile::Open( filePath );
-    MET_Algmu0thru10Efficiency = (TEfficiency*) EfficiencyFile->Get("metmu0thru10Efficiency");
-    MET_Algmu10thru20Efficiency = (TEfficiency*) EfficiencyFile->Get("metmu10thru20Efficiency")
-    MET_Algmu20thru30Efficiency = (TEfficiency*) EfficiencyFile->Get("metmu20thru30Efficiency")
-    MET_Algmu30thru40Efficiency = (TEfficiency*) EfficiencyFile->Get("metmu30thru40Efficiency")
-    MET_Algmu40thru50Efficiency = (TEfficiency*) EfficiencyFile->Get("metmu40thru50Efficiency")
-    MET_Algmu50thru60Efficiency = (TEfficiency*) EfficiencyFile->Get("metmu50thru60Efficiency")
-    MET_Algmu60thru70Efficiency = (TEfficiency*) EfficiencyFile->Get("metmu60thru70Efficiency")
-    numberSlices = EfficiencyArray->GetEntries();
+    TEfficiencyArray = (TClonesArray*) EfficiencyFile->Get("TEfficiencyArray");
+    numberSlices = TEfficiencyArray->GetEntries();
 }
 
 void FittingRoutine::writeFitsToFile( TString fileName ){
     FitFile = TFile::Open( fileName, "RECREATE" );
-    MET_Algmu0thru10Efficiency->Write();
-    MET_Algmu10thru20Efficiency->Write();
-    MET_Algmu20thru30Efficiency->Write();
-    MET_Algmu30thru40Efficiency->Write();
-    MET_Algmu40thru50Efficiency->Write();
-    MET_Algmu50thru60Efficiency->Write();
-    MET_Algmu60thru70Efficiency->Write();
+    FitArray->Write();
     FitFile->Close();
 }
 
 FittingRoutine::FittingRoutine()
-    :EfficiencyFile(0),FitFile(0), EfficiencyArray(0),FitArray(0), numberSlices(0), sliceNdx(0), currTEfficiencyObj(0), currFitFunc(0)
+    :EfficiencyFile(0),FitFile(0), TEfficiencyArray(0),FitArray(0), numberSlices(0), sliceNdx(0), currTEfficiencyObj(0), currFitFunc(0)
 {}
 
 FittingRoutine::~FittingRoutine(){}
