@@ -21,51 +21,28 @@ Bool_t L1XEefficiencySelector::Process(Long64_t entry)
 {
    fReader.SetLocalEntry(entry);
    if ( isGoodRun() && passedL1ZB()  ){
-       //if ( inMuRange(0.0,10.0)  ){
-           //MET_Algmu0thru10Efficiency->Fill(*L1_MET > XE, *cell_met);
-       //}
-       //if ( inMuRange(10.0, 20.0) ){
-           //MET_Algmu10thru20Efficiency->Fill(*L1_MET > XE, *cell_met);
-       //}
-       //if ( inMuRange(20.0, 30.0) ){
-           //MET_Algmu20thru30Efficiency->Fill(*L1_MET > XE, *cell_met);
-       //}
-       //if ( inMuRange(30.0, 40.0)  ){
-           //MET_Algmu30thru40Efficiency->Fill(*L1_MET > XE, *cell_met);
-       //}
-       //if ( inMuRange(40.0, 50.0) ){
-           //MET_Algmu40thru50Efficiency->Fill(*L1_MET > XE, *cell_met);
-       //}
-       //if ( inMuRange(50.0, 60.0) ){
-           //MET_Algmu50thru60Efficiency->Fill(*L1_MET > XE, *cell_met);
-       //}
-       //if ( inMuRange(60.0, 70.0) ){
-           //MET_Algmu60thru70Efficiency->Fill(*L1_MET > XE, *cell_met);
-       //}
-
-       // fill weighted
-
        if ( inMuRange(0.0,10.0)  ){
-           MET_Algmu0thru10Efficiency->FillWeighted(*L1_MET > XE, *HLT_noalg_zb_L1ZB_prescale,*cell_met);
+           MET_Algmu0thru10Efficiency->Fill(*L1_MET > XE, *cell_met);
        }
        if ( inMuRange(10.0, 20.0) ){
-           MET_Algmu10thru20Efficiency->FillWeighted(*L1_MET > XE, *HLT_noalg_zb_L1ZB_prescale,*cell_met);
+           MET_Algmu10thru20Efficiency->Fill(*L1_MET > XE, *cell_met);
        }
        if ( inMuRange(20.0, 30.0) ){
-           MET_Algmu20thru30Efficiency->FillWeighted(*L1_MET > XE,*HLT_noalg_zb_L1ZB_prescale, *cell_met);
+           MET_Algmu20thru30Efficiency->Fill(*L1_MET > XE, *cell_met);
        }
        if ( inMuRange(30.0, 40.0)  ){
-           MET_Algmu30thru40Efficiency->FillWeighted(*L1_MET > XE,*HLT_noalg_zb_L1ZB_prescale, *cell_met);
+           MET_Algmu30thru40Efficiency->Fill(*L1_MET > XE, *cell_met);
        }
        if ( inMuRange(40.0, 50.0) ){
-           MET_Algmu40thru50Efficiency->FillWeighted(*L1_MET > XE, *HLT_noalg_zb_L1ZB_prescale,*cell_met);
+           MET_Algmu40thru50Efficiency->Fill(*L1_MET > XE, *cell_met);
        }
        if ( inMuRange(50.0, 60.0) ){
-           MET_Algmu50thru60Efficiency->FillWeighted(*L1_MET > XE, *HLT_noalg_zb_L1ZB_prescale,*cell_met);
+           MET_Algmu50thru60Efficiency->Fill(*L1_MET > XE, *cell_met);
        }
        if ( inMuRange(60.0, 70.0) ){
-           MET_Algmu60thru70Efficiency->FillWeighted(*L1_MET > XE, *HLT_noalg_zb_L1ZB_prescale,*cell_met);
+           MET_Algmu60thru70Efficiency->Fill(*L1_MET > XE, *cell_met);
        }
+
    }
 
    return kTRUE;
