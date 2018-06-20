@@ -54,18 +54,37 @@ void FittingRoutine::fit_efficiencies(){
 
 void FittingRoutine::getTEfficiencyObjects( TString filePath ){
     // load TEfficiency objects into TClonesArray into memory; file path needs to be passed in from program.
+    // open file READ mode 
     EfficiencyFile = TFile::Open( filePath, "READ" );
+    // get the list of keys of all objects in file 
     TList* TFileKeyList = EfficiencyFile->GetListOfKeys();
+    // compute how many keys in list 
     numberSlices = TFileKeyList->GetEntries();
+    // create an iterator for the list
     TIter* keyIter = new TIter( TFileKeyList );
     TKey* key = 0;
+    // while you can read in new keys from the iterator
     while ( key = (TKey*) keyIter->Next()){
+        // determine what the class contained in the key is 
         TClass* cl = gROOT->GetClass( key->GetClassName() );
+        // if the class does not inherit from TEfficiency
         if ( !cl->InheritsFrom("TEfficiency")){
+            // skip
             continue;
         }
 
-    }«»
+        // get the pointer to tefficiency from key
+        TEfficiency* teff = (TEfficiency*)key->ReadObj();
+        // print the name of current tefficiency object for sanity check
+        printf("TEfficiency Read: %s", teff->GetName());
+
+        // push back to tclonesarray
+        teff = (TEfficiency*) TEfficiencyArray->ConstructedAt(i);
+    }
+
+    // close the file
+    EfficiencyFile->Close();
+
 }
 
 void FittingRoutine::writeFitsToFile( TString fileName ){

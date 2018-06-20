@@ -33,25 +33,25 @@ Bool_t PlotMETDistsVersMu::Process(Long64_t entry)
     MET_Datamu50thru60->Sumw2();
     MET_Datamu60thru70->Sumw2();
    if ( /*isPassnoAlgXE30() &&*/ passedL1ZB()  && isGoodRun() ){
-       if ( *InTimePileup > 0.0 && *InTimePileup < 10.0  ){
+       if ( inMuRange( 0.0 , 10.0) ){
            MET_Datamu0thru10->Fill(*MET_Data, *HLT_noalg_zb_L1ZB_prescale);
        }
-       if ( *InTimePileup > 10.0 && *InTimePileup < 20.0  ){
+       if ( inMuRange( 10.0, 20.0) ){
            MET_Datamu10thru20->Fill(*MET_Data, *HLT_noalg_zb_L1ZB_prescale);
        }
-       if ( *InTimePileup > 20.0 && *InTimePileup < 30.0  ){
+       if ( inMuRange( 20.0 , 30.0) ){
            MET_Datamu20thru30->Fill(*MET_Data, *HLT_noalg_zb_L1ZB_prescale);
        }
-       if ( *InTimePileup > 30.0 && *InTimePileup < 40.0  ){
+       if ( inMuRange( 30.0, 40.0) ){
            MET_Datamu30thru40->Fill(*MET_Data, *HLT_noalg_zb_L1ZB_prescale);
        }
-       if ( *InTimePileup > 40.0 && *InTimePileup < 50.0  ){
+       if ( inMuRange( 40.0 , 50.0 ) ){
            MET_Datamu40thru50->Fill(*MET_Data, *HLT_noalg_zb_L1ZB_prescale);
        }
-       if ( *InTimePileup > 50.0 && *InTimePileup < 60.0  ){
+       if ( inMuRange( 50.0 , 60.0 ) ){
            MET_Datamu50thru60->Fill(*MET_Data, *HLT_noalg_zb_L1ZB_prescale);
        }
-       if ( *InTimePileup > 60.0 && *InTimePileup < 70.0  ){
+       if ( inMuRange( 60.0 , 70.0 ) ){
            MET_Datamu60thru70->Fill(*MET_Data, *HLT_noalg_zb_L1ZB_prescale);
        }
    }
@@ -139,3 +139,7 @@ Bool_t PlotMETDistsVersMu::passedL1ZB(){
 Bool_t PlotMETDistsVersMu::isPassnoAlgXE30(){
     return (*HLT_noalg_L1XE30_passed);
 }
+
+Bool_t L1XEefficiencySelector::inMuRange( Float_t a , Float_t b ){ //{{{
+    return ( *InTimePileup > a && *InTimePileup < b );
+} //}}}
