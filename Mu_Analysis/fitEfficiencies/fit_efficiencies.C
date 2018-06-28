@@ -80,7 +80,7 @@ void fit_efficiencies(){
     mu30thru40FitFunction->SetLineColor(4);
     mu40thru50FitFunction->SetLineColor(12);
     mu50thru60FitFunction->SetLineColor(6);
-    mu60thru70FitFunction->SetLineColor(9);
+    mu60thru70FitFunction->SetLineColor(8);
 
     mu0thru10FitFunction->Draw();
     mu10thru20FitFunction->Draw("SAME");
