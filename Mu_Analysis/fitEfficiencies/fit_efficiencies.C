@@ -69,6 +69,16 @@ void fit_efficiencies(){
     mu50thru60FitFunction->SetName("metmu50thru60Fit");
     mu60thru70FitFunction->SetName("metmu60thru70Fit");
 
+    TCanvas* mycanv = new TCanvas("fitFunctionCanv", "Efficiency Fits");
+
+    mu0thru10FitFunction->SetLineColor(1);
+    mu10thru20FitFunction->SetLineColor(2);
+    mu20thru30FitFunction->SetLineColor(3);
+    mu30thru40FitFunction->SetLineColor(4);
+    mu40thru50FitFunction->SetLineColor(12);
+    mu50thru60FitFunction->SetLineColor(6);
+    mu60thru70FitFunction->SetLineColor(9);
+
     mu0thru10FitFunction->Draw();
     mu10thru20FitFunction->Draw("SAME");
     mu20thru30FitFunction->Draw("SAME");
@@ -77,9 +87,20 @@ void fit_efficiencies(){
     mu50thru60FitFunction->Draw("SAME");
     mu60thru70FitFunction->Draw("SAME");
 
+    mycanv->SetTitle("MET Slices in Mu");
+    //gPad->SetLogy();
+    TLegend* legend = new TLegend();
+    legend->AddEntry(mu0thru10FitFunction);
+    legend->AddEntry(mu10thru20FitFunction);
+    legend->AddEntry(mu20thru30FitFunction);
+    legend->AddEntry(mu30thru40FitFunction);
+    legend->AddEntry(mu40thru50FitFunction);
+    legend->AddEntry(mu50thru60FitFunction);
+    legend->AddEntry(mu60thru70FitFunction);
+    legend->Draw("SAME");
+    gStyle->SetOptStat(0);
 
     TFile* FitFile = TFile::Open( efficiencyFitsFilePath , "RECREATE" );
-
     mu0thru10FitFunction->Write();
     mu10thru20FitFunction->Write();
     mu20thru30FitFunction->Write();
