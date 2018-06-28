@@ -41,7 +41,7 @@ TF1* FittingRoutine::generateFitFunction(){
 
 void FittingRoutine::fit_efficiencies(){
     printf("Number of objects in TEfficiency File: %d", numberSlices);
-    EfficiencyArray = new TClonesArray( "TEfficiency", numberSlices );
+    TEfficiencyArray = new TClonesArray( "TEfficiency", numberSlices );
     FitArray = new TClonesArray( "TF1", numberSlices );
     for ( sliceNdx ; sliceNdx  < numberSlices ; sliceNdx++){
         printf("Current slice: %d" , sliceNdx);
