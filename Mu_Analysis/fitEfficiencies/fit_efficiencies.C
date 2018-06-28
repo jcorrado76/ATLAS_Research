@@ -1,37 +1,16 @@
 #include <iostream>
 #include <TClonesArray.h>
 
-void fit_efficiencies(){
-    TString filePath = "EfficiencyFits.root";
-    std::cout << "Entered fit_Efficiencies\n" << std::endl;
-    getTEfficiencyObjects( filePath );
-    try{
-        std::cout << "Entered fit efficiencies \n" << std::endl;
-        MyFittingRoutine->fit_efficiencies();
-    }
-    catch(...){
-        std::cout << "Something failed inside fit_efficiencies" << std::endl;
-    }
-    try{
-        std::cout << "Entered Write fits to file \n" << std::endl;
-        MyFittingRoutine->writeFitsToFile();
-    }
-    catch(...) {
-        std::cout << "Failed to write new TF1 fits to file" << std::endl;
-    }
-
-}
-
-Double_t FittingRoutine::myfunction(Double_t *x , Double_t *par ){
+Double_t fitFunction(Double_t *x , Double_t *par ){
     Float_t xx = x[0];
     Double_t l1cut = 30.0;
     Double_t f = (1./2.)*(1.+TMath::Erf((par[0]*x[0]+par[1]-l1cut)/(par[2]*TMath::Sqrt(2.))));
     return f;
 }
 
-void FittingRoutine::myfunc()
+void myfunc()
 {
-   TF1 *fitErrorFunction = new TF1("myfunc",myfunction,0.0,105.0,3);
+   TF1 *fitErrorFunction = new TF1("myfunc",fitFunction,0.0,105.0,3);
     //set the normalization to 1
     //set the x translation to 0
     //initialize sigma to 10
@@ -42,8 +21,7 @@ void FittingRoutine::myfunc()
     fitErrorFunction->SetParNames("Slope","Translation","Sigma");
 }
 
-
-TF1* FittingRoutine::generateFitFunction(){
+TF1* generateFitFunction(){
     // initialize the TEfficiency object that will hold each TEfficiency on each iteration 
     TF1* fitErrorFunction = (TF1*)gROOT->GetFunction("myfunc");
     // get the efficiency from the tclones array
@@ -60,6 +38,32 @@ TF1* FittingRoutine::generateFitFunction(){
     return fitErrorFunction;
 }
 
+void fit_efficiencies(){
+    TString filePath = "EfficiencyFits.root";
+
+    TFile* myfile = TFile::Open(filePath);
+   TEfficiency*  MET_Algmu0thru10Efficiency = (TEfficiency*)myfile->Get("metmu0thru10Efficiency");
+   TEfficiency*  MET_Algmu10thru20Efficiency =(TEfficiency*)myfile->Get("metmu10thru20Efficiency");
+   TEfficiency*  MET_Algmu20thru30Efficiency = (TEfficiency*)myfile->Get("metmu20thru30Efficiency");
+   TEfficiency*  MET_Algmu30thru40Efficiency = (TEfficiency*)myfile->Get("metmu30thru40Efficiency");
+   TEfficiency*  MET_Algmu40thru50Efficiency = (TEfficiency*)myfile->Get("metmu40thru50Efficiency");
+   TEfficiency*  MET_Algmu50thru60Efficiency = (TEfficiency*)myfile->Get("metmu50thru60Efficiency");
+   TEfficiency*  MET_Algmu60thru70Efficiency = (TEfficiency*)myfile->Get("metmu60thru70Efficiency");
+
+
+
+        MyFittingRoutine->fit_efficiencies();
+    }
+    catch(...){
+        std::cout << "Something failed inside fit_efficiencies" << std::endl;
+    }
+    FitFile = TFile::Open( fileName, "RECREATE" );
+    FitArray->Write();
+    FitFile->Close();
+}
+
+
+
 void FittingRoutine::fit_efficiencies(){
     printf("Number of objects in TEfficiency File: %d", numberSlices);
     TEfficiencyArray = new TClonesArray( "TEfficiency", numberSlices );
@@ -74,57 +78,3 @@ void FittingRoutine::fit_efficiencies(){
     }
 }
 
-void TEfficiencyObjects( TString filePath ){
-    // load TEfficiency objects into TClonesArray into memory; file path needs to be passed in from program.
-    // open file READ mode 
-    try{
-        EfficiencyFile = TFile::Open( filePath, "READ" );
-    }
-    catch(...){
-        std::cout << "Could not open: " << filePath << std::endl;
-    }
-    // get the list of keys of all objects in file 
-    TList* TFileKeyList = EfficiencyFile->GetListOfKeys();
-    // compute how many keys in list 
-    numberSlices = TFileKeyList->GetEntries();
-    // create an iterator for the list
-    TIter* keyIter = new TIter( TFileKeyList );
-    TKey* key = 0;
-    sliceNdx = 0;
-    // while you can read in new keys from the iterator
-    while ( (key = (TKey*) keyIter->Next())){
-        // determine what the class contained in the key is 
-        TClass* cl = gROOT->GetClass( key->GetClassName() );
-        // if the class does not inherit from TEfficiency
-        if ( !cl->InheritsFrom("TEfficiency")){
-            // skip
-            continue;
-        }
-
-        // get the pointer to tefficiency from key
-        TEfficiency* teff = (TEfficiency*)key->ReadObj();
-        // print the name of current tefficiency object for sanity check
-        printf("TEfficiency Read: %s", teff->GetName());
-
-        // push back to tclonesarray
-        teff = (TEfficiency*) TEfficiencyArray->ConstructedAt(sliceNdx);
-        sliceNdx++;
-    }
-
-    // close the file
-    EfficiencyFile->Close();
-
-}
-
-void FittingRoutine::writeFitsToFile( TString fileName ){
-    FitFile = TFile::Open( fileName, "RECREATE" );
-    // this will write each object separately to file
-    FitArray->Write();
-    FitFile->Close();
-}
-
-FittingRoutine::FittingRoutine()
-    :EfficiencyFile(0),FitFile(0), TEfficiencyArray(0),FitArray(0), numberSlices(0), sliceNdx(0), currTEfficiencyObj(0), currFitFunc(0)
-{}
-
-FittingRoutine::~FittingRoutine(){}
