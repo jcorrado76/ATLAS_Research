@@ -38,4 +38,4 @@ fit_efficiencies.o : fit_efficiencies.C
 	$(CC) -c fit_efficiencies.C ${ROOTFLG} 
 
 clean :
-	rm *.pcm *.d *.so
+	rm *.pcm *.d *.so *.swp
