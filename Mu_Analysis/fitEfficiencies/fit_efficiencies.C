@@ -2,6 +2,9 @@
 #include <TEfficiency.h>
 #include <TFile.h>
 #include <TF1.h>
+#include <TLegend.h>
+#include <TCanvas.h>
+#include <TStyle.h>
 
 
 Double_t fitFunction(Double_t *x , Double_t *par ){
@@ -87,16 +90,16 @@ void fit_efficiencies(){
     mu50thru60FitFunction->Draw("SAME");
     mu60thru70FitFunction->Draw("SAME");
 
-    mycanv->SetTitle("MET Slices in Mu");
+    mycanv->SetTitle("Fits to Efficiency");
     //gPad->SetLogy();
     TLegend* legend = new TLegend();
-    legend->AddEntry(mu0thru10FitFunction);
-    legend->AddEntry(mu10thru20FitFunction);
-    legend->AddEntry(mu20thru30FitFunction);
-    legend->AddEntry(mu30thru40FitFunction);
-    legend->AddEntry(mu40thru50FitFunction);
-    legend->AddEntry(mu50thru60FitFunction);
-    legend->AddEntry(mu60thru70FitFunction);
+    legend->AddEntry(mu0thru10FitFunction, "mu 0 to 10");
+    legend->AddEntry(mu10thru20FitFunction , "mu 10 to 20");
+    legend->AddEntry(mu20thru30FitFunction, "mu 20 to 30");
+    legend->AddEntry(mu30thru40FitFunction, "mu 30 to 40");
+    legend->AddEntry(mu40thru50FitFunction, "mu 40 to 50");
+    legend->AddEntry(mu50thru60FitFunction , "mu 50 to 60");
+    legend->AddEntry(mu60thru70FitFunction , "mu 60 to 70");
     legend->Draw("SAME");
     gStyle->SetOptStat(0);
 
