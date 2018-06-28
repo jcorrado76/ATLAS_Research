@@ -64,6 +64,7 @@ void FittingRoutine::getTEfficiencyObjects( TString filePath ){
     // create an iterator for the list
     TIter* keyIter = new TIter( TFileKeyList );
     TKey* key = 0;
+    sliceNdx = 0;
     // while you can read in new keys from the iterator
     while ( (key = (TKey*) keyIter->Next())){
         // determine what the class contained in the key is 
@@ -80,7 +81,8 @@ void FittingRoutine::getTEfficiencyObjects( TString filePath ){
         printf("TEfficiency Read: %s", teff->GetName());
 
         // push back to tclonesarray
-        teff = (TEfficiency*) TEfficiencyArray->ConstructedAt(i);
+        teff = (TEfficiency*) TEfficiencyArray->ConstructedAt(sliceNdx);
+        sliceNdx++;
     }
 
     // close the file
