@@ -7,6 +7,7 @@
 #include <TClonesArray.h>
 #include <TString.h>
 #include <TKey.h>
+#include <TClass.h>
 
 class FittingRoutine{
     private:
