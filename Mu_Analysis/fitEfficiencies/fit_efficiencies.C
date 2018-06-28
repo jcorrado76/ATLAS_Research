@@ -43,35 +43,16 @@ void fit_efficiencies(){
     TString efficiencyFitsFilePath = "EfficiencyFits.root";
 
     TFile* myfile = TFile::Open(efficiencyObjectFilePath);
-   TEfficiency*  MET_Algmu0thru10Efficiency = (TEfficiency*)myfile->Get("metmu0thru10Efficiency");
-   TEfficiency*  MET_Algmu10thru20Efficiency =(TEfficiency*)myfile->Get("metmu10thru20Efficiency");
-   TEfficiency*  MET_Algmu20thru30Efficiency = (TEfficiency*)myfile->Get("metmu20thru30Efficiency");
-   TEfficiency*  MET_Algmu30thru40Efficiency = (TEfficiency*)myfile->Get("metmu30thru40Efficiency");
-   TEfficiency*  MET_Algmu40thru50Efficiency = (TEfficiency*)myfile->Get("metmu40thru50Efficiency");
-   TEfficiency*  MET_Algmu50thru60Efficiency = (TEfficiency*)myfile->Get("metmu50thru60Efficiency");
-   TEfficiency*  MET_Algmu60thru70Efficiency = (TEfficiency*)myfile->Get("metmu60thru70Efficiency");
+    TEfficiency*  MET_Algmu0thru10Efficiency = (TEfficiency*)myfile->Get("metmu0thru10Efficiency");
+    TEfficiency*  MET_Algmu10thru20Efficiency =(TEfficiency*)myfile->Get("metmu10thru20Efficiency");
+    TEfficiency*  MET_Algmu20thru30Efficiency = (TEfficiency*)myfile->Get("metmu20thru30Efficiency");
+    TEfficiency*  MET_Algmu30thru40Efficiency = (TEfficiency*)myfile->Get("metmu30thru40Efficiency");
+    TEfficiency*  MET_Algmu40thru50Efficiency = (TEfficiency*)myfile->Get("metmu40thru50Efficiency");
+    TEfficiency*  MET_Algmu50thru60Efficiency = (TEfficiency*)myfile->Get("metmu50thru60Efficiency");
+    TEfficiency*  MET_Algmu60thru70Efficiency = (TEfficiency*)myfile->Get("metmu60thru70Efficiency");
 
-
-
-        MyFittingRoutine->fit_efficiencies();
+    TF1* mu0thru10FitFunction = generateFitFunction( MET_Algmu0thru10Efficiency);
     FitFile = TFile::Open( efficiencyFitsFilePath , "RECREATE" );
     FitArray->Write();
     FitFile->Close();
 }
-
-
-
-void FittingRoutine::fit_efficiencies(){
-    printf("Number of objects in TEfficiency File: %d", numberSlices);
-    TEfficiencyArray = new TClonesArray( "TEfficiency", numberSlices );
-    FitArray = new TClonesArray( "TF1", numberSlices );
-    for ( sliceNdx ; sliceNdx  < numberSlices ; sliceNdx++){
-        printf("Current slice: %d" , sliceNdx);
-        // get TEfficiency from file reading in
-        currTEfficiencyObj = (TEfficiency*) TEfficiencyArray->ConstructedAt( sliceNdx );
-        currFitFunc = generateFitFunction();
-        // construct a fit object in output array 
-        currFitFunc = (TF1*) FitArray->ConstructedAt( sliceNdx );
-    }
-}
-
