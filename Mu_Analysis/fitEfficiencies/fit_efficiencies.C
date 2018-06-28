@@ -1,5 +1,4 @@
 #include <iostream>
-#include <TClonesArray.h>
 
 Double_t fitFunction(Double_t *x , Double_t *par ){
     Float_t xx = x[0];
@@ -21,13 +20,10 @@ void myfunc()
     fitErrorFunction->SetParNames("Slope","Translation","Sigma");
 }
 
-TF1* generateFitFunction(){
-    // initialize the TEfficiency object that will hold each TEfficiency on each iteration 
+TF1* generateFitFunction(TEfficiency* teff_obj){
     TF1* fitErrorFunction = (TF1*)gROOT->GetFunction("myfunc");
-    // get the efficiency from the tclones array
-    currTEfficiencyObj = (TEfficiency*)TEfficiencyArray->ConstructedAt(sliceNdx);
     //"R" tells the fit function from BinomialEfficiency::Fit to use the range of the TF1 as the fitting range
-    currTEfficiencyObj->Fit( fitErrorFunction  , "R" );
+    teff_obj->Fit( fitErrorFunction  , "R" );
 
     std::cout << "Value of fit for a: " << fitErrorFunction->GetParameter(0) << std::endl;
     std::cout << "Value of error on a: " << fitErrorFunction->GetParError(0) << std::endl;
@@ -63,13 +59,13 @@ void fit_efficiencies(){
 
     TFile* FitFile = TFile::Open( efficiencyFitsFilePath , "RECREATE" );
 
-    TF1* mu0thru10FitFunction->Write();
-    TF1* mu10thru20FitFunction->Write():
-    TF1* mu20thru30FitFunction->Write():
-    TF1* mu30thru40FitFunction->Write():
-    TF1* mu40thru50FitFunction->Write():
-    TF1* mu50thru60FitFunction->Write():
-    TF1* mu60thru70FitFunction->Write():
+    mu0thru10FitFunction->Write();
+    mu10thru20FitFunction->Write();
+    mu20thru30FitFunction->Write();
+    mu30thru40FitFunction->Write();
+    mu40thru50FitFunction->Write();
+    mu50thru60FitFunction->Write();
+    mu60thru70FitFunction->Write();
 
     FitFile->Close();
     
