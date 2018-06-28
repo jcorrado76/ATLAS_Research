@@ -62,6 +62,16 @@ void L1XEefficiencySelector::Terminate() // Plotting {{{
     MET_Algmu50thru60Efficiency->SetLineColor(6);
     MET_Algmu60thru70Efficiency->SetLineColor(9);
 
+    
+    MET_Algmu0thru10Efficiency->SetMarkerStyle(29);
+    MET_Algmu10thru20Efficiency->SetMarkerStyle(20);
+    MET_Algmu20thru30Efficiency->SetMarkerStyle(3);
+    MET_Algmu30thru40Efficiency->SetMarkerStyle(4);
+    MET_Algmu40thru50Efficiency->SetMarkerStyle(27);
+    MET_Algmu50thru60Efficiency->SetMarkerStyle(22);
+    MET_Algmu60thru70Efficiency->SetMarkerStyle(21);
+
+
 
     MET_Algmu10thru20Efficiency->Draw();
     MET_Algmu20thru30Efficiency->Draw("SAME");
