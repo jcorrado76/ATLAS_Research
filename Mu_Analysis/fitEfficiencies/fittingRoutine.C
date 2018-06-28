@@ -1,4 +1,5 @@
 #include "fittingRoutine.h"
+ClassImp(FittingRoutine);
 
 Double_t FittingRoutine::myfunction(Double_t *x , Double_t *par ){
     Float_t xx = x[0];
