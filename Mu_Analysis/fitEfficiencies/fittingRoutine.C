@@ -26,7 +26,7 @@ TF1* FittingRoutine::generateFitFunction(){
     // initialize the TEfficiency object that will hold each TEfficiency on each iteration 
     TF1* fitErrorFunction = (TF1*)gROOT->GetFunction("myfunc");
     // get the efficiency from the tclones array
-    currTEfficiencyObj = (TEfficiency*)EfficiencyArray->ConstructedAt(sliceNdx);
+    currTEfficiencyObj = (TEfficiency*)TEfficiencyArray->ConstructedAt(sliceNdx);
     //"R" tells the fit function from BinomialEfficiency::Fit to use the range of the TF1 as the fitting range
     currTEfficiencyObj->Fit( fitErrorFunction  , "R" );
 
