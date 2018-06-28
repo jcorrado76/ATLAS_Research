@@ -24,15 +24,13 @@
            #insert.o search.o files.o utils.o
 
 CC=g++
-SRC=fittingRoutine.C fit_efficiencies.C
-HDR=fittingRoutine.h
 ROOTFLG=`root-config --cflags --libs`
 
 fitting_routine.exe : fitting_routine.o fit_efficiencies.o
-	$(CC) -o fitting_routine.exe fitting_routine.o fit_efficiencies.o ${ROOTFLG}
+	$(CC) -o fitting_routine.exe fittingRoutine.o fit_efficiencies.o ${ROOTFLG}
 
-fitting_routine.o : fitting_routine.C fitting_routine.h
-	$(CC) -c fitting_routine.C ${ROOTFLG}
+fitting_routine.o : fittingRoutine.C fittingRoutine.h
+	$(CC) -c fittingRoutine.C fittingRoutine.h ${ROOTFLG}
 
 fit_efficiencies.o : fit_efficiencies.C
 	$(CC) -c fit_efficiencies.C ${ROOTFLG} 
