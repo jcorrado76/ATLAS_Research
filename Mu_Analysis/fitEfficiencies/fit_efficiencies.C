@@ -39,9 +39,10 @@ TF1* generateFitFunction(){
 }
 
 void fit_efficiencies(){
-    TString filePath = "EfficiencyFits.root";
+    TString efficiencyObjectFilePath = "EfficiencyObjects.root";
+    TString efficiencyFitsFilePath = "EfficiencyFits.root";
 
-    TFile* myfile = TFile::Open(filePath);
+    TFile* myfile = TFile::Open(efficiencyObjectFilePath);
    TEfficiency*  MET_Algmu0thru10Efficiency = (TEfficiency*)myfile->Get("metmu0thru10Efficiency");
    TEfficiency*  MET_Algmu10thru20Efficiency =(TEfficiency*)myfile->Get("metmu10thru20Efficiency");
    TEfficiency*  MET_Algmu20thru30Efficiency = (TEfficiency*)myfile->Get("metmu20thru30Efficiency");
@@ -53,11 +54,7 @@ void fit_efficiencies(){
 
 
         MyFittingRoutine->fit_efficiencies();
-    }
-    catch(...){
-        std::cout << "Something failed inside fit_efficiencies" << std::endl;
-    }
-    FitFile = TFile::Open( fileName, "RECREATE" );
+    FitFile = TFile::Open( efficiencyFitsFilePath , "RECREATE" );
     FitArray->Write();
     FitFile->Close();
 }
