@@ -29,6 +29,7 @@ class FittingRoutine{
         static Double_t myfunction(Double_t *x , Double_t *par );
         void myfunc();
         
+        ClassDef(FittingRoutine,0);
         
 
 
