@@ -6,27 +6,27 @@
     try{
         FittingRoutine* MyFittingRoutine = new FittingRoutine();
     }
-    catch(){
+    catch(...){
         std::cout << "Failed to initialize the fittingroutine object" << std::endl;
     }
     try{
         MyFittingRoutine->getTEfficiencyObjects( filePath );
     }
-    catch)_{
+    catch(...){
         std::cout << "Failed to get the tefficiency objects from: " << filePath << std::endl;
     }
     try{
         MyFittingRoutine->fit_efficiencies();
     }
-    catch(){
+    catch(...){
         std::cout << "Something failed inside fit_efficiencies" << std::endl;
     }
     try{
         MyFittingRoutine->writeFitsToFile();
     }
-    catch() {
+    catch(...) {
         std::cout << "Failed to write new TF1 fits to file" << std::endl;
-    }«»
+    }
 
 }
 
