@@ -65,7 +65,7 @@ void FittingRoutine::getTEfficiencyObjects( TString filePath ){
     TIter* keyIter = new TIter( TFileKeyList );
     TKey* key = 0;
     // while you can read in new keys from the iterator
-    while ( (key = (TKey*) keyIter->Next()){
+    while ( (key = (TKey*) keyIter->Next())){
         // determine what the class contained in the key is 
         TClass* cl = gROOT->GetClass( key->GetClassName() );
         // if the class does not inherit from TEfficiency
