@@ -46,7 +46,7 @@ void FittingRoutine::fit_efficiencies(){
     for ( sliceNdx ; sliceNdx  < numberSlices ; sliceNdx++){
         printf("Current slice: %d" , sliceNdx);
         // get TEfficiency from file reading in
-        currTEfficiencyObj = (TEfficiency*) EfficiencyArray->ConstructedAt( sliceNdx );
+        currTEfficiencyObj = (TEfficiency*) TEfficiencyArray->ConstructedAt( sliceNdx );
         currFitFunc = generateFitFunction();
         // construct a fit object in output array 
         currFitFunc = (TF1*) FitArray->ConstructedAt( sliceNdx );
