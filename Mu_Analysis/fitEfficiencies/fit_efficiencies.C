@@ -12,7 +12,7 @@ Double_t fitFunction(Double_t *x , Double_t *par ){
 }
 
 TF1* generateFitFunction(TEfficiency* teff_obj){
-    TF1 *fitErrorFunction = new TF1("myfunc",fitFunction,0.0,105.0,3);
+    TF1 *fitErrorFunction = new TF1("fitFunction",fitFunction,0.0,105.0,3);
     //set the normalization to 1
     //set the x translation to 0
     //initialize sigma to 10
