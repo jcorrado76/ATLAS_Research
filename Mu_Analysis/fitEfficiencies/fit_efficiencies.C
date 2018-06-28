@@ -1,4 +1,8 @@
 #include <iostream>
+#include <TEfficiency.h>
+#include <TFile.h>
+#include <TF1.h>
+
 
 Double_t fitFunction(Double_t *x , Double_t *par ){
     Float_t xx = x[0];
@@ -39,6 +43,7 @@ void fit_efficiencies(){
     TString efficiencyFitsFilePath = "EfficiencyFits.root";
 
     TFile* myfile = TFile::Open(efficiencyObjectFilePath);
+    std::cout << "Getting efficiency objects from file" << std::endl;
     TEfficiency*  MET_Algmu0thru10Efficiency = (TEfficiency*)myfile->Get("metmu0thru10Efficiency");
     TEfficiency*  MET_Algmu10thru20Efficiency =(TEfficiency*)myfile->Get("metmu10thru20Efficiency");
     TEfficiency*  MET_Algmu20thru30Efficiency = (TEfficiency*)myfile->Get("metmu20thru30Efficiency");
@@ -46,7 +51,9 @@ void fit_efficiencies(){
     TEfficiency*  MET_Algmu40thru50Efficiency = (TEfficiency*)myfile->Get("metmu40thru50Efficiency");
     TEfficiency*  MET_Algmu50thru60Efficiency = (TEfficiency*)myfile->Get("metmu50thru60Efficiency");
     TEfficiency*  MET_Algmu60thru70Efficiency = (TEfficiency*)myfile->Get("metmu60thru70Efficiency");
+    std::cout << "Successfully got efficiency objects from file" << std::endl;
 
+    std::cout << "Attempting to generate fit functions" << std::endl;
     TF1* mu0thru10FitFunction = generateFitFunction( MET_Algmu0thru10Efficiency);
     TF1* mu10thru20FitFunction = generateFitFunction( MET_Algmu10thru20Efficiency);
     TF1* mu20thru30FitFunction = generateFitFunction( MET_Algmu20thru30Efficiency);
@@ -54,6 +61,7 @@ void fit_efficiencies(){
     TF1* mu40thru50FitFunction = generateFitFunction( MET_Algmu40thru50Efficiency);
     TF1* mu50thru60FitFunction = generateFitFunction( MET_Algmu50thru60Efficiency);
     TF1* mu60thru70FitFunction = generateFitFunction( MET_Algmu60thru70Efficiency);
+    std::cout << "Successfully generated fit functions" << std::endl;
 
     myfile->Close();
 
