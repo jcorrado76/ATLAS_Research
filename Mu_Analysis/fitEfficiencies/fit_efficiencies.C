@@ -69,6 +69,13 @@ void fit_efficiencies(){
     mu50thru60FitFunction->SetName("metmu50thru60Fit");
     mu60thru70FitFunction->SetName("metmu60thru70Fit");
 
+    mu0thru10FitFunction->Draw();
+    mu10thru20FitFunction->Draw("SAME");
+    mu20thru30FitFunction->Draw("SAME");
+    mu30thru40FitFunction->Draw("SAME");
+    mu40thru50FitFunction->Draw("SAME");
+    mu50thru60FitFunction->Draw("SAME");
+    mu60thru70FitFunction->Draw("SAME");
 
 
     TFile* FitFile = TFile::Open( efficiencyFitsFilePath , "RECREATE" );
