@@ -58,8 +58,19 @@ void fit_efficiencies(){
     TF1* mu40thru50FitFunction = generateFitFunction( MET_Algmu40thru50Efficiency);
     TF1* mu50thru60FitFunction = generateFitFunction( MET_Algmu50thru60Efficiency);
     TF1* mu60thru70FitFunction = generateFitFunction( MET_Algmu60thru70Efficiency);
+
     myfile->Close();
+
     TFile* FitFile = TFile::Open( efficiencyFitsFilePath , "RECREATE" );
+
+    TF1* mu0thru10FitFunction->Write();
+    TF1* mu10thru20FitFunction->Write():
+    TF1* mu20thru30FitFunction->Write():
+    TF1* mu30thru40FitFunction->Write():
+    TF1* mu40thru50FitFunction->Write():
+    TF1* mu50thru60FitFunction->Write():
+    TF1* mu60thru70FitFunction->Write():
+
     FitFile->Close();
     
 }
