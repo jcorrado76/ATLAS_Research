@@ -56,7 +56,12 @@ void FittingRoutine::fit_efficiencies(){
 void FittingRoutine::getTEfficiencyObjects( TString filePath ){
     // load TEfficiency objects into TClonesArray into memory; file path needs to be passed in from program.
     // open file READ mode 
-    EfficiencyFile = TFile::Open( filePath, "READ" );
+    try{
+        EfficiencyFile = TFile::Open( filePath, "READ" );
+    }
+    catch(...){
+        std::cout << "Could not open: " << filePath << std::endl;
+    }
     // get the list of keys of all objects in file 
     TList* TFileKeyList = EfficiencyFile->GetListOfKeys();
     // compute how many keys in list 
