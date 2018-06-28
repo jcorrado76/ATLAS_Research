@@ -7,13 +7,12 @@
 Double_t fitFunction(Double_t *x , Double_t *par ){
     Float_t xx = x[0];
     Double_t l1cut = 30.0;
-    Double_t f = (1./2.)*(1.+TMath::Erf((par[0]*x[0]+par[1]-l1cut)/(par[2]*TMath::Sqrt(2.))));
-    return f;
+    Double_t fitval = (1./2.)*(1.+TMath::Erf((par[0]*x[0]+par[1]-l1cut)/(par[2]*TMath::Sqrt(2.))));
+    return fitval;
 }
 
-void myfunc()
-{
-   TF1 *fitErrorFunction = new TF1("myfunc",fitFunction,0.0,105.0,3);
+TF1* generateFitFunction(TEfficiency* teff_obj){
+    TF1 *fitErrorFunction = new TF1("myfunc",fitFunction,0.0,105.0,3);
     //set the normalization to 1
     //set the x translation to 0
     //initialize sigma to 10
@@ -22,10 +21,6 @@ void myfunc()
     fitErrorFunction->SetParameter(2, 10.);
     //initializing parameters reasonably is important because it is a maximum likelihood fit
     fitErrorFunction->SetParNames("Slope","Translation","Sigma");
-}
-
-TF1* generateFitFunction(TEfficiency* teff_obj){
-    TF1* fitErrorFunction = (TF1*)gROOT->GetFunction("myfunc");
     //"R" tells the fit function from BinomialEfficiency::Fit to use the range of the TF1 as the fitting range
     teff_obj->Fit( fitErrorFunction  , "R" );
 
@@ -45,6 +40,7 @@ void fit_efficiencies(){
     TFile* myfile = TFile::Open(efficiencyObjectFilePath);
     std::cout << "Getting efficiency objects from file" << std::endl;
     TEfficiency*  MET_Algmu0thru10Efficiency = (TEfficiency*)myfile->Get("metmu0thru10Efficiency");
+    std::cout << "First efficiency object name: " << MET_Algmu0thru10Efficiency->GetName() << std::endl;
     TEfficiency*  MET_Algmu10thru20Efficiency =(TEfficiency*)myfile->Get("metmu10thru20Efficiency");
     TEfficiency*  MET_Algmu20thru30Efficiency = (TEfficiency*)myfile->Get("metmu20thru30Efficiency");
     TEfficiency*  MET_Algmu30thru40Efficiency = (TEfficiency*)myfile->Get("metmu30thru40Efficiency");
