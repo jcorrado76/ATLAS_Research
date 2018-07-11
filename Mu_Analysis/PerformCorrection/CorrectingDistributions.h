@@ -24,6 +24,13 @@ class CorrectingDistributions : public TSelector {
 public :
    TTreeReader     fReader;  //!the tree reader
    TTree          *fChain = 0;   //!pointer to the analyzed TTree or TChain
+   TH1F*            MET_Correctedmu0thru10 = 0;
+   TH1F*            MET_Correctedmu10thru20 = 0;
+   TH1F*            MET_Correctedmu20thru30 = 0;
+   TH1F*            MET_Correctedmu30thru40 = 0;
+   TH1F*            MET_Correctedmu40thru50 = 0;
+   TH1F*            MET_Correctedmu50thru60 = 0;
+   TH1F*            MET_Correctedmu60thru70 = 0;
 
    // Readers to access the data (delete the ones you do not need).
    TTreeReaderValue<UInt_t> RunNumber = {fReader, "RunNumber"};

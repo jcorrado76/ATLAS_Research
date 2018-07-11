@@ -20,6 +20,8 @@ Bool_t CorrectingDistributions::Process(Long64_t entry)
 {
    fReader.SetEntry(entry);
 
+   // fill 7 histograms with METCELL, but make the weight the corrected weight, and also correct the error
+
    return kTRUE;
 }
 
