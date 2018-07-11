@@ -65,7 +65,7 @@ public :
    virtual void    Terminate();
    Bool_t isGoodRun();
    Bool_t passedL1ZB();
-   Bool_t isPassnoAlgXE30();
+   Bool_t isPassnoAlgL1XE30();
    Bool_t inMuRange( Float_t , Float_t );
    Double_t ComputeWeight(TF1*);
 
@@ -75,29 +75,3 @@ public :
 
 #endif
 
-#ifdef CorrectingDistributions_cxx
-void CorrectingDistributions::Init(TTree *tree)
-{
-   // The Init() function is called when the selector needs to initialize
-   // a new tree or chain. Typically here the reader is initialized.
-   // It is normally not necessary to make changes to the generated
-   // code, but the routine can be extended by the user if needed.
-   // Init() will be called many times when running on PROOF
-   // (once per file to be processed).
-
-   fReader.SetTree(tree);
-}
-
-Bool_t CorrectingDistributions::Notify()
-{
-   // The Notify() function is called when a new file is opened. This
-   // can be either for a new TTree in a TChain or when when a new TTree
-   // is started when using PROOF. It is normally not necessary to make changes
-   // to the generated code, but the routine can be extended by the
-   // user if needed. The return value is currently not used.
-
-   return kTRUE;
-}
-
-
-#endif // #ifdef CorrectingDistributions_cxx
