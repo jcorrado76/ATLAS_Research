@@ -14,12 +14,10 @@
 #include <TTreeReader.h>
 #include <TTreeReaderValue.h>
 #include <TTreeReaderArray.h>
-
-// Headers needed by this particular selector
+#include <TH2.h>
+#include <TStyle.h>
 #include <vector>
-
-
-
+#include <TF1.h>
 class CorrectingDistributions : public TSelector {
 public :
    TTreeReader     fReader;  //!the tree reader
@@ -41,43 +39,14 @@ public :
    TF1*             EfficiencyFitMuBin7 = 0;
 
    // Readers to access the data (delete the ones you do not need).
-   TTreeReaderValue<UInt_t> RunNumber = {fReader, "RunNumber"};
-   TTreeReaderValue<ULong64_t> EventNumber = {fReader, "EventNumber"};
-   TTreeReaderValue<UInt_t> LumiBlock = {fReader, "LumiBlock"};
-   TTreeReaderValue<UInt_t> NPrimaryVertices = {fReader, "NPrimaryVertices"};
    TTreeReaderValue<Float_t> InTimePileup = {fReader, "InTimePileup"};
    TTreeReaderValue<Float_t> OutOfTimePileup = {fReader, "OutOfTimePileup"};
-   TTreeReaderValue<Float_t> L1_mpx = {fReader, "L1.mpx"};
-   TTreeReaderValue<Float_t> L1_mpy = {fReader, "L1.mpy"};
-   TTreeReaderValue<Float_t> L1_sumet = {fReader, "L1.sumet"};
    TTreeReaderValue<Float_t> L1_met = {fReader, "L1.met"};
-   TTreeReaderValue<Float_t> L1_phi = {fReader, "L1.phi"};
-   TTreeReaderValue<Float_t> cell_mpx = {fReader, "cell.mpx"};
-   TTreeReaderValue<Float_t> cell_mpy = {fReader, "cell.mpy"};
-   TTreeReaderValue<Float_t> cell_sumet = {fReader, "cell.sumet"};
    TTreeReaderValue<Float_t> cell_met = {fReader, "cell.met"};
-   TTreeReaderValue<Float_t> cell_phi = {fReader, "cell.phi"};
    TTreeReaderValue<Bool_t> HLT_noalg_zb_L1ZB_passed = {fReader, "HLT_noalg_zb_L1ZB.passed"};
    TTreeReaderValue<Float_t> HLT_noalg_zb_L1ZB_prescale = {fReader, "HLT_noalg_zb_L1ZB.prescale"};
-   TTreeReaderValue<UInt_t> HLT_noalg_zb_L1ZB_passBits = {fReader, "HLT_noalg_zb_L1ZB.passBits"};
-   TTreeReaderValue<Bool_t> HLT_j40_L1ZB_passed = {fReader, "HLT_j40_L1ZB.passed"};
-   TTreeReaderValue<Float_t> HLT_j40_L1ZB_prescale = {fReader, "HLT_j40_L1ZB.prescale"};
-   TTreeReaderValue<UInt_t> HLT_j40_L1ZB_passBits = {fReader, "HLT_j40_L1ZB.passBits"};
-   TTreeReaderValue<Bool_t> HLT_noalg_L1XE10_passed = {fReader, "HLT_noalg_L1XE10.passed"};
-   TTreeReaderValue<Float_t> HLT_noalg_L1XE10_prescale = {fReader, "HLT_noalg_L1XE10.prescale"};
-   TTreeReaderValue<UInt_t> HLT_noalg_L1XE10_passBits = {fReader, "HLT_noalg_L1XE10.passBits"};
-   TTreeReaderValue<Bool_t> HLT_noalg_L1XE20_passed = {fReader, "HLT_noalg_L1XE20.passed"};
-   TTreeReaderValue<Float_t> HLT_noalg_L1XE20_prescale = {fReader, "HLT_noalg_L1XE20.prescale"};
-   TTreeReaderValue<UInt_t> HLT_noalg_L1XE20_passBits = {fReader, "HLT_noalg_L1XE20.passBits"};
    TTreeReaderValue<Bool_t> HLT_noalg_L1XE30_passed = {fReader, "HLT_noalg_L1XE30.passed"};
    TTreeReaderValue<Float_t> HLT_noalg_L1XE30_prescale = {fReader, "HLT_noalg_L1XE30.prescale"};
-   TTreeReaderValue<UInt_t> HLT_noalg_L1XE30_passBits = {fReader, "HLT_noalg_L1XE30.passBits"};
-   TTreeReaderValue<Bool_t> HLT_noalg_L1XE40_passed = {fReader, "HLT_noalg_L1XE40.passed"};
-   TTreeReaderValue<Float_t> HLT_noalg_L1XE40_prescale = {fReader, "HLT_noalg_L1XE40.prescale"};
-   TTreeReaderValue<UInt_t> HLT_noalg_L1XE40_passBits = {fReader, "HLT_noalg_L1XE40.passBits"};
-   TTreeReaderValue<Bool_t> HLT_noalg_L1XE45_passed = {fReader, "HLT_noalg_L1XE45.passed"};
-   TTreeReaderValue<Float_t> HLT_noalg_L1XE45_prescale = {fReader, "HLT_noalg_L1XE45.prescale"};
-   TTreeReaderValue<UInt_t> HLT_noalg_L1XE45_passBits = {fReader, "HLT_noalg_L1XE45.passBits"};
 
    CorrectingDistributions(TTree * /*tree*/ =0) { }
    virtual ~CorrectingDistributions() { }
@@ -98,6 +67,7 @@ public :
    Bool_t passedL1ZB();
    Bool_t isPassnoAlgXE30();
    Bool_t inMuRange( Float_t , Float_t );
+   Double_t ComputeWeight(TF1*);
 
    ClassDef(CorrectingDistributions,0);
 
