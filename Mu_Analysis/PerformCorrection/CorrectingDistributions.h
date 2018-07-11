@@ -32,6 +32,14 @@ public :
    TH1F*            MET_Correctedmu50thru60 = 0;
    TH1F*            MET_Correctedmu60thru70 = 0;
 
+   TF1*             EfficiencyFitMuBin1 = 0;
+   TF1*             EfficiencyFitMuBin2 = 0;
+   TF1*             EfficiencyFitMuBin3 = 0;
+   TF1*             EfficiencyFitMuBin4 = 0;
+   TF1*             EfficiencyFitMuBin5 = 0;
+   TF1*             EfficiencyFitMuBin6 = 0;
+   TF1*             EfficiencyFitMuBin7 = 0;
+
    // Readers to access the data (delete the ones you do not need).
    TTreeReaderValue<UInt_t> RunNumber = {fReader, "RunNumber"};
    TTreeReaderValue<ULong64_t> EventNumber = {fReader, "EventNumber"};
@@ -49,27 +57,6 @@ public :
    TTreeReaderValue<Float_t> cell_sumet = {fReader, "cell.sumet"};
    TTreeReaderValue<Float_t> cell_met = {fReader, "cell.met"};
    TTreeReaderValue<Float_t> cell_phi = {fReader, "cell.phi"};
-   TTreeReaderValue<Float_t> mht_mpx = {fReader, "mht.mpx"};
-   TTreeReaderValue<Float_t> mht_mpy = {fReader, "mht.mpy"};
-   TTreeReaderValue<Float_t> mht_sumet = {fReader, "mht.sumet"};
-   TTreeReaderValue<Float_t> mht_met = {fReader, "mht.met"};
-   TTreeReaderValue<Float_t> mht_phi = {fReader, "mht.phi"};
-   TTreeReaderValue<Float_t> pufit_mpx = {fReader, "pufit.mpx"};
-   TTreeReaderValue<Float_t> pufit_mpy = {fReader, "pufit.mpy"};
-   TTreeReaderValue<Float_t> pufit_sumet = {fReader, "pufit.sumet"};
-   TTreeReaderValue<Float_t> pufit_met = {fReader, "pufit.met"};
-   TTreeReaderValue<Float_t> pufit_phi = {fReader, "pufit.phi"};
-   TTreeReaderValue<Float_t> topocl_mpx = {fReader, "topocl.mpx"};
-   TTreeReaderValue<Float_t> topocl_mpy = {fReader, "topocl.mpy"};
-   TTreeReaderValue<Float_t> topocl_sumet = {fReader, "topocl.sumet"};
-   TTreeReaderValue<Float_t> topocl_met = {fReader, "topocl.met"};
-   TTreeReaderValue<Float_t> topocl_phi = {fReader, "topocl.phi"};
-   TTreeReaderValue<Bool_t> L1_XE55_passed = {fReader, "L1_XE55.passed"};
-   TTreeReaderValue<Float_t> L1_XE55_prescale = {fReader, "L1_XE55.prescale"};
-   TTreeReaderValue<UInt_t> L1_XE55_passBits = {fReader, "L1_XE55.passBits"};
-   TTreeReaderValue<Bool_t> L1_XE60_passed = {fReader, "L1_XE60.passed"};
-   TTreeReaderValue<Float_t> L1_XE60_prescale = {fReader, "L1_XE60.prescale"};
-   TTreeReaderValue<UInt_t> L1_XE60_passBits = {fReader, "L1_XE60.passBits"};
    TTreeReaderValue<Bool_t> HLT_noalg_zb_L1ZB_passed = {fReader, "HLT_noalg_zb_L1ZB.passed"};
    TTreeReaderValue<Float_t> HLT_noalg_zb_L1ZB_prescale = {fReader, "HLT_noalg_zb_L1ZB.prescale"};
    TTreeReaderValue<UInt_t> HLT_noalg_zb_L1ZB_passBits = {fReader, "HLT_noalg_zb_L1ZB.passBits"};
@@ -107,6 +94,10 @@ public :
    virtual TList  *GetOutputList() const { return fOutput; }
    virtual void    SlaveTerminate();
    virtual void    Terminate();
+   Bool_t isGoodRun();
+   Bool_t passedL1ZB();
+   Bool_t isPassnoAlgXE30();
+   Bool_t inMuRange( Float_t , Float_t );
 
    ClassDef(CorrectingDistributions,0);
 

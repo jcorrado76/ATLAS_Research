@@ -125,29 +125,23 @@ void PlotMETDistsVersMu::Terminate() // Plotting{{{
     legend->Draw("SAME");
     gStyle->SetOptStat(0);
 }//}}}
-
 void PlotMETDistsVersMu::Init(TTree *tree) //{{{
 {
    fReader.SetTree(tree);
 } //}}}
-
 Bool_t PlotMETDistsVersMu::Notify() //{{{
 {
    return kTRUE;
 } //}}}
-
-Bool_t PlotMETDistsVersMu::isGoodRun(){
+Bool_t PlotMETDistsVersMu::isGoodRun(){ //{{{
     return (*RunNumber != 330203 && *RunNumber != 331975 && *RunNumber != 334487);
-}
-
-Bool_t PlotMETDistsVersMu::passedL1ZB(){
+} // }}}
+Bool_t PlotMETDistsVersMu::passedL1ZB(){ //{{{
     return (*HLT_noalg_zb_L1ZB_passed);
-}
-
-Bool_t PlotMETDistsVersMu::isPassnoAlgXE30(){
+} //}}}
+Bool_t PlotMETDistsVersMu::isPassnoAlgXE30(){ //{{{
     return (*HLT_noalg_L1XE30_passed);
-}
-
+} //}}}
 Bool_t PlotMETDistsVersMu::inMuRange( Float_t a , Float_t b ){ //{{{
     return ( *InTimePileup > a && *InTimePileup < b );
 } //}}}
