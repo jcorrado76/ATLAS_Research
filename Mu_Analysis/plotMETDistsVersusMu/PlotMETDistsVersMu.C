@@ -22,7 +22,7 @@ void PlotMETDistsVersMu::SlaveBegin(TTree * /*tree*/) // {{{
 
 Bool_t PlotMETDistsVersMu::Process(Long64_t entry)
 {
-   fReader.SetEntry(entry);
+   fReader.SetLocalEntry(entry);
 
    if ( passedL1ZB()  && isGoodRun() ){
        if ( inMuRange( 0.0 , 10.0) ){
