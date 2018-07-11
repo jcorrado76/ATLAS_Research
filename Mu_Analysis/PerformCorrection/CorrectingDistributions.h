@@ -14,10 +14,12 @@
 #include <TTreeReader.h>
 #include <TTreeReaderValue.h>
 #include <TTreeReaderArray.h>
-#include <TH2.h>
 #include <TStyle.h>
 #include <vector>
 #include <TF1.h>
+#include <TCanvas.h>
+#include <TLegend.h>
+#include <TPad.h>
 class CorrectingDistributions : public TSelector {
 public :
    TTreeReader     fReader;  //!the tree reader
@@ -38,7 +40,16 @@ public :
    TF1*             EfficiencyFitMuBin6 = 0;
    TF1*             EfficiencyFitMuBin7 = 0;
 
+    Int_t nbins = 1000;
+    Float_t gevLow = 0.0;
+    Float_t gevHigh = 100.0;
+    TString xaxisTitle = alg_name + " [GeV]";
+    TString yaxisTitle = "Number of Entries";
+    TCanvas* mycanv = new TCanvas("MET_AlgMuSlices", "MET Slices in Mu");
+    TString alg_name = "METCELL";
+
    // Readers to access the data (delete the ones you do not need).
+   TTreeReaderValue<UInt_t> RunNumber = {fReader, "RunNumber"};
    TTreeReaderValue<Float_t> InTimePileup = {fReader, "InTimePileup"};
    TTreeReaderValue<Float_t> OutOfTimePileup = {fReader, "OutOfTimePileup"};
    TTreeReaderValue<Float_t> L1_met = {fReader, "L1.met"};
