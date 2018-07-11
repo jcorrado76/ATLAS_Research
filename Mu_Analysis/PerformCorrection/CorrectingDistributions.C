@@ -4,6 +4,17 @@
 void CorrectingDistributions::Begin(TTree * /*tree*/)
 {
    TString option = GetOption();
+    TFile* myfile = TFile::Open("../fitEfficiencies/EfficiencyFits.root");
+    std::cout << "Getting fits from file" << std::endl;
+     EfficiencyFitMuBin1 = (TF1*)myfile->Get("metmu0thru10Fit");
+    std::cout << "First efficiency object name: " << MET_Algmu0thru10Efficiency->GetName() << std::endl;
+     EfficiencyFitMuBin2 =(TF1*)myfile->Get("metmu10thru20Fit");
+     EfficiencyFitMuBin3 = (TF1*)myfile->Get("metmu20thru30Fit");
+     EfficiencyFitMuBin4 = (TF1*)myfile->Get("metmu30thru40Fit");
+     EfficiencyFitMuBin5 = (TF1*)myfile->Get("metmu40thru50Fit");
+     EfficiencyFitMuBin6 = (TF1*)myfile->Get("metmu50thru60Fit");
+     EfficiencyFitMuBin7 = (TF1*)myfile->Get("metmu60thru70Fit");
+    std::cout << "Successfully got fit objects from file" << std::endl;
 }
 
 void CorrectingDistributions::SlaveBegin(TTree * /*tree*/)
