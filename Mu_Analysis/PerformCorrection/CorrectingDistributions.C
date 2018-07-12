@@ -79,18 +79,33 @@ void CorrectingDistributions::Terminate(){
     MET_Correctedmu50thru60->SetLineColor(6);
     MET_Correctedmu60thru70->SetLineColor(7);
 
-    // normalize histograms to 1 so we can compare shapes 
-    Int_t MET_Correctedmu0thru10Nentries = MET_Correctedmu0thru10->GetEntries();
-
     // normalize to 1 
     MET_Correctedmu0thru10->SetNormFactor(1.);
+    MET_Correctedmu10thru20->SetNormFactor(1.);
+    MET_Correctedmu20thru30->SetNormFactor(1.);
+    MET_Correctedmu30thru40->SetNormFactor(1.);
+    MET_Correctedmu40thru50->SetNormFactor(1.);
+    MET_Correctedmu50thru60->SetNormFactor(1.);
+    MET_Correctedmu60thru70->SetNormFactor(1.);
 
     MET_Correctedmu0thru10->Draw();
+    MET_Correctedmu10thru20->Draw();
+    MET_Correctedmu20thru30->Draw();
+    MET_Correctedmu30thru40->Draw();
+    MET_Correctedmu40thru50->Draw();
+    MET_Correctedmu50thru60->Draw();
+    MET_Correctedmu60thru70->Draw();
     
     mycanv->SetTitle("MET Slices in Mu");
     gPad->SetLogy();
     TLegend* legend = new TLegend();
     legend->AddEntry(MET_Correctedmu0thru10);
+    legend->AddEntry(MET_Correctedmu10thru20);
+    legend->AddEntry(MET_Correctedmu20thru30);
+    legend->AddEntry(MET_Correctedmu30thru40);
+    legend->AddEntry(MET_Correctedmu40thru50);
+    legend->AddEntry(MET_Correctedmu50thru60);
+    legend->AddEntry(MET_Correctedmu60thru70);
     legend->Draw("SAME");
     gStyle->SetOptStat(0);
 }
