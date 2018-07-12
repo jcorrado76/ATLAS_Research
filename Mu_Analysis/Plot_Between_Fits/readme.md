@@ -7,3 +7,9 @@ uncertainty, and another version where the parameters are subtracted off by the
 uncertainty. Hopefully I can find an option to fill between these two curves
 with some alpha value so I can overlay the data points for the efficiency in
 between each of the fits. 
+
+
+fa2 is an example of how to fill areas below a function and also to the left or
+right of certain TLines.
+
+ray is an example of how to fill in areas between two functions
