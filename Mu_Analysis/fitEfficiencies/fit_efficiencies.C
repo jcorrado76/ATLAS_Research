@@ -38,8 +38,8 @@ TF1* generateFitFunction(TEfficiency* teff_obj){
 }
 
 void fit_efficiencies(){
-    TString efficiencyObjectFilePath = "EfficiencyObjects.root";
-    TString efficiencyFitsFilePath = "EfficiencyFits.root";
+    TString efficiencyObjectFilePath = "../Root_Files/EfficiencyObjects.root";
+    TString efficiencyFitsFilePath = "../Root_Files/EfficiencyFits.root";
 
     TFile* myfile = TFile::Open(efficiencyObjectFilePath);
     std::cout << "Getting efficiency objects from file" << std::endl;
@@ -106,7 +106,7 @@ void fit_efficiencies(){
 
     TImage *img = TImage::Create();
     img->FromPad(mycanv);
-    img->WriteImage("EfficiencyFits.png");
+    img->WriteImage("../Plots/EfficiencyFits.png");
 
     TFile* FitFile = TFile::Open( efficiencyFitsFilePath , "RECREATE" );
     mu0thru10FitFunction->Write();

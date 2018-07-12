@@ -4,7 +4,7 @@
 void CorrectingDistributions::Begin(TTree * /*tree*/)
 {
    TString option = GetOption();
-    TFile* myfile = TFile::Open("../fitEfficiencies/EfficiencyFits.root");
+    TFile* myfile = TFile::Open("../Root_Files/EfficiencyFits.root");
     std::cout << "Getting fits from file" << std::endl;
      EfficiencyFitMuBin1 = (TF1*)myfile->Get("metmu0thru10Fit");
      EfficiencyFitMuBin2 = (TF1*)myfile->Get("metmu10thru20Fit");

@@ -96,7 +96,7 @@ void L1XEefficiencySelector::Terminate() // Plotting {{{
     gStyle->SetOptStat(0);
 
 
-    TFile* efficiencyObjFile = TFile::Open("./../fitEfficiencies/EfficiencyObjects.root", "RECREATE");
+    TFile* efficiencyObjFile = TFile::Open("../Root_Files/EfficiencyObjects.root", "RECREATE");
     MET_Algmu0thru10Efficiency->Write();
     MET_Algmu10thru20Efficiency->Write();
     MET_Algmu20thru30Efficiency->Write();
@@ -107,7 +107,7 @@ void L1XEefficiencySelector::Terminate() // Plotting {{{
 
     TImage *img = TImage::Create();
     img->FromPad(mycanv);
-    img->WriteImage("EfficiencyCurves.png");
+    img->WriteImage("../Plots/EfficiencyCurves.png");
 
     efficiencyObjFile->Close();
 
