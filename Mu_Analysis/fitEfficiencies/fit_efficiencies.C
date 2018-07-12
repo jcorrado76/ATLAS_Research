@@ -5,6 +5,7 @@
 #include <TLegend.h>
 #include <TCanvas.h>
 #include <TStyle.h>
+#include <TImage.h>
 
 
 Double_t fitFunction(Double_t *x , Double_t *par ){
@@ -102,6 +103,10 @@ void fit_efficiencies(){
     legend->AddEntry(mu60thru70FitFunction , "mu 60 to 70");
     legend->Draw("SAME");
     gStyle->SetOptStat(0);
+
+    TImage *img = TImage::Create();
+    img->FromPad(mycanv);
+    img->WriteImage("EfficiencyFits.png");
 
     TFile* FitFile = TFile::Open( efficiencyFitsFilePath , "RECREATE" );
     mu0thru10FitFunction->Write();
