@@ -105,6 +105,10 @@ void L1XEefficiencySelector::Terminate() // Plotting {{{
     MET_Algmu50thru60Efficiency->Write();
     MET_Algmu60thru70Efficiency->Write();
 
+    TImage *img = TImage::Create();
+    img->FromPad(mycanv);
+    img->WriteImage("EfficiencyCurves.png");
+
     efficiencyObjFile->Close();
 
 } //}}}
