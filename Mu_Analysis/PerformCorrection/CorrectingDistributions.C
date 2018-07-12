@@ -72,6 +72,12 @@ void CorrectingDistributions::SlaveTerminate(){}
 void CorrectingDistributions::Terminate(){
     // color the histograms so we can see difference 
     MET_Correctedmu0thru10->SetLineColor(1);
+    MET_Correctedmu10thru20->SetLineColor(2);
+    MET_Correctedmu20thru30->SetLineColor(3);
+    MET_Correctedmu30thru40->SetLineColor(4);
+    MET_Correctedmu40thru50->SetLineColor(5);
+    MET_Correctedmu50thru60->SetLineColor(6);
+    MET_Correctedmu60thru70->SetLineColor(7);
 
     // normalize histograms to 1 so we can compare shapes 
     Int_t MET_Correctedmu0thru10Nentries = MET_Correctedmu0thru10->GetEntries();
