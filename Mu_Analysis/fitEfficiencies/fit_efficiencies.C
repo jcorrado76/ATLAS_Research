@@ -73,7 +73,14 @@ void fit_efficiencies(){
     mu50thru60FitFunction->SetName("metmu50thru60Fit");
     mu60thru70FitFunction->SetName("metmu60thru70Fit");
 
-    TCanvas* mycanv = new TCanvas("fitFunctionCanv", "Efficiency Fits");
+    TCanvas* metmu0thru10canv = new TCanvas("canv1", "mu0thru10");
+    MET_Algmu0thru10Efficiency->Draw();
+    TCanvas* metmu10thru20canv = new TCanvas("canv2", "mu10thru20");
+    TCanvas* metmu20thru30canv = new TCanvas("canv3", "mu20thru30");
+    TCanvas* metmu30thru40canv = new TCanvas("canv4", "mu30thru40");
+    TCanvas* metmu40thru50canv = new TCanvas("canv5", "mu40thru50");
+    TCanvas* metmu50thru60canv = new TCanvas("canv6", "mu50thru60");
+    TCanvas* metmu60thru70canv = new TCanvas("canv7", "mu60thru70");
 
     mu0thru10FitFunction->SetLineColor(1);
     mu10thru20FitFunction->SetLineColor(2);
