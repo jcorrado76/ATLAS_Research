@@ -1,0 +1,67 @@
+Generating Fit for mu 0 to 10
+Info in <TBinomialEfficiencyFitter::result>:  chi2 6.255788 ndf 0 
+Value of fit for a: 0.535228
+Value of error on a: 0.122647
+Value of fit for b: -4.83038
+Value of error on b: 7.93135
+Value of fit for sigma: 7.62255
+Value of error on sigma: 1.73856
+
+Generating Fit for mu 10 to 20
+Warning in <TBinomialEfficiencyFitter::Fit>: Abnormal termination of minimization.
+Info in <TBinomialEfficiencyFitter::result>:  chi2 19613404000000000841190427717760188416.000000 ndf 0 
+Value of fit for a: 0.819506
+Value of error on a: 1.3548e-19
+Value of fit for b: -42.6753
+Value of error on b: 3.19329e-18
+Value of fit for sigma: 8.73203
+Value of error on sigma: 9.57987e-19
+
+Generating Fit for mu 20 to 30
+Warning in <TBinomialEfficiencyFitter::Fit>: Abnormal termination of minimization.
+Info in <TBinomialEfficiencyFitter::result>:  chi2 25361699999999998926430102024735424512.000000 ndf 0 
+Value of fit for a: 0.831295
+Value of error on a: 1.25569e-18
+Value of fit for b: -39.888
+Value of error on b: 4.26554e-17
+Value of fit for sigma: 8.81485
+Value of error on sigma: 1.31672e-17
+
+Generating Fit for mu 30 to 40
+Info in <TBinomialEfficiencyFitter::result>:  chi2 640.187832 ndf 0 
+Value of fit for a: 0.243102
+Value of error on a: 0.00240664
+Value of fit for b: 3.8986
+Value of error on b: 0.232875
+Value of fit for sigma: 7.31039
+Value of error on sigma: 0.06555
+
+Generating Fit for mu 40 to 50
+Warning in <TBinomialEfficiencyFitter::Fit>: Abnormal termination of minimization.
+Info in <TBinomialEfficiencyFitter::result>:  chi2 11166172000000000796078586307337519104.000000 ndf 0 
+Value of fit for a: 1
+Value of error on a: 2.58512e-19
+Value of fit for b: 0
+Value of error on b: 6.10356e-17
+Value of fit for sigma: 10
+Value of error on sigma: 1.83107e-18
+
+Generating Fit for mu 50 to 60
+Warning in <TBinomialEfficiencyFitter::Fit>: Abnormal termination of minimization.
+Info in <TBinomialEfficiencyFitter::result>:  chi2 1767889999999999968790474146940190720.000000 ndf 0 
+Value of fit for a: 1
+Value of error on a: 4.58378e-18
+Value of fit for b: 0
+Value of error on b: 2.57489e-16
+Value of fit for sigma: 10
+Value of error on sigma: 4.94946e-17
+
+Generating Fit for mu 60 to 70
+Info in <TBinomialEfficiencyFitter::result>:  chi2 78.048310 ndf 0 
+Value of fit for a: 0.347033
+Value of error on a: 0.0142224
+Value of fit for b: -14.1188
+Value of error on b: 1.61316
+Value of fit for sigma: 14.9641
+Value of error on sigma: 0.550096
+

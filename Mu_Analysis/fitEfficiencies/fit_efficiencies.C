@@ -6,6 +6,7 @@
 #include <TCanvas.h>
 #include <TStyle.h>
 #include <TImage.h>
+#include <TGraphAsymmErrors.h>
 
 
 Double_t fitFunction(Double_t *x , Double_t *par ){
