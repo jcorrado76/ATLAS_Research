@@ -53,60 +53,80 @@ void fit_efficiencies(){
     TEfficiency*  MET_Algmu60thru70Efficiency = (TEfficiency*)myfile->Get("metmu60thru70Efficiency");
     std::cout << "Successfully got efficiency objects from file" << std::endl;
 
-    std::cout << "Attempting to generate fit functions" << std::endl;
+    std::cout << "\nGenerating Fit for mu 0 to 10" << std::endl;
     TF1* mu0thru10FitFunction = generateFitFunction( MET_Algmu0thru10Efficiency);
+    std::cout << "\nGenerating Fit for mu 10 to 20" << std::endl;
     TF1* mu10thru20FitFunction = generateFitFunction( MET_Algmu10thru20Efficiency);
+    std::cout << "\nGenerating Fit for mu 20 to 30" << std::endl;
     TF1* mu20thru30FitFunction = generateFitFunction( MET_Algmu20thru30Efficiency);
+    std::cout << "\nGenerating Fit for mu 30 to 40" << std::endl;
     TF1* mu30thru40FitFunction = generateFitFunction( MET_Algmu30thru40Efficiency);
+    std::cout << "\nGenerating Fit for mu 40 to 50" << std::endl;
     TF1* mu40thru50FitFunction = generateFitFunction( MET_Algmu40thru50Efficiency);
+    std::cout << "\nGenerating Fit for mu 50 to 60" << std::endl;
     TF1* mu50thru60FitFunction = generateFitFunction( MET_Algmu50thru60Efficiency);
+    std::cout << "\nGenerating Fit for mu 60 to 70" << std::endl;
     TF1* mu60thru70FitFunction = generateFitFunction( MET_Algmu60thru70Efficiency);
     std::cout << "Successfully generated fit functions" << std::endl;
 
     myfile->Close();
 
-    mu0thru10FitFunction->SetName("metmu0thru10Fit");
-    mu10thru20FitFunction->SetName("metmu10thru20Fit");
-    mu20thru30FitFunction->SetName("metmu20thru30Fit");
-    mu30thru40FitFunction->SetName("metmu30thru40Fit");
-    mu40thru50FitFunction->SetName("metmu40thru50Fit");
-    mu50thru60FitFunction->SetName("metmu50thru60Fit");
-    mu60thru70FitFunction->SetName("metmu60thru70Fit");
+    TCanvas* canv1 = new TCanvas("canv1", "mu0thru10");
+    MET_Algmu0thru10Efficiency->Draw();
+    gPad->Update();
+    auto graph = MET_Algmu0thru10Efficiency->GetPaintedGraph();
+    graph->SetMinimum(0);
+    graph->SetMaximum(1);
 
-    TCanvas* mycanv = new TCanvas("fitFunctionCanv", "Efficiency Fits");
+    TCanvas* canv2 = new TCanvas("canv2", "mu10thru20");
+    MET_Algmu10thru20Efficiency->Draw();
+    gPad->Update();
+    graph = MET_Algmu10thru20Efficiency->GetPaintedGraph();
+    graph->SetMinimum(0);
+    graph->SetMaximum(1);
 
-    mu0thru10FitFunction->SetLineColor(1);
-    mu10thru20FitFunction->SetLineColor(2);
-    mu20thru30FitFunction->SetLineColor(3);
-    mu30thru40FitFunction->SetLineColor(4);
-    mu40thru50FitFunction->SetLineColor(12);
-    mu50thru60FitFunction->SetLineColor(6);
-    mu60thru70FitFunction->SetLineColor(8);
+    TCanvas* canv3 = new TCanvas("canv3", "mu20thru30");
+    MET_Algmu20thru30Efficiency->Draw();
+    gPad->Update();
+    graph = MET_Algmu20thru30Efficiency->GetPaintedGraph();
+    graph->SetMinimum(0);
+    graph->SetMaximum(1);
 
-    mu0thru10FitFunction->Draw();
-    mu10thru20FitFunction->Draw("SAME");
-    mu20thru30FitFunction->Draw("SAME");
-    mu30thru40FitFunction->Draw("SAME");
-    mu40thru50FitFunction->Draw("SAME");
-    mu50thru60FitFunction->Draw("SAME");
-    mu60thru70FitFunction->Draw("SAME");
+    TCanvas* canv4 = new TCanvas("canv4", "mu30thru40");
+    MET_Algmu30thru40Efficiency->Draw();
+    gPad->Update();
+    graph = MET_Algmu30thru40Efficiency->GetPaintedGraph();
+    graph->SetMinimum(0);
+    graph->SetMaximum(1);
 
-    mycanv->SetTitle("Fits to Efficiency");
-    //gPad->SetLogy();
-    TLegend* legend = new TLegend();
-    legend->AddEntry(mu0thru10FitFunction, "mu 0 to 10");
-    legend->AddEntry(mu10thru20FitFunction , "mu 10 to 20");
-    legend->AddEntry(mu20thru30FitFunction, "mu 20 to 30");
-    legend->AddEntry(mu30thru40FitFunction, "mu 30 to 40");
-    legend->AddEntry(mu40thru50FitFunction, "mu 40 to 50");
-    legend->AddEntry(mu50thru60FitFunction , "mu 50 to 60");
-    legend->AddEntry(mu60thru70FitFunction , "mu 60 to 70");
-    legend->Draw("SAME");
+    TCanvas* canv5 = new TCanvas("canv5", "mu40thru50");
+    MET_Algmu40thru50Efficiency->Draw();
+    gPad->Update();
+    graph = MET_Algmu40thru50Efficiency->GetPaintedGraph();
+    graph->SetMinimum(0);
+    graph->SetMaximum(1);
+
+    TCanvas* canv6 = new TCanvas("canv6", "mu50thru60");
+    MET_Algmu50thru60Efficiency->Draw();
+    gPad->Update();
+    graph = MET_Algmu50thru60Efficiency->GetPaintedGraph();
+    graph->SetMinimum(0);
+    graph->SetMaximum(1);
+
+    TCanvas* canv7 = new TCanvas("canv7", "mu60thru70");
+    MET_Algmu60thru70Efficiency->Draw();
+    gPad->Update();
+    graph = MET_Algmu60thru70Efficiency->GetPaintedGraph();
+    graph->SetMinimum(0);
+    graph->SetMaximum(1);
+
     gStyle->SetOptStat(0);
 
+    /*
     TImage *img = TImage::Create();
     img->FromPad(mycanv);
     img->WriteImage("../Plots/EfficiencyFits.png");
+    */
 
     TFile* FitFile = TFile::Open( efficiencyFitsFilePath , "RECREATE" );
     mu0thru10FitFunction->Write();
