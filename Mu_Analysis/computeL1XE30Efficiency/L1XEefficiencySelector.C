@@ -124,7 +124,7 @@ Bool_t L1XEefficiencySelector::Notify() // {{{
 } // }}}
 
 Bool_t L1XEefficiencySelector::isGoodRun(){ // {{{
-    return (*RunNumber != 33023 && *RunNumber != 331975 && *RunNumber != 334487);
+    return (*RunNumber != 330203 && *RunNumber != 331975 && *RunNumber != 334487);
 } // }}}
 
 Bool_t L1XEefficiencySelector::passedL1ZB(){ // {{{ 
