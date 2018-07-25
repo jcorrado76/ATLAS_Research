@@ -21,7 +21,7 @@ TF1* generateFitFunction(TEfficiency* teff_obj){
     //set the normalization to 1
     //set the x translation to 0
     //initialize sigma to 10
-    fitErrorFunction->SetParameter(0, 1.);
+    fitErrorFunction->SetParameter(0, 0.1);
     fitErrorFunction->SetParameter(1, 0.);
     fitErrorFunction->SetParameter(2, 10.);
     //initializing parameters reasonably is important because it is a maximum likelihood fit
