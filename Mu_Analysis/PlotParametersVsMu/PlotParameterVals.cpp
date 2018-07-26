@@ -54,6 +54,7 @@ void PlotParameterVals(){
    // mg->Add(slopeGraph);
     mg->Add(sigmaGraph);
 
+    // DRAW THE TWO GRAPHS 
     // A means draw axis around the graph
     // C means a smooth curve is drawn
     // P means draw the markers
@@ -61,6 +62,7 @@ void PlotParameterVals(){
     mg->GetXaxis()->SetTitle("Mu");
     mg->GetYaxis()->SetTitle("Value of Parameter");
 
+    // SCALE THE SLOPE GRAPH
    Float_t scale = gPad->GetUymax() ;
    std::cout << "GetUymax(): " << gPad->GetUymax() << std::endl;
    for (int i = 0 ; i< n ; i++){
@@ -68,6 +70,8 @@ void PlotParameterVals(){
        std::cout << slopeGraph->GetY()[i] << std::endl;
    }
 
+   // CREATE NEW RHS AXIS
+   // Remove A here because it'll mess with the axes
    slopeGraph->Draw("SAME CP");
    TGaxis *axis = new TGaxis( gPad->GetUxmax() , gPad->GetUymin(), gPad->GetUxmax(), gPad->GetUymax() , 0 , 1.0 , 510, "+L");
    axis->SetLineColor(kRed);
@@ -80,10 +84,8 @@ void PlotParameterVals(){
     legend->AddEntry(sigmaGraph,"Sigma");
     //legend->SetFillColor(42);
     legend->Draw();
-
-    
-
     gPad->Modified();
+    // in case if you want to set limits on plots
     //mg->GetXaxis()->SetLimits(0.0,20.0);
     //mg->SetMinimum(0.);
     //mg->SetMaximum(10.);
