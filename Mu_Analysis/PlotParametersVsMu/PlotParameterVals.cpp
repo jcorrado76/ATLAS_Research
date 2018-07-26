@@ -113,8 +113,8 @@ void PlotParameterVals(){
     //mg->SetMaximum(10.);
     
 
-    auto Pad = new TPad("Pad","Pad",0.3,0.4,1.0,1.0);
-    Pad->SetFillColor(kBlue-10);
+    auto Pad = new TPad("Pad","Pad",0.15,0.0,0.7,0.30);
+    //Pad->SetFillColor(kBlue-10);
     Pad->Draw();
     Pad->cd();
 
