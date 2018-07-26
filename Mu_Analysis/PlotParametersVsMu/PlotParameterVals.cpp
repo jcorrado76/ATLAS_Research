@@ -62,7 +62,7 @@ void PlotParameterVals(){
 
    Float_t scale = gPad->GetUymax() / rightmax;
    for (int i = 0 ; i< n ; i++){
-       slopeGraph.GetY()[i] *= scale;
+       slopeGraph->GetY()[i] *= scale;
    }
 
    TGaxis *axis = new TGaxis( gPad->GetUxmax() , gPad->GetUymin(), gPad->GetUxmax(), gPad-.GetUymax() , 0 , rightmax , 510, "+L");
