@@ -3,6 +3,7 @@
 #include "TPad.h"
 #include "TCanvas.h"
 #include "TAxis.h"
+#include "TLegend.h"
 
 
 void PlotParameterVals(){
@@ -31,20 +32,20 @@ void PlotParameterVals(){
     Double_t sigma_xerr[n] = {0};
 
     TGraphErrors* interceptGraph = new TGraphErrors(n,mu,intercept,intercept_xerr,intercept_yerr);
-    interceptGraph->SetLineColor(4);
     interceptGraph->SetMarkerStyle(20);
+    interceptGraph->SetLineColor(4);
     interceptGraph->SetMarkerColor(4);
     interceptGraph->SetMarkerSize(1.5);
 
     TGraphErrors* slopeGraph = new TGraphErrors(n,mu,slope,slope_xerr,slope_yerr);
-    slopeGraph->SetLineColor(2);
     slopeGraph->SetMarkerStyle(21);
+    slopeGraph->SetLineColor(2);
     slopeGraph->SetMarkerColor(2);
     slopeGraph->SetMarkerSize(1.5);
 
     TGraphErrors* sigmaGraph = new TGraphErrors(n,mu,sigma,sigma_xerr,sigma_yerr);
-    sigmaGraph->SetLineColor(6);
     sigmaGraph->SetMarkerStyle(22);
+    sigmaGraph->SetLineColor(6);
     sigmaGraph->SetMarkerColor(6);
     sigmaGraph->SetMarkerSize(1.5);
 
@@ -56,8 +57,16 @@ void PlotParameterVals(){
     mg->GetXaxis()->SetTitle("Mu");
     mg->GetYaxis()->SetTitle("Value of Parameter");
 
+    TLegend* legend = new TLegend(0.1,0.7,0.48,0.9);
+    legend->AddEntry(interceptGraph,"Intercept");
+    legend->AddEntry(slopeGraph,"Slope");
+    legend->AddEntry(sigmaGraph,"Sigma");
+    legend->Draw();
+
+    
+
     gPad->Modified();
-    //mg->GetXaxis()->SetLimit();
+    //mg->GetXaxis()->SetLimits(0.0,20.0);
     //mg->SetMinimum(0.);
     //mg->SetMaximum(10.);
 }
