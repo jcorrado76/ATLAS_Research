@@ -18,7 +18,6 @@ void PlotParameterVals(){
 
 
     const Int_t n = 7;
-    //Double_t intercept[n],slope[n],sigma[n],mu[n];
     Double_t mu[n] = {10,20,30,40,50,60,70};
 
     Double_t intercept[n] = {-7.58999,-3.25036,-2.84429,-1.82258,-1.26243,7.67782,-0.33278};
@@ -59,23 +58,18 @@ void PlotParameterVals(){
     mg->GetXaxis()->SetTitle("Mu");
     mg->GetYaxis()->SetTitle("Value of Parameter");
 
-   double maxVal = interceptGraph->GetHistogram()->GetMaximum(); 
-   Float_t rightmax = 1.1 * maxVal;
-
    Float_t scale = gPad->GetUymax() ;
    std::cout << "GetUymax(): " << gPad->GetUymax() << std::endl;
-   std::cout << "rightmax(): " << rightmax << std::endl;
-   std::cout << "scale: " << scale<< std::endl;
    for (int i = 0 ; i< n ; i++){
        slopeGraph->GetY()[i] *= gPad->GetUymax();
        std::cout << slopeGraph->GetY()[i] << std::endl;
    }
 
-   slopeGraph->Draw("SAME");
-   TGaxis *axis = new TGaxis( gPad->GetUxmax() , gPad->GetUymin(), gPad->GetUxmax(), gPad->GetUymax() , 0 , 1.0 , 500, "+L");
+   slopeGraph->Draw("SAME CP");
+   TGaxis *axis = new TGaxis( gPad->GetUxmax() , gPad->GetUymin(), gPad->GetUxmax(), gPad->GetUymax() , 0 , 1.0 , 510, "+L");
    axis->SetLineColor(kRed);
    axis->SetTextColor(kRed);
-   axis->Draw();
+   axis->Draw("SAME");
 
     TLegend* legend = new TLegend(0.1,0.7,0.48,0.9);
     legend->AddEntry(interceptGraph,"Intercept");
