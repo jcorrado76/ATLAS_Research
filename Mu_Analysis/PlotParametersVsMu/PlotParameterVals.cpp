@@ -112,6 +112,7 @@ void PlotParameterVals(){
     //mg->SetMinimum(0.);
     //mg->SetMaximum(10.);
     
+    Canvas->Divide(1,2);
 
     auto Pad = new TPad("Pad","Pad",0.15,0.0,0.7,0.30);
     //Pad->SetFillColor(kBlue-10);
