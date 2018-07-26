@@ -23,20 +23,18 @@ void PlotParametersVsMu(){
     Double_t sigma[n] = {8.22652,8.72053,8.63395,8.91276,9.16529,7.07223,10.2882};
     Double_t sigma_err[n] = {0.731322,0.707108,2.74936e-23,0.0809516,0.167048,-.687461,8.11952};
 
-    TGraph* interceptGraph = new TGraphErrors(n,mu,intercept);
+    TGraphErrors* interceptGraph = new TGraphErrors(n,mu,intercept,intercept_err);
     interceptGraph->SetLineColor(4);
-    TGraph* slopeGraph = new TGraphErrors(n,mu,slope);
+    TGraphErrors* slopeGraph = new TGraphErrors(n,mu,slope,slope_err);
     slopeGraph->SetLineColor(2);
-    TGraph* sigmaGraph = new TGraphErrors(n,mu,sigma);
+    TGraphErrors* sigmaGraph = new TGraphErrors(n,mu,sigma,sigma_err);
     sigmaGraph->SetLineColor(6);
 
     mg->Add(interceptGraph);
     mg->Add(slopeGraph);
     mg->Add(sigmaGraph);
 
-    interceptGraph->Draw("ALP");
-    slopeGraph->Draw("SAME");
-    sigmaGraph->Draw("SAME");
+    mg->Draw("AC");
 }
 
 
