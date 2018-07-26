@@ -16,7 +16,7 @@ Double_t fitFunction(Double_t *x , Double_t *par ){
     return fitval;
 }
 
-TF1* generateFitFunction(TEfficiency* teff_obj){
+TF1* generateFitFunction(TEfficiency* teff_obj, float initial_slope = 0.1 , float initial_intercept = 0.0, float initial_sigma = 10.0){
     TF1 *fitErrorFunction = new TF1("fitFunction",fitFunction,0.0,300.0,3);
     //set the normalization to 1
     //set the x translation to 0
