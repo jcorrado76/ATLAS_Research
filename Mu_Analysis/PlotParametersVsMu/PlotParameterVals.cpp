@@ -9,25 +9,27 @@
 #include "TList.h"
 
 
-void HighlightHisto(TVirtualPad *pad , TObject *obj , Int_t ihp , Int_t y);
+TList* l = 0;
+void HighlightTeff(TVirtualPad *pad , TObject *obj , Int_t ihp , Int_t y);
 void PlotParameterVals(){
 
-    TList *l = new TList();
+    l = new TList();
 
     TFile *f1 = TFile::Open("../Root_Files/EfficiencyObjects.root");
     
     TIter next(f1->GetListOfKeys());
     TKey *key;
 
-    while ((key = (TKey*)next()){
+    while ((key = (TKey*)next())){
             TClass *cl = gROOT->GetClass(key->GetClassName());
             if (!cl->InheritsFrom("TEfficiency")) continue;
             TEfficiency * teff = (TEfficiency*)key->ReadObj();
             l->Add(teff);
+    }
 
-    TCanvas *c1 = new TCanvas("c1","Fit Parameters versus Mu");
-    c1->SetFillColor(42);
-    c1->SetGrid();
+    TCanvas *Canvas = new TCanvas("Canvas","Fit Parameters versus Mu");
+    Canvas->SetFillColor(42);
+    Canvas->SetGrid();
 
     TMultiGraph *mg = new TMultiGraph();
     mg->SetTitle("Fit Parameters Versus Mu");
@@ -104,6 +106,37 @@ void PlotParameterVals(){
     //mg->GetXaxis()->SetLimits(0.0,20.0);
     //mg->SetMinimum(0.);
     //mg->SetMaximum(10.);
+    
+
+    auto Pad = new TPad("Pad","Pad",0.3,0.4,1.0,1.0);
+    Pad->SetFillColor(kBlue-10);
+    Pad->Draw();
+    Pad->cd();
+
+    auto info = new TText(0.5,0.5, "Mouse over the points to see efficiency fits");
+    info->SetTextAlign(22);
+    info->Draw();
+    Canvas->cd();
+
+    slopeGraph->SetHighlight();
+    interceptGraph->SetHighlight();
+    sigmaGraph->SetHighlight();
+    Canvas->HighlightConnect("HighlightTeff(TVirtualPad*, TObject* , Int_t , Int_t)");
+
+}
+
+void HighlightTeff( TVirtualPad *pad , TObject *obj , Int_t ihp , Int_t y){
+    auto Pad = (TVirtualPad *)pad->FindObject("Pad");
+    if (!Pad) return;
+
+    if (ihp == -1){
+        Pad->Clear();
+        return;
+    }
+
+    Pad->cd();
+    l->At(ihp)->Draw();
+    gPad->Update();
 }
 
 
