@@ -32,10 +32,16 @@ void PlotParameterVals(){
             l->Add(teff);
     }
 
-    TCanvas *Canvas = new TCanvas("Canvas","Fit Parameters versus Mu");
+    TCanvas *Canvas = new TCanvas("Canvas","Fit Parameters versus Mu",200,10,700,900);
     Canvas->SetFillColor(42);
     Canvas->SetGrid();
 
+    TPad* fitPad = new TPad("pad1","Pad containing Fit Parameter Values",0.05,0.50,0.95,0.95,21);
+    fitPad->Draw();
+    TPad *Pad = new TPad("Pad","Pad",0.05,0.05,0.95,0.45,21);
+    //Pad->SetFillColor(kBlue-10);
+    Pad->Draw();
+    fitPad->cd();
     TMultiGraph *mg = new TMultiGraph();
     mg->SetTitle("Fit Parameters Versus Mu");
 
@@ -112,17 +118,13 @@ void PlotParameterVals(){
     //mg->SetMinimum(0.);
     //mg->SetMaximum(10.);
     
-    Canvas->Divide(1,2);
 
-    auto Pad = new TPad("Pad","Pad",0.15,0.0,0.7,0.30);
-    //Pad->SetFillColor(kBlue-10);
-    Pad->Draw();
     Pad->cd();
 
     auto info = new TText(0.5,0.5, "Mouse over the points to see efficiency fits");
     info->SetTextAlign(22);
     info->Draw();
-    Canvas->cd();
+    fitPad->cd();
 
     slopeGraph->SetHighlight();
     interceptGraph->SetHighlight();
