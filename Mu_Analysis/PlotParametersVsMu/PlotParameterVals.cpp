@@ -53,23 +53,22 @@ void PlotParameterVals(){
    // mg->Add(slopeGraph);
     mg->Add(sigmaGraph);
 
+    mg->Draw("AC");
+    mg->GetXaxis()->SetTitle("Mu");
+    mg->GetYaxis()->SetTitle("Value of Parameter");
 
    double maxVal = interceptGraph->GetHistogram()->GetMaximum(); 
    Float_t rightmax = 1.1 * maxVal;
-
 
    Float_t scale = gPad->GetUymax() / rightmax;
    for (int i = 0 ; i< n ; i++){
        slopeGraph.GetY()[i] *= scale;
    }
 
-
-
-
-
-    mg->Draw("AC");
-    mg->GetXaxis()->SetTitle("Mu");
-    mg->GetYaxis()->SetTitle("Value of Parameter");
+   TGaxis *axis = new TGaxis( gPad->GetUxmax() , gPad->GetUymin(), gPad->GetUxmax(), gPad-.GetUymax() , 0 , rightmax , 510, "+L");
+   axis->SetLineColor(kRed);
+   axis->SetTextColor(kRed);
+   axis->Draw();
 
     TLegend* legend = new TLegend(0.1,0.7,0.48,0.9);
     legend->AddEntry(interceptGraph,"Intercept");
