@@ -14,15 +14,16 @@ void PlotParameterVals(){
 
     TList *l = new TList();
 
+    TFile *f1 = TFile::Open("../Root_Files/EfficiencyObjects.root");
     
+    TIter next(f1->GetListOfKeys());
+    TKey *key;
 
-
-
-
-
-
-
-
+    while ((key = (TKey*)next()){
+            TClass *cl = gROOT->GetClass(key->GetClassName());
+            if (!cl->InheritsFrom("TEfficiency")) continue;
+            TEfficiency * teff = (TEfficiency*)key->ReadObj();
+            l->Add(teff);
 
     TCanvas *c1 = new TCanvas("c1","Fit Parameters versus Mu");
     c1->SetFillColor(42);
