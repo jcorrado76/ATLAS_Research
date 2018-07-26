@@ -58,6 +58,11 @@ void PlotParameterVals(){
    Float_t rightmax = 1.1 * maxVal;
 
 
+   Float_t scale = gPad->GetUymax() / rightmax;
+   for (int i = 0 ; i< n ; i++){
+       slopeGraph.GetY()[i] *= scale;
+   }
+
 
 
 
