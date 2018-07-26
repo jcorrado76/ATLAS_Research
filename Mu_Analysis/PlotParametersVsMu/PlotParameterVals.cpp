@@ -7,6 +7,11 @@
 #include "TAxis.h"
 #include "TLegend.h"
 #include "TList.h"
+#include "TFile.h"
+#include "TKey.h"
+#include "TClass.h"
+#include "TEfficiency.h"
+#include "TText.h"
 
 
 TList* l = 0;
