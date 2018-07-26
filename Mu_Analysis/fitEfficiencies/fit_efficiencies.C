@@ -27,7 +27,7 @@ TF1* generateFitFunction(TEfficiency* teff_obj, float gevMax = 300.0, float init
     //initializing parameters reasonably is important because it is a maximum likelihood fit
     fitErrorFunction->SetParNames("Slope","Translation","Sigma");
     //"R" tells the fit function from BinomialEfficiency::Fit to use the range of the TF1 as the fitting range
-    teff_obj->Fit( fitErrorFunction  , "R" );
+    teff_obj->Fit( fitErrorFunction  , "" );
 
     std::cout << "Value of fit for a: " << fitErrorFunction->GetParameter(0) << std::endl;
     std::cout << "Value of error on a: " << fitErrorFunction->GetParError(0) << std::endl;
