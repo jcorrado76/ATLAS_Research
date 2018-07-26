@@ -1,8 +1,15 @@
 #include "TGraphErrors.h"
-
+#include "TMultiGraph.h"
 
 
 void PlotParametersVsMu(){
+    TCanvas *c1 = new TCanvas("c1","Fit Parameters versus Mu");
+    c1->SetGrid();
+
+    TMultiGraph *mg = new TMultiGraph();
+    mg->SetTitle("Fit Parameters Versus Mu");
+
+
     const int n = 7;
     //Double_t intercept[n],slope[n],sigma[n],mu[n];
     Double_t mu[n] = {10,20,30,40,50,60,70};
@@ -11,13 +18,13 @@ void PlotParametersVsMu(){
     Double_t sigma[n] = {8.22652,8.72053,8.63395,8.91276,9.16529,7.07223,10.2882};
 
     TGraph* interceptGraph = new TGraphErrors(n,mu,intercept);
-    TGraph* slopeGraph = new TGraph(n,mu,slope);
-    TGraph* sigmaGraph = new TGraph(n,mu,sigma);
+    TGraph* slopeGraph = new TGraphErrors(n,mu,slope);
+    TGraph* sigmaGraph = new TGraphErrors(n,mu,sigma);
 
     interceptGraph->SetTitle("Fit Parameters versus Mu");
 
 
-    interceptGraph->Draw();
+    interceptGraph->Draw("ALP");
     slopeGraph->Draw("SAME");
     sigmaGraph->Draw("SAME");
 }
