@@ -34,14 +34,11 @@ void PlotParameterVals(){
 
     TCanvas *Canvas = new TCanvas("Canvas","Fit Parameters versus Mu",200,10,700,900);
     Canvas->SetFillColor(42);
-    Canvas->SetGrid();
+    Canvas->Divide(1,2);
 
-    TPad* fitPad = new TPad("pad1","Pad containing Fit Parameter Values",0.05,0.50,0.95,0.95,21);
-    fitPad->Draw();
-    TPad *Pad = new TPad("Pad","Pad",0.05,0.05,0.95,0.45,21);
-    //Pad->SetFillColor(kBlue-10);
-    Pad->Draw();
-    fitPad->cd();
+    Canvas->cd(1);
+    //gPad->SetFrameFillColor(33);
+    gPad->SetGrid();
     TMultiGraph *mg = new TMultiGraph();
     mg->SetTitle("Fit Parameters Versus Mu");
 
@@ -118,33 +115,29 @@ void PlotParameterVals(){
     //mg->SetMinimum(0.);
     //mg->SetMaximum(10.);
     
-
-    Pad->cd();
-
-    auto info = new TText(0.5,0.5, "Mouse over the points to see efficiency fits");
+    auto info = new TText(0.7,0.2, "Mouse over the points to see efficiency fits");
     info->SetTextAlign(22);
     info->Draw();
-    fitPad->cd();
 
     slopeGraph->SetHighlight();
     interceptGraph->SetHighlight();
     sigmaGraph->SetHighlight();
     Canvas->HighlightConnect("HighlightTeff(TVirtualPad*, TObject* , Int_t , Int_t)");
+    Canvas->cd(2);
+    gPad->Draw();
 
 }
 
 void HighlightTeff( TVirtualPad *pad , TObject *obj , Int_t ihp , Int_t y){
-    auto Pad = (TVirtualPad *)pad->FindObject("Pad");
-    if (!Pad) return;
-
+    //if (obj != slopeGraph et cetera for the other graphs ) return;
     if (ihp == -1){
-        Pad->Clear();
         return;
     }
-
-    Pad->cd();
+    TVirtualPad *savepad = gPad;
+    pad->GetCanvas()->cd(2);
     l->At(ihp)->Draw();
     gPad->Update();
+    savepad->cd();
 }
 
 
