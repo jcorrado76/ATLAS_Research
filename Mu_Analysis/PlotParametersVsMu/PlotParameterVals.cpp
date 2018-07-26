@@ -67,7 +67,6 @@ void PlotParameterVals(){
    std::cout << "GetUymax(): " << gPad->GetUymax() << std::endl;
    for (int i = 0 ; i< n ; i++){
        slopeGraph->GetY()[i] *= gPad->GetUymax();
-       std::cout << slopeGraph->GetY()[i] << std::endl;
    }
 
    // CREATE NEW RHS AXIS
