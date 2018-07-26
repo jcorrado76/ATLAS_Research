@@ -54,6 +54,9 @@ void PlotParameterVals(){
    // mg->Add(slopeGraph);
     mg->Add(sigmaGraph);
 
+    // A means draw axis around the graph
+    // C means a smooth curve is drawn
+    // P means draw the markers
     mg->Draw("ACP");
     mg->GetXaxis()->SetTitle("Mu");
     mg->GetYaxis()->SetTitle("Value of Parameter");
@@ -75,6 +78,7 @@ void PlotParameterVals(){
     legend->AddEntry(interceptGraph,"Intercept");
     legend->AddEntry(slopeGraph,"Slope");
     legend->AddEntry(sigmaGraph,"Sigma");
+    //legend->SetFillColor(42);
     legend->Draw();
 
     
