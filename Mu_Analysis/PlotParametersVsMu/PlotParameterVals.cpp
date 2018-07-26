@@ -50,8 +50,17 @@ void PlotParameterVals(){
     sigmaGraph->SetMarkerSize(1.5);
 
     mg->Add(interceptGraph);
-    mg->Add(slopeGraph);
+   // mg->Add(slopeGraph);
     mg->Add(sigmaGraph);
+
+
+   double maxVal = interceptGraph->GetHistogram()->GetMaximum(); 
+   Float_t rightmax = 1.1 * maxVal;
+
+
+
+
+
 
     mg->Draw("AC");
     mg->GetXaxis()->SetTitle("Mu");
