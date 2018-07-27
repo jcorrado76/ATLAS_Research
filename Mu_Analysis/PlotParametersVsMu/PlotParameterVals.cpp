@@ -11,7 +11,6 @@
 #include "TKey.h"
 #include "TClass.h"
 #include "TEfficiency.h"
-#include "TText.h"
 
 
 TList* l = 0;
@@ -114,10 +113,6 @@ void PlotParameterVals(){
     //mg->GetXaxis()->SetLimits(0.0,20.0);
     //mg->SetMinimum(0.);
     //mg->SetMaximum(10.);
-    
-    auto info = new TText(0.7,0.2, "Mouse over the points to see efficiency fits");
-    info->SetTextAlign(22);
-    info->Draw();
 
     slopeGraph->SetHighlight();
     interceptGraph->SetHighlight();
