@@ -139,3 +139,29 @@ Bool_t L1XEefficiencySelector::inMuRange( Float_t a , Float_t b ){ //{{{
     return ( *InTimePileup > a && *InTimePileup < b );
 } //}}}
 
+
+Double_t fitFunction(Double_t *x , Double_t *par ){
+    Float_t xx = x[0];
+    Double_t l1cut = 30.0;
+    Double_t fitval = (1./2.)*(1.+TMath::Erf((par[0]*x[0]+par[1]-l1cut)/(par[2]*TMath::Sqrt(2.))));
+    return fitval;
+}//}}}
+
+TF1* generateFitFunction(TEfficiency* teff_obj, float gevMax = 300.0, float initial_slope = 0.1 , float initial_intercept = 0.0, float initial_sigma = 10.0){
+    TF1 *fitErrorFunction = new TF1("fitFunction",fitFunction,0.0,gevMax,3);
+    fitErrorFunction->SetParameter(0, initial_slope);
+    fitErrorFunction->SetParameter(1, initial_intercept);
+    fitErrorFunction->SetParameter(2, initial_sigma);
+    //initializing parameters reasonably is important because it is a maximum likelihood fit
+    fitErrorFunction->SetParNames("Slope","Translation","Sigma");
+    //"R" tells the fit function from BinomialEfficiency::Fit to use the range of the TF1 as the fitting range
+    teff_obj->Fit( fitErrorFunction  , "R+");
+
+    std::cout << "Value of fit for a: " << fitErrorFunction->GetParameter(0) << std::endl;
+    std::cout << "Value of error on a: " << fitErrorFunction->GetParError(0) << std::endl;
+    std::cout << "Value of fit for b: " << fitErrorFunction->GetParameter(1) << std::endl;
+    std::cout << "Value of error on b: " << fitErrorFunction->GetParError(1) << std::endl;
+    std::cout << "Value of fit for sigma: " << fitErrorFunction->GetParameter(2) << std::endl;
+    std::cout << "Value of error on sigma: " << fitErrorFunction->GetParError(2) << std::endl;
+    return fitErrorFunction;
+}
