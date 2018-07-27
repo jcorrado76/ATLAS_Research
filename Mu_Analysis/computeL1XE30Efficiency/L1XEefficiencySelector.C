@@ -54,6 +54,22 @@ void L1XEefficiencySelector::Terminate() // Plotting {{{
 {
     TCanvas* mycanv = new TCanvas("metMuSlices", "MET Slices in Mu");
 
+    std::cout << "\nGenerating Fit for mu 0 to 10" << std::endl;
+    TF1* mu0thru10FitFunction = generateFitFunction( MET_Algmu0thru10Efficiency );
+    std::cout << "\nGenerating Fit for mu 10 to 20" << std::endl;
+    TF1* mu10thru20FitFunction = generateFitFunction( MET_Algmu10thru20Efficiency);
+    std::cout << "\nGenerating Fit for mu 20 to 30" << std::endl;
+    TF1* mu20thru30FitFunction = generateFitFunction( MET_Algmu20thru30Efficiency);
+    std::cout << "\nGenerating Fit for mu 30 to 40" << std::endl;
+    TF1* mu30thru40FitFunction = generateFitFunction( MET_Algmu30thru40Efficiency);
+    std::cout << "\nGenerating Fit for mu 40 to 50" << std::endl;
+    TF1* mu40thru50FitFunction = generateFitFunction( MET_Algmu40thru50Efficiency);
+    std::cout << "\nGenerating Fit for mu 50 to 60" << std::endl;
+    TF1* mu50thru60FitFunction = generateFitFunction( MET_Algmu50thru60Efficiency);
+    std::cout << "\nGenerating Fit for mu 60 to 70" << std::endl;
+    TF1* mu60thru70FitFunction = generateFitFunction( MET_Algmu60thru70Efficiency);
+    std::cout << "Successfully generated fit functions" << std::endl;
+
     MET_Algmu0thru10Efficiency->SetLineColor(1);
     MET_Algmu10thru20Efficiency->SetLineColor(2);
     MET_Algmu20thru30Efficiency->SetLineColor(3);
@@ -139,15 +155,14 @@ Bool_t L1XEefficiencySelector::inMuRange( Float_t a , Float_t b ){ //{{{
     return ( *InTimePileup > a && *InTimePileup < b );
 } //}}}
 
-
-Double_t fitFunction(Double_t *x , Double_t *par ){
+Double_t L1XEefficiencySelector::fitFunction(Double_t *x , Double_t *par ){//{{{
     Float_t xx = x[0];
     Double_t l1cut = 30.0;
     Double_t fitval = (1./2.)*(1.+TMath::Erf((par[0]*x[0]+par[1]-l1cut)/(par[2]*TMath::Sqrt(2.))));
     return fitval;
 }//}}}
 
-TF1* generateFitFunction(TEfficiency* teff_obj, float gevMax = 300.0, float initial_slope = 0.1 , float initial_intercept = 0.0, float initial_sigma = 10.0){
+TF1* L1XEefficiencySelector::generateFitFunction(TEfficiency* teff_obj, float gevMax, float initial_slope, float initial_intercept, float initial_sigma ){//{{{
     TF1 *fitErrorFunction = new TF1("fitFunction",fitFunction,0.0,gevMax,3);
     fitErrorFunction->SetParameter(0, initial_slope);
     fitErrorFunction->SetParameter(1, initial_intercept);
@@ -164,4 +179,4 @@ TF1* generateFitFunction(TEfficiency* teff_obj, float gevMax = 300.0, float init
     std::cout << "Value of fit for sigma: " << fitErrorFunction->GetParameter(2) << std::endl;
     std::cout << "Value of error on sigma: " << fitErrorFunction->GetParError(2) << std::endl;
     return fitErrorFunction;
-}
+}//}}}

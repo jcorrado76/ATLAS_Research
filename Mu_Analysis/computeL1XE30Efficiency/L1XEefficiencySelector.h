@@ -24,6 +24,7 @@
 #include <TPaveText.h>
 #include <TGraphAsymmErrors.h>
 #include <TImage.h>
+#include <TF1.h>
 
 // Headers needed by this particular selector
 #include <vector>
