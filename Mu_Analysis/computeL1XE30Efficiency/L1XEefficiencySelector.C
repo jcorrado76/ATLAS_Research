@@ -155,7 +155,7 @@ Bool_t L1XEefficiencySelector::inMuRange( Float_t a , Float_t b ){ //{{{
     return ( *InTimePileup > a && *InTimePileup < b );
 } //}}}
 
-Double_t L1XEefficiencySelector::fitFunction(Double_t *x , Double_t *par ){//{{{
+static Double_t L1XEefficiencySelector::fitFunction(Double_t *x , Double_t *par ){//{{{
     Float_t xx = x[0];
     Double_t l1cut = 30.0;
     Double_t fitval = (1./2.)*(1.+TMath::Erf((par[0]*x[0]+par[1]-l1cut)/(par[2]*TMath::Sqrt(2.))));
