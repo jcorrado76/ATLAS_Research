@@ -1,0 +1,14 @@
+Divide by Efficiency
+  [ ] Read the tefficiency objects from the root file
+  [ ] get the associated fit TF1 functions
+  [ ] then use them to evaluate in the correct weight function
+
+Plot Against zerobias distributions
+  [ ] Edit the plot MET distributions macro to plot the zerobias MET
+distributions by adding a functionality to write the distributions to file
+  [ ] Read the zerobias met distributions from file
+  [ ] plot the zerobias met distributions on the same plots as the corrected met
+distributions from the physics main stream
+  [ ] write these plots to file 
+
+

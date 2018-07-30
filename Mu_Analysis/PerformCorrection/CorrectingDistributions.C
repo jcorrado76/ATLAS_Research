@@ -6,6 +6,19 @@ void CorrectingDistributions::Begin(TTree * /*tree*/)
    TString option = GetOption();
     TFile* myfile = TFile::Open("../Root_Files/EfficiencyObjects.root");
     std::cout << "Getting fits from file" << std::endl;
+
+
+    /* you have to pull the tefficiency objects from file here, and then get the fit function associated with them, by
+     * using TEfficiency->GetFunctions("Name"). Then you can use the TF1's you got to evaluate the weight at event level
+     * You have to write a function to store the MET distributions for the zerobias data, so you can read them in
+     * during the plotting process. You need to plot the zerobias distributions on the same plot as the corrected
+     * PhysicsMain distributions. We want to compare the corrected PhysicsMain to the zerobias 
+     */
+    TEfficiency* efficiencyObjectMu0thru10 = (TEfficiency*)
+
+
+
+
      EfficiencyFitMuBin1 = (TF1*)myfile->Get("metmu0thru10Fit");
      EfficiencyFitMuBin2 = (TF1*)myfile->Get("metmu10thru20Fit");
      EfficiencyFitMuBin3 = (TF1*)myfile->Get("metmu20thru30Fit");
