@@ -1,0 +1,404 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+Begin	BurrTemplateSelector/Jburr_Template_Selector.C	/^void Jburr_Template_Selector::Begin(TTree * \/*tree*\/){TString option = GetOption();}$/;"	f	class:Jburr_Template_Selector
+Begin	PerformCorrection/CorrectingDistributions.C	/^void CorrectingDistributions::Begin(TTree * \/*tree*\/)$/;"	f	class:CorrectingDistributions
+Begin	computeL1XE30Efficiency/L1XEefficiencySelector.C	/^void L1XEefficiencySelector::Begin(TTree * )$/;"	f	class:L1XEefficiencySelector
+Begin	plotMETDistsVersusMu/PlotMETDistsVersMu.C	/^void PlotMETDistsVersMu::Begin(TTree *) \/\/ {{{$/;"	f	class:PlotMETDistsVersMu
+CalAntiKt4EMTopoJets_eta	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderArray<float> CalAntiKt4EMTopoJets_eta = {fReader, "CalAntiKt4EMTopoJets.eta"};$/;"	m	class:Jburr_Template_Selector
+CalAntiKt4EMTopoJets_m	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderArray<float> CalAntiKt4EMTopoJets_m = {fReader, "CalAntiKt4EMTopoJets.m"};$/;"	m	class:Jburr_Template_Selector
+CalAntiKt4EMTopoJets_phi	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderArray<float> CalAntiKt4EMTopoJets_phi = {fReader, "CalAntiKt4EMTopoJets.phi"};$/;"	m	class:Jburr_Template_Selector
+CalAntiKt4EMTopoJets_pt	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderArray<float> CalAntiKt4EMTopoJets_pt = {fReader, "CalAntiKt4EMTopoJets.pt"};$/;"	m	class:Jburr_Template_Selector
+CalAntiKt4EMTopoMissingET_FinalTrkNoMu_met	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Float_t> CalAntiKt4EMTopoMissingET_FinalTrkNoMu_met = {fReader, "CalAntiKt4EMTopoMissingET.FinalTrkNoMu.met"};$/;"	m	class:Jburr_Template_Selector
+CalAntiKt4EMTopoMissingET_FinalTrkNoMu_mpx	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Float_t> CalAntiKt4EMTopoMissingET_FinalTrkNoMu_mpx = {fReader, "CalAntiKt4EMTopoMissingET.FinalTrkNoMu.mpx"};$/;"	m	class:Jburr_Template_Selector
+CalAntiKt4EMTopoMissingET_FinalTrkNoMu_mpy	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Float_t> CalAntiKt4EMTopoMissingET_FinalTrkNoMu_mpy = {fReader, "CalAntiKt4EMTopoMissingET.FinalTrkNoMu.mpy"};$/;"	m	class:Jburr_Template_Selector
+CalAntiKt4EMTopoMissingET_FinalTrkNoMu_phi	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Float_t> CalAntiKt4EMTopoMissingET_FinalTrkNoMu_phi = {fReader, "CalAntiKt4EMTopoMissingET.FinalTrkNoMu.phi"};$/;"	m	class:Jburr_Template_Selector
+CalAntiKt4EMTopoMissingET_FinalTrkNoMu_sumet	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Float_t> CalAntiKt4EMTopoMissingET_FinalTrkNoMu_sumet = {fReader, "CalAntiKt4EMTopoMissingET.FinalTrkNoMu.sumet"};$/;"	m	class:Jburr_Template_Selector
+CalAntiKt4EMTopoMissingET_FinalTrk_met	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Float_t> CalAntiKt4EMTopoMissingET_FinalTrk_met = {fReader, "CalAntiKt4EMTopoMissingET.FinalTrk.met"};$/;"	m	class:Jburr_Template_Selector
+CalAntiKt4EMTopoMissingET_FinalTrk_mpx	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Float_t> CalAntiKt4EMTopoMissingET_FinalTrk_mpx = {fReader, "CalAntiKt4EMTopoMissingET.FinalTrk.mpx"};$/;"	m	class:Jburr_Template_Selector
+CalAntiKt4EMTopoMissingET_FinalTrk_mpy	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Float_t> CalAntiKt4EMTopoMissingET_FinalTrk_mpy = {fReader, "CalAntiKt4EMTopoMissingET.FinalTrk.mpy"};$/;"	m	class:Jburr_Template_Selector
+CalAntiKt4EMTopoMissingET_FinalTrk_phi	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Float_t> CalAntiKt4EMTopoMissingET_FinalTrk_phi = {fReader, "CalAntiKt4EMTopoMissingET.FinalTrk.phi"};$/;"	m	class:Jburr_Template_Selector
+CalAntiKt4EMTopoMissingET_FinalTrk_sumet	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Float_t> CalAntiKt4EMTopoMissingET_FinalTrk_sumet = {fReader, "CalAntiKt4EMTopoMissingET.FinalTrk.sumet"};$/;"	m	class:Jburr_Template_Selector
+CalAntiKt4EMTopoMissingET_Fwd35_FinalTrkNoMu_met	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Float_t> CalAntiKt4EMTopoMissingET_Fwd35_FinalTrkNoMu_met = {fReader, "CalAntiKt4EMTopoMissingET_Fwd35.FinalTrkNoMu.met"};$/;"	m	class:Jburr_Template_Selector
+CalAntiKt4EMTopoMissingET_Fwd35_FinalTrkNoMu_mpx	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Float_t> CalAntiKt4EMTopoMissingET_Fwd35_FinalTrkNoMu_mpx = {fReader, "CalAntiKt4EMTopoMissingET_Fwd35.FinalTrkNoMu.mpx"};$/;"	m	class:Jburr_Template_Selector
+CalAntiKt4EMTopoMissingET_Fwd35_FinalTrkNoMu_mpy	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Float_t> CalAntiKt4EMTopoMissingET_Fwd35_FinalTrkNoMu_mpy = {fReader, "CalAntiKt4EMTopoMissingET_Fwd35.FinalTrkNoMu.mpy"};$/;"	m	class:Jburr_Template_Selector
+CalAntiKt4EMTopoMissingET_Fwd35_FinalTrkNoMu_phi	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Float_t> CalAntiKt4EMTopoMissingET_Fwd35_FinalTrkNoMu_phi = {fReader, "CalAntiKt4EMTopoMissingET_Fwd35.FinalTrkNoMu.phi"};$/;"	m	class:Jburr_Template_Selector
+CalAntiKt4EMTopoMissingET_Fwd35_FinalTrkNoMu_sumet	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Float_t> CalAntiKt4EMTopoMissingET_Fwd35_FinalTrkNoMu_sumet = {fReader, "CalAntiKt4EMTopoMissingET_Fwd35.FinalTrkNoMu.sumet"};$/;"	m	class:Jburr_Template_Selector
+CalAntiKt4EMTopoMissingET_Fwd35_FinalTrk_met	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Float_t> CalAntiKt4EMTopoMissingET_Fwd35_FinalTrk_met = {fReader, "CalAntiKt4EMTopoMissingET_Fwd35.FinalTrk.met"};$/;"	m	class:Jburr_Template_Selector
+CalAntiKt4EMTopoMissingET_Fwd35_FinalTrk_mpx	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Float_t> CalAntiKt4EMTopoMissingET_Fwd35_FinalTrk_mpx = {fReader, "CalAntiKt4EMTopoMissingET_Fwd35.FinalTrk.mpx"};$/;"	m	class:Jburr_Template_Selector
+CalAntiKt4EMTopoMissingET_Fwd35_FinalTrk_mpy	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Float_t> CalAntiKt4EMTopoMissingET_Fwd35_FinalTrk_mpy = {fReader, "CalAntiKt4EMTopoMissingET_Fwd35.FinalTrk.mpy"};$/;"	m	class:Jburr_Template_Selector
+CalAntiKt4EMTopoMissingET_Fwd35_FinalTrk_phi	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Float_t> CalAntiKt4EMTopoMissingET_Fwd35_FinalTrk_phi = {fReader, "CalAntiKt4EMTopoMissingET_Fwd35.FinalTrk.phi"};$/;"	m	class:Jburr_Template_Selector
+CalAntiKt4EMTopoMissingET_Fwd35_FinalTrk_sumet	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Float_t> CalAntiKt4EMTopoMissingET_Fwd35_FinalTrk_sumet = {fReader, "CalAntiKt4EMTopoMissingET_Fwd35.FinalTrk.sumet"};$/;"	m	class:Jburr_Template_Selector
+CalAntiKt4EMTopoMissingET_Fwd40_FinalTrkNoMu_met	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Float_t> CalAntiKt4EMTopoMissingET_Fwd40_FinalTrkNoMu_met = {fReader, "CalAntiKt4EMTopoMissingET_Fwd40.FinalTrkNoMu.met"};$/;"	m	class:Jburr_Template_Selector
+CalAntiKt4EMTopoMissingET_Fwd40_FinalTrkNoMu_mpx	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Float_t> CalAntiKt4EMTopoMissingET_Fwd40_FinalTrkNoMu_mpx = {fReader, "CalAntiKt4EMTopoMissingET_Fwd40.FinalTrkNoMu.mpx"};$/;"	m	class:Jburr_Template_Selector
+CalAntiKt4EMTopoMissingET_Fwd40_FinalTrkNoMu_mpy	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Float_t> CalAntiKt4EMTopoMissingET_Fwd40_FinalTrkNoMu_mpy = {fReader, "CalAntiKt4EMTopoMissingET_Fwd40.FinalTrkNoMu.mpy"};$/;"	m	class:Jburr_Template_Selector
+CalAntiKt4EMTopoMissingET_Fwd40_FinalTrkNoMu_phi	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Float_t> CalAntiKt4EMTopoMissingET_Fwd40_FinalTrkNoMu_phi = {fReader, "CalAntiKt4EMTopoMissingET_Fwd40.FinalTrkNoMu.phi"};$/;"	m	class:Jburr_Template_Selector
+CalAntiKt4EMTopoMissingET_Fwd40_FinalTrkNoMu_sumet	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Float_t> CalAntiKt4EMTopoMissingET_Fwd40_FinalTrkNoMu_sumet = {fReader, "CalAntiKt4EMTopoMissingET_Fwd40.FinalTrkNoMu.sumet"};$/;"	m	class:Jburr_Template_Selector
+CalAntiKt4EMTopoMissingET_Fwd40_FinalTrk_met	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Float_t> CalAntiKt4EMTopoMissingET_Fwd40_FinalTrk_met = {fReader, "CalAntiKt4EMTopoMissingET_Fwd40.FinalTrk.met"};$/;"	m	class:Jburr_Template_Selector
+CalAntiKt4EMTopoMissingET_Fwd40_FinalTrk_mpx	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Float_t> CalAntiKt4EMTopoMissingET_Fwd40_FinalTrk_mpx = {fReader, "CalAntiKt4EMTopoMissingET_Fwd40.FinalTrk.mpx"};$/;"	m	class:Jburr_Template_Selector
+CalAntiKt4EMTopoMissingET_Fwd40_FinalTrk_mpy	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Float_t> CalAntiKt4EMTopoMissingET_Fwd40_FinalTrk_mpy = {fReader, "CalAntiKt4EMTopoMissingET_Fwd40.FinalTrk.mpy"};$/;"	m	class:Jburr_Template_Selector
+CalAntiKt4EMTopoMissingET_Fwd40_FinalTrk_phi	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Float_t> CalAntiKt4EMTopoMissingET_Fwd40_FinalTrk_phi = {fReader, "CalAntiKt4EMTopoMissingET_Fwd40.FinalTrk.phi"};$/;"	m	class:Jburr_Template_Selector
+CalAntiKt4EMTopoMissingET_Fwd40_FinalTrk_sumet	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Float_t> CalAntiKt4EMTopoMissingET_Fwd40_FinalTrk_sumet = {fReader, "CalAntiKt4EMTopoMissingET_Fwd40.FinalTrk.sumet"};$/;"	m	class:Jburr_Template_Selector
+CalAntiKt4EMTopoMissingET_Loose_FinalTrkNoMu_met	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Float_t> CalAntiKt4EMTopoMissingET_Loose_FinalTrkNoMu_met = {fReader, "CalAntiKt4EMTopoMissingET_Loose.FinalTrkNoMu.met"};$/;"	m	class:Jburr_Template_Selector
+CalAntiKt4EMTopoMissingET_Loose_FinalTrkNoMu_mpx	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Float_t> CalAntiKt4EMTopoMissingET_Loose_FinalTrkNoMu_mpx = {fReader, "CalAntiKt4EMTopoMissingET_Loose.FinalTrkNoMu.mpx"};$/;"	m	class:Jburr_Template_Selector
+CalAntiKt4EMTopoMissingET_Loose_FinalTrkNoMu_mpy	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Float_t> CalAntiKt4EMTopoMissingET_Loose_FinalTrkNoMu_mpy = {fReader, "CalAntiKt4EMTopoMissingET_Loose.FinalTrkNoMu.mpy"};$/;"	m	class:Jburr_Template_Selector
+CalAntiKt4EMTopoMissingET_Loose_FinalTrkNoMu_phi	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Float_t> CalAntiKt4EMTopoMissingET_Loose_FinalTrkNoMu_phi = {fReader, "CalAntiKt4EMTopoMissingET_Loose.FinalTrkNoMu.phi"};$/;"	m	class:Jburr_Template_Selector
+CalAntiKt4EMTopoMissingET_Loose_FinalTrkNoMu_sumet	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Float_t> CalAntiKt4EMTopoMissingET_Loose_FinalTrkNoMu_sumet = {fReader, "CalAntiKt4EMTopoMissingET_Loose.FinalTrkNoMu.sumet"};$/;"	m	class:Jburr_Template_Selector
+CalAntiKt4EMTopoMissingET_Loose_FinalTrk_met	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Float_t> CalAntiKt4EMTopoMissingET_Loose_FinalTrk_met = {fReader, "CalAntiKt4EMTopoMissingET_Loose.FinalTrk.met"};$/;"	m	class:Jburr_Template_Selector
+CalAntiKt4EMTopoMissingET_Loose_FinalTrk_mpx	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Float_t> CalAntiKt4EMTopoMissingET_Loose_FinalTrk_mpx = {fReader, "CalAntiKt4EMTopoMissingET_Loose.FinalTrk.mpx"};$/;"	m	class:Jburr_Template_Selector
+CalAntiKt4EMTopoMissingET_Loose_FinalTrk_mpy	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Float_t> CalAntiKt4EMTopoMissingET_Loose_FinalTrk_mpy = {fReader, "CalAntiKt4EMTopoMissingET_Loose.FinalTrk.mpy"};$/;"	m	class:Jburr_Template_Selector
+CalAntiKt4EMTopoMissingET_Loose_FinalTrk_phi	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Float_t> CalAntiKt4EMTopoMissingET_Loose_FinalTrk_phi = {fReader, "CalAntiKt4EMTopoMissingET_Loose.FinalTrk.phi"};$/;"	m	class:Jburr_Template_Selector
+CalAntiKt4EMTopoMissingET_Loose_FinalTrk_sumet	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Float_t> CalAntiKt4EMTopoMissingET_Loose_FinalTrk_sumet = {fReader, "CalAntiKt4EMTopoMissingET_Loose.FinalTrk.sumet"};$/;"	m	class:Jburr_Template_Selector
+CalElectrons_eta	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderArray<float> CalElectrons_eta = {fReader, "CalElectrons.eta"};$/;"	m	class:Jburr_Template_Selector
+CalElectrons_m	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderArray<float> CalElectrons_m = {fReader, "CalElectrons.m"};$/;"	m	class:Jburr_Template_Selector
+CalElectrons_phi	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderArray<float> CalElectrons_phi = {fReader, "CalElectrons.phi"};$/;"	m	class:Jburr_Template_Selector
+CalElectrons_pt	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderArray<float> CalElectrons_pt = {fReader, "CalElectrons.pt"};$/;"	m	class:Jburr_Template_Selector
+CalMuons_eta	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderArray<float> CalMuons_eta = {fReader, "CalMuons.eta"};$/;"	m	class:Jburr_Template_Selector
+CalMuons_m	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderArray<float> CalMuons_m = {fReader, "CalMuons.m"};$/;"	m	class:Jburr_Template_Selector
+CalMuons_phi	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderArray<float> CalMuons_phi = {fReader, "CalMuons.phi"};$/;"	m	class:Jburr_Template_Selector
+CalMuons_pt	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderArray<float> CalMuons_pt = {fReader, "CalMuons.pt"};$/;"	m	class:Jburr_Template_Selector
+ComputeWeight	PerformCorrection/CorrectingDistributions.C	/^Double_t CorrectingDistributions::ComputeWeight(TF1* fitFunc)\/\/{{{$/;"	f	class:CorrectingDistributions
+CorrectingDistributions	PerformCorrection/CorrectingDistributions.h	/^   CorrectingDistributions(TTree * \/*tree*\/ =0) { }$/;"	f	class:CorrectingDistributions
+CorrectingDistributions	PerformCorrection/CorrectingDistributions.h	/^class CorrectingDistributions : public TSelector {$/;"	c
+CorrectingDistributions_h	PerformCorrection/CorrectingDistributions.h	8;"	d
+EfficiencyFitMuBin1	PerformCorrection/CorrectingDistributions.h	/^   TF1*             EfficiencyFitMuBin1 = 0;$/;"	m	class:CorrectingDistributions
+EfficiencyFitMuBin2	PerformCorrection/CorrectingDistributions.h	/^   TF1*             EfficiencyFitMuBin2 = 0;$/;"	m	class:CorrectingDistributions
+EfficiencyFitMuBin3	PerformCorrection/CorrectingDistributions.h	/^   TF1*             EfficiencyFitMuBin3 = 0;$/;"	m	class:CorrectingDistributions
+EfficiencyFitMuBin4	PerformCorrection/CorrectingDistributions.h	/^   TF1*             EfficiencyFitMuBin4 = 0;$/;"	m	class:CorrectingDistributions
+EfficiencyFitMuBin5	PerformCorrection/CorrectingDistributions.h	/^   TF1*             EfficiencyFitMuBin5 = 0;$/;"	m	class:CorrectingDistributions
+EfficiencyFitMuBin6	PerformCorrection/CorrectingDistributions.h	/^   TF1*             EfficiencyFitMuBin6 = 0;$/;"	m	class:CorrectingDistributions
+EfficiencyFitMuBin7	PerformCorrection/CorrectingDistributions.h	/^   TF1*             EfficiencyFitMuBin7 = 0;$/;"	m	class:CorrectingDistributions
+EventNumber	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<ULong64_t> EventNumber = {fReader, "EventNumber"};$/;"	m	class:Jburr_Template_Selector
+EventNumber	plotMETDistsVersusMu/PlotMETDistsVersMu.h	/^   TTreeReaderValue<ULong64_t> EventNumber = {fReader, "EventNumber"};$/;"	m	class:PlotMETDistsVersMu
+FillFunc	Plot_Between_Fits/fa2.C	/^Double_t FillFunc(double x)$/;"	f
+GetEntry	BurrTemplateSelector/Jburr_Template_Selector.h	/^   virtual Int_t   GetEntry(Long64_t entry, Int_t getall = 0) { return fChain ? fChain->GetTree()->GetEntry(entry, getall) : 0; }$/;"	f	class:Jburr_Template_Selector
+GetEntry	PerformCorrection/CorrectingDistributions.h	/^   virtual Int_t   GetEntry(Long64_t entry, Int_t getall = 0) { return fChain ? fChain->GetTree()->GetEntry(entry, getall) : 0; }$/;"	f	class:CorrectingDistributions
+GetEntry	computeL1XE30Efficiency/L1XEefficiencySelector.h	/^   virtual Int_t   GetEntry(Long64_t entry, Int_t getall = 0) { return fChain ? fChain->GetTree()->GetEntry(entry, getall) : 0; }$/;"	f	class:L1XEefficiencySelector
+GetEntry	plotMETDistsVersusMu/PlotMETDistsVersMu.h	/^   virtual Int_t   GetEntry(Long64_t entry, Int_t getall = 0) { return fChain ? fChain->GetTree()->GetEntry(entry, getall) : 0; }$/;"	f	class:PlotMETDistsVersMu
+GetOutputList	BurrTemplateSelector/Jburr_Template_Selector.h	/^   virtual TList  *GetOutputList() const { return fOutput; }$/;"	f	class:Jburr_Template_Selector
+GetOutputList	PerformCorrection/CorrectingDistributions.h	/^   virtual TList  *GetOutputList() const { return fOutput; }$/;"	f	class:CorrectingDistributions
+GetOutputList	computeL1XE30Efficiency/L1XEefficiencySelector.h	/^   virtual TList  *GetOutputList() const { return fOutput; }$/;"	f	class:L1XEefficiencySelector
+GetOutputList	plotMETDistsVersusMu/PlotMETDistsVersMu.h	/^   virtual TList  *GetOutputList() const { return fOutput; }$/;"	f	class:PlotMETDistsVersMu
+HInvEle_pass	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Bool_t> HInvEle_pass = {fReader, "HInvEle.pass"};$/;"	m	class:Jburr_Template_Selector
+HInvMuon_pass	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Bool_t> HInvMuon_pass = {fReader, "HInvMuon.pass"};$/;"	m	class:Jburr_Template_Selector
+HLT_2e12_lhvloose_nod0_L12EM10VH_passBits	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<UInt_t> HLT_2e12_lhvloose_nod0_L12EM10VH_passBits = {fReader, "HLT_2e12_lhvloose_nod0_L12EM10VH.passBits"};$/;"	m	class:Jburr_Template_Selector
+HLT_2e12_lhvloose_nod0_L12EM10VH_passed	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Bool_t> HLT_2e12_lhvloose_nod0_L12EM10VH_passed = {fReader, "HLT_2e12_lhvloose_nod0_L12EM10VH.passed"};$/;"	m	class:Jburr_Template_Selector
+HLT_2e12_lhvloose_nod0_L12EM10VH_prescale	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Float_t> HLT_2e12_lhvloose_nod0_L12EM10VH_prescale = {fReader, "HLT_2e12_lhvloose_nod0_L12EM10VH.prescale"};$/;"	m	class:Jburr_Template_Selector
+HLT_2e15_lhvloose_nod0_L12EM13VH_passBits	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<UInt_t> HLT_2e15_lhvloose_nod0_L12EM13VH_passBits = {fReader, "HLT_2e15_lhvloose_nod0_L12EM13VH.passBits"};$/;"	m	class:Jburr_Template_Selector
+HLT_2e15_lhvloose_nod0_L12EM13VH_passed	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Bool_t> HLT_2e15_lhvloose_nod0_L12EM13VH_passed = {fReader, "HLT_2e15_lhvloose_nod0_L12EM13VH.passed"};$/;"	m	class:Jburr_Template_Selector
+HLT_2e15_lhvloose_nod0_L12EM13VH_prescale	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Float_t> HLT_2e15_lhvloose_nod0_L12EM13VH_prescale = {fReader, "HLT_2e15_lhvloose_nod0_L12EM13VH.prescale"};$/;"	m	class:Jburr_Template_Selector
+HLT_2e17_lhvloose_nod0_L12EM15VHI_passBits	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<UInt_t> HLT_2e17_lhvloose_nod0_L12EM15VHI_passBits = {fReader, "HLT_2e17_lhvloose_nod0_L12EM15VHI.passBits"};$/;"	m	class:Jburr_Template_Selector
+HLT_2e17_lhvloose_nod0_L12EM15VHI_passed	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Bool_t> HLT_2e17_lhvloose_nod0_L12EM15VHI_passed = {fReader, "HLT_2e17_lhvloose_nod0_L12EM15VHI.passed"};$/;"	m	class:Jburr_Template_Selector
+HLT_2e17_lhvloose_nod0_L12EM15VHI_prescale	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Float_t> HLT_2e17_lhvloose_nod0_L12EM15VHI_prescale = {fReader, "HLT_2e17_lhvloose_nod0_L12EM15VHI.prescale"};$/;"	m	class:Jburr_Template_Selector
+HLT_2e17_lhvloose_nod0_passBits	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<UInt_t> HLT_2e17_lhvloose_nod0_passBits = {fReader, "HLT_2e17_lhvloose_nod0.passBits"};$/;"	m	class:Jburr_Template_Selector
+HLT_2e17_lhvloose_nod0_passed	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Bool_t> HLT_2e17_lhvloose_nod0_passed = {fReader, "HLT_2e17_lhvloose_nod0.passed"};$/;"	m	class:Jburr_Template_Selector
+HLT_2e17_lhvloose_nod0_prescale	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Float_t> HLT_2e17_lhvloose_nod0_prescale = {fReader, "HLT_2e17_lhvloose_nod0.prescale"};$/;"	m	class:Jburr_Template_Selector
+HLT_2e24_lhvloose_nod0_passBits	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<UInt_t> HLT_2e24_lhvloose_nod0_passBits = {fReader, "HLT_2e24_lhvloose_nod0.passBits"};$/;"	m	class:Jburr_Template_Selector
+HLT_2e24_lhvloose_nod0_passed	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Bool_t> HLT_2e24_lhvloose_nod0_passed = {fReader, "HLT_2e24_lhvloose_nod0.passed"};$/;"	m	class:Jburr_Template_Selector
+HLT_2e24_lhvloose_nod0_prescale	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Float_t> HLT_2e24_lhvloose_nod0_prescale = {fReader, "HLT_2e24_lhvloose_nod0.prescale"};$/;"	m	class:Jburr_Template_Selector
+HLT_2mu14_passBits	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<UInt_t> HLT_2mu14_passBits = {fReader, "HLT_2mu14.passBits"};$/;"	m	class:Jburr_Template_Selector
+HLT_2mu14_passed	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Bool_t> HLT_2mu14_passed = {fReader, "HLT_2mu14.passed"};$/;"	m	class:Jburr_Template_Selector
+HLT_2mu14_prescale	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Float_t> HLT_2mu14_prescale = {fReader, "HLT_2mu14.prescale"};$/;"	m	class:Jburr_Template_Selector
+HLT_e24_lhmedium_nod0_ivarloose_passBits	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<UInt_t> HLT_e24_lhmedium_nod0_ivarloose_passBits = {fReader, "HLT_e24_lhmedium_nod0_ivarloose.passBits"};$/;"	m	class:Jburr_Template_Selector
+HLT_e24_lhmedium_nod0_ivarloose_passed	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Bool_t> HLT_e24_lhmedium_nod0_ivarloose_passed = {fReader, "HLT_e24_lhmedium_nod0_ivarloose.passed"};$/;"	m	class:Jburr_Template_Selector
+HLT_e24_lhmedium_nod0_ivarloose_prescale	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Float_t> HLT_e24_lhmedium_nod0_ivarloose_prescale = {fReader, "HLT_e24_lhmedium_nod0_ivarloose.prescale"};$/;"	m	class:Jburr_Template_Selector
+HLT_e24_lhtight_nod0_ivarloose_passBits	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<UInt_t> HLT_e24_lhtight_nod0_ivarloose_passBits = {fReader, "HLT_e24_lhtight_nod0_ivarloose.passBits"};$/;"	m	class:Jburr_Template_Selector
+HLT_e24_lhtight_nod0_ivarloose_passed	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Bool_t> HLT_e24_lhtight_nod0_ivarloose_passed = {fReader, "HLT_e24_lhtight_nod0_ivarloose.passed"};$/;"	m	class:Jburr_Template_Selector
+HLT_e24_lhtight_nod0_ivarloose_prescale	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Float_t> HLT_e24_lhtight_nod0_ivarloose_prescale = {fReader, "HLT_e24_lhtight_nod0_ivarloose.prescale"};$/;"	m	class:Jburr_Template_Selector
+HLT_e26_lhtight_nod0_ivarloose_L1EM22VHIM_passBits	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<UInt_t> HLT_e26_lhtight_nod0_ivarloose_L1EM22VHIM_passBits = {fReader, "HLT_e26_lhtight_nod0_ivarloose_L1EM22VHIM.passBits"};$/;"	m	class:Jburr_Template_Selector
+HLT_e26_lhtight_nod0_ivarloose_L1EM22VHIM_passed	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Bool_t> HLT_e26_lhtight_nod0_ivarloose_L1EM22VHIM_passed = {fReader, "HLT_e26_lhtight_nod0_ivarloose_L1EM22VHIM.passed"};$/;"	m	class:Jburr_Template_Selector
+HLT_e26_lhtight_nod0_ivarloose_L1EM22VHIM_prescale	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Float_t> HLT_e26_lhtight_nod0_ivarloose_L1EM22VHIM_prescale = {fReader, "HLT_e26_lhtight_nod0_ivarloose_L1EM22VHIM.prescale"};$/;"	m	class:Jburr_Template_Selector
+HLT_e26_lhtight_nod0_ivarloose_passBits	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<UInt_t> HLT_e26_lhtight_nod0_ivarloose_passBits = {fReader, "HLT_e26_lhtight_nod0_ivarloose.passBits"};$/;"	m	class:Jburr_Template_Selector
+HLT_e26_lhtight_nod0_ivarloose_passed	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Bool_t> HLT_e26_lhtight_nod0_ivarloose_passed = {fReader, "HLT_e26_lhtight_nod0_ivarloose.passed"};$/;"	m	class:Jburr_Template_Selector
+HLT_e26_lhtight_nod0_ivarloose_prescale	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Float_t> HLT_e26_lhtight_nod0_ivarloose_prescale = {fReader, "HLT_e26_lhtight_nod0_ivarloose.prescale"};$/;"	m	class:Jburr_Template_Selector
+HLT_e26_lhtight_smooth_ivarloose_passBits	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<UInt_t> HLT_e26_lhtight_smooth_ivarloose_passBits = {fReader, "HLT_e26_lhtight_smooth_ivarloose.passBits"};$/;"	m	class:Jburr_Template_Selector
+HLT_e26_lhtight_smooth_ivarloose_passed	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Bool_t> HLT_e26_lhtight_smooth_ivarloose_passed = {fReader, "HLT_e26_lhtight_smooth_ivarloose.passed"};$/;"	m	class:Jburr_Template_Selector
+HLT_e26_lhtight_smooth_ivarloose_prescale	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Float_t> HLT_e26_lhtight_smooth_ivarloose_prescale = {fReader, "HLT_e26_lhtight_smooth_ivarloose.prescale"};$/;"	m	class:Jburr_Template_Selector
+HLT_e28_lhtight_nod0_ivarloose_L1EM24VHIM_passBits	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<UInt_t> HLT_e28_lhtight_nod0_ivarloose_L1EM24VHIM_passBits = {fReader, "HLT_e28_lhtight_nod0_ivarloose_L1EM24VHIM.passBits"};$/;"	m	class:Jburr_Template_Selector
+HLT_e28_lhtight_nod0_ivarloose_L1EM24VHIM_passed	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Bool_t> HLT_e28_lhtight_nod0_ivarloose_L1EM24VHIM_passed = {fReader, "HLT_e28_lhtight_nod0_ivarloose_L1EM24VHIM.passed"};$/;"	m	class:Jburr_Template_Selector
+HLT_e28_lhtight_nod0_ivarloose_L1EM24VHIM_prescale	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Float_t> HLT_e28_lhtight_nod0_ivarloose_L1EM24VHIM_prescale = {fReader, "HLT_e28_lhtight_nod0_ivarloose_L1EM24VHIM.prescale"};$/;"	m	class:Jburr_Template_Selector
+HLT_e28_lhtight_nod0_ivarloose_passBits	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<UInt_t> HLT_e28_lhtight_nod0_ivarloose_passBits = {fReader, "HLT_e28_lhtight_nod0_ivarloose.passBits"};$/;"	m	class:Jburr_Template_Selector
+HLT_e28_lhtight_nod0_ivarloose_passed	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Bool_t> HLT_e28_lhtight_nod0_ivarloose_passed = {fReader, "HLT_e28_lhtight_nod0_ivarloose.passed"};$/;"	m	class:Jburr_Template_Selector
+HLT_e28_lhtight_nod0_ivarloose_prescale	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Float_t> HLT_e28_lhtight_nod0_ivarloose_prescale = {fReader, "HLT_e28_lhtight_nod0_ivarloose.prescale"};$/;"	m	class:Jburr_Template_Selector
+HLT_e60_lhmedium_nod0_L1EM24VHI_passBits	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<UInt_t> HLT_e60_lhmedium_nod0_L1EM24VHI_passBits = {fReader, "HLT_e60_lhmedium_nod0_L1EM24VHI.passBits"};$/;"	m	class:Jburr_Template_Selector
+HLT_e60_lhmedium_nod0_L1EM24VHI_passed	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Bool_t> HLT_e60_lhmedium_nod0_L1EM24VHI_passed = {fReader, "HLT_e60_lhmedium_nod0_L1EM24VHI.passed"};$/;"	m	class:Jburr_Template_Selector
+HLT_e60_lhmedium_nod0_L1EM24VHI_prescale	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Float_t> HLT_e60_lhmedium_nod0_L1EM24VHI_prescale = {fReader, "HLT_e60_lhmedium_nod0_L1EM24VHI.prescale"};$/;"	m	class:Jburr_Template_Selector
+HLT_e60_lhmedium_nod0_passBits	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<UInt_t> HLT_e60_lhmedium_nod0_passBits = {fReader, "HLT_e60_lhmedium_nod0.passBits"};$/;"	m	class:Jburr_Template_Selector
+HLT_e60_lhmedium_nod0_passed	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Bool_t> HLT_e60_lhmedium_nod0_passed = {fReader, "HLT_e60_lhmedium_nod0.passed"};$/;"	m	class:Jburr_Template_Selector
+HLT_e60_lhmedium_nod0_prescale	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Float_t> HLT_e60_lhmedium_nod0_prescale = {fReader, "HLT_e60_lhmedium_nod0.prescale"};$/;"	m	class:Jburr_Template_Selector
+HLT_e60_medium_passBits	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<UInt_t> HLT_e60_medium_passBits = {fReader, "HLT_e60_medium.passBits"};$/;"	m	class:Jburr_Template_Selector
+HLT_e60_medium_passed	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Bool_t> HLT_e60_medium_passed = {fReader, "HLT_e60_medium.passed"};$/;"	m	class:Jburr_Template_Selector
+HLT_e60_medium_prescale	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Float_t> HLT_e60_medium_prescale = {fReader, "HLT_e60_medium.prescale"};$/;"	m	class:Jburr_Template_Selector
+HLT_j40_L1ZB_passBits	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<UInt_t> HLT_j40_L1ZB_passBits = {fReader, "HLT_j40_L1ZB.passBits"};$/;"	m	class:Jburr_Template_Selector
+HLT_j40_L1ZB_passed	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Bool_t> HLT_j40_L1ZB_passed = {fReader, "HLT_j40_L1ZB.passed"};$/;"	m	class:Jburr_Template_Selector
+HLT_j40_L1ZB_prescale	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Float_t> HLT_j40_L1ZB_prescale = {fReader, "HLT_j40_L1ZB.prescale"};$/;"	m	class:Jburr_Template_Selector
+HLT_mu20_mu8noL1_passBits	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<UInt_t> HLT_mu20_mu8noL1_passBits = {fReader, "HLT_mu20_mu8noL1.passBits"};$/;"	m	class:Jburr_Template_Selector
+HLT_mu20_mu8noL1_passed	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Bool_t> HLT_mu20_mu8noL1_passed = {fReader, "HLT_mu20_mu8noL1.passed"};$/;"	m	class:Jburr_Template_Selector
+HLT_mu20_mu8noL1_prescale	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Float_t> HLT_mu20_mu8noL1_prescale = {fReader, "HLT_mu20_mu8noL1.prescale"};$/;"	m	class:Jburr_Template_Selector
+HLT_mu22_mu8noL1_passBits	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<UInt_t> HLT_mu22_mu8noL1_passBits = {fReader, "HLT_mu22_mu8noL1.passBits"};$/;"	m	class:Jburr_Template_Selector
+HLT_mu22_mu8noL1_passed	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Bool_t> HLT_mu22_mu8noL1_passed = {fReader, "HLT_mu22_mu8noL1.passed"};$/;"	m	class:Jburr_Template_Selector
+HLT_mu22_mu8noL1_prescale	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Float_t> HLT_mu22_mu8noL1_prescale = {fReader, "HLT_mu22_mu8noL1.prescale"};$/;"	m	class:Jburr_Template_Selector
+HLT_mu24_imedium_passBits	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<UInt_t> HLT_mu24_imedium_passBits = {fReader, "HLT_mu24_imedium.passBits"};$/;"	m	class:Jburr_Template_Selector
+HLT_mu24_imedium_passed	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Bool_t> HLT_mu24_imedium_passed = {fReader, "HLT_mu24_imedium.passed"};$/;"	m	class:Jburr_Template_Selector
+HLT_mu24_imedium_prescale	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Float_t> HLT_mu24_imedium_prescale = {fReader, "HLT_mu24_imedium.prescale"};$/;"	m	class:Jburr_Template_Selector
+HLT_mu24_ivarloose_passBits	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<UInt_t> HLT_mu24_ivarloose_passBits = {fReader, "HLT_mu24_ivarloose.passBits"};$/;"	m	class:Jburr_Template_Selector
+HLT_mu24_ivarloose_passed	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Bool_t> HLT_mu24_ivarloose_passed = {fReader, "HLT_mu24_ivarloose.passed"};$/;"	m	class:Jburr_Template_Selector
+HLT_mu24_ivarloose_prescale	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Float_t> HLT_mu24_ivarloose_prescale = {fReader, "HLT_mu24_ivarloose.prescale"};$/;"	m	class:Jburr_Template_Selector
+HLT_mu24_ivarmedium_passBits	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<UInt_t> HLT_mu24_ivarmedium_passBits = {fReader, "HLT_mu24_ivarmedium.passBits"};$/;"	m	class:Jburr_Template_Selector
+HLT_mu24_ivarmedium_passed	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Bool_t> HLT_mu24_ivarmedium_passed = {fReader, "HLT_mu24_ivarmedium.passed"};$/;"	m	class:Jburr_Template_Selector
+HLT_mu24_ivarmedium_prescale	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Float_t> HLT_mu24_ivarmedium_prescale = {fReader, "HLT_mu24_ivarmedium.prescale"};$/;"	m	class:Jburr_Template_Selector
+HLT_mu26_imedium_passBits	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<UInt_t> HLT_mu26_imedium_passBits = {fReader, "HLT_mu26_imedium.passBits"};$/;"	m	class:Jburr_Template_Selector
+HLT_mu26_imedium_passed	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Bool_t> HLT_mu26_imedium_passed = {fReader, "HLT_mu26_imedium.passed"};$/;"	m	class:Jburr_Template_Selector
+HLT_mu26_imedium_prescale	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Float_t> HLT_mu26_imedium_prescale = {fReader, "HLT_mu26_imedium.prescale"};$/;"	m	class:Jburr_Template_Selector
+HLT_mu26_ivarmedium_passBits	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<UInt_t> HLT_mu26_ivarmedium_passBits = {fReader, "HLT_mu26_ivarmedium.passBits"};$/;"	m	class:Jburr_Template_Selector
+HLT_mu26_ivarmedium_passed	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Bool_t> HLT_mu26_ivarmedium_passed = {fReader, "HLT_mu26_ivarmedium.passed"};$/;"	m	class:Jburr_Template_Selector
+HLT_mu26_ivarmedium_prescale	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Float_t> HLT_mu26_ivarmedium_prescale = {fReader, "HLT_mu26_ivarmedium.prescale"};$/;"	m	class:Jburr_Template_Selector
+HLT_mu40_passBits	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<UInt_t> HLT_mu40_passBits = {fReader, "HLT_mu40.passBits"};$/;"	m	class:Jburr_Template_Selector
+HLT_mu40_passed	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Bool_t> HLT_mu40_passed = {fReader, "HLT_mu40.passed"};$/;"	m	class:Jburr_Template_Selector
+HLT_mu40_prescale	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Float_t> HLT_mu40_prescale = {fReader, "HLT_mu40.prescale"};$/;"	m	class:Jburr_Template_Selector
+HLT_mu50_passBits	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<UInt_t> HLT_mu50_passBits = {fReader, "HLT_mu50.passBits"};$/;"	m	class:Jburr_Template_Selector
+HLT_mu50_passed	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Bool_t> HLT_mu50_passed = {fReader, "HLT_mu50.passed"};$/;"	m	class:Jburr_Template_Selector
+HLT_mu50_prescale	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Float_t> HLT_mu50_prescale = {fReader, "HLT_mu50.prescale"};$/;"	m	class:Jburr_Template_Selector
+HLT_noalg_L1XE10_passBits	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<UInt_t> HLT_noalg_L1XE10_passBits = {fReader, "HLT_noalg_L1XE10.passBits"};$/;"	m	class:Jburr_Template_Selector
+HLT_noalg_L1XE10_passed	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Bool_t> HLT_noalg_L1XE10_passed = {fReader, "HLT_noalg_L1XE10.passed"};$/;"	m	class:Jburr_Template_Selector
+HLT_noalg_L1XE10_prescale	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Float_t> HLT_noalg_L1XE10_prescale = {fReader, "HLT_noalg_L1XE10.prescale"};$/;"	m	class:Jburr_Template_Selector
+HLT_noalg_L1XE20_passBits	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<UInt_t> HLT_noalg_L1XE20_passBits = {fReader, "HLT_noalg_L1XE20.passBits"};$/;"	m	class:Jburr_Template_Selector
+HLT_noalg_L1XE20_passed	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Bool_t> HLT_noalg_L1XE20_passed = {fReader, "HLT_noalg_L1XE20.passed"};$/;"	m	class:Jburr_Template_Selector
+HLT_noalg_L1XE20_prescale	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Float_t> HLT_noalg_L1XE20_prescale = {fReader, "HLT_noalg_L1XE20.prescale"};$/;"	m	class:Jburr_Template_Selector
+HLT_noalg_L1XE30_passBits	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<UInt_t> HLT_noalg_L1XE30_passBits = {fReader, "HLT_noalg_L1XE30.passBits"};$/;"	m	class:Jburr_Template_Selector
+HLT_noalg_L1XE30_passed	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Bool_t> HLT_noalg_L1XE30_passed = {fReader, "HLT_noalg_L1XE30.passed"};$/;"	m	class:Jburr_Template_Selector
+HLT_noalg_L1XE30_passed	PerformCorrection/CorrectingDistributions.h	/^   TTreeReaderValue<Bool_t> HLT_noalg_L1XE30_passed = {fReader, "HLT_noalg_L1XE30.passed"};$/;"	m	class:CorrectingDistributions
+HLT_noalg_L1XE30_passed	computeL1XE30Efficiency/L1XEefficiencySelector.h	/^   TTreeReaderValue<Bool_t> HLT_noalg_L1XE30_passed = {fReader, "HLT_noalg_L1XE30.passed"};$/;"	m	class:L1XEefficiencySelector
+HLT_noalg_L1XE30_passed	plotMETDistsVersusMu/PlotMETDistsVersMu.h	/^   TTreeReaderValue<Bool_t> HLT_noalg_L1XE30_passed = {fReader, "HLT_noalg_L1XE30.passed"};$/;"	m	class:PlotMETDistsVersMu
+HLT_noalg_L1XE30_prescale	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Float_t> HLT_noalg_L1XE30_prescale = {fReader, "HLT_noalg_L1XE30.prescale"};$/;"	m	class:Jburr_Template_Selector
+HLT_noalg_L1XE30_prescale	PerformCorrection/CorrectingDistributions.h	/^   TTreeReaderValue<Float_t> HLT_noalg_L1XE30_prescale = {fReader, "HLT_noalg_L1XE30.prescale"};$/;"	m	class:CorrectingDistributions
+HLT_noalg_L1XE30_prescale	computeL1XE30Efficiency/L1XEefficiencySelector.h	/^   TTreeReaderValue<Float_t> HLT_noalg_L1XE30_prescale = {fReader, "HLT_noalg_L1XE30.prescale"};$/;"	m	class:L1XEefficiencySelector
+HLT_noalg_L1XE40_passBits	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<UInt_t> HLT_noalg_L1XE40_passBits = {fReader, "HLT_noalg_L1XE40.passBits"};$/;"	m	class:Jburr_Template_Selector
+HLT_noalg_L1XE40_passed	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Bool_t> HLT_noalg_L1XE40_passed = {fReader, "HLT_noalg_L1XE40.passed"};$/;"	m	class:Jburr_Template_Selector
+HLT_noalg_L1XE40_prescale	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Float_t> HLT_noalg_L1XE40_prescale = {fReader, "HLT_noalg_L1XE40.prescale"};$/;"	m	class:Jburr_Template_Selector
+HLT_noalg_L1XE45_passBits	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<UInt_t> HLT_noalg_L1XE45_passBits = {fReader, "HLT_noalg_L1XE45.passBits"};$/;"	m	class:Jburr_Template_Selector
+HLT_noalg_L1XE45_passed	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Bool_t> HLT_noalg_L1XE45_passed = {fReader, "HLT_noalg_L1XE45.passed"};$/;"	m	class:Jburr_Template_Selector
+HLT_noalg_L1XE45_prescale	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Float_t> HLT_noalg_L1XE45_prescale = {fReader, "HLT_noalg_L1XE45.prescale"};$/;"	m	class:Jburr_Template_Selector
+HLT_noalg_zb_L1ZB_passBits	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<UInt_t> HLT_noalg_zb_L1ZB_passBits = {fReader, "HLT_noalg_zb_L1ZB.passBits"};$/;"	m	class:Jburr_Template_Selector
+HLT_noalg_zb_L1ZB_passed	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Bool_t> HLT_noalg_zb_L1ZB_passed = {fReader, "HLT_noalg_zb_L1ZB.passed"};$/;"	m	class:Jburr_Template_Selector
+HLT_noalg_zb_L1ZB_passed	PerformCorrection/CorrectingDistributions.h	/^   TTreeReaderValue<Bool_t> HLT_noalg_zb_L1ZB_passed = {fReader, "HLT_noalg_zb_L1ZB.passed"};$/;"	m	class:CorrectingDistributions
+HLT_noalg_zb_L1ZB_passed	computeL1XE30Efficiency/L1XEefficiencySelector.h	/^   TTreeReaderValue<Bool_t> HLT_noalg_zb_L1ZB_passed = {fReader, "HLT_noalg_zb_L1ZB.passed"};$/;"	m	class:L1XEefficiencySelector
+HLT_noalg_zb_L1ZB_passed	plotMETDistsVersusMu/PlotMETDistsVersMu.h	/^   TTreeReaderValue<Bool_t> HLT_noalg_zb_L1ZB_passed = {fReader, "HLT_noalg_zb_L1ZB.passed"};$/;"	m	class:PlotMETDistsVersMu
+HLT_noalg_zb_L1ZB_prescale	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Float_t> HLT_noalg_zb_L1ZB_prescale = {fReader, "HLT_noalg_zb_L1ZB.prescale"};$/;"	m	class:Jburr_Template_Selector
+HLT_noalg_zb_L1ZB_prescale	PerformCorrection/CorrectingDistributions.h	/^   TTreeReaderValue<Float_t> HLT_noalg_zb_L1ZB_prescale = {fReader, "HLT_noalg_zb_L1ZB.prescale"};$/;"	m	class:CorrectingDistributions
+HLT_noalg_zb_L1ZB_prescale	computeL1XE30Efficiency/L1XEefficiencySelector.h	/^   TTreeReaderValue<Float_t> HLT_noalg_zb_L1ZB_prescale = {fReader, "HLT_noalg_zb_L1ZB.prescale"};$/;"	m	class:L1XEefficiencySelector
+HLT_noalg_zb_L1ZB_prescale	plotMETDistsVersusMu/PlotMETDistsVersMu.h	/^   TTreeReaderValue<Float_t> HLT_noalg_zb_L1ZB_prescale = {fReader, "HLT_noalg_zb_L1ZB.prescale"};$/;"	m	class:PlotMETDistsVersMu
+HLT_xe100_pufit_L1XE50_passBits	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<UInt_t> HLT_xe100_pufit_L1XE50_passBits = {fReader, "HLT_xe100_pufit_L1XE50.passBits"};$/;"	m	class:Jburr_Template_Selector
+HLT_xe100_pufit_L1XE50_passed	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Bool_t> HLT_xe100_pufit_L1XE50_passed = {fReader, "HLT_xe100_pufit_L1XE50.passed"};$/;"	m	class:Jburr_Template_Selector
+HLT_xe100_pufit_L1XE50_prescale	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Float_t> HLT_xe100_pufit_L1XE50_prescale = {fReader, "HLT_xe100_pufit_L1XE50.prescale"};$/;"	m	class:Jburr_Template_Selector
+HLT_xe110_pufit_L1XE50_passBits	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<UInt_t> HLT_xe110_pufit_L1XE50_passBits = {fReader, "HLT_xe110_pufit_L1XE50.passBits"};$/;"	m	class:Jburr_Template_Selector
+HLT_xe110_pufit_L1XE50_passed	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Bool_t> HLT_xe110_pufit_L1XE50_passed = {fReader, "HLT_xe110_pufit_L1XE50.passed"};$/;"	m	class:Jburr_Template_Selector
+HLT_xe110_pufit_L1XE50_prescale	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Float_t> HLT_xe110_pufit_L1XE50_prescale = {fReader, "HLT_xe110_pufit_L1XE50.prescale"};$/;"	m	class:Jburr_Template_Selector
+HLT_xe110_pufit_L1XE55_passBits	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<UInt_t> HLT_xe110_pufit_L1XE55_passBits = {fReader, "HLT_xe110_pufit_L1XE55.passBits"};$/;"	m	class:Jburr_Template_Selector
+HLT_xe110_pufit_L1XE55_passed	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Bool_t> HLT_xe110_pufit_L1XE55_passed = {fReader, "HLT_xe110_pufit_L1XE55.passed"};$/;"	m	class:Jburr_Template_Selector
+HLT_xe110_pufit_L1XE55_prescale	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Float_t> HLT_xe110_pufit_L1XE55_prescale = {fReader, "HLT_xe110_pufit_L1XE55.prescale"};$/;"	m	class:Jburr_Template_Selector
+HLT_xe120_mht_xe80_L1XE50_passBits	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<UInt_t> HLT_xe120_mht_xe80_L1XE50_passBits = {fReader, "HLT_xe120_mht_xe80_L1XE50.passBits"};$/;"	m	class:Jburr_Template_Selector
+HLT_xe120_mht_xe80_L1XE50_passed	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Bool_t> HLT_xe120_mht_xe80_L1XE50_passed = {fReader, "HLT_xe120_mht_xe80_L1XE50.passed"};$/;"	m	class:Jburr_Template_Selector
+HLT_xe120_mht_xe80_L1XE50_prescale	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Float_t> HLT_xe120_mht_xe80_L1XE50_prescale = {fReader, "HLT_xe120_mht_xe80_L1XE50.prescale"};$/;"	m	class:Jburr_Template_Selector
+HLT_xe120_mht_xe80_L1XE55_passBits	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<UInt_t> HLT_xe120_mht_xe80_L1XE55_passBits = {fReader, "HLT_xe120_mht_xe80_L1XE55.passBits"};$/;"	m	class:Jburr_Template_Selector
+HLT_xe120_mht_xe80_L1XE55_passed	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Bool_t> HLT_xe120_mht_xe80_L1XE55_passed = {fReader, "HLT_xe120_mht_xe80_L1XE55.passed"};$/;"	m	class:Jburr_Template_Selector
+HLT_xe120_mht_xe80_L1XE55_prescale	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Float_t> HLT_xe120_mht_xe80_L1XE55_prescale = {fReader, "HLT_xe120_mht_xe80_L1XE55.prescale"};$/;"	m	class:Jburr_Template_Selector
+HighlightTeff	PlotParametersVsMu/PlotParameterVals.cpp	/^void HighlightTeff( TVirtualPad *pad , TObject *obj , Int_t ihp , Int_t y){$/;"	f
+InTimePileup	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Float_t> InTimePileup = {fReader, "InTimePileup"};$/;"	m	class:Jburr_Template_Selector
+InTimePileup	PerformCorrection/CorrectingDistributions.h	/^   TTreeReaderValue<Float_t> InTimePileup = {fReader, "InTimePileup"};$/;"	m	class:CorrectingDistributions
+InTimePileup	computeL1XE30Efficiency/L1XEefficiencySelector.h	/^   TTreeReaderValue<Float_t> InTimePileup = {fReader, "InTimePileup"};$/;"	m	class:L1XEefficiencySelector
+InTimePileup	plotMETDistsVersusMu/PlotMETDistsVersMu.h	/^   TTreeReaderValue<Float_t> InTimePileup = {fReader, "InTimePileup"};$/;"	m	class:PlotMETDistsVersMu
+Init	BurrTemplateSelector/Jburr_Template_Selector.h	/^void Jburr_Template_Selector::Init(TTree *tree)$/;"	f	class:Jburr_Template_Selector
+Init	PerformCorrection/CorrectingDistributions.C	/^void CorrectingDistributions::Init(TTree *tree){fReader.SetTree(tree);}$/;"	f	class:CorrectingDistributions
+Init	computeL1XE30Efficiency/L1XEefficiencySelector.C	/^void L1XEefficiencySelector::Init(TTree *tree) \/\/\/ {{{$/;"	f	class:L1XEefficiencySelector
+Init	plotMETDistsVersusMu/PlotMETDistsVersMu.C	/^void PlotMETDistsVersMu::Init(TTree *tree) \/\/{{{$/;"	f	class:PlotMETDistsVersMu
+Jburr_Template_Selector	BurrTemplateSelector/Jburr_Template_Selector.h	/^   Jburr_Template_Selector(TTree * \/*tree*\/ =0) { }$/;"	f	class:Jburr_Template_Selector
+Jburr_Template_Selector	BurrTemplateSelector/Jburr_Template_Selector.h	/^class Jburr_Template_Selector : public TSelector {$/;"	c
+Jburr_Template_Selector_h	BurrTemplateSelector/Jburr_Template_Selector.h	9;"	d
+L1XEefficiencySelector	computeL1XE30Efficiency/L1XEefficiencySelector.h	/^   L1XEefficiencySelector(TTree * \/*tree*\/ =0) { }$/;"	f	class:L1XEefficiencySelector
+L1XEefficiencySelector	computeL1XE30Efficiency/L1XEefficiencySelector.h	/^class L1XEefficiencySelector : public TSelector {$/;"	c
+L1XEefficiencySelector_h	computeL1XE30Efficiency/L1XEefficiencySelector.h	9;"	d
+L1_MET	computeL1XE30Efficiency/L1XEefficiencySelector.h	/^   TTreeReaderValue<Float_t> L1_MET = {fReader, alg_name };$/;"	m	class:L1XEefficiencySelector
+L1_XE50_passBits	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<UInt_t> L1_XE50_passBits = {fReader, "L1_XE50.passBits"};$/;"	m	class:Jburr_Template_Selector
+L1_XE50_passed	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Bool_t> L1_XE50_passed = {fReader, "L1_XE50.passed"};$/;"	m	class:Jburr_Template_Selector
+L1_XE50_prescale	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Float_t> L1_XE50_prescale = {fReader, "L1_XE50.prescale"};$/;"	m	class:Jburr_Template_Selector
+L1_XE55_passBits	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<UInt_t> L1_XE55_passBits = {fReader, "L1_XE55.passBits"};$/;"	m	class:Jburr_Template_Selector
+L1_XE55_passed	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Bool_t> L1_XE55_passed = {fReader, "L1_XE55.passed"};$/;"	m	class:Jburr_Template_Selector
+L1_XE55_prescale	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Float_t> L1_XE55_prescale = {fReader, "L1_XE55.prescale"};$/;"	m	class:Jburr_Template_Selector
+L1_XE60_passBits	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<UInt_t> L1_XE60_passBits = {fReader, "L1_XE60.passBits"};$/;"	m	class:Jburr_Template_Selector
+L1_XE60_passed	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Bool_t> L1_XE60_passed = {fReader, "L1_XE60.passed"};$/;"	m	class:Jburr_Template_Selector
+L1_XE60_prescale	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Float_t> L1_XE60_prescale = {fReader, "L1_XE60.prescale"};$/;"	m	class:Jburr_Template_Selector
+L1_met	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Float_t> L1_met = {fReader, "L1.met"};$/;"	m	class:Jburr_Template_Selector
+L1_met	PerformCorrection/CorrectingDistributions.h	/^   TTreeReaderValue<Float_t> L1_met = {fReader, "L1.met"};$/;"	m	class:CorrectingDistributions
+L1_mpx	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Float_t> L1_mpx = {fReader, "L1.mpx"};$/;"	m	class:Jburr_Template_Selector
+L1_mpy	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Float_t> L1_mpy = {fReader, "L1.mpy"};$/;"	m	class:Jburr_Template_Selector
+L1_phi	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Float_t> L1_phi = {fReader, "L1.phi"};$/;"	m	class:Jburr_Template_Selector
+L1_sumet	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Float_t> L1_sumet = {fReader, "L1.sumet"};$/;"	m	class:Jburr_Template_Selector
+LumiBlock	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<UInt_t> LumiBlock = {fReader, "LumiBlock"};$/;"	m	class:Jburr_Template_Selector
+MET_Algmu0thru10Efficiency	computeL1XE30Efficiency/L1XEefficiencySelector.h	/^   TEfficiency*            MET_Algmu0thru10Efficiency = 0;$/;"	m	class:L1XEefficiencySelector
+MET_Algmu10thru20Efficiency	computeL1XE30Efficiency/L1XEefficiencySelector.h	/^   TEfficiency*            MET_Algmu10thru20Efficiency = 0;$/;"	m	class:L1XEefficiencySelector
+MET_Algmu20thru30Efficiency	computeL1XE30Efficiency/L1XEefficiencySelector.h	/^   TEfficiency*            MET_Algmu20thru30Efficiency = 0;$/;"	m	class:L1XEefficiencySelector
+MET_Algmu30thru40Efficiency	computeL1XE30Efficiency/L1XEefficiencySelector.h	/^   TEfficiency*            MET_Algmu30thru40Efficiency = 0;$/;"	m	class:L1XEefficiencySelector
+MET_Algmu40thru50Efficiency	computeL1XE30Efficiency/L1XEefficiencySelector.h	/^   TEfficiency*            MET_Algmu40thru50Efficiency = 0;$/;"	m	class:L1XEefficiencySelector
+MET_Algmu50thru60Efficiency	computeL1XE30Efficiency/L1XEefficiencySelector.h	/^   TEfficiency*            MET_Algmu50thru60Efficiency = 0;$/;"	m	class:L1XEefficiencySelector
+MET_Algmu60thru70Efficiency	computeL1XE30Efficiency/L1XEefficiencySelector.h	/^   TEfficiency*            MET_Algmu60thru70Efficiency = 0;$/;"	m	class:L1XEefficiencySelector
+MET_Correctedmu0thru10	PerformCorrection/CorrectingDistributions.h	/^   TH1F*            MET_Correctedmu0thru10 = 0;$/;"	m	class:CorrectingDistributions
+MET_Correctedmu10thru20	PerformCorrection/CorrectingDistributions.h	/^   TH1F*            MET_Correctedmu10thru20 = 0;$/;"	m	class:CorrectingDistributions
+MET_Correctedmu20thru30	PerformCorrection/CorrectingDistributions.h	/^   TH1F*            MET_Correctedmu20thru30 = 0;$/;"	m	class:CorrectingDistributions
+MET_Correctedmu30thru40	PerformCorrection/CorrectingDistributions.h	/^   TH1F*            MET_Correctedmu30thru40 = 0;$/;"	m	class:CorrectingDistributions
+MET_Correctedmu40thru50	PerformCorrection/CorrectingDistributions.h	/^   TH1F*            MET_Correctedmu40thru50 = 0;$/;"	m	class:CorrectingDistributions
+MET_Correctedmu50thru60	PerformCorrection/CorrectingDistributions.h	/^   TH1F*            MET_Correctedmu50thru60 = 0;$/;"	m	class:CorrectingDistributions
+MET_Correctedmu60thru70	PerformCorrection/CorrectingDistributions.h	/^   TH1F*            MET_Correctedmu60thru70 = 0;$/;"	m	class:CorrectingDistributions
+MET_Data	plotMETDistsVersusMu/PlotMETDistsVersMu.h	/^   TTreeReaderValue<Float_t> MET_Data = {fReader, alg_name };$/;"	m	class:PlotMETDistsVersMu
+MET_Datamu0thru10	plotMETDistsVersusMu/PlotMETDistsVersMu.h	/^   TH1F*            MET_Datamu0thru10 = 0;$/;"	m	class:PlotMETDistsVersMu
+MET_Datamu10thru20	plotMETDistsVersusMu/PlotMETDistsVersMu.h	/^   TH1F*            MET_Datamu10thru20 = 0;$/;"	m	class:PlotMETDistsVersMu
+MET_Datamu20thru30	plotMETDistsVersusMu/PlotMETDistsVersMu.h	/^   TH1F*            MET_Datamu20thru30 = 0;$/;"	m	class:PlotMETDistsVersMu
+MET_Datamu30thru40	plotMETDistsVersusMu/PlotMETDistsVersMu.h	/^   TH1F*            MET_Datamu30thru40 = 0;$/;"	m	class:PlotMETDistsVersMu
+MET_Datamu40thru50	plotMETDistsVersusMu/PlotMETDistsVersMu.h	/^   TH1F*            MET_Datamu40thru50 = 0;$/;"	m	class:PlotMETDistsVersMu
+MET_Datamu50thru60	plotMETDistsVersusMu/PlotMETDistsVersMu.h	/^   TH1F*            MET_Datamu50thru60 = 0;$/;"	m	class:PlotMETDistsVersMu
+MET_Datamu60thru70	plotMETDistsVersusMu/PlotMETDistsVersMu.h	/^   TH1F*            MET_Datamu60thru70 = 0;$/;"	m	class:PlotMETDistsVersMu
+NPrimaryVertices	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<UInt_t> NPrimaryVertices = {fReader, "NPrimaryVertices"};$/;"	m	class:Jburr_Template_Selector
+Notify	BurrTemplateSelector/Jburr_Template_Selector.h	/^Bool_t Jburr_Template_Selector::Notify()$/;"	f	class:Jburr_Template_Selector
+Notify	PerformCorrection/CorrectingDistributions.C	/^Bool_t CorrectingDistributions::Notify(){return kTRUE;}$/;"	f	class:CorrectingDistributions
+Notify	computeL1XE30Efficiency/L1XEefficiencySelector.C	/^Bool_t L1XEefficiencySelector::Notify() \/\/ {{{$/;"	f	class:L1XEefficiencySelector
+Notify	plotMETDistsVersusMu/PlotMETDistsVersMu.C	/^Bool_t PlotMETDistsVersMu::Notify() \/\/{{{$/;"	f	class:PlotMETDistsVersMu
+OutOfTimePileup	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Float_t> OutOfTimePileup = {fReader, "OutOfTimePileup"};$/;"	m	class:Jburr_Template_Selector
+OutOfTimePileup	PerformCorrection/CorrectingDistributions.h	/^   TTreeReaderValue<Float_t> OutOfTimePileup = {fReader, "OutOfTimePileup"};$/;"	m	class:CorrectingDistributions
+OutOfTimePileup	plotMETDistsVersusMu/PlotMETDistsVersMu.h	/^   TTreeReaderValue<Float_t> OutOfTimePileup = {fReader, "OutOfTimePileup"};$/;"	m	class:PlotMETDistsVersMu
+PlotMETDistsVersMu	plotMETDistsVersusMu/PlotMETDistsVersMu.h	/^   PlotMETDistsVersMu(TTree * =0) { }$/;"	f	class:PlotMETDistsVersMu
+PlotMETDistsVersMu	plotMETDistsVersusMu/PlotMETDistsVersMu.h	/^class PlotMETDistsVersMu : public TSelector {$/;"	c
+PlotMETDistsVersMu_h	plotMETDistsVersusMu/PlotMETDistsVersMu.h	9;"	d
+PlotParameterVals	PlotParametersVsMu/PlotParameterVals.cpp	/^void PlotParameterVals(){$/;"	f
+Process	BurrTemplateSelector/Jburr_Template_Selector.C	/^Bool_t Jburr_Template_Selector::Process(Long64_t entry){return kTRUE;}$/;"	f	class:Jburr_Template_Selector
+Process	PerformCorrection/CorrectingDistributions.C	/^Bool_t CorrectingDistributions::Process(Long64_t entry)$/;"	f	class:CorrectingDistributions
+Process	computeL1XE30Efficiency/L1XEefficiencySelector.C	/^Bool_t L1XEefficiencySelector::Process(Long64_t entry)$/;"	f	class:L1XEefficiencySelector
+Process	plotMETDistsVersusMu/PlotMETDistsVersMu.C	/^Bool_t PlotMETDistsVersMu::Process(Long64_t entry)$/;"	f	class:PlotMETDistsVersMu
+RunNumber	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<UInt_t> RunNumber = {fReader, "RunNumber"};$/;"	m	class:Jburr_Template_Selector
+RunNumber	PerformCorrection/CorrectingDistributions.h	/^   TTreeReaderValue<UInt_t> RunNumber = {fReader, "RunNumber"};$/;"	m	class:CorrectingDistributions
+RunNumber	computeL1XE30Efficiency/L1XEefficiencySelector.h	/^   TTreeReaderValue<UInt_t> RunNumber = {fReader, "RunNumber"};$/;"	m	class:L1XEefficiencySelector
+RunNumber	plotMETDistsVersusMu/PlotMETDistsVersMu.h	/^   TTreeReaderValue<UInt_t> RunNumber = {fReader, "RunNumber"};$/;"	m	class:PlotMETDistsVersMu
+Run_Proof_Driver	plotMETDistsVersusMu/Run_Proof_Driver.C	/^void Run_Proof_Driver(){$/;"	f
+SetInputList	BurrTemplateSelector/Jburr_Template_Selector.h	/^   virtual void    SetInputList(TList *input) { fInput = input; }$/;"	f	class:Jburr_Template_Selector
+SetInputList	PerformCorrection/CorrectingDistributions.h	/^   virtual void    SetInputList(TList *input) { fInput = input; }$/;"	f	class:CorrectingDistributions
+SetInputList	computeL1XE30Efficiency/L1XEefficiencySelector.h	/^   virtual void    SetInputList(TList *input) { fInput = input; }$/;"	f	class:L1XEefficiencySelector
+SetInputList	plotMETDistsVersusMu/PlotMETDistsVersMu.h	/^   virtual void    SetInputList(TList *input) { fInput = input; }$/;"	f	class:PlotMETDistsVersMu
+SetObject	BurrTemplateSelector/Jburr_Template_Selector.h	/^   virtual void    SetObject(TObject *obj) { fObject = obj; }$/;"	f	class:Jburr_Template_Selector
+SetObject	PerformCorrection/CorrectingDistributions.h	/^   virtual void    SetObject(TObject *obj) { fObject = obj; }$/;"	f	class:CorrectingDistributions
+SetObject	computeL1XE30Efficiency/L1XEefficiencySelector.h	/^   virtual void    SetObject(TObject *obj) { fObject = obj; }$/;"	f	class:L1XEefficiencySelector
+SetObject	plotMETDistsVersusMu/PlotMETDistsVersMu.h	/^   virtual void    SetObject(TObject *obj) { fObject = obj; }$/;"	f	class:PlotMETDistsVersMu
+SetOption	BurrTemplateSelector/Jburr_Template_Selector.h	/^   virtual void    SetOption(const char *option) { fOption = option; }$/;"	f	class:Jburr_Template_Selector
+SetOption	PerformCorrection/CorrectingDistributions.h	/^   virtual void    SetOption(const char *option) { fOption = option; }$/;"	f	class:CorrectingDistributions
+SetOption	computeL1XE30Efficiency/L1XEefficiencySelector.h	/^   virtual void    SetOption(const char *option) { fOption = option; }$/;"	f	class:L1XEefficiencySelector
+SetOption	plotMETDistsVersusMu/PlotMETDistsVersMu.h	/^   virtual void    SetOption(const char *option) { fOption = option; }$/;"	f	class:PlotMETDistsVersMu
+SlaveBegin	BurrTemplateSelector/Jburr_Template_Selector.C	/^void Jburr_Template_Selector::SlaveBegin(TTree * \/*tree*\/){TString option = GetOption();}$/;"	f	class:Jburr_Template_Selector
+SlaveBegin	PerformCorrection/CorrectingDistributions.C	/^void CorrectingDistributions::SlaveBegin(TTree * \/*tree*\/)$/;"	f	class:CorrectingDistributions
+SlaveBegin	computeL1XE30Efficiency/L1XEefficiencySelector.C	/^void L1XEefficiencySelector::SlaveBegin(TTree * \/*tree*\/)\/\/ {{{$/;"	f	class:L1XEefficiencySelector
+SlaveBegin	plotMETDistsVersusMu/PlotMETDistsVersMu.C	/^void PlotMETDistsVersMu::SlaveBegin(TTree * \/*tree*\/) \/\/ {{{$/;"	f	class:PlotMETDistsVersMu
+SlaveTerminate	BurrTemplateSelector/Jburr_Template_Selector.C	/^void Jburr_Template_Selector::SlaveTerminate(){}$/;"	f	class:Jburr_Template_Selector
+SlaveTerminate	PerformCorrection/CorrectingDistributions.C	/^void CorrectingDistributions::SlaveTerminate(){}$/;"	f	class:CorrectingDistributions
+SlaveTerminate	computeL1XE30Efficiency/L1XEefficiencySelector.C	/^void L1XEefficiencySelector::SlaveTerminate(){}$/;"	f	class:L1XEefficiencySelector
+SlaveTerminate	plotMETDistsVersusMu/PlotMETDistsVersMu.C	/^void PlotMETDistsVersMu::SlaveTerminate(){}$/;"	f	class:PlotMETDistsVersMu
+TTBarenujj_pass	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Bool_t> TTBarenujj_pass = {fReader, "TTBarenujj.pass"};$/;"	m	class:Jburr_Template_Selector
+TTBarenumunu_pass	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Bool_t> TTBarenumunu_pass = {fReader, "TTBarenumunu.pass"};$/;"	m	class:Jburr_Template_Selector
+TTBarmunujj_pass	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Bool_t> TTBarmunujj_pass = {fReader, "TTBarmunujj.pass"};$/;"	m	class:Jburr_Template_Selector
+Terminate	BurrTemplateSelector/Jburr_Template_Selector.C	/^void Jburr_Template_Selector::Terminate(){}$/;"	f	class:Jburr_Template_Selector
+Terminate	PerformCorrection/CorrectingDistributions.C	/^void CorrectingDistributions::Terminate(){$/;"	f	class:CorrectingDistributions
+Terminate	computeL1XE30Efficiency/L1XEefficiencySelector.C	/^void L1XEefficiencySelector::Terminate() \/\/ Plotting {{{$/;"	f	class:L1XEefficiencySelector
+Terminate	plotMETDistsVersusMu/PlotMETDistsVersMu.C	/^void PlotMETDistsVersMu::Terminate() \/\/ Plotting{{{$/;"	f	class:PlotMETDistsVersMu
+Version	BurrTemplateSelector/Jburr_Template_Selector.h	/^   virtual Int_t   Version() const { return 2; }$/;"	f	class:Jburr_Template_Selector
+Version	PerformCorrection/CorrectingDistributions.h	/^   virtual Int_t   Version() const { return 2; }$/;"	f	class:CorrectingDistributions
+Version	computeL1XE30Efficiency/L1XEefficiencySelector.h	/^   virtual Int_t   Version() const { return 2; }$/;"	f	class:L1XEefficiencySelector
+Version	plotMETDistsVersusMu/PlotMETDistsVersMu.h	/^   virtual Int_t   Version() const { return 2; }$/;"	f	class:PlotMETDistsVersMu
+W_mt	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Float_t> W_mt = {fReader, "W.mt"};$/;"	m	class:Jburr_Template_Selector
+W_pt	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Float_t> W_pt = {fReader, "W.pt"};$/;"	m	class:Jburr_Template_Selector
+Wenu_pass	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Bool_t> Wenu_pass = {fReader, "Wenu.pass"};$/;"	m	class:Jburr_Template_Selector
+Wmunu_pass	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Bool_t> Wmunu_pass = {fReader, "Wmunu.pass"};$/;"	m	class:Jburr_Template_Selector
+XE	computeL1XE30Efficiency/L1XEefficiencySelector.h	/^   Float_t XE = 30.0; \/\/ L1 cut$/;"	m	class:L1XEefficiencySelector
+Z_eta	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Float_t> Z_eta = {fReader, "Z.eta"};$/;"	m	class:Jburr_Template_Selector
+Z_mass	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Float_t> Z_mass = {fReader, "Z.mass"};$/;"	m	class:Jburr_Template_Selector
+Z_phi	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Float_t> Z_phi = {fReader, "Z.phi"};$/;"	m	class:Jburr_Template_Selector
+Z_pt	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Float_t> Z_pt = {fReader, "Z.pt"};$/;"	m	class:Jburr_Template_Selector
+Zee_pass	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Bool_t> Zee_pass = {fReader, "Zee.pass"};$/;"	m	class:Jburr_Template_Selector
+Zmumu_pass	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Bool_t> Zmumu_pass = {fReader, "Zmumu.pass"};$/;"	m	class:Jburr_Template_Selector
+alg_name	PerformCorrection/CorrectingDistributions.h	/^    TString alg_name = "METCELL";$/;"	m	class:CorrectingDistributions
+alg_name	computeL1XE30Efficiency/L1XEefficiencySelector.h	/^   TString alg_name = "L1.met"; \/\/ these two must match branches in jburr tree$/;"	m	class:L1XEefficiencySelector
+alg_name	plotMETDistsVersusMu/PlotMETDistsVersMu.h	/^   TString alg_name = "cell.met"; $/;"	m	class:PlotMETDistsVersMu
+cell_met	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Float_t> cell_met = {fReader, "cell.met"};$/;"	m	class:Jburr_Template_Selector
+cell_met	PerformCorrection/CorrectingDistributions.h	/^   TTreeReaderValue<Float_t> cell_met = {fReader, "cell.met"};$/;"	m	class:CorrectingDistributions
+cell_met	computeL1XE30Efficiency/L1XEefficiencySelector.h	/^   TTreeReaderValue<Float_t> cell_met = {fReader, zb_alg_name };$/;"	m	class:L1XEefficiencySelector
+cell_mpx	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Float_t> cell_mpx = {fReader, "cell.mpx"};$/;"	m	class:Jburr_Template_Selector
+cell_mpy	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Float_t> cell_mpy = {fReader, "cell.mpy"};$/;"	m	class:Jburr_Template_Selector
+cell_phi	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Float_t> cell_phi = {fReader, "cell.phi"};$/;"	m	class:Jburr_Template_Selector
+cell_sumet	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Float_t> cell_sumet = {fReader, "cell.sumet"};$/;"	m	class:Jburr_Template_Selector
+fChain	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTree          *fChain = 0;   \/\/!pointer to the analyzed TTree or TChain$/;"	m	class:Jburr_Template_Selector
+fChain	PerformCorrection/CorrectingDistributions.h	/^   TTree          *fChain = 0;   \/\/!pointer to the analyzed TTree or TChain$/;"	m	class:CorrectingDistributions
+fChain	computeL1XE30Efficiency/L1XEefficiencySelector.h	/^   TTree          *fChain = 0;   \/\/!pointer to the analyzed TTree or TChain$/;"	m	class:L1XEefficiencySelector
+fChain	plotMETDistsVersusMu/PlotMETDistsVersMu.h	/^   TTree          *fChain = 0;   \/\/!pointer to the analyzed TTree or TChain$/;"	m	class:PlotMETDistsVersMu
+fReader	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReader     fReader;  \/\/!the tree reader$/;"	m	class:Jburr_Template_Selector
+fReader	PerformCorrection/CorrectingDistributions.h	/^   TTreeReader     fReader;  \/\/!the tree reader$/;"	m	class:CorrectingDistributions
+fReader	computeL1XE30Efficiency/L1XEefficiencySelector.h	/^   TTreeReader     fReader;  \/\/!the tree reader$/;"	m	class:L1XEefficiencySelector
+fReader	plotMETDistsVersusMu/PlotMETDistsVersMu.h	/^   TTreeReader     fReader;  \/\/!the tree reader$/;"	m	class:PlotMETDistsVersMu
+fa2	Plot_Between_Fits/fa2.C	/^void fa2(){$/;"	f
+fitFunction	computeL1XE30Efficiency/L1XEefficiencySelector.C	/^Double_t L1XEefficiencySelector::fitFunction(Double_t *x , Double_t *par ){\/\/{{{$/;"	f	class:L1XEefficiencySelector
+generateFitFunction	computeL1XE30Efficiency/L1XEefficiencySelector.C	/^TF1* L1XEefficiencySelector::generateFitFunction(TEfficiency* teff_obj, float gevMax, float initial_slope, float initial_intercept, float initial_sigma ){\/\/{{{$/;"	f	class:L1XEefficiencySelector
+gevHigh	PerformCorrection/CorrectingDistributions.h	/^    Float_t gevHigh = 100.0;$/;"	m	class:CorrectingDistributions
+gevHigh	computeL1XE30Efficiency/L1XEefficiencySelector.h	/^    Float_t gevHigh = 300.0;$/;"	m	class:L1XEefficiencySelector
+gevHigh	plotMETDistsVersusMu/PlotMETDistsVersMu.h	/^    Float_t gevHigh = 100.0;$/;"	m	class:PlotMETDistsVersMu
+gevLow	PerformCorrection/CorrectingDistributions.h	/^    Float_t gevLow = 0.0;$/;"	m	class:CorrectingDistributions
+gevLow	computeL1XE30Efficiency/L1XEefficiencySelector.h	/^    Float_t gevLow = 0.0;$/;"	m	class:L1XEefficiencySelector
+gevLow	plotMETDistsVersusMu/PlotMETDistsVersMu.h	/^    Float_t gevLow = 0.0;$/;"	m	class:PlotMETDistsVersMu
+inMuRange	BurrTemplateSelector/Jburr_Template_Selector.C	/^Bool_t Jburr_Template_Selector::inMuRange( Float_t a , Float_t b ){ \/\/{{{$/;"	f	class:Jburr_Template_Selector
+inMuRange	PerformCorrection/CorrectingDistributions.C	/^Bool_t CorrectingDistributions::inMuRange( Float_t a , Float_t b ){ \/\/{{{$/;"	f	class:CorrectingDistributions
+inMuRange	computeL1XE30Efficiency/L1XEefficiencySelector.C	/^Bool_t L1XEefficiencySelector::inMuRange( Float_t a , Float_t b ){ \/\/{{{$/;"	f	class:L1XEefficiencySelector
+inMuRange	plotMETDistsVersusMu/PlotMETDistsVersMu.C	/^Bool_t PlotMETDistsVersMu::inMuRange( Float_t a , Float_t b ){ \/\/{{{$/;"	f	class:PlotMETDistsVersMu
+isGoodRun	BurrTemplateSelector/Jburr_Template_Selector.C	/^Bool_t Jburr_Template_Selector::isGoodRun(){ \/\/{{{$/;"	f	class:Jburr_Template_Selector
+isGoodRun	PerformCorrection/CorrectingDistributions.C	/^Bool_t CorrectingDistributions::isGoodRun(){\/\/{{{$/;"	f	class:CorrectingDistributions
+isGoodRun	computeL1XE30Efficiency/L1XEefficiencySelector.C	/^Bool_t L1XEefficiencySelector::isGoodRun(){ \/\/ {{{$/;"	f	class:L1XEefficiencySelector
+isGoodRun	plotMETDistsVersusMu/PlotMETDistsVersMu.C	/^Bool_t PlotMETDistsVersMu::isGoodRun(){ \/\/{{{$/;"	f	class:PlotMETDistsVersMu
+isPassnoAlgL1XE30	PerformCorrection/CorrectingDistributions.C	/^Bool_t CorrectingDistributions::isPassnoAlgL1XE30(){ \/\/ {{{$/;"	f	class:CorrectingDistributions
+isPassnoAlgXE30	BurrTemplateSelector/Jburr_Template_Selector.C	/^Bool_t Jburr_Template_Selector::isPassnoAlgXE30(){ \/\/{{{$/;"	f	class:Jburr_Template_Selector
+isPassnoAlgXE30	computeL1XE30Efficiency/L1XEefficiencySelector.C	/^Bool_t L1XEefficiencySelector::isPassnoAlgXE30(){ \/\/ {{{$/;"	f	class:L1XEefficiencySelector
+isPassnoAlgXE30	plotMETDistsVersusMu/PlotMETDistsVersMu.C	/^Bool_t PlotMETDistsVersMu::isPassnoAlgXE30(){ \/\/{{{$/;"	f	class:PlotMETDistsVersMu
+l	PlotParametersVsMu/PlotParameterVals.cpp	/^TList* l = 0;$/;"	v
+mht_met	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Float_t> mht_met = {fReader, "mht.met"};$/;"	m	class:Jburr_Template_Selector
+mht_mpx	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Float_t> mht_mpx = {fReader, "mht.mpx"};$/;"	m	class:Jburr_Template_Selector
+mht_mpy	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Float_t> mht_mpy = {fReader, "mht.mpy"};$/;"	m	class:Jburr_Template_Selector
+mht_phi	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Float_t> mht_phi = {fReader, "mht.phi"};$/;"	m	class:Jburr_Template_Selector
+mht_sumet	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Float_t> mht_sumet = {fReader, "mht.sumet"};$/;"	m	class:Jburr_Template_Selector
+muSlicesStack	plotMETDistsVersusMu/PlotMETDistsVersMu.h	/^    THStack* muSlicesStack = new THStack("muStack","MET Hists in Mu Slices After Removing Runs 33023, 331975, and 334487");$/;"	m	class:PlotMETDistsVersMu
+mycanv	PerformCorrection/CorrectingDistributions.h	/^    TCanvas* mycanv = new TCanvas("MET_AlgMuSlices", "MET Slices in Mu");$/;"	m	class:CorrectingDistributions
+mycanv	plotMETDistsVersusMu/PlotMETDistsVersMu.h	/^    TCanvas* mycanv = new TCanvas("MET_AlgMuSlices", "MET Slices in Mu");$/;"	m	class:PlotMETDistsVersMu
+nbins	PerformCorrection/CorrectingDistributions.h	/^    Int_t nbins = 1000;$/;"	m	class:CorrectingDistributions
+nbins	computeL1XE30Efficiency/L1XEefficiencySelector.h	/^    Int_t nbins = (gevHigh - gevLow) \/ width; \/\/ compute nbins as function of preferred width$/;"	m	class:L1XEefficiencySelector
+nbins	plotMETDistsVersusMu/PlotMETDistsVersMu.h	/^    Int_t nbins = 1000;$/;"	m	class:PlotMETDistsVersMu
+passedL1ZB	BurrTemplateSelector/Jburr_Template_Selector.C	/^Bool_t Jburr_Template_Selector::passedL1ZB(){ \/\/{{{$/;"	f	class:Jburr_Template_Selector
+passedL1ZB	PerformCorrection/CorrectingDistributions.C	/^Bool_t CorrectingDistributions::passedL1ZB(){\/\/{{{$/;"	f	class:CorrectingDistributions
+passedL1ZB	computeL1XE30Efficiency/L1XEefficiencySelector.C	/^Bool_t L1XEefficiencySelector::passedL1ZB(){ \/\/ {{{ $/;"	f	class:L1XEefficiencySelector
+passedL1ZB	plotMETDistsVersusMu/PlotMETDistsVersMu.C	/^Bool_t PlotMETDistsVersMu::passedL1ZB(){ \/\/{{{$/;"	f	class:PlotMETDistsVersMu
+pufit_met	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Float_t> pufit_met = {fReader, "pufit.met"};$/;"	m	class:Jburr_Template_Selector
+pufit_mpx	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Float_t> pufit_mpx = {fReader, "pufit.mpx"};$/;"	m	class:Jburr_Template_Selector
+pufit_mpy	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Float_t> pufit_mpy = {fReader, "pufit.mpy"};$/;"	m	class:Jburr_Template_Selector
+pufit_phi	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Float_t> pufit_phi = {fReader, "pufit.phi"};$/;"	m	class:Jburr_Template_Selector
+pufit_sumet	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Float_t> pufit_sumet = {fReader, "pufit.sumet"};$/;"	m	class:Jburr_Template_Selector
+ray	Plot_Between_Fits/ray.C	/^void ray() {$/;"	f
+title	computeL1XE30Efficiency/L1XEefficiencySelector.h	/^    TString title = alg_name + " Efficiency";$/;"	m	class:L1XEefficiencySelector
+topocl_met	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Float_t> topocl_met = {fReader, "topocl.met"};$/;"	m	class:Jburr_Template_Selector
+topocl_mpx	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Float_t> topocl_mpx = {fReader, "topocl.mpx"};$/;"	m	class:Jburr_Template_Selector
+topocl_mpy	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Float_t> topocl_mpy = {fReader, "topocl.mpy"};$/;"	m	class:Jburr_Template_Selector
+topocl_phi	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Float_t> topocl_phi = {fReader, "topocl.phi"};$/;"	m	class:Jburr_Template_Selector
+topocl_sumet	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Float_t> topocl_sumet = {fReader, "topocl.sumet"};$/;"	m	class:Jburr_Template_Selector
+width	computeL1XE30Efficiency/L1XEefficiencySelector.h	/^    Float_t width = 20.0; \/\/want 20 GeV bins$/;"	m	class:L1XEefficiencySelector
+xaxis	computeL1XE30Efficiency/L1XEefficiencySelector.h	/^    TString xaxis = zb_alg_name + " [GeV]";$/;"	m	class:L1XEefficiencySelector
+xaxisTitle	PerformCorrection/CorrectingDistributions.h	/^    TString xaxisTitle = alg_name + " [GeV]";$/;"	m	class:CorrectingDistributions
+xaxisTitle	plotMETDistsVersusMu/PlotMETDistsVersMu.h	/^    TString xaxisTitle = alg_name + " [GeV]";$/;"	m	class:PlotMETDistsVersMu
+yaxis	computeL1XE30Efficiency/L1XEefficiencySelector.h	/^    TString yaxis = "efficiency";$/;"	m	class:L1XEefficiencySelector
+yaxisTitle	PerformCorrection/CorrectingDistributions.h	/^    TString yaxisTitle = "Number of Entries";$/;"	m	class:CorrectingDistributions
+yaxisTitle	plotMETDistsVersusMu/PlotMETDistsVersMu.h	/^    TString yaxisTitle = "Number of Entries";$/;"	m	class:PlotMETDistsVersMu
+zb_alg_name	computeL1XE30Efficiency/L1XEefficiencySelector.h	/^   TString zb_alg_name = "cell.met";$/;"	m	class:L1XEefficiencySelector
+~CorrectingDistributions	PerformCorrection/CorrectingDistributions.h	/^   virtual ~CorrectingDistributions() { }$/;"	f	class:CorrectingDistributions
+~Jburr_Template_Selector	BurrTemplateSelector/Jburr_Template_Selector.h	/^   virtual ~Jburr_Template_Selector() { }$/;"	f	class:Jburr_Template_Selector
+~L1XEefficiencySelector	computeL1XE30Efficiency/L1XEefficiencySelector.h	/^   virtual ~L1XEefficiencySelector() { }$/;"	f	class:L1XEefficiencySelector
+~PlotMETDistsVersMu	plotMETDistsVersusMu/PlotMETDistsVersMu.h	/^   virtual ~PlotMETDistsVersMu() { }$/;"	f	class:PlotMETDistsVersMu
