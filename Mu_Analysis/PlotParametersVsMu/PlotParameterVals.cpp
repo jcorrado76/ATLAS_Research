@@ -133,10 +133,16 @@ void HighlightTeff( TVirtualPad *pad , TObject *obj , Int_t ihp , Int_t y){
     Double_t avg_slope = 0.2975016;
     Double_t avg_sigma = 9.144146;
     Double_t l1cut = 30.0;
-    TF1 *avg_errFunc= new TF1("AvgErrorFunc",(1./2.)*(1.+TMath::Erf((avg_slope*x+avg_intercept-l1cut)/(avg_sigma*TMath::Sqrt(2.)))),0.0,300.0);
+    TF1 *avg_errFunc= new TF1("AvgErrorFunc","(1./2.)*(1.+TMath::Erf(([0]*x+[1]-[3])/([2]*TMath::Sqrt(2.))))",0.0,300.0);
+    avg_errFunc->SetParameter(0,avg_slope);
+    avg_errFunc->SetParameter(1,avg_intercept);
+    avg_errFunc->SetParameter(2,avg_sigma);
+    avg_errFunc->SetParameter(3,l1cut);
     TVirtualPad *savepad = gPad;
     pad->GetCanvas()->cd(2);
-    l->At(ihp)->Draw();
+    avg_errFunc->Draw();
+    avg_errFunc->SetLineColor(kBlue);
+    l->At(ihp)->Draw("SAME");
     gPad->Update();
     savepad->cd();
 }
