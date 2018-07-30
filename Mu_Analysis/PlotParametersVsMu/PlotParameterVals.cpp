@@ -129,6 +129,11 @@ void HighlightTeff( TVirtualPad *pad , TObject *obj , Int_t ihp , Int_t y){
     if (ihp == -1){
         return;
     }
+    Double_t avg_intercept = -1.902488;
+    Double_t avg_slope = 0.2975016;
+    Double_t avg_sigma = 9.144146;
+    Double_t l1cut = 30.0;
+    TF1 *avg_errFunc= new TF1("AvgErrorFunc",(1./2.)*(1.+TMath::Erf((avg_slope*x+avg_intercept-l1cut)/(avg_sigma*TMath::Sqrt(2.)))),0.0,300.0);
     TVirtualPad *savepad = gPad;
     pad->GetCanvas()->cd(2);
     l->At(ihp)->Draw();
