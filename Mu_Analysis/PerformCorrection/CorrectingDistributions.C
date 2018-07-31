@@ -125,27 +125,27 @@ void CorrectingDistributions::Terminate(){
     zbMETMuBin0thru10->Draw("SAME");
 
     TCanvas* canvMuBin2 = new TCanvas("c2","Canvas for Mu Bin 10 to 20");
-    MET_Correctedmu10thru20->Draw("SAME");
+    MET_Correctedmu10thru20->Draw();
     zbMETMuBin10thru20->Draw("SAME");
 
     TCanvas* canvMuBin3 = new TCanvas("c3","Canvas for Mu Bin 20 to 30");
-    MET_Correctedmu20thru30->Draw("SAME");
+    MET_Correctedmu20thru30->Draw();
     zbMETMuBin20thru30->Draw("SAME");
 
     TCanvas* canvMuBin4 = new TCanvas("c4","Canvas for Mu Bin 30 to 40");
-    MET_Correctedmu30thru40->Draw("SAME");
+    MET_Correctedmu30thru40->Draw();
     zbMETMuBin30thru40->Draw("SAME");
 
     TCanvas* canvMuBin5 = new TCanvas("c5","Canvas for Mu Bin 40 to 50");
-    MET_Correctedmu40thru50->Draw("SAME");
+    MET_Correctedmu40thru50->Draw();
     zbMETMuBin40thru50->Draw("SAME");
 
     TCanvas* canvMuBin6 = new TCanvas("c6","Canvas for Mu Bin 50 to 60");
-    MET_Correctedmu50thru60->Draw("SAME");
+    MET_Correctedmu50thru60->Draw();
     zbMETMuBin50thru60->Draw("SAME");
 
     TCanvas* canvMuBin7 = new TCanvas("c7","Canvas for Mu Bin 60 to 70");
-    MET_Correctedmu60thru70->Draw("SAME");
+    MET_Correctedmu60thru70->Draw();
     zbMETMuBin60thru70->Draw("SAME");
 
 
