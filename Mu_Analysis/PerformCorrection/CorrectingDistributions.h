@@ -21,6 +21,7 @@
 #include <TCanvas.h>
 #include <TLegend.h>
 #include <TPad.h>
+#include <TEfficiency.h>
 class CorrectingDistributions : public TSelector {
 public :
    TTreeReader     fReader;  //!the tree reader

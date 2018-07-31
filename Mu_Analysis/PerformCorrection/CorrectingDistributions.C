@@ -107,14 +107,50 @@ void CorrectingDistributions::Terminate(){
     MET_Correctedmu50thru60->SetNormFactor(1.);
     MET_Correctedmu60thru70->SetNormFactor(1.);
 
+
+    TFile* zb_MET_File = TFile::Open("../Root_Files/ZB_MET_Distributions.root");
+    TH1F* zbMETMuBin0thru10 = (TH1F*)zb_MET_File->Get("metmu0thru10");
+    TH1F* zbMETMuBin10thru20 = (TH1F*)zb_MET_File->Get("metmu10thru20");
+    TH1F* zbMETMuBin20thru30 = (TH1F*)zb_MET_File->Get("metmu20thru30");
+    TH1F* zbMETMuBin30thru40 = (TH1F*)zb_MET_File->Get("metmu30thru40");
+    TH1F* zbMETMuBin40thru50 = (TH1F*)zb_MET_File->Get("metmu40thru50");
+    TH1F* zbMETMuBin50thru60 = (TH1F*)zb_MET_File->Get("metmu50thru60");
+    TH1F* zbMETMuBin60thru70 = (TH1F*)zb_MET_File->Get("metmu60thru70");
+
+    zb_MET_File->Close();
+
+
+    TCanvas* canvMuBin1 = new TCanvas("c1","Canvas for Mu Bin 0 to 10");
     MET_Correctedmu0thru10->Draw();
-    MET_Correctedmu10thru20->Draw();
-    MET_Correctedmu20thru30->Draw();
-    MET_Correctedmu30thru40->Draw();
-    MET_Correctedmu40thru50->Draw();
-    MET_Correctedmu50thru60->Draw();
-    MET_Correctedmu60thru70->Draw();
+    zbMETMuBin0thru10->Draw("SAME");
+
+    TCanvas* canvMuBin2 = new TCanvas("c2","Canvas for Mu Bin 10 to 20");
+    MET_Correctedmu10thru20->Draw("SAME");
+    zbMETMuBin10thru20->Draw("SAME");
+
+    TCanvas* canvMuBin3 = new TCanvas("c3","Canvas for Mu Bin 20 to 30");
+    MET_Correctedmu20thru30->Draw("SAME");
+    zbMETMuBin20thru30->Draw("SAME");
+
+    TCanvas* canvMuBin4 = new TCanvas("c4","Canvas for Mu Bin 30 to 40");
+    MET_Correctedmu30thru40->Draw("SAME");
+    zbMETMuBin30thru40->Draw("SAME");
+
+    TCanvas* canvMuBin5 = new TCanvas("c5","Canvas for Mu Bin 40 to 50");
+    MET_Correctedmu40thru50->Draw("SAME");
+    zbMETMuBin40thru50->Draw("SAME");
+
+    TCanvas* canvMuBin6 = new TCanvas("c6","Canvas for Mu Bin 50 to 60");
+    MET_Correctedmu50thru60->Draw("SAME");
+    zbMETMuBin50thru60->Draw("SAME");
+
+    TCanvas* canvMuBin7 = new TCanvas("c7","Canvas for Mu Bin 60 to 70");
+    MET_Correctedmu60thru70->Draw("SAME");
+    zbMETMuBin60thru70->Draw("SAME");
+
+
     
+    /*
     mycanv->SetTitle("MET Slices in Mu");
     gPad->SetLogy();
     TLegend* legend = new TLegend();
@@ -127,6 +163,7 @@ void CorrectingDistributions::Terminate(){
     legend->AddEntry(MET_Correctedmu60thru70);
     legend->Draw("SAME");
     gStyle->SetOptStat(0);
+    */
 }
 void CorrectingDistributions::Init(TTree *tree){fReader.SetTree(tree);}
 Bool_t CorrectingDistributions::Notify(){return kTRUE;}
