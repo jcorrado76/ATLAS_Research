@@ -4,7 +4,7 @@
 void CorrectingDistributions::Begin(TTree * /*tree*/)
 {
    TString option = GetOption();
-    TFile* myfile = TFile::Open("../Root_Files/EfficiencyObjects.root");
+    TFile* EfficiencyObjectFile = TFile::Open("../Root_Files/EfficiencyObjects.root");
     std::cout << "Getting fits from file" << std::endl;
 
 
@@ -14,18 +14,24 @@ void CorrectingDistributions::Begin(TTree * /*tree*/)
      * during the plotting process. You need to plot the zerobias distributions on the same plot as the corrected
      * PhysicsMain distributions. We want to compare the corrected PhysicsMain to the zerobias 
      */
-    TEfficiency* efficiencyObjectMu0thru10 = (TEfficiency*)
+    TEfficiency* efficiencyObjectMu0thru10 = (TEfficiency*)EfficiencyObjectFile->Get("metmu0thru10Efficiency");
+    TEfficiency* efficiencyObjectMu10thru20 = (TEfficiency*)EfficiencyObjectFile->Get("metmu10thru20Efficiency");
+    TEfficiency* efficiencyObjectMu20thru30 = (TEfficiency*)EfficiencyObjectFile->Get("metmu20thru30Efficiency");
+    TEfficiency* efficiencyObjectMu30thru40 = (TEfficiency*)EfficiencyObjectFile->Get("metmu30thru40Efficiency");
+    TEfficiency* efficiencyObjectMu40thru50 = (TEfficiency*)EfficiencyObjectFile->Get("metmu40thru50Efficiency");
+    TEfficiency* efficiencyObjectMu50thru60 = (TEfficiency*)EfficiencyObjectFile->Get("metmu50thru60Efficiency");
+    TEfficiency* efficiencyObjectMu60thru70 = (TEfficiency*)EfficiencyObjectFile->Get("metmu60thru70Efficiency");
 
+    EfficiencyObjectFile->Close();
 
+     EfficiencyFitMuBin1 = (TF1*)(efficiencyObjectMu0thru10->GetListOfFunctions())->At(0);
+     EfficiencyFitMuBin2 = (TF1*)(efficiencyObjectMu10thru20->GetListOfFunctions())->At(0);
+     EfficiencyFitMuBin3 = (TF1*)(efficiencyObjectMu20thru30->GetListOfFunctions())->At(0);
+     EfficiencyFitMuBin4 = (TF1*)(efficiencyObjectMu30thru40->GetListOfFunctions())->At(0);
+     EfficiencyFitMuBin5 = (TF1*)(efficiencyObjectMu40thru50->GetListOfFunctions())->At(0);
+     EfficiencyFitMuBin6 = (TF1*)(efficiencyObjectMu50thru60->GetListOfFunctions())->At(0);
+     EfficiencyFitMuBin7 = (TF1*)(efficiencyObjectMu60thru70->GetListOfFunctions())->At(0);
 
-
-     EfficiencyFitMuBin1 = (TF1*)myfile->Get("metmu0thru10Fit");
-     EfficiencyFitMuBin2 = (TF1*)myfile->Get("metmu10thru20Fit");
-     EfficiencyFitMuBin3 = (TF1*)myfile->Get("metmu20thru30Fit");
-     EfficiencyFitMuBin4 = (TF1*)myfile->Get("metmu30thru40Fit");
-     EfficiencyFitMuBin5 = (TF1*)myfile->Get("metmu40thru50Fit");
-     EfficiencyFitMuBin6 = (TF1*)myfile->Get("metmu50thru60Fit");
-     EfficiencyFitMuBin7 = (TF1*)myfile->Get("metmu60thru70Fit");
     std::cout << "Successfully got fit objects from file" << std::endl;
     std::cout << "Name of first fit: " << EfficiencyFitMuBin1->GetName() << std::endl;
     MET_Correctedmu0thru10 = new TH1F("correctedmetmu0thru10","MET Data for actint between 0 and 10", nbins , gevLow , gevHigh );
