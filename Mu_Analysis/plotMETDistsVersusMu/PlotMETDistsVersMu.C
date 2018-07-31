@@ -124,6 +124,17 @@ void PlotMETDistsVersMu::Terminate() // Plotting{{{
     legend->AddEntry(MET_Datamu60thru70);
     legend->Draw("SAME");
     gStyle->SetOptStat(0);
+
+    TFile* MET_Dist_File = TFile::Open("../Root_Files/ZB_MET_Distributions.root", "RECREATE");
+    MET_Datamu0thru10->Write();
+    MET_Datamu10thru20->Write();
+    MET_Datamu20thru30->Write();
+    MET_Datamu30thru40->Write();
+    MET_Datamu40thru50->Write();
+    MET_Datamu50thru60->Write();
+    MET_Datamu60thru70->Write();
+
+    MET_Dist_File->Close();
 }//}}}
 void PlotMETDistsVersMu::Init(TTree *tree) //{{{
 {
