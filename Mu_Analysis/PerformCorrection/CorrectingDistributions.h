@@ -42,13 +42,14 @@ public :
    TF1*             EfficiencyFitMuBin6 = 0;
    TF1*             EfficiencyFitMuBin7 = 0;
 
-    Int_t nbins = 1000;
+   Float_t binWidth = 5.0;
     Float_t gevLow = 0.0;
     Float_t gevHigh = 100.0;
+    Int_t nbins = (gevHigh-gevLow)/binWidth;
     TString alg_name = "METCELL";
     TString xaxisTitle = alg_name + " [GeV]";
     TString yaxisTitle = "Number of Entries";
-    TCanvas* mycanv = new TCanvas("MET_AlgMuSlices", "MET Slices in Mu");
+    //TCanvas* mycanv = new TCanvas("MET_AlgMuSlices", "MET Slices in Mu");
 
    // Readers to access the data (delete the ones you do not need).
    TTreeReaderValue<UInt_t> RunNumber = {fReader, "RunNumber"};

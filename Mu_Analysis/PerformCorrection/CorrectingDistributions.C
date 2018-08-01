@@ -34,13 +34,13 @@ void CorrectingDistributions::Begin(TTree * /*tree*/)
 
     std::cout << "Successfully got fit objects from file" << std::endl;
     std::cout << "Name of first fit: " << EfficiencyFitMuBin1->GetName() << std::endl;
-    MET_Correctedmu0thru10 = new TH1F("correctedmetmu0thru10","MET Data for actint between 0 and 10", nbins , gevLow , gevHigh );
-    MET_Correctedmu10thru20 = new TH1F("correctedmetmu10thru20","MET Data for actint between 10 and 20", nbins , gevLow , gevHigh );
-    MET_Correctedmu20thru30 = new TH1F("correctedmetmu20thru30","MET Data for actint between 20 and 30", nbins , gevLow , gevHigh );
-    MET_Correctedmu30thru40 = new TH1F("correctedmetmu30thru40","MET Data for actint between 30 and 40", nbins , gevLow , gevHigh );
-    MET_Correctedmu40thru50 = new TH1F("correctedmetmu40thru50","MET Data for actint between 40 and 50", nbins , gevLow , gevHigh );
-    MET_Correctedmu50thru60 = new TH1F("correctedmetmu50thru60","MET Data for actint between 50 and 60", nbins , gevLow , gevHigh );
-    MET_Correctedmu60thru70 = new TH1F("correctedmetmu60thru70","MET Data for actint between 60 and 70", nbins , gevLow , gevHigh );
+    MET_Correctedmu0thru10 = new TH1F("correctedmetmu0thru10","Corrected Data for actint between 0 and 10", nbins , gevLow , gevHigh );
+    MET_Correctedmu10thru20 = new TH1F("correctedmetmu10thru20","Corrected Data for actint between 10 and 20", nbins , gevLow , gevHigh );
+    MET_Correctedmu20thru30 = new TH1F("correctedmetmu20thru30","Corrected Data for actint between 20 and 30", nbins , gevLow , gevHigh );
+    MET_Correctedmu30thru40 = new TH1F("correctedmetmu30thru40","Corrected Data for actint between 30 to 40", nbins , gevLow , gevHigh );
+    MET_Correctedmu40thru50 = new TH1F("correctedmetmu40thru50","Corrected Data for actint between 40 to 50", nbins , gevLow , gevHigh );
+    MET_Correctedmu50thru60 = new TH1F("correctedmetmu50thru60","Corrected Data for actint between 50 and 60", nbins , gevLow , gevHigh );
+    MET_Correctedmu60thru70 = new TH1F("correctedmetmu60thru70","Corrected Data for actint between 60 and 70", nbins , gevLow , gevHigh );
 }
 
 void CorrectingDistributions::SlaveBegin(TTree * /*tree*/)
@@ -90,13 +90,13 @@ Double_t CorrectingDistributions::ComputeWeight(TF1* fitFunc)//{{{
 void CorrectingDistributions::SlaveTerminate(){}
 void CorrectingDistributions::Terminate(){
     // color the histograms so we can see difference 
-    MET_Correctedmu0thru10->SetLineColor(1);
+    MET_Correctedmu0thru10->SetLineColor(2);
     MET_Correctedmu10thru20->SetLineColor(2);
-    MET_Correctedmu20thru30->SetLineColor(3);
-    MET_Correctedmu30thru40->SetLineColor(4);
-    MET_Correctedmu40thru50->SetLineColor(5);
-    MET_Correctedmu50thru60->SetLineColor(6);
-    MET_Correctedmu60thru70->SetLineColor(7);
+    MET_Correctedmu20thru30->SetLineColor(2);
+    MET_Correctedmu30thru40->SetLineColor(2);
+    MET_Correctedmu40thru50->SetLineColor(2);
+    MET_Correctedmu50thru60->SetLineColor(2);
+    MET_Correctedmu60thru70->SetLineColor(2);
 
     // normalize to 1 
     MET_Correctedmu0thru10->SetNormFactor(1.);
@@ -117,38 +117,75 @@ void CorrectingDistributions::Terminate(){
     TH1F* zbMETMuBin50thru60 = (TH1F*)zb_MET_File->Get("metmu50thru60");
     TH1F* zbMETMuBin60thru70 = (TH1F*)zb_MET_File->Get("metmu60thru70");
 
-    zb_MET_File->Close();
+    zbMETMuBin0thru10->SetLineColor(3);
+    zbMETMuBin10thru20->SetLineColor(3);
+    zbMETMuBin20thru30->SetLineColor(3);
+    zbMETMuBin30thru40->SetLineColor(3);
+    zbMETMuBin40thru50->SetLineColor(3);
+    zbMETMuBin50thru60->SetLineColor(3);
+    zbMETMuBin60thru70->SetLineColor(3);
 
 
+    std::cout << "Starting to draw canvases" << std::endl;
     TCanvas* canvMuBin1 = new TCanvas("c1","Canvas for Mu Bin 0 to 10");
-    MET_Correctedmu0thru10->Draw();
-    zbMETMuBin0thru10->Draw("SAME");
+    zbMETMuBin0thru10->Draw();
+    MET_Correctedmu0thru10->Draw("SAME");
+    TLegend* legend1 = new TLegend();
+    legend1->AddEntry(MET_Correctedmu0thru10);
+    legend1->AddEntry(zbMETMuBin0thru10);
+    legend1->Draw("SAME");
+
 
     TCanvas* canvMuBin2 = new TCanvas("c2","Canvas for Mu Bin 10 to 20");
-    MET_Correctedmu10thru20->Draw();
-    zbMETMuBin10thru20->Draw("SAME");
+    zbMETMuBin10thru20->Draw();
+    MET_Correctedmu10thru20->Draw("SAME");
+    TLegend* legend2 = new TLegend();
+    legend2->AddEntry(MET_Correctedmu10thru20);
+    legend2->AddEntry(zbMETMuBin10thru20);
+    legend2->Draw("SAME");
 
     TCanvas* canvMuBin3 = new TCanvas("c3","Canvas for Mu Bin 20 to 30");
     MET_Correctedmu20thru30->Draw();
     zbMETMuBin20thru30->Draw("SAME");
+    TLegend* legend3 = new TLegend();
+    legend3->AddEntry(MET_Correctedmu20thru30);
+    legend3->AddEntry(zbMETMuBin20thru30);
+    legend3->Draw("SAME");
 
     TCanvas* canvMuBin4 = new TCanvas("c4","Canvas for Mu Bin 30 to 40");
     MET_Correctedmu30thru40->Draw();
     zbMETMuBin30thru40->Draw("SAME");
+    TLegend* legend4 = new TLegend();
+    legend4->AddEntry(MET_Correctedmu30thru40);
+    legend4->AddEntry(zbMETMuBin30thru40);
+    legend4->Draw("SAME");
 
     TCanvas* canvMuBin5 = new TCanvas("c5","Canvas for Mu Bin 40 to 50");
-    MET_Correctedmu40thru50->Draw();
-    zbMETMuBin40thru50->Draw("SAME");
+    zbMETMuBin40thru50->Draw();
+    MET_Correctedmu40thru50->Draw("SAME");
+    TLegend* legend5 = new TLegend();
+    legend5->AddEntry(MET_Correctedmu40thru50);
+    legend5->AddEntry(zbMETMuBin40thru50);
+    legend5->Draw("SAME");
 
     TCanvas* canvMuBin6 = new TCanvas("c6","Canvas for Mu Bin 50 to 60");
     MET_Correctedmu50thru60->Draw();
     zbMETMuBin50thru60->Draw("SAME");
+    TLegend* legend6 = new TLegend();
+    legend6->AddEntry(MET_Correctedmu50thru60);
+    legend6->AddEntry(zbMETMuBin50thru60);
+    legend6->Draw("SAME");
 
     TCanvas* canvMuBin7 = new TCanvas("c7","Canvas for Mu Bin 60 to 70");
     MET_Correctedmu60thru70->Draw();
     zbMETMuBin60thru70->Draw("SAME");
+    TLegend* legend7 = new TLegend();
+    legend7->AddEntry(MET_Correctedmu60thru70);
+    legend7->AddEntry(zbMETMuBin60thru70);
+    legend7->Draw("SAME");
 
 
+    zb_MET_File->Close();
     
     /*
     mycanv->SetTitle("MET Slices in Mu");

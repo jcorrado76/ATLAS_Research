@@ -35,9 +35,10 @@ public :
    TH1F*            MET_Datamu50thru60 = 0;
    TH1F*            MET_Datamu60thru70 = 0;
    TString alg_name = "cell.met"; 
-    Int_t nbins = 1000;
+   Float_t binWidth = 1.0;
     Float_t gevLow = 0.0;
     Float_t gevHigh = 100.0;
+    Int_t nbins = (gevHigh-gevLow)/binWidth;
     TString xaxisTitle = alg_name + " [GeV]";
     TString yaxisTitle = "Number of Entries";
     TCanvas* mycanv = new TCanvas("MET_AlgMuSlices", "MET Slices in Mu");
