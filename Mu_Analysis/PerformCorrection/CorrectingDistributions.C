@@ -88,7 +88,6 @@ Double_t CorrectingDistributions::ComputeWeight(TF1* fitFunc)//{{{
 }//}}}
 void CorrectingDistributions::SlaveTerminate(){}
 void CorrectingDistributions::Terminate(){
-    // color the histograms so we can see difference 
 
     // normalize to 1 
     MET_Correctedmu0thru10->SetNormFactor(1.);
@@ -100,29 +99,11 @@ void CorrectingDistributions::Terminate(){
     MET_Correctedmu60thru70->SetNormFactor(1.);
 
 
-    TFile* zb_MET_File = TFile::Open("../Root_Files/ZB_MET_Distributions.root");
-    TH1F* zbMETMuBin0thru10 = (TH1F*)zb_MET_File->Get("metmu0thru10");
-    TH1F* zbMETMuBin10thru20 = (TH1F*)zb_MET_File->Get("metmu10thru20");
-    TH1F* zbMETMuBin20thru30 = (TH1F*)zb_MET_File->Get("metmu20thru30");
-    TH1F* zbMETMuBin30thru40 = (TH1F*)zb_MET_File->Get("metmu30thru40");
-    TH1F* zbMETMuBin40thru50 = (TH1F*)zb_MET_File->Get("metmu40thru50");
-    TH1F* zbMETMuBin50thru60 = (TH1F*)zb_MET_File->Get("metmu50thru60");
-    TH1F* zbMETMuBin60thru70 = (TH1F*)zb_MET_File->Get("metmu60thru70");
-
-    zbMETMuBin0thru10->SetLineColor(3);
-    zbMETMuBin10thru20->SetLineColor(3);
-    zbMETMuBin20thru30->SetLineColor(3);
-    zbMETMuBin30thru40->SetLineColor(3);
-    zbMETMuBin40thru50->SetLineColor(3);
-    zbMETMuBin50thru60->SetLineColor(3);
-    zbMETMuBin60thru70->SetLineColor(3);
-
-
     TCanvas* correctedCanvas = new TCanvas("correctedCanvas","Canvas with corrected data");
     MET_Correctedmu0thru10->SetLineColor(2);
     MET_Correctedmu10thru20->SetLineColor(3);
     MET_Correctedmu20thru30->SetLineColor(4);
-    MET_Correctedmu30thru40->SetLineColor(5);
+    MET_Correctedmu30thru40->SetLineColor(44);
     MET_Correctedmu40thru50->SetLineColor(6);
     MET_Correctedmu50thru60->SetLineColor(7);
     MET_Correctedmu60thru70->SetLineColor(8);
@@ -133,6 +114,44 @@ void CorrectingDistributions::Terminate(){
     MET_Correctedmu40thru50->Draw("SAME");
     MET_Correctedmu50thru60->Draw("SAME");
     MET_Correctedmu60thru70->Draw("SAME");
+	TLegend* correctedLegend = new TLegend();
+	correctedLegend->AddEntry(MET_Correctedmu0thru10);
+	correctedLegend->AddEntry(MET_Correctedmu10thru20);
+	correctedLegend->AddEntry(MET_Correctedmu20thru30);
+	correctedLegend->AddEntry(MET_Correctedmu30thru40);
+	correctedLegend->AddEntry(MET_Correctedmu40thru50);
+	correctedLegend->AddEntry(MET_Correctedmu50thru60);
+	correctedLegend->AddEntry(MET_Correctedmu60thru70);
+	correctedCanvas->Draw("SAME");
+
+    TFile* zb_MET_File = TFile::Open("../Root_Files/ZB_MET_Distributions.root");
+    TH1F* zbMETMuBin0thru10 = (TH1F*)zb_MET_File->Get("metmu0thru10");
+    TH1F* zbMETMuBin10thru20 = (TH1F*)zb_MET_File->Get("metmu10thru20");
+    TH1F* zbMETMuBin20thru30 = (TH1F*)zb_MET_File->Get("metmu20thru30");
+    TH1F* zbMETMuBin30thru40 = (TH1F*)zb_MET_File->Get("metmu30thru40");
+    TH1F* zbMETMuBin40thru50 = (TH1F*)zb_MET_File->Get("metmu40thru50");
+    TH1F* zbMETMuBin50thru60 = (TH1F*)zb_MET_File->Get("metmu50thru60");
+    TH1F* zbMETMuBin60thru70 = (TH1F*)zb_MET_File->Get("metmu60thru70");
+	std::cout << "Name of the first zb cell met distribution object: " << zbMETMuBin0thru10->GetName() << std::endl;
+	std::cout << "Name of the last zb Cell met distribution object: " << zbMETMuBin10thru20->GetName() << std::endl;
+
+	TCanvas* zb_MET_Canvas = new TCanvas("zbCanvas","Canvas with zerobias data");
+    zbMETMuBin0thru10->SetLineColor(2);
+    zbMETMuBin10thru20->SetLineColor(3);
+    zbMETMuBin20thru30->SetLineColor(4);
+    zbMETMuBin30thru40->SetLineColor(44);
+    zbMETMuBin40thru50->SetLineColor(6);
+    zbMETMuBin50thru60->SetLineColor(7);
+    zbMETMuBin60thru70->SetLineColor(8);
+    zbMETMuBin0thru10->Draw();
+    zbMETMuBin10thru20->Draw("SAME");
+    zbMETMuBin20thru30->Draw("SAME");
+    zbMETMuBin30thru40->Draw("SAME");
+    zbMETMuBin40thru50->Draw("SAME");
+    zbMETMuBin50thru60->Draw("SAME");
+    zbMETMuBin60thru70->Draw("SAME");
+
+
 
 
 
