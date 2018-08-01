@@ -4,9 +4,9 @@
 void CorrectingDistributions::Begin(TTree * /*tree*/)
 {
    TString option = GetOption();
+
     TFile* EfficiencyObjectFile = TFile::Open("../Root_Files/EfficiencyObjects.root");
     std::cout << "Getting fits from file" << std::endl;
-
     efficiencyObjectMu0thru10 = (TEfficiency*)EfficiencyObjectFile->Get("metmu0thru10Efficiency");
     efficiencyObjectMu10thru20 = (TEfficiency*)EfficiencyObjectFile->Get("metmu10thru20Efficiency");
     efficiencyObjectMu20thru30 = (TEfficiency*)EfficiencyObjectFile->Get("metmu20thru30Efficiency");
@@ -14,7 +14,8 @@ void CorrectingDistributions::Begin(TTree * /*tree*/)
     efficiencyObjectMu40thru50 = (TEfficiency*)EfficiencyObjectFile->Get("metmu40thru50Efficiency");
     efficiencyObjectMu50thru60 = (TEfficiency*)EfficiencyObjectFile->Get("metmu50thru60Efficiency");
     efficiencyObjectMu60thru70 = (TEfficiency*)EfficiencyObjectFile->Get("metmu60thru70Efficiency");
-
+    std::cout << "Name of first efficiency object: " << efficiencyObjectMu0thru10->GetName() << std::endl;
+    std::cout << "Name of last efficiency object: " << efficiencyObjectMu60thru70->GetName() << std::endl;
     EfficiencyObjectFile->Close();
 
      EfficiencyFitMuBin1 = (TF1*)(efficiencyObjectMu0thru10->GetListOfFunctions())->At(0);
