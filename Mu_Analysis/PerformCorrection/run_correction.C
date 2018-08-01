@@ -1,6 +1,6 @@
 {
     TChain* mychain = new TChain( "METTree" , "mychain" );
-    mychain->Add("~/Downloads/user.jburr.2017_11_17.JETM10/*");
-    mychain->Process("CorrectingDistributions.C+");
+    mychain->Add("~/DATA/Jburr*");
+    mychain->Process("CorrectingDistributions.C+g");
 }
 

@@ -26,13 +26,9 @@ void CorrectingDistributions::Begin(TTree * /*tree*/)
 	 EfficiencyFitMuBin5 = (TF1*)(efficiencyObjectMu40thru50->GetListOfFunctions())->At(0);
 	 EfficiencyFitMuBin6 = (TF1*)(efficiencyObjectMu50thru60->GetListOfFunctions())->At(0);
 	 EfficiencyFitMuBin7 = (TF1*)(efficiencyObjectMu60thru70->GetListOfFunctions())->At(0);
-		
-    EfficiencyObjectFile->Close();
-	 EfficiencyFitMuBin1->GetFormula()->Print();
-    EfficiencyFitMuBin2->GetFormula()->Print();
-
 
 	// INITIALIZE THE NEW CORRECTED DISTRIBUTIONS
+    std::cout << "Initializing histograms to contain the corrected data" << std::endl;
     MET_Correctedmu0thru10 = new TH1F("correctedmetmu0thru10","Corrected Data for actint between 0 and 10", nbins , gevLow , gevHigh );
     MET_Correctedmu10thru20 = new TH1F("correctedmetmu10thru20","Corrected Data for actint between 10 and 20", nbins , gevLow , gevHigh );
     MET_Correctedmu20thru30 = new TH1F("correctedmetmu20thru30","Corrected Data for actint between 20 and 30", nbins , gevLow , gevHigh );
@@ -40,6 +36,10 @@ void CorrectingDistributions::Begin(TTree * /*tree*/)
     MET_Correctedmu40thru50 = new TH1F("correctedmetmu40thru50","Corrected Data for actint between 40 to 50", nbins , gevLow , gevHigh );
     MET_Correctedmu50thru60 = new TH1F("correctedmetmu50thru60","Corrected Data for actint between 50 and 60", nbins , gevLow , gevHigh );
     MET_Correctedmu60thru70 = new TH1F("correctedmetmu60thru70","Corrected Data for actint between 60 and 70", nbins , gevLow , gevHigh );
+
+    EfficiencyObjectFile->Close();
+
+    std::cout << "Closed the efficiency object file" << std::endl;
 }
 
 void CorrectingDistributions::SlaveBegin(TTree * /*tree*/)//{{{
@@ -51,16 +51,20 @@ Bool_t CorrectingDistributions::Process(Long64_t entry)
 {
    fReader.SetLocalEntry(entry);
 
+   std::cout << "Hello world" << std::endl;
    // just make sure this is the correct flag L1XE30
    // still need to compute new error and pass it to this fill function somehow 
 
    // if the entry is passnoalg L1XE30, and it one of the good runs
    if ( isPassnoAlgL1XE30() && isGoodRun() ){
+       std::cout << "Entered first layer of logic" << std::endl;
        if ( inMuRange( 0.0 , 10.0) ){
+           std::cout << "is in mu range" << std::endl;
            MET_Correctedmu0thru10->Fill(*cell_met, ComputeWeight(EfficiencyFitMuBin1));
+           std::cout << "Was able to reference cell met and use compute weight on the efficiency fit mu bin 1" << std::endl;
        }
        if ( inMuRange( 10.0, 20.0) ){
-           MET_Correctedmu10thru20->Fill(*cell_met,ComputeWeight(EfficiencyFitMuBin2));
+           MET_Correctedmu10thru20->Fill(*cell_met,ComputeWeight( EfficiencyFitMuBin2));
        }
        if ( inMuRange( 20.0 , 30.0) ){
            MET_Correctedmu20thru30->Fill(*cell_met,ComputeWeight(EfficiencyFitMuBin3));

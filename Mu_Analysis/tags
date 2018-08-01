@@ -294,7 +294,7 @@ SetOption	PerformCorrection/CorrectingDistributions.h	/^   virtual void    SetOp
 SetOption	computeL1XE30Efficiency/L1XEefficiencySelector.h	/^   virtual void    SetOption(const char *option) { fOption = option; }$/;"	f	class:L1XEefficiencySelector
 SetOption	plotMETDistsVersusMu/PlotMETDistsVersMu.h	/^   virtual void    SetOption(const char *option) { fOption = option; }$/;"	f	class:PlotMETDistsVersMu
 SlaveBegin	BurrTemplateSelector/Jburr_Template_Selector.C	/^void Jburr_Template_Selector::SlaveBegin(TTree * \/*tree*\/){TString option = GetOption();}$/;"	f	class:Jburr_Template_Selector
-SlaveBegin	PerformCorrection/CorrectingDistributions.C	/^void CorrectingDistributions::SlaveBegin(TTree * \/*tree*\/)$/;"	f	class:CorrectingDistributions
+SlaveBegin	PerformCorrection/CorrectingDistributions.C	/^void CorrectingDistributions::SlaveBegin(TTree * \/*tree*\/)\/\/{{{$/;"	f	class:CorrectingDistributions
 SlaveBegin	computeL1XE30Efficiency/L1XEefficiencySelector.C	/^void L1XEefficiencySelector::SlaveBegin(TTree * \/*tree*\/)\/\/ {{{$/;"	f	class:L1XEefficiencySelector
 SlaveBegin	plotMETDistsVersusMu/PlotMETDistsVersMu.C	/^void PlotMETDistsVersMu::SlaveBegin(TTree * \/*tree*\/) \/\/ {{{$/;"	f	class:PlotMETDistsVersMu
 SlaveTerminate	BurrTemplateSelector/Jburr_Template_Selector.C	/^void Jburr_Template_Selector::SlaveTerminate(){}$/;"	f	class:Jburr_Template_Selector
@@ -326,6 +326,8 @@ Zmumu_pass	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<
 alg_name	PerformCorrection/CorrectingDistributions.h	/^    TString alg_name = "METCELL";$/;"	m	class:CorrectingDistributions
 alg_name	computeL1XE30Efficiency/L1XEefficiencySelector.h	/^   TString alg_name = "L1.met"; \/\/ these two must match branches in jburr tree$/;"	m	class:L1XEefficiencySelector
 alg_name	plotMETDistsVersusMu/PlotMETDistsVersMu.h	/^   TString alg_name = "cell.met"; $/;"	m	class:PlotMETDistsVersMu
+binWidth	PerformCorrection/CorrectingDistributions.h	/^   Float_t binWidth = 5.0;$/;"	m	class:CorrectingDistributions
+binWidth	plotMETDistsVersusMu/PlotMETDistsVersMu.h	/^   Float_t binWidth = 1.0;$/;"	m	class:PlotMETDistsVersMu
 cell_met	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Float_t> cell_met = {fReader, "cell.met"};$/;"	m	class:Jburr_Template_Selector
 cell_met	PerformCorrection/CorrectingDistributions.h	/^   TTreeReaderValue<Float_t> cell_met = {fReader, "cell.met"};$/;"	m	class:CorrectingDistributions
 cell_met	computeL1XE30Efficiency/L1XEefficiencySelector.h	/^   TTreeReaderValue<Float_t> cell_met = {fReader, zb_alg_name };$/;"	m	class:L1XEefficiencySelector
@@ -333,6 +335,13 @@ cell_mpx	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Fl
 cell_mpy	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Float_t> cell_mpy = {fReader, "cell.mpy"};$/;"	m	class:Jburr_Template_Selector
 cell_phi	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Float_t> cell_phi = {fReader, "cell.phi"};$/;"	m	class:Jburr_Template_Selector
 cell_sumet	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Float_t> cell_sumet = {fReader, "cell.sumet"};$/;"	m	class:Jburr_Template_Selector
+efficiencyObjectMu0thru10	PerformCorrection/CorrectingDistributions.h	/^    TEfficiency* efficiencyObjectMu0thru10 = 0;$/;"	m	class:CorrectingDistributions
+efficiencyObjectMu10thru20	PerformCorrection/CorrectingDistributions.h	/^    TEfficiency* efficiencyObjectMu10thru20 =0;$/;"	m	class:CorrectingDistributions
+efficiencyObjectMu20thru30	PerformCorrection/CorrectingDistributions.h	/^    TEfficiency* efficiencyObjectMu20thru30 =0;$/;"	m	class:CorrectingDistributions
+efficiencyObjectMu30thru40	PerformCorrection/CorrectingDistributions.h	/^    TEfficiency* efficiencyObjectMu30thru40 = 0;$/;"	m	class:CorrectingDistributions
+efficiencyObjectMu40thru50	PerformCorrection/CorrectingDistributions.h	/^    TEfficiency* efficiencyObjectMu40thru50 = 0;$/;"	m	class:CorrectingDistributions
+efficiencyObjectMu50thru60	PerformCorrection/CorrectingDistributions.h	/^    TEfficiency* efficiencyObjectMu50thru60 = 0;$/;"	m	class:CorrectingDistributions
+efficiencyObjectMu60thru70	PerformCorrection/CorrectingDistributions.h	/^    TEfficiency* efficiencyObjectMu60thru70 = 0;$/;"	m	class:CorrectingDistributions
 fChain	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTree          *fChain = 0;   \/\/!pointer to the analyzed TTree or TChain$/;"	m	class:Jburr_Template_Selector
 fChain	PerformCorrection/CorrectingDistributions.h	/^   TTree          *fChain = 0;   \/\/!pointer to the analyzed TTree or TChain$/;"	m	class:CorrectingDistributions
 fChain	computeL1XE30Efficiency/L1XEefficiencySelector.h	/^   TTree          *fChain = 0;   \/\/!pointer to the analyzed TTree or TChain$/;"	m	class:L1XEefficiencySelector
@@ -369,11 +378,10 @@ mht_mpy	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Flo
 mht_phi	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Float_t> mht_phi = {fReader, "mht.phi"};$/;"	m	class:Jburr_Template_Selector
 mht_sumet	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Float_t> mht_sumet = {fReader, "mht.sumet"};$/;"	m	class:Jburr_Template_Selector
 muSlicesStack	plotMETDistsVersusMu/PlotMETDistsVersMu.h	/^    THStack* muSlicesStack = new THStack("muStack","MET Hists in Mu Slices After Removing Runs 33023, 331975, and 334487");$/;"	m	class:PlotMETDistsVersMu
-mycanv	PerformCorrection/CorrectingDistributions.h	/^    TCanvas* mycanv = new TCanvas("MET_AlgMuSlices", "MET Slices in Mu");$/;"	m	class:CorrectingDistributions
 mycanv	plotMETDistsVersusMu/PlotMETDistsVersMu.h	/^    TCanvas* mycanv = new TCanvas("MET_AlgMuSlices", "MET Slices in Mu");$/;"	m	class:PlotMETDistsVersMu
-nbins	PerformCorrection/CorrectingDistributions.h	/^    Int_t nbins = 1000;$/;"	m	class:CorrectingDistributions
+nbins	PerformCorrection/CorrectingDistributions.h	/^    Int_t nbins = (gevHigh-gevLow)\/binWidth;$/;"	m	class:CorrectingDistributions
 nbins	computeL1XE30Efficiency/L1XEefficiencySelector.h	/^    Int_t nbins = (gevHigh - gevLow) \/ width; \/\/ compute nbins as function of preferred width$/;"	m	class:L1XEefficiencySelector
-nbins	plotMETDistsVersusMu/PlotMETDistsVersMu.h	/^    Int_t nbins = 1000;$/;"	m	class:PlotMETDistsVersMu
+nbins	plotMETDistsVersusMu/PlotMETDistsVersMu.h	/^    Int_t nbins = (gevHigh-gevLow)\/binWidth;$/;"	m	class:PlotMETDistsVersMu
 passedL1ZB	BurrTemplateSelector/Jburr_Template_Selector.C	/^Bool_t Jburr_Template_Selector::passedL1ZB(){ \/\/{{{$/;"	f	class:Jburr_Template_Selector
 passedL1ZB	PerformCorrection/CorrectingDistributions.C	/^Bool_t CorrectingDistributions::passedL1ZB(){\/\/{{{$/;"	f	class:CorrectingDistributions
 passedL1ZB	computeL1XE30Efficiency/L1XEefficiencySelector.C	/^Bool_t L1XEefficiencySelector::passedL1ZB(){ \/\/ {{{ $/;"	f	class:L1XEefficiencySelector

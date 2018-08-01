@@ -52,7 +52,7 @@ public :
 
    Float_t binWidth = 5.0;
     Float_t gevLow = 0.0;
-    Float_t gevHigh = 100.0;
+    Float_t gevHigh = 300.0;
     Int_t nbins = (gevHigh-gevLow)/binWidth;
     TString alg_name = "METCELL";
     TString xaxisTitle = alg_name + " [GeV]";
