@@ -1,61 +1,68 @@
-Begin	CorrectingDistributions.C	/^void CorrectingDistributions::Begin(TTree * \/*tree/
-ComputeWeight	CorrectingDistributions.C	/^Double_t CorrectingDistributions::ComputeWeight(TF/
-CorrectingDistributions	CorrectingDistributions.h	24
-CorrectingDistributions	CorrectingDistributions.h	/^   CorrectingDistributions(TTree * \/*tree*\/ =0) { /
-CorrectingDistributions_C__ROOTBUILDVERSION	CorrectingDistributions_C.d	125
-CorrectingDistributions_cxx	CorrectingDistributions.C	1
-CorrectingDistributions_h	CorrectingDistributions.h	8
-EfficiencyFitMuBin1	CorrectingDistributions.h	36
-EfficiencyFitMuBin2	CorrectingDistributions.h	37
-EfficiencyFitMuBin3	CorrectingDistributions.h	38
-EfficiencyFitMuBin4	CorrectingDistributions.h	39
-EfficiencyFitMuBin5	CorrectingDistributions.h	40
-EfficiencyFitMuBin6	CorrectingDistributions.h	41
-EfficiencyFitMuBin7	CorrectingDistributions.h	42
-G__VECTOR_HAS_CLASS_ITERATOR	CorrectingDistributions_C_ACLiC_dict dictionary payload	3
-GetEntry	CorrectingDistributions.h	/^   virtual Int_t   GetEntry(Long64_t entry, Int_t /
-GetOutputList	CorrectingDistributions.h	/^   virtual TList  *GetOutputList() const { return /
-HLT_noalg_L1XE30_passed	CorrectingDistributions.h	60
-HLT_noalg_L1XE30_prescale	CorrectingDistributions.h	61
-HLT_noalg_zb_L1ZB_passed	CorrectingDistributions.h	58
-HLT_noalg_zb_L1ZB_prescale	CorrectingDistributions.h	59
-InTimePileup	CorrectingDistributions.h	54
-Init	CorrectingDistributions.C	/^void CorrectingDistributions::Init(TTree *tree){fR/
-L1_met	CorrectingDistributions.h	56
-MET	readme.md	5
-MET_Correctedmu0thru10	CorrectingDistributions.h	28
-MET_Correctedmu10thru20	CorrectingDistributions.h	29
-MET_Correctedmu20thru30	CorrectingDistributions.h	30
-MET_Correctedmu30thru40	CorrectingDistributions.h	31
-MET_Correctedmu40thru50	CorrectingDistributions.h	32
-MET_Correctedmu50thru60	CorrectingDistributions.h	33
-MET_Correctedmu60thru70	CorrectingDistributions.h	34
-Notify	CorrectingDistributions.C	/^Bool_t CorrectingDistributions::Notify(){return kT/
-OutOfTimePileup	CorrectingDistributions.h	55
-Process	CorrectingDistributions.C	/^Bool_t CorrectingDistributions::Process(Long64_t e/
-RunNumber	CorrectingDistributions.h	53
-SetInputList	CorrectingDistributions.h	/^   virtual void    SetInputList(TList *input) { fI/
-SetObject	CorrectingDistributions.h	/^   virtual void    SetObject(TObject *obj) { fObje/
-SetOption	CorrectingDistributions.h	/^   virtual void    SetOption(const char *option) {/
-SlaveBegin	CorrectingDistributions.C	/^void CorrectingDistributions::SlaveBegin(TTree * \//
-SlaveTerminate	CorrectingDistributions.C	/^void CorrectingDistributions::SlaveTerminate(){}$/
-Terminate	CorrectingDistributions.C	/^void CorrectingDistributions::Terminate(){$/
-Version	CorrectingDistributions.h	/^   virtual Int_t   Version() const { return 2; }$/
-_BACKWARD_BACKWARD_WARNING_H	CorrectingDistributions_C_ACLiC_dict dictionary payload	9
-_BACKWARD_BACKWARD_WARNING_H	CorrectingDistributions_C_ACLiC_dict dictionary payload	12
-__ACLIC__	CorrectingDistributions_C_ACLiC_dict dictionary payload	6
-alg_name	CorrectingDistributions.h	47
-cell_met	CorrectingDistributions.h	57
-fChain	CorrectingDistributions.h	27
-fReader	CorrectingDistributions.h	26
-gevHigh	CorrectingDistributions.h	46
-gevLow	CorrectingDistributions.h	45
-inMuRange	CorrectingDistributions.C	/^Bool_t CorrectingDistributions::inMuRange( Float_t/
-isGoodRun	CorrectingDistributions.C	/^Bool_t CorrectingDistributions::isGoodRun(){\/\/{{{$/
-isPassnoAlgL1XE30	CorrectingDistributions.C	/^Bool_t CorrectingDistributions::isPassnoAlgL1XE30(/
-mycanv	CorrectingDistributions.h	50
-nbins	CorrectingDistributions.h	44
-passedL1ZB	CorrectingDistributions.C	/^Bool_t CorrectingDistributions::passedL1ZB(){\/\/{{{/
-xaxisTitle	CorrectingDistributions.h	48
-yaxisTitle	CorrectingDistributions.h	49
-~CorrectingDistributions	CorrectingDistributions.h	/^   virtual ~CorrectingDistributions() { }$/
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+Begin	CorrectingDistributions.C	/^void CorrectingDistributions::Begin(TTree * \/*tree*\/)$/;"	f	class:CorrectingDistributions
+ComputeWeight	CorrectingDistributions.C	/^Double_t CorrectingDistributions::ComputeWeight(TF1* fitFunc)\/\/{{{$/;"	f	class:CorrectingDistributions
+CorrectingDistributions	CorrectingDistributions.h	/^   CorrectingDistributions(TTree * \/*tree*\/ =0) { }$/;"	f	class:CorrectingDistributions
+CorrectingDistributions	CorrectingDistributions.h	/^class CorrectingDistributions : public TSelector {$/;"	c
+CorrectingDistributions_cxx	CorrectingDistributions.C	1;"	d	file:
+CorrectingDistributions_h	CorrectingDistributions.h	8;"	d
+EfficiencyFitMuBin1	CorrectingDistributions.h	/^   TF1*             EfficiencyFitMuBin1 = 0;$/;"	m	class:CorrectingDistributions
+EfficiencyFitMuBin2	CorrectingDistributions.h	/^   TF1*             EfficiencyFitMuBin2 = 0;$/;"	m	class:CorrectingDistributions
+EfficiencyFitMuBin3	CorrectingDistributions.h	/^   TF1*             EfficiencyFitMuBin3 = 0;$/;"	m	class:CorrectingDistributions
+EfficiencyFitMuBin4	CorrectingDistributions.h	/^   TF1*             EfficiencyFitMuBin4 = 0;$/;"	m	class:CorrectingDistributions
+EfficiencyFitMuBin5	CorrectingDistributions.h	/^   TF1*             EfficiencyFitMuBin5 = 0;$/;"	m	class:CorrectingDistributions
+EfficiencyFitMuBin6	CorrectingDistributions.h	/^   TF1*             EfficiencyFitMuBin6 = 0;$/;"	m	class:CorrectingDistributions
+EfficiencyFitMuBin7	CorrectingDistributions.h	/^   TF1*             EfficiencyFitMuBin7 = 0;$/;"	m	class:CorrectingDistributions
+GetEntry	CorrectingDistributions.h	/^   virtual Int_t   GetEntry(Long64_t entry, Int_t getall = 0) { return fChain ? fChain->GetTree()->GetEntry(entry, getall) : 0; }$/;"	f	class:CorrectingDistributions
+GetOutputList	CorrectingDistributions.h	/^   virtual TList  *GetOutputList() const { return fOutput; }$/;"	f	class:CorrectingDistributions
+HLT_noalg_L1XE30_passed	CorrectingDistributions.h	/^   TTreeReaderValue<Bool_t> HLT_noalg_L1XE30_passed = {fReader, "HLT_noalg_L1XE30.passed"};$/;"	m	class:CorrectingDistributions
+HLT_noalg_L1XE30_prescale	CorrectingDistributions.h	/^   TTreeReaderValue<Float_t> HLT_noalg_L1XE30_prescale = {fReader, "HLT_noalg_L1XE30.prescale"};$/;"	m	class:CorrectingDistributions
+HLT_noalg_zb_L1ZB_passed	CorrectingDistributions.h	/^   TTreeReaderValue<Bool_t> HLT_noalg_zb_L1ZB_passed = {fReader, "HLT_noalg_zb_L1ZB.passed"};$/;"	m	class:CorrectingDistributions
+HLT_noalg_zb_L1ZB_prescale	CorrectingDistributions.h	/^   TTreeReaderValue<Float_t> HLT_noalg_zb_L1ZB_prescale = {fReader, "HLT_noalg_zb_L1ZB.prescale"};$/;"	m	class:CorrectingDistributions
+InTimePileup	CorrectingDistributions.h	/^   TTreeReaderValue<Float_t> InTimePileup = {fReader, "InTimePileup"};$/;"	m	class:CorrectingDistributions
+Init	CorrectingDistributions.C	/^void CorrectingDistributions::Init(TTree *tree){fReader.SetTree(tree);}$/;"	f	class:CorrectingDistributions
+L1_met	CorrectingDistributions.h	/^   TTreeReaderValue<Float_t> L1_met = {fReader, "L1.met"};$/;"	m	class:CorrectingDistributions
+MET_Correctedmu0thru10	CorrectingDistributions.h	/^   TH1F*            MET_Correctedmu0thru10 = 0;$/;"	m	class:CorrectingDistributions
+MET_Correctedmu10thru20	CorrectingDistributions.h	/^   TH1F*            MET_Correctedmu10thru20 = 0;$/;"	m	class:CorrectingDistributions
+MET_Correctedmu20thru30	CorrectingDistributions.h	/^   TH1F*            MET_Correctedmu20thru30 = 0;$/;"	m	class:CorrectingDistributions
+MET_Correctedmu30thru40	CorrectingDistributions.h	/^   TH1F*            MET_Correctedmu30thru40 = 0;$/;"	m	class:CorrectingDistributions
+MET_Correctedmu40thru50	CorrectingDistributions.h	/^   TH1F*            MET_Correctedmu40thru50 = 0;$/;"	m	class:CorrectingDistributions
+MET_Correctedmu50thru60	CorrectingDistributions.h	/^   TH1F*            MET_Correctedmu50thru60 = 0;$/;"	m	class:CorrectingDistributions
+MET_Correctedmu60thru70	CorrectingDistributions.h	/^   TH1F*            MET_Correctedmu60thru70 = 0;$/;"	m	class:CorrectingDistributions
+Notify	CorrectingDistributions.C	/^Bool_t CorrectingDistributions::Notify(){return kTRUE;}$/;"	f	class:CorrectingDistributions
+OutOfTimePileup	CorrectingDistributions.h	/^   TTreeReaderValue<Float_t> OutOfTimePileup = {fReader, "OutOfTimePileup"};$/;"	m	class:CorrectingDistributions
+Process	CorrectingDistributions.C	/^Bool_t CorrectingDistributions::Process(Long64_t entry)$/;"	f	class:CorrectingDistributions
+RunNumber	CorrectingDistributions.h	/^   TTreeReaderValue<UInt_t> RunNumber = {fReader, "RunNumber"};$/;"	m	class:CorrectingDistributions
+SetInputList	CorrectingDistributions.h	/^   virtual void    SetInputList(TList *input) { fInput = input; }$/;"	f	class:CorrectingDistributions
+SetObject	CorrectingDistributions.h	/^   virtual void    SetObject(TObject *obj) { fObject = obj; }$/;"	f	class:CorrectingDistributions
+SetOption	CorrectingDistributions.h	/^   virtual void    SetOption(const char *option) { fOption = option; }$/;"	f	class:CorrectingDistributions
+SlaveBegin	CorrectingDistributions.C	/^void CorrectingDistributions::SlaveBegin(TTree * \/*tree*\/)\/\/{{{$/;"	f	class:CorrectingDistributions
+SlaveTerminate	CorrectingDistributions.C	/^void CorrectingDistributions::SlaveTerminate(){}$/;"	f	class:CorrectingDistributions
+Terminate	CorrectingDistributions.C	/^void CorrectingDistributions::Terminate(){$/;"	f	class:CorrectingDistributions
+Version	CorrectingDistributions.h	/^   virtual Int_t   Version() const { return 2; }$/;"	f	class:CorrectingDistributions
+alg_name	CorrectingDistributions.h	/^    TString alg_name = "METCELL";$/;"	m	class:CorrectingDistributions
+binWidth	CorrectingDistributions.h	/^   Float_t binWidth = 5.0;$/;"	m	class:CorrectingDistributions
+cell_met	CorrectingDistributions.h	/^   TTreeReaderValue<Float_t> cell_met = {fReader, "cell.met"};$/;"	m	class:CorrectingDistributions
+efficiencyObjectMu0thru10	CorrectingDistributions.h	/^    TEfficiency* efficiencyObjectMu0thru10 = 0;$/;"	m	class:CorrectingDistributions
+efficiencyObjectMu10thru20	CorrectingDistributions.h	/^    TEfficiency* efficiencyObjectMu10thru20 =0;$/;"	m	class:CorrectingDistributions
+efficiencyObjectMu20thru30	CorrectingDistributions.h	/^    TEfficiency* efficiencyObjectMu20thru30 =0;$/;"	m	class:CorrectingDistributions
+efficiencyObjectMu30thru40	CorrectingDistributions.h	/^    TEfficiency* efficiencyObjectMu30thru40 = 0;$/;"	m	class:CorrectingDistributions
+efficiencyObjectMu40thru50	CorrectingDistributions.h	/^    TEfficiency* efficiencyObjectMu40thru50 = 0;$/;"	m	class:CorrectingDistributions
+efficiencyObjectMu50thru60	CorrectingDistributions.h	/^    TEfficiency* efficiencyObjectMu50thru60 = 0;$/;"	m	class:CorrectingDistributions
+efficiencyObjectMu60thru70	CorrectingDistributions.h	/^    TEfficiency* efficiencyObjectMu60thru70 = 0;$/;"	m	class:CorrectingDistributions
+fChain	CorrectingDistributions.h	/^   TTree          *fChain = 0;   \/\/!pointer to the analyzed TTree or TChain$/;"	m	class:CorrectingDistributions
+fReader	CorrectingDistributions.h	/^   TTreeReader     fReader;  \/\/!the tree reader$/;"	m	class:CorrectingDistributions
+gevHigh	CorrectingDistributions.h	/^    Float_t gevHigh = 100.0;$/;"	m	class:CorrectingDistributions
+gevLow	CorrectingDistributions.h	/^    Float_t gevLow = 0.0;$/;"	m	class:CorrectingDistributions
+inMuRange	CorrectingDistributions.C	/^Bool_t CorrectingDistributions::inMuRange( Float_t a , Float_t b ){ \/\/{{{$/;"	f	class:CorrectingDistributions
+isGoodRun	CorrectingDistributions.C	/^Bool_t CorrectingDistributions::isGoodRun(){\/\/{{{$/;"	f	class:CorrectingDistributions
+isPassnoAlgL1XE30	CorrectingDistributions.C	/^Bool_t CorrectingDistributions::isPassnoAlgL1XE30(){ \/\/ {{{$/;"	f	class:CorrectingDistributions
+nbins	CorrectingDistributions.h	/^    Int_t nbins = (gevHigh-gevLow)\/binWidth;$/;"	m	class:CorrectingDistributions
+passedL1ZB	CorrectingDistributions.C	/^Bool_t CorrectingDistributions::passedL1ZB(){\/\/{{{$/;"	f	class:CorrectingDistributions
+xaxisTitle	CorrectingDistributions.h	/^    TString xaxisTitle = alg_name + " [GeV]";$/;"	m	class:CorrectingDistributions
+yaxisTitle	CorrectingDistributions.h	/^    TString yaxisTitle = "Number of Entries";$/;"	m	class:CorrectingDistributions
+~CorrectingDistributions	CorrectingDistributions.h	/^   virtual ~CorrectingDistributions() { }$/;"	f	class:CorrectingDistributions

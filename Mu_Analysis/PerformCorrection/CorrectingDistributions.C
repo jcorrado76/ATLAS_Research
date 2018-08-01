@@ -17,7 +17,6 @@ void CorrectingDistributions::Begin(TTree * /*tree*/)
     efficiencyObjectMu60thru70 = (TEfficiency*)EfficiencyObjectFile->Get("metmu60thru70Efficiency");
     std::cout << "Name of first efficiency object: " << efficiencyObjectMu0thru10->GetName() << std::endl;
     std::cout << "Name of last efficiency object: " << efficiencyObjectMu60thru70->GetName() << std::endl;
-    EfficiencyObjectFile->Close();
 
 	// GET FIT FUNCTIONS ATTACHED TO THE EFFICIENCY OBJECTS
 	 EfficiencyFitMuBin1 = (TF1*)(efficiencyObjectMu0thru10->GetListOfFunctions())->At(0);
@@ -27,8 +26,10 @@ void CorrectingDistributions::Begin(TTree * /*tree*/)
 	 EfficiencyFitMuBin5 = (TF1*)(efficiencyObjectMu40thru50->GetListOfFunctions())->At(0);
 	 EfficiencyFitMuBin6 = (TF1*)(efficiencyObjectMu50thru60->GetListOfFunctions())->At(0);
 	 EfficiencyFitMuBin7 = (TF1*)(efficiencyObjectMu60thru70->GetListOfFunctions())->At(0);
-    std::cout << "Formula for first fit function" << EfficiencyFitMuBin1->GetFormula->Print()<< std::endl;
-    std::cout << "Name of last efficiency object: " << EfficiencyFitMuBin2->GetFormula->Print()<< std::endl;
+		
+    EfficiencyObjectFile->Close();
+	 EfficiencyFitMuBin1->GetFormula()->Print();
+    EfficiencyFitMuBin2->GetFormula()->Print();
 
 
 	// INITIALIZE THE NEW CORRECTED DISTRIBUTIONS
@@ -41,10 +42,10 @@ void CorrectingDistributions::Begin(TTree * /*tree*/)
     MET_Correctedmu60thru70 = new TH1F("correctedmetmu60thru70","Corrected Data for actint between 60 and 70", nbins , gevLow , gevHigh );
 }
 
-void CorrectingDistributions::SlaveBegin(TTree * /*tree*/)
+void CorrectingDistributions::SlaveBegin(TTree * /*tree*/)//{{{
 {
    TString option = GetOption();
-}
+}//}}}
 
 Bool_t CorrectingDistributions::Process(Long64_t entry)
 {
@@ -124,6 +125,7 @@ void CorrectingDistributions::Terminate(){
 	correctedLegend->AddEntry(MET_Correctedmu60thru70);
 	correctedCanvas->Draw("SAME");
 
+	// GET ZEROBIAS DISTRIBUTIONS FROM FILE 
     TFile* zb_MET_File = TFile::Open("../Root_Files/ZB_MET_Distributions.root");
     TH1F* zbMETMuBin0thru10 = (TH1F*)zb_MET_File->Get("metmu0thru10");
     TH1F* zbMETMuBin10thru20 = (TH1F*)zb_MET_File->Get("metmu10thru20");
@@ -135,6 +137,7 @@ void CorrectingDistributions::Terminate(){
 	std::cout << "Name of the first zb cell met distribution object: " << zbMETMuBin0thru10->GetName() << std::endl;
 	std::cout << "Name of the last zb Cell met distribution object: " << zbMETMuBin10thru20->GetName() << std::endl;
 
+	// PLOT ZERO BIAS DISTRIBUTIONS
 	TCanvas* zb_MET_Canvas = new TCanvas("zbCanvas","Canvas with zerobias data");
     zbMETMuBin0thru10->SetLineColor(2);
     zbMETMuBin10thru20->SetLineColor(3);
@@ -150,20 +153,10 @@ void CorrectingDistributions::Terminate(){
     zbMETMuBin40thru50->Draw("SAME");
     zbMETMuBin50thru60->Draw("SAME");
     zbMETMuBin60thru70->Draw("SAME");
+	zb_MET_Canvas->Draw();
 
-
-
-
-
-
-    MET_Correctedmu0thru10->SetLineColor(2);
-    MET_Correctedmu10thru20->SetLineColor(2);
-    MET_Correctedmu20thru30->SetLineColor(2);
-    MET_Correctedmu30thru40->SetLineColor(2);
-    MET_Correctedmu40thru50->SetLineColor(2);
-    MET_Correctedmu50thru60->SetLineColor(2);
-    MET_Correctedmu60thru70->SetLineColor(2);
-
+    zb_MET_File->Close();
+/*
     std::cout << "Starting to draw canvases" << std::endl;
     TCanvas* canvMuBin1 = new TCanvas("c1","Canvas for Mu Bin 0 to 10");
     zbMETMuBin0thru10->Draw();
@@ -223,8 +216,7 @@ void CorrectingDistributions::Terminate(){
     legend7->Draw("SAME");
 
 
-    zb_MET_File->Close();
-    
+*/   
     /*
     mycanv->SetTitle("MET Slices in Mu");
     gPad->SetLogy();
