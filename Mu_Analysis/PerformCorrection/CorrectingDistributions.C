@@ -5,6 +5,7 @@ void CorrectingDistributions::Begin(TTree * /*tree*/)
 {
    TString option = GetOption();
 
+    // GET EFFICIENCY OBJECTS FROM FILE 
     TFile* EfficiencyObjectFile = TFile::Open("../Root_Files/EfficiencyObjects.root");
     std::cout << "Getting fits from file" << std::endl;
     efficiencyObjectMu0thru10 = (TEfficiency*)EfficiencyObjectFile->Get("metmu0thru10Efficiency");
@@ -18,16 +19,17 @@ void CorrectingDistributions::Begin(TTree * /*tree*/)
     std::cout << "Name of last efficiency object: " << efficiencyObjectMu60thru70->GetName() << std::endl;
     EfficiencyObjectFile->Close();
 
-     EfficiencyFitMuBin1 = (TF1*)(efficiencyObjectMu0thru10->GetListOfFunctions())->At(0);
-     EfficiencyFitMuBin2 = (TF1*)(efficiencyObjectMu10thru20->GetListOfFunctions())->At(0);
-     EfficiencyFitMuBin3 = (TF1*)(efficiencyObjectMu20thru30->GetListOfFunctions())->At(0);
-     EfficiencyFitMuBin4 = (TF1*)(efficiencyObjectMu30thru40->GetListOfFunctions())->At(0);
-     EfficiencyFitMuBin5 = (TF1*)(efficiencyObjectMu40thru50->GetListOfFunctions())->At(0);
-     EfficiencyFitMuBin6 = (TF1*)(efficiencyObjectMu50thru60->GetListOfFunctions())->At(0);
-     EfficiencyFitMuBin7 = (TF1*)(efficiencyObjectMu60thru70->GetListOfFunctions())->At(0);
+	// GET FIT FUNCTIONS ATTACHED TO THE EFFICIENCY OBJECTS
+	 EfficiencyFitMuBin1 = (TF1*)(efficiencyObjectMu0thru10->GetListOfFunctions())->At(0);
+	 EfficiencyFitMuBin2 = (TF1*)(efficiencyObjectMu10thru20->GetListOfFunctions())->At(0);
+	 EfficiencyFitMuBin3 = (TF1*)(efficiencyObjectMu20thru30->GetListOfFunctions())->At(0);
+	 EfficiencyFitMuBin4 = (TF1*)(efficiencyObjectMu30thru40->GetListOfFunctions())->At(0);
+	 EfficiencyFitMuBin5 = (TF1*)(efficiencyObjectMu40thru50->GetListOfFunctions())->At(0);
+	 EfficiencyFitMuBin6 = (TF1*)(efficiencyObjectMu50thru60->GetListOfFunctions())->At(0);
+	 EfficiencyFitMuBin7 = (TF1*)(efficiencyObjectMu60thru70->GetListOfFunctions())->At(0);
+    std::cout << "Formula for first fit function" << EfficiencyFitMuBin1->GetFormula->Print()<< std::endl;
+    std::cout << "Name of last efficiency object: " << EfficiencyFitMuBin2->GetFormula->Print()<< std::endl;
 
-    std::cout << "Successfully got fit objects from file" << std::endl;
-    std::cout << "Name of first fit: " << EfficiencyFitMuBin1->GetName() << std::endl;
     MET_Correctedmu0thru10 = new TH1F("correctedmetmu0thru10","Corrected Data for actint between 0 and 10", nbins , gevLow , gevHigh );
     MET_Correctedmu10thru20 = new TH1F("correctedmetmu10thru20","Corrected Data for actint between 10 and 20", nbins , gevLow , gevHigh );
     MET_Correctedmu20thru30 = new TH1F("correctedmetmu20thru30","Corrected Data for actint between 20 and 30", nbins , gevLow , gevHigh );
