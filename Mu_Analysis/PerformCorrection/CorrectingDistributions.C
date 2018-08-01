@@ -30,6 +30,8 @@ void CorrectingDistributions::Begin(TTree * /*tree*/)
     std::cout << "Formula for first fit function" << EfficiencyFitMuBin1->GetFormula->Print()<< std::endl;
     std::cout << "Name of last efficiency object: " << EfficiencyFitMuBin2->GetFormula->Print()<< std::endl;
 
+
+	// INITIALIZE THE NEW CORRECTED DISTRIBUTIONS
     MET_Correctedmu0thru10 = new TH1F("correctedmetmu0thru10","Corrected Data for actint between 0 and 10", nbins , gevLow , gevHigh );
     MET_Correctedmu10thru20 = new TH1F("correctedmetmu10thru20","Corrected Data for actint between 10 and 20", nbins , gevLow , gevHigh );
     MET_Correctedmu20thru30 = new TH1F("correctedmetmu20thru30","Corrected Data for actint between 20 and 30", nbins , gevLow , gevHigh );
@@ -51,6 +53,7 @@ Bool_t CorrectingDistributions::Process(Long64_t entry)
    // just make sure this is the correct flag L1XE30
    // still need to compute new error and pass it to this fill function somehow 
 
+   // if the entry is passnoalg L1XE30, and it one of the good runs
    if ( isPassnoAlgL1XE30() && isGoodRun() ){
        if ( inMuRange( 0.0 , 10.0) ){
            MET_Correctedmu0thru10->Fill(*cell_met, ComputeWeight(EfficiencyFitMuBin1));
