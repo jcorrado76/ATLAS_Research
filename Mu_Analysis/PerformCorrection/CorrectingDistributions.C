@@ -7,20 +7,13 @@ void CorrectingDistributions::Begin(TTree * /*tree*/)
     TFile* EfficiencyObjectFile = TFile::Open("../Root_Files/EfficiencyObjects.root");
     std::cout << "Getting fits from file" << std::endl;
 
-
-    /* you have to pull the tefficiency objects from file here, and then get the fit function associated with them, by
-     * using TEfficiency->GetFunctions("Name"). Then you can use the TF1's you got to evaluate the weight at event level
-     * You have to write a function to store the MET distributions for the zerobias data, so you can read them in
-     * during the plotting process. You need to plot the zerobias distributions on the same plot as the corrected
-     * PhysicsMain distributions. We want to compare the corrected PhysicsMain to the zerobias 
-     */
-    TEfficiency* efficiencyObjectMu0thru10 = (TEfficiency*)EfficiencyObjectFile->Get("metmu0thru10Efficiency");
-    TEfficiency* efficiencyObjectMu10thru20 = (TEfficiency*)EfficiencyObjectFile->Get("metmu10thru20Efficiency");
-    TEfficiency* efficiencyObjectMu20thru30 = (TEfficiency*)EfficiencyObjectFile->Get("metmu20thru30Efficiency");
-    TEfficiency* efficiencyObjectMu30thru40 = (TEfficiency*)EfficiencyObjectFile->Get("metmu30thru40Efficiency");
-    TEfficiency* efficiencyObjectMu40thru50 = (TEfficiency*)EfficiencyObjectFile->Get("metmu40thru50Efficiency");
-    TEfficiency* efficiencyObjectMu50thru60 = (TEfficiency*)EfficiencyObjectFile->Get("metmu50thru60Efficiency");
-    TEfficiency* efficiencyObjectMu60thru70 = (TEfficiency*)EfficiencyObjectFile->Get("metmu60thru70Efficiency");
+    efficiencyObjectMu0thru10 = (TEfficiency*)EfficiencyObjectFile->Get("metmu0thru10Efficiency");
+    efficiencyObjectMu10thru20 = (TEfficiency*)EfficiencyObjectFile->Get("metmu10thru20Efficiency");
+    efficiencyObjectMu20thru30 = (TEfficiency*)EfficiencyObjectFile->Get("metmu20thru30Efficiency");
+    efficiencyObjectMu30thru40 = (TEfficiency*)EfficiencyObjectFile->Get("metmu30thru40Efficiency");
+    efficiencyObjectMu40thru50 = (TEfficiency*)EfficiencyObjectFile->Get("metmu40thru50Efficiency");
+    efficiencyObjectMu50thru60 = (TEfficiency*)EfficiencyObjectFile->Get("metmu50thru60Efficiency");
+    efficiencyObjectMu60thru70 = (TEfficiency*)EfficiencyObjectFile->Get("metmu60thru70Efficiency");
 
     EfficiencyObjectFile->Close();
 
@@ -90,13 +83,6 @@ Double_t CorrectingDistributions::ComputeWeight(TF1* fitFunc)//{{{
 void CorrectingDistributions::SlaveTerminate(){}
 void CorrectingDistributions::Terminate(){
     // color the histograms so we can see difference 
-    MET_Correctedmu0thru10->SetLineColor(2);
-    MET_Correctedmu10thru20->SetLineColor(2);
-    MET_Correctedmu20thru30->SetLineColor(2);
-    MET_Correctedmu30thru40->SetLineColor(2);
-    MET_Correctedmu40thru50->SetLineColor(2);
-    MET_Correctedmu50thru60->SetLineColor(2);
-    MET_Correctedmu60thru70->SetLineColor(2);
 
     // normalize to 1 
     MET_Correctedmu0thru10->SetNormFactor(1.);
@@ -125,6 +111,33 @@ void CorrectingDistributions::Terminate(){
     zbMETMuBin50thru60->SetLineColor(3);
     zbMETMuBin60thru70->SetLineColor(3);
 
+
+    TCanvas* correctedCanvas = new TCanvas("correctedCanvas","Canvas with corrected data");
+    MET_Correctedmu0thru10->SetLineColor(2);
+    MET_Correctedmu10thru20->SetLineColor(3);
+    MET_Correctedmu20thru30->SetLineColor(4);
+    MET_Correctedmu30thru40->SetLineColor(5);
+    MET_Correctedmu40thru50->SetLineColor(6);
+    MET_Correctedmu50thru60->SetLineColor(7);
+    MET_Correctedmu60thru70->SetLineColor(8);
+    MET_Correctedmu0thru10->Draw();
+    MET_Correctedmu10thru20->Draw("SAME");
+    MET_Correctedmu20thru30->Draw("SAME");
+    MET_Correctedmu30thru40->Draw("SAME");
+    MET_Correctedmu40thru50->Draw("SAME");
+    MET_Correctedmu50thru60->Draw("SAME");
+    MET_Correctedmu60thru70->Draw("SAME");
+
+
+
+
+    MET_Correctedmu0thru10->SetLineColor(2);
+    MET_Correctedmu10thru20->SetLineColor(2);
+    MET_Correctedmu20thru30->SetLineColor(2);
+    MET_Correctedmu30thru40->SetLineColor(2);
+    MET_Correctedmu40thru50->SetLineColor(2);
+    MET_Correctedmu50thru60->SetLineColor(2);
+    MET_Correctedmu60thru70->SetLineColor(2);
 
     std::cout << "Starting to draw canvases" << std::endl;
     TCanvas* canvMuBin1 = new TCanvas("c1","Canvas for Mu Bin 0 to 10");

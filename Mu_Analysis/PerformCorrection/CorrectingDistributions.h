@@ -42,6 +42,14 @@ public :
    TF1*             EfficiencyFitMuBin6 = 0;
    TF1*             EfficiencyFitMuBin7 = 0;
 
+    TEfficiency* efficiencyObjectMu0thru10 = 0;
+    TEfficiency* efficiencyObjectMu10thru20 =0;
+    TEfficiency* efficiencyObjectMu20thru30 =0;
+    TEfficiency* efficiencyObjectMu30thru40 = 0;
+    TEfficiency* efficiencyObjectMu40thru50 = 0;
+    TEfficiency* efficiencyObjectMu50thru60 = 0;
+    TEfficiency* efficiencyObjectMu60thru70 = 0;
+
    Float_t binWidth = 5.0;
     Float_t gevLow = 0.0;
     Float_t gevHigh = 100.0;
