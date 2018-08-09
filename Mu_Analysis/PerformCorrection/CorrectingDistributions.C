@@ -52,6 +52,7 @@ Bool_t CorrectingDistributions::Process(Long64_t entry)
    fReader.SetLocalEntry(entry);
 
    std::cout << "Hello world" << std::endl;
+   std::cout << *InTimePileup << std::endl;
    // just make sure this is the correct flag L1XE30
    // still need to compute new error and pass it to this fill function somehow 
 
@@ -245,6 +246,14 @@ Bool_t CorrectingDistributions::passedL1ZB(){//{{{
     return (*HLT_noalg_zb_L1ZB_passed);
 }//}}}
 Bool_t CorrectingDistributions::inMuRange( Float_t a , Float_t b ){ //{{{
+    try{
+        std::cout << "Trying to de-reference in time pileup" << std::endl;
+        *InTimePileup;
+    }
+    catch (int n){
+        std::cout << "Could not de-reference InTimePileup" << std::endl;
+    }
+
     return ( *InTimePileup > a && *InTimePileup < b );
 } //}}}
 Bool_t CorrectingDistributions::isPassnoAlgL1XE30(){ // {{{
