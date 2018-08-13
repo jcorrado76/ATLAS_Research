@@ -8,13 +8,13 @@ void CorrectingDistributions::Begin(TTree * /*tree*/)
     // GET EFFICIENCY OBJECTS FROM FILE 
     TFile* EfficiencyObjectFile = TFile::Open("../Root_Files/EfficiencyObjects.root");
     std::cout << "Getting fits from file" << std::endl;
-    efficiencyObjectMu0thru10 = (TEfficiency*)EfficiencyObjectFile->Get("metmu0thru10Efficiency");
-    efficiencyObjectMu10thru20 = (TEfficiency*)EfficiencyObjectFile->Get("metmu10thru20Efficiency");
-    efficiencyObjectMu20thru30 = (TEfficiency*)EfficiencyObjectFile->Get("metmu20thru30Efficiency");
-    efficiencyObjectMu30thru40 = (TEfficiency*)EfficiencyObjectFile->Get("metmu30thru40Efficiency");
-    efficiencyObjectMu40thru50 = (TEfficiency*)EfficiencyObjectFile->Get("metmu40thru50Efficiency");
-    efficiencyObjectMu50thru60 = (TEfficiency*)EfficiencyObjectFile->Get("metmu50thru60Efficiency");
-    efficiencyObjectMu60thru70 = (TEfficiency*)EfficiencyObjectFile->Get("metmu60thru70Efficiency");
+    efficiencyObjectMu0thru10 = (TEfficiency*)EfficiencyObjectFile->Get("metmu0Efficiency");
+    efficiencyObjectMu10thru20 = (TEfficiency*)EfficiencyObjectFile->Get("metmu1Efficiency");
+    efficiencyObjectMu20thru30 = (TEfficiency*)EfficiencyObjectFile->Get("metmu2Efficiency");
+    efficiencyObjectMu30thru40 = (TEfficiency*)EfficiencyObjectFile->Get("metmu3Efficiency");
+    efficiencyObjectMu40thru50 = (TEfficiency*)EfficiencyObjectFile->Get("metmu4Efficiency");
+    efficiencyObjectMu50thru60 = (TEfficiency*)EfficiencyObjectFile->Get("metmu5Efficiency");
+    efficiencyObjectMu60thru70 = (TEfficiency*)EfficiencyObjectFile->Get("metmu6Efficiency");
     std::cout << "Name of first efficiency object: " << efficiencyObjectMu0thru10->GetName() << std::endl;
     std::cout << "Name of last efficiency object: " << efficiencyObjectMu60thru70->GetName() << std::endl;
 
@@ -28,6 +28,8 @@ void CorrectingDistributions::Begin(TTree * /*tree*/)
 	 EfficiencyFitMuBin7 = (TF1*)(efficiencyObjectMu60thru70->GetListOfFunctions())->At(0);
 
 	// INITIALIZE THE NEW CORRECTED DISTRIBUTIONS
+
+    EfficiencyObjectFile->Close();
     std::cout << "Initializing histograms to contain the corrected data" << std::endl;
     MET_Correctedmu0thru10 = new TH1F("correctedmetmu0thru10","Corrected Data for actint between 0 and 10", nbins , gevLow , gevHigh );
     MET_Correctedmu10thru20 = new TH1F("correctedmetmu10thru20","Corrected Data for actint between 10 and 20", nbins , gevLow , gevHigh );
@@ -36,8 +38,6 @@ void CorrectingDistributions::Begin(TTree * /*tree*/)
     MET_Correctedmu40thru50 = new TH1F("correctedmetmu40thru50","Corrected Data for actint between 40 to 50", nbins , gevLow , gevHigh );
     MET_Correctedmu50thru60 = new TH1F("correctedmetmu50thru60","Corrected Data for actint between 50 and 60", nbins , gevLow , gevHigh );
     MET_Correctedmu60thru70 = new TH1F("correctedmetmu60thru70","Corrected Data for actint between 60 and 70", nbins , gevLow , gevHigh );
-
-    EfficiencyObjectFile->Close();
 
     std::cout << "Closed the efficiency object file" << std::endl;
 }
@@ -51,12 +51,11 @@ Bool_t CorrectingDistributions::Process(Long64_t entry)
 {
    fReader.SetLocalEntry(entry);
 
-   std::cout << "Hello world" << std::endl;
-   std::cout << *InTimePileup << std::endl;
    // just make sure this is the correct flag L1XE30
    // still need to compute new error and pass it to this fill function somehow 
 
    // if the entry is passnoalg L1XE30, and it one of the good runs
+   /*
    if ( isPassnoAlgL1XE30() && isGoodRun() ){
        std::cout << "Entered first layer of logic" << std::endl;
        if ( inMuRange( 0.0 , 10.0) ){
@@ -84,6 +83,7 @@ Bool_t CorrectingDistributions::Process(Long64_t entry)
        }
    }
 
+   */
    return kTRUE;
 }
 Double_t CorrectingDistributions::ComputeWeight(TF1* fitFunc)//{{{
