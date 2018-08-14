@@ -92,15 +92,15 @@ void PlotMETDistsVersMu::Terminate() // Plotting{{{
     MET_Datamu40thru50->Draw("SAME");
     MET_Datamu50thru60->Draw("SAME");
     MET_Datamu60thru70->Draw("SAME");
-    TLegend* legend = new TLegend();
-    legend->AddEntry(MET_Datamu0thru10);
-    legend->AddEntry(MET_Datamu10thru20);
-    legend->AddEntry(MET_Datamu20thru30);
-    legend->AddEntry(MET_Datamu30thru40);
-    legend->AddEntry(MET_Datamu40thru50);
-    legend->AddEntry(MET_Datamu50thru60);
-    legend->AddEntry(MET_Datamu60thru70);
-    legend->Draw("SAME");
+    TLegend* met_dist_legend = new TLegend();
+    met_dist_legend->AddEntry(MET_Datamu0thru10);
+    met_dist_legend->AddEntry(MET_Datamu10thru20);
+    met_dist_legend->AddEntry(MET_Datamu20thru30);
+    met_dist_legend->AddEntry(MET_Datamu30thru40);
+    met_dist_legend->AddEntry(MET_Datamu40thru50);
+    met_dist_legend->AddEntry(MET_Datamu50thru60);
+    met_dist_legend->AddEntry(MET_Datamu60thru70);
+    met_dist_legend->Draw("SAME");
     gPad->SetLogy();
     gStyle->SetOptStat(0);//}}}
     // FORMATTING EFFICIENCY CURVES{{{
@@ -128,19 +128,19 @@ void PlotMETDistsVersMu::Terminate() // Plotting{{{
     MET_Algmu50thru60Efficiency->Draw("SAME");
     MET_Algmu60thru70Efficiency->Draw("SAME");
     MET_Algmu0thru10Efficiency->Draw("SAME");
-    TLegend* legend = new TLegend();
-    legend->AddEntry(MET_Algmu0thru10Efficiency);
-    legend->AddEntry(MET_Algmu10thru20Efficiency);
-    legend->AddEntry(MET_Algmu20thru30Efficiency);
-    legend->AddEntry(MET_Algmu30thru40Efficiency);
-    legend->AddEntry(MET_Algmu40thru50Efficiency);
-    legend->AddEntry(MET_Algmu50thru60Efficiency);
-    legend->AddEntry(MET_Algmu60thru70Efficiency);
-    legend->Draw("SAME");
+    TLegend* efficiency_legend = new TLegend();
+    efficiency_legend->AddEntry(MET_Algmu0thru10Efficiency);
+    efficiency_legend->AddEntry(MET_Algmu10thru20Efficiency);
+    efficiency_legend->AddEntry(MET_Algmu20thru30Efficiency);
+    efficiency_legend->AddEntry(MET_Algmu30thru40Efficiency);
+    efficiency_legend->AddEntry(MET_Algmu40thru50Efficiency);
+    efficiency_legend->AddEntry(MET_Algmu50thru60Efficiency);
+    efficiency_legend->AddEntry(MET_Algmu60thru70Efficiency);
+    efficiency_legend->Draw("SAME");
     gStyle->SetOptStat(0);//}}}
     // WRITE TO FILE {{{
     TFile* Mu_Analysis_File = TFile::Open("../Root_Files/mu_analysis.root", "RECREATE");
-    TDirectory* zb_met_distributions = MET_Dist_File->mkdir("zb_met");
+    TDirectory* zb_met_distributions = Mu_Analysis_File->mkdir("zb_met");
     zb_met_distributions->cd();
     MET_Datamu0thru10->Write();
     MET_Datamu10thru20->Write();
@@ -150,7 +150,7 @@ void PlotMETDistsVersMu::Terminate() // Plotting{{{
     MET_Datamu50thru60->Write();
     MET_Datamu60thru70->Write();
 
-    TDirectory* efficiency_curves = MET_Dist_File->mkdir("efficiency_curves");
+    TDirectory* efficiency_curves = Mu_Analysis_File->mkdir("efficiency_curves");
     efficiency_curves->cd();
     MET_Algmu0thru10Efficiency->Write();
     MET_Algmu10thru20Efficiency->Write();

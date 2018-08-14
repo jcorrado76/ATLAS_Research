@@ -20,8 +20,8 @@
 #include <TH1.h>
 #include <TLegend.h>
 #include <TString.h>
-#include <vector>
-#include <THStack.h>
+#include <TEfficiency.h>
+#include <TF1.h>
 
 class PlotMETDistsVersMu : public TSelector {
 public :
@@ -58,7 +58,7 @@ public :
    TString l1_alg_name = "L1.met";
     // set titles and axis labels. 
     TString efficiency_title = zb_alg_name + " Efficiency";
-    TString efficiency_xaxis = zb_zb_alg_name + " [GeV]";
+    TString efficiency_xaxis = zb_alg_name + " [GeV]";
     TString efficiency_yaxis = "efficiency";
 
     TString met_dist_xaxis = zb_alg_name + " [GeV]";
