@@ -6,36 +6,32 @@ void CorrectingDistributions::Begin(TTree * /*tree*/)
     TString option = GetOption();
 
     // GET EFFICIENCY OBJECTS FROM FILE 
-    EfficiencyObjectFile = TFile::Open("../Root_Files/EfficiencyObjects.root");
-    zb_MET_File = TFile::Open("../Root_Files/ZB_MET_Distributions.root");
+    mu_analysis_file = TFile::Open("../Root_Files/mu_analysis.root");
+    TDirectory* efficiency_dir = mu_analysis_file->GetDirectory("efficiency_curves");
+    efficiency_dir->GetObject("metmu0thru10Efficiency",efficiencyObjectMu0thru10);
+    efficiency_dir->GetObject("metmu10thru10Efficiency",efficiencyObjectMu10thru20);
+    efficiency_dir->GetObject("metmu20thru20Efficiency",efficiencyObjectMu20thru30);
+    efficiency_dir->GetObject("metmu30thru40Efficiency",efficiencyObjectMu30thru40);
+    efficiency_dir->GetObject("metmu40thru50Efficiency",efficiencyObjectMu40thru50);
+    efficiency_dir->GetObject("metmu50thru60Efficiency",efficiencyObjectMu50thru60);
+    efficiency_dir->GetObject("metmu60thru70Efficiency",efficiencyObjectMu60thru70);
 
-    std::cout << "Getting fits from file" << std::endl;
-    efficiencyObjectMu0thru10 = (TEfficiency*)EfficiencyObjectFile->Get("metmu0Efficiency");
-    efficiencyObjectMu10thru20 = (TEfficiency*)EfficiencyObjectFile->Get("metmu1Efficiency");
-    efficiencyObjectMu20thru30 = (TEfficiency*)EfficiencyObjectFile->Get("metmu2Efficiency");
-    efficiencyObjectMu30thru40 = (TEfficiency*)EfficiencyObjectFile->Get("metmu3Efficiency");
-    efficiencyObjectMu40thru50 = (TEfficiency*)EfficiencyObjectFile->Get("metmu4Efficiency");
-    efficiencyObjectMu50thru60 = (TEfficiency*)EfficiencyObjectFile->Get("metmu5Efficiency");
-    efficiencyObjectMu60thru70 = (TEfficiency*)EfficiencyObjectFile->Get("metmu6Efficiency");
+    EfficiencyFitMuBin1 = (TF1*)((efficiencyObjectMu0thru10->GetListOfFunctions())->At(0));
+    EfficiencyFitMuBin2 = (TF1*)((efficiencyObjectMu10thru20->GetListOfFunctions())->At(0));
+    EfficiencyFitMuBin3 = (TF1*)((efficiencyObjectMu20thru30->GetListOfFunctions())->At(0));
+    EfficiencyFitMuBin4 = (TF1*)((efficiencyObjectMu30thru40->GetListOfFunctions())->At(0));
+    EfficiencyFitMuBin5 = (TF1*)((efficiencyObjectMu40thru50->GetListOfFunctions())->At(0));
+    EfficiencyFitMuBin6 = (TF1*)((efficiencyObjectMu50thru60->GetListOfFunctions())->At(0));
+    EfficiencyFitMuBin7 = (TF1*)((efficiencyObjectMu60thru70->GetListOfFunctions())->At(0));
 
-    EfficiencyFitMuBin1 = (TF1*)(efficiencyObjectMu0thru10->GetListOfFunctions())->At(0);
-    EfficiencyFitMuBin2 = (TF1*)(efficiencyObjectMu10thru20->GetListOfFunctions())->At(0);
-    EfficiencyFitMuBin3 = (TF1*)(efficiencyObjectMu20thru30->GetListOfFunctions())->At(0);
-    EfficiencyFitMuBin4 = (TF1*)(efficiencyObjectMu30thru40->GetListOfFunctions())->At(0);
-    EfficiencyFitMuBin5 = (TF1*)(efficiencyObjectMu40thru50->GetListOfFunctions())->At(0);
-    EfficiencyFitMuBin6 = (TF1*)(efficiencyObjectMu50thru60->GetListOfFunctions())->At(0);
-    EfficiencyFitMuBin7 = (TF1*)(efficiencyObjectMu60thru70->GetListOfFunctions())->At(0);
-
-    zbMETMuBin0thru10 = (TH1F*)zb_MET_File->Get("metmu0thru10");
-    zbMETMuBin10thru20 = (TH1F*)zb_MET_File->Get("metmu10thru20");
-    zbMETMuBin20thru30 = (TH1F*)zb_MET_File->Get("metmu20thru30");
-    zbMETMuBin30thru40 = (TH1F*)zb_MET_File->Get("metmu30thru40");
-    zbMETMuBin40thru50 = (TH1F*)zb_MET_File->Get("metmu40thru50");
-    zbMETMuBin50thru60 = (TH1F*)zb_MET_File->Get("metmu50thru60");
-    zbMETMuBin60thru70 = (TH1F*)zb_MET_File->Get("metmu60thru70");
-
-    std::cout << zbMETMuBin40thru50->GetName() << std::endl;
-    zbMETMuBin40thru50->Draw();
+    TDirectory* met_dir = mu_analysis_file->GetDirectory("zb_met");
+    met_dir->GetObject("metmu0thru10",zbMETMuBin0thru10);
+    met_dir->GetObject("metmu10thru20",zbMETMuBin10thru20);
+    met_dir->GetObject("metmu20thru30",zbMETMuBin20thru30);
+    met_dir->GetObject("metmu30thru40",zbMETMuBin30thru40);
+    met_dir->GetObject("metmu40thru50",zbMETMuBin40thru50);
+    met_dir->GetObject("metmu50thru60",zbMETMuBin50thru60);
+    met_dir->GetObject("metmu60thru70",zbMETMuBin60thru70);
 
     MET_Correctedmu0thru10 = new TH1F("correctedmetmu0thru10","Corrected Data for actint between 0 and 10", nbins , gevLow , gevHigh );
     MET_Correctedmu10thru20 = new TH1F("correctedmetmu10thru20","Corrected Data for actint between 10 and 20", nbins , gevLow , gevHigh );
@@ -47,10 +43,6 @@ void CorrectingDistributions::Begin(TTree * /*tree*/)
 
 }
 
-void CorrectingDistributions::SlaveBegin(TTree * /*tree*/)//{{{
-{
-   TString option = GetOption();
-}//}}}
 
 Bool_t CorrectingDistributions::Process(Long64_t entry)
 {
@@ -112,18 +104,16 @@ void CorrectingDistributions::Terminate(){
     zbMETMuBin60thru70->SetNormFactor(1.);
 
 
-    //TCanvas* mycanv = new TCanvas("c1","Canvas with corrected and zb");
-    //TLegend* mylegend = new TLegend();
-    //MET_Correctedmu40thru50->SetLineColor(2);
-    //MET_Correctedmu40thru50->Draw();
-    //zbMETMuBin40thru50->SetLineColor(3);
-    //zbMETMuBin40thru50->Draw("SAME");
-    //mylegend->AddEntry(MET_Correctedmu40thru50);
-    //mylegend->AddEntry(zbMETMuBin40thru50);
-    //mylegend->Draw("SAME");
+    TCanvas* mycanv = new TCanvas("c1","Canvas with corrected and zb");
+    TLegend* mylegend = new TLegend();
+    MET_Correctedmu40thru50->SetLineColor(2);
+    MET_Correctedmu40thru50->Draw();
+    zbMETMuBin40thru50->SetLineColor(3);
+    zbMETMuBin40thru50->Draw("SAME");
+    mylegend->AddEntry(MET_Correctedmu40thru50);
+    mylegend->AddEntry(zbMETMuBin40thru50);
+    mylegend->Draw("SAME");
 
-    std::cout << MET_Correctedmu40thru50->GetEntries() << std::endl;
-    std::cout << zbMETMuBin40thru50->GetEntries() << std::endl;
 
 
     /*
@@ -181,11 +171,23 @@ void CorrectingDistributions::Terminate(){
     zbDistLegend->Draw("SAME");
     zb_MET_Canvas->SetLogy();
     */
-    EfficiencyObjectFile->Close();
-    zb_MET_File->Close();
 
+    TDirectory* corrected_met_distributions = mu_analysis_file->mkdir("corrected_met");
+    corrected_met_distributions->cd();
+    MET_Correctedmu0thru10->Write();
+    MET_Correctedmu10thru20->Write();
+    MET_Correctedmu20thru30->Write();
+    MET_Correctedmu30thru40->Write();
+    MET_Correctedmu40thru50->Write();
+    MET_Correctedmu50thru60->Write();
+    MET_Correctedmu60thru70->Write();
+    mu_analysis_file->Close();
 }
 void CorrectingDistributions::Init(TTree *tree){fReader.SetTree(tree);}
+void CorrectingDistributions::SlaveBegin(TTree * /*tree*/)//{{{
+{
+   TString option = GetOption();
+}//}}}
 Bool_t CorrectingDistributions::Notify(){return kTRUE;}
 Bool_t CorrectingDistributions::isGoodRun(){//{{{
     return (*RunNumber != 330203 && *RunNumber != 331975 && *RunNumber != 334487);

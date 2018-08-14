@@ -22,12 +22,12 @@
 #include <TLegend.h>
 #include <TPad.h>
 #include <TEfficiency.h>
+#include <TDirectory.h>
 class CorrectingDistributions : public TSelector {
 public :
    TTreeReader     fReader;  //!the tree reader
    TTree          *fChain = 0;   //!pointer to the analyzed TTree or TChain
-    TFile* EfficiencyObjectFile = 0;
-    TFile* zb_MET_File = 0;
+    TFile* mu_analysis_file = 0;
    TH1F*            MET_Correctedmu0thru10 = 0;
    TH1F*            MET_Correctedmu10thru20 = 0;
    TH1F*            MET_Correctedmu20thru30 = 0;
