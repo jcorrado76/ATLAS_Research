@@ -34,6 +34,14 @@ public :
    TH1F*            MET_Correctedmu50thru60 = 0;
    TH1F*            MET_Correctedmu60thru70 = 0;
 
+    TH1F* zbMETMuBin0thru10 = 0;
+    TH1F* zbMETMuBin10thru20 = 0;
+    TH1F* zbMETMuBin20thru30 = 0;
+    TH1F* zbMETMuBin30thru40 = 0;
+    TH1F* zbMETMuBin40thru50 = 0;
+    TH1F* zbMETMuBin50thru60 = 0;
+    TH1F* zbMETMuBin60thru70 = 0;
+
    TF1*             EfficiencyFitMuBin1 = 0;
    TF1*             EfficiencyFitMuBin2 = 0;
    TF1*             EfficiencyFitMuBin3 = 0;
