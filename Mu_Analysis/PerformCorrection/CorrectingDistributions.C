@@ -3,10 +3,12 @@
 
 void CorrectingDistributions::Begin(TTree * /*tree*/)
 {
-   TString option = GetOption();
+    TString option = GetOption();
 
     // GET EFFICIENCY OBJECTS FROM FILE 
-    TFile* EfficiencyObjectFile = TFile::Open("../Root_Files/EfficiencyObjects.root");
+    EfficiencyObjectFile = TFile::Open("../Root_Files/EfficiencyObjects.root");
+    zb_MET_File = TFile::Open("../Root_Files/ZB_MET_Distributions.root");
+
     std::cout << "Getting fits from file" << std::endl;
     efficiencyObjectMu0thru10 = (TEfficiency*)EfficiencyObjectFile->Get("metmu0Efficiency");
     efficiencyObjectMu10thru20 = (TEfficiency*)EfficiencyObjectFile->Get("metmu1Efficiency");
@@ -15,17 +17,15 @@ void CorrectingDistributions::Begin(TTree * /*tree*/)
     efficiencyObjectMu40thru50 = (TEfficiency*)EfficiencyObjectFile->Get("metmu4Efficiency");
     efficiencyObjectMu50thru60 = (TEfficiency*)EfficiencyObjectFile->Get("metmu5Efficiency");
     efficiencyObjectMu60thru70 = (TEfficiency*)EfficiencyObjectFile->Get("metmu6Efficiency");
-    EfficiencyObjectFile->Close();
 
-	 EfficiencyFitMuBin1 = (TF1*)(efficiencyObjectMu0thru10->GetListOfFunctions())->At(0);
-	 EfficiencyFitMuBin2 = (TF1*)(efficiencyObjectMu10thru20->GetListOfFunctions())->At(0);
-	 EfficiencyFitMuBin3 = (TF1*)(efficiencyObjectMu20thru30->GetListOfFunctions())->At(0);
-	 EfficiencyFitMuBin4 = (TF1*)(efficiencyObjectMu30thru40->GetListOfFunctions())->At(0);
-	 EfficiencyFitMuBin5 = (TF1*)(efficiencyObjectMu40thru50->GetListOfFunctions())->At(0);
-	 EfficiencyFitMuBin6 = (TF1*)(efficiencyObjectMu50thru60->GetListOfFunctions())->At(0);
-	 EfficiencyFitMuBin7 = (TF1*)(efficiencyObjectMu60thru70->GetListOfFunctions())->At(0);
+    EfficiencyFitMuBin1 = (TF1*)(efficiencyObjectMu0thru10->GetListOfFunctions())->At(0);
+    EfficiencyFitMuBin2 = (TF1*)(efficiencyObjectMu10thru20->GetListOfFunctions())->At(0);
+    EfficiencyFitMuBin3 = (TF1*)(efficiencyObjectMu20thru30->GetListOfFunctions())->At(0);
+    EfficiencyFitMuBin4 = (TF1*)(efficiencyObjectMu30thru40->GetListOfFunctions())->At(0);
+    EfficiencyFitMuBin5 = (TF1*)(efficiencyObjectMu40thru50->GetListOfFunctions())->At(0);
+    EfficiencyFitMuBin6 = (TF1*)(efficiencyObjectMu50thru60->GetListOfFunctions())->At(0);
+    EfficiencyFitMuBin7 = (TF1*)(efficiencyObjectMu60thru70->GetListOfFunctions())->At(0);
 
-    TFile* zb_MET_File = TFile::Open("../Root_Files/ZB_MET_Distributions.root");
     zbMETMuBin0thru10 = (TH1F*)zb_MET_File->Get("metmu0thru10");
     zbMETMuBin10thru20 = (TH1F*)zb_MET_File->Get("metmu10thru20");
     zbMETMuBin20thru30 = (TH1F*)zb_MET_File->Get("metmu20thru30");
@@ -33,7 +33,6 @@ void CorrectingDistributions::Begin(TTree * /*tree*/)
     zbMETMuBin40thru50 = (TH1F*)zb_MET_File->Get("metmu40thru50");
     zbMETMuBin50thru60 = (TH1F*)zb_MET_File->Get("metmu50thru60");
     zbMETMuBin60thru70 = (TH1F*)zb_MET_File->Get("metmu60thru70");
-    zb_MET_File->Close();
 
     MET_Correctedmu0thru10 = new TH1F("correctedmetmu0thru10","Corrected Data for actint between 0 and 10", nbins , gevLow , gevHigh );
     MET_Correctedmu10thru20 = new TH1F("correctedmetmu10thru20","Corrected Data for actint between 10 and 20", nbins , gevLow , gevHigh );
@@ -43,7 +42,6 @@ void CorrectingDistributions::Begin(TTree * /*tree*/)
     MET_Correctedmu50thru60 = new TH1F("correctedmetmu50thru60","Corrected Data for actint between 50 and 60", nbins , gevLow , gevHigh );
     MET_Correctedmu60thru70 = new TH1F("correctedmetmu60thru70","Corrected Data for actint between 60 and 70", nbins , gevLow , gevHigh );
 
-    std::cout << "Closed the efficiency object file" << std::endl;
 }
 
 void CorrectingDistributions::SlaveBegin(TTree * /*tree*/)//{{{
@@ -102,8 +100,27 @@ void CorrectingDistributions::Terminate(){
     MET_Correctedmu40thru50->SetNormFactor(1.);
     MET_Correctedmu50thru60->SetNormFactor(1.);
     MET_Correctedmu60thru70->SetNormFactor(1.);
+    zbMETMuBin0thru10->SetNormFactor(1.);
+    zbMETMuBin10thru20->SetNormFactor(1.);
+    zbMETMuBin20thru30->SetNormFactor(1.);
+    zbMETMuBin30thru40->SetNormFactor(1.);
+    zbMETMuBin40thru50->SetNormFactor(1.);
+    zbMETMuBin50thru60->SetNormFactor(1.);
+    zbMETMuBin60thru70->SetNormFactor(1.);
+
+    TCanvas* mycanv = new TCanvas("c1","Canvas with corrected and zb");
+    TLegend* mylegend = new TLegend();
+    MET_Correctedmu40thru50->SetLineColor(2);
+    MET_Correctedmu40thru50->Draw();
+    zbMETMuBin40thru50->SetLineColor(3);
+    zbMETMuBin40thru50->Draw("SAME");
+    mylegend->AddEntry(MET_Correctedmu40thru50);
+    mylegend->AddEntry(zbMETMuBin40thru50);
+    mylegend->Draw("SAME");
 
 
+
+    /*
     TCanvas* correctedCanvas = new TCanvas("correctedCanvas","Canvas with corrected data");
     MET_Correctedmu0thru10->SetLineColor(2);
     MET_Correctedmu10thru20->SetLineColor(3);
@@ -129,6 +146,7 @@ void CorrectingDistributions::Terminate(){
     MET_Correctedmu50thru60->Draw("SAME");
     MET_Correctedmu60thru70->Draw("SAME");
 	correctedLegend->Draw("SAME");
+    correctedCanvas->SetLogy();
 
 	// PLOT ZERO BIAS DISTRIBUTIONS
 	TCanvas* zb_MET_Canvas = new TCanvas("zbCanvas","Canvas with zerobias data");
@@ -139,7 +157,6 @@ void CorrectingDistributions::Terminate(){
     zbMETMuBin40thru50->SetLineColor(6);
     zbMETMuBin50thru60->SetLineColor(7);
     zbMETMuBin60thru70->SetLineColor(8);
-
     zbMETMuBin0thru10->Draw();
     zbMETMuBin10thru20->Draw("SAME");
     zbMETMuBin20thru30->Draw("SAME");
@@ -147,6 +164,16 @@ void CorrectingDistributions::Terminate(){
     zbMETMuBin40thru50->Draw("SAME");
     zbMETMuBin50thru60->Draw("SAME");
     zbMETMuBin60thru70->Draw("SAME");
+    TLegend* zbDistLegend = new TLegend();
+    zbDistLegend->AddEntry(zbMETMuBin0thru10);
+    zbDistLegend->AddEntry(zbMETMuBin10thru20);
+    zbDistLegend->AddEntry(zbMETMuBin20thru30);
+    zbDistLegend->AddEntry(zbMETMuBin30thru40);
+    zbDistLegend->AddEntry(zbMETMuBin40thru50);
+    zbDistLegend->AddEntry(zbMETMuBin50thru60);
+    zbDistLegend->AddEntry(zbMETMuBin60thru70);
+    zbDistLegend->Draw("SAME");
+    zb_MET_Canvas->SetLogy();
 }
 void CorrectingDistributions::Init(TTree *tree){fReader.SetTree(tree);}
 Bool_t CorrectingDistributions::Notify(){return kTRUE;}
