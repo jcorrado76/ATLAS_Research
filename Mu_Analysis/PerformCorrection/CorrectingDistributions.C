@@ -6,11 +6,15 @@ void CorrectingDistributions::Begin(TTree * /*tree*/)
     TString option = GetOption();
 
     // GET EFFICIENCY OBJECTS FROM FILE 
-    mu_analysis_file = TFile::Open("../Root_Files/mu_analysis.root");
+    mu_analysis_file = TFile::Open("../Root_Files/mu_analysis.root","RECREATE");
+    if (mu_analysis_file->IsZombie()){
+        printf("mu_analysis.root not opened");
+        return;
+    }
     TDirectory* efficiency_dir = mu_analysis_file->GetDirectory("efficiency_curves");
     efficiency_dir->GetObject("metmu0thru10Efficiency",efficiencyObjectMu0thru10);
-    efficiency_dir->GetObject("metmu10thru10Efficiency",efficiencyObjectMu10thru20);
-    efficiency_dir->GetObject("metmu20thru20Efficiency",efficiencyObjectMu20thru30);
+    efficiency_dir->GetObject("metmu10thru20Efficiency",efficiencyObjectMu10thru20);
+    efficiency_dir->GetObject("metmu20thru30Efficiency",efficiencyObjectMu20thru30);
     efficiency_dir->GetObject("metmu30thru40Efficiency",efficiencyObjectMu30thru40);
     efficiency_dir->GetObject("metmu40thru50Efficiency",efficiencyObjectMu40thru50);
     efficiency_dir->GetObject("metmu50thru60Efficiency",efficiencyObjectMu50thru60);
