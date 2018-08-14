@@ -20,7 +20,7 @@ void PlotMETDistsVersMu::SlaveBegin(TTree * /*tree*/) // {{{
    TString option = GetOption();
 } // }}}
 
-Bool_t PlotMETDistsVersMu::Process(Long64_t entry)
+Bool_t PlotMETDistsVersMu::Process(Long64_t entry)//{{{
 {
    fReader.SetLocalEntry(entry);
 
@@ -48,7 +48,7 @@ Bool_t PlotMETDistsVersMu::Process(Long64_t entry)
        }
    }
    return kTRUE;
-}
+}//}}}
 
 void PlotMETDistsVersMu::SlaveTerminate(){}
 
@@ -71,15 +71,6 @@ void PlotMETDistsVersMu::Terminate() // Plotting{{{
     Int_t MET_Datamu40thru50Nentries = MET_Datamu40thru50->GetEntries();
     Int_t MET_Datamu50thru60Nentries = MET_Datamu50thru60->GetEntries();
     Int_t MET_Datamu60thru70Nentries = MET_Datamu60thru70->GetEntries();
-
-    // need to compute error bars correctly before filling hist to tell it to store errors
-    //MET_Datamu0thru10->Sumw2();
-    //MET_Datamu10thru20->Sumw2();
-    //MET_Datamu20thru30->Sumw2();
-    //MET_Datamu30thru40->Sumw2();
-    //MET_Datamu40thru50->Sumw2();
-    //MET_Datamu50thru60->Sumw2();
-    //MET_Datamu60thru70->Sumw2();
 
     // normalize to 1 
     MET_Datamu0thru10->SetNormFactor(1.);
@@ -125,7 +116,9 @@ void PlotMETDistsVersMu::Terminate() // Plotting{{{
     legend->Draw("SAME");
     gStyle->SetOptStat(0);
 
-    TFile* MET_Dist_File = TFile::Open("../Root_Files/ZB_MET_Distributions.root", "RECREATE");
+    TFile* MET_Dist_File = TFile::Open("../Root_Files/mu_analysis.root", "RECREATE");
+    TDirectory* zb_met_distributions = MET_Dist_File->mkdir("zb_met");
+    zb_met_distributions->cd();
     MET_Datamu0thru10->Write();
     MET_Datamu10thru20->Write();
     MET_Datamu20thru30->Write();

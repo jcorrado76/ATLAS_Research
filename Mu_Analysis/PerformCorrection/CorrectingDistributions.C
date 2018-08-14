@@ -34,6 +34,9 @@ void CorrectingDistributions::Begin(TTree * /*tree*/)
     zbMETMuBin50thru60 = (TH1F*)zb_MET_File->Get("metmu50thru60");
     zbMETMuBin60thru70 = (TH1F*)zb_MET_File->Get("metmu60thru70");
 
+    std::cout << zbMETMuBin40thru50->GetName() << std::endl;
+    zbMETMuBin40thru50->Draw();
+
     MET_Correctedmu0thru10 = new TH1F("correctedmetmu0thru10","Corrected Data for actint between 0 and 10", nbins , gevLow , gevHigh );
     MET_Correctedmu10thru20 = new TH1F("correctedmetmu10thru20","Corrected Data for actint between 10 and 20", nbins , gevLow , gevHigh );
     MET_Correctedmu20thru30 = new TH1F("correctedmetmu20thru30","Corrected Data for actint between 20 and 30", nbins , gevLow , gevHigh );
@@ -108,16 +111,19 @@ void CorrectingDistributions::Terminate(){
     zbMETMuBin50thru60->SetNormFactor(1.);
     zbMETMuBin60thru70->SetNormFactor(1.);
 
-    TCanvas* mycanv = new TCanvas("c1","Canvas with corrected and zb");
-    TLegend* mylegend = new TLegend();
-    MET_Correctedmu40thru50->SetLineColor(2);
-    MET_Correctedmu40thru50->Draw();
-    zbMETMuBin40thru50->SetLineColor(3);
-    zbMETMuBin40thru50->Draw("SAME");
-    mylegend->AddEntry(MET_Correctedmu40thru50);
-    mylegend->AddEntry(zbMETMuBin40thru50);
-    mylegend->Draw("SAME");
 
+    //TCanvas* mycanv = new TCanvas("c1","Canvas with corrected and zb");
+    //TLegend* mylegend = new TLegend();
+    //MET_Correctedmu40thru50->SetLineColor(2);
+    //MET_Correctedmu40thru50->Draw();
+    //zbMETMuBin40thru50->SetLineColor(3);
+    //zbMETMuBin40thru50->Draw("SAME");
+    //mylegend->AddEntry(MET_Correctedmu40thru50);
+    //mylegend->AddEntry(zbMETMuBin40thru50);
+    //mylegend->Draw("SAME");
+
+    std::cout << MET_Correctedmu40thru50->GetEntries() << std::endl;
+    std::cout << zbMETMuBin40thru50->GetEntries() << std::endl;
 
 
     /*
@@ -174,6 +180,10 @@ void CorrectingDistributions::Terminate(){
     zbDistLegend->AddEntry(zbMETMuBin60thru70);
     zbDistLegend->Draw("SAME");
     zb_MET_Canvas->SetLogy();
+    */
+    EfficiencyObjectFile->Close();
+    zb_MET_File->Close();
+
 }
 void CorrectingDistributions::Init(TTree *tree){fReader.SetTree(tree);}
 Bool_t CorrectingDistributions::Notify(){return kTRUE;}
