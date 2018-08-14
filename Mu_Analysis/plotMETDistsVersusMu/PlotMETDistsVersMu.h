@@ -34,11 +34,23 @@ public :
    TH1F*            MET_Datamu40thru50 = 0;
    TH1F*            MET_Datamu50thru60 = 0;
    TH1F*            MET_Datamu60thru70 = 0;
-   TString alg_name = "cell.met"; 
+   TEfficiency*            MET_Algmu0thru10Efficiency = 0;
+   TEfficiency*            MET_Algmu10thru20Efficiency = 0;
+   TEfficiency*            MET_Algmu20thru30Efficiency = 0;
+   TEfficiency*            MET_Algmu30thru40Efficiency = 0;
+   TEfficiency*            MET_Algmu40thru50Efficiency = 0;
+   TEfficiency*            MET_Algmu50thru60Efficiency = 0;
+   TEfficiency*            MET_Algmu60thru70Efficiency = 0;
+
+
    Float_t binWidth = 1.0;
     Float_t gevLow = 0.0;
-    Float_t gevHigh = 100.0;
+    Float_t gevHigh = 300.0;
+    Float_t width = 20.0; //want 20 GeV bins
+    Int_t nbins = (gevHigh - gevLow) / width; // compute nbins as function of preferred width
     Int_t nbins = (gevHigh-gevLow)/binWidth;
+
+   TString alg_name = "cell.met"; 
     TString xaxisTitle = alg_name + " [GeV]";
     TString yaxisTitle = "Number of Entries";
     TCanvas* mycanv = new TCanvas("MET_AlgMuSlices", "MET Slices in Mu");
@@ -73,6 +85,8 @@ public :
    Bool_t passedL1ZB();
    Bool_t isPassnoAlgXE30();
    Bool_t inMuRange( Float_t , Float_t );
+   static Double_t fitFunction(Double_t *x , Double_t *par );
+   TF1* generateFitFunction(TEfficiency* teff_obj, float gevMax = 300.0, float initial_slope = 0.1 , float initial_intercept = 0.0, float initial_sigma = 10.0);
 
    ClassDef(PlotMETDistsVersMu,0);
 
