@@ -43,24 +43,34 @@ public :
    TEfficiency*            MET_Algmu60thru70Efficiency = 0;
 
 
-   Float_t binWidth = 1.0;
     Float_t gevLow = 0.0;
     Float_t gevHigh = 300.0;
-    Float_t width = 20.0; //want 20 GeV bins
-    Int_t nbins = (gevHigh - gevLow) / width; // compute nbins as function of preferred width
-    Int_t nbins = (gevHigh-gevLow)/binWidth;
+    Float_t met_dist_binwidth = 1.0;
+    Float_t efficiency_bin_width = 20.0; //want 20 GeV bins
+    Int_t met_dist_nbins = (gevHigh - gevLow) / met_dist_binwidth; // compute nbins as function of preferred width
+    Int_t efficiency_nbins = (gevHigh - gevLow) / efficiency_bin_width;
 
-   TString alg_name = "cell.met"; 
-    TString xaxisTitle = alg_name + " [GeV]";
-    TString yaxisTitle = "Number of Entries";
-    TCanvas* mycanv = new TCanvas("MET_AlgMuSlices", "MET Slices in Mu");
-    THStack* muSlicesStack = new THStack("muStack","MET Hists in Mu Slices After Removing Runs 33023, 331975, and 334487");
+
+
+
+   Float_t XE = 30.0; // L1 cut
+   TString zb_alg_name = "cell.met"; 
+   TString l1_alg_name = "L1.met";
+    // set titles and axis labels. 
+    TString efficiency_title = zb_alg_name + " Efficiency";
+    TString efficiency_xaxis = zb_zb_alg_name + " [GeV]";
+    TString efficiency_yaxis = "efficiency";
+
+    TString met_dist_xaxis = zb_alg_name + " [GeV]";
+    TString met_dist_yaxis = "Number of Entries";
 
    TTreeReaderValue<UInt_t> RunNumber = {fReader, "RunNumber"};
    TTreeReaderValue<ULong64_t> EventNumber = {fReader, "EventNumber"};
    TTreeReaderValue<Float_t> InTimePileup = {fReader, "InTimePileup"};
-   TTreeReaderValue<Float_t> OutOfTimePileup = {fReader, "OutOfTimePileup"};
-   TTreeReaderValue<Float_t> MET_Data = {fReader, alg_name };
+
+   TTreeReaderValue<Float_t> MET_Data = {fReader, zb_alg_name };
+   TTreeReaderValue<Float_t> L1_MET = {fReader, l1_alg_name};
+
    TTreeReaderValue<Bool_t> HLT_noalg_zb_L1ZB_passed = {fReader, "HLT_noalg_zb_L1ZB.passed"};
    TTreeReaderValue<Bool_t> HLT_noalg_L1XE30_passed = {fReader, "HLT_noalg_L1XE30.passed"};
    TTreeReaderValue<Float_t> HLT_noalg_zb_L1ZB_prescale = {fReader, "HLT_noalg_zb_L1ZB.prescale"};

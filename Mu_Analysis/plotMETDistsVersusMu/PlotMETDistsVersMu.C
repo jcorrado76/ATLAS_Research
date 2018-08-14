@@ -6,27 +6,21 @@
 void PlotMETDistsVersMu::Begin(TTree *) // {{{
 {
    TString option = GetOption();
-    MET_Datamu0thru10 = new TH1F("metmu0thru10","MET Data for actint between 0 and 10", nbins , gevLow , gevHigh );
-    MET_Datamu10thru20 = new TH1F("metmu10thru20","MET Data for actint between 10 and 20", nbins , gevLow , gevHigh );
-    MET_Datamu20thru30 = new TH1F("metmu20thru30","MET Data for actint between 20 and 30", nbins , gevLow , gevHigh );
-    MET_Datamu30thru40 = new TH1F("metmu30thru40","MET Data for actint between 30 and 40", nbins , gevLow , gevHigh );
-    MET_Datamu40thru50 = new TH1F("metmu40thru50","MET Data for actint between 40 and 50", nbins , gevLow , gevHigh );
-    MET_Datamu50thru60 = new TH1F("metmu50thru60","MET Data for actint between 50 and 60", nbins , gevLow , gevHigh );
-    MET_Datamu60thru70 = new TH1F("metmu60thru70","MET Data for actint between 60 and 70", nbins , gevLow , gevHigh );
-    MET_Algmu0thru10Efficiency = new TEfficiency("metmu0thru10Efficiency","MET Alg Efficiency for actint between 0 and 10", nbins , gevLow , gevHigh );
-    MET_Algmu10thru20Efficiency = new TEfficiency("metmu10thru20Efficiency","MET Alg Efficiency for actint between 10 and 20", nbins , gevLow , gevHigh );
-    MET_Algmu20thru30Efficiency = new TEfficiency("metmu20thru30Efficiency","MET Alg Efficiency for actint between 20 and 30", nbins , gevLow , gevHigh );
-    MET_Algmu30thru40Efficiency = new TEfficiency("metmu30thru40Efficiency","MET Alg Efficiency for actint between 30 and 40", nbins , gevLow , gevHigh );
-    MET_Algmu40thru50Efficiency = new TEfficiency("metmu40thru50Efficiency","MET Alg Efficiency for actint between 40 and 50", nbins , gevLow , gevHigh );
-    MET_Algmu50thru60Efficiency = new TEfficiency("metmu50thru60Efficiency","MET Alg Efficiency for actint between 50 and 60", nbins , gevLow , gevHigh );
-    MET_Algmu60thru70Efficiency = new TEfficiency("metmu60thru70Efficiency","MET Alg Efficiency for actint between 60 and 70", nbins , gevLow , gevHigh );
+    MET_Datamu0thru10 = new TH1F("metmu0thru10","MET Data for actint between 0 and 10", met_dist_nbins , gevLow , gevHigh );
+    MET_Datamu10thru20 = new TH1F("metmu10thru20","MET Data for actint between 10 and 20", met_dist_nbins , gevLow , gevHigh );
+    MET_Datamu20thru30 = new TH1F("metmu20thru30","MET Data for actint between 20 and 30", met_dist_nbins , gevLow , gevHigh );
+    MET_Datamu30thru40 = new TH1F("metmu30thru40","MET Data for actint between 30 and 40", met_dist_nbins , gevLow , gevHigh );
+    MET_Datamu40thru50 = new TH1F("metmu40thru50","MET Data for actint between 40 and 50", met_dist_nbins , gevLow , gevHigh );
+    MET_Datamu50thru60 = new TH1F("metmu50thru60","MET Data for actint between 50 and 60", met_dist_nbins , gevLow , gevHigh );
+    MET_Datamu60thru70 = new TH1F("metmu60thru70","MET Data for actint between 60 and 70", met_dist_nbins , gevLow , gevHigh );
+    MET_Algmu0thru10Efficiency = new TEfficiency("metmu0thru10Efficiency","MET Alg Efficiency for actint between 0 and 10", efficiency_nbins , gevLow , gevHigh );
+    MET_Algmu10thru20Efficiency = new TEfficiency("metmu10thru20Efficiency","MET Alg Efficiency for actint between 10 and 20", efficiency_nbins , gevLow , gevHigh );
+    MET_Algmu20thru30Efficiency = new TEfficiency("metmu20thru30Efficiency","MET Alg Efficiency for actint between 20 and 30", efficiency_nbins , gevLow , gevHigh );
+    MET_Algmu30thru40Efficiency = new TEfficiency("metmu30thru40Efficiency","MET Alg Efficiency for actint between 30 and 40", efficiency_nbins , gevLow , gevHigh );
+    MET_Algmu40thru50Efficiency = new TEfficiency("metmu40thru50Efficiency","MET Alg Efficiency for actint between 40 and 50", efficiency_nbins , gevLow , gevHigh );
+    MET_Algmu50thru60Efficiency = new TEfficiency("metmu50thru60Efficiency","MET Alg Efficiency for actint between 50 and 60", efficiency_nbins , gevLow , gevHigh );
+    MET_Algmu60thru70Efficiency = new TEfficiency("metmu60thru70Efficiency","MET Alg Efficiency for actint between 60 and 70", efficiency_nbins , gevLow , gevHigh );
 } // }}}
-
-void PlotMETDistsVersMu::SlaveBegin(TTree * /*tree*/) // {{{
-{
-   TString option = GetOption();
-} // }}}
-
 Bool_t PlotMETDistsVersMu::Process(Long64_t entry)//{{{
 {
    fReader.SetLocalEntry(entry);
@@ -34,41 +28,46 @@ Bool_t PlotMETDistsVersMu::Process(Long64_t entry)//{{{
    if ( passedL1ZB()  && isGoodRun() ){
        if ( inMuRange( 0.0 , 10.0) ){
            MET_Datamu0thru10->Fill(*MET_Data, *HLT_noalg_zb_L1ZB_prescale);
-           MET_Algmu0thru10Efficiency->Fill(*L1_MET > XE, *cell_met);
+           MET_Algmu0thru10Efficiency->Fill(*L1_MET > XE, *MET_Data);
        }
        if ( inMuRange( 10.0, 20.0) ){
            MET_Datamu10thru20->Fill(*MET_Data, *HLT_noalg_zb_L1ZB_prescale);
-           MET_Algmu10thru20Efficiency->Fill(*L1_MET > XE, *cell_met);
+           MET_Algmu10thru20Efficiency->Fill(*L1_MET > XE, *MET_Data);
        }
        if ( inMuRange( 20.0 , 30.0) ){
            MET_Datamu20thru30->Fill(*MET_Data, *HLT_noalg_zb_L1ZB_prescale);
-           MET_Algmu20thru30Efficiency->Fill(*L1_MET > XE, *cell_met);
+           MET_Algmu20thru30Efficiency->Fill(*L1_MET > XE, *MET_Data);
        }
        if ( inMuRange( 30.0, 40.0) ){
            MET_Datamu30thru40->Fill(*MET_Data, *HLT_noalg_zb_L1ZB_prescale);
-           MET_Algmu30thru40Efficiency->Fill(*L1_MET > XE, *cell_met);
+           MET_Algmu30thru40Efficiency->Fill(*L1_MET > XE, *MET_Data);
        }
        if ( inMuRange( 40.0 , 50.0 ) ){
            MET_Datamu40thru50->Fill(*MET_Data, *HLT_noalg_zb_L1ZB_prescale);
-           MET_Algmu40thru50Efficiency->Fill(*L1_MET > XE, *cell_met);
+           MET_Algmu40thru50Efficiency->Fill(*L1_MET > XE, *MET_Data);
        }
        if ( inMuRange( 50.0 , 60.0 ) ){
            MET_Datamu50thru60->Fill(*MET_Data, *HLT_noalg_zb_L1ZB_prescale);
-           MET_Algmu50thru60Efficiency->Fill(*L1_MET > XE, *cell_met);
+           MET_Algmu50thru60Efficiency->Fill(*L1_MET > XE, *MET_Data);
        }
        if ( inMuRange( 60.0 , 70.0 ) ){
            MET_Datamu60thru70->Fill(*MET_Data, *HLT_noalg_zb_L1ZB_prescale);
-           MET_Algmu60thru70Efficiency->Fill(*L1_MET > XE, *cell_met);
+           MET_Algmu60thru70Efficiency->Fill(*L1_MET > XE, *MET_Data);
        }
    }
    return kTRUE;
 }//}}}
-
-void PlotMETDistsVersMu::SlaveTerminate(){}
-
 void PlotMETDistsVersMu::Terminate() // Plotting{{{
 {
-    // color the histograms so we can see difference 
+    // GENERATE FIT FUNCTIONS{{{
+    TF1* mu0thru10FitFunction = generateFitFunction( MET_Algmu0thru10Efficiency );
+    TF1* mu10thru20FitFunction = generateFitFunction( MET_Algmu10thru20Efficiency);
+    TF1* mu20thru30FitFunction = generateFitFunction( MET_Algmu20thru30Efficiency);
+    TF1* mu30thru40FitFunction = generateFitFunction( MET_Algmu30thru40Efficiency);
+    TF1* mu40thru50FitFunction = generateFitFunction( MET_Algmu40thru50Efficiency);
+    TF1* mu50thru60FitFunction = generateFitFunction( MET_Algmu50thru60Efficiency);
+    TF1* mu60thru70FitFunction = generateFitFunction( MET_Algmu60thru70Efficiency);//}}}
+    // FORMATTING ZB DATA {{{
     MET_Datamu0thru10->SetLineColor(1);
     MET_Datamu10thru20->SetLineColor(2);
     MET_Datamu20thru30->SetLineColor(3);
@@ -76,7 +75,6 @@ void PlotMETDistsVersMu::Terminate() // Plotting{{{
     MET_Datamu40thru50->SetLineColor(12);
     MET_Datamu50thru60->SetLineColor(6);
     MET_Datamu60thru70->SetLineColor(9);
-
     // normalize to 1 
     MET_Datamu0thru10->SetNormFactor(1.);
     MET_Datamu10thru20->SetNormFactor(1.);
@@ -84,8 +82,9 @@ void PlotMETDistsVersMu::Terminate() // Plotting{{{
     MET_Datamu30thru40->SetNormFactor(1.);
     MET_Datamu40thru50->SetNormFactor(1.);
     MET_Datamu50thru60->SetNormFactor(1.);
-    MET_Datamu60thru70->SetNormFactor(1.);
-
+    MET_Datamu60thru70->SetNormFactor(1.);//}}}
+    // PLOT ZB DATA{{{
+    TCanvas* zb_met_dists = new TCanvas("zb_met_plot","Plot of MET Distribution in Mu Slices");
     MET_Datamu0thru10->Draw();
     MET_Datamu10thru20->Draw("SAME");
     MET_Datamu20thru30->Draw("SAME");
@@ -93,8 +92,6 @@ void PlotMETDistsVersMu::Terminate() // Plotting{{{
     MET_Datamu40thru50->Draw("SAME");
     MET_Datamu50thru60->Draw("SAME");
     MET_Datamu60thru70->Draw("SAME");
-    mycanv->SetTitle("MET Slices in Mu");
-    gPad->SetLogy();
     TLegend* legend = new TLegend();
     legend->AddEntry(MET_Datamu0thru10);
     legend->AddEntry(MET_Datamu10thru20);
@@ -104,18 +101,9 @@ void PlotMETDistsVersMu::Terminate() // Plotting{{{
     legend->AddEntry(MET_Datamu50thru60);
     legend->AddEntry(MET_Datamu60thru70);
     legend->Draw("SAME");
-    gStyle->SetOptStat(0);
-
-    TCanvas* mycanv = new TCanvas("efficiencyPlot", "MET Efficiency Slices in Mu");
-    TF1* mu0thru10FitFunction = generateFitFunction( MET_Algmu0thru10Efficiency );
-    TF1* mu10thru20FitFunction = generateFitFunction( MET_Algmu10thru20Efficiency);
-    TF1* mu20thru30FitFunction = generateFitFunction( MET_Algmu20thru30Efficiency);
-    TF1* mu30thru40FitFunction = generateFitFunction( MET_Algmu30thru40Efficiency);
-    TF1* mu40thru50FitFunction = generateFitFunction( MET_Algmu40thru50Efficiency);
-    TF1* mu50thru60FitFunction = generateFitFunction( MET_Algmu50thru60Efficiency);
-    TF1* mu60thru70FitFunction = generateFitFunction( MET_Algmu60thru70Efficiency);
-
-    // set line color of efficiency curves
+    gPad->SetLogy();
+    gStyle->SetOptStat(0);//}}}
+    // FORMATTING EFFICIENCY CURVES{{{
     MET_Algmu0thru10Efficiency->SetLineColor(1);
     MET_Algmu10thru20Efficiency->SetLineColor(2);
     MET_Algmu20thru30Efficiency->SetLineColor(3);
@@ -130,8 +118,9 @@ void PlotMETDistsVersMu::Terminate() // Plotting{{{
     MET_Algmu30thru40Efficiency->SetMarkerStyle(4);
     MET_Algmu40thru50Efficiency->SetMarkerStyle(27);
     MET_Algmu50thru60Efficiency->SetMarkerStyle(22);
-    MET_Algmu60thru70Efficiency->SetMarkerStyle(21);
-    // draw the efficiency curves
+    MET_Algmu60thru70Efficiency->SetMarkerStyle(21);//}}}
+    // PLOT EFFICIENCY CURVES {{{
+    TCanvas* efficiency_plot = new TCanvas("efficiencyPlot", "MET Efficiency Slices in Mu");
     MET_Algmu10thru20Efficiency->Draw();
     MET_Algmu20thru30Efficiency->Draw("SAME");
     MET_Algmu30thru40Efficiency->Draw("SAME");
@@ -139,10 +128,6 @@ void PlotMETDistsVersMu::Terminate() // Plotting{{{
     MET_Algmu50thru60Efficiency->Draw("SAME");
     MET_Algmu60thru70Efficiency->Draw("SAME");
     MET_Algmu0thru10Efficiency->Draw("SAME");
-
-    
-    mycanv->SetTitle("MET Slices in Mu");
-    //gPad->SetLogy();
     TLegend* legend = new TLegend();
     legend->AddEntry(MET_Algmu0thru10Efficiency);
     legend->AddEntry(MET_Algmu10thru20Efficiency);
@@ -152,9 +137,8 @@ void PlotMETDistsVersMu::Terminate() // Plotting{{{
     legend->AddEntry(MET_Algmu50thru60Efficiency);
     legend->AddEntry(MET_Algmu60thru70Efficiency);
     legend->Draw("SAME");
-    gStyle->SetOptStat(0);
-
-
+    gStyle->SetOptStat(0);//}}}
+    // WRITE TO FILE {{{
     TFile* Mu_Analysis_File = TFile::Open("../Root_Files/mu_analysis.root", "RECREATE");
     TDirectory* zb_met_distributions = MET_Dist_File->mkdir("zb_met");
     zb_met_distributions->cd();
@@ -176,8 +160,13 @@ void PlotMETDistsVersMu::Terminate() // Plotting{{{
     MET_Algmu50thru60Efficiency->Write();
     MET_Algmu60thru70Efficiency->Write();
 
-    Mu_Analysis_File->Close();
+    Mu_Analysis_File->Close();//}}}
 }//}}}
+void PlotMETDistsVersMu::SlaveBegin(TTree * /*tree*/) // {{{
+{
+   TString option = GetOption();
+} // }}}
+void PlotMETDistsVersMu::SlaveTerminate(){}
 void PlotMETDistsVersMu::Init(TTree *tree) //{{{
 {
    fReader.SetTree(tree);
@@ -204,7 +193,6 @@ Double_t PlotMETDistsVersMu::fitFunction(Double_t *x , Double_t *par ){//{{{
     Double_t fitval = (1./2.)*(1.+TMath::Erf((par[0]*x[0]+par[1]-l1cut)/(par[2]*TMath::Sqrt(2.))));
     return fitval;
 }//}}}
-
 TF1* PlotMETDistsVersMu::generateFitFunction(TEfficiency* teff_obj, float gevMax, float initial_slope, float initial_intercept, float initial_sigma ){//{{{
     TF1 *fitErrorFunction = new TF1("fitFunction",fitFunction,0.0,gevMax,3);
     fitErrorFunction->SetParameter(0, initial_slope);
