@@ -6,13 +6,13 @@
 void PlotMETDistsVersMu::Begin(TTree *) // {{{
 {
    TString option = GetOption();
-    MET_Datamu0thru10 = new TH1F("metmu0thru10","MET Data for actint between 0 and 10", met_dist_nbins , gevLow , gevHigh );
-    MET_Datamu10thru20 = new TH1F("metmu10thru20","MET Data for actint between 10 and 20", met_dist_nbins , gevLow , gevHigh );
-    MET_Datamu20thru30 = new TH1F("metmu20thru30","MET Data for actint between 20 and 30", met_dist_nbins , gevLow , gevHigh );
-    MET_Datamu30thru40 = new TH1F("metmu30thru40","MET Data for actint between 30 and 40", met_dist_nbins , gevLow , gevHigh );
-    MET_Datamu40thru50 = new TH1F("metmu40thru50","MET Data for actint between 40 and 50", met_dist_nbins , gevLow , gevHigh );
-    MET_Datamu50thru60 = new TH1F("metmu50thru60","MET Data for actint between 50 and 60", met_dist_nbins , gevLow , gevHigh );
-    MET_Datamu60thru70 = new TH1F("metmu60thru70","MET Data for actint between 60 and 70", met_dist_nbins , gevLow , gevHigh );
+    MET_Datamu0thru10 = new TH1F("metmu0thru10","ZB MET Data for actint between 0 and 10", met_dist_nbins , gevLow , gevHigh );
+    MET_Datamu10thru20 = new TH1F("metmu10thru20","ZB MET Data for actint between 10 and 20", met_dist_nbins , gevLow , gevHigh );
+    MET_Datamu20thru30 = new TH1F("metmu20thru30","ZB MET Data for actint between 20 and 30", met_dist_nbins , gevLow , gevHigh );
+    MET_Datamu30thru40 = new TH1F("metmu30thru40","ZB MET Data for actint between 30 and 40", met_dist_nbins , gevLow , gevHigh );
+    MET_Datamu40thru50 = new TH1F("metmu40thru50","ZB MET Data for actint between 40 and 50", met_dist_nbins , gevLow , gevHigh );
+    MET_Datamu50thru60 = new TH1F("metmu50thru60","ZB MET Data for actint between 50 and 60", met_dist_nbins , gevLow , gevHigh );
+    MET_Datamu60thru70 = new TH1F("metmu60thru70","ZB MET Data for actint between 60 and 70", met_dist_nbins , gevLow , gevHigh );
     MET_Algmu0thru10Efficiency = new TEfficiency("metmu0thru10Efficiency","MET Alg Efficiency for actint between 0 and 10", efficiency_nbins , gevLow , gevHigh );
     MET_Algmu10thru20Efficiency = new TEfficiency("metmu10thru20Efficiency","MET Alg Efficiency for actint between 10 and 20", efficiency_nbins , gevLow , gevHigh );
     MET_Algmu20thru30Efficiency = new TEfficiency("metmu20thru30Efficiency","MET Alg Efficiency for actint between 20 and 30", efficiency_nbins , gevLow , gevHigh );
@@ -102,7 +102,9 @@ void PlotMETDistsVersMu::Terminate() // Plotting{{{
     met_dist_legend->AddEntry(MET_Datamu60thru70);
     met_dist_legend->Draw("SAME");
     gPad->SetLogy();
-    gStyle->SetOptStat(0);//}}}
+    gStyle->SetOptStat(0);
+    zb_met_dists->Print("../Plots/ZB_MET_Distributions.png");
+    //}}}
     // FORMATTING EFFICIENCY CURVES{{{
     MET_Algmu0thru10Efficiency->SetLineColor(1);
     MET_Algmu10thru20Efficiency->SetLineColor(2);
@@ -138,6 +140,7 @@ void PlotMETDistsVersMu::Terminate() // Plotting{{{
     efficiency_legend->AddEntry(MET_Algmu60thru70Efficiency);
     efficiency_legend->Draw("SAME");
     gStyle->SetOptStat(0);//}}}
+    efficiency_plot->Print("../Plots/ZB_MET_Efficiency.png");
     // WRITE TO FILE {{{
     TFile* Mu_Analysis_File = TFile::Open("../Root_Files/mu_analysis.root", "RECREATE");
     TDirectory* zb_met_distributions = Mu_Analysis_File->mkdir("zb_met");

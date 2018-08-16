@@ -121,6 +121,13 @@ void CorrectingDistributions::Terminate(){
     MET_Correctedmu40thru50->SetLineColor(6);
     MET_Correctedmu50thru60->SetLineColor(7);
     MET_Correctedmu60thru70->SetLineColor(8);
+    MET_Correctedmu0thru10->Draw();
+    MET_Correctedmu10thru20->Draw("SAME");
+    MET_Correctedmu20thru30->Draw("SAME");
+    MET_Correctedmu30thru40->Draw("SAME");
+    MET_Correctedmu40thru50->Draw("SAME");
+    MET_Correctedmu50thru60->Draw("SAME");
+    MET_Correctedmu60thru70->Draw("SAME");
 	TLegend* correctedLegend = new TLegend();
 	correctedLegend->AddEntry(MET_Correctedmu0thru10);
 	correctedLegend->AddEntry(MET_Correctedmu10thru20);
@@ -129,16 +136,9 @@ void CorrectingDistributions::Terminate(){
 	correctedLegend->AddEntry(MET_Correctedmu40thru50);
 	correctedLegend->AddEntry(MET_Correctedmu50thru60);
 	correctedLegend->AddEntry(MET_Correctedmu60thru70);
-
-    MET_Correctedmu0thru10->Draw();
-    MET_Correctedmu10thru20->Draw("SAME");
-    MET_Correctedmu20thru30->Draw("SAME");
-    MET_Correctedmu30thru40->Draw("SAME");
-    MET_Correctedmu40thru50->Draw("SAME");
-    MET_Correctedmu50thru60->Draw("SAME");
-    MET_Correctedmu60thru70->Draw("SAME");
 	correctedLegend->Draw("SAME");
     correctedCanvas->SetLogy();
+    gStyle->SetOptStat(0);
     //}}}
 
 	// PLOT ZERO BIAS DISTRIBUTIONS {{{
@@ -167,30 +167,74 @@ void CorrectingDistributions::Terminate(){
     zbDistLegend->AddEntry(zbMETMuBin60thru70);
     zbDistLegend->Draw("SAME");
     zb_MET_Canvas->SetLogy();
+    gStyle->SetOptStat(0);
     //}}}
 
     // PLOT CORRECTED MET WITH THE ZB MET {{{
     TCanvas* c1 = new TCanvas("c1","metmubin1");
+    TLegend* l1 = new TLegend();
     MET_Correctedmu0thru10->Draw();
+    zbMETMuBin0thru10->SetLineColor(3);
     zbMETMuBin0thru10->Draw("SAME");
+    l1->AddEntry(MET_Correctedmu0thru10);
+    l1->AddEntry(zbMETMuBin0thru10);
+    l1->Draw("SAME");
+    gStyle->SetOptStat(0);
     TCanvas* c2 = new TCanvas("c2","metmubin2");
+    TLegend* l2 = new TLegend();
     MET_Correctedmu10thru20->Draw();
+    zbMETMuBin10thru20->SetLineColor(2);
     zbMETMuBin10thru20->Draw("SAME");
+    l2->AddEntry(MET_Correctedmu10thru20);
+    l2->AddEntry(zbMETMuBin10thru20);
+    l2->Draw("SAME");
+    gStyle->SetOptStat(0);
     TCanvas* c3 = new TCanvas("c3","metmubin3");
+    TLegend* l3 = new TLegend();
     MET_Correctedmu20thru30->Draw();
+    zbMETMuBin20thru30->SetLineColor(3);
     zbMETMuBin20thru30->Draw("SAME");
+    l3->AddEntry(MET_Correctedmu20thru30);
+    l3->AddEntry(zbMETMuBin20thru30);
+    l3->Draw("SAME");
+    gStyle->SetOptStat(0);
     TCanvas* c4 = new TCanvas("c4","metmubin4");
+    TLegend* l4 = new TLegend();
     MET_Correctedmu30thru40->Draw();
+    zbMETMuBin30thru40->SetLineColor(3);
     zbMETMuBin30thru40->Draw("SAME");
+    l4->AddEntry(MET_Correctedmu30thru40);
+    l4->AddEntry(zbMETMuBin30thru40);
+    l4->Draw("SAME");
+    gStyle->SetOptStat(0);
     TCanvas* c5 = new TCanvas("c5","metmubin5");
+    TLegend* l5 = new TLegend();
     MET_Correctedmu40thru50->Draw();
+    zbMETMuBin40thru50->SetLineColor(3);
     zbMETMuBin40thru50->Draw("SAME");
+    l5->AddEntry(MET_Correctedmu40thru50);
+    l5->AddEntry(zbMETMuBin40thru50);
+    l5->Draw("SAME");
+    gStyle->SetOptStat(0);
     TCanvas* c6 = new TCanvas("c6","metmubin6");
+    TLegend* l6 = new TLegend();
+    MET_Correctedmu50thru60->SetLineColor(3);
     MET_Correctedmu50thru60->Draw();
+    zbMETMuBin50thru60->SetLineColor(2);
     zbMETMuBin50thru60->Draw("SAME");
+    l6->AddEntry(MET_Correctedmu50thru60);
+    l6->AddEntry(zbMETMuBin50thru60);
+    l6->Draw("SAME");
+    gStyle->SetOptStat(0);
     TCanvas* c7 = new TCanvas("c7","metmubin7");
+    TLegend* l7 = new TLegend();
     MET_Correctedmu60thru70->Draw();
+    zbMETMuBin60thru70->SetLineColor(2);
     zbMETMuBin60thru70->Draw("SAME");
+    l7->AddEntry(MET_Correctedmu60thru70);
+    l7->AddEntry(zbMETMuBin60thru70);
+    l7->Draw("SAME");
+    gStyle->SetOptStat(0);
     //}}}
 
     TDirectory* corrected_met_distributions = mu_analysis_file->GetDirectory("corrected_met");
