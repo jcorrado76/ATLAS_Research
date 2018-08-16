@@ -28,13 +28,13 @@ public :
    TTreeReader     fReader;  //!the tree reader
    TTree          *fChain = 0;   //!pointer to the analyzed TTree or TChain
     TFile* mu_analysis_file = 0;
-   TH1F*            MET_Correctedmu0thru10 = 0;
-   TH1F*            MET_Correctedmu10thru20 = 0;
-   TH1F*            MET_Correctedmu20thru30 = 0;
-   TH1F*            MET_Correctedmu30thru40 = 0;
-   TH1F*            MET_Correctedmu40thru50 = 0;
-   TH1F*            MET_Correctedmu50thru60 = 0;
-   TH1F*            MET_Correctedmu60thru70 = 0;
+    TH1F*            MET_Correctedmu0thru10 = 0;
+    TH1F*            MET_Correctedmu10thru20 = 0;
+    TH1F*            MET_Correctedmu20thru30 = 0;
+    TH1F*            MET_Correctedmu30thru40 = 0;
+    TH1F*            MET_Correctedmu40thru50 = 0;
+    TH1F*            MET_Correctedmu50thru60 = 0;
+    TH1F*            MET_Correctedmu60thru70 = 0;
 
     TH1F* zbMETMuBin0thru10 = 0;
     TH1F* zbMETMuBin10thru20 = 0;
@@ -44,13 +44,13 @@ public :
     TH1F* zbMETMuBin50thru60 = 0;
     TH1F* zbMETMuBin60thru70 = 0;
 
-   TF1*             EfficiencyFitMuBin1 = 0;
-   TF1*             EfficiencyFitMuBin2 = 0;
-   TF1*             EfficiencyFitMuBin3 = 0;
-   TF1*             EfficiencyFitMuBin4 = 0;
-   TF1*             EfficiencyFitMuBin5 = 0;
-   TF1*             EfficiencyFitMuBin6 = 0;
-   TF1*             EfficiencyFitMuBin7 = 0;
+    TF1*             EfficiencyFitMuBin1 = 0;
+    TF1*             EfficiencyFitMuBin2 = 0;
+    TF1*             EfficiencyFitMuBin3 = 0;
+    TF1*             EfficiencyFitMuBin4 = 0;
+    TF1*             EfficiencyFitMuBin5 = 0;
+    TF1*             EfficiencyFitMuBin6 = 0;
+    TF1*             EfficiencyFitMuBin7 = 0;
 
     TEfficiency* efficiencyObjectMu0thru10 = 0;
     TEfficiency* efficiencyObjectMu10thru20 =0;
@@ -60,14 +60,13 @@ public :
     TEfficiency* efficiencyObjectMu50thru60 = 0;
     TEfficiency* efficiencyObjectMu60thru70 = 0;
 
-   Float_t binWidth = 5.0;
+    Float_t binWidth = 5.0;
     Float_t gevLow = 0.0;
     Float_t gevHigh = 300.0;
     Int_t nbins = (gevHigh-gevLow)/binWidth;
     TString alg_name = "METCELL";
     TString xaxisTitle = alg_name + " [GeV]";
     TString yaxisTitle = "Number of Entries";
-    //TCanvas* mycanv = new TCanvas("MET_AlgMuSlices", "MET Slices in Mu");
 
    // Readers to access the data (delete the ones you do not need).
    TTreeReaderValue<UInt_t> RunNumber = {fReader, "RunNumber"};

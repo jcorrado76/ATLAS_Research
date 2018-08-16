@@ -5,6 +5,9 @@ void CorrectingDistributions::Begin(TTree * /*tree*/)
 {
     TString option = GetOption();
 
+    // TH1 OBJECTS DO NOT BELONG TO TFILE SCOPE. THEY WILL STAY
+    TH1::AddDirectory(false);
+
     // GET EFFICIENCY OBJECTS FROM FILE 
     mu_analysis_file = TFile::Open("../Root_Files/mu_analysis.root","UPDATE");
     mu_analysis_file->Print();
@@ -20,8 +23,6 @@ void CorrectingDistributions::Begin(TTree * /*tree*/)
     efficiency_dir->GetObject("metmu40thru50Efficiency",efficiencyObjectMu40thru50);
     efficiency_dir->GetObject("metmu50thru60Efficiency",efficiencyObjectMu50thru60);
     efficiency_dir->GetObject("metmu60thru70Efficiency",efficiencyObjectMu60thru70);
-
-    //efficiencyObjectMu0thru10->Draw();
 
     EfficiencyFitMuBin1 = (TF1*)((efficiencyObjectMu0thru10->GetListOfFunctions())->At(0));
     EfficiencyFitMuBin2 = (TF1*)((efficiencyObjectMu10thru20->GetListOfFunctions())->At(0));
@@ -110,20 +111,7 @@ void CorrectingDistributions::Terminate(){
     zbMETMuBin50thru60->SetNormFactor(1.);
     zbMETMuBin60thru70->SetNormFactor(1.);
 
-
-    TCanvas* mycanv = new TCanvas("c1","Canvas with corrected and zb");
-    TLegend* mylegend = new TLegend();
-    MET_Correctedmu40thru50->SetLineColor(2);
-    MET_Correctedmu40thru50->Draw();
-    zbMETMuBin40thru50->SetLineColor(3);
-    zbMETMuBin40thru50->Draw("SAME");
-    mylegend->AddEntry(MET_Correctedmu40thru50);
-    mylegend->AddEntry(zbMETMuBin40thru50);
-    mylegend->Draw("SAME");
-
-
-
-    /*
+    // plot corrected distributions {{{
     TCanvas* correctedCanvas = new TCanvas("correctedCanvas","Canvas with corrected data");
     MET_Correctedmu0thru10->SetLineColor(2);
     MET_Correctedmu10thru20->SetLineColor(3);
@@ -150,6 +138,7 @@ void CorrectingDistributions::Terminate(){
     MET_Correctedmu60thru70->Draw("SAME");
 	correctedLegend->Draw("SAME");
     correctedCanvas->SetLogy();
+    //}}}
 
 	// PLOT ZERO BIAS DISTRIBUTIONS
 	TCanvas* zb_MET_Canvas = new TCanvas("zbCanvas","Canvas with zerobias data");
@@ -177,7 +166,6 @@ void CorrectingDistributions::Terminate(){
     zbDistLegend->AddEntry(zbMETMuBin60thru70);
     zbDistLegend->Draw("SAME");
     zb_MET_Canvas->SetLogy();
-    */
 
     TDirectory* corrected_met_distributions = mu_analysis_file->GetDirectory("corrected_met");
     if (!corrected_met_distributions){
