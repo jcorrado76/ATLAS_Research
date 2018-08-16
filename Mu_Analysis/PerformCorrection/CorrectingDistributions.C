@@ -139,6 +139,7 @@ void CorrectingDistributions::Terminate(){
 	correctedLegend->Draw("SAME");
     correctedCanvas->SetLogy();
     gStyle->SetOptStat(0);
+    correctedCanvas->Print("../Plots/Plot_Corrected_Distributions.png");
     //}}}
 
 	// PLOT ZERO BIAS DISTRIBUTIONS {{{
@@ -168,6 +169,7 @@ void CorrectingDistributions::Terminate(){
     zbDistLegend->Draw("SAME");
     zb_MET_Canvas->SetLogy();
     gStyle->SetOptStat(0);
+    zb_MET_Canvas->Print("../Plots/ZB_MET_Distributions.png");
     //}}}
 
     // PLOT CORRECTED MET WITH THE ZB MET {{{
@@ -180,6 +182,7 @@ void CorrectingDistributions::Terminate(){
     l1->AddEntry(zbMETMuBin0thru10);
     l1->Draw("SAME");
     gStyle->SetOptStat(0);
+    c1->Print("../Plots/CorrectedAndZB/zb_met_corrected_mubin1.png");
     TCanvas* c2 = new TCanvas("c2","metmubin2");
     TLegend* l2 = new TLegend();
     MET_Correctedmu10thru20->Draw();
@@ -189,6 +192,7 @@ void CorrectingDistributions::Terminate(){
     l2->AddEntry(zbMETMuBin10thru20);
     l2->Draw("SAME");
     gStyle->SetOptStat(0);
+    c2->Print("../Plots/CorrectedAndZB/zb_met_corrected_mubin2.png");
     TCanvas* c3 = new TCanvas("c3","metmubin3");
     TLegend* l3 = new TLegend();
     MET_Correctedmu20thru30->Draw();
@@ -198,6 +202,7 @@ void CorrectingDistributions::Terminate(){
     l3->AddEntry(zbMETMuBin20thru30);
     l3->Draw("SAME");
     gStyle->SetOptStat(0);
+    c3->Print("../Plots/CorrectedAndZB/zb_met_corrected_mubin3.png");
     TCanvas* c4 = new TCanvas("c4","metmubin4");
     TLegend* l4 = new TLegend();
     MET_Correctedmu30thru40->Draw();
@@ -207,6 +212,7 @@ void CorrectingDistributions::Terminate(){
     l4->AddEntry(zbMETMuBin30thru40);
     l4->Draw("SAME");
     gStyle->SetOptStat(0);
+    c4->Print("../Plots/CorrectedAndZB/zb_met_corrected_mubin4.png");
     TCanvas* c5 = new TCanvas("c5","metmubin5");
     TLegend* l5 = new TLegend();
     MET_Correctedmu40thru50->Draw();
@@ -216,6 +222,7 @@ void CorrectingDistributions::Terminate(){
     l5->AddEntry(zbMETMuBin40thru50);
     l5->Draw("SAME");
     gStyle->SetOptStat(0);
+    c5->Print("../Plots/CorrectedAndZB/zb_met_corrected_mubin5.png");
     TCanvas* c6 = new TCanvas("c6","metmubin6");
     TLegend* l6 = new TLegend();
     MET_Correctedmu50thru60->SetLineColor(3);
@@ -226,6 +233,7 @@ void CorrectingDistributions::Terminate(){
     l6->AddEntry(zbMETMuBin50thru60);
     l6->Draw("SAME");
     gStyle->SetOptStat(0);
+    c6->Print("../Plots/CorrectedAndZB/zb_met_corrected_mubin6.png");
     TCanvas* c7 = new TCanvas("c7","metmubin7");
     TLegend* l7 = new TLegend();
     MET_Correctedmu60thru70->Draw();
@@ -235,6 +243,7 @@ void CorrectingDistributions::Terminate(){
     l7->AddEntry(zbMETMuBin60thru70);
     l7->Draw("SAME");
     gStyle->SetOptStat(0);
+    c7->Print("../Plots/CorrectedAndZB/zb_met_corrected_mubin7.png");
     //}}}
 
     TDirectory* corrected_met_distributions = mu_analysis_file->GetDirectory("corrected_met");
