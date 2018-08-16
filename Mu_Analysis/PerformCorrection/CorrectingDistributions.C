@@ -52,7 +52,7 @@ void CorrectingDistributions::Begin(TTree * /*tree*/)
 }
 
 
-Bool_t CorrectingDistributions::Process(Long64_t entry)
+Bool_t CorrectingDistributions::Process(Long64_t entry)//{{{
 {
    fReader.SetLocalEntry(entry);
 
@@ -85,7 +85,7 @@ Bool_t CorrectingDistributions::Process(Long64_t entry)
    }
 
    return kTRUE;
-}
+}//}}}
 Double_t CorrectingDistributions::ComputeWeight(TF1* fitFunc)//{{{
 {
     Float_t numerator = *HLT_noalg_L1XE30_prescale;
@@ -246,6 +246,7 @@ void CorrectingDistributions::Terminate(){
     c7->Print("../Plots/CorrectedAndZB/zb_met_corrected_mubin7.png");
     //}}}
 
+    // WRITE CORRECTED MET DISTRIBUTIONS TO FILE{{{
     TDirectory* corrected_met_distributions = mu_analysis_file->GetDirectory("corrected_met");
     if (!corrected_met_distributions){
         std::cout << "Corrected MET dist directory did not already exist. creating new one" << std::endl;
@@ -261,6 +262,7 @@ void CorrectingDistributions::Terminate(){
     MET_Correctedmu40thru50->Write();
     MET_Correctedmu50thru60->Write();
     MET_Correctedmu60thru70->Write();
+    //}}}
     mu_analysis_file->Close();
 }
 void CorrectingDistributions::Init(TTree *tree){fReader.SetTree(tree);}
