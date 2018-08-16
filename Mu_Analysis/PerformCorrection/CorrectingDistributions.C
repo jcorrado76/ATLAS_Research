@@ -140,7 +140,7 @@ void CorrectingDistributions::Terminate(){
     correctedCanvas->SetLogy();
     //}}}
 
-	// PLOT ZERO BIAS DISTRIBUTIONS
+	// PLOT ZERO BIAS DISTRIBUTIONS {{{
 	TCanvas* zb_MET_Canvas = new TCanvas("zbCanvas","Canvas with zerobias data");
     zbMETMuBin0thru10->SetLineColor(2);
     zbMETMuBin10thru20->SetLineColor(3);
@@ -166,6 +166,31 @@ void CorrectingDistributions::Terminate(){
     zbDistLegend->AddEntry(zbMETMuBin60thru70);
     zbDistLegend->Draw("SAME");
     zb_MET_Canvas->SetLogy();
+    //}}}
+
+
+    // PLOT CORRECTED MET WITH THE ZB MET
+    TCanvas* c1 = new TCanvas("c1","metmubin1");
+    MET_Correctedmu0thru10->Draw();
+    zbMETMuBin0thru10->Draw("SAME");
+    TCanvas* c2 = new TCanvas("c2","metmubin2");
+    MET_Correctedmu10thru20->Draw();
+    zbMETMuBin10thru20->Draw("SAME");
+    TCanvas* c3 = new TCanvas("c3","metmubin3");
+    MET_Correctedmu20thru30->Draw();
+    zbMETMuBin20thru30->Draw("SAME");
+    TCanvas* c4 = new TCanvas("c4","metmubin4");
+    MET_Correctedmu30thru40->Draw();
+    zbMETMuBin30thru40->Draw("SAME");
+    TCanvas* c5 = new TCanvas("c5","metmubin5");
+    MET_Correctedmu40thru50->Draw();
+    zbMETMuBin40thru50->Draw("SAME");
+    TCanvas* c6 = new TCanvas("c6","metmubin6");
+    MET_Correctedmu50thru60->Draw();
+    zbMETMuBin50thru60->Draw("SAME");
+    TCanvas* c7 = new TCanvas("c7","metmubin7");
+    MET_Correctedmu60thru70->Draw();
+    zbMETMuBin60thru70->Draw("SAME");
 
     TDirectory* corrected_met_distributions = mu_analysis_file->GetDirectory("corrected_met");
     if (!corrected_met_distributions){
