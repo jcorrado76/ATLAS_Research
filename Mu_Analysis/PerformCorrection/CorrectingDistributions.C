@@ -95,7 +95,7 @@ Double_t CorrectingDistributions::ComputeWeight(TF1* fitFunc)//{{{
 void CorrectingDistributions::SlaveTerminate(){}
 void CorrectingDistributions::Terminate(){
 
-    // normalize to 1 
+    // normalize to 1 {{{
     MET_Correctedmu0thru10->SetNormFactor(1.);
     MET_Correctedmu10thru20->SetNormFactor(1.);
     MET_Correctedmu20thru30->SetNormFactor(1.);
@@ -110,6 +110,7 @@ void CorrectingDistributions::Terminate(){
     zbMETMuBin40thru50->SetNormFactor(1.);
     zbMETMuBin50thru60->SetNormFactor(1.);
     zbMETMuBin60thru70->SetNormFactor(1.);
+    //}}}
 
     // plot corrected distributions {{{
     TCanvas* correctedCanvas = new TCanvas("correctedCanvas","Canvas with corrected data");
@@ -168,8 +169,7 @@ void CorrectingDistributions::Terminate(){
     zb_MET_Canvas->SetLogy();
     //}}}
 
-
-    // PLOT CORRECTED MET WITH THE ZB MET
+    // PLOT CORRECTED MET WITH THE ZB MET {{{
     TCanvas* c1 = new TCanvas("c1","metmubin1");
     MET_Correctedmu0thru10->Draw();
     zbMETMuBin0thru10->Draw("SAME");
@@ -191,6 +191,7 @@ void CorrectingDistributions::Terminate(){
     TCanvas* c7 = new TCanvas("c7","metmubin7");
     MET_Correctedmu60thru70->Draw();
     zbMETMuBin60thru70->Draw("SAME");
+    //}}}
 
     TDirectory* corrected_met_distributions = mu_analysis_file->GetDirectory("corrected_met");
     if (!corrected_met_distributions){
