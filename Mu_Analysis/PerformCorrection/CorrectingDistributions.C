@@ -169,7 +169,7 @@ void CorrectingDistributions::Terminate(){
     zbDistLegend->Draw("SAME");
     zb_MET_Canvas->SetLogy();
     gStyle->SetOptStat(0);
-    zb_MET_Canvas->Print("../Plots/CorrectedAndZB/ZB_MET_Distributions.png");
+    //zb_MET_Canvas->Print("../Plots/CorrectedAndZB/ZB_MET_Distributions.png");
     //}}}
 
     // PLOT CORRECTED MET WITH THE ZB MET {{{
