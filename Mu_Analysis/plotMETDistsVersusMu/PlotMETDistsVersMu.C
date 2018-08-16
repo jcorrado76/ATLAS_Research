@@ -103,7 +103,7 @@ void PlotMETDistsVersMu::Terminate() // Plotting{{{
     met_dist_legend->Draw("SAME");
     gPad->SetLogy();
     gStyle->SetOptStat(0);
-    zb_met_dists->Print("../Plots/ZB_MET_Distributions.png");
+    zb_met_dists->Print("../Plots/CorrectedAndZB/ZB_MET_Distributions.png");
     //}}}
     // FORMATTING EFFICIENCY CURVES{{{
     MET_Algmu0thru10Efficiency->SetLineColor(1);
