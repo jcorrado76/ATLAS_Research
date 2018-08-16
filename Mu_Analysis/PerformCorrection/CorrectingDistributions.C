@@ -21,6 +21,8 @@ void CorrectingDistributions::Begin(TTree * /*tree*/)
     efficiency_dir->GetObject("metmu50thru60Efficiency",efficiencyObjectMu50thru60);
     efficiency_dir->GetObject("metmu60thru70Efficiency",efficiencyObjectMu60thru70);
 
+    //efficiencyObjectMu0thru10->Draw();
+
     EfficiencyFitMuBin1 = (TF1*)((efficiencyObjectMu0thru10->GetListOfFunctions())->At(0));
     EfficiencyFitMuBin2 = (TF1*)((efficiencyObjectMu10thru20->GetListOfFunctions())->At(0));
     EfficiencyFitMuBin3 = (TF1*)((efficiencyObjectMu20thru30->GetListOfFunctions())->At(0));
@@ -177,7 +179,10 @@ void CorrectingDistributions::Terminate(){
     zb_MET_Canvas->SetLogy();
     */
 
-    TDirectory* corrected_met_distributions = mu_analysis_file->mkdir("corrected_met");
+    TDirectory* corrected_met_distributions = mu_analysis_file->GetDirectory("corrected_met");
+    if (!corrected_met_distributions){
+        corrected_met_distributions = mu_analysis_file->mkdir("corrected_met");
+    }
     corrected_met_distributions->cd();
     MET_Correctedmu0thru10->Write();
     MET_Correctedmu10thru20->Write();
