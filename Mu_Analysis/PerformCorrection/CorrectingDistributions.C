@@ -6,7 +6,7 @@ void CorrectingDistributions::Begin(TTree * /*tree*/)
     TString option = GetOption();
 
     // GET EFFICIENCY OBJECTS FROM FILE 
-    mu_analysis_file = TFile::Open("../Root_Files/mu_analysis.root","RECREATE");
+    mu_analysis_file = TFile::Open("../Root_Files/mu_analysis.root","UPDATE");
     mu_analysis_file->Print();
     if (mu_analysis_file->IsZombie()){
         printf("mu_analysis.root not opened");
