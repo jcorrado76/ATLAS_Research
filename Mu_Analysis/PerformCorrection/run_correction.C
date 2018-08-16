@@ -4,6 +4,6 @@
     TChain* mychain = new TChain( "METTree" , "mychain" );
     mychain->Add("~/DATA/PhysicsMain/JburrJETM10*");
     mychain->Process("CorrectingDistributions.C+g");
-    cout << "Finished running macro" << endl;
+    printf("Finished running macro");
 }
 

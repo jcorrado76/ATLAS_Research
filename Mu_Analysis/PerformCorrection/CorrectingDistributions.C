@@ -181,9 +181,12 @@ void CorrectingDistributions::Terminate(){
 
     TDirectory* corrected_met_distributions = mu_analysis_file->GetDirectory("corrected_met");
     if (!corrected_met_distributions){
+        std::cout << "Corrected MET dist directory did not already exist. creating new one" << std::endl;
         corrected_met_distributions = mu_analysis_file->mkdir("corrected_met");
     }
-    corrected_met_distributions->cd();
+    if (corrected_met_distributions->cd()){
+        std::cout << "Successfully switched to correcting met distributions directory" << std::endl;
+    }
     MET_Correctedmu0thru10->Write();
     MET_Correctedmu10thru20->Write();
     MET_Correctedmu20thru30->Write();

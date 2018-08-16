@@ -61,8 +61,16 @@ gevLow	CorrectingDistributions.h	/^    Float_t gevLow = 0.0;$/;"	m	class:Correct
 inMuRange	CorrectingDistributions.C	/^Bool_t CorrectingDistributions::inMuRange( Float_t a , Float_t b ){ \/\/{{{$/;"	f	class:CorrectingDistributions
 isGoodRun	CorrectingDistributions.C	/^Bool_t CorrectingDistributions::isGoodRun(){\/\/{{{$/;"	f	class:CorrectingDistributions
 isPassnoAlgL1XE30	CorrectingDistributions.C	/^Bool_t CorrectingDistributions::isPassnoAlgL1XE30(){ \/\/ {{{$/;"	f	class:CorrectingDistributions
+mu_analysis_file	CorrectingDistributions.h	/^    TFile* mu_analysis_file = 0;$/;"	m	class:CorrectingDistributions
 nbins	CorrectingDistributions.h	/^    Int_t nbins = (gevHigh-gevLow)\/binWidth;$/;"	m	class:CorrectingDistributions
 passedL1ZB	CorrectingDistributions.C	/^Bool_t CorrectingDistributions::passedL1ZB(){\/\/{{{$/;"	f	class:CorrectingDistributions
 xaxisTitle	CorrectingDistributions.h	/^    TString xaxisTitle = alg_name + " [GeV]";$/;"	m	class:CorrectingDistributions
 yaxisTitle	CorrectingDistributions.h	/^    TString yaxisTitle = "Number of Entries";$/;"	m	class:CorrectingDistributions
+zbMETMuBin0thru10	CorrectingDistributions.h	/^    TH1F* zbMETMuBin0thru10 = 0;$/;"	m	class:CorrectingDistributions
+zbMETMuBin10thru20	CorrectingDistributions.h	/^    TH1F* zbMETMuBin10thru20 = 0;$/;"	m	class:CorrectingDistributions
+zbMETMuBin20thru30	CorrectingDistributions.h	/^    TH1F* zbMETMuBin20thru30 = 0;$/;"	m	class:CorrectingDistributions
+zbMETMuBin30thru40	CorrectingDistributions.h	/^    TH1F* zbMETMuBin30thru40 = 0;$/;"	m	class:CorrectingDistributions
+zbMETMuBin40thru50	CorrectingDistributions.h	/^    TH1F* zbMETMuBin40thru50 = 0;$/;"	m	class:CorrectingDistributions
+zbMETMuBin50thru60	CorrectingDistributions.h	/^    TH1F* zbMETMuBin50thru60 = 0;$/;"	m	class:CorrectingDistributions
+zbMETMuBin60thru70	CorrectingDistributions.h	/^    TH1F* zbMETMuBin60thru70 = 0;$/;"	m	class:CorrectingDistributions
 ~CorrectingDistributions	CorrectingDistributions.h	/^   virtual ~CorrectingDistributions() { }$/;"	f	class:CorrectingDistributions
