@@ -105,6 +105,7 @@ void CorrectingDistributions::Terminate(){
 
 
     // RELATIVE NORMALIZATION COPIES
+    std::cout << "Creating relative normalization copies" << std::endl;
     MET_Correctedmu0thru10_copy = (TH1F*)MET_Correctedmu0thru10->Clone();
     MET_Correctedmu10thru20_copy = (TH1F*)MET_Correctedmu10thru20->Clone();
     MET_Correctedmu20thru30_copy = (TH1F*)MET_Correctedmu20thru30->Clone();
@@ -116,20 +117,26 @@ void CorrectingDistributions::Terminate(){
 
 	// DETERMINE Relative Normalization Distributions
     // These should be the same for all of the histograms, because the ticks should be the same 
-    Float_t normalization_thresh = 100.0;
-    Int_t thresh_bin = zbMETMuBin0thru10->GetBin( thresh );
+    Float_t normalization_thresh = 10.0;
+    Int_t thresh_bin = zbMETMuBin0thru10->GetBin( normalization_thresh );
+    std::cout << "bin corresponding to " << normalization_thresh << " Gev: " << thresh_bin << std::endl;
+
+    //zbMETMuBin0thru10->Draw();
+    MET_Correctedmu0thru10_copy->Draw();
 
     // determine the ratios of the bins of the original ZB to corrected at the thresh bin
     Int_t initial_bin_content = zbMETMuBin0thru10->GetBinContent( thresh_bin );
     Int_t initial_bin_content_corrected = MET_Correctedmu0thru10_copy->GetBinContent( thresh_bin );
     // renormalize the entire histogam using the ratio at the thresh bin
+    std::cout << "initial bin content: " << initial_bin_content << std::endl;
+    std::cout << "corrected initial bin content: " << initial_bin_content_corrected << std::endl;
     MET_Correctedmu0thru10_copy->Scale( initial_bin_content / initial_bin_content_corrected );
 
 
     TCanvas* relative_normalization_canvas = new TCanvas("relative_norm", "Canvas Containing Relative Normalization");
     TLegend* relative_norm_legend = new TLegend();
-    zbMETMuBin0thru10->Draw();
-    MET_Correctedmu0thru10_copy->Draw("SAME");
+    MET_Correctedmu0thru10_copy->Draw();
+    zbMETMuBin0thru10->Draw("SAME");
     relative_norm_legend->AddEntry(zbMETMuBin0thru10);
     relative_norm_legend->AddEntry(MET_Correctedmu0thru10_copy);
     relative_norm_legend->Draw("SAME");
