@@ -105,13 +105,13 @@ void CorrectingDistributions::Terminate(){
 
 
     // RELATIVE NORMALIZATION COPIES
-    MET_Correctedmu0thru10->Clone( MET_Correctedmu0thru10_copy );
-    MET_Correctedmu10thru20->Clone( MET_Correctedmu10thru20_copy );
-    MET_Correctedmu20thru30->Clone( MET_Correctedmu20thru30_copy );
-    MET_Correctedmu30thru40->Clone( MET_Correctedmu30thru40_copy );
-    MET_Correctedmu40thru50->Clone( MET_Correctedmu40thru50_copy );
-    MET_Correctedmu50thru60->Clone( MET_Correctedmu50thru60_copy );
-    MET_Correctedmu60thru70->Clone( MET_Correctedmu60thru70_copy );
+    MET_Correctedmu0thru10_copy = (TH1F*)MET_Correctedmu0thru10->Clone();
+    MET_Correctedmu10thru20_copy = (TH1F*)MET_Correctedmu10thru20->Clone();
+    MET_Correctedmu20thru30_copy = (TH1F*)MET_Correctedmu20thru30->Clone();
+    MET_Correctedmu30thru40_copy = (TH1F*)MET_Correctedmu30thru40->Clone();
+    MET_Correctedmu40thru50_copy = (TH1F*)MET_Correctedmu40thru50->Clone();
+    MET_Correctedmu50thru60_copy = (TH1F*)MET_Correctedmu50thru60->Clone();
+    MET_Correctedmu60thru70_copy = (TH1F*)MET_Correctedmu60thru70->Clone();
 
 
 	// DETERMINE Relative Normalization Distributions
