@@ -115,11 +115,16 @@ void CorrectingDistributions::Terminate(){
 
 
 	// DETERMINE Relative Normalization Distributions
+    // These should be the same for all of the histograms, because the ticks should be the same 
     Float_t normalization_thresh = 100.0;
     Int_t thresh_bin = zbMETMuBin0thru10->GetBin( thresh );
+
+    // determine the ratios of the bins of the original ZB to corrected at the thresh bin
     Int_t initial_bin_content = zbMETMuBin0thru10->GetBinContent( thresh_bin );
-    Int_t initial_bin_content_corrected = correctedmetdistmubin1->GetBinContent( thresh_bin );
+    Int_t initial_bin_content_corrected = MET_Correctedmu0thru10_copy->GetBinContent( thresh_bin );
+    // renormalize the entire histogam using the ratio at the thresh bin
     MET_Correctedmu0thru10_copy->Scale( initial_bin_content / initial_bin_content_corrected );
+
 
     zbMETMuBin0thru10->Draw();
     MET_Correctedmu0thru10_copy->Draw("SAME");
