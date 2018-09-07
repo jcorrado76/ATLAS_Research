@@ -49,6 +49,14 @@ void CorrectingDistributions::Begin(TTree * /*tree*/)
     MET_Correctedmu50thru60 = new TH1F("correctedmetmu50thru60","Corrected Data for actint between 50 and 60", nbins , gevLow , gevHigh );
     MET_Correctedmu60thru70 = new TH1F("correctedmetmu60thru70","Corrected Data for actint between 60 and 70", nbins , gevLow , gevHigh );
 
+    /*MET_Correctedmu0thru10_copy = new TH1F("correctedmetmu0thru10_copy","Copy of Corrected Data for actint between 0 and 10", nbins , gevLow , gevHigh );
+    MET_Correctedmu10thru20_copy = new TH1F("correctedmetmu10thru20_copy","Copy of Corrected Data for actint between 10 and 20", nbins , gevLow , gevHigh );
+    MET_Correctedmu20thru30_copy = new TH1F("correctedmetmu20thru30_copy","Copy of Corrected Data for actint between 20 and 30", nbins , gevLow , gevHigh );
+    MET_Correctedmu30thru40_copy = new TH1F("correctedmetmu30thru40_copy","Copy of Corrected Data for actint between 30 to 40", nbins , gevLow , gevHigh );
+    MET_Correctedmu40thru50_copy = new TH1F("correctedmetmu40thru50_copy","Copy of Corrected Data for actint between 40 to 50", nbins , gevLow , gevHigh );
+    MET_Correctedmu50thru60_copy = new TH1F("correctedmetmu50thru60_copy","Copy of Corrected Data for actint between 50 and 60", nbins , gevLow , gevHigh );
+    MET_Correctedmu60thru70_copy = new TH1F("correctedmetmu60thru70_copy","Copy of Corrected Data for actint between 60 and 70", nbins , gevLow , gevHigh );
+	*/
 }
 
 
@@ -94,6 +102,33 @@ Double_t CorrectingDistributions::ComputeWeight(TF1* fitFunc)//{{{
 }//}}}
 void CorrectingDistributions::SlaveTerminate(){}
 void CorrectingDistributions::Terminate(){
+
+
+    // RELATIVE NORMALIZATION COPIES
+    MET_Correctedmu0thru10->Copy( MET_Correctedmu0thru10_copy );
+    MET_Correctedmu10thru20->Copy( MET_Correctedmu10thru20_copy );
+    MET_Correctedmu20thru30->Copy( MET_Correctedmu20thru30_copy );
+    MET_Correctedmu30thru40->Copy( MET_Correctedmu30thru40_copy );
+    MET_Correctedmu40thru50->Copy( MET_Correctedmu40thru50_copy );
+    MET_Correctedmu50thru60->Copy( MET_Correctedmu50thru60_copy );
+    MET_Correctedmu60thru70->Copy( MET_Correctedmu60thru70_copy );
+
+
+	// DETERMINE Relative Normalization Distributions
+    Float_t normalization_thresh = 100.0;
+    Int_t thresh_bin = zbMETMuBin0thru10->GetBin( thresh );
+    Int_t initial_bin_content = zbMETMuBin0thru10->GetBinContent( thresh_bin );
+    Int_t initial_bin_content_corrected = correctedmetdistmubin1->GetBinContent( thresh_bin );
+    MET_Correctedmu0thru10_copy->Scale( initial_bin_content / initial_bin_content_corrected );
+
+    zbMETMuBin0thru10->Draw();
+    MET_Correctedmu0thru10_copy->Draw("SAME");
+
+
+
+
+
+
 
     // normalize to 1 {{{
     MET_Correctedmu0thru10->SetNormFactor(1.);

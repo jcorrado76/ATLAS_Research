@@ -12,20 +12,20 @@ void compute_relative_normalization(){
     Int_t nbins = 100;
 
     TH1F* metdistmubin1 = new TH1F("h1","mubin1", nbins ,metlow,methigh);
-    TH1F* metdistmubin2 = new TH1F("h2","mubin2", nbins, metlow, methigh);
+/*    TH1F* metdistmubin2 = new TH1F("h2","mubin2", nbins, metlow, methigh);
     TH1F* metdistmubin3 = new TH1F("h3","mubin3", nbins, metlow, methigh);
     TH1F* metdistmubin4 = new TH1F("h4","mubin4", nbins, metlow, methigh);
     TH1F* metdistmubin5 = new TH1F("h5","mubin5", nbins, metlow, methigh);
     TH1F* metdistmubin6 = new TH1F("h6","mubin6", nbins, metlow, methigh);
-    TH1F* metdistmubin7 = new TH1F("h7","mubin7", nbins, metlow, methigh);
+    TH1F* metdistmubin7 = new TH1F("h7","mubin7", nbins, metlow, methigh);*/
 
     TH1F* correctedmetdistmubin1 = new TH1F("correctedh1","correctedmubin1", nbins, metlow, methigh);
-    TH1F* correctedmetdistmubin2 = new TH1F("correctedh2","correctedmubin2", nbins, metlow, methigh);
+    /*TH1F* correctedmetdistmubin2 = new TH1F("correctedh2","correctedmubin2", nbins, metlow, methigh);
     TH1F* correctedmetdistmubin3 = new TH1F("correctedh3","correctedmubin3", nbins, metlow, methigh);
     TH1F* correctedmetdistmubin4 = new TH1F("correctedh4","correctedmubin4", nbins, metlow, methigh);
     TH1F* correctedmetdistmubin5 = new TH1F("correctedh5","correctedmubin5", nbins, metlow, methigh);
     TH1F* correctedmetdistmubin6 = new TH1F("correctedh6","correctedmubin6", nbins, metlow, methigh);
-    TH1F* correctedmetdistmubin7 = new TH1F("correctedh7","correctedmubin7", nbins, metlow, methigh);
+    TH1F* correctedmetdistmubin7 = new TH1F("correctedh7","correctedmubin7", nbins, metlow, methigh);*/
 
     // open the zerobias distribution directory 
     TDirectory* zb_dir = mu_analysis_file->GetDirectory( "zb_met" );

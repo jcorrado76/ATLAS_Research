@@ -44,6 +44,22 @@ public :
     TH1F* zbMETMuBin50thru60 = 0;
     TH1F* zbMETMuBin60thru70 = 0;
 
+    TH1F*            MET_Correctedmu0thru10_copy = 0;
+    TH1F*            MET_Correctedmu10thru20_copy = 0;
+    TH1F*            MET_Correctedmu20thru30_copy = 0;
+    TH1F*            MET_Correctedmu30thru40_copy = 0;
+    TH1F*            MET_Correctedmu40thru50_copy = 0;
+    TH1F*            MET_Correctedmu50thru60_copy = 0;
+    TH1F*            MET_Correctedmu60thru70_copy = 0;
+
+    TH1F* zbMETMuBin0thru10_copy = 0;
+    TH1F* zbMETMuBin10thru20_copy = 0;
+    TH1F* zbMETMuBin20thru30_copy = 0;
+    TH1F* zbMETMuBin30thru40_copy = 0;
+    TH1F* zbMETMuBin40thru50_copy = 0;
+    TH1F* zbMETMuBin50thru60_copy = 0;
+    TH1F* zbMETMuBin60thru70_copy = 0;
+
     TF1*             EfficiencyFitMuBin1 = 0;
     TF1*             EfficiencyFitMuBin2 = 0;
     TF1*             EfficiencyFitMuBin3 = 0;
