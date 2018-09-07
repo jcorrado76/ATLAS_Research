@@ -126,8 +126,12 @@ void CorrectingDistributions::Terminate(){
     MET_Correctedmu0thru10_copy->Scale( initial_bin_content / initial_bin_content_corrected );
 
 
+    TCanvas* relative_normalization_canvas = new TCanvas("relative_norm", "Canvas Containing Relative Normalization");
+    TLegend* relative_norm_legend = new TLegend();
     zbMETMuBin0thru10->Draw();
     MET_Correctedmu0thru10_copy->Draw("SAME");
+    relative_norm_legend->AddEntry(zbMETMuBin0thru10);
+    relative_norm_legend->AddEntry(MET_Correctedmu0thru10_copy);
 
 
 
