@@ -132,6 +132,8 @@ void CorrectingDistributions::Terminate(){
     MET_Correctedmu0thru10_copy->Draw("SAME");
     relative_norm_legend->AddEntry(zbMETMuBin0thru10);
     relative_norm_legend->AddEntry(MET_Correctedmu0thru10_copy);
+    relative_norm_legend->Draw("SAME");
+    gStyle->SetOptStat(0);
 
 
 
