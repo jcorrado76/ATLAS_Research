@@ -95,43 +95,41 @@ Double_t CorrectingDistributions::ComputeWeight(TF1* fitFunc)//{{{
 }//}}}
 void CorrectingDistributions::SlaveTerminate(){}
 void CorrectingDistributions::Terminate(){
-
-
-    TCanvas* check_canvas = new TCanvas("check","checking shapes of two distributinos");
-    std::cout << zbMETMuBin40thru50->Integral() << std::endl;
-    std::cout << MET_Correctedmu40thru50->Integral() << std::endl;
-    zbMETMuBin40thru50->Draw();
-    MET_Correctedmu40thru50->Draw("SAME");
-    TLegend* check_legend = new TLegend();
-    check_legend->AddEntry( zbMETMuBin40thru50 );
-    check_legend->AddEntry( MET_Correctedmu40thru50 );
-    check_legend->Draw("SAME");
-    check_canvas->SetLogy();
-
 	// DETERMINE Relative Normalization Distributions
-    Float_t normalization_thresh = 40.0;
-    Int_t thresh_bin = zbMETMuBin40thru50->GetBin( normalization_thresh );
-    printf("Thresh bin: %d\n" , thresh_bin );
-    Double_t initial_bin_content = zbMETMuBin40thru50->GetBinContent( thresh_bin );
-    std::cout << "ZB MET Bin Content: " << initial_bin_content << std::endl;
-    Double_t initial_bin_content_corrected = MET_Correctedmu40thru50->GetBinContent( thresh_bin );
-    std::cout << "Corrected MET Bin Content: " << initial_bin_content_corrected << std::endl;
-    Double_t scale_factor = initial_bin_content / initial_bin_content_corrected;
-    std::cout << "Scale Factor: " << scale_factor << std::endl;
-    // These should be the same for all of the histograms, because the ticks should be the same 
+    // BinWidth = 1.0 GeV
+    Float_t normalization_bin = 40; // corresponds to 40 GeV
+    // Scale the corrected ones to the original zb ones
+    Double_t scale_factor1 = zbMETMuBin0thru10->GetBinContent( normalization_bin ) / MET_Correctedmu0thru10->GetBinContent( normalization_bin );
+    Double_t scale_factor2 = zbMETMuBin10thru20->GetBinContent( normalization_bin ) / MET_Correctedmu10thru20->GetBinContent( normalization_bin );
+    Double_t scale_factor3 = zbMETMuBin20thru30->GetBinContent( normalization_bin ) / MET_Correctedmu20thru30->GetBinContent( normalization_bin );
+    Double_t scale_factor4 = zbMETMuBin30thru40->GetBinContent( normalization_bin ) / MET_Correctedmu30thru40->GetBinContent( normalization_bin );
+    Double_t scale_factor5 = zbMETMuBin40thru50->GetBinContent( normalization_bin ) / MET_Correctedmu40thru50->GetBinContent( normalization_bin );
+    Double_t scale_factor6 = zbMETMuBin50thru60->GetBinContent( normalization_bin ) / MET_Correctedmu50thru60->GetBinContent( normalization_bin );
+    Double_t scale_factor7 = zbMETMuBin60thru70->GetBinContent( normalization_bin ) / MET_Correctedmu60thru70->GetBinContent( normalization_bin );
+
+    zbMETMuBin0thru10->SetNormFactor(1.);
+    zbMETMuBin10thru20->SetNormFactor(1.);
+    zbMETMuBin20thru30->SetNormFactor(1.);
+    zbMETMuBin30thru40->SetNormFactor(1.);
     zbMETMuBin40thru50->SetNormFactor(1.);
+    zbMETMuBin50thru60->SetNormFactor(1.);
+    zbMETMuBin60thru70->SetNormFactor(1.);
+
+    MET_Correctedmu0thru10->SetNormFactor(1.);
+    MET_Correctedmu10thru20->SetNormFactor(1.);
+    MET_Correctedmu20thru30->SetNormFactor(1.);
+    MET_Correctedmu30thru40->SetNormFactor(1.);
     MET_Correctedmu40thru50->SetNormFactor(1.);
+    MET_Correctedmu50thru60->SetNormFactor(1.);
+    MET_Correctedmu60thru70->SetNormFactor(1.);
 
-    MET_Correctedmu40thru50->Scale( scale_factor );
-    Double_t scaled_bin_content_corrected = MET_Correctedmu40thru50->GetBinContent( thresh_bin ) ;
-    std::cout << "Corrected MET Bin Content After Scaling: " << MET_Correctedmu40thru50->GetBinContent( thresh_bin ) << std::endl;
-
-
-    if ( abs( scaled_bin_content_corrected - initial_bin_content ) < 5 ){
-        printf("Bin content of corrected matches initial zb after relative normalization: True\n");
-    }
-
-
+    MET_Correctedmu0thru10->Scale( scale_factor1 );
+    MET_Correctedmu10thru20->Scale( scale_factor2 );
+    MET_Correctedmu20thru30->Scale( scale_factor3 );
+    MET_Correctedmu30thru40->Scale( scale_factor4 );
+    MET_Correctedmu40thru50->Scale( scale_factor5 );
+    MET_Correctedmu50thru60->Scale( scale_factor6 );
+    MET_Correctedmu60thru70->Scale( scale_factor7 );
 
     //}}}
 
