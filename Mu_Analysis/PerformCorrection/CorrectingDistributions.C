@@ -49,14 +49,6 @@ void CorrectingDistributions::Begin(TTree * /*tree*/)
     MET_Correctedmu50thru60 = new TH1F("correctedmetmu50thru60","Corrected Data for actint between 50 and 60", nbins , gevLow , gevHigh );
     MET_Correctedmu60thru70 = new TH1F("correctedmetmu60thru70","Corrected Data for actint between 60 and 70", nbins , gevLow , gevHigh );
 
-    /*MET_Correctedmu0thru10_copy = new TH1F("correctedmetmu0thru10_copy","Copy of Corrected Data for actint between 0 and 10", nbins , gevLow , gevHigh );
-    MET_Correctedmu10thru20_copy = new TH1F("correctedmetmu10thru20_copy","Copy of Corrected Data for actint between 10 and 20", nbins , gevLow , gevHigh );
-    MET_Correctedmu20thru30_copy = new TH1F("correctedmetmu20thru30_copy","Copy of Corrected Data for actint between 20 and 30", nbins , gevLow , gevHigh );
-    MET_Correctedmu30thru40_copy = new TH1F("correctedmetmu30thru40_copy","Copy of Corrected Data for actint between 30 to 40", nbins , gevLow , gevHigh );
-    MET_Correctedmu40thru50_copy = new TH1F("correctedmetmu40thru50_copy","Copy of Corrected Data for actint between 40 to 50", nbins , gevLow , gevHigh );
-    MET_Correctedmu50thru60_copy = new TH1F("correctedmetmu50thru60_copy","Copy of Corrected Data for actint between 50 and 60", nbins , gevLow , gevHigh );
-    MET_Correctedmu60thru70_copy = new TH1F("correctedmetmu60thru70_copy","Copy of Corrected Data for actint between 60 and 70", nbins , gevLow , gevHigh );
-	*/
 }
 
 
@@ -103,48 +95,21 @@ Double_t CorrectingDistributions::ComputeWeight(TF1* fitFunc)//{{{
 void CorrectingDistributions::SlaveTerminate(){}
 void CorrectingDistributions::Terminate(){
 
-
-    // RELATIVE NORMALIZATION COPIES
-    std::cout << "Creating relative normalization copies" << std::endl;
-    MET_Correctedmu0thru10_copy = (TH1F*)MET_Correctedmu0thru10->Clone();
-    MET_Correctedmu10thru20_copy = (TH1F*)MET_Correctedmu10thru20->Clone();
-    MET_Correctedmu20thru30_copy = (TH1F*)MET_Correctedmu20thru30->Clone();
-    MET_Correctedmu30thru40_copy = (TH1F*)MET_Correctedmu30thru40->Clone();
-    MET_Correctedmu40thru50_copy = (TH1F*)MET_Correctedmu40thru50->Clone();
-    MET_Correctedmu50thru60_copy = (TH1F*)MET_Correctedmu50thru60->Clone();
-    MET_Correctedmu60thru70_copy = (TH1F*)MET_Correctedmu60thru70->Clone();
-
-
 	// DETERMINE Relative Normalization Distributions
     // These should be the same for all of the histograms, because the ticks should be the same 
     Float_t normalization_thresh = 10.0;
     Int_t thresh_bin = zbMETMuBin40thru50->GetBin( normalization_thresh );
 
-    // normalize to 1 {{{
-    zbMETMuBin0thru10->SetNormFactor(1.);
-    zbMETMuBin10thru20->SetNormFactor(1.);
-    zbMETMuBin20thru30->SetNormFactor(1.);
-    zbMETMuBin30thru40->SetNormFactor(1.);
-    zbMETMuBin40thru50->SetNormFactor(1.);
-    zbMETMuBin50thru60->SetNormFactor(1.);
-    zbMETMuBin60thru70->SetNormFactor(1.);
-    MET_Correctedmu0thru10->SetNormFactor(1.);
-    MET_Correctedmu10thru20->SetNormFactor(1.);
-    MET_Correctedmu20thru30->SetNormFactor(1.);
-    MET_Correctedmu30thru40->SetNormFactor(1.);
-
     Double_t initial_bin_content = zbMETMuBin40thru50->GetBinContent( thresh_bin );
-    Double_t initial_bin_content_corrected = MET_Correctedmu40thru50_copy->GetBinContent( thresh_bin );
+    Double_t initial_bin_content_corrected = MET_Correctedmu40thru50->GetBinContent( thresh_bin );
     Double_t scale_factor = initial_bin_content / initial_bin_content_corrected;
 
     std::cout << "ZB MET Bin Content: " << initial_bin_content << std::endl;
     std::cout << "Corrected MET Bin Content: " << initial_bin_content_corrected << std::endl;
     std::cout << "Scale Factor: " << scale_factor << std::endl;
 
-    MET_Correctedmu40thru50_copy->Scale( scale_factor );
-    std::cout << "Corrected MET Bin Content After Scaling: " << MET_Correctedmu40thru50_copy->GetBinContent( thresh_bin ) << std::endl;
-    MET_Correctedmu50thru60->SetNormFactor(1.);
-    MET_Correctedmu60thru70->SetNormFactor(1.);
+    MET_Correctedmu40thru50->Scale( scale_factor );
+    std::cout << "Corrected MET Bin Content After Scaling: " << MET_Correctedmu40thru50->GetBinContent( thresh_bin ) << std::endl;
     //}}}
 
     // plot corrected distributions {{{
@@ -217,6 +182,7 @@ void CorrectingDistributions::Terminate(){
     l1->AddEntry(zbMETMuBin0thru10);
     l1->Draw("SAME");
     gStyle->SetOptStat(0);
+    c1->SetLogy();
     c1->Print("../Plots/CorrectedAndZB/zb_met_corrected_mubin1.png");
     TCanvas* c2 = new TCanvas("c2","metmubin2");
     TLegend* l2 = new TLegend(0.48,0.7,0.9,0.9);
@@ -227,6 +193,7 @@ void CorrectingDistributions::Terminate(){
     l2->AddEntry(zbMETMuBin10thru20);
     l2->Draw("SAME");
     gStyle->SetOptStat(0);
+    c2->SetLogy();
     c2->Print("../Plots/CorrectedAndZB/zb_met_corrected_mubin2.png");
     TCanvas* c3 = new TCanvas("c3","metmubin3");
     TLegend* l3 = new TLegend(0.48,0.7,0.9,0.9);
@@ -236,6 +203,7 @@ void CorrectingDistributions::Terminate(){
     l3->AddEntry(MET_Correctedmu20thru30);
     l3->AddEntry(zbMETMuBin20thru30);
     l3->Draw("SAME");
+    c3->SetLogy();
     gStyle->SetOptStat(0);
     c3->Print("../Plots/CorrectedAndZB/zb_met_corrected_mubin3.png");
     TCanvas* c4 = new TCanvas("c4","metmubin4");
@@ -246,6 +214,7 @@ void CorrectingDistributions::Terminate(){
     l4->AddEntry(MET_Correctedmu30thru40);
     l4->AddEntry(zbMETMuBin30thru40);
     l4->Draw("SAME");
+    c4->SetLogy();
     gStyle->SetOptStat(0);
     c4->Print("../Plots/CorrectedAndZB/zb_met_corrected_mubin4.png");
     TCanvas* c5 = new TCanvas("c5","metmubin5");
@@ -257,6 +226,7 @@ void CorrectingDistributions::Terminate(){
     l5->AddEntry(zbMETMuBin40thru50);
     l5->Draw("SAME");
     gStyle->SetOptStat(0);
+    c5->SetLogy();
     c5->Print("../Plots/CorrectedAndZB/zb_met_corrected_mubin5.png");
     TCanvas* c6 = new TCanvas("c6","metmubin6");
     TLegend* l6 = new TLegend(0.48,0.7,0.9,0.9);
@@ -268,6 +238,7 @@ void CorrectingDistributions::Terminate(){
     l6->AddEntry(zbMETMuBin50thru60);
     l6->Draw("SAME");
     gStyle->SetOptStat(0);
+    c6->SetLogy();
     c6->Print("../Plots/CorrectedAndZB/zb_met_corrected_mubin6.png");
     TCanvas* c7 = new TCanvas("c7","metmubin7");
     TLegend* l7 = new TLegend(0.48,0.7,0.9,0.9);
@@ -278,6 +249,7 @@ void CorrectingDistributions::Terminate(){
     l7->AddEntry(zbMETMuBin60thru70);
     l7->Draw("SAME");
     gStyle->SetOptStat(0);
+    c7->SetLogy();
     c7->Print("../Plots/CorrectedAndZB/zb_met_corrected_mubin7.png");
     //}}}
 

@@ -75,23 +75,31 @@ void PlotMETDistsVersMu::Terminate() // Plotting{{{
     MET_Datamu40thru50->SetLineColor(12);
     MET_Datamu50thru60->SetLineColor(6);
     MET_Datamu60thru70->SetLineColor(9);
+    // Make Copies for Normalization
+    TH1F* MET_Datamu0thru10_Copy = (TH1F*) MET_Datamu0thru10->Clone();
+    TH1F* MET_Datamu10thru20_Copy = (TH1F*) MET_Datamu10thru20->Clone();
+    TH1F* MET_Datamu20thru30_Copy = (TH1F*) MET_Datamu20thru30->Clone();
+    TH1F* MET_Datamu30thru40_Copy = (TH1F*) MET_Datamu30thru40->Clone();
+    TH1F* MET_Datamu40thru50_Copy = (TH1F*) MET_Datamu40thru50->Clone();
+    TH1F* MET_Datamu50thru60_Copy = (TH1F*) MET_Datamu50thru60->Clone();
+    TH1F* MET_Datamu60thru70_Copy = (TH1F*) MET_Datamu60thru70->Clone();//}}}
     // normalize to 1 
-    MET_Datamu0thru10->SetNormFactor(1.);
-    MET_Datamu10thru20->SetNormFactor(1.);
-    MET_Datamu20thru30->SetNormFactor(1.);
-    MET_Datamu30thru40->SetNormFactor(1.);
-    MET_Datamu40thru50->SetNormFactor(1.);
-    MET_Datamu50thru60->SetNormFactor(1.);
-    MET_Datamu60thru70->SetNormFactor(1.);//}}}
+    MET_Datamu0thru10_Copy->SetNormFactor(1.);
+    MET_Datamu10thru20_Copy->SetNormFactor(1.);
+    MET_Datamu20thru30_Copy->SetNormFactor(1.);
+    MET_Datamu30thru40_Copy->SetNormFactor(1.);
+    MET_Datamu40thru50_Copy->SetNormFactor(1.);
+    MET_Datamu50thru60_Copy->SetNormFactor(1.);
+    MET_Datamu60thru70_Copy->SetNormFactor(1.);//}}}
     // PLOT ZB DATA{{{
     TCanvas* zb_met_dists = new TCanvas("zb_met_plot","Plot of MET Distribution in Mu Slices");
-    MET_Datamu0thru10->Draw();
-    MET_Datamu10thru20->Draw("SAME");
-    MET_Datamu20thru30->Draw("SAME");
-    MET_Datamu30thru40->Draw("SAME");
-    MET_Datamu40thru50->Draw("SAME");
-    MET_Datamu50thru60->Draw("SAME");
-    MET_Datamu60thru70->Draw("SAME");
+    MET_Datamu0thru10_Copy->Draw();
+    MET_Datamu10thru20_Copy->Draw("SAME");
+    MET_Datamu20thru30_Copy->Draw("SAME");
+    MET_Datamu30thru40_Copy->Draw("SAME");
+    MET_Datamu40thru50_Copy->Draw("SAME");
+    MET_Datamu50thru60_Copy->Draw("SAME");
+    MET_Datamu60thru70_Copy->Draw("SAME");
     TLegend* met_dist_legend = new TLegend();
     met_dist_legend->AddEntry(MET_Datamu0thru10);
     met_dist_legend->AddEntry(MET_Datamu10thru20);
