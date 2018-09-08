@@ -95,7 +95,7 @@ Double_t CorrectingDistributions::ComputeWeight(TF1* fitFunc)//{{{
 }//}}}
 void CorrectingDistributions::SlaveTerminate(){}
 void CorrectingDistributions::Terminate(){
-	// DETERMINE Relative Normalization Distributions
+	// Relative Normalization{{{
     // BinWidth = 1.0 GeV
     Float_t normalization_bin = 40; // corresponds to 40 GeV
     // Scale the corrected ones to the original zb ones
