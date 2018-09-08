@@ -76,7 +76,7 @@ public :
     TEfficiency* efficiencyObjectMu50thru60 = 0;
     TEfficiency* efficiencyObjectMu60thru70 = 0;
 
-    Float_t binWidth = 5.0;
+    Float_t binWidth = 1.0;
     Float_t gevLow = 0.0;
     Float_t gevHigh = 300.0;
     Int_t nbins = (gevHigh-gevLow)/binWidth;

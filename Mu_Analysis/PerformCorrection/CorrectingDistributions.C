@@ -41,6 +41,7 @@ void CorrectingDistributions::Begin(TTree * /*tree*/)
     met_dir->GetObject("metmu50thru60",zbMETMuBin50thru60);
     met_dir->GetObject("metmu60thru70",zbMETMuBin60thru70);
 
+    
     MET_Correctedmu0thru10 = new TH1F("correctedmetmu0thru10","Corrected Data for actint between 0 and 10", nbins , gevLow , gevHigh );
     MET_Correctedmu10thru20 = new TH1F("correctedmetmu10thru20","Corrected Data for actint between 10 and 20", nbins , gevLow , gevHigh );
     MET_Correctedmu20thru30 = new TH1F("correctedmetmu20thru30","Corrected Data for actint between 20 and 30", nbins , gevLow , gevHigh );
@@ -95,21 +96,43 @@ Double_t CorrectingDistributions::ComputeWeight(TF1* fitFunc)//{{{
 void CorrectingDistributions::SlaveTerminate(){}
 void CorrectingDistributions::Terminate(){
 
+
+    TCanvas* check_canvas = new TCanvas("check","checking shapes of two distributinos");
+    std::cout << zbMETMuBin40thru50->Integral() << std::endl;
+    std::cout << MET_Correctedmu40thru50->Integral() << std::endl;
+    zbMETMuBin40thru50->Draw();
+    MET_Correctedmu40thru50->Draw("SAME");
+    TLegend* check_legend = new TLegend();
+    check_legend->AddEntry( zbMETMuBin40thru50 );
+    check_legend->AddEntry( MET_Correctedmu40thru50 );
+    check_legend->Draw("SAME");
+    check_canvas->SetLogy();
+
 	// DETERMINE Relative Normalization Distributions
-    // These should be the same for all of the histograms, because the ticks should be the same 
-    Float_t normalization_thresh = 10.0;
+    Float_t normalization_thresh = 40.0;
     Int_t thresh_bin = zbMETMuBin40thru50->GetBin( normalization_thresh );
-
+    printf("Thresh bin: %d\n" , thresh_bin );
     Double_t initial_bin_content = zbMETMuBin40thru50->GetBinContent( thresh_bin );
-    Double_t initial_bin_content_corrected = MET_Correctedmu40thru50->GetBinContent( thresh_bin );
-    Double_t scale_factor = initial_bin_content / initial_bin_content_corrected;
-
     std::cout << "ZB MET Bin Content: " << initial_bin_content << std::endl;
+    Double_t initial_bin_content_corrected = MET_Correctedmu40thru50->GetBinContent( thresh_bin );
     std::cout << "Corrected MET Bin Content: " << initial_bin_content_corrected << std::endl;
+    Double_t scale_factor = initial_bin_content / initial_bin_content_corrected;
     std::cout << "Scale Factor: " << scale_factor << std::endl;
+    // These should be the same for all of the histograms, because the ticks should be the same 
+    zbMETMuBin40thru50->SetNormFactor(1.);
+    MET_Correctedmu40thru50->SetNormFactor(1.);
 
     MET_Correctedmu40thru50->Scale( scale_factor );
+    Double_t scaled_bin_content_corrected = MET_Correctedmu40thru50->GetBinContent( thresh_bin ) ;
     std::cout << "Corrected MET Bin Content After Scaling: " << MET_Correctedmu40thru50->GetBinContent( thresh_bin ) << std::endl;
+
+
+    if ( abs( scaled_bin_content_corrected - initial_bin_content ) < 5 ){
+        printf("Bin content of corrected matches initial zb after relative normalization: True\n");
+    }
+
+
+
     //}}}
 
     // plot corrected distributions {{{
