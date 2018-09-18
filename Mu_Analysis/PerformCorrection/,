@@ -40,7 +40,7 @@ void CorrectingDistributions::Begin(TTree * /*tree*/)
         printf("Could not open directory \'met_dir\'");
         return;
     }
-    printf("%s\n",gDirectory->GetName());
+    printf(gDirectory);
     met_dir->GetObject("metmu0thru10",zbMETMuBin0thru10);
     met_dir->GetObject("metmu10thru20",zbMETMuBin10thru20);
     met_dir->GetObject("metmu20thru30",zbMETMuBin20thru30);
@@ -49,42 +49,42 @@ void CorrectingDistributions::Begin(TTree * /*tree*/)
     met_dir->GetObject("metmu50thru60",zbMETMuBin50thru60);
     met_dir->GetObject("metmu60thru70",zbMETMuBin60thru70);
     if ( !zbMETMuBin0thru10 ){
-        printf("Could not get zb met 0 thru 10\n");
+        printf("Could not get zb met 0 thru 10");
         if ( met_dir->GetListOfKeys()->Contains("metmu0thru10")){
             printf("But zb met 0 thru 10 exists in met_dir directory");
             return;
         }
     }
     else if ( !zbMETMuBin10thru20 ){
-        printf("Could not get zb met 10 thru 20\n");
+        printf("Could not get zb met 10 thru 20");
         if ( met_dir->GetListOfKeys()->Contains("metmu10thru20")){
             printf("But zb met 10 thru 20 exists in met_dir directory");
             return;
         }
     }
     else if ( !zbMETMuBin20thru30 ){
-        printf("Could not get zb met 20 thru 30\n");
+        printf("Could not get zb met 20 thru 30");
         if ( met_dir->GetListOfKeys()->Contains("metmu20thru30")){
             printf("But zb met 20 thru 30 exists in met_dir directory");
             return;
         }
     }
     else if ( !zbMETMuBin30thru40 ){
-        printf("Could not get zb met 30 thru 40\n");
+        printf("Could not get zb met 30 thru 40");
         if ( met_dir->GetListOfKeys()->Contains("metmu30thru40")){
             printf("But zb met 30 thru 40 exists in met_dir directory");
             return;
         }
     }
     else if (!zbMETMuBin40thru50){
-        printf("Could not get zb met 40 thru 50\n");
+        printf("Could not get zb met 40 thru 50");
         if ( met_dir->GetListOfKeys()->Contains("metmu40thru50")){
             printf("But zb met 40 thru 50 exists in met_dir directory");
             return;
         }
     }
     else if (!zbMETMuBin50thru60 ){
-        printf("Could not get zb met 50 thru 60\n");
+        printf("Could not get zb met 50 thru 60");
         if ( met_dir->GetListOfKeys()->Contains("metmu50thru60")){
             printf("But zb met 50 thru 60 exists in met_dir directory");
             return;
