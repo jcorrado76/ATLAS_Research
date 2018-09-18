@@ -40,6 +40,7 @@ void CorrectingDistributions::Begin(TTree * /*tree*/)
         printf("Could not open directory \'met_dir\'");
         return;
     }
+    printf(gDirectory);
     met_dir->GetObject("metmu0thru10",zbMETMuBin0thru10);
     met_dir->GetObject("metmu10thru20",zbMETMuBin10thru20);
     met_dir->GetObject("metmu20thru30",zbMETMuBin20thru30);
@@ -47,6 +48,55 @@ void CorrectingDistributions::Begin(TTree * /*tree*/)
     met_dir->GetObject("metmu40thru50",zbMETMuBin40thru50);
     met_dir->GetObject("metmu50thru60",zbMETMuBin50thru60);
     met_dir->GetObject("metmu60thru70",zbMETMuBin60thru70);
+    if ( !zbMETMuBin0thru10 ){
+        printf("Could not get zb met 0 thru 10");
+        if ( met_dir->GetListOfKeys()->Contains("metmu0thru10")){
+            printf("But zb met 0 thru 10 exists in met_dir directory");
+            return;
+        }
+    }
+    else if ( !zbMETMuBin10thru20 ){
+        printf("Could not get zb met 10 thru 20");
+        if ( met_dir->GetListOfKeys()->Contains("metmu0thru10")){
+            printf("But zb met 0 thru 10 exists in met_dir directory");
+            return;
+        }
+    }
+    else if ( !zbMETMuBin20thru30 ){
+        printf("Could not get zb met 20 thru 30");
+        if ( met_dir->GetListOfKeys()->Contains("metmu0thru10")){
+            printf("But zb met 0 thru 10 exists in met_dir directory");
+            return;
+        }
+    }
+    else if ( !zbMETMuBin30thru40 ){
+        printf("Could not get zb met 30 thru 40");
+        if ( met_dir->GetListOfKeys()->Contains("metmu0thru10")){
+            printf("But zb met 0 thru 10 exists in met_dir directory");
+            return;
+        }
+    }
+    else if (!zbMETMuBin40thru50){
+        printf("Could not get zb met 40 thru 50");
+        if ( met_dir->GetListOfKeys()->Contains("metmu0thru10")){
+            printf("But zb met 0 thru 10 exists in met_dir directory");
+            return;
+        }
+    }
+    else if (!zbMETMuBin50thru60 ){
+        printf("Could not get zb met 50 thru 60");
+        if ( met_dir->GetListOfKeys()->Contains("metmu0thru10")){
+            printf("But zb met 0 thru 10 exists in met_dir directory");
+            return;
+        }
+    }
+    else if (!zbMETMuBin60thru70 ){
+        printf("Could not get zb met 60 thru 70\n");
+        if ( met_dir->GetListOfKeys()->Contains("metmu60thru70")){
+            printf("But zb met 60 thru 70 exists in met_dir directory");
+            return;
+        }
+    }
 
     zbMETMuBin0thru10->SetDirectory(0);
     zbMETMuBin10thru20->SetDirectory(0);
@@ -55,6 +105,8 @@ void CorrectingDistributions::Begin(TTree * /*tree*/)
     zbMETMuBin40thru50->SetDirectory(0);
     zbMETMuBin50thru60->SetDirectory(0);
     zbMETMuBin60thru70->SetDirectory(0);
+
+    mu_analysis_file->Close();
     
     MET_Correctedmu0thru10 = new TH1D("correctedmetmu0thru10","Corrected Data for actint between 0 and 10", nbins , gevLow , gevHigh );
     MET_Correctedmu10thru20 = new TH1D("correctedmetmu10thru20","Corrected Data for actint between 10 and 20", nbins , gevLow , gevHigh );
@@ -292,6 +344,7 @@ void CorrectingDistributions::Terminate(){
     //}}}
 
     // WRITE CORRECTED MET DISTRIBUTIONS TO FILE{{{
+    mu_analysis_file = TFile::Open("../Root_Files/mu_analysis.root","UPDATE");
     TDirectory* corrected_met_distributions = mu_analysis_file->GetDirectory("corrected_met");
     if (!corrected_met_distributions){
         std::cout << "Corrected MET dist directory did not already exist. creating new one" << std::endl;
