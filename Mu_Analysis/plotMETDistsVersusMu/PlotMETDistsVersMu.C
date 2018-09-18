@@ -6,6 +6,7 @@
 void PlotMETDistsVersMu::Begin(TTree *) // {{{
 {
    TString option = GetOption();
+   // definition of the TH1Fs and TEfficiency objects
     MET_Datamu0thru10 = new TH1F("metmu0thru10","ZB MET Data for actint between 0 and 10", met_dist_nbins , gevLow , gevHigh );
     MET_Datamu10thru20 = new TH1F("metmu10thru20","ZB MET Data for actint between 10 and 20", met_dist_nbins , gevLow , gevHigh );
     MET_Datamu20thru30 = new TH1F("metmu20thru30","ZB MET Data for actint between 20 and 30", met_dist_nbins , gevLow , gevHigh );
@@ -25,9 +26,13 @@ Bool_t PlotMETDistsVersMu::Process(Long64_t entry)//{{{
 {
    fReader.SetLocalEntry(entry);
 
-   if ( passedL1ZB()  && isGoodRun() ){
+   // if the event has passed HLT_noalg_zb_L1ZB_passed, and is not one of the bad run numbers
+   if ( isHLT_zb_L1ZB()  && isGoodRun() ){
+        // for mu range 0 to 10
        if ( inMuRange( 0.0 , 10.0) ){
+            // fill the met distribution for this slice of mu, weighting it by the prescale that was used
            MET_Datamu0thru10->Fill(*MET_Data, *HLT_noalg_zb_L1ZB_prescale);
+            // then fill the efficiency 
            MET_Algmu0thru10Efficiency->Fill(*L1_MET > XE, *MET_Data);
        }
        if ( inMuRange( 10.0, 20.0) ){
@@ -189,10 +194,10 @@ Bool_t PlotMETDistsVersMu::Notify() //{{{
 Bool_t PlotMETDistsVersMu::isGoodRun(){ //{{{
     return (*RunNumber != 330203 && *RunNumber != 331975 && *RunNumber != 334487);
 } // }}}
-Bool_t PlotMETDistsVersMu::passedL1ZB(){ //{{{
+Bool_t PlotMETDistsVersMu::isHLT_zb_L1ZB(){ //{{{
     return (*HLT_noalg_zb_L1ZB_passed);
 } //}}}
-Bool_t PlotMETDistsVersMu::isPassnoAlgXE30(){ //{{{
+Bool_t PlotMETDistsVersMu::isHLT_zb_L1XE30(){ //{{{
     return (*HLT_noalg_L1XE30_passed);
 } //}}}
 Bool_t PlotMETDistsVersMu::inMuRange( Float_t a , Float_t b ){ //{{{
