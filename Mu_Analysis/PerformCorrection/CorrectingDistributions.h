@@ -28,37 +28,37 @@ public :
    TTreeReader     fReader;  //!the tree reader
    TTree          *fChain = 0;   //!pointer to the analyzed TTree or TChain
     TFile* mu_analysis_file = 0;
-    TH1F*            MET_Correctedmu0thru10 = 0;
-    TH1F*            MET_Correctedmu10thru20 = 0;
-    TH1F*            MET_Correctedmu20thru30 = 0;
-    TH1F*            MET_Correctedmu30thru40 = 0;
-    TH1F*            MET_Correctedmu40thru50 = 0;
-    TH1F*            MET_Correctedmu50thru60 = 0;
-    TH1F*            MET_Correctedmu60thru70 = 0;
+    TH1D*            MET_Correctedmu0thru10 = 0;
+    TH1D*            MET_Correctedmu10thru20 = 0;
+    TH1D*            MET_Correctedmu20thru30 = 0;
+    TH1D*            MET_Correctedmu30thru40 = 0;
+    TH1D*            MET_Correctedmu40thru50 = 0;
+    TH1D*            MET_Correctedmu50thru60 = 0;
+    TH1D*            MET_Correctedmu60thru70 = 0;
 
-    TH1F* zbMETMuBin0thru10 = 0;
-    TH1F* zbMETMuBin10thru20 = 0;
-    TH1F* zbMETMuBin20thru30 = 0;
-    TH1F* zbMETMuBin30thru40 = 0;
-    TH1F* zbMETMuBin40thru50 = 0;
-    TH1F* zbMETMuBin50thru60 = 0;
-    TH1F* zbMETMuBin60thru70 = 0;
+    TH1D* zbMETMuBin0thru10 = 0;
+    TH1D* zbMETMuBin10thru20 = 0;
+    TH1D* zbMETMuBin20thru30 = 0;
+    TH1D* zbMETMuBin30thru40 = 0;
+    TH1D* zbMETMuBin40thru50 = 0;
+    TH1D* zbMETMuBin50thru60 = 0;
+    TH1D* zbMETMuBin60thru70 = 0;
 
-    TH1F*            MET_Correctedmu0thru10_copy = 0;
-    TH1F*            MET_Correctedmu10thru20_copy = 0;
-    TH1F*            MET_Correctedmu20thru30_copy = 0;
-    TH1F*            MET_Correctedmu30thru40_copy = 0;
-    TH1F*            MET_Correctedmu40thru50_copy = 0;
-    TH1F*            MET_Correctedmu50thru60_copy = 0;
-    TH1F*            MET_Correctedmu60thru70_copy = 0;
+    TH1D*            MET_Correctedmu0thru10_copy = 0;
+    TH1D*            MET_Correctedmu10thru20_copy = 0;
+    TH1D*            MET_Correctedmu20thru30_copy = 0;
+    TH1D*            MET_Correctedmu30thru40_copy = 0;
+    TH1D*            MET_Correctedmu40thru50_copy = 0;
+    TH1D*            MET_Correctedmu50thru60_copy = 0;
+    TH1D*            MET_Correctedmu60thru70_copy = 0;
 
-    TH1F* zbMETMuBin0thru10_copy = 0;
-    TH1F* zbMETMuBin10thru20_copy = 0;
-    TH1F* zbMETMuBin20thru30_copy = 0;
-    TH1F* zbMETMuBin30thru40_copy = 0;
-    TH1F* zbMETMuBin40thru50_copy = 0;
-    TH1F* zbMETMuBin50thru60_copy = 0;
-    TH1F* zbMETMuBin60thru70_copy = 0;
+    TH1D* zbMETMuBin0thru10_copy = 0;
+    TH1D* zbMETMuBin10thru20_copy = 0;
+    TH1D* zbMETMuBin20thru30_copy = 0;
+    TH1D* zbMETMuBin30thru40_copy = 0;
+    TH1D* zbMETMuBin40thru50_copy = 0;
+    TH1D* zbMETMuBin50thru60_copy = 0;
+    TH1D* zbMETMuBin60thru70_copy = 0;
 
     TF1*             EfficiencyFitMuBin1 = 0;
     TF1*             EfficiencyFitMuBin2 = 0;

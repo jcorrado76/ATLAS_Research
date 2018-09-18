@@ -10,12 +10,15 @@ void CorrectingDistributions::Begin(TTree * /*tree*/)
 
     // GET EFFICIENCY OBJECTS FROM FILE 
     mu_analysis_file = TFile::Open("../Root_Files/mu_analysis.root","UPDATE");
-    mu_analysis_file->Print();
-    if (mu_analysis_file->IsZombie()){
+    if (!mu_analysis_file){
         printf("mu_analysis.root not opened");
         return;
     }
     TDirectory* efficiency_dir = mu_analysis_file->GetDirectory("efficiency_curves");
+    if ( !efficiency_dir ){
+        printf("Could not open directory \'efficiency_curves\'");
+        return;
+    }
     efficiency_dir->GetObject("metmu0thru10Efficiency",efficiencyObjectMu0thru10);
     efficiency_dir->GetObject("metmu10thru20Efficiency",efficiencyObjectMu10thru20);
     efficiency_dir->GetObject("metmu20thru30Efficiency",efficiencyObjectMu20thru30);
@@ -33,6 +36,10 @@ void CorrectingDistributions::Begin(TTree * /*tree*/)
     EfficiencyFitMuBin7 = (TF1*)((efficiencyObjectMu60thru70->GetListOfFunctions())->At(0));
 
     TDirectory* met_dir = mu_analysis_file->GetDirectory("zb_met");
+    if ( !met_dir ){
+        printf("Could not open directory \'met_dir\'");
+        return;
+    }
     met_dir->GetObject("metmu0thru10",zbMETMuBin0thru10);
     met_dir->GetObject("metmu10thru20",zbMETMuBin10thru20);
     met_dir->GetObject("metmu20thru30",zbMETMuBin20thru30);
@@ -41,14 +48,21 @@ void CorrectingDistributions::Begin(TTree * /*tree*/)
     met_dir->GetObject("metmu50thru60",zbMETMuBin50thru60);
     met_dir->GetObject("metmu60thru70",zbMETMuBin60thru70);
 
+    zbMETMuBin0thru10->SetDirectory(0);
+    zbMETMuBin10thru20->SetDirectory(0);
+    zbMETMuBin20thru30->SetDirectory(0);
+    zbMETMuBin30thru40->SetDirectory(0);
+    zbMETMuBin40thru50->SetDirectory(0);
+    zbMETMuBin50thru60->SetDirectory(0);
+    zbMETMuBin60thru70->SetDirectory(0);
     
-    MET_Correctedmu0thru10 = new TH1F("correctedmetmu0thru10","Corrected Data for actint between 0 and 10", nbins , gevLow , gevHigh );
-    MET_Correctedmu10thru20 = new TH1F("correctedmetmu10thru20","Corrected Data for actint between 10 and 20", nbins , gevLow , gevHigh );
-    MET_Correctedmu20thru30 = new TH1F("correctedmetmu20thru30","Corrected Data for actint between 20 and 30", nbins , gevLow , gevHigh );
-    MET_Correctedmu30thru40 = new TH1F("correctedmetmu30thru40","Corrected Data for actint between 30 to 40", nbins , gevLow , gevHigh );
-    MET_Correctedmu40thru50 = new TH1F("correctedmetmu40thru50","Corrected Data for actint between 40 to 50", nbins , gevLow , gevHigh );
-    MET_Correctedmu50thru60 = new TH1F("correctedmetmu50thru60","Corrected Data for actint between 50 and 60", nbins , gevLow , gevHigh );
-    MET_Correctedmu60thru70 = new TH1F("correctedmetmu60thru70","Corrected Data for actint between 60 and 70", nbins , gevLow , gevHigh );
+    MET_Correctedmu0thru10 = new TH1D("correctedmetmu0thru10","Corrected Data for actint between 0 and 10", nbins , gevLow , gevHigh );
+    MET_Correctedmu10thru20 = new TH1D("correctedmetmu10thru20","Corrected Data for actint between 10 and 20", nbins , gevLow , gevHigh );
+    MET_Correctedmu20thru30 = new TH1D("correctedmetmu20thru30","Corrected Data for actint between 20 and 30", nbins , gevLow , gevHigh );
+    MET_Correctedmu30thru40 = new TH1D("correctedmetmu30thru40","Corrected Data for actint between 30 to 40", nbins , gevLow , gevHigh );
+    MET_Correctedmu40thru50 = new TH1D("correctedmetmu40thru50","Corrected Data for actint between 40 to 50", nbins , gevLow , gevHigh );
+    MET_Correctedmu50thru60 = new TH1D("correctedmetmu50thru60","Corrected Data for actint between 50 and 60", nbins , gevLow , gevHigh );
+    MET_Correctedmu60thru70 = new TH1D("correctedmetmu60thru70","Corrected Data for actint between 60 and 70", nbins , gevLow , gevHigh );
 
 }
 
@@ -97,8 +111,11 @@ void CorrectingDistributions::SlaveTerminate(){}
 void CorrectingDistributions::Terminate(){
 	// Relative Normalization{{{
     // BinWidth = 1.0 GeV
-    Float_t normalization_bin = 40; // corresponds to 40 GeV
+    Float_t normalization_bin = 50; // corresponds to 60 GeV
     // Scale the corrected ones to the original zb ones
+    zbMETMuBin10thru20->Draw();
+    printf("ZB MET Bin Content: %f" , zbMETMuBin10thru20->GetBinContent( normalization_bin ) );
+    printf("Corrected Bin Content: %f" , MET_Correctedmu10thru20->GetBinContent( normalization_bin ) );
     Double_t scale_factor1 = zbMETMuBin0thru10->GetBinContent( normalization_bin ) / MET_Correctedmu0thru10->GetBinContent( normalization_bin );
     Double_t scale_factor2 = zbMETMuBin10thru20->GetBinContent( normalization_bin ) / MET_Correctedmu10thru20->GetBinContent( normalization_bin );
     Double_t scale_factor3 = zbMETMuBin20thru30->GetBinContent( normalization_bin ) / MET_Correctedmu20thru30->GetBinContent( normalization_bin );
