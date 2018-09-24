@@ -164,7 +164,7 @@ void CorrectingDistributions::SlaveTerminate(){}
 void CorrectingDistributions::Terminate(){
 	// Relative Normalization{{{
     // BinWidth = 1.0 GeV
-    Float_t normalization_bin = 50; // corresponds to 60 GeV
+    Float_t normalization_bin = 60; // corresponds to 60 GeV
     // Scale the corrected ones to the original zb ones
     zbMETMuBin10thru20->Draw();
     printf("ZB MET Bin Content: %f" , zbMETMuBin10thru20->GetBinContent( normalization_bin ) );
