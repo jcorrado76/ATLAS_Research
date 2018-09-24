@@ -167,15 +167,22 @@ void CorrectingDistributions::Terminate(){
     Float_t normalization_bin = 60; // corresponds to 60 GeV
     // Scale the corrected ones to the original zb ones
     zbMETMuBin10thru20->Draw();
-    printf("ZB MET Bin Content: %f" , zbMETMuBin10thru20->GetBinContent( normalization_bin ) );
-    printf("Corrected Bin Content: %f" , MET_Correctedmu10thru20->GetBinContent( normalization_bin ) );
+    std::cout << "ZB MET Bin Content: " << zbMETMuBin0thru10->GetBinContent( normalization_bin )  << std::endl;
+    std::cout << "Corrected Bin Content: " << MET_Correctedmu0thru10->GetBinContent( normalization_bin ) << std::endl;
     Double_t scale_factor1 = zbMETMuBin0thru10->GetBinContent( normalization_bin ) / MET_Correctedmu0thru10->GetBinContent( normalization_bin );
+    std::cout << scale_factor1 << std::endl;
     Double_t scale_factor2 = zbMETMuBin10thru20->GetBinContent( normalization_bin ) / MET_Correctedmu10thru20->GetBinContent( normalization_bin );
+    std::cout << scale_factor2 << std::endl;
     Double_t scale_factor3 = zbMETMuBin20thru30->GetBinContent( normalization_bin ) / MET_Correctedmu20thru30->GetBinContent( normalization_bin );
+    std::cout << scale_factor3 << std::endl;
     Double_t scale_factor4 = zbMETMuBin30thru40->GetBinContent( normalization_bin ) / MET_Correctedmu30thru40->GetBinContent( normalization_bin );
+    std::cout << scale_factor4 << std::endl;
     Double_t scale_factor5 = zbMETMuBin40thru50->GetBinContent( normalization_bin ) / MET_Correctedmu40thru50->GetBinContent( normalization_bin );
+    std::cout << scale_factor5 << std::endl;
     Double_t scale_factor6 = zbMETMuBin50thru60->GetBinContent( normalization_bin ) / MET_Correctedmu50thru60->GetBinContent( normalization_bin );
+    std::cout << scale_factor6 << std::endl;
     Double_t scale_factor7 = zbMETMuBin60thru70->GetBinContent( normalization_bin ) / MET_Correctedmu60thru70->GetBinContent( normalization_bin );
+    std::cout << scale_factor7 << std::endl;
 
     zbMETMuBin0thru10->SetNormFactor(1.);
     zbMETMuBin10thru20->SetNormFactor(1.);
@@ -228,7 +235,7 @@ void CorrectingDistributions::Terminate(){
 	correctedLegend->AddEntry(MET_Correctedmu50thru60);
 	correctedLegend->AddEntry(MET_Correctedmu60thru70);
 	correctedLegend->Draw("SAME");
-    correctedCanvas->SetLogy();
+//    correctedCanvas->SetLogy();
     gStyle->SetOptStat(0);
     correctedCanvas->Print("../Plots/CorrectedAndZB/Plot_Corrected_Distributions.png");
     //}}}
