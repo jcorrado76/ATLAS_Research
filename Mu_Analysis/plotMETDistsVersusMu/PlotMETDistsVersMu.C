@@ -7,13 +7,13 @@ void PlotMETDistsVersMu::Begin(TTree *) // {{{
 {
    TString option = GetOption();
    // definition of the TH1Fs and TEfficiency objects
-    MET_Datamu0thru10 = new TH1F("metmu0thru10","ZB MET Data for actint between 0 and 10", met_dist_nbins , gevLow , gevHigh );
-    MET_Datamu10thru20 = new TH1F("metmu10thru20","ZB MET Data for actint between 10 and 20", met_dist_nbins , gevLow , gevHigh );
-    MET_Datamu20thru30 = new TH1F("metmu20thru30","ZB MET Data for actint between 20 and 30", met_dist_nbins , gevLow , gevHigh );
-    MET_Datamu30thru40 = new TH1F("metmu30thru40","ZB MET Data for actint between 30 and 40", met_dist_nbins , gevLow , gevHigh );
-    MET_Datamu40thru50 = new TH1F("metmu40thru50","ZB MET Data for actint between 40 and 50", met_dist_nbins , gevLow , gevHigh );
-    MET_Datamu50thru60 = new TH1F("metmu50thru60","ZB MET Data for actint between 50 and 60", met_dist_nbins , gevLow , gevHigh );
-    MET_Datamu60thru70 = new TH1F("metmu60thru70","ZB MET Data for actint between 60 and 70", met_dist_nbins , gevLow , gevHigh );
+    MET_Datamu0thru10 = new TH1D("metmu0thru10","ZB MET Data for actint between 0 and 10", met_dist_nbins , gevLow , gevHigh );
+    MET_Datamu10thru20 = new TH1D("metmu10thru20","ZB MET Data for actint between 10 and 20", met_dist_nbins , gevLow , gevHigh );
+    MET_Datamu20thru30 = new TH1D("metmu20thru30","ZB MET Data for actint between 20 and 30", met_dist_nbins , gevLow , gevHigh );
+    MET_Datamu30thru40 = new TH1D("metmu30thru40","ZB MET Data for actint between 30 and 40", met_dist_nbins , gevLow , gevHigh );
+    MET_Datamu40thru50 = new TH1D("metmu40thru50","ZB MET Data for actint between 40 and 50", met_dist_nbins , gevLow , gevHigh );
+    MET_Datamu50thru60 = new TH1D("metmu50thru60","ZB MET Data for actint between 50 and 60", met_dist_nbins , gevLow , gevHigh );
+    MET_Datamu60thru70 = new TH1D("metmu60thru70","ZB MET Data for actint between 60 and 70", met_dist_nbins , gevLow , gevHigh );
     MET_Algmu0thru10Efficiency = new TEfficiency("metmu0thru10Efficiency","MET Alg Efficiency for actint between 0 and 10", efficiency_nbins , gevLow , gevHigh );
     MET_Algmu10thru20Efficiency = new TEfficiency("metmu10thru20Efficiency","MET Alg Efficiency for actint between 10 and 20", efficiency_nbins , gevLow , gevHigh );
     MET_Algmu20thru30Efficiency = new TEfficiency("metmu20thru30Efficiency","MET Alg Efficiency for actint between 20 and 30", efficiency_nbins , gevLow , gevHigh );

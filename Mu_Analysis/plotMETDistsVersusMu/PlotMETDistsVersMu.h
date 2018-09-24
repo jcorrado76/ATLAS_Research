@@ -27,13 +27,13 @@ class PlotMETDistsVersMu : public TSelector {
 public :
    TTreeReader     fReader;  //!the tree reader
    TTree          *fChain = 0;   //!pointer to the analyzed TTree or TChain
-   TH1F*            MET_Datamu0thru10 = 0;
-   TH1F*            MET_Datamu10thru20 = 0;
-   TH1F*            MET_Datamu20thru30 = 0;
-   TH1F*            MET_Datamu30thru40 = 0;
-   TH1F*            MET_Datamu40thru50 = 0;
-   TH1F*            MET_Datamu50thru60 = 0;
-   TH1F*            MET_Datamu60thru70 = 0;
+   TH1D*            MET_Datamu0thru10 = 0;
+   TH1D*            MET_Datamu10thru20 = 0;
+   TH1D*            MET_Datamu20thru30 = 0;
+   TH1D*            MET_Datamu30thru40 = 0;
+   TH1D*            MET_Datamu40thru50 = 0;
+   TH1D*            MET_Datamu50thru60 = 0;
+   TH1D*            MET_Datamu60thru70 = 0;
    TEfficiency*            MET_Algmu0thru10Efficiency = 0;
    TEfficiency*            MET_Algmu10thru20Efficiency = 0;
    TEfficiency*            MET_Algmu20thru30Efficiency = 0;
