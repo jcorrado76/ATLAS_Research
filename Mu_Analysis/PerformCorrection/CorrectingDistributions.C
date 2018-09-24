@@ -48,6 +48,7 @@ void CorrectingDistributions::Begin(TTree * /*tree*/)
     met_dir->GetObject("metmu40thru50",zbMETMuBin40thru50);
     met_dir->GetObject("metmu50thru60",zbMETMuBin50thru60);
     met_dir->GetObject("metmu60thru70",zbMETMuBin60thru70);
+    gDirectory->GetList()->ls();
     if ( !zbMETMuBin0thru10 ){
         printf("Could not get zb met 0 thru 10\n");
         if ( met_dir->GetListOfKeys()->Contains("metmu0thru10")){
