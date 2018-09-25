@@ -15,8 +15,8 @@ void CorrectingDistributions::Begin(TTree * /*tree*/)
         return;
     }
     if ( mu_analysis_file->cd("efficiency_curves") ){
-        std::cout << "Successfully changed to efficiency_curves directory" << std::endl;
-        gDirectory->GetList()->ls();
+        std::cout << "Successfully switched to:" << std::endl;
+        gDirectory->pwd();
         gDirectory->GetObject("metmu0thru10Efficiency",efficiencyObjectMu0thru10);
         gDirectory->GetObject("metmu10thru20Efficiency",efficiencyObjectMu10thru20);
         gDirectory->GetObject("metmu20thru30Efficiency",efficiencyObjectMu20thru30);
@@ -38,14 +38,16 @@ void CorrectingDistributions::Begin(TTree * /*tree*/)
         return;
     }
 
-    if (mu_analysis_file->cd("../zb_met") ){
-        mu_analysis_file->GetObject("metmu0thru10",zbMETMuBin0thru10);
-        mu_analysis_file->GetObject("metmu10thru20",zbMETMuBin10thru20);
-        mu_analysis_file->GetObject("metmu20thru30",zbMETMuBin20thru30);
-        mu_analysis_file->GetObject("metmu30thru40",zbMETMuBin30thru40);
-        mu_analysis_file->GetObject("metmu40thru50",zbMETMuBin40thru50);
-        mu_analysis_file->GetObject("metmu50thru60",zbMETMuBin50thru60);
-        mu_analysis_file->GetObject("metmu60thru70",zbMETMuBin60thru70);
+    if (gDirectory->cd("../zb_met") ){
+        std::cout << "Successfully switched to:" << std::endl;
+        gDirectory->pwd();
+        gDirectory->GetObject("metmu0thru10",zbMETMuBin0thru10);
+        gDirectory->GetObject("metmu10thru20",zbMETMuBin10thru20);
+        gDirectory->GetObject("metmu20thru30",zbMETMuBin20thru30);
+        gDirectory->GetObject("metmu30thru40",zbMETMuBin30thru40);
+        gDirectory->GetObject("metmu40thru50",zbMETMuBin40thru50);
+        gDirectory->GetObject("metmu50thru60",zbMETMuBin50thru60);
+        gDirectory->GetObject("metmu60thru70",zbMETMuBin60thru70);
     }
     else{
         std::cout << "Unable to open zb_met directory" << std::endl;
@@ -102,6 +104,7 @@ void CorrectingDistributions::Begin(TTree * /*tree*/)
             //return;
         //}
     //}
+
 
     zbMETMuBin0thru10->SetDirectory(0);
     zbMETMuBin10thru20->SetDirectory(0);
