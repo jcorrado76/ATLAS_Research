@@ -10,94 +10,96 @@ void CorrectingDistributions::Begin(TTree * /*tree*/)
 
     // GET EFFICIENCY OBJECTS FROM FILE 
     mu_analysis_file = TFile::Open("../Root_Files/mu_analysis.root","UPDATE");
-    if (!mu_analysis_file){
-        printf("mu_analysis.root not opened");
+    if (!mu_analysis_file->IsOpen()){
+        std::cout << "mu_analysis.root not opened" << std::endl;
         return;
     }
-    TDirectory* efficiency_dir = mu_analysis_file->GetDirectory("efficiency_curves");
-    if ( !efficiency_dir ){
-        printf("Could not open directory \'efficiency_curves\'");
-        return;
-    }
-    efficiency_dir->GetObject("metmu0thru10Efficiency",efficiencyObjectMu0thru10);
-    efficiency_dir->GetObject("metmu10thru20Efficiency",efficiencyObjectMu10thru20);
-    efficiency_dir->GetObject("metmu20thru30Efficiency",efficiencyObjectMu20thru30);
-    efficiency_dir->GetObject("metmu30thru40Efficiency",efficiencyObjectMu30thru40);
-    efficiency_dir->GetObject("metmu40thru50Efficiency",efficiencyObjectMu40thru50);
-    efficiency_dir->GetObject("metmu50thru60Efficiency",efficiencyObjectMu50thru60);
-    efficiency_dir->GetObject("metmu60thru70Efficiency",efficiencyObjectMu60thru70);
+    if ( mu_analysis_file->cd("efficiency_curves") ){
+        mu_analysis_file->GetObject("metmu0thru10Efficiency",efficiencyObjectMu0thru10);
+        mu_analysis_file->GetObject("metmu10thru20Efficiency",efficiencyObjectMu10thru20);
+        mu_analysis_file->GetObject("metmu20thru30Efficiency",efficiencyObjectMu20thru30);
+        mu_analysis_file->GetObject("metmu30thru40Efficiency",efficiencyObjectMu30thru40);
+        mu_analysis_file->GetObject("metmu40thru50Efficiency",efficiencyObjectMu40thru50);
+        mu_analysis_file->GetObject("metmu50thru60Efficiency",efficiencyObjectMu50thru60);
+        mu_analysis_file->GetObject("metmu60thru70Efficiency",efficiencyObjectMu60thru70);
 
-    EfficiencyFitMuBin1 = (TF1*)((efficiencyObjectMu0thru10->GetListOfFunctions())->At(0));
-    EfficiencyFitMuBin2 = (TF1*)((efficiencyObjectMu10thru20->GetListOfFunctions())->At(0));
-    EfficiencyFitMuBin3 = (TF1*)((efficiencyObjectMu20thru30->GetListOfFunctions())->At(0));
-    EfficiencyFitMuBin4 = (TF1*)((efficiencyObjectMu30thru40->GetListOfFunctions())->At(0));
-    EfficiencyFitMuBin5 = (TF1*)((efficiencyObjectMu40thru50->GetListOfFunctions())->At(0));
-    EfficiencyFitMuBin6 = (TF1*)((efficiencyObjectMu50thru60->GetListOfFunctions())->At(0));
-    EfficiencyFitMuBin7 = (TF1*)((efficiencyObjectMu60thru70->GetListOfFunctions())->At(0));
-
-    TDirectory* met_dir = mu_analysis_file->GetDirectory("zb_met");
-    if ( !met_dir ){
-        printf("Could not open directory \'met_dir\'");
+        EfficiencyFitMuBin1 = (TF1*)((efficiencyObjectMu0thru10->GetListOfFunctions())->At(0));
+        EfficiencyFitMuBin2 = (TF1*)((efficiencyObjectMu10thru20->GetListOfFunctions())->At(0));
+        EfficiencyFitMuBin3 = (TF1*)((efficiencyObjectMu20thru30->GetListOfFunctions())->At(0));
+        EfficiencyFitMuBin4 = (TF1*)((efficiencyObjectMu30thru40->GetListOfFunctions())->At(0));
+        EfficiencyFitMuBin5 = (TF1*)((efficiencyObjectMu40thru50->GetListOfFunctions())->At(0));
+        EfficiencyFitMuBin6 = (TF1*)((efficiencyObjectMu50thru60->GetListOfFunctions())->At(0));
+        EfficiencyFitMuBin7 = (TF1*)((efficiencyObjectMu60thru70->GetListOfFunctions())->At(0));
+    }
+    else{
+        std::cout << "Unable to open efficiency_curves directory" << std::endl;
         return;
     }
-    printf("%s\n",gDirectory->GetName());
-    met_dir->GetObject("metmu0thru10",zbMETMuBin0thru10);
-    met_dir->GetObject("metmu10thru20",zbMETMuBin10thru20);
-    met_dir->GetObject("metmu20thru30",zbMETMuBin20thru30);
-    met_dir->GetObject("metmu30thru40",zbMETMuBin30thru40);
-    met_dir->GetObject("metmu40thru50",zbMETMuBin40thru50);
-    met_dir->GetObject("metmu50thru60",zbMETMuBin50thru60);
-    met_dir->GetObject("metmu60thru70",zbMETMuBin60thru70);
+
+    if (mu_analysis_file->cd("../zb_met") ){
+        mu_analysis_file->GetObject("metmu0thru10",zbMETMuBin0thru10);
+        mu_analysis_file->GetObject("metmu10thru20",zbMETMuBin10thru20);
+        mu_analysis_file->GetObject("metmu20thru30",zbMETMuBin20thru30);
+        mu_analysis_file->GetObject("metmu30thru40",zbMETMuBin30thru40);
+        mu_analysis_file->GetObject("metmu40thru50",zbMETMuBin40thru50);
+        mu_analysis_file->GetObject("metmu50thru60",zbMETMuBin50thru60);
+        mu_analysis_file->GetObject("metmu60thru70",zbMETMuBin60thru70);
+    }
+    else{
+        std::cout << "Unable to open zb_met directory" << std::endl;
+        return;
+    }
+
     gDirectory->GetList()->ls();
-    if ( !zbMETMuBin0thru10 ){
-        printf("Could not get zb met 0 thru 10\n");
-        if ( met_dir->GetListOfKeys()->Contains("metmu0thru10")){
-            printf("But zb met 0 thru 10 exists in met_dir directory");
-            return;
-        }
-    }
-    else if ( !zbMETMuBin10thru20 ){
-        printf("Could not get zb met 10 thru 20\n");
-        if ( met_dir->GetListOfKeys()->Contains("metmu10thru20")){
-            printf("But zb met 10 thru 20 exists in met_dir directory");
-            return;
-        }
-    }
-    else if ( !zbMETMuBin20thru30 ){
-        printf("Could not get zb met 20 thru 30\n");
-        if ( met_dir->GetListOfKeys()->Contains("metmu20thru30")){
-            printf("But zb met 20 thru 30 exists in met_dir directory");
-            return;
-        }
-    }
-    else if ( !zbMETMuBin30thru40 ){
-        printf("Could not get zb met 30 thru 40\n");
-        if ( met_dir->GetListOfKeys()->Contains("metmu30thru40")){
-            printf("But zb met 30 thru 40 exists in met_dir directory");
-            return;
-        }
-    }
-    else if (!zbMETMuBin40thru50){
-        printf("Could not get zb met 40 thru 50\n");
-        if ( met_dir->GetListOfKeys()->Contains("metmu40thru50")){
-            printf("But zb met 40 thru 50 exists in met_dir directory");
-            return;
-        }
-    }
-    else if (!zbMETMuBin50thru60 ){
-        printf("Could not get zb met 50 thru 60\n");
-        if ( met_dir->GetListOfKeys()->Contains("metmu50thru60")){
-            printf("But zb met 50 thru 60 exists in met_dir directory");
-            return;
-        }
-    }
-    else if (!zbMETMuBin60thru70 ){
-        printf("Could not get zb met 60 thru 70\n");
-        if ( met_dir->GetListOfKeys()->Contains("metmu60thru70")){
-            printf("But zb met 60 thru 70 exists in met_dir directory");
-            return;
-        }
-    }
+    //if ( !zbMETMuBin0thru10 ){
+        //printf("Could not get zb met 0 thru 10\n");
+        //if ( met_dir->GetListOfKeys()->Contains("metmu0thru10")){
+            //printf("But zb met 0 thru 10 exists in met_dir directory");
+            //return;
+        //}
+    //}
+    //else if ( !zbMETMuBin10thru20 ){
+        //printf("Could not get zb met 10 thru 20\n");
+        //if ( met_dir->GetListOfKeys()->Contains("metmu10thru20")){
+            //printf("But zb met 10 thru 20 exists in met_dir directory");
+            //return;
+        //}
+    //}
+    //else if ( !zbMETMuBin20thru30 ){
+        //printf("Could not get zb met 20 thru 30\n");
+        //if ( met_dir->GetListOfKeys()->Contains("metmu20thru30")){
+            //printf("But zb met 20 thru 30 exists in met_dir directory");
+            //return;
+        //}
+    //}
+    //else if ( !zbMETMuBin30thru40 ){
+        //printf("Could not get zb met 30 thru 40\n");
+        //if ( met_dir->GetListOfKeys()->Contains("metmu30thru40")){
+            //printf("But zb met 30 thru 40 exists in met_dir directory");
+            //return;
+        //}
+    //}
+    //else if (!zbMETMuBin40thru50){
+        //printf("Could not get zb met 40 thru 50\n");
+        //if ( met_dir->GetListOfKeys()->Contains("metmu40thru50")){
+            //printf("But zb met 40 thru 50 exists in met_dir directory");
+            //return;
+        //}
+    //}
+    //else if (!zbMETMuBin50thru60 ){
+        //printf("Could not get zb met 50 thru 60\n");
+        //if ( met_dir->GetListOfKeys()->Contains("metmu50thru60")){
+            //printf("But zb met 50 thru 60 exists in met_dir directory");
+            //return;
+        //}
+    //}
+    //else if (!zbMETMuBin60thru70 ){
+        //printf("Could not get zb met 60 thru 70\n");
+        //if ( met_dir->GetListOfKeys()->Contains("metmu60thru70")){
+            //printf("But zb met 60 thru 70 exists in met_dir directory");
+            //return;
+        //}
+    //}
 
     zbMETMuBin0thru10->SetDirectory(0);
     zbMETMuBin10thru20->SetDirectory(0);
@@ -106,8 +108,6 @@ void CorrectingDistributions::Begin(TTree * /*tree*/)
     zbMETMuBin40thru50->SetDirectory(0);
     zbMETMuBin50thru60->SetDirectory(0);
     zbMETMuBin60thru70->SetDirectory(0);
-
-    mu_analysis_file->Close();
     
     MET_Correctedmu0thru10 = new TH1D("correctedmetmu0thru10","Corrected Data for actint between 0 and 10", nbins , gevLow , gevHigh );
     MET_Correctedmu10thru20 = new TH1D("correctedmetmu10thru20","Corrected Data for actint between 10 and 20", nbins , gevLow , gevHigh );
@@ -352,13 +352,11 @@ void CorrectingDistributions::Terminate(){
     //}}}
 
     // WRITE CORRECTED MET DISTRIBUTIONS TO FILE{{{
-    mu_analysis_file = TFile::Open("../Root_Files/mu_analysis.root","UPDATE");
-    TDirectory* corrected_met_distributions = mu_analysis_file->GetDirectory("corrected_met");
-    if (!corrected_met_distributions){
+    if ( !mu_analysis_file->cd("corrected_met") ){
         std::cout << "Corrected MET dist directory did not already exist. creating new one" << std::endl;
-        corrected_met_distributions = mu_analysis_file->mkdir("corrected_met");
+        mu_analysis_file->mkdir("corrected_met");
     }
-    if (corrected_met_distributions->cd()){
+    else{
         std::cout << "Successfully switched to correcting met distributions directory" << std::endl;
     }
     MET_Correctedmu0thru10->Write();
