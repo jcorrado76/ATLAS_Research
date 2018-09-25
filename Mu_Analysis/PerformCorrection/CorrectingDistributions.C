@@ -15,13 +15,15 @@ void CorrectingDistributions::Begin(TTree * /*tree*/)
         return;
     }
     if ( mu_analysis_file->cd("efficiency_curves") ){
-        mu_analysis_file->GetObject("metmu0thru10Efficiency",efficiencyObjectMu0thru10);
-        mu_analysis_file->GetObject("metmu10thru20Efficiency",efficiencyObjectMu10thru20);
-        mu_analysis_file->GetObject("metmu20thru30Efficiency",efficiencyObjectMu20thru30);
-        mu_analysis_file->GetObject("metmu30thru40Efficiency",efficiencyObjectMu30thru40);
-        mu_analysis_file->GetObject("metmu40thru50Efficiency",efficiencyObjectMu40thru50);
-        mu_analysis_file->GetObject("metmu50thru60Efficiency",efficiencyObjectMu50thru60);
-        mu_analysis_file->GetObject("metmu60thru70Efficiency",efficiencyObjectMu60thru70);
+        std::cout << "Successfully changed to efficiency_curves directory" << std::endl;
+        gDirectory->GetList()->ls();
+        gDirectory->GetObject("metmu0thru10Efficiency",efficiencyObjectMu0thru10);
+        gDirectory->GetObject("metmu10thru20Efficiency",efficiencyObjectMu10thru20);
+        gDirectory->GetObject("metmu20thru30Efficiency",efficiencyObjectMu20thru30);
+        gDirectory->GetObject("metmu30thru40Efficiency",efficiencyObjectMu30thru40);
+        gDirectory->GetObject("metmu40thru50Efficiency",efficiencyObjectMu40thru50);
+        gDirectory->GetObject("metmu50thru60Efficiency",efficiencyObjectMu50thru60);
+        gDirectory->GetObject("metmu60thru70Efficiency",efficiencyObjectMu60thru70);
 
         EfficiencyFitMuBin1 = (TF1*)((efficiencyObjectMu0thru10->GetListOfFunctions())->At(0));
         EfficiencyFitMuBin2 = (TF1*)((efficiencyObjectMu10thru20->GetListOfFunctions())->At(0));
