@@ -169,26 +169,27 @@ void CorrectingDistributions::SlaveTerminate(){}
 void CorrectingDistributions::Terminate(){
 	// Relative Normalization{{{
     // BinWidth = 1.0 GeV
-    Int_t normalization_bin = 60; // corresponds to 60 GeV
+    Int_t normalization_bin1 = 40; // 
+    Int_t normalization_bin2 = 52; //
+    Int_t normalization_bin3 = 60; //
+    Int_t normalization_bin4 = 56; //
+    Int_t normalization_bin5 = 55; //
+    Int_t normalization_bin6 = 52; //
+    Int_t normalization_bin7 = 40; //
     // Scale the corrected ones to the original zb ones
-    zbMETMuBin10thru20->Draw();
-    std::cout << "ZB MET Bin Content: " << zbMETMuBin0thru10->GetBinContent( normalization_bin )  << std::endl;
-    std::cout << "Corrected Bin Content: " << MET_Correctedmu0thru10->GetBinContent( normalization_bin ) << std::endl;
-    Double_t scale_factor1 = zbMETMuBin0thru10->GetBinContent( normalization_bin ) / MET_Correctedmu0thru10->GetBinContent( normalization_bin );
+    Double_t scale_factor1 = zbMETMuBin0thru10->GetBinContent( normalization_bin1 ) / MET_Correctedmu0thru10->GetBinContent( normalization_bin1 );
     std::cout << scale_factor1 << std::endl;
-    Double_t scale_factor2 = zbMETMuBin10thru20->GetBinContent( normalization_bin ) / MET_Correctedmu10thru20->GetBinContent( normalization_bin );
+    Double_t scale_factor2 = zbMETMuBin10thru20->GetBinContent( normalization_bin2 ) / MET_Correctedmu10thru20->GetBinContent( normalization_bin2 );
     std::cout << scale_factor2 << std::endl;
-    Double_t scale_factor3 = zbMETMuBin20thru30->GetBinContent( normalization_bin ) / MET_Correctedmu20thru30->GetBinContent( normalization_bin );
+    Double_t scale_factor3 = zbMETMuBin20thru30->GetBinContent( normalization_bin3 ) / MET_Correctedmu20thru30->GetBinContent( normalization_bin3 );
     std::cout << scale_factor3 << std::endl;
-    Double_t scale_factor4 = zbMETMuBin30thru40->GetBinContent( normalization_bin ) / MET_Correctedmu30thru40->GetBinContent( normalization_bin );
+    Double_t scale_factor4 = zbMETMuBin30thru40->GetBinContent( normalization_bin4 ) / MET_Correctedmu30thru40->GetBinContent( normalization_bin4 );
     std::cout << scale_factor4 << std::endl;
-    Double_t scale_factor5 = zbMETMuBin40thru50->GetBinContent( normalization_bin ) / MET_Correctedmu40thru50->GetBinContent( normalization_bin );
+    Double_t scale_factor5 = zbMETMuBin40thru50->GetBinContent( normalization_bin5 ) / MET_Correctedmu40thru50->GetBinContent( normalization_bin5 );
     std::cout << scale_factor5 << std::endl;
-    Double_t scale_factor6 = zbMETMuBin50thru60->GetBinContent( normalization_bin ) / MET_Correctedmu50thru60->GetBinContent( normalization_bin );
+    Double_t scale_factor6 = zbMETMuBin50thru60->GetBinContent( normalization_bin6 ) / MET_Correctedmu50thru60->GetBinContent( normalization_bin6 );
     std::cout << scale_factor6 << std::endl;
-    std::cout << "ZB MET Bin Content: " << zbMETMuBin60thru70->GetBinContent( normalization_bin )  << std::endl;
-    std::cout << "Corrected Bin Content: " << MET_Correctedmu60thru70->GetBinContent( normalization_bin ) << std::endl;
-    Double_t scale_factor7 = zbMETMuBin60thru70->GetBinContent( normalization_bin ) / MET_Correctedmu60thru70->GetBinContent( normalization_bin );
+    Double_t scale_factor7 = zbMETMuBin60thru70->GetBinContent( normalization_bin7 ) / MET_Correctedmu60thru70->GetBinContent( normalization_bin7 );
     std::cout << scale_factor7 << std::endl;
 
     zbMETMuBin0thru10->SetNormFactor(1.);
