@@ -169,7 +169,7 @@ void CorrectingDistributions::SlaveTerminate(){}
 void CorrectingDistributions::Terminate(){
 	// Relative Normalization{{{
     // BinWidth = 1.0 GeV
-    Float_t normalization_bin = 60; // corresponds to 60 GeV
+    Int_t normalization_bin = 60; // corresponds to 60 GeV
     // Scale the corrected ones to the original zb ones
     zbMETMuBin10thru20->Draw();
     std::cout << "ZB MET Bin Content: " << zbMETMuBin0thru10->GetBinContent( normalization_bin )  << std::endl;
@@ -186,6 +186,8 @@ void CorrectingDistributions::Terminate(){
     std::cout << scale_factor5 << std::endl;
     Double_t scale_factor6 = zbMETMuBin50thru60->GetBinContent( normalization_bin ) / MET_Correctedmu50thru60->GetBinContent( normalization_bin );
     std::cout << scale_factor6 << std::endl;
+    std::cout << "ZB MET Bin Content: " << zbMETMuBin60thru70->GetBinContent( normalization_bin )  << std::endl;
+    std::cout << "Corrected Bin Content: " << MET_Correctedmu60thru70->GetBinContent( normalization_bin ) << std::endl;
     Double_t scale_factor7 = zbMETMuBin60thru70->GetBinContent( normalization_bin ) / MET_Correctedmu60thru70->GetBinContent( normalization_bin );
     std::cout << scale_factor7 << std::endl;
 
@@ -364,13 +366,13 @@ void CorrectingDistributions::Terminate(){
     else{
         std::cout << "Successfully switched to correcting met distributions directory" << std::endl;
     }
-    MET_Correctedmu0thru10->Write();
-    MET_Correctedmu10thru20->Write();
-    MET_Correctedmu20thru30->Write();
-    MET_Correctedmu30thru40->Write();
-    MET_Correctedmu40thru50->Write();
-    MET_Correctedmu50thru60->Write();
-    MET_Correctedmu60thru70->Write();
+    MET_Correctedmu0thru10->Write("",TObject::kOverwrite);
+    MET_Correctedmu10thru20->Write("",TObject::kOverwrite);
+    MET_Correctedmu20thru30->Write("",TObject::kOverwrite);
+    MET_Correctedmu30thru40->Write("",TObject::kOverwrite);
+    MET_Correctedmu40thru50->Write("",TObject::kOverwrite);
+    MET_Correctedmu50thru60->Write("",TObject::kOverwrite);
+    MET_Correctedmu60thru70->Write("",TObject::kOverwrite);
     //}}}
     mu_analysis_file->Close();
 }
