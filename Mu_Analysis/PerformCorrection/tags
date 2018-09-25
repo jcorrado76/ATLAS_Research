@@ -10,13 +10,13 @@ CorrectingDistributions	CorrectingDistributions.h	/^   CorrectingDistributions(T
 CorrectingDistributions	CorrectingDistributions.h	/^class CorrectingDistributions : public TSelector {$/;"	c
 CorrectingDistributions_cxx	CorrectingDistributions.C	1;"	d	file:
 CorrectingDistributions_h	CorrectingDistributions.h	8;"	d
-EfficiencyFitMuBin1	CorrectingDistributions.h	/^   TF1*             EfficiencyFitMuBin1 = 0;$/;"	m	class:CorrectingDistributions
-EfficiencyFitMuBin2	CorrectingDistributions.h	/^   TF1*             EfficiencyFitMuBin2 = 0;$/;"	m	class:CorrectingDistributions
-EfficiencyFitMuBin3	CorrectingDistributions.h	/^   TF1*             EfficiencyFitMuBin3 = 0;$/;"	m	class:CorrectingDistributions
-EfficiencyFitMuBin4	CorrectingDistributions.h	/^   TF1*             EfficiencyFitMuBin4 = 0;$/;"	m	class:CorrectingDistributions
-EfficiencyFitMuBin5	CorrectingDistributions.h	/^   TF1*             EfficiencyFitMuBin5 = 0;$/;"	m	class:CorrectingDistributions
-EfficiencyFitMuBin6	CorrectingDistributions.h	/^   TF1*             EfficiencyFitMuBin6 = 0;$/;"	m	class:CorrectingDistributions
-EfficiencyFitMuBin7	CorrectingDistributions.h	/^   TF1*             EfficiencyFitMuBin7 = 0;$/;"	m	class:CorrectingDistributions
+EfficiencyFitMuBin1	CorrectingDistributions.h	/^    TF1*             EfficiencyFitMuBin1 = 0;$/;"	m	class:CorrectingDistributions
+EfficiencyFitMuBin2	CorrectingDistributions.h	/^    TF1*             EfficiencyFitMuBin2 = 0;$/;"	m	class:CorrectingDistributions
+EfficiencyFitMuBin3	CorrectingDistributions.h	/^    TF1*             EfficiencyFitMuBin3 = 0;$/;"	m	class:CorrectingDistributions
+EfficiencyFitMuBin4	CorrectingDistributions.h	/^    TF1*             EfficiencyFitMuBin4 = 0;$/;"	m	class:CorrectingDistributions
+EfficiencyFitMuBin5	CorrectingDistributions.h	/^    TF1*             EfficiencyFitMuBin5 = 0;$/;"	m	class:CorrectingDistributions
+EfficiencyFitMuBin6	CorrectingDistributions.h	/^    TF1*             EfficiencyFitMuBin6 = 0;$/;"	m	class:CorrectingDistributions
+EfficiencyFitMuBin7	CorrectingDistributions.h	/^    TF1*             EfficiencyFitMuBin7 = 0;$/;"	m	class:CorrectingDistributions
 GetEntry	CorrectingDistributions.h	/^   virtual Int_t   GetEntry(Long64_t entry, Int_t getall = 0) { return fChain ? fChain->GetTree()->GetEntry(entry, getall) : 0; }$/;"	f	class:CorrectingDistributions
 GetOutputList	CorrectingDistributions.h	/^   virtual TList  *GetOutputList() const { return fOutput; }$/;"	f	class:CorrectingDistributions
 HLT_noalg_L1XE30_passed	CorrectingDistributions.h	/^   TTreeReaderValue<Bool_t> HLT_noalg_L1XE30_passed = {fReader, "HLT_noalg_L1XE30.passed"};$/;"	m	class:CorrectingDistributions
@@ -26,16 +26,23 @@ HLT_noalg_zb_L1ZB_prescale	CorrectingDistributions.h	/^   TTreeReaderValue<Float
 InTimePileup	CorrectingDistributions.h	/^   TTreeReaderValue<Float_t> InTimePileup = {fReader, "InTimePileup"};$/;"	m	class:CorrectingDistributions
 Init	CorrectingDistributions.C	/^void CorrectingDistributions::Init(TTree *tree){fReader.SetTree(tree);}$/;"	f	class:CorrectingDistributions
 L1_met	CorrectingDistributions.h	/^   TTreeReaderValue<Float_t> L1_met = {fReader, "L1.met"};$/;"	m	class:CorrectingDistributions
-MET_Correctedmu0thru10	CorrectingDistributions.h	/^   TH1F*            MET_Correctedmu0thru10 = 0;$/;"	m	class:CorrectingDistributions
-MET_Correctedmu10thru20	CorrectingDistributions.h	/^   TH1F*            MET_Correctedmu10thru20 = 0;$/;"	m	class:CorrectingDistributions
-MET_Correctedmu20thru30	CorrectingDistributions.h	/^   TH1F*            MET_Correctedmu20thru30 = 0;$/;"	m	class:CorrectingDistributions
-MET_Correctedmu30thru40	CorrectingDistributions.h	/^   TH1F*            MET_Correctedmu30thru40 = 0;$/;"	m	class:CorrectingDistributions
-MET_Correctedmu40thru50	CorrectingDistributions.h	/^   TH1F*            MET_Correctedmu40thru50 = 0;$/;"	m	class:CorrectingDistributions
-MET_Correctedmu50thru60	CorrectingDistributions.h	/^   TH1F*            MET_Correctedmu50thru60 = 0;$/;"	m	class:CorrectingDistributions
-MET_Correctedmu60thru70	CorrectingDistributions.h	/^   TH1F*            MET_Correctedmu60thru70 = 0;$/;"	m	class:CorrectingDistributions
+MET_Correctedmu0thru10	CorrectingDistributions.h	/^    TH1D*            MET_Correctedmu0thru10 = 0;$/;"	m	class:CorrectingDistributions
+MET_Correctedmu0thru10_copy	CorrectingDistributions.h	/^    TH1D*            MET_Correctedmu0thru10_copy = 0;$/;"	m	class:CorrectingDistributions
+MET_Correctedmu10thru20	CorrectingDistributions.h	/^    TH1D*            MET_Correctedmu10thru20 = 0;$/;"	m	class:CorrectingDistributions
+MET_Correctedmu10thru20_copy	CorrectingDistributions.h	/^    TH1D*            MET_Correctedmu10thru20_copy = 0;$/;"	m	class:CorrectingDistributions
+MET_Correctedmu20thru30	CorrectingDistributions.h	/^    TH1D*            MET_Correctedmu20thru30 = 0;$/;"	m	class:CorrectingDistributions
+MET_Correctedmu20thru30_copy	CorrectingDistributions.h	/^    TH1D*            MET_Correctedmu20thru30_copy = 0;$/;"	m	class:CorrectingDistributions
+MET_Correctedmu30thru40	CorrectingDistributions.h	/^    TH1D*            MET_Correctedmu30thru40 = 0;$/;"	m	class:CorrectingDistributions
+MET_Correctedmu30thru40_copy	CorrectingDistributions.h	/^    TH1D*            MET_Correctedmu30thru40_copy = 0;$/;"	m	class:CorrectingDistributions
+MET_Correctedmu40thru50	CorrectingDistributions.h	/^    TH1D*            MET_Correctedmu40thru50 = 0;$/;"	m	class:CorrectingDistributions
+MET_Correctedmu40thru50_copy	CorrectingDistributions.h	/^    TH1D*            MET_Correctedmu40thru50_copy = 0;$/;"	m	class:CorrectingDistributions
+MET_Correctedmu50thru60	CorrectingDistributions.h	/^    TH1D*            MET_Correctedmu50thru60 = 0;$/;"	m	class:CorrectingDistributions
+MET_Correctedmu50thru60_copy	CorrectingDistributions.h	/^    TH1D*            MET_Correctedmu50thru60_copy = 0;$/;"	m	class:CorrectingDistributions
+MET_Correctedmu60thru70	CorrectingDistributions.h	/^    TH1D*            MET_Correctedmu60thru70 = 0;$/;"	m	class:CorrectingDistributions
+MET_Correctedmu60thru70_copy	CorrectingDistributions.h	/^    TH1D*            MET_Correctedmu60thru70_copy = 0;$/;"	m	class:CorrectingDistributions
 Notify	CorrectingDistributions.C	/^Bool_t CorrectingDistributions::Notify(){return kTRUE;}$/;"	f	class:CorrectingDistributions
 OutOfTimePileup	CorrectingDistributions.h	/^   TTreeReaderValue<Float_t> OutOfTimePileup = {fReader, "OutOfTimePileup"};$/;"	m	class:CorrectingDistributions
-Process	CorrectingDistributions.C	/^Bool_t CorrectingDistributions::Process(Long64_t entry)$/;"	f	class:CorrectingDistributions
+Process	CorrectingDistributions.C	/^Bool_t CorrectingDistributions::Process(Long64_t entry)\/\/{{{$/;"	f	class:CorrectingDistributions
 RunNumber	CorrectingDistributions.h	/^   TTreeReaderValue<UInt_t> RunNumber = {fReader, "RunNumber"};$/;"	m	class:CorrectingDistributions
 SetInputList	CorrectingDistributions.h	/^   virtual void    SetInputList(TList *input) { fInput = input; }$/;"	f	class:CorrectingDistributions
 SetObject	CorrectingDistributions.h	/^   virtual void    SetObject(TObject *obj) { fObject = obj; }$/;"	f	class:CorrectingDistributions
@@ -45,7 +52,7 @@ SlaveTerminate	CorrectingDistributions.C	/^void CorrectingDistributions::SlaveTe
 Terminate	CorrectingDistributions.C	/^void CorrectingDistributions::Terminate(){$/;"	f	class:CorrectingDistributions
 Version	CorrectingDistributions.h	/^   virtual Int_t   Version() const { return 2; }$/;"	f	class:CorrectingDistributions
 alg_name	CorrectingDistributions.h	/^    TString alg_name = "METCELL";$/;"	m	class:CorrectingDistributions
-binWidth	CorrectingDistributions.h	/^   Float_t binWidth = 5.0;$/;"	m	class:CorrectingDistributions
+binWidth	CorrectingDistributions.h	/^    Float_t binWidth = 1.0;$/;"	m	class:CorrectingDistributions
 cell_met	CorrectingDistributions.h	/^   TTreeReaderValue<Float_t> cell_met = {fReader, "cell.met"};$/;"	m	class:CorrectingDistributions
 efficiencyObjectMu0thru10	CorrectingDistributions.h	/^    TEfficiency* efficiencyObjectMu0thru10 = 0;$/;"	m	class:CorrectingDistributions
 efficiencyObjectMu10thru20	CorrectingDistributions.h	/^    TEfficiency* efficiencyObjectMu10thru20 =0;$/;"	m	class:CorrectingDistributions
@@ -66,11 +73,18 @@ nbins	CorrectingDistributions.h	/^    Int_t nbins = (gevHigh-gevLow)\/binWidth;$
 passedL1ZB	CorrectingDistributions.C	/^Bool_t CorrectingDistributions::passedL1ZB(){\/\/{{{$/;"	f	class:CorrectingDistributions
 xaxisTitle	CorrectingDistributions.h	/^    TString xaxisTitle = alg_name + " [GeV]";$/;"	m	class:CorrectingDistributions
 yaxisTitle	CorrectingDistributions.h	/^    TString yaxisTitle = "Number of Entries";$/;"	m	class:CorrectingDistributions
-zbMETMuBin0thru10	CorrectingDistributions.h	/^    TH1F* zbMETMuBin0thru10 = 0;$/;"	m	class:CorrectingDistributions
-zbMETMuBin10thru20	CorrectingDistributions.h	/^    TH1F* zbMETMuBin10thru20 = 0;$/;"	m	class:CorrectingDistributions
-zbMETMuBin20thru30	CorrectingDistributions.h	/^    TH1F* zbMETMuBin20thru30 = 0;$/;"	m	class:CorrectingDistributions
-zbMETMuBin30thru40	CorrectingDistributions.h	/^    TH1F* zbMETMuBin30thru40 = 0;$/;"	m	class:CorrectingDistributions
-zbMETMuBin40thru50	CorrectingDistributions.h	/^    TH1F* zbMETMuBin40thru50 = 0;$/;"	m	class:CorrectingDistributions
-zbMETMuBin50thru60	CorrectingDistributions.h	/^    TH1F* zbMETMuBin50thru60 = 0;$/;"	m	class:CorrectingDistributions
-zbMETMuBin60thru70	CorrectingDistributions.h	/^    TH1F* zbMETMuBin60thru70 = 0;$/;"	m	class:CorrectingDistributions
+zbMETMuBin0thru10	CorrectingDistributions.h	/^    TH1D* zbMETMuBin0thru10 = 0;$/;"	m	class:CorrectingDistributions
+zbMETMuBin0thru10_copy	CorrectingDistributions.h	/^    TH1D* zbMETMuBin0thru10_copy = 0;$/;"	m	class:CorrectingDistributions
+zbMETMuBin10thru20	CorrectingDistributions.h	/^    TH1D* zbMETMuBin10thru20 = 0;$/;"	m	class:CorrectingDistributions
+zbMETMuBin10thru20_copy	CorrectingDistributions.h	/^    TH1D* zbMETMuBin10thru20_copy = 0;$/;"	m	class:CorrectingDistributions
+zbMETMuBin20thru30	CorrectingDistributions.h	/^    TH1D* zbMETMuBin20thru30 = 0;$/;"	m	class:CorrectingDistributions
+zbMETMuBin20thru30_copy	CorrectingDistributions.h	/^    TH1D* zbMETMuBin20thru30_copy = 0;$/;"	m	class:CorrectingDistributions
+zbMETMuBin30thru40	CorrectingDistributions.h	/^    TH1D* zbMETMuBin30thru40 = 0;$/;"	m	class:CorrectingDistributions
+zbMETMuBin30thru40_copy	CorrectingDistributions.h	/^    TH1D* zbMETMuBin30thru40_copy = 0;$/;"	m	class:CorrectingDistributions
+zbMETMuBin40thru50	CorrectingDistributions.h	/^    TH1D* zbMETMuBin40thru50 = 0;$/;"	m	class:CorrectingDistributions
+zbMETMuBin40thru50_copy	CorrectingDistributions.h	/^    TH1D* zbMETMuBin40thru50_copy = 0;$/;"	m	class:CorrectingDistributions
+zbMETMuBin50thru60	CorrectingDistributions.h	/^    TH1D* zbMETMuBin50thru60 = 0;$/;"	m	class:CorrectingDistributions
+zbMETMuBin50thru60_copy	CorrectingDistributions.h	/^    TH1D* zbMETMuBin50thru60_copy = 0;$/;"	m	class:CorrectingDistributions
+zbMETMuBin60thru70	CorrectingDistributions.h	/^    TH1D* zbMETMuBin60thru70 = 0;$/;"	m	class:CorrectingDistributions
+zbMETMuBin60thru70_copy	CorrectingDistributions.h	/^    TH1D* zbMETMuBin60thru70_copy = 0;$/;"	m	class:CorrectingDistributions
 ~CorrectingDistributions	CorrectingDistributions.h	/^   virtual ~CorrectingDistributions() { }$/;"	f	class:CorrectingDistributions
