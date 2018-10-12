@@ -1,7 +1,7 @@
-#define CorrectingDistributions_cxx
-#include "CorrectingDistributions.h"
+#define CorrectL1XE50ToZB_cxx
+#include "CorrectL1XE50ToZB.h"
 
-void CorrectingDistributions::Begin(TTree * /*tree*/)
+void CorrectL1XE50ToZB::Begin(TTree * /*tree*/)
 {
     TString option = GetOption();
 
@@ -9,7 +9,7 @@ void CorrectingDistributions::Begin(TTree * /*tree*/)
     TH1::AddDirectory(false);
 
     // GET EFFICIENCY OBJECTS FROM FILE 
-    mu_analysis_file = TFile::Open("../Root_Files/mu_analysis.root","UPDATE");
+    mu_analysis_file = TFile::Open("mu_analysis.root","UPDATE");
     if (!mu_analysis_file->IsOpen()){
         std::cout << "mu_analysis.root not opened" << std::endl;
         return;
@@ -33,12 +33,31 @@ void CorrectingDistributions::Begin(TTree * /*tree*/)
         EfficiencyFitMuBin6 = (TF1*)((efficiencyObjectMu50thru60->GetListOfFunctions())->At(0));
         EfficiencyFitMuBin7 = (TF1*)((efficiencyObjectMu60thru70->GetListOfFunctions())->At(0));
     }
+    if ( mu_analysis_file->cd("../l1xe50efficiencies") ){
+        std::cout << "Successfully switched to:" << std::endl;
+        gDirectory->pwd();
+        gDirectory->GetObject("L150metmu0thru10Efficiency",L1XE50efficiencyObjectMu0thru10);
+        gDirectory->GetObject("L150metmu10thru20Efficiency",L1XE50efficiencyObjectMu10thru20);
+        gDirectory->GetObject("L150metmu20thru30Efficiency",L1XE50efficiencyObjectMu20thru30);
+        gDirectory->GetObject("L150metmu30thru40Efficiency",L1XE50efficiencyObjectMu30thru40);
+        gDirectory->GetObject("L150metmu40thru50Efficiency",L1XE50efficiencyObjectMu40thru50);
+        gDirectory->GetObject("L150metmu50thru60Efficiency",L1XE50efficiencyObjectMu50thru60);
+        gDirectory->GetObject("L150metmu60thru70Efficiency",L1XE50efficiencyObjectMu60thru70);
+
+        L1XE50EfficiencyFitMuBin1 = (TF1*)((L1XE50efficiencyObjectMu0thru10->GetListOfFunctions())->At(0));
+        L1XE50EfficiencyFitMuBin2 = (TF1*)((L1XE50efficiencyObjectMu10thru20->GetListOfFunctions())->At(0));
+        L1XE50EfficiencyFitMuBin3 = (TF1*)((L1XE50efficiencyObjectMu20thru30->GetListOfFunctions())->At(0));
+        L1XE50EfficiencyFitMuBin4 = (TF1*)((L1XE50efficiencyObjectMu30thru40->GetListOfFunctions())->At(0));
+        L1XE50EfficiencyFitMuBin5 = (TF1*)((L1XE50efficiencyObjectMu40thru50->GetListOfFunctions())->At(0));
+        L1XE50EfficiencyFitMuBin6 = (TF1*)((L1XE50efficiencyObjectMu50thru60->GetListOfFunctions())->At(0));
+        L1XE50EfficiencyFitMuBin7 = (TF1*)((L1XE50efficiencyObjectMu60thru70->GetListOfFunctions())->At(0));
+    }
     else{
         std::cout << "Unable to open efficiency_curves directory" << std::endl;
         return;
     }
 
-    if (gDirectory->cd("../zb_met") ){
+    if (gDirectory->cd("../zb_met_distributions") ){
         std::cout << "Successfully switched to:" << std::endl;
         gDirectory->pwd();
         gDirectory->GetObject("metmu0thru10",zbMETMuBin0thru10);
@@ -62,18 +81,18 @@ void CorrectingDistributions::Begin(TTree * /*tree*/)
     zbMETMuBin50thru60->SetDirectory(0);
     zbMETMuBin60thru70->SetDirectory(0);
     
-    MET_Correctedmu0thru10 = new TH1D("correctedmetmu0thru10","Corrected Data for actint between 0 and 10", nbins , gevLow , gevHigh );
-    MET_Correctedmu10thru20 = new TH1D("correctedmetmu10thru20","Corrected Data for actint between 10 and 20", nbins , gevLow , gevHigh );
-    MET_Correctedmu20thru30 = new TH1D("correctedmetmu20thru30","Corrected Data for actint between 20 and 30", nbins , gevLow , gevHigh );
-    MET_Correctedmu30thru40 = new TH1D("correctedmetmu30thru40","Corrected Data for actint between 30 to 40", nbins , gevLow , gevHigh );
-    MET_Correctedmu40thru50 = new TH1D("correctedmetmu40thru50","Corrected Data for actint between 40 to 50", nbins , gevLow , gevHigh );
-    MET_Correctedmu50thru60 = new TH1D("correctedmetmu50thru60","Corrected Data for actint between 50 and 60", nbins , gevLow , gevHigh );
-    MET_Correctedmu60thru70 = new TH1D("correctedmetmu60thru70","Corrected Data for actint between 60 and 70", nbins , gevLow , gevHigh );
+    MET_Correctedmu0thru10 = new TH1D("L1XE50CorrectedToZB0thru10","Corrected Data for actint between 0 and 10", nbins , gevLow , gevHigh );
+    MET_Correctedmu10thru20 = new TH1D("L1XE50CorrectedToZB10thru20","Corrected Data for actint between 10 and 20", nbins , gevLow , gevHigh );
+    MET_Correctedmu20thru30 = new TH1D("L1XE50CorrectedToZB20thru30","Corrected Data for actint between 20 and 30", nbins , gevLow , gevHigh );
+    MET_Correctedmu30thru40 = new TH1D("L1XE50CorrectedToZB30thru40","Corrected Data for actint between 30 to 40", nbins , gevLow , gevHigh );
+    MET_Correctedmu40thru50 = new TH1D("L1XE50CorrectedToZB40thru50","Corrected Data for actint between 40 to 50", nbins , gevLow , gevHigh );
+    MET_Correctedmu50thru60 = new TH1D("L1XE50CorrectedToZB50thru60","Corrected Data for actint between 50 and 60", nbins , gevLow , gevHigh );
+    MET_Correctedmu60thru70 = new TH1D("L1XE50CorrectedToZB60thru70","Corrected Data for actint between 60 and 70", nbins , gevLow , gevHigh );
 
 }
 
 
-Bool_t CorrectingDistributions::Process(Long64_t entry)//{{{
+Bool_t CorrectL1XE50ToZB::Process(Long64_t entry)//{{{
 {
    fReader.SetLocalEntry(entry);
 
@@ -81,40 +100,40 @@ Bool_t CorrectingDistributions::Process(Long64_t entry)//{{{
    // still need to compute new error and pass it to this fill function somehow 
 
    // if the entry is passnoalg L1XE30, and it one of the good runs
-   if ( isPassnoAlgL1XE30() && isGoodRun() ){
+   if ( isPassnoAlgL1XE50() && isGoodRun() ){
        if ( inMuRange( 0.0 , 10.0) ){
-           MET_Correctedmu0thru10->Fill(*cell_met, ComputeWeight(EfficiencyFitMuBin1));
+           MET_Correctedmu0thru10->Fill(*cell_met, ComputeWeight(EfficiencyFitMuBin1, L1XE50EfficiencyFitMuBin1));
        }
        if ( inMuRange( 10.0, 20.0) ){
-           MET_Correctedmu10thru20->Fill(*cell_met,ComputeWeight( EfficiencyFitMuBin2));
+           MET_Correctedmu10thru20->Fill(*cell_met,ComputeWeight( EfficiencyFitMuBin2, L1XE50EfficiencyFitMuBin2));
        }
        if ( inMuRange( 20.0 , 30.0) ){
-           MET_Correctedmu20thru30->Fill(*cell_met,ComputeWeight(EfficiencyFitMuBin3));
+           MET_Correctedmu20thru30->Fill(*cell_met,ComputeWeight(EfficiencyFitMuBin3, L1XE50EfficiencyFitMuBin3));
        }
        if ( inMuRange( 30.0, 40.0) ){
-           MET_Correctedmu30thru40->Fill(*cell_met,ComputeWeight(EfficiencyFitMuBin4));
+           MET_Correctedmu30thru40->Fill(*cell_met,ComputeWeight(EfficiencyFitMuBin4, L1XE50EfficiencyFitMuBin4));
        }
        if ( inMuRange( 40.0 , 50.0 ) ){
-           MET_Correctedmu40thru50->Fill(*cell_met,ComputeWeight(EfficiencyFitMuBin5));
+           MET_Correctedmu40thru50->Fill(*cell_met,ComputeWeight(EfficiencyFitMuBin5, L1XE50EfficiencyFitMuBin5));
        }
        if ( inMuRange( 50.0 , 60.0 ) ){
-           MET_Correctedmu50thru60->Fill(*cell_met,ComputeWeight(EfficiencyFitMuBin6));
+           MET_Correctedmu50thru60->Fill(*cell_met,ComputeWeight(EfficiencyFitMuBin6,L1XE50EfficiencyFitMuBin6));
        }
        if ( inMuRange( 60.0 , 70.0 ) ){
-           MET_Correctedmu60thru70->Fill(*cell_met,ComputeWeight(EfficiencyFitMuBin7));
+           MET_Correctedmu60thru70->Fill(*cell_met,ComputeWeight(EfficiencyFitMuBin7,L1XE50EfficiencyFitMuBin7));
        }
    }
 
    return kTRUE;
 }//}}}
-Double_t CorrectingDistributions::ComputeWeight(TF1* fitFunc)//{{{
+Double_t CorrectL1XE50ToZB::ComputeWeight(TF1* fitFunc , TF1* fitFunc2)//{{{
 {
-    Float_t numerator = *HLT_noalg_L1XE30_prescale;
-    Double_t denominator = fitFunc->Eval( *cell_met ); 
+    Float_t numerator = *L1_XE50_prescale;
+    Double_t denominator = fitFunc->Eval( *cell_met ) * fitFunc2->Eval( *cell_met ); 
     return numerator / denominator; 
 }//}}}
-void CorrectingDistributions::SlaveTerminate(){}
-void CorrectingDistributions::Terminate(){
+void CorrectL1XE50ToZB::SlaveTerminate(){}
+void CorrectL1XE50ToZB::Terminate(){
 	// Relative Normalization{{{
     // BinWidth = 1.0 GeV
     Int_t normalization_bin1 = 40; // 
@@ -267,7 +286,7 @@ void CorrectingDistributions::Terminate(){
     TLegend* l2 = new TLegend(0.48,0.7,0.9,0.9);
     pad2->SetFillStyle(4000);
     pad1->Draw();
-    pad1->cd()
+    pad1->cd();
     MET_Correctedmu10thru20->Draw();
     zbMETMuBin10thru20->SetLineColor(2);
     zbMETMuBin10thru20->Draw("SAMES");
@@ -278,96 +297,150 @@ void CorrectingDistributions::Terminate(){
     pad1->SetLogy();
     pad1->Modified();
     c2->cd();
-    c2->SetLogy();
-    axis = new TGaxis( gPad->GetUxmax() , gPad->GetUymin(), gPad->GetUxmax(), gPad->GetUymax() , 0 , 1.0 , 510, "+L");
+    pad2->Range( xmin-0.1 * dx , ymin - 0.1*dy , xmax+0.1*dx , ymax+0.1*dy);
+    pad2->Draw();
+    pad2->cd();
+    efficiencyObjectMu10thru20->Draw("SAMES");
+    axis = new TGaxis( xmax,ymin,xmax,ymax,ymin,ymax,510, "+L");
     axis->SetLineColor(kRed);
     axis->SetTextColor(kRed);
     axis->Draw("SAME");
     c2->Print("../Plots/CorrectedAndZB/zb_met_corrected_mubin2.png");
 
     TCanvas* c3 = new TCanvas("c3","metmubin3");
+    pad1 = new TPad("pad1","",0,0,1,1);
+    pad2 = new TPad("pad2","",0,0,1,1);
     TLegend* l3 = new TLegend(0.48,0.7,0.9,0.9);
+    pad2->SetFillStyle(4000);
+    pad1->Draw();
+    pad1->cd();
     MET_Correctedmu20thru30->Draw();
+    pad1->Update();
     zbMETMuBin20thru30->SetLineColor(3);
     zbMETMuBin20thru30->Draw("SAME");
     l3->AddEntry(MET_Correctedmu20thru30);
     l3->AddEntry(zbMETMuBin20thru30);
     l3->Draw("SAME");
-    c3->SetLogy();
-    gStyle->SetOptStat(0);
-
-   axis = new TGaxis( gPad->GetUxmax() , gPad->GetUymin(), gPad->GetUxmax(), gPad->GetUymax() , 0 , 1.0 , 510, "+L");
-   axis->SetLineColor(kRed);
-   axis->SetTextColor(kRed);
-   axis->Draw("SAME");
+    pad1->SetLogy();
+    pad1->Modified();
+    c3->cd();
+    pad1->SetLogy();
+    pad2->Range( xmin-0.1 * dx , ymin - 0.1*dy , xmax+0.1*dx , ymax+0.1*dy);
+    pad2->Draw();
+    pad2->cd();
+    efficiencyObjectMu20thru30->Draw("SAMES");
+    axis = new TGaxis( xmax,ymin,xmax,ymax,ymin,ymax,510, "+L");
+    axis->SetLineColor(kRed);
+    axis->SetTextColor(kRed);
+    axis->Draw("SAME");
     c3->Print("../Plots/CorrectedAndZB/zb_met_corrected_mubin3.png");
+
     TCanvas* c4 = new TCanvas("c4","metmubin4");
+    pad1 = new TPad("pad1","",0,0,1,1);
+    pad2 = new TPad("pad2","",0,0,1,1);
     TLegend* l4 = new TLegend(0.48,0.7,0.9,0.9);
+    pad2->SetFillStyle(4000);
+    pad1->Draw();
+    pad1->cd();
     MET_Correctedmu30thru40->Draw();
     zbMETMuBin30thru40->SetLineColor(3);
+    pad1->Update();
     zbMETMuBin30thru40->Draw("SAME");
     l4->AddEntry(MET_Correctedmu30thru40);
     l4->AddEntry(zbMETMuBin30thru40);
     l4->Draw("SAME");
-    c4->SetLogy();
-    gStyle->SetOptStat(0);
-   axis = new TGaxis( gPad->GetUxmax() , gPad->GetUymin(), gPad->GetUxmax(), gPad->GetUymax() , 0 , 1.0 , 510, "+L");
-   axis->SetLineColor(kRed);
-   axis->SetTextColor(kRed);
-   axis->Draw("SAME");
+    pad1->SetLogy();
+    pad2->Range( xmin-0.1 * dx , ymin - 0.1*dy , xmax+0.1*dx , ymax+0.1*dy);
+    pad2->Draw();
+    pad2->cd();
+    efficiencyObjectMu30thru40->Draw("SAMES");
+    axis = new TGaxis( xmax,ymin,xmax,ymax,ymin,ymax,510, "+L");
+    axis->SetLineColor(kRed);
+    axis->SetTextColor(kRed);
+    axis->Draw("SAME");
     c4->Print("../Plots/CorrectedAndZB/zb_met_corrected_mubin4.png");
+
     TCanvas* c5 = new TCanvas("c5","metmubin5");
     TLegend* l5 = new TLegend(0.48,0.7,0.9,0.9);
+    pad1 = new TPad("pad1","",0,0,1,1);
+    pad2 = new TPad("pad2","",0,0,1,1);
+    pad2->SetFillStyle(4000);
+    pad1->Draw();
+    pad1->cd();
     MET_Correctedmu40thru50->Draw();
     zbMETMuBin40thru50->SetLineColor(3);
+    pad1->Update();
     zbMETMuBin40thru50->Draw("SAME");
     l5->AddEntry(MET_Correctedmu40thru50);
     l5->AddEntry(zbMETMuBin40thru50);
     l5->Draw("SAME");
-    gStyle->SetOptStat(0);
-    c5->SetLogy();
-   axis = new TGaxis( gPad->GetUxmax() , gPad->GetUymin(), gPad->GetUxmax(), gPad->GetUymax() , 0 , 1.0 , 510, "+L");
-   axis->SetLineColor(kRed);
-   axis->SetTextColor(kRed);
-   axis->Draw("SAME");
+    pad1->SetLogy();
+    pad2->Range( xmin-0.1 * dx , ymin - 0.1*dy , xmax+0.1*dx , ymax+0.1*dy);
+    pad2->Draw();
+    pad2->cd();
+    efficiencyObjectMu40thru50->Draw("SAMES");
+    axis = new TGaxis( xmax,ymin,xmax,ymax,ymin,ymax,510, "+L");
+    axis->SetLineColor(kRed);
+    axis->SetTextColor(kRed);
+    axis->Draw("SAME");
     c5->Print("../Plots/CorrectedAndZB/zb_met_corrected_mubin5.png");
+
     TCanvas* c6 = new TCanvas("c6","metmubin6");
+    pad1 = new TPad("pad1","",0,0,1,1);
+    pad2 = new TPad("pad2","",0,0,1,1);
+    pad2->SetFillStyle(4000);
+    pad1->Draw();
+    pad1->cd();
     TLegend* l6 = new TLegend(0.48,0.7,0.9,0.9);
     MET_Correctedmu50thru60->SetLineColor(3);
     MET_Correctedmu50thru60->Draw();
+    pad1->Update();
     zbMETMuBin50thru60->SetLineColor(2);
     zbMETMuBin50thru60->Draw("SAME");
     l6->AddEntry(MET_Correctedmu50thru60);
     l6->AddEntry(zbMETMuBin50thru60);
     l6->Draw("SAME");
-    gStyle->SetOptStat(0);
-   axis = new TGaxis( gPad->GetUxmax() , gPad->GetUymin(), gPad->GetUxmax(), gPad->GetUymax() , 0 , 1.0 , 510, "+L");
-   axis->SetLineColor(kRed);
-   axis->SetTextColor(kRed);
-   axis->Draw("SAME");
-    c6->SetLogy();
+    pad1->SetLogy();
+    pad2->Range( xmin-0.1 * dx , ymin - 0.1*dy , xmax+0.1*dx , ymax+0.1*dy);
+    pad2->Draw();
+    pad2->cd();
+    efficiencyObjectMu50thru60->Draw("SAMES");
+    axis = new TGaxis( xmax,ymin,xmax,ymax,ymin,ymax,510, "+L");
+    axis->SetLineColor(kRed);
+    axis->SetTextColor(kRed);
+    axis->Draw("SAME");
     c6->Print("../Plots/CorrectedAndZB/zb_met_corrected_mubin6.png");
+
     TCanvas* c7 = new TCanvas("c7","metmubin7");
+    pad1 = new TPad("pad1","",0,0,1,1);
+    pad2 = new TPad("pad2","",0,0,1,1);
+    pad2->SetFillStyle(4000);
+    pad1->Draw();
+    pad1->cd();
     TLegend* l7 = new TLegend(0.48,0.7,0.9,0.9);
     MET_Correctedmu60thru70->Draw();
     zbMETMuBin60thru70->SetLineColor(2);
     zbMETMuBin60thru70->Draw("SAME");
+    pad1->Update();
     l7->AddEntry(MET_Correctedmu60thru70);
     l7->AddEntry(zbMETMuBin60thru70);
     l7->Draw("SAME");
-    gStyle->SetOptStat(0);
-    c7->SetLogy();
-   axis = new TGaxis( gPad->GetUxmax() , gPad->GetUymin(), gPad->GetUxmax(), gPad->GetUymax() , 0 , 1.0 , 510, "+L");
-   axis->SetLineColor(kRed);
-   axis->SetTextColor(kRed);
-   axis->Draw("SAME");
+    pad1->SetLogy();
+    pad2->Range( xmin-0.1 * dx , ymin - 0.1*dy , xmax+0.1*dx , ymax+0.1*dy);
+    pad2->Draw();
+    pad2->cd();
+    efficiencyObjectMu60thru70->Draw("SAMES");
+    axis = new TGaxis( xmax,ymin,xmax,ymax,ymin,ymax,510, "+L");
+    axis->SetLineColor(kRed);
+    axis->SetTextColor(kRed);
+    axis->Draw("SAME");
     c7->Print("../Plots/CorrectedAndZB/zb_met_corrected_mubin7.png");
     //}}}
 
     // WRITE CORRECTED MET DISTRIBUTIONS TO FILE{{{
-    if ( !mu_analysis_file->cd("corrected_met") ){
+    if ( !mu_analysis_file->cd("L1CorrectedToZB_met") ){
         std::cout << "Corrected MET dist directory did not already exist. creating new one" << std::endl;
-        mu_analysis_file->mkdir("corrected_met");
+        mu_analysis_file->mkdir("L1CorrectedToZB_met");
     }
     else{
         std::cout << "Successfully switched to correcting met distributions directory" << std::endl;
@@ -382,21 +455,21 @@ void CorrectingDistributions::Terminate(){
     //}}}
     mu_analysis_file->Close();
 }
-void CorrectingDistributions::Init(TTree *tree){fReader.SetTree(tree);}
-void CorrectingDistributions::SlaveBegin(TTree * /*tree*/)//{{{
+void CorrectL1XE50ToZB::Init(TTree *tree){fReader.SetTree(tree);}
+void CorrectL1XE50ToZB::SlaveBegin(TTree * /*tree*/)//{{{
 {
    TString option = GetOption();
 }//}}}
-Bool_t CorrectingDistributions::Notify(){return kTRUE;}
-Bool_t CorrectingDistributions::isGoodRun(){//{{{
+Bool_t CorrectL1XE50ToZB::Notify(){return kTRUE;}
+Bool_t CorrectL1XE50ToZB::isGoodRun(){//{{{
     return (*RunNumber != 330203 && *RunNumber != 331975 && *RunNumber != 334487);
 }//}}}
-Bool_t CorrectingDistributions::passedL1ZB(){//{{{
+Bool_t CorrectL1XE50ToZB::passedL1ZB(){//{{{
     return (*HLT_noalg_zb_L1ZB_passed);
 }//}}}
-Bool_t CorrectingDistributions::inMuRange( Float_t a , Float_t b ){ //{{{
+Bool_t CorrectL1XE50ToZB::inMuRange( Float_t a , Float_t b ){ //{{{
     return ( *InTimePileup > a && *InTimePileup < b );
 } //}}}
-Bool_t CorrectingDistributions::isPassnoAlgL1XE30(){ // {{{
-    return (*HLT_noalg_L1XE30_passed);
+Bool_t CorrectL1XE50ToZB::isPassnoAlgL1XE50(){ // {{{
+    return (*L1_XE50_passed);
 } // }}}
