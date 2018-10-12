@@ -33,7 +33,7 @@ void CorrectL1XE50ToZB::Begin(TTree * /*tree*/)
         EfficiencyFitMuBin6 = (TF1*)((efficiencyObjectMu50thru60->GetListOfFunctions())->At(0));
         EfficiencyFitMuBin7 = (TF1*)((efficiencyObjectMu60thru70->GetListOfFunctions())->At(0));
     }
-    if ( mu_analysis_file->cd("../l1xe50efficiencies") ){
+    if ( mu_analysis_file->cd("l1xe50efficiencies") ){
         std::cout << "Successfully switched to:" << std::endl;
         gDirectory->pwd();
         gDirectory->GetObject("L150metmu0thru10Efficiency",L1XE50efficiencyObjectMu0thru10);
