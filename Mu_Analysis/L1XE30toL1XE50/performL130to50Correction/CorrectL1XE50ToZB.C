@@ -278,7 +278,7 @@ void CorrectL1XE50ToZB::Terminate(){
     axis->SetLineColor(kRed);
     axis->SetTextColor(kRed);
     axis->Draw("SAME");
-    c1->Print("zb_met_corrected_mubin1.png");
+    c1->Print("plots/zb_met_corrected_mubin1.png");
 
     TCanvas* c2 = new TCanvas("c2","metmubin2");
     pad1 = new TPad("pad1","",0,0,1,1);
@@ -305,7 +305,7 @@ void CorrectL1XE50ToZB::Terminate(){
     axis->SetLineColor(kRed);
     axis->SetTextColor(kRed);
     axis->Draw("SAME");
-    c2->Print("zb_met_corrected_mubin2.png");
+    c2->Print("plots/zb_met_corrected_mubin2.png");
 
     TCanvas* c3 = new TCanvas("c3","metmubin3");
     pad1 = new TPad("pad1","",0,0,1,1);
@@ -333,7 +333,7 @@ void CorrectL1XE50ToZB::Terminate(){
     axis->SetLineColor(kRed);
     axis->SetTextColor(kRed);
     axis->Draw("SAME");
-    c3->Print("zb_met_corrected_mubin3.png");
+    c3->Print("plots/zb_met_corrected_mubin3.png");
 
     TCanvas* c4 = new TCanvas("c4","metmubin4");
     pad1 = new TPad("pad1","",0,0,1,1);
@@ -358,7 +358,7 @@ void CorrectL1XE50ToZB::Terminate(){
     axis->SetLineColor(kRed);
     axis->SetTextColor(kRed);
     axis->Draw("SAME");
-    c4->Print("zb_met_corrected_mubin4.png");
+    c4->Print("plots/zb_met_corrected_mubin4.png");
 
     TCanvas* c5 = new TCanvas("c5","metmubin5");
     TLegend* l5 = new TLegend(0.48,0.7,0.9,0.9);
@@ -383,7 +383,7 @@ void CorrectL1XE50ToZB::Terminate(){
     axis->SetLineColor(kRed);
     axis->SetTextColor(kRed);
     axis->Draw("SAME");
-    c5->Print("zb_met_corrected_mubin5.png");
+    c5->Print("plots/zb_met_corrected_mubin5.png");
 
     TCanvas* c6 = new TCanvas("c6","metmubin6");
     pad1 = new TPad("pad1","",0,0,1,1);
@@ -409,7 +409,7 @@ void CorrectL1XE50ToZB::Terminate(){
     axis->SetLineColor(kRed);
     axis->SetTextColor(kRed);
     axis->Draw("SAME");
-    c6->Print("zb_met_corrected_mubin6.png");
+    c6->Print("plots/zb_met_corrected_mubin6.png");
 
     TCanvas* c7 = new TCanvas("c7","metmubin7");
     pad1 = new TPad("pad1","",0,0,1,1);
@@ -434,7 +434,7 @@ void CorrectL1XE50ToZB::Terminate(){
     axis->SetLineColor(kRed);
     axis->SetTextColor(kRed);
     axis->Draw("SAME");
-    c7->Print("zb_met_corrected_mubin7.png");
+    c7->Print("plots/zb_met_corrected_mubin7.png");
     //}}}
 
     // WRITE CORRECTED MET DISTRIBUTIONS TO FILE{{{
