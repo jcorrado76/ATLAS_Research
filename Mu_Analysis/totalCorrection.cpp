@@ -1,7 +1,7 @@
 #include "zbToL1XE30/plotMETDistsVersusMu/PlotMETDistsVersMu.h"
 #include "zbToL1XE30/PerformCorrection/CorrectingDistributions.h"
 #include "L1XE30toL1XE50/plotl130dists/BuildEfficiencyL150.h"
-#include "CorrectAllTheWay/CorrectL1XE50AllWay.h"
+#include "L1XE30toL1XE50/performL130to50Correction/CorrectL1XE50AllWay.h"
 #include <TChain.h>
 #include <TSelector.h>
 #include <TEfficiency.h>
@@ -20,7 +20,7 @@ int totalCorrection(){
     //BuildEfficiencyL150* createL1XE50Efficiencies = (BuildEfficiencyL150*) TSelector::GetSelector("L1XE30toL1XE50/plotl130dists/BuildEfficiencyL150.C+");
     //jetm10_chain->Process( createL1XE50Efficiencies );
 
-    CorrectAllWay* CorrectL1XE50DataAllWay = (CorrectAllWay*) TSelector::GetSelector("CorrectAllTheWay/CorrectL1XE50AllWay.C+");
+    CorrectL1XE50ToZB* CorrectL1XE50DataAllWay = (CorrectL1XE50ToZB*) TSelector::GetSelector("L1XE30toL1XE50/performL130to50Correction/CorrectL1XE50AllWay.C+");
     jetm10_chain->Process( CorrectL1XE50DataAllWay );
 
 

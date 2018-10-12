@@ -4,8 +4,8 @@
 // from TChain METTree/jburrntuplechain
 //////////////////////////////////////////////////////////
 
-#ifndef CorrectingDistributions_h
-#define CorrectingDistributions_h
+#ifndef CorrectL1XE50ToZB_h
+#define CorrectL1XE50ToZB_h
 
 #include <TROOT.h>
 #include <TChain.h>
@@ -24,7 +24,7 @@
 #include <TEfficiency.h>
 #include <TDirectory.h>
 #include <TGaxis.h>
-class CorrectingDistributions : public TSelector {
+class CorrectL1XE50ToZB : public TSelector {
 public :
    TTreeReader     fReader;  //!the tree reader
    TTree          *fChain = 0;   //!pointer to the analyzed TTree or TChain
@@ -112,8 +112,8 @@ public :
    TTreeReaderValue<Bool_t> L1_XE50_passed = {fReader, "L1_XE50.passed"};
    TTreeReaderValue<Float_t> L1_XE50_prescale = {fReader, "L1_XE50.prescale"};
 
-   CorrectingDistributions(TTree * /*tree*/ =0) { }
-   virtual ~CorrectingDistributions() { }
+   CorrectL1XE50ToZB(TTree * /*tree*/ =0) { }
+   virtual ~CorrectL1XE50ToZB() { }
    virtual Int_t   Version() const { return 2; }
    virtual void    Begin(TTree *tree);
    virtual void    SlaveBegin(TTree *tree);
@@ -132,9 +132,9 @@ public :
    Bool_t isPassnoAlgL1XE30();
    Bool_t isPassnoAlgL1XE50();
    Bool_t inMuRange( Float_t , Float_t );
-   Double_t ComputeWeight(TF1*);
+   Double_t ComputeWeight(TF1*,TF1*);
 
-   ClassDef(CorrectingDistributions,0);
+   ClassDef(CorrectL1XE50ToZB,0);
 
 };
 

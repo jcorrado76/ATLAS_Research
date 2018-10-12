@@ -1,7 +1,7 @@
-#define CorrectingDistributions_cxx
-#include "CorrectingDistributions.h"
+#define CorrectL1XE50ToZB_cxx
+#include "CorrectL1XE50AllWay.h"
 
-void CorrectingDistributions::Begin(TTree * /*tree*/)
+void CorrectL1XE50ToZB::Begin(TTree * /*tree*/)
 {
     TString option = GetOption();
 
@@ -57,7 +57,7 @@ void CorrectingDistributions::Begin(TTree * /*tree*/)
         return;
     }
 
-    if (gDirectory->cd("../zb_met") ){
+    if (gDirectory->cd("../zb_met_distributions") ){
         std::cout << "Successfully switched to:" << std::endl;
         gDirectory->pwd();
         gDirectory->GetObject("metmu0thru10",zbMETMuBin0thru10);
@@ -92,7 +92,7 @@ void CorrectingDistributions::Begin(TTree * /*tree*/)
 }
 
 
-Bool_t CorrectingDistributions::Process(Long64_t entry)//{{{
+Bool_t CorrectL1XE50ToZB::Process(Long64_t entry)//{{{
 {
    fReader.SetLocalEntry(entry);
 
@@ -126,14 +126,14 @@ Bool_t CorrectingDistributions::Process(Long64_t entry)//{{{
 
    return kTRUE;
 }//}}}
-Double_t CorrectingDistributions::ComputeWeight(TF1* fitFunc , TF1* fitFunc2)//{{{
+Double_t CorrectL1XE50ToZB::ComputeWeight(TF1* fitFunc , TF1* fitFunc2)//{{{
 {
     Float_t numerator = *L1_XE50_prescale;
     Double_t denominator = fitFunc->Eval( *cell_met ) * fitFunc2->Eval( *cell_met ); 
     return numerator / denominator; 
 }//}}}
-void CorrectingDistributions::SlaveTerminate(){}
-void CorrectingDistributions::Terminate(){
+void CorrectL1XE50ToZB::SlaveTerminate(){}
+void CorrectL1XE50ToZB::Terminate(){
 	// Relative Normalization{{{
     // BinWidth = 1.0 GeV
     Int_t normalization_bin1 = 40; // 
@@ -438,9 +438,9 @@ void CorrectingDistributions::Terminate(){
     //}}}
 
     // WRITE CORRECTED MET DISTRIBUTIONS TO FILE{{{
-    if ( !mu_analysis_file->cd("corrected_met") ){
+    if ( !mu_analysis_file->cd("L1CorrectedToZB_met") ){
         std::cout << "Corrected MET dist directory did not already exist. creating new one" << std::endl;
-        mu_analysis_file->mkdir("corrected_met");
+        mu_analysis_file->mkdir("L1CorrectedToZB_met");
     }
     else{
         std::cout << "Successfully switched to correcting met distributions directory" << std::endl;
@@ -455,21 +455,21 @@ void CorrectingDistributions::Terminate(){
     //}}}
     mu_analysis_file->Close();
 }
-void CorrectingDistributions::Init(TTree *tree){fReader.SetTree(tree);}
-void CorrectingDistributions::SlaveBegin(TTree * /*tree*/)//{{{
+void CorrectL1XE50ToZB::Init(TTree *tree){fReader.SetTree(tree);}
+void CorrectL1XE50ToZB::SlaveBegin(TTree * /*tree*/)//{{{
 {
    TString option = GetOption();
 }//}}}
-Bool_t CorrectingDistributions::Notify(){return kTRUE;}
-Bool_t CorrectingDistributions::isGoodRun(){//{{{
+Bool_t CorrectL1XE50ToZB::Notify(){return kTRUE;}
+Bool_t CorrectL1XE50ToZB::isGoodRun(){//{{{
     return (*RunNumber != 330203 && *RunNumber != 331975 && *RunNumber != 334487);
 }//}}}
-Bool_t CorrectingDistributions::passedL1ZB(){//{{{
+Bool_t CorrectL1XE50ToZB::passedL1ZB(){//{{{
     return (*HLT_noalg_zb_L1ZB_passed);
 }//}}}
-Bool_t CorrectingDistributions::inMuRange( Float_t a , Float_t b ){ //{{{
+Bool_t CorrectL1XE50ToZB::inMuRange( Float_t a , Float_t b ){ //{{{
     return ( *InTimePileup > a && *InTimePileup < b );
 } //}}}
-Bool_t CorrectingDistributions::isPassnoAlgL1XE50(){ // {{{
+Bool_t CorrectL1XE50ToZB::isPassnoAlgL1XE50(){ // {{{
     return (*L1_XE50_passed);
 } // }}}
