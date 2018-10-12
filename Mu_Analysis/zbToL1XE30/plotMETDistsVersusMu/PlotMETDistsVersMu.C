@@ -114,7 +114,7 @@ void PlotMETDistsVersMu::Terminate() // Plotting{{{
     MET_Algmu60thru70Efficiency->SetMarkerStyle(21);//}}}
     // WRITE TO FILE {{{
     TFile* Mu_Analysis_File = TFile::Open("./mu_analysis.root", "RECREATE");
-    TDirectory* zb_met_distributions = Mu_Analysis_File->mkdr("zb_met");
+    TDirectory* zb_met_distributions = Mu_Analysis_File->mkdir("zb_met");
     zb_met_distributions->cd();
     MET_Datamu0thru10->Write();
     MET_Datamu10thru20->Write();
