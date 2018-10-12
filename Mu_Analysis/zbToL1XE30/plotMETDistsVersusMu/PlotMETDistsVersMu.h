@@ -97,6 +97,7 @@ public :
    Bool_t inMuRange( Float_t , Float_t );
    static Double_t fitFunction(Double_t *x , Double_t *par );
    TF1* generateFitFunction(TEfficiency* teff_obj, float gevMax = 300.0, float initial_slope = 0.1 , float initial_intercept = 0.0, float initial_sigma = 10.0);
+   TEfficiency* GetEfficiency();
 
    ClassDef(PlotMETDistsVersMu,0);
 

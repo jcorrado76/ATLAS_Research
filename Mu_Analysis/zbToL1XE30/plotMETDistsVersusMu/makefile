@@ -1,2 +1,2 @@
 clean :
-	rm *.so *.d *.pcm 
+	rm *.so *.d *.pcm *.swp

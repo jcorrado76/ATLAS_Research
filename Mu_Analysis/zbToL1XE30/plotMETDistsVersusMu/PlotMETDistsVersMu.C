@@ -96,28 +96,6 @@ void PlotMETDistsVersMu::Terminate() // Plotting{{{
     MET_Datamu40thru50_Copy->SetNormFactor(1.);
     MET_Datamu50thru60_Copy->SetNormFactor(1.);
     MET_Datamu60thru70_Copy->SetNormFactor(1.);//}}}
-    // PLOT ZB DATA{{{
-    TCanvas* zb_met_dists = new TCanvas("zb_met_plot","Plot of MET Distribution in Mu Slices");
-    MET_Datamu0thru10_Copy->Draw();
-    MET_Datamu10thru20_Copy->Draw("SAME");
-    MET_Datamu20thru30_Copy->Draw("SAME");
-    MET_Datamu30thru40_Copy->Draw("SAME");
-    MET_Datamu40thru50_Copy->Draw("SAME");
-    MET_Datamu50thru60_Copy->Draw("SAME");
-    MET_Datamu60thru70_Copy->Draw("SAME");
-    TLegend* met_dist_legend = new TLegend();
-    met_dist_legend->AddEntry(MET_Datamu0thru10);
-    met_dist_legend->AddEntry(MET_Datamu10thru20);
-    met_dist_legend->AddEntry(MET_Datamu20thru30);
-    met_dist_legend->AddEntry(MET_Datamu30thru40);
-    met_dist_legend->AddEntry(MET_Datamu40thru50);
-    met_dist_legend->AddEntry(MET_Datamu50thru60);
-    met_dist_legend->AddEntry(MET_Datamu60thru70);
-    met_dist_legend->Draw("SAME");
-    gPad->SetLogy();
-    gStyle->SetOptStat(0);
-    zb_met_dists->Print("../Plots/CorrectedAndZB/ZB_MET_Distributions.png");
-    //}}}
     // FORMATTING EFFICIENCY CURVES{{{
     MET_Algmu0thru10Efficiency->SetLineColor(1);
     MET_Algmu10thru20Efficiency->SetLineColor(2);
@@ -134,29 +112,9 @@ void PlotMETDistsVersMu::Terminate() // Plotting{{{
     MET_Algmu40thru50Efficiency->SetMarkerStyle(27);
     MET_Algmu50thru60Efficiency->SetMarkerStyle(22);
     MET_Algmu60thru70Efficiency->SetMarkerStyle(21);//}}}
-    // PLOT EFFICIENCY CURVES {{{
-    TCanvas* efficiency_plot = new TCanvas("efficiencyPlot", "MET Efficiency Slices in Mu");
-    MET_Algmu10thru20Efficiency->Draw();
-    MET_Algmu20thru30Efficiency->Draw("SAME");
-    MET_Algmu30thru40Efficiency->Draw("SAME");
-    MET_Algmu40thru50Efficiency->Draw("SAME");
-    MET_Algmu50thru60Efficiency->Draw("SAME");
-    MET_Algmu60thru70Efficiency->Draw("SAME");
-    MET_Algmu0thru10Efficiency->Draw("SAME");
-    TLegend* efficiency_legend = new TLegend();
-    efficiency_legend->AddEntry(MET_Algmu0thru10Efficiency);
-    efficiency_legend->AddEntry(MET_Algmu10thru20Efficiency);
-    efficiency_legend->AddEntry(MET_Algmu20thru30Efficiency);
-    efficiency_legend->AddEntry(MET_Algmu30thru40Efficiency);
-    efficiency_legend->AddEntry(MET_Algmu40thru50Efficiency);
-    efficiency_legend->AddEntry(MET_Algmu50thru60Efficiency);
-    efficiency_legend->AddEntry(MET_Algmu60thru70Efficiency);
-    efficiency_legend->Draw("SAME");
-    gStyle->SetOptStat(0);//}}}
-    efficiency_plot->Print("../Plots/ZB_MET_Efficiency.png");
     // WRITE TO FILE {{{
-    TFile* Mu_Analysis_File = TFile::Open("../Root_Files/mu_analysis.root", "RECREATE");
-    TDirectory* zb_met_distributions = Mu_Analysis_File->mkdir("zb_met");
+    TFile* Mu_Analysis_File = TFile::Open("./mu_analysis.root", "RECREATE");
+    TDirectory* zb_met_distributions = Mu_Analysis_File->mkdr("zb_met");
     zb_met_distributions->cd();
     MET_Datamu0thru10->Write();
     MET_Datamu10thru20->Write();
@@ -176,7 +134,7 @@ void PlotMETDistsVersMu::Terminate() // Plotting{{{
     MET_Algmu50thru60Efficiency->Write();
     MET_Algmu60thru70Efficiency->Write();
 
-    Mu_Analysis_File->Close();//}}}
+    Mu_Analysis_File->Close();
 }//}}}
 void PlotMETDistsVersMu::SlaveBegin(TTree * /*tree*/) // {{{
 {
@@ -227,3 +185,6 @@ TF1* PlotMETDistsVersMu::generateFitFunction(TEfficiency* teff_obj, float gevMax
     std::cout << "Value of error on sigma: " << fitErrorFunction->GetParError(2) << std::endl;
     return fitErrorFunction;
 }//}}}
+TEfficiency* PlotMETDistsVersMu::GetEfficiency(){
+    return(MET_Algmu20thru30Efficiency);
+}
