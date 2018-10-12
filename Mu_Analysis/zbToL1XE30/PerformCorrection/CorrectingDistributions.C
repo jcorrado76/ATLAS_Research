@@ -9,12 +9,12 @@ void CorrectingDistributions::Begin(TTree * /*tree*/)
     TH1::AddDirectory(false);
 
     // GET EFFICIENCY OBJECTS FROM FILE 
-    mu_analysis_file = TFile::Open("../Root_Files/mu_analysis.root","UPDATE");
+    mu_analysis_file = TFile::Open("mu_analysis.root","UPDATE");
     if (!mu_analysis_file->IsOpen()){
         std::cout << "mu_analysis.root not opened" << std::endl;
         return;
     }
-    if ( mu_analysis_file->cd("efficiency_curves") ){
+    if ( mu_analysis_file->cd("l1xe30_efficiency_curves") ){
         std::cout << "Successfully switched to:" << std::endl;
         gDirectory->pwd();
         gDirectory->GetObject("metmu0thru10Efficiency",efficiencyObjectMu0thru10);
@@ -38,7 +38,7 @@ void CorrectingDistributions::Begin(TTree * /*tree*/)
         return;
     }
 
-    if (gDirectory->cd("../zb_met") ){
+    if (gDirectory->cd("../zb_met_distributions") ){
         std::cout << "Successfully switched to:" << std::endl;
         gDirectory->pwd();
         gDirectory->GetObject("metmu0thru10",zbMETMuBin0thru10);

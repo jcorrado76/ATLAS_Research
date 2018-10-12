@@ -113,8 +113,8 @@ void PlotMETDistsVersMu::Terminate() // Plotting{{{
     MET_Algmu50thru60Efficiency->SetMarkerStyle(22);
     MET_Algmu60thru70Efficiency->SetMarkerStyle(21);//}}}
     // WRITE TO FILE {{{
-    TFile* Mu_Analysis_File = TFile::Open("./mu_analysis.root", "RECREATE");
-    TDirectory* zb_met_distributions = Mu_Analysis_File->mkdir("zb_met");
+    TFile* Mu_Analysis_File = TFile::Open("mu_analysis.root", "RECREATE");
+    TDirectory* zb_met_distributions = Mu_Analysis_File->mkdir("zb_met_distributions");
     zb_met_distributions->cd();
     MET_Datamu0thru10->Write();
     MET_Datamu10thru20->Write();
@@ -124,7 +124,7 @@ void PlotMETDistsVersMu::Terminate() // Plotting{{{
     MET_Datamu50thru60->Write();
     MET_Datamu60thru70->Write();
 
-    TDirectory* efficiency_curves = Mu_Analysis_File->mkdir("efficiency_curves");
+    TDirectory* efficiency_curves = Mu_Analysis_File->mkdir("l1xe30_efficiency_curves");
     efficiency_curves->cd();
     MET_Algmu0thru10Efficiency->Write();
     MET_Algmu10thru20Efficiency->Write();
