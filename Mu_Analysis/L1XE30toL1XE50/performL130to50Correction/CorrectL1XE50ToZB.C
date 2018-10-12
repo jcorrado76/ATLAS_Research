@@ -14,7 +14,7 @@ void CorrectL1XE50ToZB::Begin(TTree * /*tree*/)
         std::cout << "mu_analysis.root not opened" << std::endl;
         return;
     }
-    if ( mu_analysis_file->cd("efficiency_curves") ){
+    if ( mu_analysis_file->cd("l1xe30_efficiency_curves") ){
         std::cout << "Successfully switched to:" << std::endl;
         gDirectory->pwd();
         gDirectory->GetObject("metmu0thru10Efficiency",efficiencyObjectMu0thru10);
