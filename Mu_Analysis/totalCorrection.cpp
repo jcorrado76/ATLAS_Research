@@ -1,5 +1,7 @@
 #include "zbToL1XE30/plotMETDistsVersusMu/PlotMETDistsVersMu.h"
 #include "zbToL1XE30/PerformCorrection/CorrectingDistributions.h"
+#include "L1XE30toL1XE50/plotl130dists/BuildEfficiencyL150.h"
+#include "CorrectAllTheWay/CorrectL1XE50AllWay.h"
 #include <TChain.h>
 #include <TSelector.h>
 #include <TEfficiency.h>
@@ -13,7 +15,13 @@ int totalCorrection(){
     CorrectingDistributions* correctToZB = (CorrectingDistributions*) TSelector::GetSelector("zbToL1XE30/PerformCorrection/CorrectingDistributions.C+");
     TChain* jetm10_chain = new TChain( "METTree", "jetm10chain");
     jetm10_chain->Add("~/DATA/PhysicsMain/JburrJETM10*");
-    jetm10_chain->Process(correctToZB);
+    //jetm10_chain->Process(correctToZB);
+
+    //BuildEfficiencyL150* createL1XE50Efficiencies = (BuildEfficiencyL150*) TSelector::GetSelector("L1XE30toL1XE50/plotl130dists/BuildEfficiencyL150.C+");
+    //jetm10_chain->Process( createL1XE50Efficiencies );
+
+    CorrectAllWay* CorrectL1XE50DataAllWay = (CorrectAllWay*) TSelector::GetSelector("CorrectAllTheWay/CorrectL1XE50AllWay.C+");
+    jetm10_chain->Process( CorrectL1XE50DataAllWay );
 
 
     return(1);

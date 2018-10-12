@@ -419,6 +419,7 @@ void CorrectingDistributions::Terminate(){
     //}}}
 
     // WRITE CORRECTED MET DISTRIBUTIONS TO FILE{{{
+    // this is L1XE30 distribution corrected to ZB
     if ( !mu_analysis_file->cd("corrected_met") ){
         std::cout << "Corrected MET dist directory did not already exist. creating new one" << std::endl;
         mu_analysis_file->mkdir("corrected_met");

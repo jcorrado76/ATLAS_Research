@@ -5,8 +5,8 @@
 // found on file: ../data/totalJburrTuple.root
 //////////////////////////////////////////////////////////
 
-#ifndef PlotMETDistsVersMu_h
-#define PlotMETDistsVersMu_h
+#ifndef BuildEfficiencyL150_h
+#define BuildEfficiencyL150_h
 
 #include <TROOT.h>
 #include <TChain.h>
@@ -23,7 +23,7 @@
 #include <TEfficiency.h>
 #include <TF1.h>
 
-class PlotMETDistsVersMu : public TSelector {
+class BuildEfficiencyL150 : public TSelector {
 public :
    TTreeReader     fReader;  //!the tree reader
    TTree          *fChain = 0;   //!pointer to the analyzed TTree or TChain
@@ -77,8 +77,8 @@ public :
    TTreeReaderValue<Float_t> HLT_noalg_L1XE30_prescale = {fReader, "HLT_noalg_L1XE30.prescale"};
 
 
-   PlotMETDistsVersMu(TTree * =0) { }
-   virtual ~PlotMETDistsVersMu() { }
+   BuildEfficiencyL150(TTree * =0) { }
+   virtual ~BuildEfficiencyL150() { }
    virtual Int_t   Version() const { return 2; }
    virtual void    Begin(TTree *tree);
    virtual void    SlaveBegin(TTree *tree);
@@ -99,7 +99,7 @@ public :
    static Double_t fitFunction(Double_t *x , Double_t *par );
    TF1* generateFitFunction(TEfficiency* teff_obj, float gevMax = 300.0, float initial_slope = 0.1 , float initial_intercept = 0.0, float initial_sigma = 10.0);
 
-   ClassDef(PlotMETDistsVersMu,0);
+   ClassDef(BuildEfficiencyL150,0);
 
 };
 

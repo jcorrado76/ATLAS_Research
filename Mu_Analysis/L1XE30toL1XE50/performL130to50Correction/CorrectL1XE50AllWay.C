@@ -33,6 +33,25 @@ void CorrectingDistributions::Begin(TTree * /*tree*/)
         EfficiencyFitMuBin6 = (TF1*)((efficiencyObjectMu50thru60->GetListOfFunctions())->At(0));
         EfficiencyFitMuBin7 = (TF1*)((efficiencyObjectMu60thru70->GetListOfFunctions())->At(0));
     }
+    if ( mu_analysis_file->cd("../l1xe50efficiencies") ){
+        std::cout << "Successfully switched to:" << std::endl;
+        gDirectory->pwd();
+        gDirectory->GetObject("L150metmu0thru10Efficiency",L1XE50efficiencyObjectMu0thru10);
+        gDirectory->GetObject("L150metmu10thru20Efficiency",L1XE50efficiencyObjectMu10thru20);
+        gDirectory->GetObject("L150metmu20thru30Efficiency",L1XE50efficiencyObjectMu20thru30);
+        gDirectory->GetObject("L150metmu30thru40Efficiency",L1XE50efficiencyObjectMu30thru40);
+        gDirectory->GetObject("L150metmu40thru50Efficiency",L1XE50efficiencyObjectMu40thru50);
+        gDirectory->GetObject("L150metmu50thru60Efficiency",L1XE50efficiencyObjectMu50thru60);
+        gDirectory->GetObject("L150metmu60thru70Efficiency",L1XE50efficiencyObjectMu60thru70);
+
+        L1XE50EfficiencyFitMuBin1 = (TF1*)((L1XE50efficiencyObjectMu0thru10->GetListOfFunctions())->At(0));
+        L1XE50EfficiencyFitMuBin2 = (TF1*)((L1XE50efficiencyObjectMu10thru20->GetListOfFunctions())->At(0));
+        L1XE50EfficiencyFitMuBin3 = (TF1*)((L1XE50efficiencyObjectMu20thru30->GetListOfFunctions())->At(0));
+        L1XE50EfficiencyFitMuBin4 = (TF1*)((L1XE50efficiencyObjectMu30thru40->GetListOfFunctions())->At(0));
+        L1XE50EfficiencyFitMuBin5 = (TF1*)((L1XE50efficiencyObjectMu40thru50->GetListOfFunctions())->At(0));
+        L1XE50EfficiencyFitMuBin6 = (TF1*)((L1XE50efficiencyObjectMu50thru60->GetListOfFunctions())->At(0));
+        L1XE50EfficiencyFitMuBin7 = (TF1*)((L1XE50efficiencyObjectMu60thru70->GetListOfFunctions())->At(0));
+    }
     else{
         std::cout << "Unable to open efficiency_curves directory" << std::endl;
         return;
@@ -62,13 +81,13 @@ void CorrectingDistributions::Begin(TTree * /*tree*/)
     zbMETMuBin50thru60->SetDirectory(0);
     zbMETMuBin60thru70->SetDirectory(0);
     
-    MET_Correctedmu0thru10 = new TH1D("correctedmetmu0thru10","Corrected Data for actint between 0 and 10", nbins , gevLow , gevHigh );
-    MET_Correctedmu10thru20 = new TH1D("correctedmetmu10thru20","Corrected Data for actint between 10 and 20", nbins , gevLow , gevHigh );
-    MET_Correctedmu20thru30 = new TH1D("correctedmetmu20thru30","Corrected Data for actint between 20 and 30", nbins , gevLow , gevHigh );
-    MET_Correctedmu30thru40 = new TH1D("correctedmetmu30thru40","Corrected Data for actint between 30 to 40", nbins , gevLow , gevHigh );
-    MET_Correctedmu40thru50 = new TH1D("correctedmetmu40thru50","Corrected Data for actint between 40 to 50", nbins , gevLow , gevHigh );
-    MET_Correctedmu50thru60 = new TH1D("correctedmetmu50thru60","Corrected Data for actint between 50 and 60", nbins , gevLow , gevHigh );
-    MET_Correctedmu60thru70 = new TH1D("correctedmetmu60thru70","Corrected Data for actint between 60 and 70", nbins , gevLow , gevHigh );
+    MET_Correctedmu0thru10 = new TH1D("L1XE50CorrectedToZB0thru10","Corrected Data for actint between 0 and 10", nbins , gevLow , gevHigh );
+    MET_Correctedmu10thru20 = new TH1D("L1XE50CorrectedToZB10thru20","Corrected Data for actint between 10 and 20", nbins , gevLow , gevHigh );
+    MET_Correctedmu20thru30 = new TH1D("L1XE50CorrectedToZB20thru30","Corrected Data for actint between 20 and 30", nbins , gevLow , gevHigh );
+    MET_Correctedmu30thru40 = new TH1D("L1XE50CorrectedToZB30thru40","Corrected Data for actint between 30 to 40", nbins , gevLow , gevHigh );
+    MET_Correctedmu40thru50 = new TH1D("L1XE50CorrectedToZB40thru50","Corrected Data for actint between 40 to 50", nbins , gevLow , gevHigh );
+    MET_Correctedmu50thru60 = new TH1D("L1XE50CorrectedToZB50thru60","Corrected Data for actint between 50 and 60", nbins , gevLow , gevHigh );
+    MET_Correctedmu60thru70 = new TH1D("L1XE50CorrectedToZB60thru70","Corrected Data for actint between 60 and 70", nbins , gevLow , gevHigh );
 
 }
 
@@ -83,34 +102,34 @@ Bool_t CorrectingDistributions::Process(Long64_t entry)//{{{
    // if the entry is passnoalg L1XE30, and it one of the good runs
    if ( isPassnoAlgL1XE50() && isGoodRun() ){
        if ( inMuRange( 0.0 , 10.0) ){
-           MET_Correctedmu0thru10->Fill(*cell_met, ComputeWeight(EfficiencyFitMuBin1));
+           MET_Correctedmu0thru10->Fill(*cell_met, ComputeWeight(EfficiencyFitMuBin1, L1XE50EfficiencyFitMuBin1));
        }
        if ( inMuRange( 10.0, 20.0) ){
-           MET_Correctedmu10thru20->Fill(*cell_met,ComputeWeight( EfficiencyFitMuBin2));
+           MET_Correctedmu10thru20->Fill(*cell_met,ComputeWeight( EfficiencyFitMuBin2, L1XE50EfficiencyFitMuBin2));
        }
        if ( inMuRange( 20.0 , 30.0) ){
-           MET_Correctedmu20thru30->Fill(*cell_met,ComputeWeight(EfficiencyFitMuBin3));
+           MET_Correctedmu20thru30->Fill(*cell_met,ComputeWeight(EfficiencyFitMuBin3, L1XE50EfficiencyFitMuBin3));
        }
        if ( inMuRange( 30.0, 40.0) ){
-           MET_Correctedmu30thru40->Fill(*cell_met,ComputeWeight(EfficiencyFitMuBin4));
+           MET_Correctedmu30thru40->Fill(*cell_met,ComputeWeight(EfficiencyFitMuBin4, L1XE50EfficiencyFitMuBin4));
        }
        if ( inMuRange( 40.0 , 50.0 ) ){
-           MET_Correctedmu40thru50->Fill(*cell_met,ComputeWeight(EfficiencyFitMuBin5));
+           MET_Correctedmu40thru50->Fill(*cell_met,ComputeWeight(EfficiencyFitMuBin5, L1XE50EfficiencyFitMuBin5));
        }
        if ( inMuRange( 50.0 , 60.0 ) ){
-           MET_Correctedmu50thru60->Fill(*cell_met,ComputeWeight(EfficiencyFitMuBin6));
+           MET_Correctedmu50thru60->Fill(*cell_met,ComputeWeight(EfficiencyFitMuBin6,L1XE50EfficiencyFitMuBin6));
        }
        if ( inMuRange( 60.0 , 70.0 ) ){
-           MET_Correctedmu60thru70->Fill(*cell_met,ComputeWeight(EfficiencyFitMuBin7));
+           MET_Correctedmu60thru70->Fill(*cell_met,ComputeWeight(EfficiencyFitMuBin7,L1XE50EfficiencyFitMuBin7));
        }
    }
 
    return kTRUE;
 }//}}}
-Double_t CorrectingDistributions::ComputeWeight(TF1* fitFunc)//{{{
+Double_t CorrectingDistributions::ComputeWeight(TF1* fitFunc , TF1* fitFunc2)//{{{
 {
     Float_t numerator = *L1_XE50_prescale;
-    Double_t denominator = fitFunc->Eval( *cell_met ); 
+    Double_t denominator = fitFunc->Eval( *cell_met ) * fitFunc2->Eval( *cell_met ); 
     return numerator / denominator; 
 }//}}}
 void CorrectingDistributions::SlaveTerminate(){}

@@ -69,6 +69,14 @@ public :
     TF1*             EfficiencyFitMuBin6 = 0;
     TF1*             EfficiencyFitMuBin7 = 0;
 
+    TF1*             L1XE50EfficiencyFitMuBin1 = 0;
+    TF1*             L1XE50EfficiencyFitMuBin2 = 0;
+    TF1*             L1XE50EfficiencyFitMuBin3 = 0;
+    TF1*             L1XE50EfficiencyFitMuBin4 = 0;
+    TF1*             L1XE50EfficiencyFitMuBin5 = 0;
+    TF1*             L1XE50EfficiencyFitMuBin6 = 0;
+    TF1*             L1XE50EfficiencyFitMuBin7 = 0;
+
     TEfficiency* efficiencyObjectMu0thru10 = 0;
     TEfficiency* efficiencyObjectMu10thru20 =0;
     TEfficiency* efficiencyObjectMu20thru30 =0;
@@ -76,6 +84,14 @@ public :
     TEfficiency* efficiencyObjectMu40thru50 = 0;
     TEfficiency* efficiencyObjectMu50thru60 = 0;
     TEfficiency* efficiencyObjectMu60thru70 = 0;
+
+    TEfficiency* L1XE50efficiencyObjectMu0thru10 = 0;
+    TEfficiency* L1XE50efficiencyObjectMu10thru20 =0;
+    TEfficiency* L1XE50efficiencyObjectMu20thru30 =0;
+    TEfficiency* L1XE50efficiencyObjectMu30thru40 = 0;
+    TEfficiency* L1XE50efficiencyObjectMu40thru50 = 0;
+    TEfficiency* L1XE50efficiencyObjectMu50thru60 = 0;
+    TEfficiency* L1XE50efficiencyObjectMu60thru70 = 0;
 
     Float_t binWidth = 1.0;
     Float_t gevLow = 0.0;

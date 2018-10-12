@@ -1,28 +1,28 @@
 #define PlotMETDistsVersMu_cxx
 
 
-#include "PlotMETDistsVersMu.h"
+#include "BuildEfficiencyL150.h"
 
-void PlotMETDistsVersMu::Begin(TTree *) // {{{
+void BuildEfficiencyL150::Begin(TTree *) // {{{
 {
    TString option = GetOption();
    // definition of the TH1Fs and TEfficiency objects
-    MET_Datamu0thru10 = new TH1D("metmu0thru10","ZB MET Data for actint between 0 and 10", met_dist_nbins , gevLow , gevHigh );
-    MET_Datamu10thru20 = new TH1D("metmu10thru20","ZB MET Data for actint between 10 and 20", met_dist_nbins , gevLow , gevHigh );
-    MET_Datamu20thru30 = new TH1D("metmu20thru30","ZB MET Data for actint between 20 and 30", met_dist_nbins , gevLow , gevHigh );
-    MET_Datamu30thru40 = new TH1D("metmu30thru40","ZB MET Data for actint between 30 and 40", met_dist_nbins , gevLow , gevHigh );
-    MET_Datamu40thru50 = new TH1D("metmu40thru50","ZB MET Data for actint between 40 and 50", met_dist_nbins , gevLow , gevHigh );
-    MET_Datamu50thru60 = new TH1D("metmu50thru60","ZB MET Data for actint between 50 and 60", met_dist_nbins , gevLow , gevHigh );
-    MET_Datamu60thru70 = new TH1D("metmu60thru70","ZB MET Data for actint between 60 and 70", met_dist_nbins , gevLow , gevHigh );
-    MET_Algmu0thru10Efficiency = new TEfficiency("metmu0thru10Efficiency","MET Alg Efficiency for actint between 0 and 10", efficiency_nbins , gevLow , gevHigh );
-    MET_Algmu10thru20Efficiency = new TEfficiency("metmu10thru20Efficiency","MET Alg Efficiency for actint between 10 and 20", efficiency_nbins , gevLow , gevHigh );
-    MET_Algmu20thru30Efficiency = new TEfficiency("metmu20thru30Efficiency","MET Alg Efficiency for actint between 20 and 30", efficiency_nbins , gevLow , gevHigh );
-    MET_Algmu30thru40Efficiency = new TEfficiency("metmu30thru40Efficiency","MET Alg Efficiency for actint between 30 and 40", efficiency_nbins , gevLow , gevHigh );
-    MET_Algmu40thru50Efficiency = new TEfficiency("metmu40thru50Efficiency","MET Alg Efficiency for actint between 40 and 50", efficiency_nbins , gevLow , gevHigh );
-    MET_Algmu50thru60Efficiency = new TEfficiency("metmu50thru60Efficiency","MET Alg Efficiency for actint between 50 and 60", efficiency_nbins , gevLow , gevHigh );
-    MET_Algmu60thru70Efficiency = new TEfficiency("metmu60thru70Efficiency","MET Alg Efficiency for actint between 60 and 70", efficiency_nbins , gevLow , gevHigh );
+    MET_Datamu0thru10 = new TH1D("metmu0thru10","L1 XE 30 Data for actint between 0 and 10", met_dist_nbins , gevLow , gevHigh );
+    MET_Datamu10thru20 = new TH1D("metmu10thru20","L1 XE 30 Data for actint between 10 and 20", met_dist_nbins , gevLow , gevHigh );
+    MET_Datamu20thru30 = new TH1D("metmu20thru30","L1 XE 30 Data for actint between 20 and 30", met_dist_nbins , gevLow , gevHigh );
+    MET_Datamu30thru40 = new TH1D("metmu30thru40","L1 XE 30 Data for actint between 30 and 40", met_dist_nbins , gevLow , gevHigh );
+    MET_Datamu40thru50 = new TH1D("metmu40thru50","L1 XE 30 Data for actint between 40 and 50", met_dist_nbins , gevLow , gevHigh );
+    MET_Datamu50thru60 = new TH1D("metmu50thru60","L1 XE 30 Data for actint between 50 and 60", met_dist_nbins , gevLow , gevHigh );
+    MET_Datamu60thru70 = new TH1D("metmu60thru70","L1 XE 30 Data for actint between 60 and 70", met_dist_nbins , gevLow , gevHigh );
+    MET_Algmu0thru10Efficiency = new TEfficiency("L150metmu0thru10Efficiency","MET Alg Efficiency for actint between 0 and 10", efficiency_nbins , gevLow , gevHigh );
+    MET_Algmu10thru20Efficiency = new TEfficiency("L150metmu10thru20Efficiency","MET Alg Efficiency for actint between 10 and 20", efficiency_nbins , gevLow , gevHigh );
+    MET_Algmu20thru30Efficiency = new TEfficiency("L150metmu20thru30Efficiency","MET Alg Efficiency for actint between 20 and 30", efficiency_nbins , gevLow , gevHigh );
+    MET_Algmu30thru40Efficiency = new TEfficiency("L150metmu30thru40Efficiency","MET Alg Efficiency for actint between 30 and 40", efficiency_nbins , gevLow , gevHigh );
+    MET_Algmu40thru50Efficiency = new TEfficiency("L150metmu40thru50Efficiency","MET Alg Efficiency for actint between 40 and 50", efficiency_nbins , gevLow , gevHigh );
+    MET_Algmu50thru60Efficiency = new TEfficiency("L150metmu50thru60Efficiency","MET Alg Efficiency for actint between 50 and 60", efficiency_nbins , gevLow , gevHigh );
+    MET_Algmu60thru70Efficiency = new TEfficiency("L150metmu60thru70Efficiency","MET Alg Efficiency for actint between 60 and 70", efficiency_nbins , gevLow , gevHigh );
 } // }}}
-Bool_t PlotMETDistsVersMu::Process(Long64_t entry)//{{{
+Bool_t BuildEfficiencyL150::Process(Long64_t entry)//{{{
 {
    fReader.SetLocalEntry(entry);
 
@@ -62,7 +62,7 @@ Bool_t PlotMETDistsVersMu::Process(Long64_t entry)//{{{
    }
    return kTRUE;
 }//}}}
-void PlotMETDistsVersMu::Terminate() // Plotting{{{
+void BuildEfficiencyL150::Terminate() // Plotting{{{
 {
     // GENERATE FIT FUNCTIONS{{{
     TF1* mu0thru10FitFunction = generateFitFunction( MET_Algmu0thru10Efficiency );
@@ -155,9 +155,9 @@ void PlotMETDistsVersMu::Terminate() // Plotting{{{
     gStyle->SetOptStat(0);//}}}
     efficiency_plot->Print("../Plots/ZB_MET_Efficiency.png");
     // WRITE TO FILE {{{
-    TFile* Mu_Analysis_File = TFile::Open("../Root_Files/mu_analysis.root", "RECREATE");
-    TDirectory* zb_met_distributions = Mu_Analysis_File->mkdir("zb_met");
-    zb_met_distributions->cd();
+    TFile* Mu_Analysis_File = TFile::Open("mu_analysis.root", "RECREATE");
+    TDirectory* l1xe30_jetm10_distributions = Mu_Analysis_File->mkdir("l1xe30_jetm10data");
+    l1xe30_jetm10_distributions->cd();
     MET_Datamu0thru10->Write();
     MET_Datamu10thru20->Write();
     MET_Datamu20thru30->Write();
@@ -166,7 +166,7 @@ void PlotMETDistsVersMu::Terminate() // Plotting{{{
     MET_Datamu50thru60->Write();
     MET_Datamu60thru70->Write();
 
-    TDirectory* efficiency_curves = Mu_Analysis_File->mkdir("efficiency_curves");
+    TDirectory* efficiency_curves = Mu_Analysis_File->mkdir("l1xe50efficiencies");
     efficiency_curves->cd();
     MET_Algmu0thru10Efficiency->Write();
     MET_Algmu10thru20Efficiency->Write();
@@ -178,38 +178,38 @@ void PlotMETDistsVersMu::Terminate() // Plotting{{{
 
     Mu_Analysis_File->Close();//}}}
 }//}}}
-void PlotMETDistsVersMu::SlaveBegin(TTree * /*tree*/) // {{{
+void BuildEfficiencyL150::SlaveBegin(TTree * /*tree*/) // {{{
 {
    TString option = GetOption();
 } // }}}
-void PlotMETDistsVersMu::SlaveTerminate(){}
-void PlotMETDistsVersMu::Init(TTree *tree) //{{{
+void BuildEfficiencyL150::SlaveTerminate(){}
+void BuildEfficiencyL150::Init(TTree *tree) //{{{
 {
    fReader.SetTree(tree);
 } //}}}
-Bool_t PlotMETDistsVersMu::Notify() //{{{
+Bool_t BuildEfficiencyL150::Notify() //{{{
 {
    return kTRUE;
 } //}}}
-Bool_t PlotMETDistsVersMu::isGoodRun(){ //{{{
+Bool_t BuildEfficiencyL150::isGoodRun(){ //{{{
     return (*RunNumber != 330203 && *RunNumber != 331975 && *RunNumber != 334487);
 } // }}}
-Bool_t PlotMETDistsVersMu::isHLT_zb_L1ZB(){ //{{{
+Bool_t BuildEfficiencyL150::isHLT_zb_L1ZB(){ //{{{
     return (*HLT_noalg_zb_L1ZB_passed);
 } //}}}
-Bool_t PlotMETDistsVersMu::isHLT_zb_L1XE30(){ //{{{
+Bool_t BuildEfficiencyL150::isHLT_zb_L1XE30(){ //{{{
     return (*HLT_noalg_L1XE30_passed);
 } //}}}
-Bool_t PlotMETDistsVersMu::inMuRange( Float_t a , Float_t b ){ //{{{
+Bool_t BuildEfficiencyL150::inMuRange( Float_t a , Float_t b ){ //{{{
     return ( *InTimePileup > a && *InTimePileup < b );
 } //}}}
-Double_t PlotMETDistsVersMu::fitFunction(Double_t *x , Double_t *par ){//{{{
+Double_t BuildEfficiencyL150::fitFunction(Double_t *x , Double_t *par ){//{{{
     Float_t xx = x[0];
     Double_t l1cut = 30.0;
     Double_t fitval = (1./2.)*(1.+TMath::Erf((par[0]*x[0]+par[1]-l1cut)/(par[2]*TMath::Sqrt(2.))));
     return fitval;
 }//}}}
-TF1* PlotMETDistsVersMu::generateFitFunction(TEfficiency* teff_obj, float gevMax, float initial_slope, float initial_intercept, float initial_sigma ){//{{{
+TF1* BuildEfficiencyL150::generateFitFunction(TEfficiency* teff_obj, float gevMax, float initial_slope, float initial_intercept, float initial_sigma ){//{{{
     TF1 *fitErrorFunction = new TF1("fitFunction",fitFunction,0.0,gevMax,3);
     fitErrorFunction->SetParameter(0, initial_slope);
     fitErrorFunction->SetParameter(1, initial_intercept);
