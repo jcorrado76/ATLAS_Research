@@ -155,7 +155,7 @@ void BuildEfficiencyL150::Terminate() // Plotting{{{
     gStyle->SetOptStat(0);//}}}
     efficiency_plot->Print("../Plots/ZB_MET_Efficiency.png");
     // WRITE TO FILE {{{
-    TFile* Mu_Analysis_File = TFile::Open("mu_analysis.root", "RECREATE");
+    TFile* Mu_Analysis_File = TFile::Open("mu_analysis.root", "UPDATE");
     TDirectory* l1xe30_jetm10_distributions = Mu_Analysis_File->mkdir("l1xe30_jetm10data");
     l1xe30_jetm10_distributions->cd();
     MET_Datamu0thru10->Write();
