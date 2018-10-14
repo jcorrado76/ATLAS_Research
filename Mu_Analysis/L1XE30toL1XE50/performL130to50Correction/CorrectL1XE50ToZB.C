@@ -273,7 +273,7 @@ void CorrectL1XE50ToZB::Terminate(){
     pad2->Range( xmin-0.1 * dx , ymin - 0.1*dy , xmax+0.1*dx , ymax+0.1*dy);
     pad2->Draw();
     pad2->cd();
-    efficiencyObjectMu0thru10->Draw("SAMES");
+    L1XE50efficiencyObjectMu0thru10->Draw("SAMES");
     TGaxis *axis = new TGaxis( xmax,ymin,xmax,ymax,ymin,ymax,510, "+L");
     axis->SetLineColor(kRed);
     axis->SetTextColor(kRed);
@@ -300,7 +300,7 @@ void CorrectL1XE50ToZB::Terminate(){
     pad2->Range( xmin-0.1 * dx , ymin - 0.1*dy , xmax+0.1*dx , ymax+0.1*dy);
     pad2->Draw();
     pad2->cd();
-    efficiencyObjectMu10thru20->Draw("SAMES");
+    L1XE50efficiencyObjectMu10thru20->Draw("SAMES");
     axis = new TGaxis( xmax,ymin,xmax,ymax,ymin,ymax,510, "+L");
     axis->SetLineColor(kRed);
     axis->SetTextColor(kRed);
@@ -328,7 +328,7 @@ void CorrectL1XE50ToZB::Terminate(){
     pad2->Range( xmin-0.1 * dx , ymin - 0.1*dy , xmax+0.1*dx , ymax+0.1*dy);
     pad2->Draw();
     pad2->cd();
-    efficiencyObjectMu20thru30->Draw("SAMES");
+    L1XE50efficiencyObjectMu20thru30->Draw("SAMES");
     axis = new TGaxis( xmax,ymin,xmax,ymax,ymin,ymax,510, "+L");
     axis->SetLineColor(kRed);
     axis->SetTextColor(kRed);
@@ -353,7 +353,7 @@ void CorrectL1XE50ToZB::Terminate(){
     pad2->Range( xmin-0.1 * dx , ymin - 0.1*dy , xmax+0.1*dx , ymax+0.1*dy);
     pad2->Draw();
     pad2->cd();
-    efficiencyObjectMu30thru40->Draw("SAMES");
+    L1XE50efficiencyObjectMu30thru40->Draw("SAMES");
     axis = new TGaxis( xmax,ymin,xmax,ymax,ymin,ymax,510, "+L");
     axis->SetLineColor(kRed);
     axis->SetTextColor(kRed);
@@ -378,7 +378,7 @@ void CorrectL1XE50ToZB::Terminate(){
     pad2->Range( xmin-0.1 * dx , ymin - 0.1*dy , xmax+0.1*dx , ymax+0.1*dy);
     pad2->Draw();
     pad2->cd();
-    efficiencyObjectMu40thru50->Draw("SAMES");
+    L1XE50efficiencyObjectMu40thru50->Draw("SAMES");
     axis = new TGaxis( xmax,ymin,xmax,ymax,ymin,ymax,510, "+L");
     axis->SetLineColor(kRed);
     axis->SetTextColor(kRed);
@@ -404,7 +404,7 @@ void CorrectL1XE50ToZB::Terminate(){
     pad2->Range( xmin-0.1 * dx , ymin - 0.1*dy , xmax+0.1*dx , ymax+0.1*dy);
     pad2->Draw();
     pad2->cd();
-    efficiencyObjectMu50thru60->Draw("SAMES");
+    L1XE50efficiencyObjectMu50thru60->Draw("SAMES");
     axis = new TGaxis( xmax,ymin,xmax,ymax,ymin,ymax,510, "+L");
     axis->SetLineColor(kRed);
     axis->SetTextColor(kRed);
@@ -429,7 +429,7 @@ void CorrectL1XE50ToZB::Terminate(){
     pad2->Range( xmin-0.1 * dx , ymin - 0.1*dy , xmax+0.1*dx , ymax+0.1*dy);
     pad2->Draw();
     pad2->cd();
-    efficiencyObjectMu60thru70->Draw("SAMES");
+    L1XE50efficiencyObjectMu60thru70->Draw("SAMES");
     axis = new TGaxis( xmax,ymin,xmax,ymax,ymin,ymax,510, "+L");
     axis->SetLineColor(kRed);
     axis->SetTextColor(kRed);
