@@ -28,10 +28,10 @@ public :
    TTreeReader     fReader;  //!the tree reader
    TTree          *fChain = 0;   //!pointer to the analyzed TTree or TChain
 
-   std::vector<TH1F*> Met_Distributions_By_Mu_Bin;
-   std::vector<TH1F*> Normalized_Met_Distributions;
-   std::vector<TEfficiency*> L1XE30_Efficiency_Objects;
-   std::vector<TF1*> L1XE30_Efficiency_Fit_Objects;
+   std::vector<TH1F*>* Met_Distributions_By_Mu_Bin;
+   std::vector<TH1F*>* Normalized_Met_Distributions;
+   std::vector<TEfficiency*>* L1XE30_Efficiency_Objects;
+   std::vector<TF1*>* L1XE30_Efficiency_Fit_Objects;
    TH1F* MET_Distribution = 0;
    TEfficiency* MET_L1XE30Efficiency = 0;
    TF1* MET_L1XE30EfficiencyFit = 0;

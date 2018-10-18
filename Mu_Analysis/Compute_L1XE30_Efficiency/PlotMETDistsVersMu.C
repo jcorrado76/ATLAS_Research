@@ -1,8 +1,5 @@
 #define PlotMETDistsVersMu_cxx
-
-
 #include "PlotMETDistsVersMu.h"
-
 void PlotMETDistsVersMu::Begin(TTree *) // {{{
 {
    TString option = GetOption();
@@ -26,13 +23,13 @@ void PlotMETDistsVersMu::Begin(TTree *) // {{{
        EfficiencyTitle.Form("Efficiency of L1XE 30 As a Function of %s for Actint Between %.0f and %.0f", Alg_Name.Data() , muLow , muHigh );
 
        MET_Distribution = new TH1F( Name , Title , met_dist_nbins , gevLow , gevHigh );
-       Met_Distributions_By_Mu_Bin.push_back( MET_Distribution );
+       Met_Distributions_By_Mu_Bin->push_back( MET_Distribution );
 
        MET_L1XE30Efficiency = new TEfficiency( EfficiencyName , EfficiencyTitle , efficiency_nbins , gevLow , gevHigh );
-       L1XE30_Efficiency_Objects.push_back( MET_L1XE30Efficiency );
+       L1XE30_Efficiency_Objects->push_back( MET_L1XE30Efficiency );
 
        MET_L1XE30EfficiencyFit = new TF1();
-       L1XE30_Efficiency_Fit_Objects.push_back( MET_L1XE30EfficiencyFit );
+       L1XE30_Efficiency_Fit_Objects->push_back( MET_L1XE30EfficiencyFit );
    }
 } // }}}
 Bool_t PlotMETDistsVersMu::Process(Long64_t entry)//{{{
