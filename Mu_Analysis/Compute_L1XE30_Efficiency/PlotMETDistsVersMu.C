@@ -22,14 +22,9 @@ void PlotMETDistsVersMu::Begin(TTree *) // {{{
        Title.Form("ZeroBias MET Distribution for %s With Actint Between %.0f and %.0f" ,Alg_Name.Data(), muLow , muHigh );
        EfficiencyTitle.Form("Efficiency of L1XE 30 As a Function of %s for Actint Between %.0f and %.0f", Alg_Name.Data() , muLow , muHigh );
 
-       MET_Distribution = new TH1F( Name , Title , met_dist_nbins , gevLow , gevHigh );
-       Met_Distributions_By_Mu_Bin->push_back( MET_Distribution );
-
-       MET_L1XE30Efficiency = new TEfficiency( EfficiencyName , EfficiencyTitle , efficiency_nbins , gevLow , gevHigh );
-       L1XE30_Efficiency_Objects->push_back( MET_L1XE30Efficiency );
-
-       MET_L1XE30EfficiencyFit = new TF1();
-       L1XE30_Efficiency_Fit_Objects->push_back( MET_L1XE30EfficiencyFit );
+       Met_Distributions_By_Mu_Bin[i] = new TH1F( Name , Title , met_dist_nbins , gevLow , gevHigh );
+       L1XE30_Efficiency_Objects[i] = new TEfficiency( EfficiencyName , EfficiencyTitle , efficiency_nbins , gevLow , gevHigh );
+       L1XE30_Efficiency_Fit_Objects[i] = new TF1();
    }
 } // }}}
 Bool_t PlotMETDistsVersMu::Process(Long64_t entry)//{{{
@@ -44,8 +39,8 @@ Bool_t PlotMETDistsVersMu::Process(Long64_t entry)//{{{
            muHigh = Mu_Values[ i + 1 ];
            if ( inMuRange( muLow , muHigh ) ){
                for ( int j = 0 ; j < Number_Mu_Bins ; j++ ){
-                   (Met_Distributions_By_Mu_Bin->at(j))->Fill(*MET_Data , *HLT_noalg_zb_L1ZB_prescale);
-                   (L1XE30_Efficiency_Objects->at(j))->Fill(*L1_MET > XE , *MET_Data);
+                   Met_Distributions_By_Mu_Bin[j]->Fill(*MET_Data , *HLT_noalg_zb_L1ZB_prescale);
+                   L1XE30_Efficiency_Objects[j]->Fill(*L1_MET > XE , *MET_Data);
                }
            }
        }
@@ -55,32 +50,32 @@ Bool_t PlotMETDistsVersMu::Process(Long64_t entry)//{{{
 void PlotMETDistsVersMu::Terminate() //{{{
 {
    for ( int i = 0; i < Number_Mu_Bins ; i++ ){
-       (L1XE30_Efficiency_Objects->at(i))->SetLineColor( Colors[i] );
-       (L1XE30_Efficiency_Objects->at(i))->SetMarkerStyle( Colors[i] );
-       (L1XE30_Efficiency_Fit_Objects->at(i)) = generateFitFunction( L1XE30_Efficiency_Objects->at(i) );
-       (L1XE30_Efficiency_Fit_Objects->at(i))->SetLineColor( Colors[i] );
-       (Met_Distributions_By_Mu_Bin->at(i))->SetLineColor( Colors[i] );
-       Normalized_Met_Distributions->push_back( (TH1F*)(Met_Distributions_By_Mu_Bin->at(i))->Clone());
-       (Normalized_Met_Distributions->at(i))->SetNormFactor(1.);
+       L1XE30_Efficiency_Objects[i]->SetLineColor( Colors[i] );
+       L1XE30_Efficiency_Objects[i]->SetMarkerStyle( Colors[i] );
+       L1XE30_Efficiency_Fit_Objects[i] = generateFitFunction( L1XE30_Efficiency_Objects[i] );
+       L1XE30_Efficiency_Fit_Objects[i]->SetLineColor( Colors[i] );
+       Met_Distributions_By_Mu_Bin[i]->SetLineColor( Colors[i] );
+       Normalized_Met_Distributions[i] = (Met_Distributions_By_Mu_Bin[i])->Clone();
+       Normalized_Met_Distributions[i]->SetNormFactor(1.);
    }
     // WRITE TO FILE {{{
     TFile* Mu_Analysis_File = TFile::Open("mu_analysis.root", "RECREATE");
     TDirectory* zb_met_distributions = Mu_Analysis_File->mkdir("zb_met_distributions");
     zb_met_distributions->cd();
     for ( int  i = 0 ; i < Number_Mu_Bins ; i++ ){
-        (Met_Distributions_By_Mu_Bin->at(i))->Write();
+        Met_Distributions_By_Mu_Bin[i]->Write();
     }
 
     TDirectory* efficiency_curves = Mu_Analysis_File->mkdir("l1xe30_efficiency_curves");
     efficiency_curves->cd();
     for ( int  i = 0 ; i < Number_Mu_Bins ; i++ ){
-        (L1XE30_Efficiency_Objects->at(i))->Write();
+        L1XE30_Efficiency_Objects[i]->Write();
     }
 
     TDirectory* L1XE30_Efficiency_Fit_Objects_Dir = Mu_Analysis_File->mkdir("l1xe30_efficiency_fits");
     L1XE30_Efficiency_Fit_Objects_Dir->cd();
     for ( int  i = 0 ; i < Number_Mu_Bins ; i++ ){
-        (L1XE30_Efficiency_Fit_Objects->at(i))->Write();
+        L1XE30_Efficiency_Fit_Objects[i]->Write();
     }
 
     Mu_Analysis_File->Close();//}}}
