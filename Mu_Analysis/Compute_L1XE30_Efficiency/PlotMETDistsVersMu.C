@@ -55,7 +55,7 @@ void PlotMETDistsVersMu::Terminate() //{{{
        L1XE30_Efficiency_Fit_Objects[i] = generateFitFunction( L1XE30_Efficiency_Objects[i] );
        L1XE30_Efficiency_Fit_Objects[i]->SetLineColor( Colors[i] );
        Met_Distributions_By_Mu_Bin[i]->SetLineColor( Colors[i] );
-       Normalized_Met_Distributions[i] = (Met_Distributions_By_Mu_Bin[i])->Clone();
+       Normalized_Met_Distributions[i] = ((TH1F*)(Met_Distributions_By_Mu_Bin[i])->Clone());
        Normalized_Met_Distributions[i]->SetNormFactor(1.);
    }
     // WRITE TO FILE {{{
