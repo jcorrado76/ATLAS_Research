@@ -28,10 +28,11 @@ public :
    TTreeReader     fReader;  //!the tree reader
    TTree          *fChain = 0;   //!pointer to the analyzed TTree or TChain
 
-   std::vector<TH1F*>* Met_Distributions_By_Mu_Bin;
-   std::vector<TH1F*>* Normalized_Met_Distributions;
-   std::vector<TEfficiency*>* L1XE30_Efficiency_Objects;
-   std::vector<TF1*>* L1XE30_Efficiency_Fit_Objects;
+    const static Int_t Number_Mu_Bins = 7;
+   TH1F* Met_Distributions_By_Mu_Bin[Number_Mu_Bins];
+   TH1F* Normalized_Met_Distributions[Number_Mu_Bins];
+   TEfficiency* L1XE30_Efficiency_Objects[Number_Mu_Bins];
+   TF1* L1XE30_Efficiency_Fit_Objects[Number_Mu_Bins];
    TH1F* MET_Distribution = 0;
    TEfficiency* MET_L1XE30Efficiency = 0;
    TF1* MET_L1XE30EfficiencyFit = 0;
@@ -43,7 +44,6 @@ public :
     Float_t efficiency_bin_width = 20.0; //want 20 GeV bins
     Int_t met_dist_nbins = (gevHigh - gevLow) / met_dist_binwidth; // compute nbins as function of preferred width
     Int_t efficiency_nbins = (gevHigh - gevLow) / efficiency_bin_width;
-    const static Int_t Number_Mu_Bins = 7;
 
    // initialize all entries to 0
    Float_t Mu_Values[Number_Mu_Bins+1] = { 0.0 };
