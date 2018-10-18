@@ -57,7 +57,7 @@ void PlotMETDistsVersMu::Terminate() //{{{
    for ( int i = 0; i < Number_Mu_Bins ; i++ ){
        (L1XE30_Efficiency_Objects->at(i))->SetLineColor( Colors[i] );
        (L1XE30_Efficiency_Objects->at(i))->SetMarkerStyle( Colors[i] );
-       (L1XE30_Efficiency_Fit_Objects->at(i)) = generateFitFunction( L1XE30_Efficiency_Objects[i] );
+       (L1XE30_Efficiency_Fit_Objects->at(i)) = generateFitFunction( L1XE30_Efficiency_Objects->at(i) );
        (L1XE30_Efficiency_Fit_Objects->at(i))->SetLineColor( Colors[i] );
        (Met_Distributions_By_Mu_Bin->at(i))->SetLineColor( Colors[i] );
        Normalized_Met_Distributions->push_back( (TH1F*)(Met_Distributions_By_Mu_Bin->at(i))->Clone());
@@ -68,19 +68,19 @@ void PlotMETDistsVersMu::Terminate() //{{{
     TDirectory* zb_met_distributions = Mu_Analysis_File->mkdir("zb_met_distributions");
     zb_met_distributions->cd();
     for ( int  i = 0 ; i < Number_Mu_Bins ; i++ ){
-        (Met_Distributions_By_Mu_Bin[i])->Write();
+        (Met_Distributions_By_Mu_Bin->at(i))->Write();
     }
 
     TDirectory* efficiency_curves = Mu_Analysis_File->mkdir("l1xe30_efficiency_curves");
     efficiency_curves->cd();
     for ( int  i = 0 ; i < Number_Mu_Bins ; i++ ){
-        (L1XE30_Efficiency_Objects[i])->Write();
+        (L1XE30_Efficiency_Objects->at(i))->Write();
     }
 
     TDirectory* L1XE30_Efficiency_Fit_Objects_Dir = Mu_Analysis_File->mkdir("l1xe30_efficiency_fits");
     L1XE30_Efficiency_Fit_Objects_Dir->cd();
     for ( int  i = 0 ; i < Number_Mu_Bins ; i++ ){
-        (L1XE30_Efficiency_Fit_Objects[i])->Write();
+        (L1XE30_Efficiency_Fit_Objects->at(i))->Write();
     }
 
     Mu_Analysis_File->Close();//}}}
