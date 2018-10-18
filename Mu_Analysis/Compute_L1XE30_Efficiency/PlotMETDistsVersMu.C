@@ -44,8 +44,8 @@ Bool_t PlotMETDistsVersMu::Process(Long64_t entry)//{{{
            muHigh = Mu_Values[ i + 1 ];
            if ( inMuRange( muLow , muHigh ) ){
                for ( int j = 0 ; j < Number_Mu_Bins ; j++ ){
-                   (Met_Distributions_By_Mu_Bin[j])->Fill(*MET_Data , *HLT_noalg_zb_L1ZB_prescale);
-                   (L1XE30_Efficiency_Objects[j])->Fill(*L1_MET > XE , *MET_Data);
+                   (Met_Distributions_By_Mu_Bin->at(j))->Fill(*MET_Data , *HLT_noalg_zb_L1ZB_prescale);
+                   (L1XE30_Efficiency_Objects->at(j))->Fill(*L1_MET > XE , *MET_Data);
                }
            }
        }
@@ -55,13 +55,13 @@ Bool_t PlotMETDistsVersMu::Process(Long64_t entry)//{{{
 void PlotMETDistsVersMu::Terminate() //{{{
 {
    for ( int i = 0; i < Number_Mu_Bins ; i++ ){
-       (L1XE30_Efficiency_Objects[i])->SetLineColor( Colors[i] );
-       (L1XE30_Efficiency_Objects[i])->SetMarkerStyle( Colors[i] );
-       (L1XE30_Efficiency_Fit_Objects[i]) = generateFitFunction( L1XE30_Efficiency_Objects[i] );
-       (L1XE30_Efficiency_Fit_Objects[i])->SetLineColor( Colors[i] );
-       (Met_Distributions_By_Mu_Bin[i])->SetLineColor( Colors[i] );
-       Normalized_Met_Distributions.push_back( (TH1F*)(Met_Distributions_By_Mu_Bin[i])->Clone());
-       (Normalized_Met_Distributions[i])->SetNormFactor(1.);
+       (L1XE30_Efficiency_Objects->at(i))->SetLineColor( Colors[i] );
+       (L1XE30_Efficiency_Objects->at(i))->SetMarkerStyle( Colors[i] );
+       (L1XE30_Efficiency_Fit_Objects->at(i)) = generateFitFunction( L1XE30_Efficiency_Objects[i] );
+       (L1XE30_Efficiency_Fit_Objects->at(i))->SetLineColor( Colors[i] );
+       (Met_Distributions_By_Mu_Bin->at(i))->SetLineColor( Colors[i] );
+       Normalized_Met_Distributions->push_back( (TH1F*)(Met_Distributions_By_Mu_Bin->at(i))->Clone());
+       (Normalized_Met_Distributions->at(i))->SetNormFactor(1.);
    }
     // WRITE TO FILE {{{
     TFile* Mu_Analysis_File = TFile::Open("mu_analysis.root", "RECREATE");
