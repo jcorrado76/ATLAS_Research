@@ -1,4 +1,4 @@
-#include "./PlotMETDistsVersMu.h"
+#include "PlotMETDistsVersMu.h"
 void run_plotMETDist(){
     PlotMETDistsVersMu* myAnalysis = (PlotMETDistsVersMu*)TSelector::GetSelector("PlotMETDistsVersMu.C++g");
     TChain* mychain = new TChain( "METTree" , "mychain" );

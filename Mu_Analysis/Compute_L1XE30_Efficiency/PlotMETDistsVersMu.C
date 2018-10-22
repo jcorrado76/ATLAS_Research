@@ -7,7 +7,7 @@ void PlotMETDistsVersMu::Begin(TTree *) // {{{
    for (int i = 0 ; i < Number_Mu_Bins + 1; i++){
        Mu_Values[i] = i * 10.;
    }
-   int n;
+   Int_t n;
    Float_t muLow;
    Float_t muHigh;
    TString Name;
@@ -15,6 +15,7 @@ void PlotMETDistsVersMu::Begin(TTree *) // {{{
    TString EfficiencyName;
    TString EfficiencyTitle;
    for (int i = 0 ; i < Number_Mu_Bins-1 ; i++){
+       std::cout << i << std::endl;
        muLow = Mu_Values[i+1];
        muHigh = Mu_Values[i+2];
        Name.Form("metmu%.0fthru%.0f" , muLow , muHigh );
