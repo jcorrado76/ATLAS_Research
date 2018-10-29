@@ -28,6 +28,13 @@ class CorrectingDistributions : public TSelector {
 public :
    TTreeReader     fReader;  //!the tree reader
    TTree          *fChain = 0;   //!pointer to the analyzed TTree or TChain
+
+    const static Int_t Number_Mu_Bins = 7;
+    TH1F* ZB_MET_Distributions[Number_Mu_Bins];
+
+
+
+
     TFile* mu_analysis_file = 0;
     TH1D*            MET_Correctedmu0thru10 = 0;
     TH1D*            MET_Correctedmu10thru20 = 0;
