@@ -36,6 +36,10 @@ public :
     TEfficiency* Efficiency_Objects[Number_Mu_Bins];
     TFile* mu_analysis_file = 0;
 
+   Float_t Mu_Values[Number_Mu_Bins+1] = { 0.0 };
+   Int_t Colors[Number_Mu_Bins] = {1,2,3,4,12,6,9};
+   Int_t MarkerStyles[Number_Mu_Bins] = {29,20,3,4,27,22,21};
+
     Float_t binWidth = 1.0;
     Float_t gevLow = 0.0;
     Float_t gevHigh = 300.0;
