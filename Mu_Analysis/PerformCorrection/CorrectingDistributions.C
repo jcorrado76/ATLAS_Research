@@ -76,6 +76,8 @@ void CorrectingDistributions::Begin(TTree * /*tree*/)//{{{
            muHigh = Mu_Values[i+1];
            Name.Form("metmu%.0fthru%.0f", muLow , muHigh );
            gDirectory->GetObject( Name , Met_Distributions_By_Mu_Bin[i] );
+            // Is this necessary?
+           Met_Distributions_By_Mu_Bin[i]->SetDirectory(0);
         }
     }
     else{
@@ -83,47 +85,20 @@ void CorrectingDistributions::Begin(TTree * /*tree*/)//{{{
         return;
     }//}}}
 
-    zbMETMuBin0thru10->SetDirectory(0);
-    zbMETMuBin10thru20->SetDirectory(0);
-    zbMETMuBin20thru30->SetDirectory(0);
-    zbMETMuBin30thru40->SetDirectory(0);
-    zbMETMuBin40thru50->SetDirectory(0);
-    zbMETMuBin50thru60->SetDirectory(0);
-    zbMETMuBin60thru70->SetDirectory(0);
 
 }//}}}
 Bool_t CorrectingDistributions::Process(Long64_t entry)//{{{
 {
    fReader.SetLocalEntry(entry);
-
-   // just make sure this is the correct flag L1XE30
    // still need to compute new error and pass it to this fill function somehow 
-
    // if the entry is passnoalg L1XE30, and it one of the good runs
    if ( isPassnoAlgL1XE30() && isGoodRun() ){
-       if ( inMuRange( 0.0 , 10.0) ){
-           MET_Correctedmu0thru10->Fill(*cell_met, ComputeWeight(EfficiencyFitMuBin1));
-       }
-       if ( inMuRange( 10.0, 20.0) ){
-           MET_Correctedmu10thru20->Fill(*cell_met,ComputeWeight( EfficiencyFitMuBin2));
-       }
-       if ( inMuRange( 20.0 , 30.0) ){
-           MET_Correctedmu20thru30->Fill(*cell_met,ComputeWeight(EfficiencyFitMuBin3));
-       }
-       if ( inMuRange( 30.0, 40.0) ){
-           MET_Correctedmu30thru40->Fill(*cell_met,ComputeWeight(EfficiencyFitMuBin4));
-       }
-       if ( inMuRange( 40.0 , 50.0 ) ){
-           MET_Correctedmu40thru50->Fill(*cell_met,ComputeWeight(EfficiencyFitMuBin5));
-       }
-       if ( inMuRange( 50.0 , 60.0 ) ){
-           MET_Correctedmu50thru60->Fill(*cell_met,ComputeWeight(EfficiencyFitMuBin6));
-       }
-       if ( inMuRange( 60.0 , 70.0 ) ){
-           MET_Correctedmu60thru70->Fill(*cell_met,ComputeWeight(EfficiencyFitMuBin7));
-       }
+       for ( int i = 0 ; i < Number_Mu_Bins ; i++ ) {
+           if ( inMuRange( Mu_Values[i] , Mu_Values[i+1] ){
+                Met_Distributions_By_Mu_Bin[i]->Fill( *cell_met , ComputeWeight( L1XE30_Efficiency_Fit_Objects[i] ) );
+            }
+        }
    }
-
    return kTRUE;
 }//}}}
 Double_t CorrectingDistributions::ComputeWeight(TF1* fitFunc)//{{{
@@ -133,7 +108,7 @@ Double_t CorrectingDistributions::ComputeWeight(TF1* fitFunc)//{{{
     return numerator / denominator; 
 }//}}}
 void CorrectingDistributions::SlaveTerminate(){}
-void CorrectingDistributions::Terminate(){
+void CorrectingDistributions::Terminate(){//{{{
 	// Relative Normalization{{{
     // BinWidth = 1.0 GeV
     Int_t normalization_bin1 = 40; // 
