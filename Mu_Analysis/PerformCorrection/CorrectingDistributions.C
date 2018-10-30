@@ -116,62 +116,36 @@ void CorrectingDistributions::Terminate(){//{{{
     }
     //}}}
     // plot corrected distributions {{{
-    TCanvas* correctedCanvas = new TCanvas("correctedCanvas","Canvas with corrected data");
-    MET_Correctedmu0thru10->SetLineColor(2);
-    MET_Correctedmu10thru20->SetLineColor(3);
-    MET_Correctedmu20thru30->SetLineColor(4);
-    MET_Correctedmu30thru40->SetLineColor(44);
-    MET_Correctedmu40thru50->SetLineColor(6);
-    MET_Correctedmu50thru60->SetLineColor(7);
-    MET_Correctedmu60thru70->SetLineColor(8);
-    MET_Correctedmu0thru10->Draw();
-    MET_Correctedmu10thru20->Draw("SAME");
-    MET_Correctedmu20thru30->Draw("SAME");
-    MET_Correctedmu30thru40->Draw("SAME");
-    MET_Correctedmu40thru50->Draw("SAME");
-    MET_Correctedmu50thru60->Draw("SAME");
-    MET_Correctedmu60thru70->Draw("SAME");
+    for (int i = 0 ; i < Number_Mu_Bins ; i++ ) {
+        Met_Distributions_By_Mu_Bin[i]->SetLineColor( Colors[i] );
+        Corrected_MET_Distributions[i]->SetLineColor( Colors[i] );
+    }
+    TCanvas* correctedCanvas = new TCanvas("correctedCanvas","Canvas with Mu Bin Distributions for L1XE30 Corrected to ZB");
 	TLegend* correctedLegend = new TLegend(0.48,0.7,0.9,0.9);
-	correctedLegend->AddEntry(MET_Correctedmu0thru10);
-	correctedLegend->AddEntry(MET_Correctedmu10thru20);
-	correctedLegend->AddEntry(MET_Correctedmu20thru30);
-	correctedLegend->AddEntry(MET_Correctedmu30thru40);
-	correctedLegend->AddEntry(MET_Correctedmu40thru50);
-	correctedLegend->AddEntry(MET_Correctedmu50thru60);
-	correctedLegend->AddEntry(MET_Correctedmu60thru70);
+    Corrected_MET_Distributions[0]->Draw();
+    correctedLegend->AddEntry( Corrected_MET_Distributions[0] );
+    for (int i = 1; i < Number_Mu_Bins ; i++ ) {
+        Corrected_MET_Distributions[i]->Draw("SAME");
+        correctedLegend->AddDirectory( Corrected_MET_Distributions[i] );
+    }
 	correctedLegend->Draw("SAME");
-//    correctedCanvas->SetLogy();
+    correctedCanvas->SetLogy();
     gStyle->SetOptStat(0);
-    correctedCanvas->Print("../Plots/CorrectedAndZB/Plot_Corrected_Distributions.png");
+    correctedCanvas->Print("../Plots/CorrectedAndZB/L1XE30CorrectedToZB.png");
     //}}}
 	// PLOT ZERO BIAS DISTRIBUTIONS {{{
 	TCanvas* zb_MET_Canvas = new TCanvas("zbCanvas","Canvas with zerobias data");
-    zbMETMuBin0thru10->SetLineColor(2);
-    zbMETMuBin10thru20->SetLineColor(3);
-    zbMETMuBin20thru30->SetLineColor(4);
-    zbMETMuBin30thru40->SetLineColor(44);
-    zbMETMuBin40thru50->SetLineColor(6);
-    zbMETMuBin50thru60->SetLineColor(7);
-    zbMETMuBin60thru70->SetLineColor(8);
-    zbMETMuBin0thru10->Draw();
-    zbMETMuBin10thru20->Draw("SAME");
-    zbMETMuBin20thru30->Draw("SAME");
-    zbMETMuBin30thru40->Draw("SAME");
-    zbMETMuBin40thru50->Draw("SAME");
-    zbMETMuBin50thru60->Draw("SAME");
-    zbMETMuBin60thru70->Draw("SAME");
     TLegend* zbDistLegend = new TLegend(0.48,0.7,0.9,0.9);
-    zbDistLegend->AddEntry(zbMETMuBin0thru10);
-    zbDistLegend->AddEntry(zbMETMuBin10thru20);
-    zbDistLegend->AddEntry(zbMETMuBin20thru30);
-    zbDistLegend->AddEntry(zbMETMuBin30thru40);
-    zbDistLegend->AddEntry(zbMETMuBin40thru50);
-    zbDistLegend->AddEntry(zbMETMuBin50thru60);
-    zbDistLegend->AddEntry(zbMETMuBin60thru70);
+    Met_Distributions_By_Mu_Bin[0]->Draw();
+    zbDistLegend->AddEntry( Met_Distributions_By_Mu_Bin[0] );
+    for (int i = 1; i < Number_Mu_Bins ; i++ ) {
+        Met_Distributions_By_Mu_Bin[i]->Draw("SAME");
+        zbDistLegend->AddDirectory( Met_Distributions_By_Mu_Bin[i] );
+    }
     zbDistLegend->Draw("SAME");
     zb_MET_Canvas->SetLogy();
     gStyle->SetOptStat(0);
-    //zb_MET_Canvas->Print("../Plots/CorrectedAndZB/ZB_MET_Distributions.png");
+    zb_MET_Canvas->Print("../Plots/CorrectedAndZB/ZB_MET_Distributions.png");
     //}}}
     Double_t ymin = 0.0;
     Double_t ymax = 1.0;
