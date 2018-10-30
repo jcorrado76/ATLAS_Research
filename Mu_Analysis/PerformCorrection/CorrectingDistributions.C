@@ -4,6 +4,28 @@
 void CorrectingDistributions::Begin(TTree * /*tree*/)
 {
     TString option = GetOption();
+   for (int i = 0 ; i < Number_Mu_Bins + 1; i++){
+       Mu_Values[i] = i * 10.;
+   }
+   Int_t n;
+   Float_t muLow;
+   Float_t muHigh;
+   TString Name;
+   TString Title;
+   TString EfficiencyName;
+   TString EfficiencyTitle;
+   for (int i = 0 ; i <= Number_Mu_Bins-1 ; i++){
+       muLow = Mu_Values[i+1];
+       muHigh = Mu_Values[i+2];
+       Name.Form("metmu%.0fthru%.0f" , muLow , muHigh );
+       EfficiencyName.Form("metmu%.0fthru%.0fEfficiency", muLow , muHigh );
+       Title.Form("ZeroBias MET Distribution for %s With Actint Between %.0f and %.0f" ,Alg_Name.Data(), muLow , muHigh );
+       EfficiencyTitle.Form("Efficiency of L1XE 30 As a Function of %s for Actint Between %.0f and %.0f", Alg_Name.Data() , muLow , muHigh );
+
+       Met_Distributions_By_Mu_Bin[i] = new TH1F( Name , Title , met_dist_nbins , gevLow , gevHigh );
+       L1XE30_Efficiency_Objects[i] = new TEfficiency( EfficiencyName , EfficiencyTitle , efficiency_nbins , gevLow , gevHigh );
+       L1XE30_Efficiency_Fit_Objects[i] = new TF1();
+   }
 
     // TH1 OBJECTS DO NOT BELONG TO TFILE SCOPE. THEY WILL STAY
     TH1::AddDirectory(false);

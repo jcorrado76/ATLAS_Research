@@ -1,0 +1,5 @@
+This macro will fill histograms of the zerobias MET data, as well as create the
+efficiency of L1 XE 30.
+
+It writes the non-normalized MET distributions to file, as well as the
+efficiency objects, and the efficiency fits

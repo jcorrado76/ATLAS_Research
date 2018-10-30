@@ -14,9 +14,10 @@ void PlotMETDistsVersMu::Begin(TTree *) // {{{
    TString Title;
    TString EfficiencyName;
    TString EfficiencyTitle;
-   for (int i = 0 ; i <= Number_Mu_Bins-1 ; i++){
-       muLow = Mu_Values[i+1];
-       muHigh = Mu_Values[i+2];
+   for (int i = 0 ; i < Number_Mu_Bins ; i++){
+       muLow = Mu_Values[i];
+       muHigh = Mu_Values[i+1];
+       std::cout << "Mu between: " << muLow << " and " << muHigh << std::endl;
        Name.Form("metmu%.0fthru%.0f" , muLow , muHigh );
        EfficiencyName.Form("metmu%.0fthru%.0fEfficiency", muLow , muHigh );
        Title.Form("ZeroBias MET Distribution for %s With Actint Between %.0f and %.0f" ,Alg_Name.Data(), muLow , muHigh );
