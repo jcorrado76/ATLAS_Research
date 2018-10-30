@@ -48,7 +48,7 @@ public :
     TString xaxisTitle = alg_name + " [GeV]";
     TString yaxisTitle = "Number of Entries";
 
-   // Readers to access the data (delete the ones you do not need).
+   // Readers to access the data (delete the ones you do not need).{{{
    TTreeReaderValue<UInt_t> RunNumber = {fReader, "RunNumber"};
    TTreeReaderValue<Float_t> InTimePileup = {fReader, "InTimePileup"};
    TTreeReaderValue<Float_t> OutOfTimePileup = {fReader, "OutOfTimePileup"};
@@ -57,9 +57,9 @@ public :
    TTreeReaderValue<Bool_t> HLT_noalg_zb_L1ZB_passed = {fReader, "HLT_noalg_zb_L1ZB.passed"};
    TTreeReaderValue<Float_t> HLT_noalg_zb_L1ZB_prescale = {fReader, "HLT_noalg_zb_L1ZB.prescale"};
    TTreeReaderValue<Bool_t> HLT_noalg_L1XE30_passed = {fReader, "HLT_noalg_L1XE30.passed"};
-   TTreeReaderValue<Float_t> HLT_noalg_L1XE30_prescale = {fReader, "HLT_noalg_L1XE30.prescale"};
+   TTreeReaderValue<Float_t> HLT_noalg_L1XE30_prescale = {fReader, "HLT_noalg_L1XE30.prescale"};//}}}
 
-   CorrectingDistributions(TTree * /*tree*/ =0) { }
+   CorrectingDistributions(TTree * /*tree*/ =0) { }//{{{
    virtual ~CorrectingDistributions() { }
    virtual Int_t   Version() const { return 2; }
    virtual void    Begin(TTree *tree);
@@ -80,7 +80,7 @@ public :
    Bool_t inMuRange( Float_t , Float_t );
    Double_t ComputeWeight(TF1*);
 
-   ClassDef(CorrectingDistributions,0);
+   ClassDef(CorrectingDistributions,0);//}}}
 
 };
 
