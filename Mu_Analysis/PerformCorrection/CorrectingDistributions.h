@@ -39,6 +39,8 @@ public :
    Float_t Mu_Values[Number_Mu_Bins+1] = { 0.0 };
    Int_t Colors[Number_Mu_Bins] = {1,2,3,4,12,6,9};
    Int_t MarkerStyles[Number_Mu_Bins] = {29,20,3,4,27,22,21};
+   Int_t Normalization_Bin_Numbers[Number_Mu_Bins] = {40,52,60,56,55,52,40};
+   Float_t Scale_Factors[Number_Mu_Bins] = { 0.0 };
 
     Float_t binWidth = 1.0;
     Float_t gevLow = 0.0;
@@ -58,7 +60,6 @@ public :
    TTreeReaderValue<Float_t> HLT_noalg_zb_L1ZB_prescale = {fReader, "HLT_noalg_zb_L1ZB.prescale"};
    TTreeReaderValue<Bool_t> HLT_noalg_L1XE30_passed = {fReader, "HLT_noalg_L1XE30.passed"};
    TTreeReaderValue<Float_t> HLT_noalg_L1XE30_prescale = {fReader, "HLT_noalg_L1XE30.prescale"};//}}}
-
    CorrectingDistributions(TTree * /*tree*/ =0) { }//{{{
    virtual ~CorrectingDistributions() { }
    virtual Int_t   Version() const { return 2; }

@@ -31,10 +31,8 @@ void CorrectingDistributions::Begin(TTree * /*tree*/)//{{{
        L1XE30_Efficiency_Objects[i] = new TEfficiency( EfficiencyName , EfficiencyTitle , efficiency_nbins , gevLow , gevHigh );
        L1XE30_Efficiency_Fit_Objects[i] = new TF1();
    }
-
     // TH1 OBJECTS DO NOT BELONG TO TFILE SCOPE. THEY WILL STAY
     TH1::AddDirectory(false);
-
     mu_analysis_file = TFile::Open("mu_analysis.root","UPDATE");
     // attempt to open file {{{
     if (!mu_analysis_file->IsOpen()){
@@ -84,8 +82,6 @@ void CorrectingDistributions::Begin(TTree * /*tree*/)//{{{
         std::cout << "Unable to open zb_met directory" << std::endl;
         return;
     }//}}}
-
-
 }//}}}
 Bool_t CorrectingDistributions::Process(Long64_t entry)//{{{
 {
@@ -110,56 +106,15 @@ Double_t CorrectingDistributions::ComputeWeight(TF1* fitFunc)//{{{
 void CorrectingDistributions::SlaveTerminate(){}
 void CorrectingDistributions::Terminate(){//{{{
 	// Relative Normalization{{{
-    // BinWidth = 1.0 GeV
-    Int_t normalization_bin1 = 40; // 
-    Int_t normalization_bin2 = 52; //
-    Int_t normalization_bin3 = 60; //
-    Int_t normalization_bin4 = 56; //
-    Int_t normalization_bin5 = 55; //
-    Int_t normalization_bin6 = 52; //
-    Int_t normalization_bin7 = 40; //
     // Scale the corrected ones to the original zb ones
-    Double_t scale_factor1 = zbMETMuBin0thru10->GetBinContent( normalization_bin1 ) / MET_Correctedmu0thru10->GetBinContent( normalization_bin1 );
-    std::cout << scale_factor1 << std::endl;
-    Double_t scale_factor2 = zbMETMuBin10thru20->GetBinContent( normalization_bin2 ) / MET_Correctedmu10thru20->GetBinContent( normalization_bin2 );
-    std::cout << scale_factor2 << std::endl;
-    Double_t scale_factor3 = zbMETMuBin20thru30->GetBinContent( normalization_bin3 ) / MET_Correctedmu20thru30->GetBinContent( normalization_bin3 );
-    std::cout << scale_factor3 << std::endl;
-    Double_t scale_factor4 = zbMETMuBin30thru40->GetBinContent( normalization_bin4 ) / MET_Correctedmu30thru40->GetBinContent( normalization_bin4 );
-    std::cout << scale_factor4 << std::endl;
-    Double_t scale_factor5 = zbMETMuBin40thru50->GetBinContent( normalization_bin5 ) / MET_Correctedmu40thru50->GetBinContent( normalization_bin5 );
-    std::cout << scale_factor5 << std::endl;
-    Double_t scale_factor6 = zbMETMuBin50thru60->GetBinContent( normalization_bin6 ) / MET_Correctedmu50thru60->GetBinContent( normalization_bin6 );
-    std::cout << scale_factor6 << std::endl;
-    Double_t scale_factor7 = zbMETMuBin60thru70->GetBinContent( normalization_bin7 ) / MET_Correctedmu60thru70->GetBinContent( normalization_bin7 );
-    std::cout << scale_factor7 << std::endl;
-
-    zbMETMuBin0thru10->SetNormFactor(1.);
-    zbMETMuBin10thru20->SetNormFactor(1.);
-    zbMETMuBin20thru30->SetNormFactor(1.);
-    zbMETMuBin30thru40->SetNormFactor(1.);
-    zbMETMuBin40thru50->SetNormFactor(1.);
-    zbMETMuBin50thru60->SetNormFactor(1.);
-    zbMETMuBin60thru70->SetNormFactor(1.);
-
-    MET_Correctedmu0thru10->SetNormFactor(1.);
-    MET_Correctedmu10thru20->SetNormFactor(1.);
-    MET_Correctedmu20thru30->SetNormFactor(1.);
-    MET_Correctedmu30thru40->SetNormFactor(1.);
-    MET_Correctedmu40thru50->SetNormFactor(1.);
-    MET_Correctedmu50thru60->SetNormFactor(1.);
-    MET_Correctedmu60thru70->SetNormFactor(1.);
-
-    MET_Correctedmu0thru10->Scale( scale_factor1 );
-    MET_Correctedmu10thru20->Scale( scale_factor2 );
-    MET_Correctedmu20thru30->Scale( scale_factor3 );
-    MET_Correctedmu30thru40->Scale( scale_factor4 );
-    MET_Correctedmu40thru50->Scale( scale_factor5 );
-    MET_Correctedmu50thru60->Scale( scale_factor6 );
-    MET_Correctedmu60thru70->Scale( scale_factor7 );
-
+    for (int i = 0 ;i < Number_Mu_Bins ; i++ ) {
+        Scale_Factors[i] = ZB_MET_Distributions[i]->GetBinContent( Normalization_Bin_Numbers[i] ) / Corrected_MET_Distributions[i]->GetBinContent( Normalization_Bin_Numbers[i] );
+        std::cout << Scale_Factors[i] << std::endl;
+        ZB_MET_Distributions->SetNormFactor( 1. );
+        Corrected_MET_Distributions->SetNormFactor( 1. );
+        Corrected_MET_Distributions->Scale( Scale_Factors[i] );
+    }
     //}}}
-
     // plot corrected distributions {{{
     TCanvas* correctedCanvas = new TCanvas("correctedCanvas","Canvas with corrected data");
     MET_Correctedmu0thru10->SetLineColor(2);
@@ -189,7 +144,6 @@ void CorrectingDistributions::Terminate(){//{{{
     gStyle->SetOptStat(0);
     correctedCanvas->Print("../Plots/CorrectedAndZB/Plot_Corrected_Distributions.png");
     //}}}
-
 	// PLOT ZERO BIAS DISTRIBUTIONS {{{
 	TCanvas* zb_MET_Canvas = new TCanvas("zbCanvas","Canvas with zerobias data");
     zbMETMuBin0thru10->SetLineColor(2);
@@ -219,8 +173,6 @@ void CorrectingDistributions::Terminate(){//{{{
     gStyle->SetOptStat(0);
     //zb_MET_Canvas->Print("../Plots/CorrectedAndZB/ZB_MET_Distributions.png");
     //}}}
-
-
     Double_t ymin = 0.0;
     Double_t ymax = 1.0;
     Double_t xmin = 0.0;
@@ -411,7 +363,6 @@ void CorrectingDistributions::Terminate(){//{{{
     axis->Draw("SAME");
     c7->Print("../Plots/CorrectedAndZB/zb_met_corrected_mubin7.png");
     //}}}
-
     // WRITE CORRECTED MET DISTRIBUTIONS TO FILE{{{
     // this is L1XE30 distribution corrected to ZB
     if ( !mu_analysis_file->cd("corrected_met") ){
@@ -431,12 +382,19 @@ void CorrectingDistributions::Terminate(){//{{{
     //}}}
     mu_analysis_file->Close();
 }//}}}
+void CorrectingDistributions::SlaveTerminate(){}
 void CorrectingDistributions::Init(TTree *tree){fReader.SetTree(tree);}
 void CorrectingDistributions::SlaveBegin(TTree * /*tree*/)//{{{
 {
    TString option = GetOption();
 }//}}}
 Bool_t CorrectingDistributions::Notify(){return kTRUE;}
+Double_t CorrectingDistributions::ComputeWeight(TF1* fitFunc)//{{{
+{
+    Float_t numerator = *HLT_noalg_L1XE30_prescale;
+    Double_t denominator = fitFunc->Eval( *cell_met ); 
+    return numerator / denominator; 
+}//}}}
 Bool_t CorrectingDistributions::isGoodRun(){//{{{
     return (*RunNumber != 330203 && *RunNumber != 331975 && *RunNumber != 334487);
 }//}}}
