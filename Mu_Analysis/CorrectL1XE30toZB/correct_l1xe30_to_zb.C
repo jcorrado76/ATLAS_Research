@@ -1,5 +1,5 @@
 #include "CorrectL1XE30toZB.h"
-void compute_l1xe30_efficiency(){
+void correct_l1xe30_to_zb()
 {
     std::cout << "Correcting l1xe30 distributions to zerobias" << std::endl;
     TChain* mychain = new TChain( "METTree" , "mychain" );
