@@ -1,7 +1,7 @@
 #define CorrectL1XE30toZB_cxx
 #include "CorrectL1XE30toZB.h"
 
-void CorrectL1XE30toZB::Begin(TTree * /*tree*/)//{{{
+void CorrectL1XE30toZB::Begin(TTree * /*tree*/){//{{{
     TString option = GetOption();
    for (int i = 0 ; i < Number_Mu_Bins + 1; i++){
        Mu_Values[i] = i * 10.;
@@ -25,9 +25,9 @@ void CorrectL1XE30toZB::Begin(TTree * /*tree*/)//{{{
        EfficiencyTitle.Form("Efficiency of L1XE 30 As a Function of %s for Actint Between %.0f and %.0f", Alg_Name.Data() , muLow , muHigh );
        Corrected_Name.Form("L1XE30CorrectedToZBmu%.0fthru%.0f" , muLow , muHigh );
        Corrected_Title.Form("L1XE30 Data Corrected back to Zerobias For Actint Between %.0f and %.0f" , muLow , muHigh );
-       ZB_MET_Distributions[i] = new TH1F( Name , Title , met_dist_nbins , gevLow , gevHigh );
-       Corrected_MET_Distributions[i] = new TH1F( Corrected_Name , Corrected_Title , met_dist_nbins , gevLow , gevHigh );
-       L1XE30_Efficiency_Objects[i] = new TEfficiency( EfficiencyName , EfficiencyTitle , efficiency_nbins , gevLow , gevHigh );
+       ZB_MET_Distributions[i] = new TH1F( Name , Title , nbins , gevLow , gevHigh );
+       Corrected_MET_Distributions[i] = new TH1F( Corrected_Name , Corrected_Title , nbins , gevLow , gevHigh );
+       L1XE30_Efficiency_Objects[i] = new TEfficiency( EfficiencyName , EfficiencyTitle , nbins , gevLow , gevHigh );
        L1XE30_Efficiency_Fit_Objects[i] = new TF1();
    }
     // TH1 OBJECTS DO NOT BELONG TO TFILE SCOPE. THEY WILL STAY
@@ -52,7 +52,7 @@ void CorrectL1XE30toZB::Begin(TTree * /*tree*/)//{{{
 //}}}
     // switch to the efficiency fit object directory  {{{
     TString EfficiencyFitName;
-    if ( mu_analysis_file->cd("l1xe30_efficiency_fits");
+    if ( mu_analysis_file->cd("l1xe30_efficiency_fits")){
             std::cout << "Successfully switched to:" << std::endl;
             gDirectory->pwd();
             for ( int i = 0 ; i  < Number_Mu_Bins ; i++ ) {
@@ -61,11 +61,13 @@ void CorrectL1XE30toZB::Begin(TTree * /*tree*/)//{{{
                 // all the fit functions have the same name , but different cycle number 
                EfficiencyFitName.Form("fitFunction;%d", i+1 );
                 gDirectory->GetObject( EfficiencyFitName , L1XE30_Efficiency_Fit_Objects[i] );
+            }
     }
     else{
         std::cout << "Unable to open efficiency_curves directory" << std::endl;
         return;
-    }//}}}
+    }
+//}}}
     // switch to the MET distributions directory{{{
     if (gDirectory->cd("../zb_met_distributions") ){
         std::cout << "Successfully switched to:" << std::endl;
@@ -134,7 +136,7 @@ void CorrectL1XE30toZB::Terminate(){//{{{
     zbDistLegend->AddEntry( ZB_MET_Distributions[0] );
     for (int i = 1; i < Number_Mu_Bins ; i++ ) {
         ZB_MET_Distributions[i]->Draw("SAME");
-        zbDistLegend->AddDirectory( ZB_MET_Distributions[i] );
+        zbDistLegend->AddEntry( ZB_MET_Distributions[i] );
     }
     zbDistLegend->Draw("SAME");
     zb_MET_Canvas->SetLogy();
@@ -170,11 +172,11 @@ void CorrectL1XE30toZB::Terminate(){//{{{
         legend->Draw("SAME");
         pad1->SetLogy();
         pad1->Modified();
-        c1->cd();
+        mu_bin_canv->cd();
         pad2->Range( xmin-0.1 * dx , ymin - 0.1*dy , xmax+0.1*dx , ymax+0.1*dy);
         pad2->Draw();
         pad2->cd();
-        efficiencyObjectMu0thru10->Draw("SAMES");
+        L1XE30_Efficiency_Objects[i]->Draw("SAMES");
         TGaxis *axis = new TGaxis( xmax,ymin,xmax,ymax,ymin,ymax,510, "+L");
         axis->SetLineColor(kRed);
         axis->SetTextColor(kRed);
