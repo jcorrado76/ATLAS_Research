@@ -4,8 +4,8 @@
 // from TChain METTree/jburrntuplechain
 //////////////////////////////////////////////////////////
 
-#ifndef CorrectingDistributions_h
-#define CorrectingDistributions_h
+#ifndef CorrectL1XE30toZB_h
+#define CorrectL1XE30toZB_h
 
 #include <TROOT.h>
 #include <TChain.h>
@@ -24,7 +24,7 @@
 #include <TEfficiency.h>
 #include <TDirectory.h>
 #include <TGaxis.h>
-class CorrectingDistributions : public TSelector {
+class CorrectL1XE30toZB : public TSelector {
 public :
    TTreeReader     fReader;  //!the tree reader
    TTree          *fChain = 0;   //!pointer to the analyzed TTree or TChain
@@ -60,8 +60,8 @@ public :
    TTreeReaderValue<Float_t> HLT_noalg_zb_L1ZB_prescale = {fReader, "HLT_noalg_zb_L1ZB.prescale"};
    TTreeReaderValue<Bool_t> HLT_noalg_L1XE30_passed = {fReader, "HLT_noalg_L1XE30.passed"};
    TTreeReaderValue<Float_t> HLT_noalg_L1XE30_prescale = {fReader, "HLT_noalg_L1XE30.prescale"};//}}}
-   CorrectingDistributions(TTree * /*tree*/ =0) { }//{{{
-   virtual ~CorrectingDistributions() { }
+   CorrectL1XE30toZB(TTree * /*tree*/ =0) { }//{{{
+   virtual ~CorrectL1XE30toZB() { }
    virtual Int_t   Version() const { return 2; }
    virtual void    Begin(TTree *tree);
    virtual void    SlaveBegin(TTree *tree);
@@ -81,7 +81,7 @@ public :
    Bool_t inMuRange( Float_t , Float_t );
    Double_t ComputeWeight(TF1*);
 
-   ClassDef(CorrectingDistributions,0);//}}}
+   ClassDef(CorrectL1XE30toZB,0);//}}}
 
 };
 

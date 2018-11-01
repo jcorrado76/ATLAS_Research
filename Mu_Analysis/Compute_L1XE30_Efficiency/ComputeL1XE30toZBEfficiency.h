@@ -5,8 +5,8 @@
 // found on file: ../data/totalJburrTuple.root
 //////////////////////////////////////////////////////////
 
-#ifndef PlotMETDistsVersMu_h
-#define PlotMETDistsVersMu_h
+#ifndef ComputeL1XE30toZBEfficiency_h
+#define ComputeL1XE30toZBEfficiency_h
 
 #include <TROOT.h>
 #include <TChain.h>
@@ -23,7 +23,7 @@
 #include <TEfficiency.h>
 #include <TF1.h>
 
-class PlotMETDistsVersMu : public TSelector {
+class ComputeL1XE30toZBEfficiency : public TSelector {
 public :
    TTreeReader     fReader;  //!the tree reader
    TTree          *fChain = 0;   //!pointer to the analyzed TTree or TChain
@@ -75,8 +75,8 @@ public :
    TTreeReaderValue<Float_t> HLT_noalg_zb_L1ZB_prescale = {fReader, "HLT_noalg_zb_L1ZB.prescale"};
 
 
-   PlotMETDistsVersMu(TTree * =0) { }
-   virtual ~PlotMETDistsVersMu() { }
+   ComputeL1XE30toZBEfficiency(TTree * =0) { }
+   virtual ~ComputeL1XE30toZBEfficiency() { }
    virtual Int_t   Version() const { return 2; }
    virtual void    Begin(TTree *tree);
    virtual void    SlaveBegin(TTree *tree);
@@ -97,7 +97,7 @@ public :
    static Double_t fitFunction(Double_t *x , Double_t *par );
    TF1* generateFitFunction(TEfficiency* teff_obj, float gevMax = 300.0, float initial_slope = 0.1 , float initial_intercept = 0.0, float initial_sigma = 10.0);
 
-   ClassDef(PlotMETDistsVersMu,0);
+   ClassDef(ComputeL1XE30toZBEfficiency,0);
 
 };
 

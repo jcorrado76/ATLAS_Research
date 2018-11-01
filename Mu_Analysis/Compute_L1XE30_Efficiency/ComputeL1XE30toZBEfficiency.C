@@ -1,6 +1,6 @@
-#define PlotMETDistsVersMu_cxx
-#include "PlotMETDistsVersMu.h"
-void PlotMETDistsVersMu::Begin(TTree *) // {{{
+#define ComputeL1XE30toZBEfficiency_cxx
+#include "ComputeL1XE30toZBEfficiency.h"
+void ComputeL1XE30toZBEfficiency::Begin(TTree *) // {{{
 {
    TString option = GetOption();
    // fill Mu_Values
@@ -28,7 +28,7 @@ void PlotMETDistsVersMu::Begin(TTree *) // {{{
        L1XE30_Efficiency_Fit_Objects[i] = new TF1();
    }
 } // }}}
-Bool_t PlotMETDistsVersMu::Process(Long64_t entry)//{{{
+Bool_t ComputeL1XE30toZBEfficiency::Process(Long64_t entry)//{{{
 {
    fReader.SetLocalEntry(entry);
 
@@ -48,7 +48,7 @@ Bool_t PlotMETDistsVersMu::Process(Long64_t entry)//{{{
    }
    return kTRUE;
 }//}}}
-void PlotMETDistsVersMu::Terminate() //{{{
+void ComputeL1XE30toZBEfficiency::Terminate() //{{{
 {
    for ( int i = 0; i < Number_Mu_Bins ; i++ ){
        L1XE30_Efficiency_Objects[i]->SetLineColor( Colors[i] );
@@ -81,38 +81,38 @@ void PlotMETDistsVersMu::Terminate() //{{{
 
     Mu_Analysis_File->Close();//}}}
 }//}}}
-void PlotMETDistsVersMu::SlaveBegin(TTree * /*tree*/) // {{{
+void ComputeL1XE30toZBEfficiency::SlaveBegin(TTree * /*tree*/) // {{{
 {
    TString option = GetOption();
 } // }}}
-void PlotMETDistsVersMu::SlaveTerminate(){}
-void PlotMETDistsVersMu::Init(TTree *tree) //{{{
+void ComputeL1XE30toZBEfficiency::SlaveTerminate(){}
+void ComputeL1XE30toZBEfficiency::Init(TTree *tree) //{{{
 {
    fReader.SetTree(tree);
 } //}}}
-Bool_t PlotMETDistsVersMu::Notify() //{{{
+Bool_t ComputeL1XE30toZBEfficiency::Notify() //{{{
 {
    return kTRUE;
 } //}}}
-Bool_t PlotMETDistsVersMu::isGoodRun(){ //{{{
+Bool_t ComputeL1XE30toZBEfficiency::isGoodRun(){ //{{{
     return (*RunNumber != 330203 && *RunNumber != 331975 && *RunNumber != 334487);
 } // }}}
-Bool_t PlotMETDistsVersMu::isHLT_zb_L1ZB(){ //{{{
+Bool_t ComputeL1XE30toZBEfficiency::isHLT_zb_L1ZB(){ //{{{
     return (*HLT_noalg_zb_L1ZB_passed);
 } //}}}
-Bool_t PlotMETDistsVersMu::isHLT_zb_L1XE30(){ //{{{
+Bool_t ComputeL1XE30toZBEfficiency::isHLT_zb_L1XE30(){ //{{{
     return (*HLT_noalg_L1XE30_passed);
 } //}}}
-Bool_t PlotMETDistsVersMu::inMuRange( Float_t a , Float_t b ){ //{{{
+Bool_t ComputeL1XE30toZBEfficiency::inMuRange( Float_t a , Float_t b ){ //{{{
     return ( *InTimePileup > a && *InTimePileup < b );
 } //}}}
-Double_t PlotMETDistsVersMu::fitFunction(Double_t *x , Double_t *par ){//{{{
+Double_t ComputeL1XE30toZBEfficiency::fitFunction(Double_t *x , Double_t *par ){//{{{
     Float_t xx = x[0];
     Double_t l1cut = 30.0;
     Double_t fitval = (1./2.)*(1.+TMath::Erf((par[0]*x[0]+par[1]-l1cut)/(par[2]*TMath::Sqrt(2.))));
     return fitval;
 }//}}}
-TF1* PlotMETDistsVersMu::generateFitFunction(TEfficiency* teff_obj, float gevMax, float initial_slope, float initial_intercept, float initial_sigma ){//{{{
+TF1* ComputeL1XE30toZBEfficiency::generateFitFunction(TEfficiency* teff_obj, float gevMax, float initial_slope, float initial_intercept, float initial_sigma ){//{{{
     TF1 *fitErrorFunction = new TF1("fitFunction",fitFunction,0.0,gevMax,3);
     fitErrorFunction->SetParameter(0, initial_slope);
     fitErrorFunction->SetParameter(1, initial_intercept);

@@ -1,7 +1,7 @@
-#define CorrectingDistributions_cxx
-#include "CorrectingDistributions.h"
+#define CorrectL1XE30toZB_cxx
+#include "CorrectL1XE30toZB.h"
 
-void CorrectingDistributions::Begin(TTree * /*tree*/)//{{{
+void CorrectL1XE30toZB::Begin(TTree * /*tree*/)//{{{
     TString option = GetOption();
    for (int i = 0 ; i < Number_Mu_Bins + 1; i++){
        Mu_Values[i] = i * 10.;
@@ -83,7 +83,7 @@ void CorrectingDistributions::Begin(TTree * /*tree*/)//{{{
         return;
     }//}}}
 }//}}}
-Bool_t CorrectingDistributions::Process(Long64_t entry)//{{{
+Bool_t CorrectL1XE30toZB::Process(Long64_t entry)//{{{
 {
    fReader.SetLocalEntry(entry);
    // still need to compute new error and pass it to this fill function somehow 
@@ -97,14 +97,7 @@ Bool_t CorrectingDistributions::Process(Long64_t entry)//{{{
    }
    return kTRUE;
 }//}}}
-Double_t CorrectingDistributions::ComputeWeight(TF1* fitFunc)//{{{
-{
-    Float_t numerator = *HLT_noalg_L1XE30_prescale;
-    Double_t denominator = fitFunc->Eval( *cell_met ); 
-    return numerator / denominator; 
-}//}}}
-void CorrectingDistributions::SlaveTerminate(){}
-void CorrectingDistributions::Terminate(){//{{{
+void CorrectL1XE30toZB::Terminate(){//{{{
 	// Relative Normalization{{{
     // Scale the corrected ones to the original zb ones
     for (int i = 0 ;i < Number_Mu_Bins ; i++ ) {
@@ -356,28 +349,28 @@ void CorrectingDistributions::Terminate(){//{{{
     //}}}
     mu_analysis_file->Close();
 }//}}}
-void CorrectingDistributions::SlaveTerminate(){}
-void CorrectingDistributions::Init(TTree *tree){fReader.SetTree(tree);}
-void CorrectingDistributions::SlaveBegin(TTree * /*tree*/)//{{{
+void CorrectL1XE30toZB::SlaveTerminate(){}
+void CorrectL1XE30toZB::Init(TTree *tree){fReader.SetTree(tree);}
+void CorrectL1XE30toZB::SlaveBegin(TTree * /*tree*/)//{{{
 {
    TString option = GetOption();
 }//}}}
-Bool_t CorrectingDistributions::Notify(){return kTRUE;}
-Double_t CorrectingDistributions::ComputeWeight(TF1* fitFunc)//{{{
+Bool_t CorrectL1XE30toZB::Notify(){return kTRUE;}
+Double_t CorrectL1XE30toZB::ComputeWeight(TF1* fitFunc)//{{{
 {
     Float_t numerator = *HLT_noalg_L1XE30_prescale;
     Double_t denominator = fitFunc->Eval( *cell_met ); 
     return numerator / denominator; 
 }//}}}
-Bool_t CorrectingDistributions::isGoodRun(){//{{{
+Bool_t CorrectL1XE30toZB::isGoodRun(){//{{{
     return (*RunNumber != 330203 && *RunNumber != 331975 && *RunNumber != 334487);
 }//}}}
-Bool_t CorrectingDistributions::passedL1ZB(){//{{{
+Bool_t CorrectL1XE30toZB::passedL1ZB(){//{{{
     return (*HLT_noalg_zb_L1ZB_passed);
 }//}}}
-Bool_t CorrectingDistributions::inMuRange( Float_t a , Float_t b ){ //{{{
+Bool_t CorrectL1XE30toZB::inMuRange( Float_t a , Float_t b ){ //{{{
     return ( *InTimePileup > a && *InTimePileup < b );
 } //}}}
-Bool_t CorrectingDistributions::isPassnoAlgL1XE30(){ // {{{
+Bool_t CorrectL1XE30toZB::isPassnoAlgL1XE30(){ // {{{
     return (*HLT_noalg_L1XE30_passed);
 } // }}}
