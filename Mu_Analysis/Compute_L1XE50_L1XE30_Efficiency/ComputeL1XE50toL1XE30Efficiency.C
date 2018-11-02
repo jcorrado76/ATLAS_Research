@@ -1,63 +1,48 @@
 #define PlotMETDistsVersMu_cxx
-
-
 #include "ComputeL1XE50toL1XE30Efficiency.h"
-
 void ComputeL1XE50toL1XE30Efficiency::Begin(TTree *) // {{{
 {
    TString option = GetOption();
-   // definition of the TH1Fs and TEfficiency objects
-    MET_Datamu0thru10 = new TH1D("metmu0thru10","L1 XE 30 Data for actint between 0 and 10", met_dist_nbins , gevLow , gevHigh );
-    MET_Datamu10thru20 = new TH1D("metmu10thru20","L1 XE 30 Data for actint between 10 and 20", met_dist_nbins , gevLow , gevHigh );
-    MET_Datamu20thru30 = new TH1D("metmu20thru30","L1 XE 30 Data for actint between 20 and 30", met_dist_nbins , gevLow , gevHigh );
-    MET_Datamu30thru40 = new TH1D("metmu30thru40","L1 XE 30 Data for actint between 30 and 40", met_dist_nbins , gevLow , gevHigh );
-    MET_Datamu40thru50 = new TH1D("metmu40thru50","L1 XE 30 Data for actint between 40 and 50", met_dist_nbins , gevLow , gevHigh );
-    MET_Datamu50thru60 = new TH1D("metmu50thru60","L1 XE 30 Data for actint between 50 and 60", met_dist_nbins , gevLow , gevHigh );
-    MET_Datamu60thru70 = new TH1D("metmu60thru70","L1 XE 30 Data for actint between 60 and 70", met_dist_nbins , gevLow , gevHigh );
-    MET_Algmu0thru10Efficiency = new TEfficiency("L150metmu0thru10Efficiency","MET Alg Efficiency for actint between 0 and 10", efficiency_nbins , gevLow , gevHigh );
-    MET_Algmu10thru20Efficiency = new TEfficiency("L150metmu10thru20Efficiency","MET Alg Efficiency for actint between 10 and 20", efficiency_nbins , gevLow , gevHigh );
-    MET_Algmu20thru30Efficiency = new TEfficiency("L150metmu20thru30Efficiency","MET Alg Efficiency for actint between 20 and 30", efficiency_nbins , gevLow , gevHigh );
-    MET_Algmu30thru40Efficiency = new TEfficiency("L150metmu30thru40Efficiency","MET Alg Efficiency for actint between 30 and 40", efficiency_nbins , gevLow , gevHigh );
-    MET_Algmu40thru50Efficiency = new TEfficiency("L150metmu40thru50Efficiency","MET Alg Efficiency for actint between 40 and 50", efficiency_nbins , gevLow , gevHigh );
-    MET_Algmu50thru60Efficiency = new TEfficiency("L150metmu50thru60Efficiency","MET Alg Efficiency for actint between 50 and 60", efficiency_nbins , gevLow , gevHigh );
-    MET_Algmu60thru70Efficiency = new TEfficiency("L150metmu60thru70Efficiency","MET Alg Efficiency for actint between 60 and 70", efficiency_nbins , gevLow , gevHigh );
+   // fill Mu_Values
+   for (int i = 0 ; i < Number_Mu_Bins + 1; i++){
+       Mu_Values[i] = i * 10.;
+   }
+   Int_t n;
+   Float_t muLow;
+   Float_t muHigh;
+   TString Name;
+   TString Title;
+   TString EfficiencyName;
+   TString EfficiencyTitle;
+   for (int i = 0 ; i < Number_Mu_Bins ; i++){
+       muLow = Mu_Values[i];
+       muHigh = Mu_Values[i+1];
+       std::cout << "Mu between: " << muLow << " and " << muHigh << std::endl;
+       Name.Form("metmu%.0fthru%.0f" , muLow , muHigh );
+       EfficiencyName.Form("metmu%.0fthru%.0fEfficiency", muLow , muHigh );
+       Title.Form("L1 XE 30 MET Distribution for %s With Actint Between %.0f and %.0f" ,Alg_Name.Data(), muLow , muHigh );
+       EfficiencyTitle.Form("Efficiency of L1XE 50 As a Function of %s for Actint Between %.0f and %.0f", Alg_Name.Data() , muLow , muHigh );
+
+       Met_Distributions_By_Mu_Bin[i] = new TH1F( Name , Title , met_dist_nbins , gevLow , gevHigh );
+       L1XE50_Efficiency_Objects[i] = new TEfficiency( EfficiencyName , EfficiencyTitle , efficiency_nbins , gevLow , gevHigh );
+       L1XE50_Efficiency_Fit_Objects[i] = new TF1();
+   }
 } // }}}
 Bool_t ComputeL1XE50toL1XE30Efficiency::Process(Long64_t entry)//{{{
 {
    fReader.SetLocalEntry(entry);
-
    // if the event has passed HLT_noalg_zb_L1ZB_passed, and is not one of the bad run numbers
    if ( isHLT_zb_L1XE30()  && isGoodRun() ){
-        // for mu range 0 to 10
-       if ( inMuRange( 0.0 , 10.0) ){
-            // fill the met distribution for this slice of mu, weighting it by the prescale that was used
-           MET_Datamu0thru10->Fill(*MET_Data, *HLT_noalg_L1XE30_prescale);
-            // then fill the efficiency 
-           MET_Algmu0thru10Efficiency->Fill(*L1_MET > XE, *MET_Data);
-       }
-       if ( inMuRange( 10.0, 20.0) ){
-           MET_Datamu10thru20->Fill(*MET_Data, *HLT_noalg_L1XE30_prescale);
-           MET_Algmu10thru20Efficiency->Fill(*L1_MET > XE, *MET_Data);
-       }
-       if ( inMuRange( 20.0 , 30.0) ){
-           MET_Datamu20thru30->Fill(*MET_Data, *HLT_noalg_L1XE30_prescale);
-           MET_Algmu20thru30Efficiency->Fill(*L1_MET > XE, *MET_Data);
-       }
-       if ( inMuRange( 30.0, 40.0) ){
-           MET_Datamu30thru40->Fill(*MET_Data, *HLT_noalg_L1XE30_prescale);
-           MET_Algmu30thru40Efficiency->Fill(*L1_MET > XE, *MET_Data);
-       }
-       if ( inMuRange( 40.0 , 50.0 ) ){
-           MET_Datamu40thru50->Fill(*MET_Data, *HLT_noalg_L1XE30_prescale);
-           MET_Algmu40thru50Efficiency->Fill(*L1_MET > XE, *MET_Data);
-       }
-       if ( inMuRange( 50.0 , 60.0 ) ){
-           MET_Datamu50thru60->Fill(*MET_Data, *HLT_noalg_L1XE30_prescale);
-           MET_Algmu50thru60Efficiency->Fill(*L1_MET > XE, *MET_Data);
-       }
-       if ( inMuRange( 60.0 , 70.0 ) ){
-           MET_Datamu60thru70->Fill(*MET_Data, *HLT_noalg_L1XE30_prescale);
-           MET_Algmu60thru70Efficiency->Fill(*L1_MET > XE, *MET_Data);
+       Float_t muLo , muHi;
+       for ( int i = 0; i < Number_Mu_Bins ; i++ ){
+           muLow = Mu_Values[ i ];
+           muHigh = Mu_Values[ i + 1 ];
+           if ( inMuRange( muLo , muHi ) ){
+               for ( int j = 0 ; j < Number_Mu_Bins ; j++ ){
+                   Met_Distributions_By_Mu_Bin[j]->Fill(*MET_Data , *HLT_noalg_L1XE30_prescale);
+                   L1XE50_Efficiency_Objects[j]->Fill(*L1_MET > XE , *MET_Data);
+               }
+           }
        }
    }
    return kTRUE;
