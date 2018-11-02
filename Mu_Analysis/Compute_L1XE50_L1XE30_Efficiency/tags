@@ -1,0 +1,55 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+Begin	PlotMETDistsVersMu.C	/^void PlotMETDistsVersMu::Begin(TTree *) \/\/ {{{$/;"	f	class:PlotMETDistsVersMu
+EventNumber	PlotMETDistsVersMu.h	/^   TTreeReaderValue<ULong64_t> EventNumber = {fReader, "EventNumber"};$/;"	m	class:PlotMETDistsVersMu
+GetEntry	PlotMETDistsVersMu.h	/^   virtual Int_t   GetEntry(Long64_t entry, Int_t getall = 0) { return fChain ? fChain->GetTree()->GetEntry(entry, getall) : 0; }$/;"	f	class:PlotMETDistsVersMu
+GetOutputList	PlotMETDistsVersMu.h	/^   virtual TList  *GetOutputList() const { return fOutput; }$/;"	f	class:PlotMETDistsVersMu
+HLT_noalg_L1XE30_passed	PlotMETDistsVersMu.h	/^   TTreeReaderValue<Bool_t> HLT_noalg_L1XE30_passed = {fReader, "HLT_noalg_L1XE30.passed"};$/;"	m	class:PlotMETDistsVersMu
+HLT_noalg_zb_L1ZB_passed	PlotMETDistsVersMu.h	/^   TTreeReaderValue<Bool_t> HLT_noalg_zb_L1ZB_passed = {fReader, "HLT_noalg_zb_L1ZB.passed"};$/;"	m	class:PlotMETDistsVersMu
+HLT_noalg_zb_L1ZB_prescale	PlotMETDistsVersMu.h	/^   TTreeReaderValue<Float_t> HLT_noalg_zb_L1ZB_prescale = {fReader, "HLT_noalg_zb_L1ZB.prescale"};$/;"	m	class:PlotMETDistsVersMu
+InTimePileup	PlotMETDistsVersMu.h	/^   TTreeReaderValue<Float_t> InTimePileup = {fReader, "InTimePileup"};$/;"	m	class:PlotMETDistsVersMu
+Init	PlotMETDistsVersMu.C	/^void PlotMETDistsVersMu::Init(TTree *tree) \/\/{{{$/;"	f	class:PlotMETDistsVersMu
+MET_Data	PlotMETDistsVersMu.h	/^   TTreeReaderValue<Float_t> MET_Data = {fReader, alg_name };$/;"	m	class:PlotMETDistsVersMu
+MET_Datamu0thru10	PlotMETDistsVersMu.h	/^   TH1F*            MET_Datamu0thru10 = 0;$/;"	m	class:PlotMETDistsVersMu
+MET_Datamu10thru20	PlotMETDistsVersMu.h	/^   TH1F*            MET_Datamu10thru20 = 0;$/;"	m	class:PlotMETDistsVersMu
+MET_Datamu20thru30	PlotMETDistsVersMu.h	/^   TH1F*            MET_Datamu20thru30 = 0;$/;"	m	class:PlotMETDistsVersMu
+MET_Datamu30thru40	PlotMETDistsVersMu.h	/^   TH1F*            MET_Datamu30thru40 = 0;$/;"	m	class:PlotMETDistsVersMu
+MET_Datamu40thru50	PlotMETDistsVersMu.h	/^   TH1F*            MET_Datamu40thru50 = 0;$/;"	m	class:PlotMETDistsVersMu
+MET_Datamu50thru60	PlotMETDistsVersMu.h	/^   TH1F*            MET_Datamu50thru60 = 0;$/;"	m	class:PlotMETDistsVersMu
+MET_Datamu60thru70	PlotMETDistsVersMu.h	/^   TH1F*            MET_Datamu60thru70 = 0;$/;"	m	class:PlotMETDistsVersMu
+Notify	PlotMETDistsVersMu.C	/^Bool_t PlotMETDistsVersMu::Notify() \/\/{{{$/;"	f	class:PlotMETDistsVersMu
+OutOfTimePileup	PlotMETDistsVersMu.h	/^   TTreeReaderValue<Float_t> OutOfTimePileup = {fReader, "OutOfTimePileup"};$/;"	m	class:PlotMETDistsVersMu
+PlotMETDistsVersMu	PlotMETDistsVersMu.h	/^   PlotMETDistsVersMu(TTree * =0) { }$/;"	f	class:PlotMETDistsVersMu
+PlotMETDistsVersMu	PlotMETDistsVersMu.h	/^class PlotMETDistsVersMu : public TSelector {$/;"	c
+PlotMETDistsVersMu_cxx	PlotMETDistsVersMu.C	1;"	d	file:
+PlotMETDistsVersMu_h	PlotMETDistsVersMu.h	9;"	d
+Process	PlotMETDistsVersMu.C	/^Bool_t PlotMETDistsVersMu::Process(Long64_t entry)$/;"	f	class:PlotMETDistsVersMu
+RunNumber	PlotMETDistsVersMu.h	/^   TTreeReaderValue<UInt_t> RunNumber = {fReader, "RunNumber"};$/;"	m	class:PlotMETDistsVersMu
+Run_Proof_Driver	Run_Proof_Driver.C	/^void Run_Proof_Driver(){$/;"	f
+SetInputList	PlotMETDistsVersMu.h	/^   virtual void    SetInputList(TList *input) { fInput = input; }$/;"	f	class:PlotMETDistsVersMu
+SetObject	PlotMETDistsVersMu.h	/^   virtual void    SetObject(TObject *obj) { fObject = obj; }$/;"	f	class:PlotMETDistsVersMu
+SetOption	PlotMETDistsVersMu.h	/^   virtual void    SetOption(const char *option) { fOption = option; }$/;"	f	class:PlotMETDistsVersMu
+SlaveBegin	PlotMETDistsVersMu.C	/^void PlotMETDistsVersMu::SlaveBegin(TTree * \/*tree*\/) \/\/ {{{$/;"	f	class:PlotMETDistsVersMu
+SlaveTerminate	PlotMETDistsVersMu.C	/^void PlotMETDistsVersMu::SlaveTerminate(){}$/;"	f	class:PlotMETDistsVersMu
+Terminate	PlotMETDistsVersMu.C	/^void PlotMETDistsVersMu::Terminate() \/\/ Plotting{{{$/;"	f	class:PlotMETDistsVersMu
+Version	PlotMETDistsVersMu.h	/^   virtual Int_t   Version() const { return 2; }$/;"	f	class:PlotMETDistsVersMu
+alg_name	PlotMETDistsVersMu.h	/^   TString alg_name = "cell.met"; $/;"	m	class:PlotMETDistsVersMu
+binWidth	PlotMETDistsVersMu.h	/^   Float_t binWidth = 1.0;$/;"	m	class:PlotMETDistsVersMu
+fChain	PlotMETDistsVersMu.h	/^   TTree          *fChain = 0;   \/\/!pointer to the analyzed TTree or TChain$/;"	m	class:PlotMETDistsVersMu
+fReader	PlotMETDistsVersMu.h	/^   TTreeReader     fReader;  \/\/!the tree reader$/;"	m	class:PlotMETDistsVersMu
+gevHigh	PlotMETDistsVersMu.h	/^    Float_t gevHigh = 100.0;$/;"	m	class:PlotMETDistsVersMu
+gevLow	PlotMETDistsVersMu.h	/^    Float_t gevLow = 0.0;$/;"	m	class:PlotMETDistsVersMu
+inMuRange	PlotMETDistsVersMu.C	/^Bool_t PlotMETDistsVersMu::inMuRange( Float_t a , Float_t b ){ \/\/{{{$/;"	f	class:PlotMETDistsVersMu
+isGoodRun	PlotMETDistsVersMu.C	/^Bool_t PlotMETDistsVersMu::isGoodRun(){ \/\/{{{$/;"	f	class:PlotMETDistsVersMu
+isPassnoAlgXE30	PlotMETDistsVersMu.C	/^Bool_t PlotMETDistsVersMu::isPassnoAlgXE30(){ \/\/{{{$/;"	f	class:PlotMETDistsVersMu
+muSlicesStack	PlotMETDistsVersMu.h	/^    THStack* muSlicesStack = new THStack("muStack","MET Hists in Mu Slices After Removing Runs 33023, 331975, and 334487");$/;"	m	class:PlotMETDistsVersMu
+mycanv	PlotMETDistsVersMu.h	/^    TCanvas* mycanv = new TCanvas("MET_AlgMuSlices", "MET Slices in Mu");$/;"	m	class:PlotMETDistsVersMu
+nbins	PlotMETDistsVersMu.h	/^    Int_t nbins = (gevHigh-gevLow)\/binWidth;$/;"	m	class:PlotMETDistsVersMu
+passedL1ZB	PlotMETDistsVersMu.C	/^Bool_t PlotMETDistsVersMu::passedL1ZB(){ \/\/{{{$/;"	f	class:PlotMETDistsVersMu
+xaxisTitle	PlotMETDistsVersMu.h	/^    TString xaxisTitle = alg_name + " [GeV]";$/;"	m	class:PlotMETDistsVersMu
+yaxisTitle	PlotMETDistsVersMu.h	/^    TString yaxisTitle = "Number of Entries";$/;"	m	class:PlotMETDistsVersMu
+~PlotMETDistsVersMu	PlotMETDistsVersMu.h	/^   virtual ~PlotMETDistsVersMu() { }$/;"	f	class:PlotMETDistsVersMu
