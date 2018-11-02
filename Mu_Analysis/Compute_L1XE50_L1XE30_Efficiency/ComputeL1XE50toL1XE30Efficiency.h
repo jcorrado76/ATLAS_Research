@@ -43,9 +43,6 @@ public :
     Int_t met_dist_nbins = (gevHigh - gevLow) / met_dist_binwidth; // compute nbins as function of preferred width
     Int_t efficiency_nbins = (gevHigh - gevLow) / efficiency_bin_width;
 
-
-
-
    Float_t XE = 50.0; // L1 cut
    TString zb_alg_name = "cell.met"; 
    TString l1_alg_name = "L1.met";

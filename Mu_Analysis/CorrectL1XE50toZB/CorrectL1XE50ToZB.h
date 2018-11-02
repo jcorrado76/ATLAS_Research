@@ -29,6 +29,14 @@ public :
    TTreeReader     fReader;  //!the tree reader
    TTree          *fChain = 0;   //!pointer to the analyzed TTree or TChain
     TFile* mu_analysis_file = 0;
+    const static Int_t Number_Mu_Bins = 7;
+   TH1F* Met_Distributions_By_Mu_Bin[Number_Mu_Bins];
+   TH1F* Normalized_Met_Distributions[Number_Mu_Bins];
+   TEfficiency* L1XE30_Efficiency_Objects[Number_Mu_Bins];
+   TF1* L1XE30_Efficiency_Fit_Objects[Number_Mu_Bins];
+   TH1F* MET_Distribution = 0;
+   TEfficiency* MET_L1XE30Efficiency = 0;
+   TF1* MET_L1XE30EfficiencyFit = 0;
     TH1D*            MET_Correctedmu0thru10 = 0;
     TH1D*            MET_Correctedmu10thru20 = 0;
     TH1D*            MET_Correctedmu20thru30 = 0;

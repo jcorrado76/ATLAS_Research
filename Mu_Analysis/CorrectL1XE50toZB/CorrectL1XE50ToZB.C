@@ -1,136 +1,123 @@
 #define CorrectL1XE50ToZB_cxx
 #include "CorrectL1XE50ToZB.h"
 
-void CorrectL1XE50ToZB::Begin(TTree * /*tree*/)
+void CorrectL1XE50ToZB::Begin(TTree * /*tree*/)//{{{
 {
     TString option = GetOption();
-
+   for (int i = 0 ; i < Number_Mu_Bins + 1; i++){
+       Mu_Values[i] = i * 10.;
+   }
+   Int_t n;
+   Float_t muLow;
+   Float_t muHigh;
+   TString Name;
+   TString Title;
+   TString Corrected_Name;
+   TString Corrected_Title;
+   TString EfficiencyName;
+   TString EfficiencyTitle;
+   // initialize empty histograms, efficiency objects, etc.
+   for (int i = 0 ; i < Number_Mu_Bins ; i++){
+       muLow = Mu_Values[i];
+       muHigh = Mu_Values[i+1];
+       std::cout << "Mu between: " << muLow << " and " << muHigh << std::endl;
+       Name.Form("metmu%.0fthru%.0f" , muLow , muHigh );
+       EfficiencyName.Form("metmu%.0fthru%.0fEfficiency", muLow , muHigh );
+       Title.Form("L1XE 50 MET Distribution for %s With Actint Between %.0f and %.0f" ,Alg_Name.Data(), muLow , muHigh );
+       EfficiencyTitle.Form("Efficiency of L1XE 50 As a Function of %s for Actint Between %.0f and %.0f", Alg_Name.Data() , muLow , muHigh );
+       Corrected_Name.Form("L1XE50CorrectedToZBmu%.0fthru%.0f" , muLow , muHigh );
+       Corrected_Title.Form("L1XE50 Data Corrected back to Zerobias For Actint Between %.0f and %.0f" , muLow , muHigh );
+       ZB_MET_Distributions[i] = new TH1F( Name , Title , nbins , gevLow , gevHigh );
+       Corrected_MET_Distributions[i] = new TH1F( Corrected_Name , Corrected_Title , nbins , gevLow , gevHigh );
+       L1XE30_Efficiency_Objects[i] = new TEfficiency( EfficiencyName , EfficiencyTitle , nbins , gevLow , gevHigh );
+       L1XE30_Efficiency_Fit_Objects[i] = new TF1();
+       L1XE50_Efficiency_Fit_Objects[i] = new TF1();
+   }
     // TH1 OBJECTS DO NOT BELONG TO TFILE SCOPE. THEY WILL STAY
     TH1::AddDirectory(false);
-
-    // GET EFFICIENCY OBJECTS FROM FILE 
-    mu_analysis_file = TFile::Open("mu_analysis.root","UPDATE");
+    TFile* mu_analysis_file = TFile::Open("mu_analysis.root","UPDATE");
     if (!mu_analysis_file->IsOpen()){
         std::cout << "mu_analysis.root not opened" << std::endl;
         return;
     }
-    if ( mu_analysis_file->cd("l1xe30_efficiency_curves") ){
+    // retrieve l1xe50 efficiency curves{{{
+    if ( mu_analysis_file->cd("l1xe50_efficiency_curves") ){
         std::cout << "Successfully switched to:" << std::endl;
         gDirectory->pwd();
-        gDirectory->GetObject("metmu0thru10Efficiency",efficiencyObjectMu0thru10);
-        gDirectory->GetObject("metmu10thru20Efficiency",efficiencyObjectMu10thru20);
-        gDirectory->GetObject("metmu20thru30Efficiency",efficiencyObjectMu20thru30);
-        gDirectory->GetObject("metmu30thru40Efficiency",efficiencyObjectMu30thru40);
-        gDirectory->GetObject("metmu40thru50Efficiency",efficiencyObjectMu40thru50);
-        gDirectory->GetObject("metmu50thru60Efficiency",efficiencyObjectMu50thru60);
-        gDirectory->GetObject("metmu60thru70Efficiency",efficiencyObjectMu60thru70);
-
-        EfficiencyFitMuBin1 = (TF1*)((efficiencyObjectMu0thru10->GetListOfFunctions())->At(0));
-        EfficiencyFitMuBin2 = (TF1*)((efficiencyObjectMu10thru20->GetListOfFunctions())->At(0));
-        EfficiencyFitMuBin3 = (TF1*)((efficiencyObjectMu20thru30->GetListOfFunctions())->At(0));
-        EfficiencyFitMuBin4 = (TF1*)((efficiencyObjectMu30thru40->GetListOfFunctions())->At(0));
-        EfficiencyFitMuBin5 = (TF1*)((efficiencyObjectMu40thru50->GetListOfFunctions())->At(0));
-        EfficiencyFitMuBin6 = (TF1*)((efficiencyObjectMu50thru60->GetListOfFunctions())->At(0));
-        EfficiencyFitMuBin7 = (TF1*)((efficiencyObjectMu60thru70->GetListOfFunctions())->At(0));
-    }
-    if ( mu_analysis_file->cd("l1xe50efficiencies") ){
-        std::cout << "Successfully switched to:" << std::endl;
-        gDirectory->pwd();
-        gDirectory->GetObject("L150metmu0thru10Efficiency",L1XE50efficiencyObjectMu0thru10);
-        gDirectory->GetObject("L150metmu10thru20Efficiency",L1XE50efficiencyObjectMu10thru20);
-        gDirectory->GetObject("L150metmu20thru30Efficiency",L1XE50efficiencyObjectMu20thru30);
-        gDirectory->GetObject("L150metmu30thru40Efficiency",L1XE50efficiencyObjectMu30thru40);
-        gDirectory->GetObject("L150metmu40thru50Efficiency",L1XE50efficiencyObjectMu40thru50);
-        gDirectory->GetObject("L150metmu50thru60Efficiency",L1XE50efficiencyObjectMu50thru60);
-        gDirectory->GetObject("L150metmu60thru70Efficiency",L1XE50efficiencyObjectMu60thru70);
-
-        L1XE50EfficiencyFitMuBin1 = (TF1*)((L1XE50efficiencyObjectMu0thru10->GetListOfFunctions())->At(0));
-        L1XE50EfficiencyFitMuBin2 = (TF1*)((L1XE50efficiencyObjectMu10thru20->GetListOfFunctions())->At(0));
-        L1XE50EfficiencyFitMuBin3 = (TF1*)((L1XE50efficiencyObjectMu20thru30->GetListOfFunctions())->At(0));
-        L1XE50EfficiencyFitMuBin4 = (TF1*)((L1XE50efficiencyObjectMu30thru40->GetListOfFunctions())->At(0));
-        L1XE50EfficiencyFitMuBin5 = (TF1*)((L1XE50efficiencyObjectMu40thru50->GetListOfFunctions())->At(0));
-        L1XE50EfficiencyFitMuBin6 = (TF1*)((L1XE50efficiencyObjectMu50thru60->GetListOfFunctions())->At(0));
-        L1XE50EfficiencyFitMuBin7 = (TF1*)((L1XE50efficiencyObjectMu60thru70->GetListOfFunctions())->At(0));
+        for ( int i = 0 ; i  < Number_Mu_Bins ; i++ ) {
+           muLow = Mu_Values[i];
+           muHigh = Mu_Values[i+1];
+           EfficiencyName.Form("metmu%.0fthru%.0fEfficiency", muLow , muHigh );
+            gDirectory->GetObject( EfficiencyName , L1XE50_Efficiency_Objects[i] );
+        }
+    else{
+        std::cout << "Unable to open l1xe50 efficiency curves directory" << std::endl;
+    }//}}}
+    // retrieve l1xe30 efficiency fits{{{
+    TString EfficiencyFitName;
+    if ( mu_analysis_file->cd("l1xe30_efficiency_fits")){
+            std::cout << "Successfully switched to:" << std::endl;
+            gDirectory->pwd();
+            for ( int i = 0 ; i  < Number_Mu_Bins ; i++ ) {
+               muLow = Mu_Values[i];
+               muHigh = Mu_Values[i+1];
+                // all the fit functions have the same name , but different cycle number 
+               EfficiencyFitName.Form("fitFunction;%d", i+1 );
+                gDirectory->GetObject( EfficiencyFitName , L1XE30_Efficiency_Fit_Objects[i] );
+            }
     }
     else{
-        std::cout << "Unable to open efficiency_curves directory" << std::endl;
+        std::cout << "Unable to open l1xe30 efficiency fits directory" << std::endl;
         return;
-    }
-
-    if (gDirectory->cd("../zb_met_distributions") ){
-        std::cout << "Successfully switched to:" << std::endl;
-        gDirectory->pwd();
-        gDirectory->GetObject("metmu0thru10",zbMETMuBin0thru10);
-        gDirectory->GetObject("metmu10thru20",zbMETMuBin10thru20);
-        gDirectory->GetObject("metmu20thru30",zbMETMuBin20thru30);
-        gDirectory->GetObject("metmu30thru40",zbMETMuBin30thru40);
-        gDirectory->GetObject("metmu40thru50",zbMETMuBin40thru50);
-        gDirectory->GetObject("metmu50thru60",zbMETMuBin50thru60);
-        gDirectory->GetObject("metmu60thru70",zbMETMuBin60thru70);
+    }//}}}
+    // retrieve l1xe50 efficiency fits {{{
+    if ( mu_analysis_file->cd("l1xe50_efficiency_fits")){
+            std::cout << "Successfully switched to:" << std::endl;
+            gDirectory->pwd();
+            for ( int i = 0 ; i  < Number_Mu_Bins ; i++ ) {
+               muLow = Mu_Values[i];
+               muHigh = Mu_Values[i+1];
+                // all the fit functions have the same name , but different cycle number 
+               EfficiencyFitName.Form("fitFunction;%d", i+1 );
+                gDirectory->GetObject( EfficiencyFitName , L1XE50_Efficiency_Fit_Objects[i] );
+            }
     }
     else{
-        std::cout << "Unable to open zb_met directory" << std::endl;
+        std::cout << "Unable to open L1XE50 efficiency fits directory" << std::endl;
         return;
+    }//}}}
+    // retrieve ZB distributions{{{
+    if (mu_analysis_file->cd("zb_met_distributions") ){
+        std::cout << "Successfully switched to:" << std::endl;
+        gDirectory->pwd();
+            for ( int i = 0 ; i  < Number_Mu_Bins ; i++ ) {
+               muLow = Mu_Values[i];
+               muHigh = Mu_Values[i+1];
+                // all the fit functions have the same name , but different cycle number 
+               Name.Form("metmu%.0fthru%.0f", muLow , muHigh );
+                gDirectory->GetObject( EfficiencyFitName , ZB_MET_Distributions[i] );
+                ZB_MET_Distributions[i]->SetDirectory(0);
+            }
     }
-
-    zbMETMuBin0thru10->SetDirectory(0);
-    zbMETMuBin10thru20->SetDirectory(0);
-    zbMETMuBin20thru30->SetDirectory(0);
-    zbMETMuBin30thru40->SetDirectory(0);
-    zbMETMuBin40thru50->SetDirectory(0);
-    zbMETMuBin50thru60->SetDirectory(0);
-    zbMETMuBin60thru70->SetDirectory(0);
-    
-    MET_Correctedmu0thru10 = new TH1D("L1XE50CorrectedToZB0thru10","Corrected Data for actint between 0 and 10", nbins , gevLow , gevHigh );
-    MET_Correctedmu10thru20 = new TH1D("L1XE50CorrectedToZB10thru20","Corrected Data for actint between 10 and 20", nbins , gevLow , gevHigh );
-    MET_Correctedmu20thru30 = new TH1D("L1XE50CorrectedToZB20thru30","Corrected Data for actint between 20 and 30", nbins , gevLow , gevHigh );
-    MET_Correctedmu30thru40 = new TH1D("L1XE50CorrectedToZB30thru40","Corrected Data for actint between 30 to 40", nbins , gevLow , gevHigh );
-    MET_Correctedmu40thru50 = new TH1D("L1XE50CorrectedToZB40thru50","Corrected Data for actint between 40 to 50", nbins , gevLow , gevHigh );
-    MET_Correctedmu50thru60 = new TH1D("L1XE50CorrectedToZB50thru60","Corrected Data for actint between 50 and 60", nbins , gevLow , gevHigh );
-    MET_Correctedmu60thru70 = new TH1D("L1XE50CorrectedToZB60thru70","Corrected Data for actint between 60 and 70", nbins , gevLow , gevHigh );
-
-}
-
-
+    else{
+        std::cout << "Unable to open zerobias MET distribution directory" << std::endl;
+        return;
+    }//}}}
+}//}}}
 Bool_t CorrectL1XE50ToZB::Process(Long64_t entry)//{{{
 {
    fReader.SetLocalEntry(entry);
-
    // just make sure this is the correct flag L1XE30
    // still need to compute new error and pass it to this fill function somehow 
-
    // if the entry is passnoalg L1XE30, and it one of the good runs
    if ( isPassnoAlgL1XE50() && isGoodRun() ){
-       if ( inMuRange( 0.0 , 10.0) ){
-           MET_Correctedmu0thru10->Fill(*cell_met, ComputeWeight(EfficiencyFitMuBin1, L1XE50EfficiencyFitMuBin1));
-       }
-       if ( inMuRange( 10.0, 20.0) ){
-           MET_Correctedmu10thru20->Fill(*cell_met,ComputeWeight( EfficiencyFitMuBin2, L1XE50EfficiencyFitMuBin2));
-       }
-       if ( inMuRange( 20.0 , 30.0) ){
-           MET_Correctedmu20thru30->Fill(*cell_met,ComputeWeight(EfficiencyFitMuBin3, L1XE50EfficiencyFitMuBin3));
-       }
-       if ( inMuRange( 30.0, 40.0) ){
-           MET_Correctedmu30thru40->Fill(*cell_met,ComputeWeight(EfficiencyFitMuBin4, L1XE50EfficiencyFitMuBin4));
-       }
-       if ( inMuRange( 40.0 , 50.0 ) ){
-           MET_Correctedmu40thru50->Fill(*cell_met,ComputeWeight(EfficiencyFitMuBin5, L1XE50EfficiencyFitMuBin5));
-       }
-       if ( inMuRange( 50.0 , 60.0 ) ){
-           MET_Correctedmu50thru60->Fill(*cell_met,ComputeWeight(EfficiencyFitMuBin6,L1XE50EfficiencyFitMuBin6));
-       }
-       if ( inMuRange( 60.0 , 70.0 ) ){
-           MET_Correctedmu60thru70->Fill(*cell_met,ComputeWeight(EfficiencyFitMuBin7,L1XE50EfficiencyFitMuBin7));
-       }
+       for ( int i = 0 ; i < Number_Mu_Bins ; i++ ) {
+           if ( inMuRange( Mu_Values[i] , Mu_Values[i+1] )){
+                Corrected_MET_Distributions[i]->Fill( *cell_met , ComputeWeight( L1XE30_Efficiency_Fit_Objects[i], L1XE50_Efficiency_Fit_Objects[i] ) );
+            }
+        }
    }
-
    return kTRUE;
-}//}}}
-Double_t CorrectL1XE50ToZB::ComputeWeight(TF1* fitFunc , TF1* fitFunc2)//{{{
-{
-    Float_t numerator = *L1_XE50_prescale;
-    Double_t denominator = fitFunc->Eval( *cell_met ) * fitFunc2->Eval( *cell_met ); 
-    return numerator / denominator; 
 }//}}}
 void CorrectL1XE50ToZB::SlaveTerminate(){}
 void CorrectL1XE50ToZB::Terminate(){
@@ -184,7 +171,6 @@ void CorrectL1XE50ToZB::Terminate(){
     MET_Correctedmu60thru70->Scale( scale_factor7 );
 
     //}}}
-
     // plot corrected distributions {{{
     TCanvas* correctedCanvas = new TCanvas("correctedCanvas","Canvas with corrected data");
     MET_Correctedmu0thru10->SetLineColor(2);
@@ -214,7 +200,6 @@ void CorrectL1XE50ToZB::Terminate(){
     gStyle->SetOptStat(0);
     correctedCanvas->Print("../Plots/CorrectedAndZB/Plot_Corrected_Distributions.png");
     //}}}
-
 	// PLOT ZERO BIAS DISTRIBUTIONS {{{
 	TCanvas* zb_MET_Canvas = new TCanvas("zbCanvas","Canvas with zerobias data");
     zbMETMuBin0thru10->SetLineColor(2);
@@ -244,8 +229,6 @@ void CorrectL1XE50ToZB::Terminate(){
     gStyle->SetOptStat(0);
     //zb_MET_Canvas->Print("../Plots/CorrectedAndZB/ZB_MET_Distributions.png");
     //}}}
-
-
     Double_t ymin = 0.0;
     Double_t ymax = 1.0;
     Double_t xmin = 0.0;
@@ -436,7 +419,6 @@ void CorrectL1XE50ToZB::Terminate(){
     axis->Draw("SAME");
     c7->Print("plots/zb_met_corrected_mubin7.png");
     //}}}
-
     // WRITE CORRECTED MET DISTRIBUTIONS TO FILE{{{
     if ( !mu_analysis_file->cd("L1CorrectedToZB_met") ){
         std::cout << "Corrected MET dist directory did not already exist. creating new one" << std::endl;
@@ -473,3 +455,9 @@ Bool_t CorrectL1XE50ToZB::inMuRange( Float_t a , Float_t b ){ //{{{
 Bool_t CorrectL1XE50ToZB::isPassnoAlgL1XE50(){ // {{{
     return (*L1_XE50_passed);
 } // }}}
+Double_t CorrectL1XE50ToZB::ComputeWeight(TF1* fitFunc , TF1* fitFunc2)//{{{
+{
+    Float_t numerator = *L1_XE50_prescale;
+    Double_t denominator = fitFunc->Eval( *cell_met ) * fitFunc2->Eval( *cell_met ); 
+    return numerator / denominator; 
+}//}}}
