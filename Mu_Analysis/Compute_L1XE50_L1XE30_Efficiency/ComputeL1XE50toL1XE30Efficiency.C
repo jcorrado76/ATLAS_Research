@@ -49,40 +49,20 @@ Bool_t ComputeL1XE50toL1XE30Efficiency::Process(Long64_t entry)//{{{
 }//}}}
 void ComputeL1XE50toL1XE30Efficiency::Terminate() // Plotting{{{
 {
-    // GENERATE FIT FUNCTIONS{{{
-    TF1* mu0thru10FitFunction = generateFitFunction( MET_Algmu0thru10Efficiency );
-    TF1* mu10thru20FitFunction = generateFitFunction( MET_Algmu10thru20Efficiency);
-    TF1* mu20thru30FitFunction = generateFitFunction( MET_Algmu20thru30Efficiency);
-    TF1* mu30thru40FitFunction = generateFitFunction( MET_Algmu30thru40Efficiency);
-    TF1* mu40thru50FitFunction = generateFitFunction( MET_Algmu40thru50Efficiency);
-    TF1* mu50thru60FitFunction = generateFitFunction( MET_Algmu50thru60Efficiency);
-    TF1* mu60thru70FitFunction = generateFitFunction( MET_Algmu60thru70Efficiency);//}}}
-    // FORMATTING ZB DATA {{{
-    MET_Datamu0thru10->SetLineColor(1);
-    MET_Datamu10thru20->SetLineColor(2);
-    MET_Datamu20thru30->SetLineColor(3);
-    MET_Datamu30thru40->SetLineColor(4);
-    MET_Datamu40thru50->SetLineColor(12);
-    MET_Datamu50thru60->SetLineColor(6);
-    MET_Datamu60thru70->SetLineColor(9);
-    // Make Copies for Normalization
-    TH1F* MET_Datamu0thru10_Copy = (TH1F*) MET_Datamu0thru10->Clone();
-    TH1F* MET_Datamu10thru20_Copy = (TH1F*) MET_Datamu10thru20->Clone();
-    TH1F* MET_Datamu20thru30_Copy = (TH1F*) MET_Datamu20thru30->Clone();
-    TH1F* MET_Datamu30thru40_Copy = (TH1F*) MET_Datamu30thru40->Clone();
-    TH1F* MET_Datamu40thru50_Copy = (TH1F*) MET_Datamu40thru50->Clone();
-    TH1F* MET_Datamu50thru60_Copy = (TH1F*) MET_Datamu50thru60->Clone();
-    TH1F* MET_Datamu60thru70_Copy = (TH1F*) MET_Datamu60thru70->Clone();//}}}
-    // normalize to 1 
-    MET_Datamu0thru10_Copy->SetNormFactor(1.);
-    MET_Datamu10thru20_Copy->SetNormFactor(1.);
-    MET_Datamu20thru30_Copy->SetNormFactor(1.);
-    MET_Datamu30thru40_Copy->SetNormFactor(1.);
-    MET_Datamu40thru50_Copy->SetNormFactor(1.);
-    MET_Datamu50thru60_Copy->SetNormFactor(1.);
-    MET_Datamu60thru70_Copy->SetNormFactor(1.);//}}}
+    for (int i = 0 ; i < Number_Mu_Bins ; i++ ){
+       L1XE50_Efficiency_Objects[i]->SetLineColor( Colors[i] );
+       L1XE50_Efficiency_Objects[i]->SetMarkerStyle( Colors[i] );
+       L1XE50_Efficiency_Fit_Objects[i] = generateFitFunction( L1XE50_Efficiency_Objects[i] );
+       L1XE50_Efficiency_Fit_Objects[i]->SetLineColor( Colors[i] );
+       Met_Distributions_By_Mu_Bin[i]->SetLineColor( Colors[i] );
+       Normalized_Met_Distributions[i] = ((TH1F*)(Met_Distributions_By_Mu_Bin[i])->Clone());
+       Normalized_Met_Distributions[i]->SetNormFactor(1.);
+    }
     // PLOT ZB DATA{{{
-    TCanvas* zb_met_dists = new TCanvas("zb_met_plot","Plot of MET Distribution in Mu Slices");
+    TCanvas* l1xe30_canv = new TCanvas("l1xe30_data","Plot of MET Distribution in Mu Slices");
+    //for (int i = 0 ; i < Number_Mu_Bins ; i++ ) {
+
+    //}
     MET_Datamu0thru10_Copy->Draw();
     MET_Datamu10thru20_Copy->Draw("SAME");
     MET_Datamu20thru30_Copy->Draw("SAME");
@@ -143,23 +123,22 @@ void ComputeL1XE50toL1XE30Efficiency::Terminate() // Plotting{{{
     TFile* Mu_Analysis_File = TFile::Open("mu_analysis.root", "UPDATE");
     TDirectory* l1xe30_jetm10_distributions = Mu_Analysis_File->mkdir("l1xe30_jetm10data");
     l1xe30_jetm10_distributions->cd();
-    MET_Datamu0thru10->Write();
-    MET_Datamu10thru20->Write();
-    MET_Datamu20thru30->Write();
-    MET_Datamu30thru40->Write();
-    MET_Datamu40thru50->Write();
-    MET_Datamu50thru60->Write();
-    MET_Datamu60thru70->Write();
+    for ( int i = 0 ; i < Number_Mu_Bins ; i++ ){
+        Met_Distributions_By_Mu_Bin[i]->Write();
+    }
 
-    TDirectory* efficiency_curves = Mu_Analysis_File->mkdir("l1xe50efficiencies");
+    TDirectory* efficiency_curves = Mu_Analysis_File->mkdir("l1xe50_efficieny_curves");
     efficiency_curves->cd();
-    MET_Algmu0thru10Efficiency->Write();
-    MET_Algmu10thru20Efficiency->Write();
-    MET_Algmu20thru30Efficiency->Write();
-    MET_Algmu30thru40Efficiency->Write();
-    MET_Algmu40thru50Efficiency->Write();
-    MET_Algmu50thru60Efficiency->Write();
-    MET_Algmu60thru70Efficiency->Write();
+    for ( int i = 0 ; i < Number_Mu_Bins ; i++ ){
+        L1XE50_Efficiency_Objects[i]->Write();
+    }
+
+    TDirectory* L1XE50_Efficiency_Fit_Objects_Dir = Mu_Analysis_File->mkdir("l1xe50_efficiency_fits");
+    L1XE50_Efficiency_Fit_Objects_Dir->cd();
+    for ( int i = 0 ; i < Number_Mu_Bins ; i++ ){
+        L1XE50_Efficiency_Fit_Objects[i]->Write();
+    }
+
 
     Mu_Analysis_File->Close();//}}}
 }//}}}
