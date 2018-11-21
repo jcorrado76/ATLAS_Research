@@ -33,11 +33,11 @@ Bool_t ComputeL1XE50toL1XE30Efficiency::Process(Long64_t entry)//{{{
    fReader.SetLocalEntry(entry);
    // if the event has passed HLT_noalg_zb_L1ZB_passed, and is not one of the bad run numbers
    if ( isHLT_zb_L1XE30()  && isGoodRun() ){
-       Float_t muLo , muHi;
+       Float_t muLow , muHigh;
        for ( int i = 0; i < Number_Mu_Bins ; i++ ){
            muLow = Mu_Values[ i ];
            muHigh = Mu_Values[ i + 1 ];
-           if ( inMuRange( muLo , muHi ) ){
+           if ( inMuRange( muLow , muHigh ) ){
                for ( int j = 0 ; j < Number_Mu_Bins ; j++ ){
                    Met_Distributions_By_Mu_Bin[j]->Fill(*MET_Data , *HLT_noalg_L1XE30_prescale);
                    L1XE50_Efficiency_Objects[j]->Fill(*L1_MET > XE , *MET_Data);
@@ -47,7 +47,7 @@ Bool_t ComputeL1XE50toL1XE30Efficiency::Process(Long64_t entry)//{{{
    }
    return kTRUE;
 }//}}}
-void ComputeL1XE50toL1XE30Efficiency::Terminate() // Plotting{{{
+void ComputeL1XE50toL1XE30Efficiency::Terminate()
 {
     for (int i = 0 ; i < Number_Mu_Bins ; i++ ){
        L1XE50_Efficiency_Objects[i]->SetLineColor( Colors[i] );
@@ -58,76 +58,16 @@ void ComputeL1XE50toL1XE30Efficiency::Terminate() // Plotting{{{
        Normalized_Met_Distributions[i] = ((TH1F*)(Met_Distributions_By_Mu_Bin[i])->Clone());
        Normalized_Met_Distributions[i]->SetNormFactor(1.);
     }
-    // PLOT ZB DATA{{{
-    TCanvas* l1xe30_canv = new TCanvas("l1xe30_data","Plot of MET Distribution in Mu Slices");
-    //for (int i = 0 ; i < Number_Mu_Bins ; i++ ) {
 
-    //}
-    MET_Datamu0thru10_Copy->Draw();
-    MET_Datamu10thru20_Copy->Draw("SAME");
-    MET_Datamu20thru30_Copy->Draw("SAME");
-    MET_Datamu30thru40_Copy->Draw("SAME");
-    MET_Datamu40thru50_Copy->Draw("SAME");
-    MET_Datamu50thru60_Copy->Draw("SAME");
-    MET_Datamu60thru70_Copy->Draw("SAME");
-    TLegend* met_dist_legend = new TLegend();
-    met_dist_legend->AddEntry(MET_Datamu0thru10);
-    met_dist_legend->AddEntry(MET_Datamu10thru20);
-    met_dist_legend->AddEntry(MET_Datamu20thru30);
-    met_dist_legend->AddEntry(MET_Datamu30thru40);
-    met_dist_legend->AddEntry(MET_Datamu40thru50);
-    met_dist_legend->AddEntry(MET_Datamu50thru60);
-    met_dist_legend->AddEntry(MET_Datamu60thru70);
-    met_dist_legend->Draw("SAME");
-    gPad->SetLogy();
-    gStyle->SetOptStat(0);
-    zb_met_dists->Print("../Plots/CorrectedAndZB/ZB_MET_Distributions.png");
-    //}}}
-    // FORMATTING EFFICIENCY CURVES{{{
-    MET_Algmu0thru10Efficiency->SetLineColor(1);
-    MET_Algmu10thru20Efficiency->SetLineColor(2);
-    MET_Algmu20thru30Efficiency->SetLineColor(3);
-    MET_Algmu30thru40Efficiency->SetLineColor(4);
-    MET_Algmu40thru50Efficiency->SetLineColor(12);
-    MET_Algmu50thru60Efficiency->SetLineColor(6);
-    MET_Algmu60thru70Efficiency->SetLineColor(9);
-    // set marker style of efficiency curves
-    MET_Algmu0thru10Efficiency->SetMarkerStyle(29);
-    MET_Algmu10thru20Efficiency->SetMarkerStyle(20);
-    MET_Algmu20thru30Efficiency->SetMarkerStyle(3);
-    MET_Algmu30thru40Efficiency->SetMarkerStyle(4);
-    MET_Algmu40thru50Efficiency->SetMarkerStyle(27);
-    MET_Algmu50thru60Efficiency->SetMarkerStyle(22);
-    MET_Algmu60thru70Efficiency->SetMarkerStyle(21);//}}}
-    // PLOT EFFICIENCY CURVES {{{
-    TCanvas* efficiency_plot = new TCanvas("efficiencyPlot", "MET Efficiency Slices in Mu");
-    MET_Algmu10thru20Efficiency->Draw();
-    MET_Algmu20thru30Efficiency->Draw("SAME");
-    MET_Algmu30thru40Efficiency->Draw("SAME");
-    MET_Algmu40thru50Efficiency->Draw("SAME");
-    MET_Algmu50thru60Efficiency->Draw("SAME");
-    MET_Algmu60thru70Efficiency->Draw("SAME");
-    MET_Algmu0thru10Efficiency->Draw("SAME");
-    TLegend* efficiency_legend = new TLegend();
-    efficiency_legend->AddEntry(MET_Algmu0thru10Efficiency);
-    efficiency_legend->AddEntry(MET_Algmu10thru20Efficiency);
-    efficiency_legend->AddEntry(MET_Algmu20thru30Efficiency);
-    efficiency_legend->AddEntry(MET_Algmu30thru40Efficiency);
-    efficiency_legend->AddEntry(MET_Algmu40thru50Efficiency);
-    efficiency_legend->AddEntry(MET_Algmu50thru60Efficiency);
-    efficiency_legend->AddEntry(MET_Algmu60thru70Efficiency);
-    efficiency_legend->Draw("SAME");
-    gStyle->SetOptStat(0);//}}}
-    efficiency_plot->Print("../Plots/ZB_MET_Efficiency.png");
     // WRITE TO FILE {{{
-    TFile* Mu_Analysis_File = TFile::Open("mu_analysis.root", "UPDATE");
-    TDirectory* l1xe30_jetm10_distributions = Mu_Analysis_File->mkdir("l1xe30_jetm10data");
-    l1xe30_jetm10_distributions->cd();
-    for ( int i = 0 ; i < Number_Mu_Bins ; i++ ){
+    TFile* Mu_Analysis_File = TFile::Open("mu_analysis.root", "RECREATE");
+    TDirectory* zb_met_distributions = Mu_Analysis_File->mkdir("zb_met_distributions");
+    zb_met_distributions->cd();
+    for ( int i = 0 ; i < Number_Mu_Bins ; i++ ) {
         Met_Distributions_By_Mu_Bin[i]->Write();
     }
 
-    TDirectory* efficiency_curves = Mu_Analysis_File->mkdir("l1xe50_efficieny_curves");
+    TDirectory* efficiency_curves = Mu_Analysis_File->mkdir("l1xe50_efficiency_curves");
     efficiency_curves->cd();
     for ( int i = 0 ; i < Number_Mu_Bins ; i++ ){
         L1XE50_Efficiency_Objects[i]->Write();
@@ -139,8 +79,7 @@ void ComputeL1XE50toL1XE30Efficiency::Terminate() // Plotting{{{
         L1XE50_Efficiency_Fit_Objects[i]->Write();
     }
 
-
-    Mu_Analysis_File->Close();//}}}
+    Mu_Analysis_File->Close();
 }//}}}
 void ComputeL1XE50toL1XE30Efficiency::SlaveBegin(TTree * /*tree*/) // {{{
 {

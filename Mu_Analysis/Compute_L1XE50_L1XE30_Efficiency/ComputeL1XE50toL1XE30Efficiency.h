@@ -27,6 +27,7 @@ class ComputeL1XE50toL1XE30Efficiency : public TSelector {
 public :
    TTreeReader     fReader;  //!the tree reader
    TTree          *fChain = 0;   //!pointer to the analyzed TTree or TChain
+
     const static Int_t Number_Mu_Bins = 7;
    TH1F* Met_Distributions_By_Mu_Bin[Number_Mu_Bins];
    TH1F* Normalized_Met_Distributions[Number_Mu_Bins];
@@ -43,10 +44,15 @@ public :
     Int_t met_dist_nbins = (gevHigh - gevLow) / met_dist_binwidth; // compute nbins as function of preferred width
     Int_t efficiency_nbins = (gevHigh - gevLow) / efficiency_bin_width;
 
+    Float_t Mu_Values[Number_Mu_Bins+1] = {0.0};
+    Int_t Colors[Number_Mu_Bins] = {1,2,3,4,12,6,9};
+    Int_t MarkerStyles[Number_Mu_Bins] = {29,20,3,4,27,22,21};
+
    Float_t XE = 50.0; // L1 cut
-   TString zb_alg_name = "cell.met"; 
+   TString Alg_Name = "CELL MET";
+   TString zb_alg_name = "cell.met";
    TString l1_alg_name = "L1.met";
-    // set titles and axis labels. 
+    // set titles and axis labels.
     TString efficiency_title = zb_alg_name + " Efficiency";
     TString efficiency_xaxis = zb_alg_name + " [GeV]";
     TString efficiency_yaxis = "efficiency";
@@ -94,4 +100,3 @@ public :
 };
 
 #endif
-
