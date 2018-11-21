@@ -19,7 +19,7 @@ void PlotParameterVals(){
 
     l = new TList();
 
-    TFile *mu_analysis_file = TFile::Open("../Root_Files/mu_analysis.root");
+    TFile *mu_analysis_file = TFile::Open("../mu_analysis.root");
     
     TDirectory* efficiency_dir = mu_analysis_file->GetDirectory("efficiency_curves");
     TIter next(efficiency_dir->GetListOfKeys());
