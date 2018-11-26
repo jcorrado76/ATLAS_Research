@@ -15,12 +15,16 @@ void CorrectL1XE30toZB::Begin(TTree * /*tree*/){//{{{
    TString Corrected_Title;
    TString EfficiencyName;
    TString EfficiencyTitle;
+
+
    for (int i = 0 ; i < Number_Mu_Bins ; i++){
        muLow = Mu_Values[i];
        muHigh = Mu_Values[i+1];
        std::cout << "Mu between: " << muLow << " and " << muHigh << std::endl;
        Name.Form("metmu%.0fthru%.0f" , muLow , muHigh );
+       delete gROOT->FindObject(Name);
        EfficiencyName.Form("metmu%.0fthru%.0fEfficiency", muLow , muHigh );
+       delete gROOT->FindObject(EfficiencyName);
        Title.Form("ZeroBias MET Distribution for %s With Actint Between %.0f and %.0f" ,Alg_Name.Data(), muLow , muHigh );
        EfficiencyTitle.Form("Efficiency of L1XE 30 As a Function of %s for Actint Between %.0f and %.0f", Alg_Name.Data() , muLow , muHigh );
        Corrected_Name.Form("L1XE30CorrectedToZBmu%.0fthru%.0f" , muLow , muHigh );
@@ -40,8 +44,7 @@ void CorrectL1XE30toZB::Begin(TTree * /*tree*/){//{{{
     }//}}}
     // cd to the efficiency object directory{{{
     if ( mu_analysis_file->cd("l1xe30_efficiency_curves") ){
-        std::cout << "Successfully switched to:" << std::endl;
-        gDirectory->pwd();
+        std::cout << "Successfully switched to l1xe30_efficiency_curves" << std::endl;
         for ( int i = 0 ; i  < Number_Mu_Bins ; i++ ) {
            muLow = Mu_Values[i];
            muHigh = Mu_Values[i+1];
@@ -53,12 +56,11 @@ void CorrectL1XE30toZB::Begin(TTree * /*tree*/){//{{{
     // switch to the efficiency fit object directory  {{{
     TString EfficiencyFitName;
     if ( mu_analysis_file->cd("l1xe30_efficiency_fits")){
-            std::cout << "Successfully switched to:" << std::endl;
-            gDirectory->pwd();
+            std::cout << "Successfully switched to l1xe30_efficiency_fits" << std::endl;
             for ( int i = 0 ; i  < Number_Mu_Bins ; i++ ) {
                muLow = Mu_Values[i];
                muHigh = Mu_Values[i+1];
-                // all the fit functions have the same name , but different cycle number 
+                // all the fit functions have the same name , but different cycle number
                EfficiencyFitName.Form("fitFunction;%d", i+1 );
                 gDirectory->GetObject( EfficiencyFitName , L1XE30_Efficiency_Fit_Objects[i] );
             }
@@ -70,8 +72,7 @@ void CorrectL1XE30toZB::Begin(TTree * /*tree*/){//{{{
 //}}}
     // switch to the MET distributions directory{{{
     if (gDirectory->cd("../zb_met_distributions") ){
-        std::cout << "Successfully switched to:" << std::endl;
-        gDirectory->pwd();
+        std::cout << "Successfully switched to zb_met_distributions" << std::endl;
         for (int i = 0 ; i < Number_Mu_Bins ; i++ ) {
            muLow = Mu_Values[i];
            muHigh = Mu_Values[i+1];
@@ -89,7 +90,7 @@ void CorrectL1XE30toZB::Begin(TTree * /*tree*/){//{{{
 Bool_t CorrectL1XE30toZB::Process(Long64_t entry)//{{{
 {
    fReader.SetLocalEntry(entry);
-   // still need to compute new error and pass it to this fill function somehow 
+   // still need to compute new error and pass it to this fill function somehow
    // if the entry is passnoalg L1XE30, and it one of the good runs
    if ( isPassnoAlgL1XE30() && isGoodRun() ){
        for ( int i = 0 ; i < Number_Mu_Bins ; i++ ) {
@@ -210,8 +211,8 @@ Bool_t CorrectL1XE30toZB::Notify(){return kTRUE;}
 Double_t CorrectL1XE30toZB::ComputeWeight(TF1* fitFunc)//{{{
 {
     Float_t numerator = *HLT_noalg_L1XE30_prescale;
-    Double_t denominator = fitFunc->Eval( *cell_met ); 
-    return numerator / denominator; 
+    Double_t denominator = fitFunc->Eval( *cell_met );
+    return numerator / denominator;
 }//}}}
 Bool_t CorrectL1XE30toZB::isGoodRun(){//{{{
     return (*RunNumber != 330203 && *RunNumber != 331975 && *RunNumber != 334487);
