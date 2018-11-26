@@ -14,6 +14,7 @@ void ComputeL1XE30toZBEfficiency::Begin(TTree *) // {{{
    TString Title;
    TString EfficiencyName;
    TString EfficiencyTitle;
+   std::cout << "Creating the proper met distribution, l1xe30 efficiency and l1xe30 efficiency fit objects" << std::endl;
    for (int i = 0 ; i < Number_Mu_Bins ; i++){
        muLow = Mu_Values[i];
        muHigh = Mu_Values[i+1];
@@ -49,16 +50,16 @@ Bool_t ComputeL1XE30toZBEfficiency::Process(Long64_t entry)//{{{
 }//}}}
 void ComputeL1XE30toZBEfficiency::Terminate() //{{{
 {
+    std::cout << "Setting the plotting characteristics of the l1xe30 efficiency objects, fits and the met distributions" << std::endl;
    for ( int i = 0; i < Number_Mu_Bins ; i++ ){
        L1XE30_Efficiency_Objects[i]->SetLineColor( Colors[i] );
        L1XE30_Efficiency_Objects[i]->SetMarkerStyle( Colors[i] );
        L1XE30_Efficiency_Fit_Objects[i] = generateFitFunction( L1XE30_Efficiency_Objects[i] );
        L1XE30_Efficiency_Fit_Objects[i]->SetLineColor( Colors[i] );
        Met_Distributions_By_Mu_Bin[i]->SetLineColor( Colors[i] );
-       Normalized_Met_Distributions[i] = ((TH1F*)(Met_Distributions_By_Mu_Bin[i])->Clone());
-       Normalized_Met_Distributions[i]->SetNormFactor(1.);
    }
     // WRITE TO FILE {{{
+    std::cout << "Writing the met distributions to zb_met_distributions" << std::endl;
     TFile* Mu_Analysis_File = TFile::Open("mu_analysis.root", "RECREATE");
     TDirectory* zb_met_distributions = Mu_Analysis_File->mkdir("zb_met_distributions");
     zb_met_distributions->cd();
@@ -66,12 +67,14 @@ void ComputeL1XE30toZBEfficiency::Terminate() //{{{
         Met_Distributions_By_Mu_Bin[i]->Write();
     }
 
+    std::cout << "Writing the l1xe30 efficiency curves to l1xe30_efficiency_curves" << std::endl;
     TDirectory* efficiency_curves = Mu_Analysis_File->mkdir("l1xe30_efficiency_curves");
     efficiency_curves->cd();
     for ( int  i = 0 ; i < Number_Mu_Bins ; i++ ){
         L1XE30_Efficiency_Objects[i]->Write();
     }
 
+    std::cout << "Writing the l1xe30 efficiency curve objects to l1xe30_efficiency_curves" << std::endl;
     TDirectory* L1XE30_Efficiency_Fit_Objects_Dir = Mu_Analysis_File->mkdir("l1xe30_efficiency_fits");
     L1XE30_Efficiency_Fit_Objects_Dir->cd();
     for ( int  i = 0 ; i < Number_Mu_Bins ; i++ ){

@@ -86,6 +86,7 @@ void CorrectL1XE30toZB::Begin(TTree * /*tree*/){//{{{
         std::cout << "Unable to open zb_met directory" << std::endl;
         return;
     }//}}}
+    std::cout << "Successfully retrieved the zb met distributions" << std::endl;
 }//}}}
 Bool_t CorrectL1XE30toZB::Process(Long64_t entry)//{{{
 {
@@ -104,6 +105,7 @@ Bool_t CorrectL1XE30toZB::Process(Long64_t entry)//{{{
 void CorrectL1XE30toZB::Terminate(){//{{{
 	// Relative Normalization{{{
     // Scale the corrected ones to the original zb ones
+    std::cout << "Beginning to do relative normalization. This is usually where I get inf/nans propagated to pad" << std::endl;
     for (int i = 0 ;i < Number_Mu_Bins ; i++ ) {
         Scale_Factors[i] = ZB_MET_Distributions[i]->GetBinContent( Normalization_Bin_Numbers[i] ) / Corrected_MET_Distributions[i]->GetBinContent( Normalization_Bin_Numbers[i] );
         std::cout << Scale_Factors[i] << std::endl;
