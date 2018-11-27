@@ -160,7 +160,7 @@ void CorrectL1XE50toZB::Terminate(){
 	correctedLegend->Draw("SAME");
     correctedCanvas->SetLogy();
     gStyle->SetOptStat(0);
-    correctedCanvas->Print("../Plots/CorrectedAndZB/L1XE50CorrectedToZB.png");
+    correctedCanvas->Print("plots/CorrectedAndZB/L1XE50CorrectedToZB.png");
 
     //}}}
 	// PLOT ZERO BIAS DISTRIBUTIONS {{{
@@ -175,7 +175,7 @@ void CorrectL1XE50toZB::Terminate(){
     zbDistLegend->Draw("SAME");
     zb_MET_Canvas->SetLogy();
     gStyle->SetOptStat(0);
-    zb_MET_Canvas->Print("../Plots/CorrectedAndZB/ZB_MET_Distributions.png");
+    zb_MET_Canvas->Print("plots/CorrectedAndZB/ZB_MET_Distributions.png");
 
     //}}}
     Double_t ymin = 0.0;
@@ -217,7 +217,7 @@ void CorrectL1XE50toZB::Terminate(){
         axis->SetLineColor(kRed);
         axis->SetTextColor(kRed);
         axis->Draw("SAME");
-        plot_name.Form( "../Plots/CorrectedAndZB/zb_l1xe50met_corrected_mubin%d.png" , i+1 );
+        plot_name.Form( "plots/CorrectedAndZB/zb_l1xe50met_corrected_mubin%d.png" , i+1 );
         mu_bin_canv->Print(plot_name);
     }
 

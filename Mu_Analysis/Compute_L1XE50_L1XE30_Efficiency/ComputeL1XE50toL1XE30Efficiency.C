@@ -61,11 +61,11 @@ void ComputeL1XE50toL1XE30Efficiency::Terminate()
 
     // WRITE TO FILE {{{
     TFile* Mu_Analysis_File = TFile::Open("mu_analysis.root", "UPDATE");
-    TDirectory* zb_met_distributions = (TDirectory*) Mu_Analysis_File->Get("zb_met_distributions");
-    if (!zb_met_distributions){
-        zb_met_distributions = Mu_Analysis_File->mkdir("zb_met_distributions");
+    TDirectory* l1xe30_met_distributions = (TDirectory*) Mu_Analysis_File->Get("l1xe30_met_distributions");
+    if (!l1xe30_met_distributions){
+        l1xe30_met_distributions = Mu_Analysis_File->mkdir("l1xe30_met_distributions");
     }
-    zb_met_distributions->cd();
+    l1xe30_met_distributions->cd();
     for ( int i = 0 ; i < Number_Mu_Bins ; i++ ) {
         Met_Distributions_By_Mu_Bin[i]->Write();
     }

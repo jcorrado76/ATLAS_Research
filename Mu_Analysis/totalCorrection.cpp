@@ -18,11 +18,12 @@ int totalCorrection(){
     zb_chain->Add("~/DATA/ZB/user.jburr.2017_11_17.ZB/*");
     zb_chain->Process(buildl1xe30Efficiencies);
 
+    TChain* jetm10_chain = new TChain( "METTree", "jetm10chain");
+    jetm10_chain->Add("~/DATA/PhysicsMain/JburrJETM10*");
+
     std::cout << "Correcting L1XE30 Data back to ZB MET Data" << std::endl;
     // correct the l1xe30 data back to match ZB data
     CorrectL1XE30toZB* correctToZB = (CorrectL1XE30toZB*) TSelector::GetSelector("CorrectL1XE30toZB/CorrectL1XE30toZB.C+");
-    TChain* jetm10_chain = new TChain( "METTree", "jetm10chain");
-    jetm10_chain->Add("~/DATA/PhysicsMain/JburrJETM10*");
     jetm10_chain->Process(correctToZB);
 
     std::cout << "Computing L1XE50 Efficiency from L1XE30 JETM10 Data" << std::endl;
