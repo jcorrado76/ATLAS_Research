@@ -24,7 +24,7 @@
 #include <TEfficiency.h>
 #include <TDirectory.h>
 #include <TGaxis.h>
-class CorrectL1XE50ToZB : public TSelector {
+class CorrectL1XE50toZB : public TSelector {
 public :
    TTreeReader     fReader;  //!the tree reader
    TTree          *fChain = 0;   //!pointer to the analyzed TTree or TChain
@@ -65,8 +65,8 @@ public :
    TTreeReaderValue<Bool_t> L1_XE50_passed = {fReader, "L1_XE50.passed"};
    TTreeReaderValue<Float_t> L1_XE50_prescale = {fReader, "L1_XE50.prescale"};
 
-   CorrectL1XE50ToZB(TTree * /*tree*/ =0) { }
-   virtual ~CorrectL1XE50ToZB() { }
+   CorrectL1XE50toZB(TTree * /*tree*/ =0) { }
+   virtual ~CorrectL1XE50toZB() { }
    virtual Int_t   Version() const { return 2; }
    virtual void    Begin(TTree *tree);
    virtual void    SlaveBegin(TTree *tree);
@@ -87,7 +87,7 @@ public :
    Bool_t inMuRange( Float_t , Float_t );
    Double_t ComputeWeight(TF1*,TF1*);
 
-   ClassDef(CorrectL1XE50ToZB,0);
+   ClassDef(CorrectL1XE50toZB,0);
 
 };
 

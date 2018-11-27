@@ -1,7 +1,7 @@
-#define CorrectL1XE50ToZB_cxx
+#define CorrectL1XE50toZB_cxx
 #include "CorrectL1XE50toZB.h"
 
-void CorrectL1XE50ToZB::Begin(TTree * /*tree*/)//{{{
+void CorrectL1XE50toZB::Begin(TTree * /*tree*/)//{{{
 {
     TString option = GetOption();
    for (int i = 0 ; i < Number_Mu_Bins + 1; i++){
@@ -114,7 +114,7 @@ void CorrectL1XE50ToZB::Begin(TTree * /*tree*/)//{{{
         return;
     }//}}}
 }//}}}
-Bool_t CorrectL1XE50ToZB::Process(Long64_t entry)//{{{
+Bool_t CorrectL1XE50toZB::Process(Long64_t entry)//{{{
 {
    fReader.SetLocalEntry(entry);
    // just make sure this is the correct flag L1XE30
@@ -129,8 +129,8 @@ Bool_t CorrectL1XE50ToZB::Process(Long64_t entry)//{{{
    }
    return kTRUE;
 }//}}}
-void CorrectL1XE50ToZB::SlaveTerminate(){}
-void CorrectL1XE50ToZB::Terminate(){
+void CorrectL1XE50toZB::SlaveTerminate(){}
+void CorrectL1XE50toZB::Terminate(){
 	// Relative Normalization{{{
     // BinWidth = 1.0 GeV
 
@@ -230,25 +230,25 @@ void CorrectL1XE50ToZB::Terminate(){
     //}}}
     mu_analysis_file->Close();
 }
-void CorrectL1XE50ToZB::Init(TTree *tree){fReader.SetTree(tree);}
-void CorrectL1XE50ToZB::SlaveBegin(TTree * /*tree*/)//{{{
+void CorrectL1XE50toZB::Init(TTree *tree){fReader.SetTree(tree);}
+void CorrectL1XE50toZB::SlaveBegin(TTree * /*tree*/)//{{{
 {
    TString option = GetOption();
 }//}}}
-Bool_t CorrectL1XE50ToZB::Notify(){return kTRUE;}
-Bool_t CorrectL1XE50ToZB::isGoodRun(){//{{{
+Bool_t CorrectL1XE50toZB::Notify(){return kTRUE;}
+Bool_t CorrectL1XE50toZB::isGoodRun(){//{{{
     return (*RunNumber != 330203 && *RunNumber != 331975 && *RunNumber != 334487);
 }//}}}
-Bool_t CorrectL1XE50ToZB::passedL1ZB(){//{{{
+Bool_t CorrectL1XE50toZB::passedL1ZB(){//{{{
     return (*HLT_noalg_zb_L1ZB_passed);
 }//}}}
-Bool_t CorrectL1XE50ToZB::inMuRange( Float_t a , Float_t b ){ //{{{
+Bool_t CorrectL1XE50toZB::inMuRange( Float_t a , Float_t b ){ //{{{
     return ( *InTimePileup > a && *InTimePileup < b );
 } //}}}
-Bool_t CorrectL1XE50ToZB::isPassnoAlgL1XE50(){ // {{{
+Bool_t CorrectL1XE50toZB::isPassnoAlgL1XE50(){ // {{{
     return (*L1_XE50_passed);
 } // }}}
-Double_t CorrectL1XE50ToZB::ComputeWeight(TF1* fitFunc , TF1* fitFunc2)//{{{
+Double_t CorrectL1XE50toZB::ComputeWeight(TF1* fitFunc , TF1* fitFunc2)//{{{
 {
     Float_t numerator = *L1_XE50_prescale;
     Double_t denominator = fitFunc->Eval( *cell_met ) * fitFunc2->Eval( *cell_met );

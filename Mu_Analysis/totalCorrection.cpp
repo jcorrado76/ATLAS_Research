@@ -33,7 +33,7 @@ int totalCorrection(){
 
     std::cout << "Correcting L1XE50 all the way back to ZB MET Data" << std::endl;
     // Correct L1XE50 data back to zerobias data
-    CorrectL1XE50ToZB* CorrectL1XE50DataAllWay = (CorrectL1XE50ToZB*) TSelector::GetSelector("CorrectL1XE50toZB/CorrectL1XE50ToZB.C+");
+    CorrectL1XE50toZB* CorrectL1XE50DataAllWay = (CorrectL1XE50toZB*) TSelector::GetSelector("CorrectL1XE50toZB/CorrectL1XE50toZB.C+");
     jetm10_chain->Process( CorrectL1XE50DataAllWay );
 
     return(1);
