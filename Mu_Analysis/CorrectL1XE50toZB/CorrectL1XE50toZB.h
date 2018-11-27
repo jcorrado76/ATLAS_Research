@@ -31,7 +31,7 @@ public :
     TFile* mu_analysis_file = 0;
     const static Int_t Number_Mu_Bins = 7;
 
-   TH1F* Met_Distributions_By_Mu_Bin[Number_Mu_Bins];
+   TH1F* ZB_MET_Distributions[Number_Mu_Bins];
    TH1F* Corrected_Met_Distributions[Number_Mu_Bins];
 
    TEfficiency* L1XE30_Efficiency_Objects[Number_Mu_Bins];
@@ -47,6 +47,12 @@ public :
     TString alg_name = "METCELL";
     TString xaxisTitle = alg_name + " [GeV]";
     TString yaxisTitle = "Number of Entries";
+
+    Float_t Mu_Values[Number_Mu_Bins+1] = { 0.0 };
+    Int_t Colors[Number_Mu_Bins] = {1,2,3,4,12,6,9};
+    Int_t MarkerStyles[Number_Mu_Bins] = {29,20,3,4,27,22,21};
+    Int_t Normalization_Bin_Numbers[Number_Mu_Bins] = {40,52,60,56,55,52,40};
+    Float_t Scale_Factors[Number_Mu_Bins] = { 0.0 };
 
    // Readers to access the data (delete the ones you do not need).
    TTreeReaderValue<UInt_t> RunNumber = {fReader, "RunNumber"};
