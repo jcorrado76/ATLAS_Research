@@ -59,6 +59,7 @@ void CorrectL1XE50ToZB::Begin(TTree * /*tree*/)//{{{
            EfficiencyName.Form("metmu%.0fthru%.0fEfficiency", muLow , muHigh );
             gDirectory->GetObject( EfficiencyName , L1XE50_Efficiency_Objects[i] );
         }
+    }
     else{
         std::cout << "Unable to open l1xe50 efficiency curves directory" << std::endl;
     }//}}}
@@ -182,6 +183,11 @@ void CorrectL1XE50ToZB::Terminate(){
     Double_t xmax = 300.0;
     Double_t dy = (ymax-ymin) / 0.8;
     Double_t dx  =(xmax-xmin) / 0.8;
+
+    TString Canvas_Name;
+    TString Canvas_Title;
+    TString plot_name;
+
     for (int i = 0 ; i < Number_Mu_Bins ; i++ ){
         Canvas_Name.Form( "c%d", i+1 );
         Canvas_Title.Form( "met_mubin%d", i+1 );

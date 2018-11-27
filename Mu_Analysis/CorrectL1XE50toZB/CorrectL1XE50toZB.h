@@ -32,7 +32,7 @@ public :
     const static Int_t Number_Mu_Bins = 7;
 
    TH1F* ZB_MET_Distributions[Number_Mu_Bins];
-   TH1F* Corrected_Met_Distributions[Number_Mu_Bins];
+   TH1F* Corrected_MET_Distributions[Number_Mu_Bins];
 
    TEfficiency* L1XE30_Efficiency_Objects[Number_Mu_Bins];
    TF1* L1XE30_Efficiency_Fit_Objects[Number_Mu_Bins];
@@ -44,8 +44,8 @@ public :
     Float_t gevLow = 0.0;
     Float_t gevHigh = 300.0;
     Int_t nbins = (gevHigh-gevLow)/binWidth;
-    TString alg_name = "METCELL";
-    TString xaxisTitle = alg_name + " [GeV]";
+    TString Alg_Name = "METCELL";
+    TString xaxisTitle = Alg_Name + " [GeV]";
     TString yaxisTitle = "Number of Entries";
 
     Float_t Mu_Values[Number_Mu_Bins+1] = { 0.0 };
