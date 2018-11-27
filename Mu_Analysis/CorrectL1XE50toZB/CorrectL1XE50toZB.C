@@ -105,9 +105,10 @@ void CorrectL1XE50toZB::Begin(TTree * /*tree*/)//{{{
                muHigh = Mu_Values[i+1];
                 // all the fit functions have the same name , but different cycle number
                Name.Form("metmu%.0fthru%.0f", muLow , muHigh );
-                gDirectory->GetObject( EfficiencyFitName , ZB_MET_Distributions[i] );
+                gDirectory->GetObject( Name , ZB_MET_Distributions[i] );
                 ZB_MET_Distributions[i]->SetDirectory(0);
             }
+        std::cout << "Successfully got all of the zb met distributions" << std::endl;
     }
     else{
         std::cout << "Unable to open zerobias MET distribution directory" << std::endl;
