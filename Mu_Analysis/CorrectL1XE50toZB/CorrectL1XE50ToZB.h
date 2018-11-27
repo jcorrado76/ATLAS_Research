@@ -30,76 +30,15 @@ public :
    TTree          *fChain = 0;   //!pointer to the analyzed TTree or TChain
     TFile* mu_analysis_file = 0;
     const static Int_t Number_Mu_Bins = 7;
+
    TH1F* Met_Distributions_By_Mu_Bin[Number_Mu_Bins];
-   TH1F* Normalized_Met_Distributions[Number_Mu_Bins];
+   TH1F* Corrected_Met_Distributions[Number_Mu_Bins];
+
    TEfficiency* L1XE30_Efficiency_Objects[Number_Mu_Bins];
    TF1* L1XE30_Efficiency_Fit_Objects[Number_Mu_Bins];
-   TH1F* MET_Distribution = 0;
-   TEfficiency* MET_L1XE30Efficiency = 0;
-   TF1* MET_L1XE30EfficiencyFit = 0;
-    TH1D*            MET_Correctedmu0thru10 = 0;
-    TH1D*            MET_Correctedmu10thru20 = 0;
-    TH1D*            MET_Correctedmu20thru30 = 0;
-    TH1D*            MET_Correctedmu30thru40 = 0;
-    TH1D*            MET_Correctedmu40thru50 = 0;
-    TH1D*            MET_Correctedmu50thru60 = 0;
-    TH1D*            MET_Correctedmu60thru70 = 0;
 
-    TH1D* zbMETMuBin0thru10 = 0;
-    TH1D* zbMETMuBin10thru20 = 0;
-    TH1D* zbMETMuBin20thru30 = 0;
-    TH1D* zbMETMuBin30thru40 = 0;
-    TH1D* zbMETMuBin40thru50 = 0;
-    TH1D* zbMETMuBin50thru60 = 0;
-    TH1D* zbMETMuBin60thru70 = 0;
-
-    TH1D*            MET_Correctedmu0thru10_copy = 0;
-    TH1D*            MET_Correctedmu10thru20_copy = 0;
-    TH1D*            MET_Correctedmu20thru30_copy = 0;
-    TH1D*            MET_Correctedmu30thru40_copy = 0;
-    TH1D*            MET_Correctedmu40thru50_copy = 0;
-    TH1D*            MET_Correctedmu50thru60_copy = 0;
-    TH1D*            MET_Correctedmu60thru70_copy = 0;
-
-    TH1D* zbMETMuBin0thru10_copy = 0;
-    TH1D* zbMETMuBin10thru20_copy = 0;
-    TH1D* zbMETMuBin20thru30_copy = 0;
-    TH1D* zbMETMuBin30thru40_copy = 0;
-    TH1D* zbMETMuBin40thru50_copy = 0;
-    TH1D* zbMETMuBin50thru60_copy = 0;
-    TH1D* zbMETMuBin60thru70_copy = 0;
-
-    TF1*             EfficiencyFitMuBin1 = 0;
-    TF1*             EfficiencyFitMuBin2 = 0;
-    TF1*             EfficiencyFitMuBin3 = 0;
-    TF1*             EfficiencyFitMuBin4 = 0;
-    TF1*             EfficiencyFitMuBin5 = 0;
-    TF1*             EfficiencyFitMuBin6 = 0;
-    TF1*             EfficiencyFitMuBin7 = 0;
-
-    TF1*             L1XE50EfficiencyFitMuBin1 = 0;
-    TF1*             L1XE50EfficiencyFitMuBin2 = 0;
-    TF1*             L1XE50EfficiencyFitMuBin3 = 0;
-    TF1*             L1XE50EfficiencyFitMuBin4 = 0;
-    TF1*             L1XE50EfficiencyFitMuBin5 = 0;
-    TF1*             L1XE50EfficiencyFitMuBin6 = 0;
-    TF1*             L1XE50EfficiencyFitMuBin7 = 0;
-
-    TEfficiency* efficiencyObjectMu0thru10 = 0;
-    TEfficiency* efficiencyObjectMu10thru20 =0;
-    TEfficiency* efficiencyObjectMu20thru30 =0;
-    TEfficiency* efficiencyObjectMu30thru40 = 0;
-    TEfficiency* efficiencyObjectMu40thru50 = 0;
-    TEfficiency* efficiencyObjectMu50thru60 = 0;
-    TEfficiency* efficiencyObjectMu60thru70 = 0;
-
-    TEfficiency* L1XE50efficiencyObjectMu0thru10 = 0;
-    TEfficiency* L1XE50efficiencyObjectMu10thru20 =0;
-    TEfficiency* L1XE50efficiencyObjectMu20thru30 =0;
-    TEfficiency* L1XE50efficiencyObjectMu30thru40 = 0;
-    TEfficiency* L1XE50efficiencyObjectMu40thru50 = 0;
-    TEfficiency* L1XE50efficiencyObjectMu50thru60 = 0;
-    TEfficiency* L1XE50efficiencyObjectMu60thru70 = 0;
+   TEfficiency* L1XE50_Efficiency_Objects[Number_Mu_Bins];
+   TF1* L1XE50_Efficiency_Fit_Objects[Number_Mu_Bins];
 
     Float_t binWidth = 1.0;
     Float_t gevLow = 0.0;
