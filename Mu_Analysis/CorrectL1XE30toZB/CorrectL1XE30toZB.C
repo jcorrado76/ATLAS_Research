@@ -36,13 +36,17 @@ void CorrectL1XE30toZB::Begin(TTree * /*tree*/){//{{{
    }
     // TH1 OBJECTS DO NOT BELONG TO TFILE SCOPE. THEY WILL STAY
     TH1::AddDirectory(false);
+
+    // Open the root file in update mode
     TFile* mu_analysis_file = TFile::Open("mu_analysis.root","UPDATE");
-    // attempt to open file {{{
+    // attempt to open file{{{
     if (!mu_analysis_file->IsOpen()){
         std::cout << "mu_analysis.root not opened" << std::endl;
         return;
     }//}}}
-    // cd to the efficiency object directory{{{
+
+
+    // get l1xe30 efficiency objects  {{{
     if ( mu_analysis_file->cd("l1xe30_efficiency_curves") ){
         std::cout << "Successfully switched to l1xe30_efficiency_curves" << std::endl;
         for ( int i = 0 ; i  < Number_Mu_Bins ; i++ ) {
@@ -53,7 +57,8 @@ void CorrectL1XE30toZB::Begin(TTree * /*tree*/){//{{{
         }
     }
 //}}}
-    // switch to the efficiency fit object directory  {{{
+
+    // get l1xe30 efficiency fit objects {{{
     TString EfficiencyFitName;
     if ( mu_analysis_file->cd("l1xe30_efficiency_fits")){
             std::cout << "Successfully switched to l1xe30_efficiency_fits" << std::endl;
@@ -70,7 +75,8 @@ void CorrectL1XE30toZB::Begin(TTree * /*tree*/){//{{{
         return;
     }
 //}}}
-    // switch to the MET distributions directory{{{
+
+    // get the zerobias met distributions {{{
     if (gDirectory->cd("../zb_met_distributions") ){
         std::cout << "Successfully switched to zb_met_distributions" << std::endl;
         for (int i = 0 ; i < Number_Mu_Bins ; i++ ) {
@@ -96,7 +102,7 @@ Bool_t CorrectL1XE30toZB::Process(Long64_t entry)//{{{
    if ( isPassnoAlgL1XE30() && isGoodRun() ){
        for ( int i = 0 ; i < Number_Mu_Bins ; i++ ) {
            if ( inMuRange( Mu_Values[i] , Mu_Values[i+1] )){
-                ZB_MET_Distributions[i]->Fill( *cell_met , ComputeWeight( L1XE30_Efficiency_Fit_Objects[i] ) );
+                Corrected_MET_Distributions[i]->Fill( *cell_met , ComputeWeight( L1XE30_Efficiency_Fit_Objects[i] ) );
             }
         }
    }
@@ -105,10 +111,8 @@ Bool_t CorrectL1XE30toZB::Process(Long64_t entry)//{{{
 void CorrectL1XE30toZB::Terminate(){//{{{
 	// Relative Normalization{{{
     // Scale the corrected ones to the original zb ones
-    std::cout << "Beginning to do relative normalization. This is usually where I get inf/nans propagated to pad" << std::endl;
     for (int i = 0 ;i < Number_Mu_Bins ; i++ ) {
         Scale_Factors[i] = ZB_MET_Distributions[i]->GetBinContent( Normalization_Bin_Numbers[i] ) / Corrected_MET_Distributions[i]->GetBinContent( Normalization_Bin_Numbers[i] );
-        std::cout << Scale_Factors[i] << std::endl;
         ZB_MET_Distributions[i]->SetNormFactor( 1. );
         Corrected_MET_Distributions[i]->SetNormFactor( 1. );
         Corrected_MET_Distributions[i]->Scale( Scale_Factors[i] );
@@ -188,15 +192,14 @@ void CorrectL1XE30toZB::Terminate(){//{{{
         mu_bin_canv->Print(plot_name);
     }
     //}}}
+
+
     // WRITE CORRECTED MET DISTRIBUTIONS TO FILE{{{
     // this is L1XE30 distribution corrected to ZB
-    if ( !mu_analysis_file->cd("L1XE30CorrectedToZB") ){
-        std::cout << "Corrected MET dist directory did not already exist. creating new one" << std::endl;
-        mu_analysis_file->mkdir("L1XE30CorrectedToZB");
-    }
-    else{
-        std::cout << "Successfully switched to correcting met distributions directory" << std::endl;
-    }
+    TFile* mu_analysis_file = TFile::Open("mu_analysis.root","UPDATE");
+    std::cout << "Making a directory for corrected met distributions" << std::endl;
+    TDirectory* corrected_directory = mu_analysis_file->mkdir("L1XE30CorrectedToZB");
+    corrected_directory->cd();
     for (int i = 0 ; i < Number_Mu_Bins ; i++ ) {
         Corrected_MET_Distributions[i]->Write( "" , TObject::kOverwrite );
     }

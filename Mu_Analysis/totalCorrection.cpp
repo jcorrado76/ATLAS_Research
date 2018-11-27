@@ -28,7 +28,7 @@ int totalCorrection(){
     std::cout << "Computing L1XE50 Efficiency from L1XE30 JETM10 Data" << std::endl;
     // Compute l1xe50 efficiencies from the jetm10 l1xe30 data
     ComputeL1XE50toL1XE30Efficiency* createL1XE50Efficiencies =
-        (ComputeL1XE50toL1XE30Efficiency*) TSelector::GetSelector("Compute_L1XE50_L1XE30_Efficiency/Compute_L1XE50_L1XE30_Efficiency.C+");
+        (ComputeL1XE50toL1XE30Efficiency*) TSelector::GetSelector("Compute_L1XE50_L1XE30_Efficiency/ComputeL1XE50toL1XE30Efficiency.C+");
     jetm10_chain->Process( createL1XE50Efficiencies );
 
     std::cout << "Correcting L1XE50 all the way back to ZB MET Data" << std::endl;
