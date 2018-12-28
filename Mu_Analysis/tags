@@ -4,12 +4,19 @@
 !_TAG_PROGRAM_NAME	Exuberant Ctags	//
 !_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
 !_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+Alg_Name	Compute_L1XE30_Efficiency/ComputeL1XE30toZBEfficiency.h	/^   TString Alg_Name = "CELL MET";$/;"	m	class:ComputeL1XE30toZBEfficiency
+Alg_Name	Compute_L1XE50_L1XE30_Efficiency/ComputeL1XE50toL1XE30Efficiency.h	/^   TString Alg_Name = "CELL MET";$/;"	m	class:ComputeL1XE50toL1XE30Efficiency
+Alg_Name	CorrectL1XE30toZB/CorrectL1XE30toZB.h	/^    TString Alg_Name = "METCELL";$/;"	m	class:CorrectL1XE30toZB
+Alg_Name	CorrectL1XE50toZB/CorrectL1XE50toZB.h	/^    TString Alg_Name = "METCELL";$/;"	m	class:CorrectL1XE50toZB
 Begin	BurrTemplateSelector/Jburr_Template_Selector.C	/^void Jburr_Template_Selector::Begin(TTree * \/*tree*\/){TString option = GetOption();}$/;"	f	class:Jburr_Template_Selector
-Begin	CorrectAllTheWay/CorrectingDistributions.C	/^void CorrectingDistributions::Begin(TTree * \/*tree*\/)$/;"	f	class:CorrectingDistributions
-Begin	L1XE30toL1XE50/performL130to50Correction/CorrectingDistributions.C	/^void CorrectingDistributions::Begin(TTree * \/*tree*\/)$/;"	f	class:CorrectingDistributions
-Begin	L1XE30toL1XE50/plotl130dists/PlotMETDistsVersMu.C	/^void PlotMETDistsVersMu::Begin(TTree *) \/\/ {{{$/;"	f	class:PlotMETDistsVersMu
-Begin	zbToL1XE30/PerformCorrection/CorrectingDistributions.C	/^void CorrectingDistributions::Begin(TTree * \/*tree*\/)$/;"	f	class:CorrectingDistributions
-Begin	zbToL1XE30/plotMETDistsVersusMu/PlotMETDistsVersMu.C	/^void PlotMETDistsVersMu::Begin(TTree *) \/\/ {{{$/;"	f	class:PlotMETDistsVersMu
+Begin	Compute_L1XE30_Efficiency/ComputeL1XE30toZBEfficiency.C	/^void ComputeL1XE30toZBEfficiency::Begin(TTree *) \/\/ {{{$/;"	f	class:ComputeL1XE30toZBEfficiency
+Begin	Compute_L1XE50_L1XE30_Efficiency/ComputeL1XE50toL1XE30Efficiency.C	/^void ComputeL1XE50toL1XE30Efficiency::Begin(TTree *) \/\/ {{{$/;"	f	class:ComputeL1XE50toL1XE30Efficiency
+Begin	CorrectL1XE30toZB/CorrectL1XE30toZB.C	/^void CorrectL1XE30toZB::Begin(TTree * \/*tree*\/){\/\/{{{$/;"	f	class:CorrectL1XE30toZB
+Begin	CorrectL1XE50toZB/CorrectL1XE50toZB.C	/^void CorrectL1XE50toZB::Begin(TTree * \/*tree*\/)\/\/{{{$/;"	f	class:CorrectL1XE50toZB
+Begin	old_correction/plotl130dists/BuildEfficiencyL150.C	/^void BuildEfficiencyL150::Begin(TTree *) \/\/ {{{$/;"	f	class:BuildEfficiencyL150
+BuildEfficiencyL150	old_correction/plotl130dists/BuildEfficiencyL150.h	/^   BuildEfficiencyL150(TTree * =0) { }$/;"	f	class:BuildEfficiencyL150
+BuildEfficiencyL150	old_correction/plotl130dists/BuildEfficiencyL150.h	/^class BuildEfficiencyL150 : public TSelector {$/;"	c
+BuildEfficiencyL150_h	old_correction/plotl130dists/BuildEfficiencyL150.h	9;"	d
 CalAntiKt4EMTopoJets_eta	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderArray<float> CalAntiKt4EMTopoJets_eta = {fReader, "CalAntiKt4EMTopoJets.eta"};$/;"	m	class:Jburr_Template_Selector
 CalAntiKt4EMTopoJets_m	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderArray<float> CalAntiKt4EMTopoJets_m = {fReader, "CalAntiKt4EMTopoJets.m"};$/;"	m	class:Jburr_Template_Selector
 CalAntiKt4EMTopoJets_phi	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderArray<float> CalAntiKt4EMTopoJets_phi = {fReader, "CalAntiKt4EMTopoJets.phi"};$/;"	m	class:Jburr_Template_Selector
@@ -62,59 +69,46 @@ CalMuons_eta	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderArra
 CalMuons_m	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderArray<float> CalMuons_m = {fReader, "CalMuons.m"};$/;"	m	class:Jburr_Template_Selector
 CalMuons_phi	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderArray<float> CalMuons_phi = {fReader, "CalMuons.phi"};$/;"	m	class:Jburr_Template_Selector
 CalMuons_pt	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderArray<float> CalMuons_pt = {fReader, "CalMuons.pt"};$/;"	m	class:Jburr_Template_Selector
-ComputeWeight	CorrectAllTheWay/CorrectingDistributions.C	/^Double_t CorrectingDistributions::ComputeWeight(TF1* fitFunc)\/\/{{{$/;"	f	class:CorrectingDistributions
-ComputeWeight	L1XE30toL1XE50/performL130to50Correction/CorrectingDistributions.C	/^Double_t CorrectingDistributions::ComputeWeight(TF1* fitFunc)\/\/{{{$/;"	f	class:CorrectingDistributions
-ComputeWeight	zbToL1XE30/PerformCorrection/CorrectingDistributions.C	/^Double_t CorrectingDistributions::ComputeWeight(TF1* fitFunc)\/\/{{{$/;"	f	class:CorrectingDistributions
-CorrectingDistributions	CorrectAllTheWay/CorrectingDistributions.h	/^   CorrectingDistributions(TTree * \/*tree*\/ =0) { }$/;"	f	class:CorrectingDistributions
-CorrectingDistributions	CorrectAllTheWay/CorrectingDistributions.h	/^class CorrectingDistributions : public TSelector {$/;"	c
-CorrectingDistributions	L1XE30toL1XE50/performL130to50Correction/CorrectingDistributions.h	/^   CorrectingDistributions(TTree * \/*tree*\/ =0) { }$/;"	f	class:CorrectingDistributions
-CorrectingDistributions	L1XE30toL1XE50/performL130to50Correction/CorrectingDistributions.h	/^class CorrectingDistributions : public TSelector {$/;"	c
-CorrectingDistributions	zbToL1XE30/PerformCorrection/CorrectingDistributions.h	/^   CorrectingDistributions(TTree * \/*tree*\/ =0) { }$/;"	f	class:CorrectingDistributions
-CorrectingDistributions	zbToL1XE30/PerformCorrection/CorrectingDistributions.h	/^class CorrectingDistributions : public TSelector {$/;"	c
-CorrectingDistributions_cxx	CorrectAllTheWay/CorrectingDistributions.C	1;"	d	file:
-CorrectingDistributions_cxx	L1XE30toL1XE50/performL130to50Correction/CorrectingDistributions.C	1;"	d	file:
-CorrectingDistributions_cxx	zbToL1XE30/PerformCorrection/CorrectingDistributions.C	1;"	d	file:
-CorrectingDistributions_h	CorrectAllTheWay/CorrectingDistributions.h	8;"	d
-CorrectingDistributions_h	L1XE30toL1XE50/performL130to50Correction/CorrectingDistributions.h	8;"	d
-CorrectingDistributions_h	zbToL1XE30/PerformCorrection/CorrectingDistributions.h	8;"	d
-EfficiencyFitMuBin1	CorrectAllTheWay/CorrectingDistributions.h	/^    TF1*             EfficiencyFitMuBin1 = 0;$/;"	m	class:CorrectingDistributions
-EfficiencyFitMuBin1	L1XE30toL1XE50/performL130to50Correction/CorrectingDistributions.h	/^    TF1*             EfficiencyFitMuBin1 = 0;$/;"	m	class:CorrectingDistributions
-EfficiencyFitMuBin1	zbToL1XE30/PerformCorrection/CorrectingDistributions.h	/^    TF1*             EfficiencyFitMuBin1 = 0;$/;"	m	class:CorrectingDistributions
-EfficiencyFitMuBin2	CorrectAllTheWay/CorrectingDistributions.h	/^    TF1*             EfficiencyFitMuBin2 = 0;$/;"	m	class:CorrectingDistributions
-EfficiencyFitMuBin2	L1XE30toL1XE50/performL130to50Correction/CorrectingDistributions.h	/^    TF1*             EfficiencyFitMuBin2 = 0;$/;"	m	class:CorrectingDistributions
-EfficiencyFitMuBin2	zbToL1XE30/PerformCorrection/CorrectingDistributions.h	/^    TF1*             EfficiencyFitMuBin2 = 0;$/;"	m	class:CorrectingDistributions
-EfficiencyFitMuBin3	CorrectAllTheWay/CorrectingDistributions.h	/^    TF1*             EfficiencyFitMuBin3 = 0;$/;"	m	class:CorrectingDistributions
-EfficiencyFitMuBin3	L1XE30toL1XE50/performL130to50Correction/CorrectingDistributions.h	/^    TF1*             EfficiencyFitMuBin3 = 0;$/;"	m	class:CorrectingDistributions
-EfficiencyFitMuBin3	zbToL1XE30/PerformCorrection/CorrectingDistributions.h	/^    TF1*             EfficiencyFitMuBin3 = 0;$/;"	m	class:CorrectingDistributions
-EfficiencyFitMuBin4	CorrectAllTheWay/CorrectingDistributions.h	/^    TF1*             EfficiencyFitMuBin4 = 0;$/;"	m	class:CorrectingDistributions
-EfficiencyFitMuBin4	L1XE30toL1XE50/performL130to50Correction/CorrectingDistributions.h	/^    TF1*             EfficiencyFitMuBin4 = 0;$/;"	m	class:CorrectingDistributions
-EfficiencyFitMuBin4	zbToL1XE30/PerformCorrection/CorrectingDistributions.h	/^    TF1*             EfficiencyFitMuBin4 = 0;$/;"	m	class:CorrectingDistributions
-EfficiencyFitMuBin5	CorrectAllTheWay/CorrectingDistributions.h	/^    TF1*             EfficiencyFitMuBin5 = 0;$/;"	m	class:CorrectingDistributions
-EfficiencyFitMuBin5	L1XE30toL1XE50/performL130to50Correction/CorrectingDistributions.h	/^    TF1*             EfficiencyFitMuBin5 = 0;$/;"	m	class:CorrectingDistributions
-EfficiencyFitMuBin5	zbToL1XE30/PerformCorrection/CorrectingDistributions.h	/^    TF1*             EfficiencyFitMuBin5 = 0;$/;"	m	class:CorrectingDistributions
-EfficiencyFitMuBin6	CorrectAllTheWay/CorrectingDistributions.h	/^    TF1*             EfficiencyFitMuBin6 = 0;$/;"	m	class:CorrectingDistributions
-EfficiencyFitMuBin6	L1XE30toL1XE50/performL130to50Correction/CorrectingDistributions.h	/^    TF1*             EfficiencyFitMuBin6 = 0;$/;"	m	class:CorrectingDistributions
-EfficiencyFitMuBin6	zbToL1XE30/PerformCorrection/CorrectingDistributions.h	/^    TF1*             EfficiencyFitMuBin6 = 0;$/;"	m	class:CorrectingDistributions
-EfficiencyFitMuBin7	CorrectAllTheWay/CorrectingDistributions.h	/^    TF1*             EfficiencyFitMuBin7 = 0;$/;"	m	class:CorrectingDistributions
-EfficiencyFitMuBin7	L1XE30toL1XE50/performL130to50Correction/CorrectingDistributions.h	/^    TF1*             EfficiencyFitMuBin7 = 0;$/;"	m	class:CorrectingDistributions
-EfficiencyFitMuBin7	zbToL1XE30/PerformCorrection/CorrectingDistributions.h	/^    TF1*             EfficiencyFitMuBin7 = 0;$/;"	m	class:CorrectingDistributions
+Colors	Compute_L1XE30_Efficiency/ComputeL1XE30toZBEfficiency.h	/^   Int_t Colors[Number_Mu_Bins] = {1,2,3,4,12,6,9};$/;"	m	class:ComputeL1XE30toZBEfficiency
+Colors	Compute_L1XE50_L1XE30_Efficiency/ComputeL1XE50toL1XE30Efficiency.h	/^    Int_t Colors[Number_Mu_Bins] = {1,2,3,4,12,6,9};$/;"	m	class:ComputeL1XE50toL1XE30Efficiency
+Colors	CorrectL1XE30toZB/CorrectL1XE30toZB.h	/^   Int_t Colors[Number_Mu_Bins] = {1,2,3,4,12,6,9};$/;"	m	class:CorrectL1XE30toZB
+Colors	CorrectL1XE50toZB/CorrectL1XE50toZB.h	/^    Int_t Colors[Number_Mu_Bins] = {1,2,3,4,12,6,9};$/;"	m	class:CorrectL1XE50toZB
+ComputeL1XE30toZBEfficiency	Compute_L1XE30_Efficiency/ComputeL1XE30toZBEfficiency.h	/^   ComputeL1XE30toZBEfficiency(TTree * =0) { }$/;"	f	class:ComputeL1XE30toZBEfficiency
+ComputeL1XE30toZBEfficiency	Compute_L1XE30_Efficiency/ComputeL1XE30toZBEfficiency.h	/^class ComputeL1XE30toZBEfficiency : public TSelector {$/;"	c
+ComputeL1XE30toZBEfficiency_cxx	Compute_L1XE30_Efficiency/ComputeL1XE30toZBEfficiency.C	1;"	d	file:
+ComputeL1XE30toZBEfficiency_h	Compute_L1XE30_Efficiency/ComputeL1XE30toZBEfficiency.h	9;"	d
+ComputeL1XE50toL1XE30Efficiency	Compute_L1XE50_L1XE30_Efficiency/ComputeL1XE50toL1XE30Efficiency.h	/^   ComputeL1XE50toL1XE30Efficiency(TTree * =0) { }$/;"	f	class:ComputeL1XE50toL1XE30Efficiency
+ComputeL1XE50toL1XE30Efficiency	Compute_L1XE50_L1XE30_Efficiency/ComputeL1XE50toL1XE30Efficiency.h	/^class ComputeL1XE50toL1XE30Efficiency : public TSelector {$/;"	c
+ComputeL1XE50toL1XE30Efficiency_h	Compute_L1XE50_L1XE30_Efficiency/ComputeL1XE50toL1XE30Efficiency.h	9;"	d
+ComputeWeight	CorrectL1XE30toZB/CorrectL1XE30toZB.C	/^Double_t CorrectL1XE30toZB::ComputeWeight(TF1* fitFunc)\/\/{{{$/;"	f	class:CorrectL1XE30toZB
+ComputeWeight	CorrectL1XE50toZB/CorrectL1XE50toZB.C	/^Double_t CorrectL1XE50toZB::ComputeWeight(TF1* fitFunc , TF1* fitFunc2)\/\/{{{$/;"	f	class:CorrectL1XE50toZB
+CorrectL1XE30toZB	CorrectL1XE30toZB/CorrectL1XE30toZB.h	/^   CorrectL1XE30toZB(TTree * \/*tree*\/ =0) { }\/\/{{{$/;"	f	class:CorrectL1XE30toZB
+CorrectL1XE30toZB	CorrectL1XE30toZB/CorrectL1XE30toZB.h	/^class CorrectL1XE30toZB : public TSelector {$/;"	c
+CorrectL1XE30toZB_cxx	CorrectL1XE30toZB/CorrectL1XE30toZB.C	1;"	d	file:
+CorrectL1XE30toZB_h	CorrectL1XE30toZB/CorrectL1XE30toZB.h	8;"	d
+CorrectL1XE50ToZB_h	CorrectL1XE50toZB/CorrectL1XE50toZB.h	8;"	d
+CorrectL1XE50toZB	CorrectL1XE50toZB/CorrectL1XE50toZB.h	/^   CorrectL1XE50toZB(TTree * \/*tree*\/ =0) { }$/;"	f	class:CorrectL1XE50toZB
+CorrectL1XE50toZB	CorrectL1XE50toZB/CorrectL1XE50toZB.h	/^class CorrectL1XE50toZB : public TSelector {$/;"	c
+CorrectL1XE50toZB_cxx	CorrectL1XE50toZB/CorrectL1XE50toZB.C	1;"	d	file:
+Corrected_MET_Distributions	CorrectL1XE30toZB/CorrectL1XE30toZB.h	/^    TH1F* Corrected_MET_Distributions[Number_Mu_Bins];$/;"	m	class:CorrectL1XE30toZB
+Corrected_MET_Distributions	CorrectL1XE50toZB/CorrectL1XE50toZB.h	/^   TH1F* Corrected_MET_Distributions[Number_Mu_Bins];$/;"	m	class:CorrectL1XE50toZB
 EventNumber	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<ULong64_t> EventNumber = {fReader, "EventNumber"};$/;"	m	class:Jburr_Template_Selector
-EventNumber	L1XE30toL1XE50/plotl130dists/PlotMETDistsVersMu.h	/^   TTreeReaderValue<ULong64_t> EventNumber = {fReader, "EventNumber"};$/;"	m	class:PlotMETDistsVersMu
-EventNumber	zbToL1XE30/plotMETDistsVersusMu/PlotMETDistsVersMu.h	/^   TTreeReaderValue<ULong64_t> EventNumber = {fReader, "EventNumber"};$/;"	m	class:PlotMETDistsVersMu
-FillFunc	zbToL1XE30/Plot_Between_Fits/fa2.C	/^Double_t FillFunc(double x)$/;"	f
-GetEfficiency	zbToL1XE30/plotMETDistsVersusMu/PlotMETDistsVersMu.C	/^TEfficiency* PlotMETDistsVersMu::GetEfficiency(){$/;"	f	class:PlotMETDistsVersMu
+EventNumber	Compute_L1XE30_Efficiency/ComputeL1XE30toZBEfficiency.h	/^   TTreeReaderValue<ULong64_t> EventNumber = {fReader, "EventNumber"};$/;"	m	class:ComputeL1XE30toZBEfficiency
+EventNumber	Compute_L1XE50_L1XE30_Efficiency/ComputeL1XE50toL1XE30Efficiency.h	/^   TTreeReaderValue<ULong64_t> EventNumber = {fReader, "EventNumber"};$/;"	m	class:ComputeL1XE50toL1XE30Efficiency
+EventNumber	old_correction/plotl130dists/BuildEfficiencyL150.h	/^   TTreeReaderValue<ULong64_t> EventNumber = {fReader, "EventNumber"};$/;"	m	class:BuildEfficiencyL150
+FillFunc	Plot_Between_Fits/fa2.C	/^Double_t FillFunc(double x)$/;"	f
 GetEntry	BurrTemplateSelector/Jburr_Template_Selector.h	/^   virtual Int_t   GetEntry(Long64_t entry, Int_t getall = 0) { return fChain ? fChain->GetTree()->GetEntry(entry, getall) : 0; }$/;"	f	class:Jburr_Template_Selector
-GetEntry	CorrectAllTheWay/CorrectingDistributions.h	/^   virtual Int_t   GetEntry(Long64_t entry, Int_t getall = 0) { return fChain ? fChain->GetTree()->GetEntry(entry, getall) : 0; }$/;"	f	class:CorrectingDistributions
-GetEntry	L1XE30toL1XE50/performL130to50Correction/CorrectingDistributions.h	/^   virtual Int_t   GetEntry(Long64_t entry, Int_t getall = 0) { return fChain ? fChain->GetTree()->GetEntry(entry, getall) : 0; }$/;"	f	class:CorrectingDistributions
-GetEntry	L1XE30toL1XE50/plotl130dists/PlotMETDistsVersMu.h	/^   virtual Int_t   GetEntry(Long64_t entry, Int_t getall = 0) { return fChain ? fChain->GetTree()->GetEntry(entry, getall) : 0; }$/;"	f	class:PlotMETDistsVersMu
-GetEntry	zbToL1XE30/PerformCorrection/CorrectingDistributions.h	/^   virtual Int_t   GetEntry(Long64_t entry, Int_t getall = 0) { return fChain ? fChain->GetTree()->GetEntry(entry, getall) : 0; }$/;"	f	class:CorrectingDistributions
-GetEntry	zbToL1XE30/plotMETDistsVersusMu/PlotMETDistsVersMu.h	/^   virtual Int_t   GetEntry(Long64_t entry, Int_t getall = 0) { return fChain ? fChain->GetTree()->GetEntry(entry, getall) : 0; }$/;"	f	class:PlotMETDistsVersMu
+GetEntry	Compute_L1XE30_Efficiency/ComputeL1XE30toZBEfficiency.h	/^   virtual Int_t   GetEntry(Long64_t entry, Int_t getall = 0) { return fChain ? fChain->GetTree()->GetEntry(entry, getall) : 0; }$/;"	f	class:ComputeL1XE30toZBEfficiency
+GetEntry	Compute_L1XE50_L1XE30_Efficiency/ComputeL1XE50toL1XE30Efficiency.h	/^   virtual Int_t   GetEntry(Long64_t entry, Int_t getall = 0) { return fChain ? fChain->GetTree()->GetEntry(entry, getall) : 0; }$/;"	f	class:ComputeL1XE50toL1XE30Efficiency
+GetEntry	CorrectL1XE30toZB/CorrectL1XE30toZB.h	/^   virtual Int_t   GetEntry(Long64_t entry, Int_t getall = 0) { return fChain ? fChain->GetTree()->GetEntry(entry, getall) : 0; }$/;"	f	class:CorrectL1XE30toZB
+GetEntry	CorrectL1XE50toZB/CorrectL1XE50toZB.h	/^   virtual Int_t   GetEntry(Long64_t entry, Int_t getall = 0) { return fChain ? fChain->GetTree()->GetEntry(entry, getall) : 0; }$/;"	f	class:CorrectL1XE50toZB
+GetEntry	old_correction/plotl130dists/BuildEfficiencyL150.h	/^   virtual Int_t   GetEntry(Long64_t entry, Int_t getall = 0) { return fChain ? fChain->GetTree()->GetEntry(entry, getall) : 0; }$/;"	f	class:BuildEfficiencyL150
 GetOutputList	BurrTemplateSelector/Jburr_Template_Selector.h	/^   virtual TList  *GetOutputList() const { return fOutput; }$/;"	f	class:Jburr_Template_Selector
-GetOutputList	CorrectAllTheWay/CorrectingDistributions.h	/^   virtual TList  *GetOutputList() const { return fOutput; }$/;"	f	class:CorrectingDistributions
-GetOutputList	L1XE30toL1XE50/performL130to50Correction/CorrectingDistributions.h	/^   virtual TList  *GetOutputList() const { return fOutput; }$/;"	f	class:CorrectingDistributions
-GetOutputList	L1XE30toL1XE50/plotl130dists/PlotMETDistsVersMu.h	/^   virtual TList  *GetOutputList() const { return fOutput; }$/;"	f	class:PlotMETDistsVersMu
-GetOutputList	zbToL1XE30/PerformCorrection/CorrectingDistributions.h	/^   virtual TList  *GetOutputList() const { return fOutput; }$/;"	f	class:CorrectingDistributions
-GetOutputList	zbToL1XE30/plotMETDistsVersusMu/PlotMETDistsVersMu.h	/^   virtual TList  *GetOutputList() const { return fOutput; }$/;"	f	class:PlotMETDistsVersMu
+GetOutputList	Compute_L1XE30_Efficiency/ComputeL1XE30toZBEfficiency.h	/^   virtual TList  *GetOutputList() const { return fOutput; }$/;"	f	class:ComputeL1XE30toZBEfficiency
+GetOutputList	Compute_L1XE50_L1XE30_Efficiency/ComputeL1XE50toL1XE30Efficiency.h	/^   virtual TList  *GetOutputList() const { return fOutput; }$/;"	f	class:ComputeL1XE50toL1XE30Efficiency
+GetOutputList	CorrectL1XE30toZB/CorrectL1XE30toZB.h	/^   virtual TList  *GetOutputList() const { return fOutput; }$/;"	f	class:CorrectL1XE30toZB
+GetOutputList	CorrectL1XE50toZB/CorrectL1XE50toZB.h	/^   virtual TList  *GetOutputList() const { return fOutput; }$/;"	f	class:CorrectL1XE50toZB
+GetOutputList	old_correction/plotl130dists/BuildEfficiencyL150.h	/^   virtual TList  *GetOutputList() const { return fOutput; }$/;"	f	class:BuildEfficiencyL150
 HInvEle_pass	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Bool_t> HInvEle_pass = {fReader, "HInvEle.pass"};$/;"	m	class:Jburr_Template_Selector
 HInvMuon_pass	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Bool_t> HInvMuon_pass = {fReader, "HInvMuon.pass"};$/;"	m	class:Jburr_Template_Selector
 HLT_2e12_lhvloose_nod0_L12EM10VH_passBits	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<UInt_t> HLT_2e12_lhvloose_nod0_L12EM10VH_passBits = {fReader, "HLT_2e12_lhvloose_nod0_L12EM10VH.passBits"};$/;"	m	class:Jburr_Template_Selector
@@ -203,14 +197,14 @@ HLT_noalg_L1XE20_passed	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTre
 HLT_noalg_L1XE20_prescale	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Float_t> HLT_noalg_L1XE20_prescale = {fReader, "HLT_noalg_L1XE20.prescale"};$/;"	m	class:Jburr_Template_Selector
 HLT_noalg_L1XE30_passBits	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<UInt_t> HLT_noalg_L1XE30_passBits = {fReader, "HLT_noalg_L1XE30.passBits"};$/;"	m	class:Jburr_Template_Selector
 HLT_noalg_L1XE30_passed	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Bool_t> HLT_noalg_L1XE30_passed = {fReader, "HLT_noalg_L1XE30.passed"};$/;"	m	class:Jburr_Template_Selector
-HLT_noalg_L1XE30_passed	CorrectAllTheWay/CorrectingDistributions.h	/^   TTreeReaderValue<Bool_t> HLT_noalg_L1XE30_passed = {fReader, "HLT_noalg_L1XE30.passed"};$/;"	m	class:CorrectingDistributions
-HLT_noalg_L1XE30_passed	L1XE30toL1XE50/plotl130dists/PlotMETDistsVersMu.h	/^   TTreeReaderValue<Bool_t> HLT_noalg_L1XE30_passed = {fReader, "HLT_noalg_L1XE30.passed"};$/;"	m	class:PlotMETDistsVersMu
-HLT_noalg_L1XE30_passed	zbToL1XE30/PerformCorrection/CorrectingDistributions.h	/^   TTreeReaderValue<Bool_t> HLT_noalg_L1XE30_passed = {fReader, "HLT_noalg_L1XE30.passed"};$/;"	m	class:CorrectingDistributions
-HLT_noalg_L1XE30_passed	zbToL1XE30/plotMETDistsVersusMu/PlotMETDistsVersMu.h	/^   TTreeReaderValue<Bool_t> HLT_noalg_L1XE30_passed = {fReader, "HLT_noalg_L1XE30.passed"};$/;"	m	class:PlotMETDistsVersMu
+HLT_noalg_L1XE30_passed	Compute_L1XE30_Efficiency/ComputeL1XE30toZBEfficiency.h	/^   TTreeReaderValue<Bool_t> HLT_noalg_L1XE30_passed = {fReader, "HLT_noalg_L1XE30.passed"};$/;"	m	class:ComputeL1XE30toZBEfficiency
+HLT_noalg_L1XE30_passed	Compute_L1XE50_L1XE30_Efficiency/ComputeL1XE50toL1XE30Efficiency.h	/^   TTreeReaderValue<Bool_t> HLT_noalg_L1XE30_passed = {fReader, "HLT_noalg_L1XE30.passed"};$/;"	m	class:ComputeL1XE50toL1XE30Efficiency
+HLT_noalg_L1XE30_passed	CorrectL1XE30toZB/CorrectL1XE30toZB.h	/^   TTreeReaderValue<Bool_t> HLT_noalg_L1XE30_passed = {fReader, "HLT_noalg_L1XE30.passed"};$/;"	m	class:CorrectL1XE30toZB
+HLT_noalg_L1XE30_passed	old_correction/plotl130dists/BuildEfficiencyL150.h	/^   TTreeReaderValue<Bool_t> HLT_noalg_L1XE30_passed = {fReader, "HLT_noalg_L1XE30.passed"};$/;"	m	class:BuildEfficiencyL150
 HLT_noalg_L1XE30_prescale	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Float_t> HLT_noalg_L1XE30_prescale = {fReader, "HLT_noalg_L1XE30.prescale"};$/;"	m	class:Jburr_Template_Selector
-HLT_noalg_L1XE30_prescale	CorrectAllTheWay/CorrectingDistributions.h	/^   TTreeReaderValue<Float_t> HLT_noalg_L1XE30_prescale = {fReader, "HLT_noalg_L1XE30.prescale"};$/;"	m	class:CorrectingDistributions
-HLT_noalg_L1XE30_prescale	L1XE30toL1XE50/plotl130dists/PlotMETDistsVersMu.h	/^   TTreeReaderValue<Float_t> HLT_noalg_L1XE30_prescale = {fReader, "HLT_noalg_L1XE30.prescale"};$/;"	m	class:PlotMETDistsVersMu
-HLT_noalg_L1XE30_prescale	zbToL1XE30/PerformCorrection/CorrectingDistributions.h	/^   TTreeReaderValue<Float_t> HLT_noalg_L1XE30_prescale = {fReader, "HLT_noalg_L1XE30.prescale"};$/;"	m	class:CorrectingDistributions
+HLT_noalg_L1XE30_prescale	Compute_L1XE50_L1XE30_Efficiency/ComputeL1XE50toL1XE30Efficiency.h	/^   TTreeReaderValue<Float_t> HLT_noalg_L1XE30_prescale = {fReader, "HLT_noalg_L1XE30.prescale"};$/;"	m	class:ComputeL1XE50toL1XE30Efficiency
+HLT_noalg_L1XE30_prescale	CorrectL1XE30toZB/CorrectL1XE30toZB.h	/^   TTreeReaderValue<Float_t> HLT_noalg_L1XE30_prescale = {fReader, "HLT_noalg_L1XE30.prescale"};\/\/}}}$/;"	m	class:CorrectL1XE30toZB
+HLT_noalg_L1XE30_prescale	old_correction/plotl130dists/BuildEfficiencyL150.h	/^   TTreeReaderValue<Float_t> HLT_noalg_L1XE30_prescale = {fReader, "HLT_noalg_L1XE30.prescale"};$/;"	m	class:BuildEfficiencyL150
 HLT_noalg_L1XE40_passBits	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<UInt_t> HLT_noalg_L1XE40_passBits = {fReader, "HLT_noalg_L1XE40.passBits"};$/;"	m	class:Jburr_Template_Selector
 HLT_noalg_L1XE40_passed	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Bool_t> HLT_noalg_L1XE40_passed = {fReader, "HLT_noalg_L1XE40.passed"};$/;"	m	class:Jburr_Template_Selector
 HLT_noalg_L1XE40_prescale	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Float_t> HLT_noalg_L1XE40_prescale = {fReader, "HLT_noalg_L1XE40.prescale"};$/;"	m	class:Jburr_Template_Selector
@@ -219,17 +213,17 @@ HLT_noalg_L1XE45_passed	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTre
 HLT_noalg_L1XE45_prescale	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Float_t> HLT_noalg_L1XE45_prescale = {fReader, "HLT_noalg_L1XE45.prescale"};$/;"	m	class:Jburr_Template_Selector
 HLT_noalg_zb_L1ZB_passBits	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<UInt_t> HLT_noalg_zb_L1ZB_passBits = {fReader, "HLT_noalg_zb_L1ZB.passBits"};$/;"	m	class:Jburr_Template_Selector
 HLT_noalg_zb_L1ZB_passed	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Bool_t> HLT_noalg_zb_L1ZB_passed = {fReader, "HLT_noalg_zb_L1ZB.passed"};$/;"	m	class:Jburr_Template_Selector
-HLT_noalg_zb_L1ZB_passed	CorrectAllTheWay/CorrectingDistributions.h	/^   TTreeReaderValue<Bool_t> HLT_noalg_zb_L1ZB_passed = {fReader, "HLT_noalg_zb_L1ZB.passed"};$/;"	m	class:CorrectingDistributions
-HLT_noalg_zb_L1ZB_passed	L1XE30toL1XE50/performL130to50Correction/CorrectingDistributions.h	/^   TTreeReaderValue<Bool_t> HLT_noalg_zb_L1ZB_passed = {fReader, "HLT_noalg_zb_L1ZB.passed"};$/;"	m	class:CorrectingDistributions
-HLT_noalg_zb_L1ZB_passed	L1XE30toL1XE50/plotl130dists/PlotMETDistsVersMu.h	/^   TTreeReaderValue<Bool_t> HLT_noalg_zb_L1ZB_passed = {fReader, "HLT_noalg_zb_L1ZB.passed"};$/;"	m	class:PlotMETDistsVersMu
-HLT_noalg_zb_L1ZB_passed	zbToL1XE30/PerformCorrection/CorrectingDistributions.h	/^   TTreeReaderValue<Bool_t> HLT_noalg_zb_L1ZB_passed = {fReader, "HLT_noalg_zb_L1ZB.passed"};$/;"	m	class:CorrectingDistributions
-HLT_noalg_zb_L1ZB_passed	zbToL1XE30/plotMETDistsVersusMu/PlotMETDistsVersMu.h	/^   TTreeReaderValue<Bool_t> HLT_noalg_zb_L1ZB_passed = {fReader, "HLT_noalg_zb_L1ZB.passed"};$/;"	m	class:PlotMETDistsVersMu
+HLT_noalg_zb_L1ZB_passed	Compute_L1XE30_Efficiency/ComputeL1XE30toZBEfficiency.h	/^   TTreeReaderValue<Bool_t> HLT_noalg_zb_L1ZB_passed = {fReader, "HLT_noalg_zb_L1ZB.passed"};$/;"	m	class:ComputeL1XE30toZBEfficiency
+HLT_noalg_zb_L1ZB_passed	Compute_L1XE50_L1XE30_Efficiency/ComputeL1XE50toL1XE30Efficiency.h	/^   TTreeReaderValue<Bool_t> HLT_noalg_zb_L1ZB_passed = {fReader, "HLT_noalg_zb_L1ZB.passed"};$/;"	m	class:ComputeL1XE50toL1XE30Efficiency
+HLT_noalg_zb_L1ZB_passed	CorrectL1XE30toZB/CorrectL1XE30toZB.h	/^   TTreeReaderValue<Bool_t> HLT_noalg_zb_L1ZB_passed = {fReader, "HLT_noalg_zb_L1ZB.passed"};$/;"	m	class:CorrectL1XE30toZB
+HLT_noalg_zb_L1ZB_passed	CorrectL1XE50toZB/CorrectL1XE50toZB.h	/^   TTreeReaderValue<Bool_t> HLT_noalg_zb_L1ZB_passed = {fReader, "HLT_noalg_zb_L1ZB.passed"};$/;"	m	class:CorrectL1XE50toZB
+HLT_noalg_zb_L1ZB_passed	old_correction/plotl130dists/BuildEfficiencyL150.h	/^   TTreeReaderValue<Bool_t> HLT_noalg_zb_L1ZB_passed = {fReader, "HLT_noalg_zb_L1ZB.passed"};$/;"	m	class:BuildEfficiencyL150
 HLT_noalg_zb_L1ZB_prescale	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Float_t> HLT_noalg_zb_L1ZB_prescale = {fReader, "HLT_noalg_zb_L1ZB.prescale"};$/;"	m	class:Jburr_Template_Selector
-HLT_noalg_zb_L1ZB_prescale	CorrectAllTheWay/CorrectingDistributions.h	/^   TTreeReaderValue<Float_t> HLT_noalg_zb_L1ZB_prescale = {fReader, "HLT_noalg_zb_L1ZB.prescale"};$/;"	m	class:CorrectingDistributions
-HLT_noalg_zb_L1ZB_prescale	L1XE30toL1XE50/performL130to50Correction/CorrectingDistributions.h	/^   TTreeReaderValue<Float_t> HLT_noalg_zb_L1ZB_prescale = {fReader, "HLT_noalg_zb_L1ZB.prescale"};$/;"	m	class:CorrectingDistributions
-HLT_noalg_zb_L1ZB_prescale	L1XE30toL1XE50/plotl130dists/PlotMETDistsVersMu.h	/^   TTreeReaderValue<Float_t> HLT_noalg_zb_L1ZB_prescale = {fReader, "HLT_noalg_zb_L1ZB.prescale"};$/;"	m	class:PlotMETDistsVersMu
-HLT_noalg_zb_L1ZB_prescale	zbToL1XE30/PerformCorrection/CorrectingDistributions.h	/^   TTreeReaderValue<Float_t> HLT_noalg_zb_L1ZB_prescale = {fReader, "HLT_noalg_zb_L1ZB.prescale"};$/;"	m	class:CorrectingDistributions
-HLT_noalg_zb_L1ZB_prescale	zbToL1XE30/plotMETDistsVersusMu/PlotMETDistsVersMu.h	/^   TTreeReaderValue<Float_t> HLT_noalg_zb_L1ZB_prescale = {fReader, "HLT_noalg_zb_L1ZB.prescale"};$/;"	m	class:PlotMETDistsVersMu
+HLT_noalg_zb_L1ZB_prescale	Compute_L1XE30_Efficiency/ComputeL1XE30toZBEfficiency.h	/^   TTreeReaderValue<Float_t> HLT_noalg_zb_L1ZB_prescale = {fReader, "HLT_noalg_zb_L1ZB.prescale"};$/;"	m	class:ComputeL1XE30toZBEfficiency
+HLT_noalg_zb_L1ZB_prescale	Compute_L1XE50_L1XE30_Efficiency/ComputeL1XE50toL1XE30Efficiency.h	/^   TTreeReaderValue<Float_t> HLT_noalg_zb_L1ZB_prescale = {fReader, "HLT_noalg_zb_L1ZB.prescale"};$/;"	m	class:ComputeL1XE50toL1XE30Efficiency
+HLT_noalg_zb_L1ZB_prescale	CorrectL1XE30toZB/CorrectL1XE30toZB.h	/^   TTreeReaderValue<Float_t> HLT_noalg_zb_L1ZB_prescale = {fReader, "HLT_noalg_zb_L1ZB.prescale"};$/;"	m	class:CorrectL1XE30toZB
+HLT_noalg_zb_L1ZB_prescale	CorrectL1XE50toZB/CorrectL1XE50toZB.h	/^   TTreeReaderValue<Float_t> HLT_noalg_zb_L1ZB_prescale = {fReader, "HLT_noalg_zb_L1ZB.prescale"};$/;"	m	class:CorrectL1XE50toZB
+HLT_noalg_zb_L1ZB_prescale	old_correction/plotl130dists/BuildEfficiencyL150.h	/^   TTreeReaderValue<Float_t> HLT_noalg_zb_L1ZB_prescale = {fReader, "HLT_noalg_zb_L1ZB.prescale"};$/;"	m	class:BuildEfficiencyL150
 HLT_xe100_pufit_L1XE50_passBits	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<UInt_t> HLT_xe100_pufit_L1XE50_passBits = {fReader, "HLT_xe100_pufit_L1XE50.passBits"};$/;"	m	class:Jburr_Template_Selector
 HLT_xe100_pufit_L1XE50_passed	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Bool_t> HLT_xe100_pufit_L1XE50_passed = {fReader, "HLT_xe100_pufit_L1XE50.passed"};$/;"	m	class:Jburr_Template_Selector
 HLT_xe100_pufit_L1XE50_prescale	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Float_t> HLT_xe100_pufit_L1XE50_prescale = {fReader, "HLT_xe100_pufit_L1XE50.prescale"};$/;"	m	class:Jburr_Template_Selector
@@ -245,30 +239,41 @@ HLT_xe120_mht_xe80_L1XE50_prescale	BurrTemplateSelector/Jburr_Template_Selector.
 HLT_xe120_mht_xe80_L1XE55_passBits	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<UInt_t> HLT_xe120_mht_xe80_L1XE55_passBits = {fReader, "HLT_xe120_mht_xe80_L1XE55.passBits"};$/;"	m	class:Jburr_Template_Selector
 HLT_xe120_mht_xe80_L1XE55_passed	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Bool_t> HLT_xe120_mht_xe80_L1XE55_passed = {fReader, "HLT_xe120_mht_xe80_L1XE55.passed"};$/;"	m	class:Jburr_Template_Selector
 HLT_xe120_mht_xe80_L1XE55_prescale	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Float_t> HLT_xe120_mht_xe80_L1XE55_prescale = {fReader, "HLT_xe120_mht_xe80_L1XE55.prescale"};$/;"	m	class:Jburr_Template_Selector
-HighlightTeff	zbToL1XE30/PlotParametersVsMu/PlotParameterVals.cpp	/^void HighlightTeff( TVirtualPad *pad , TObject *obj , Int_t ihp , Int_t y){$/;"	f
+HighlightTeff	PlotParametersVsMu/PlotParameterVals.cpp	/^void HighlightTeff( TVirtualPad *pad , TObject *obj , Int_t ihp , Int_t y){$/;"	f
 InTimePileup	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Float_t> InTimePileup = {fReader, "InTimePileup"};$/;"	m	class:Jburr_Template_Selector
-InTimePileup	CorrectAllTheWay/CorrectingDistributions.h	/^   TTreeReaderValue<Float_t> InTimePileup = {fReader, "InTimePileup"};$/;"	m	class:CorrectingDistributions
-InTimePileup	L1XE30toL1XE50/performL130to50Correction/CorrectingDistributions.h	/^   TTreeReaderValue<Float_t> InTimePileup = {fReader, "InTimePileup"};$/;"	m	class:CorrectingDistributions
-InTimePileup	L1XE30toL1XE50/plotl130dists/PlotMETDistsVersMu.h	/^   TTreeReaderValue<Float_t> InTimePileup = {fReader, "InTimePileup"};$/;"	m	class:PlotMETDistsVersMu
-InTimePileup	zbToL1XE30/PerformCorrection/CorrectingDistributions.h	/^   TTreeReaderValue<Float_t> InTimePileup = {fReader, "InTimePileup"};$/;"	m	class:CorrectingDistributions
-InTimePileup	zbToL1XE30/plotMETDistsVersusMu/PlotMETDistsVersMu.h	/^   TTreeReaderValue<Float_t> InTimePileup = {fReader, "InTimePileup"};$/;"	m	class:PlotMETDistsVersMu
+InTimePileup	Compute_L1XE30_Efficiency/ComputeL1XE30toZBEfficiency.h	/^   TTreeReaderValue<Float_t> InTimePileup = {fReader, "InTimePileup"};$/;"	m	class:ComputeL1XE30toZBEfficiency
+InTimePileup	Compute_L1XE50_L1XE30_Efficiency/ComputeL1XE50toL1XE30Efficiency.h	/^   TTreeReaderValue<Float_t> InTimePileup = {fReader, "InTimePileup"};$/;"	m	class:ComputeL1XE50toL1XE30Efficiency
+InTimePileup	CorrectL1XE30toZB/CorrectL1XE30toZB.h	/^   TTreeReaderValue<Float_t> InTimePileup = {fReader, "InTimePileup"};$/;"	m	class:CorrectL1XE30toZB
+InTimePileup	CorrectL1XE50toZB/CorrectL1XE50toZB.h	/^   TTreeReaderValue<Float_t> InTimePileup = {fReader, "InTimePileup"};$/;"	m	class:CorrectL1XE50toZB
+InTimePileup	old_correction/plotl130dists/BuildEfficiencyL150.h	/^   TTreeReaderValue<Float_t> InTimePileup = {fReader, "InTimePileup"};$/;"	m	class:BuildEfficiencyL150
 Init	BurrTemplateSelector/Jburr_Template_Selector.h	/^void Jburr_Template_Selector::Init(TTree *tree)$/;"	f	class:Jburr_Template_Selector
-Init	CorrectAllTheWay/CorrectingDistributions.C	/^void CorrectingDistributions::Init(TTree *tree){fReader.SetTree(tree);}$/;"	f	class:CorrectingDistributions
-Init	L1XE30toL1XE50/performL130to50Correction/CorrectingDistributions.C	/^void CorrectingDistributions::Init(TTree *tree){fReader.SetTree(tree);}$/;"	f	class:CorrectingDistributions
-Init	L1XE30toL1XE50/plotl130dists/PlotMETDistsVersMu.C	/^void PlotMETDistsVersMu::Init(TTree *tree) \/\/{{{$/;"	f	class:PlotMETDistsVersMu
-Init	zbToL1XE30/PerformCorrection/CorrectingDistributions.C	/^void CorrectingDistributions::Init(TTree *tree){fReader.SetTree(tree);}$/;"	f	class:CorrectingDistributions
-Init	zbToL1XE30/plotMETDistsVersusMu/PlotMETDistsVersMu.C	/^void PlotMETDistsVersMu::Init(TTree *tree) \/\/{{{$/;"	f	class:PlotMETDistsVersMu
+Init	Compute_L1XE30_Efficiency/ComputeL1XE30toZBEfficiency.C	/^void ComputeL1XE30toZBEfficiency::Init(TTree *tree) \/\/{{{$/;"	f	class:ComputeL1XE30toZBEfficiency
+Init	Compute_L1XE50_L1XE30_Efficiency/ComputeL1XE50toL1XE30Efficiency.C	/^void ComputeL1XE50toL1XE30Efficiency::Init(TTree *tree) \/\/{{{$/;"	f	class:ComputeL1XE50toL1XE30Efficiency
+Init	CorrectL1XE30toZB/CorrectL1XE30toZB.C	/^void CorrectL1XE30toZB::Init(TTree *tree){fReader.SetTree(tree);}$/;"	f	class:CorrectL1XE30toZB
+Init	CorrectL1XE50toZB/CorrectL1XE50toZB.C	/^void CorrectL1XE50toZB::Init(TTree *tree){fReader.SetTree(tree);}$/;"	f	class:CorrectL1XE50toZB
+Init	old_correction/plotl130dists/BuildEfficiencyL150.C	/^void BuildEfficiencyL150::Init(TTree *tree) \/\/{{{$/;"	f	class:BuildEfficiencyL150
 Jburr_Template_Selector	BurrTemplateSelector/Jburr_Template_Selector.h	/^   Jburr_Template_Selector(TTree * \/*tree*\/ =0) { }$/;"	f	class:Jburr_Template_Selector
 Jburr_Template_Selector	BurrTemplateSelector/Jburr_Template_Selector.h	/^class Jburr_Template_Selector : public TSelector {$/;"	c
 Jburr_Template_Selector_cxx	BurrTemplateSelector/Jburr_Template_Selector.C	1;"	d	file:
 Jburr_Template_Selector_h	BurrTemplateSelector/Jburr_Template_Selector.h	9;"	d
-L1_MET	L1XE30toL1XE50/plotl130dists/PlotMETDistsVersMu.h	/^   TTreeReaderValue<Float_t> L1_MET = {fReader, l1_alg_name};$/;"	m	class:PlotMETDistsVersMu
-L1_MET	zbToL1XE30/plotMETDistsVersusMu/PlotMETDistsVersMu.h	/^   TTreeReaderValue<Float_t> L1_MET = {fReader, l1_alg_name};$/;"	m	class:PlotMETDistsVersMu
+L1XE30_Efficiency_Fit_Objects	Compute_L1XE30_Efficiency/ComputeL1XE30toZBEfficiency.h	/^   TF1* L1XE30_Efficiency_Fit_Objects[Number_Mu_Bins];$/;"	m	class:ComputeL1XE30toZBEfficiency
+L1XE30_Efficiency_Fit_Objects	CorrectL1XE30toZB/CorrectL1XE30toZB.h	/^    TF1* L1XE30_Efficiency_Fit_Objects[Number_Mu_Bins];$/;"	m	class:CorrectL1XE30toZB
+L1XE30_Efficiency_Fit_Objects	CorrectL1XE50toZB/CorrectL1XE50toZB.h	/^   TF1* L1XE30_Efficiency_Fit_Objects[Number_Mu_Bins];$/;"	m	class:CorrectL1XE50toZB
+L1XE30_Efficiency_Objects	Compute_L1XE30_Efficiency/ComputeL1XE30toZBEfficiency.h	/^   TEfficiency* L1XE30_Efficiency_Objects[Number_Mu_Bins];$/;"	m	class:ComputeL1XE30toZBEfficiency
+L1XE30_Efficiency_Objects	CorrectL1XE30toZB/CorrectL1XE30toZB.h	/^    TEfficiency* L1XE30_Efficiency_Objects[Number_Mu_Bins];$/;"	m	class:CorrectL1XE30toZB
+L1XE30_Efficiency_Objects	CorrectL1XE50toZB/CorrectL1XE50toZB.h	/^   TEfficiency* L1XE30_Efficiency_Objects[Number_Mu_Bins];$/;"	m	class:CorrectL1XE50toZB
+L1XE50_Efficiency_Fit_Objects	Compute_L1XE50_L1XE30_Efficiency/ComputeL1XE50toL1XE30Efficiency.h	/^   TF1* L1XE50_Efficiency_Fit_Objects[Number_Mu_Bins];$/;"	m	class:ComputeL1XE50toL1XE30Efficiency
+L1XE50_Efficiency_Fit_Objects	CorrectL1XE50toZB/CorrectL1XE50toZB.h	/^   TF1* L1XE50_Efficiency_Fit_Objects[Number_Mu_Bins];$/;"	m	class:CorrectL1XE50toZB
+L1XE50_Efficiency_Objects	Compute_L1XE50_L1XE30_Efficiency/ComputeL1XE50toL1XE30Efficiency.h	/^   TEfficiency* L1XE50_Efficiency_Objects[Number_Mu_Bins];$/;"	m	class:ComputeL1XE50toL1XE30Efficiency
+L1XE50_Efficiency_Objects	CorrectL1XE50toZB/CorrectL1XE50toZB.h	/^   TEfficiency* L1XE50_Efficiency_Objects[Number_Mu_Bins];$/;"	m	class:CorrectL1XE50toZB
+L1_MET	Compute_L1XE30_Efficiency/ComputeL1XE30toZBEfficiency.h	/^   TTreeReaderValue<Float_t> L1_MET = {fReader, l1_alg_name};$/;"	m	class:ComputeL1XE30toZBEfficiency
+L1_MET	Compute_L1XE50_L1XE30_Efficiency/ComputeL1XE50toL1XE30Efficiency.h	/^   TTreeReaderValue<Float_t> L1_MET = {fReader, l1_alg_name};$/;"	m	class:ComputeL1XE50toL1XE30Efficiency
+L1_MET	old_correction/plotl130dists/BuildEfficiencyL150.h	/^   TTreeReaderValue<Float_t> L1_MET = {fReader, l1_alg_name};$/;"	m	class:BuildEfficiencyL150
 L1_XE50_passBits	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<UInt_t> L1_XE50_passBits = {fReader, "L1_XE50.passBits"};$/;"	m	class:Jburr_Template_Selector
 L1_XE50_passed	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Bool_t> L1_XE50_passed = {fReader, "L1_XE50.passed"};$/;"	m	class:Jburr_Template_Selector
-L1_XE50_passed	L1XE30toL1XE50/performL130to50Correction/CorrectingDistributions.h	/^   TTreeReaderValue<Bool_t> L1_XE50_passed = {fReader, "L1_XE50.passed"};$/;"	m	class:CorrectingDistributions
+L1_XE50_passed	CorrectL1XE50toZB/CorrectL1XE50toZB.h	/^   TTreeReaderValue<Bool_t> L1_XE50_passed = {fReader, "L1_XE50.passed"};$/;"	m	class:CorrectL1XE50toZB
 L1_XE50_prescale	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Float_t> L1_XE50_prescale = {fReader, "L1_XE50.prescale"};$/;"	m	class:Jburr_Template_Selector
-L1_XE50_prescale	L1XE30toL1XE50/performL130to50Correction/CorrectingDistributions.h	/^   TTreeReaderValue<Float_t> L1_XE50_prescale = {fReader, "L1_XE50.prescale"};$/;"	m	class:CorrectingDistributions
+L1_XE50_prescale	CorrectL1XE50toZB/CorrectL1XE50toZB.h	/^   TTreeReaderValue<Float_t> L1_XE50_prescale = {fReader, "L1_XE50.prescale"};$/;"	m	class:CorrectL1XE50toZB
 L1_XE55_passBits	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<UInt_t> L1_XE55_passBits = {fReader, "L1_XE55.passBits"};$/;"	m	class:Jburr_Template_Selector
 L1_XE55_passed	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Bool_t> L1_XE55_passed = {fReader, "L1_XE55.passed"};$/;"	m	class:Jburr_Template_Selector
 L1_XE55_prescale	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Float_t> L1_XE55_prescale = {fReader, "L1_XE55.prescale"};$/;"	m	class:Jburr_Template_Selector
@@ -276,362 +281,273 @@ L1_XE60_passBits	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReader
 L1_XE60_passed	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Bool_t> L1_XE60_passed = {fReader, "L1_XE60.passed"};$/;"	m	class:Jburr_Template_Selector
 L1_XE60_prescale	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Float_t> L1_XE60_prescale = {fReader, "L1_XE60.prescale"};$/;"	m	class:Jburr_Template_Selector
 L1_met	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Float_t> L1_met = {fReader, "L1.met"};$/;"	m	class:Jburr_Template_Selector
-L1_met	CorrectAllTheWay/CorrectingDistributions.h	/^   TTreeReaderValue<Float_t> L1_met = {fReader, "L1.met"};$/;"	m	class:CorrectingDistributions
-L1_met	L1XE30toL1XE50/performL130to50Correction/CorrectingDistributions.h	/^   TTreeReaderValue<Float_t> L1_met = {fReader, "L1.met"};$/;"	m	class:CorrectingDistributions
-L1_met	zbToL1XE30/PerformCorrection/CorrectingDistributions.h	/^   TTreeReaderValue<Float_t> L1_met = {fReader, "L1.met"};$/;"	m	class:CorrectingDistributions
+L1_met	CorrectL1XE30toZB/CorrectL1XE30toZB.h	/^   TTreeReaderValue<Float_t> L1_met = {fReader, "L1.met"};$/;"	m	class:CorrectL1XE30toZB
+L1_met	CorrectL1XE50toZB/CorrectL1XE50toZB.h	/^   TTreeReaderValue<Float_t> L1_met = {fReader, "L1.met"};$/;"	m	class:CorrectL1XE50toZB
 L1_mpx	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Float_t> L1_mpx = {fReader, "L1.mpx"};$/;"	m	class:Jburr_Template_Selector
 L1_mpy	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Float_t> L1_mpy = {fReader, "L1.mpy"};$/;"	m	class:Jburr_Template_Selector
 L1_phi	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Float_t> L1_phi = {fReader, "L1.phi"};$/;"	m	class:Jburr_Template_Selector
 L1_sumet	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Float_t> L1_sumet = {fReader, "L1.sumet"};$/;"	m	class:Jburr_Template_Selector
 LumiBlock	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<UInt_t> LumiBlock = {fReader, "LumiBlock"};$/;"	m	class:Jburr_Template_Selector
-MET_Algmu0thru10Efficiency	L1XE30toL1XE50/plotl130dists/PlotMETDistsVersMu.h	/^   TEfficiency*            MET_Algmu0thru10Efficiency = 0;$/;"	m	class:PlotMETDistsVersMu
-MET_Algmu0thru10Efficiency	zbToL1XE30/plotMETDistsVersusMu/PlotMETDistsVersMu.h	/^   TEfficiency*            MET_Algmu0thru10Efficiency = 0;$/;"	m	class:PlotMETDistsVersMu
-MET_Algmu10thru20Efficiency	L1XE30toL1XE50/plotl130dists/PlotMETDistsVersMu.h	/^   TEfficiency*            MET_Algmu10thru20Efficiency = 0;$/;"	m	class:PlotMETDistsVersMu
-MET_Algmu10thru20Efficiency	zbToL1XE30/plotMETDistsVersusMu/PlotMETDistsVersMu.h	/^   TEfficiency*            MET_Algmu10thru20Efficiency = 0;$/;"	m	class:PlotMETDistsVersMu
-MET_Algmu20thru30Efficiency	L1XE30toL1XE50/plotl130dists/PlotMETDistsVersMu.h	/^   TEfficiency*            MET_Algmu20thru30Efficiency = 0;$/;"	m	class:PlotMETDistsVersMu
-MET_Algmu20thru30Efficiency	zbToL1XE30/plotMETDistsVersusMu/PlotMETDistsVersMu.h	/^   TEfficiency*            MET_Algmu20thru30Efficiency = 0;$/;"	m	class:PlotMETDistsVersMu
-MET_Algmu30thru40Efficiency	L1XE30toL1XE50/plotl130dists/PlotMETDistsVersMu.h	/^   TEfficiency*            MET_Algmu30thru40Efficiency = 0;$/;"	m	class:PlotMETDistsVersMu
-MET_Algmu30thru40Efficiency	zbToL1XE30/plotMETDistsVersusMu/PlotMETDistsVersMu.h	/^   TEfficiency*            MET_Algmu30thru40Efficiency = 0;$/;"	m	class:PlotMETDistsVersMu
-MET_Algmu40thru50Efficiency	L1XE30toL1XE50/plotl130dists/PlotMETDistsVersMu.h	/^   TEfficiency*            MET_Algmu40thru50Efficiency = 0;$/;"	m	class:PlotMETDistsVersMu
-MET_Algmu40thru50Efficiency	zbToL1XE30/plotMETDistsVersusMu/PlotMETDistsVersMu.h	/^   TEfficiency*            MET_Algmu40thru50Efficiency = 0;$/;"	m	class:PlotMETDistsVersMu
-MET_Algmu50thru60Efficiency	L1XE30toL1XE50/plotl130dists/PlotMETDistsVersMu.h	/^   TEfficiency*            MET_Algmu50thru60Efficiency = 0;$/;"	m	class:PlotMETDistsVersMu
-MET_Algmu50thru60Efficiency	zbToL1XE30/plotMETDistsVersusMu/PlotMETDistsVersMu.h	/^   TEfficiency*            MET_Algmu50thru60Efficiency = 0;$/;"	m	class:PlotMETDistsVersMu
-MET_Algmu60thru70Efficiency	L1XE30toL1XE50/plotl130dists/PlotMETDistsVersMu.h	/^   TEfficiency*            MET_Algmu60thru70Efficiency = 0;$/;"	m	class:PlotMETDistsVersMu
-MET_Algmu60thru70Efficiency	zbToL1XE30/plotMETDistsVersusMu/PlotMETDistsVersMu.h	/^   TEfficiency*            MET_Algmu60thru70Efficiency = 0;$/;"	m	class:PlotMETDistsVersMu
-MET_Correctedmu0thru10	CorrectAllTheWay/CorrectingDistributions.h	/^    TH1D*            MET_Correctedmu0thru10 = 0;$/;"	m	class:CorrectingDistributions
-MET_Correctedmu0thru10	L1XE30toL1XE50/performL130to50Correction/CorrectingDistributions.h	/^    TH1D*            MET_Correctedmu0thru10 = 0;$/;"	m	class:CorrectingDistributions
-MET_Correctedmu0thru10	zbToL1XE30/PerformCorrection/CorrectingDistributions.h	/^    TH1D*            MET_Correctedmu0thru10 = 0;$/;"	m	class:CorrectingDistributions
-MET_Correctedmu0thru10_copy	CorrectAllTheWay/CorrectingDistributions.h	/^    TH1D*            MET_Correctedmu0thru10_copy = 0;$/;"	m	class:CorrectingDistributions
-MET_Correctedmu0thru10_copy	L1XE30toL1XE50/performL130to50Correction/CorrectingDistributions.h	/^    TH1D*            MET_Correctedmu0thru10_copy = 0;$/;"	m	class:CorrectingDistributions
-MET_Correctedmu0thru10_copy	zbToL1XE30/PerformCorrection/CorrectingDistributions.h	/^    TH1D*            MET_Correctedmu0thru10_copy = 0;$/;"	m	class:CorrectingDistributions
-MET_Correctedmu10thru20	CorrectAllTheWay/CorrectingDistributions.h	/^    TH1D*            MET_Correctedmu10thru20 = 0;$/;"	m	class:CorrectingDistributions
-MET_Correctedmu10thru20	L1XE30toL1XE50/performL130to50Correction/CorrectingDistributions.h	/^    TH1D*            MET_Correctedmu10thru20 = 0;$/;"	m	class:CorrectingDistributions
-MET_Correctedmu10thru20	zbToL1XE30/PerformCorrection/CorrectingDistributions.h	/^    TH1D*            MET_Correctedmu10thru20 = 0;$/;"	m	class:CorrectingDistributions
-MET_Correctedmu10thru20_copy	CorrectAllTheWay/CorrectingDistributions.h	/^    TH1D*            MET_Correctedmu10thru20_copy = 0;$/;"	m	class:CorrectingDistributions
-MET_Correctedmu10thru20_copy	L1XE30toL1XE50/performL130to50Correction/CorrectingDistributions.h	/^    TH1D*            MET_Correctedmu10thru20_copy = 0;$/;"	m	class:CorrectingDistributions
-MET_Correctedmu10thru20_copy	zbToL1XE30/PerformCorrection/CorrectingDistributions.h	/^    TH1D*            MET_Correctedmu10thru20_copy = 0;$/;"	m	class:CorrectingDistributions
-MET_Correctedmu20thru30	CorrectAllTheWay/CorrectingDistributions.h	/^    TH1D*            MET_Correctedmu20thru30 = 0;$/;"	m	class:CorrectingDistributions
-MET_Correctedmu20thru30	L1XE30toL1XE50/performL130to50Correction/CorrectingDistributions.h	/^    TH1D*            MET_Correctedmu20thru30 = 0;$/;"	m	class:CorrectingDistributions
-MET_Correctedmu20thru30	zbToL1XE30/PerformCorrection/CorrectingDistributions.h	/^    TH1D*            MET_Correctedmu20thru30 = 0;$/;"	m	class:CorrectingDistributions
-MET_Correctedmu20thru30_copy	CorrectAllTheWay/CorrectingDistributions.h	/^    TH1D*            MET_Correctedmu20thru30_copy = 0;$/;"	m	class:CorrectingDistributions
-MET_Correctedmu20thru30_copy	L1XE30toL1XE50/performL130to50Correction/CorrectingDistributions.h	/^    TH1D*            MET_Correctedmu20thru30_copy = 0;$/;"	m	class:CorrectingDistributions
-MET_Correctedmu20thru30_copy	zbToL1XE30/PerformCorrection/CorrectingDistributions.h	/^    TH1D*            MET_Correctedmu20thru30_copy = 0;$/;"	m	class:CorrectingDistributions
-MET_Correctedmu30thru40	CorrectAllTheWay/CorrectingDistributions.h	/^    TH1D*            MET_Correctedmu30thru40 = 0;$/;"	m	class:CorrectingDistributions
-MET_Correctedmu30thru40	L1XE30toL1XE50/performL130to50Correction/CorrectingDistributions.h	/^    TH1D*            MET_Correctedmu30thru40 = 0;$/;"	m	class:CorrectingDistributions
-MET_Correctedmu30thru40	zbToL1XE30/PerformCorrection/CorrectingDistributions.h	/^    TH1D*            MET_Correctedmu30thru40 = 0;$/;"	m	class:CorrectingDistributions
-MET_Correctedmu30thru40_copy	CorrectAllTheWay/CorrectingDistributions.h	/^    TH1D*            MET_Correctedmu30thru40_copy = 0;$/;"	m	class:CorrectingDistributions
-MET_Correctedmu30thru40_copy	L1XE30toL1XE50/performL130to50Correction/CorrectingDistributions.h	/^    TH1D*            MET_Correctedmu30thru40_copy = 0;$/;"	m	class:CorrectingDistributions
-MET_Correctedmu30thru40_copy	zbToL1XE30/PerformCorrection/CorrectingDistributions.h	/^    TH1D*            MET_Correctedmu30thru40_copy = 0;$/;"	m	class:CorrectingDistributions
-MET_Correctedmu40thru50	CorrectAllTheWay/CorrectingDistributions.h	/^    TH1D*            MET_Correctedmu40thru50 = 0;$/;"	m	class:CorrectingDistributions
-MET_Correctedmu40thru50	L1XE30toL1XE50/performL130to50Correction/CorrectingDistributions.h	/^    TH1D*            MET_Correctedmu40thru50 = 0;$/;"	m	class:CorrectingDistributions
-MET_Correctedmu40thru50	zbToL1XE30/PerformCorrection/CorrectingDistributions.h	/^    TH1D*            MET_Correctedmu40thru50 = 0;$/;"	m	class:CorrectingDistributions
-MET_Correctedmu40thru50_copy	CorrectAllTheWay/CorrectingDistributions.h	/^    TH1D*            MET_Correctedmu40thru50_copy = 0;$/;"	m	class:CorrectingDistributions
-MET_Correctedmu40thru50_copy	L1XE30toL1XE50/performL130to50Correction/CorrectingDistributions.h	/^    TH1D*            MET_Correctedmu40thru50_copy = 0;$/;"	m	class:CorrectingDistributions
-MET_Correctedmu40thru50_copy	zbToL1XE30/PerformCorrection/CorrectingDistributions.h	/^    TH1D*            MET_Correctedmu40thru50_copy = 0;$/;"	m	class:CorrectingDistributions
-MET_Correctedmu50thru60	CorrectAllTheWay/CorrectingDistributions.h	/^    TH1D*            MET_Correctedmu50thru60 = 0;$/;"	m	class:CorrectingDistributions
-MET_Correctedmu50thru60	L1XE30toL1XE50/performL130to50Correction/CorrectingDistributions.h	/^    TH1D*            MET_Correctedmu50thru60 = 0;$/;"	m	class:CorrectingDistributions
-MET_Correctedmu50thru60	zbToL1XE30/PerformCorrection/CorrectingDistributions.h	/^    TH1D*            MET_Correctedmu50thru60 = 0;$/;"	m	class:CorrectingDistributions
-MET_Correctedmu50thru60_copy	CorrectAllTheWay/CorrectingDistributions.h	/^    TH1D*            MET_Correctedmu50thru60_copy = 0;$/;"	m	class:CorrectingDistributions
-MET_Correctedmu50thru60_copy	L1XE30toL1XE50/performL130to50Correction/CorrectingDistributions.h	/^    TH1D*            MET_Correctedmu50thru60_copy = 0;$/;"	m	class:CorrectingDistributions
-MET_Correctedmu50thru60_copy	zbToL1XE30/PerformCorrection/CorrectingDistributions.h	/^    TH1D*            MET_Correctedmu50thru60_copy = 0;$/;"	m	class:CorrectingDistributions
-MET_Correctedmu60thru70	CorrectAllTheWay/CorrectingDistributions.h	/^    TH1D*            MET_Correctedmu60thru70 = 0;$/;"	m	class:CorrectingDistributions
-MET_Correctedmu60thru70	L1XE30toL1XE50/performL130to50Correction/CorrectingDistributions.h	/^    TH1D*            MET_Correctedmu60thru70 = 0;$/;"	m	class:CorrectingDistributions
-MET_Correctedmu60thru70	zbToL1XE30/PerformCorrection/CorrectingDistributions.h	/^    TH1D*            MET_Correctedmu60thru70 = 0;$/;"	m	class:CorrectingDistributions
-MET_Correctedmu60thru70_copy	CorrectAllTheWay/CorrectingDistributions.h	/^    TH1D*            MET_Correctedmu60thru70_copy = 0;$/;"	m	class:CorrectingDistributions
-MET_Correctedmu60thru70_copy	L1XE30toL1XE50/performL130to50Correction/CorrectingDistributions.h	/^    TH1D*            MET_Correctedmu60thru70_copy = 0;$/;"	m	class:CorrectingDistributions
-MET_Correctedmu60thru70_copy	zbToL1XE30/PerformCorrection/CorrectingDistributions.h	/^    TH1D*            MET_Correctedmu60thru70_copy = 0;$/;"	m	class:CorrectingDistributions
-MET_Data	L1XE30toL1XE50/plotl130dists/PlotMETDistsVersMu.h	/^   TTreeReaderValue<Float_t> MET_Data = {fReader, zb_alg_name };$/;"	m	class:PlotMETDistsVersMu
-MET_Data	zbToL1XE30/plotMETDistsVersusMu/PlotMETDistsVersMu.h	/^   TTreeReaderValue<Float_t> MET_Data = {fReader, zb_alg_name };$/;"	m	class:PlotMETDistsVersMu
-MET_Datamu0thru10	L1XE30toL1XE50/plotl130dists/PlotMETDistsVersMu.h	/^   TH1D*            MET_Datamu0thru10 = 0;$/;"	m	class:PlotMETDistsVersMu
-MET_Datamu0thru10	zbToL1XE30/plotMETDistsVersusMu/PlotMETDistsVersMu.h	/^   TH1D*            MET_Datamu0thru10 = 0;$/;"	m	class:PlotMETDistsVersMu
-MET_Datamu10thru20	L1XE30toL1XE50/plotl130dists/PlotMETDistsVersMu.h	/^   TH1D*            MET_Datamu10thru20 = 0;$/;"	m	class:PlotMETDistsVersMu
-MET_Datamu10thru20	zbToL1XE30/plotMETDistsVersusMu/PlotMETDistsVersMu.h	/^   TH1D*            MET_Datamu10thru20 = 0;$/;"	m	class:PlotMETDistsVersMu
-MET_Datamu20thru30	L1XE30toL1XE50/plotl130dists/PlotMETDistsVersMu.h	/^   TH1D*            MET_Datamu20thru30 = 0;$/;"	m	class:PlotMETDistsVersMu
-MET_Datamu20thru30	zbToL1XE30/plotMETDistsVersusMu/PlotMETDistsVersMu.h	/^   TH1D*            MET_Datamu20thru30 = 0;$/;"	m	class:PlotMETDistsVersMu
-MET_Datamu30thru40	L1XE30toL1XE50/plotl130dists/PlotMETDistsVersMu.h	/^   TH1D*            MET_Datamu30thru40 = 0;$/;"	m	class:PlotMETDistsVersMu
-MET_Datamu30thru40	zbToL1XE30/plotMETDistsVersusMu/PlotMETDistsVersMu.h	/^   TH1D*            MET_Datamu30thru40 = 0;$/;"	m	class:PlotMETDistsVersMu
-MET_Datamu40thru50	L1XE30toL1XE50/plotl130dists/PlotMETDistsVersMu.h	/^   TH1D*            MET_Datamu40thru50 = 0;$/;"	m	class:PlotMETDistsVersMu
-MET_Datamu40thru50	zbToL1XE30/plotMETDistsVersusMu/PlotMETDistsVersMu.h	/^   TH1D*            MET_Datamu40thru50 = 0;$/;"	m	class:PlotMETDistsVersMu
-MET_Datamu50thru60	L1XE30toL1XE50/plotl130dists/PlotMETDistsVersMu.h	/^   TH1D*            MET_Datamu50thru60 = 0;$/;"	m	class:PlotMETDistsVersMu
-MET_Datamu50thru60	zbToL1XE30/plotMETDistsVersusMu/PlotMETDistsVersMu.h	/^   TH1D*            MET_Datamu50thru60 = 0;$/;"	m	class:PlotMETDistsVersMu
-MET_Datamu60thru70	L1XE30toL1XE50/plotl130dists/PlotMETDistsVersMu.h	/^   TH1D*            MET_Datamu60thru70 = 0;$/;"	m	class:PlotMETDistsVersMu
-MET_Datamu60thru70	zbToL1XE30/plotMETDistsVersusMu/PlotMETDistsVersMu.h	/^   TH1D*            MET_Datamu60thru70 = 0;$/;"	m	class:PlotMETDistsVersMu
+MET_Algmu0thru10Efficiency	old_correction/plotl130dists/BuildEfficiencyL150.h	/^   TEfficiency*            MET_Algmu0thru10Efficiency = 0;$/;"	m	class:BuildEfficiencyL150
+MET_Algmu10thru20Efficiency	old_correction/plotl130dists/BuildEfficiencyL150.h	/^   TEfficiency*            MET_Algmu10thru20Efficiency = 0;$/;"	m	class:BuildEfficiencyL150
+MET_Algmu20thru30Efficiency	old_correction/plotl130dists/BuildEfficiencyL150.h	/^   TEfficiency*            MET_Algmu20thru30Efficiency = 0;$/;"	m	class:BuildEfficiencyL150
+MET_Algmu30thru40Efficiency	old_correction/plotl130dists/BuildEfficiencyL150.h	/^   TEfficiency*            MET_Algmu30thru40Efficiency = 0;$/;"	m	class:BuildEfficiencyL150
+MET_Algmu40thru50Efficiency	old_correction/plotl130dists/BuildEfficiencyL150.h	/^   TEfficiency*            MET_Algmu40thru50Efficiency = 0;$/;"	m	class:BuildEfficiencyL150
+MET_Algmu50thru60Efficiency	old_correction/plotl130dists/BuildEfficiencyL150.h	/^   TEfficiency*            MET_Algmu50thru60Efficiency = 0;$/;"	m	class:BuildEfficiencyL150
+MET_Algmu60thru70Efficiency	old_correction/plotl130dists/BuildEfficiencyL150.h	/^   TEfficiency*            MET_Algmu60thru70Efficiency = 0;$/;"	m	class:BuildEfficiencyL150
+MET_Data	Compute_L1XE30_Efficiency/ComputeL1XE30toZBEfficiency.h	/^   TTreeReaderValue<Float_t> MET_Data = {fReader, zb_alg_name };$/;"	m	class:ComputeL1XE30toZBEfficiency
+MET_Data	Compute_L1XE50_L1XE30_Efficiency/ComputeL1XE50toL1XE30Efficiency.h	/^   TTreeReaderValue<Float_t> MET_Data = {fReader, zb_alg_name };$/;"	m	class:ComputeL1XE50toL1XE30Efficiency
+MET_Data	old_correction/plotl130dists/BuildEfficiencyL150.h	/^   TTreeReaderValue<Float_t> MET_Data = {fReader, zb_alg_name };$/;"	m	class:BuildEfficiencyL150
+MET_Datamu0thru10	old_correction/plotl130dists/BuildEfficiencyL150.h	/^   TH1D*            MET_Datamu0thru10 = 0;$/;"	m	class:BuildEfficiencyL150
+MET_Datamu10thru20	old_correction/plotl130dists/BuildEfficiencyL150.h	/^   TH1D*            MET_Datamu10thru20 = 0;$/;"	m	class:BuildEfficiencyL150
+MET_Datamu20thru30	old_correction/plotl130dists/BuildEfficiencyL150.h	/^   TH1D*            MET_Datamu20thru30 = 0;$/;"	m	class:BuildEfficiencyL150
+MET_Datamu30thru40	old_correction/plotl130dists/BuildEfficiencyL150.h	/^   TH1D*            MET_Datamu30thru40 = 0;$/;"	m	class:BuildEfficiencyL150
+MET_Datamu40thru50	old_correction/plotl130dists/BuildEfficiencyL150.h	/^   TH1D*            MET_Datamu40thru50 = 0;$/;"	m	class:BuildEfficiencyL150
+MET_Datamu50thru60	old_correction/plotl130dists/BuildEfficiencyL150.h	/^   TH1D*            MET_Datamu50thru60 = 0;$/;"	m	class:BuildEfficiencyL150
+MET_Datamu60thru70	old_correction/plotl130dists/BuildEfficiencyL150.h	/^   TH1D*            MET_Datamu60thru70 = 0;$/;"	m	class:BuildEfficiencyL150
+MET_Distribution	Compute_L1XE30_Efficiency/ComputeL1XE30toZBEfficiency.h	/^   TH1F* MET_Distribution = 0;$/;"	m	class:ComputeL1XE30toZBEfficiency
+MET_Distribution	Compute_L1XE50_L1XE30_Efficiency/ComputeL1XE50toL1XE30Efficiency.h	/^   TH1F* MET_Distribution = 0;$/;"	m	class:ComputeL1XE50toL1XE30Efficiency
+MET_L1XE30Efficiency	Compute_L1XE30_Efficiency/ComputeL1XE30toZBEfficiency.h	/^   TEfficiency* MET_L1XE30Efficiency = 0;$/;"	m	class:ComputeL1XE30toZBEfficiency
+MET_L1XE30EfficiencyFit	Compute_L1XE30_Efficiency/ComputeL1XE30toZBEfficiency.h	/^   TF1* MET_L1XE30EfficiencyFit = 0;$/;"	m	class:ComputeL1XE30toZBEfficiency
+MET_L1XE50Efficiency	Compute_L1XE50_L1XE30_Efficiency/ComputeL1XE50toL1XE30Efficiency.h	/^   TEfficiency* MET_L1XE50Efficiency = 0;$/;"	m	class:ComputeL1XE50toL1XE30Efficiency
+MET_L1XE50EfficiencyFit	Compute_L1XE50_L1XE30_Efficiency/ComputeL1XE50toL1XE30Efficiency.h	/^   TF1* MET_L1XE50EfficiencyFit = 0;$/;"	m	class:ComputeL1XE50toL1XE30Efficiency
+MarkerStyles	Compute_L1XE30_Efficiency/ComputeL1XE30toZBEfficiency.h	/^   Int_t MarkerStyles[Number_Mu_Bins] = {29,20,3,4,27,22,21};$/;"	m	class:ComputeL1XE30toZBEfficiency
+MarkerStyles	Compute_L1XE50_L1XE30_Efficiency/ComputeL1XE50toL1XE30Efficiency.h	/^    Int_t MarkerStyles[Number_Mu_Bins] = {29,20,3,4,27,22,21};$/;"	m	class:ComputeL1XE50toL1XE30Efficiency
+MarkerStyles	CorrectL1XE30toZB/CorrectL1XE30toZB.h	/^   Int_t MarkerStyles[Number_Mu_Bins] = {29,20,3,4,27,22,21};$/;"	m	class:CorrectL1XE30toZB
+MarkerStyles	CorrectL1XE50toZB/CorrectL1XE50toZB.h	/^    Int_t MarkerStyles[Number_Mu_Bins] = {29,20,3,4,27,22,21};$/;"	m	class:CorrectL1XE50toZB
+Met_Distributions_By_Mu_Bin	Compute_L1XE30_Efficiency/ComputeL1XE30toZBEfficiency.h	/^   TH1F* Met_Distributions_By_Mu_Bin[Number_Mu_Bins];$/;"	m	class:ComputeL1XE30toZBEfficiency
+Met_Distributions_By_Mu_Bin	Compute_L1XE50_L1XE30_Efficiency/ComputeL1XE50toL1XE30Efficiency.h	/^   TH1F* Met_Distributions_By_Mu_Bin[Number_Mu_Bins];$/;"	m	class:ComputeL1XE50toL1XE30Efficiency
+Mu_Values	Compute_L1XE30_Efficiency/ComputeL1XE30toZBEfficiency.h	/^   Float_t Mu_Values[Number_Mu_Bins+1] = { 0.0 };$/;"	m	class:ComputeL1XE30toZBEfficiency
+Mu_Values	Compute_L1XE50_L1XE30_Efficiency/ComputeL1XE50toL1XE30Efficiency.h	/^    Float_t Mu_Values[Number_Mu_Bins+1] = {0.0};$/;"	m	class:ComputeL1XE50toL1XE30Efficiency
+Mu_Values	CorrectL1XE30toZB/CorrectL1XE30toZB.h	/^   Float_t Mu_Values[Number_Mu_Bins+1] = { 0.0 };$/;"	m	class:CorrectL1XE30toZB
+Mu_Values	CorrectL1XE50toZB/CorrectL1XE50toZB.h	/^    Float_t Mu_Values[Number_Mu_Bins+1] = { 0.0 };$/;"	m	class:CorrectL1XE50toZB
 NPrimaryVertices	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<UInt_t> NPrimaryVertices = {fReader, "NPrimaryVertices"};$/;"	m	class:Jburr_Template_Selector
+Normalization_Bin_Numbers	CorrectL1XE30toZB/CorrectL1XE30toZB.h	/^   Int_t Normalization_Bin_Numbers[Number_Mu_Bins] = {40,52,60,56,55,52,40};$/;"	m	class:CorrectL1XE30toZB
+Normalization_Bin_Numbers	CorrectL1XE50toZB/CorrectL1XE50toZB.h	/^    Int_t Normalization_Bin_Numbers[Number_Mu_Bins] = {40,52,60,56,55,52,40};$/;"	m	class:CorrectL1XE50toZB
+Normalized_Met_Distributions	Compute_L1XE30_Efficiency/ComputeL1XE30toZBEfficiency.h	/^   TH1F* Normalized_Met_Distributions[Number_Mu_Bins];$/;"	m	class:ComputeL1XE30toZBEfficiency
+Normalized_Met_Distributions	Compute_L1XE50_L1XE30_Efficiency/ComputeL1XE50toL1XE30Efficiency.h	/^   TH1F* Normalized_Met_Distributions[Number_Mu_Bins];$/;"	m	class:ComputeL1XE50toL1XE30Efficiency
 Notify	BurrTemplateSelector/Jburr_Template_Selector.h	/^Bool_t Jburr_Template_Selector::Notify()$/;"	f	class:Jburr_Template_Selector
-Notify	CorrectAllTheWay/CorrectingDistributions.C	/^Bool_t CorrectingDistributions::Notify(){return kTRUE;}$/;"	f	class:CorrectingDistributions
-Notify	L1XE30toL1XE50/performL130to50Correction/CorrectingDistributions.C	/^Bool_t CorrectingDistributions::Notify(){return kTRUE;}$/;"	f	class:CorrectingDistributions
-Notify	L1XE30toL1XE50/plotl130dists/PlotMETDistsVersMu.C	/^Bool_t PlotMETDistsVersMu::Notify() \/\/{{{$/;"	f	class:PlotMETDistsVersMu
-Notify	zbToL1XE30/PerformCorrection/CorrectingDistributions.C	/^Bool_t CorrectingDistributions::Notify(){return kTRUE;}$/;"	f	class:CorrectingDistributions
-Notify	zbToL1XE30/plotMETDistsVersusMu/PlotMETDistsVersMu.C	/^Bool_t PlotMETDistsVersMu::Notify() \/\/{{{$/;"	f	class:PlotMETDistsVersMu
-OBJ	zbToL1XE30/Plots/CorrectedAndZB/makefile	/^OBJ=$(wildcard *.png)$/;"	m
+Notify	Compute_L1XE30_Efficiency/ComputeL1XE30toZBEfficiency.C	/^Bool_t ComputeL1XE30toZBEfficiency::Notify() \/\/{{{$/;"	f	class:ComputeL1XE30toZBEfficiency
+Notify	Compute_L1XE50_L1XE30_Efficiency/ComputeL1XE50toL1XE30Efficiency.C	/^Bool_t ComputeL1XE50toL1XE30Efficiency::Notify() \/\/{{{$/;"	f	class:ComputeL1XE50toL1XE30Efficiency
+Notify	CorrectL1XE30toZB/CorrectL1XE30toZB.C	/^Bool_t CorrectL1XE30toZB::Notify(){return kTRUE;}$/;"	f	class:CorrectL1XE30toZB
+Notify	CorrectL1XE50toZB/CorrectL1XE50toZB.C	/^Bool_t CorrectL1XE50toZB::Notify(){return kTRUE;}$/;"	f	class:CorrectL1XE50toZB
+Notify	old_correction/plotl130dists/BuildEfficiencyL150.C	/^Bool_t BuildEfficiencyL150::Notify() \/\/{{{$/;"	f	class:BuildEfficiencyL150
+Number_Mu_Bins	Compute_L1XE30_Efficiency/ComputeL1XE30toZBEfficiency.h	/^    const static Int_t Number_Mu_Bins = 7;$/;"	m	class:ComputeL1XE30toZBEfficiency
+Number_Mu_Bins	Compute_L1XE50_L1XE30_Efficiency/ComputeL1XE50toL1XE30Efficiency.h	/^    const static Int_t Number_Mu_Bins = 7;$/;"	m	class:ComputeL1XE50toL1XE30Efficiency
+Number_Mu_Bins	CorrectL1XE30toZB/CorrectL1XE30toZB.h	/^    const static Int_t Number_Mu_Bins = 7;$/;"	m	class:CorrectL1XE30toZB
+Number_Mu_Bins	CorrectL1XE50toZB/CorrectL1XE50toZB.h	/^    const static Int_t Number_Mu_Bins = 7;$/;"	m	class:CorrectL1XE50toZB
+OBJ	plots/CorrectedAndZB/makefile	/^OBJ=$(wildcard *.png)$/;"	m
+OBJ	plots/makefile	/^OBJ=$(wildcard *.png)$/;"	m
 OutOfTimePileup	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Float_t> OutOfTimePileup = {fReader, "OutOfTimePileup"};$/;"	m	class:Jburr_Template_Selector
-OutOfTimePileup	CorrectAllTheWay/CorrectingDistributions.h	/^   TTreeReaderValue<Float_t> OutOfTimePileup = {fReader, "OutOfTimePileup"};$/;"	m	class:CorrectingDistributions
-OutOfTimePileup	L1XE30toL1XE50/performL130to50Correction/CorrectingDistributions.h	/^   TTreeReaderValue<Float_t> OutOfTimePileup = {fReader, "OutOfTimePileup"};$/;"	m	class:CorrectingDistributions
-OutOfTimePileup	zbToL1XE30/PerformCorrection/CorrectingDistributions.h	/^   TTreeReaderValue<Float_t> OutOfTimePileup = {fReader, "OutOfTimePileup"};$/;"	m	class:CorrectingDistributions
-PlotMETDistsVersMu	L1XE30toL1XE50/plotl130dists/PlotMETDistsVersMu.h	/^   PlotMETDistsVersMu(TTree * =0) { }$/;"	f	class:PlotMETDistsVersMu
-PlotMETDistsVersMu	L1XE30toL1XE50/plotl130dists/PlotMETDistsVersMu.h	/^class PlotMETDistsVersMu : public TSelector {$/;"	c
-PlotMETDistsVersMu	zbToL1XE30/plotMETDistsVersusMu/PlotMETDistsVersMu.h	/^   PlotMETDistsVersMu(TTree * =0) { }$/;"	f	class:PlotMETDistsVersMu
-PlotMETDistsVersMu	zbToL1XE30/plotMETDistsVersusMu/PlotMETDistsVersMu.h	/^class PlotMETDistsVersMu : public TSelector {$/;"	c
-PlotMETDistsVersMu_cxx	L1XE30toL1XE50/plotl130dists/PlotMETDistsVersMu.C	1;"	d	file:
-PlotMETDistsVersMu_cxx	zbToL1XE30/plotMETDistsVersusMu/PlotMETDistsVersMu.C	1;"	d	file:
-PlotMETDistsVersMu_h	L1XE30toL1XE50/plotl130dists/PlotMETDistsVersMu.h	9;"	d
-PlotMETDistsVersMu_h	zbToL1XE30/plotMETDistsVersusMu/PlotMETDistsVersMu.h	9;"	d
-PlotParameterVals	zbToL1XE30/PlotParametersVsMu/PlotParameterVals.cpp	/^void PlotParameterVals(){$/;"	f
+OutOfTimePileup	CorrectL1XE30toZB/CorrectL1XE30toZB.h	/^   TTreeReaderValue<Float_t> OutOfTimePileup = {fReader, "OutOfTimePileup"};$/;"	m	class:CorrectL1XE30toZB
+OutOfTimePileup	CorrectL1XE50toZB/CorrectL1XE50toZB.h	/^   TTreeReaderValue<Float_t> OutOfTimePileup = {fReader, "OutOfTimePileup"};$/;"	m	class:CorrectL1XE50toZB
+PlotMETDistsVersMu_cxx	Compute_L1XE50_L1XE30_Efficiency/ComputeL1XE50toL1XE30Efficiency.C	1;"	d	file:
+PlotMETDistsVersMu_cxx	old_correction/plotl130dists/BuildEfficiencyL150.C	1;"	d	file:
+PlotParameterVals	PlotParametersVsMu/PlotParameterVals.cpp	/^void PlotParameterVals(){$/;"	f
 Process	BurrTemplateSelector/Jburr_Template_Selector.C	/^Bool_t Jburr_Template_Selector::Process(Long64_t entry){return kTRUE;}$/;"	f	class:Jburr_Template_Selector
-Process	CorrectAllTheWay/CorrectingDistributions.C	/^Bool_t CorrectingDistributions::Process(Long64_t entry)\/\/{{{$/;"	f	class:CorrectingDistributions
-Process	L1XE30toL1XE50/performL130to50Correction/CorrectingDistributions.C	/^Bool_t CorrectingDistributions::Process(Long64_t entry)\/\/{{{$/;"	f	class:CorrectingDistributions
-Process	L1XE30toL1XE50/plotl130dists/PlotMETDistsVersMu.C	/^Bool_t PlotMETDistsVersMu::Process(Long64_t entry)\/\/{{{$/;"	f	class:PlotMETDistsVersMu
-Process	zbToL1XE30/PerformCorrection/CorrectingDistributions.C	/^Bool_t CorrectingDistributions::Process(Long64_t entry)\/\/{{{$/;"	f	class:CorrectingDistributions
-Process	zbToL1XE30/plotMETDistsVersusMu/PlotMETDistsVersMu.C	/^Bool_t PlotMETDistsVersMu::Process(Long64_t entry)\/\/{{{$/;"	f	class:PlotMETDistsVersMu
+Process	Compute_L1XE30_Efficiency/ComputeL1XE30toZBEfficiency.C	/^Bool_t ComputeL1XE30toZBEfficiency::Process(Long64_t entry)\/\/{{{$/;"	f	class:ComputeL1XE30toZBEfficiency
+Process	Compute_L1XE50_L1XE30_Efficiency/ComputeL1XE50toL1XE30Efficiency.C	/^Bool_t ComputeL1XE50toL1XE30Efficiency::Process(Long64_t entry)\/\/{{{$/;"	f	class:ComputeL1XE50toL1XE30Efficiency
+Process	CorrectL1XE30toZB/CorrectL1XE30toZB.C	/^Bool_t CorrectL1XE30toZB::Process(Long64_t entry)\/\/{{{$/;"	f	class:CorrectL1XE30toZB
+Process	CorrectL1XE50toZB/CorrectL1XE50toZB.C	/^Bool_t CorrectL1XE50toZB::Process(Long64_t entry)\/\/{{{$/;"	f	class:CorrectL1XE50toZB
+Process	old_correction/plotl130dists/BuildEfficiencyL150.C	/^Bool_t BuildEfficiencyL150::Process(Long64_t entry)\/\/{{{$/;"	f	class:BuildEfficiencyL150
 RunNumber	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<UInt_t> RunNumber = {fReader, "RunNumber"};$/;"	m	class:Jburr_Template_Selector
-RunNumber	CorrectAllTheWay/CorrectingDistributions.h	/^   TTreeReaderValue<UInt_t> RunNumber = {fReader, "RunNumber"};$/;"	m	class:CorrectingDistributions
-RunNumber	L1XE30toL1XE50/performL130to50Correction/CorrectingDistributions.h	/^   TTreeReaderValue<UInt_t> RunNumber = {fReader, "RunNumber"};$/;"	m	class:CorrectingDistributions
-RunNumber	L1XE30toL1XE50/plotl130dists/PlotMETDistsVersMu.h	/^   TTreeReaderValue<UInt_t> RunNumber = {fReader, "RunNumber"};$/;"	m	class:PlotMETDistsVersMu
-RunNumber	zbToL1XE30/PerformCorrection/CorrectingDistributions.h	/^   TTreeReaderValue<UInt_t> RunNumber = {fReader, "RunNumber"};$/;"	m	class:CorrectingDistributions
-RunNumber	zbToL1XE30/plotMETDistsVersusMu/PlotMETDistsVersMu.h	/^   TTreeReaderValue<UInt_t> RunNumber = {fReader, "RunNumber"};$/;"	m	class:PlotMETDistsVersMu
+RunNumber	Compute_L1XE30_Efficiency/ComputeL1XE30toZBEfficiency.h	/^   TTreeReaderValue<UInt_t> RunNumber = {fReader, "RunNumber"};$/;"	m	class:ComputeL1XE30toZBEfficiency
+RunNumber	Compute_L1XE50_L1XE30_Efficiency/ComputeL1XE50toL1XE30Efficiency.h	/^   TTreeReaderValue<UInt_t> RunNumber = {fReader, "RunNumber"};$/;"	m	class:ComputeL1XE50toL1XE30Efficiency
+RunNumber	CorrectL1XE30toZB/CorrectL1XE30toZB.h	/^   TTreeReaderValue<UInt_t> RunNumber = {fReader, "RunNumber"};$/;"	m	class:CorrectL1XE30toZB
+RunNumber	CorrectL1XE50toZB/CorrectL1XE50toZB.h	/^   TTreeReaderValue<UInt_t> RunNumber = {fReader, "RunNumber"};$/;"	m	class:CorrectL1XE50toZB
+RunNumber	old_correction/plotl130dists/BuildEfficiencyL150.h	/^   TTreeReaderValue<UInt_t> RunNumber = {fReader, "RunNumber"};$/;"	m	class:BuildEfficiencyL150
+Scale_Factors	CorrectL1XE30toZB/CorrectL1XE30toZB.h	/^   Float_t Scale_Factors[Number_Mu_Bins] = { 0.0 };$/;"	m	class:CorrectL1XE30toZB
+Scale_Factors	CorrectL1XE50toZB/CorrectL1XE50toZB.h	/^    Float_t Scale_Factors[Number_Mu_Bins] = { 0.0 };$/;"	m	class:CorrectL1XE50toZB
 SetInputList	BurrTemplateSelector/Jburr_Template_Selector.h	/^   virtual void    SetInputList(TList *input) { fInput = input; }$/;"	f	class:Jburr_Template_Selector
-SetInputList	CorrectAllTheWay/CorrectingDistributions.h	/^   virtual void    SetInputList(TList *input) { fInput = input; }$/;"	f	class:CorrectingDistributions
-SetInputList	L1XE30toL1XE50/performL130to50Correction/CorrectingDistributions.h	/^   virtual void    SetInputList(TList *input) { fInput = input; }$/;"	f	class:CorrectingDistributions
-SetInputList	L1XE30toL1XE50/plotl130dists/PlotMETDistsVersMu.h	/^   virtual void    SetInputList(TList *input) { fInput = input; }$/;"	f	class:PlotMETDistsVersMu
-SetInputList	zbToL1XE30/PerformCorrection/CorrectingDistributions.h	/^   virtual void    SetInputList(TList *input) { fInput = input; }$/;"	f	class:CorrectingDistributions
-SetInputList	zbToL1XE30/plotMETDistsVersusMu/PlotMETDistsVersMu.h	/^   virtual void    SetInputList(TList *input) { fInput = input; }$/;"	f	class:PlotMETDistsVersMu
+SetInputList	Compute_L1XE30_Efficiency/ComputeL1XE30toZBEfficiency.h	/^   virtual void    SetInputList(TList *input) { fInput = input; }$/;"	f	class:ComputeL1XE30toZBEfficiency
+SetInputList	Compute_L1XE50_L1XE30_Efficiency/ComputeL1XE50toL1XE30Efficiency.h	/^   virtual void    SetInputList(TList *input) { fInput = input; }$/;"	f	class:ComputeL1XE50toL1XE30Efficiency
+SetInputList	CorrectL1XE30toZB/CorrectL1XE30toZB.h	/^   virtual void    SetInputList(TList *input) { fInput = input; }$/;"	f	class:CorrectL1XE30toZB
+SetInputList	CorrectL1XE50toZB/CorrectL1XE50toZB.h	/^   virtual void    SetInputList(TList *input) { fInput = input; }$/;"	f	class:CorrectL1XE50toZB
+SetInputList	old_correction/plotl130dists/BuildEfficiencyL150.h	/^   virtual void    SetInputList(TList *input) { fInput = input; }$/;"	f	class:BuildEfficiencyL150
 SetObject	BurrTemplateSelector/Jburr_Template_Selector.h	/^   virtual void    SetObject(TObject *obj) { fObject = obj; }$/;"	f	class:Jburr_Template_Selector
-SetObject	CorrectAllTheWay/CorrectingDistributions.h	/^   virtual void    SetObject(TObject *obj) { fObject = obj; }$/;"	f	class:CorrectingDistributions
-SetObject	L1XE30toL1XE50/performL130to50Correction/CorrectingDistributions.h	/^   virtual void    SetObject(TObject *obj) { fObject = obj; }$/;"	f	class:CorrectingDistributions
-SetObject	L1XE30toL1XE50/plotl130dists/PlotMETDistsVersMu.h	/^   virtual void    SetObject(TObject *obj) { fObject = obj; }$/;"	f	class:PlotMETDistsVersMu
-SetObject	zbToL1XE30/PerformCorrection/CorrectingDistributions.h	/^   virtual void    SetObject(TObject *obj) { fObject = obj; }$/;"	f	class:CorrectingDistributions
-SetObject	zbToL1XE30/plotMETDistsVersusMu/PlotMETDistsVersMu.h	/^   virtual void    SetObject(TObject *obj) { fObject = obj; }$/;"	f	class:PlotMETDistsVersMu
+SetObject	Compute_L1XE30_Efficiency/ComputeL1XE30toZBEfficiency.h	/^   virtual void    SetObject(TObject *obj) { fObject = obj; }$/;"	f	class:ComputeL1XE30toZBEfficiency
+SetObject	Compute_L1XE50_L1XE30_Efficiency/ComputeL1XE50toL1XE30Efficiency.h	/^   virtual void    SetObject(TObject *obj) { fObject = obj; }$/;"	f	class:ComputeL1XE50toL1XE30Efficiency
+SetObject	CorrectL1XE30toZB/CorrectL1XE30toZB.h	/^   virtual void    SetObject(TObject *obj) { fObject = obj; }$/;"	f	class:CorrectL1XE30toZB
+SetObject	CorrectL1XE50toZB/CorrectL1XE50toZB.h	/^   virtual void    SetObject(TObject *obj) { fObject = obj; }$/;"	f	class:CorrectL1XE50toZB
+SetObject	old_correction/plotl130dists/BuildEfficiencyL150.h	/^   virtual void    SetObject(TObject *obj) { fObject = obj; }$/;"	f	class:BuildEfficiencyL150
 SetOption	BurrTemplateSelector/Jburr_Template_Selector.h	/^   virtual void    SetOption(const char *option) { fOption = option; }$/;"	f	class:Jburr_Template_Selector
-SetOption	CorrectAllTheWay/CorrectingDistributions.h	/^   virtual void    SetOption(const char *option) { fOption = option; }$/;"	f	class:CorrectingDistributions
-SetOption	L1XE30toL1XE50/performL130to50Correction/CorrectingDistributions.h	/^   virtual void    SetOption(const char *option) { fOption = option; }$/;"	f	class:CorrectingDistributions
-SetOption	L1XE30toL1XE50/plotl130dists/PlotMETDistsVersMu.h	/^   virtual void    SetOption(const char *option) { fOption = option; }$/;"	f	class:PlotMETDistsVersMu
-SetOption	zbToL1XE30/PerformCorrection/CorrectingDistributions.h	/^   virtual void    SetOption(const char *option) { fOption = option; }$/;"	f	class:CorrectingDistributions
-SetOption	zbToL1XE30/plotMETDistsVersusMu/PlotMETDistsVersMu.h	/^   virtual void    SetOption(const char *option) { fOption = option; }$/;"	f	class:PlotMETDistsVersMu
+SetOption	Compute_L1XE30_Efficiency/ComputeL1XE30toZBEfficiency.h	/^   virtual void    SetOption(const char *option) { fOption = option; }$/;"	f	class:ComputeL1XE30toZBEfficiency
+SetOption	Compute_L1XE50_L1XE30_Efficiency/ComputeL1XE50toL1XE30Efficiency.h	/^   virtual void    SetOption(const char *option) { fOption = option; }$/;"	f	class:ComputeL1XE50toL1XE30Efficiency
+SetOption	CorrectL1XE30toZB/CorrectL1XE30toZB.h	/^   virtual void    SetOption(const char *option) { fOption = option; }$/;"	f	class:CorrectL1XE30toZB
+SetOption	CorrectL1XE50toZB/CorrectL1XE50toZB.h	/^   virtual void    SetOption(const char *option) { fOption = option; }$/;"	f	class:CorrectL1XE50toZB
+SetOption	old_correction/plotl130dists/BuildEfficiencyL150.h	/^   virtual void    SetOption(const char *option) { fOption = option; }$/;"	f	class:BuildEfficiencyL150
 SlaveBegin	BurrTemplateSelector/Jburr_Template_Selector.C	/^void Jburr_Template_Selector::SlaveBegin(TTree * \/*tree*\/){TString option = GetOption();}$/;"	f	class:Jburr_Template_Selector
-SlaveBegin	CorrectAllTheWay/CorrectingDistributions.C	/^void CorrectingDistributions::SlaveBegin(TTree * \/*tree*\/)\/\/{{{$/;"	f	class:CorrectingDistributions
-SlaveBegin	L1XE30toL1XE50/performL130to50Correction/CorrectingDistributions.C	/^void CorrectingDistributions::SlaveBegin(TTree * \/*tree*\/)\/\/{{{$/;"	f	class:CorrectingDistributions
-SlaveBegin	L1XE30toL1XE50/plotl130dists/PlotMETDistsVersMu.C	/^void PlotMETDistsVersMu::SlaveBegin(TTree * \/*tree*\/) \/\/ {{{$/;"	f	class:PlotMETDistsVersMu
-SlaveBegin	zbToL1XE30/PerformCorrection/CorrectingDistributions.C	/^void CorrectingDistributions::SlaveBegin(TTree * \/*tree*\/)\/\/{{{$/;"	f	class:CorrectingDistributions
-SlaveBegin	zbToL1XE30/plotMETDistsVersusMu/PlotMETDistsVersMu.C	/^void PlotMETDistsVersMu::SlaveBegin(TTree * \/*tree*\/) \/\/ {{{$/;"	f	class:PlotMETDistsVersMu
+SlaveBegin	Compute_L1XE30_Efficiency/ComputeL1XE30toZBEfficiency.C	/^void ComputeL1XE30toZBEfficiency::SlaveBegin(TTree * \/*tree*\/) \/\/ {{{$/;"	f	class:ComputeL1XE30toZBEfficiency
+SlaveBegin	Compute_L1XE50_L1XE30_Efficiency/ComputeL1XE50toL1XE30Efficiency.C	/^void ComputeL1XE50toL1XE30Efficiency::SlaveBegin(TTree * \/*tree*\/) \/\/ {{{$/;"	f	class:ComputeL1XE50toL1XE30Efficiency
+SlaveBegin	CorrectL1XE30toZB/CorrectL1XE30toZB.C	/^void CorrectL1XE30toZB::SlaveBegin(TTree * \/*tree*\/)\/\/{{{$/;"	f	class:CorrectL1XE30toZB
+SlaveBegin	CorrectL1XE50toZB/CorrectL1XE50toZB.C	/^void CorrectL1XE50toZB::SlaveBegin(TTree * \/*tree*\/)\/\/{{{$/;"	f	class:CorrectL1XE50toZB
+SlaveBegin	old_correction/plotl130dists/BuildEfficiencyL150.C	/^void BuildEfficiencyL150::SlaveBegin(TTree * \/*tree*\/) \/\/ {{{$/;"	f	class:BuildEfficiencyL150
 SlaveTerminate	BurrTemplateSelector/Jburr_Template_Selector.C	/^void Jburr_Template_Selector::SlaveTerminate(){}$/;"	f	class:Jburr_Template_Selector
-SlaveTerminate	CorrectAllTheWay/CorrectingDistributions.C	/^void CorrectingDistributions::SlaveTerminate(){}$/;"	f	class:CorrectingDistributions
-SlaveTerminate	L1XE30toL1XE50/performL130to50Correction/CorrectingDistributions.C	/^void CorrectingDistributions::SlaveTerminate(){}$/;"	f	class:CorrectingDistributions
-SlaveTerminate	L1XE30toL1XE50/plotl130dists/PlotMETDistsVersMu.C	/^void PlotMETDistsVersMu::SlaveTerminate(){}$/;"	f	class:PlotMETDistsVersMu
-SlaveTerminate	zbToL1XE30/PerformCorrection/CorrectingDistributions.C	/^void CorrectingDistributions::SlaveTerminate(){}$/;"	f	class:CorrectingDistributions
-SlaveTerminate	zbToL1XE30/plotMETDistsVersusMu/PlotMETDistsVersMu.C	/^void PlotMETDistsVersMu::SlaveTerminate(){}$/;"	f	class:PlotMETDistsVersMu
+SlaveTerminate	Compute_L1XE30_Efficiency/ComputeL1XE30toZBEfficiency.C	/^void ComputeL1XE30toZBEfficiency::SlaveTerminate(){}$/;"	f	class:ComputeL1XE30toZBEfficiency
+SlaveTerminate	Compute_L1XE50_L1XE30_Efficiency/ComputeL1XE50toL1XE30Efficiency.C	/^void ComputeL1XE50toL1XE30Efficiency::SlaveTerminate(){}$/;"	f	class:ComputeL1XE50toL1XE30Efficiency
+SlaveTerminate	CorrectL1XE30toZB/CorrectL1XE30toZB.C	/^void CorrectL1XE30toZB::SlaveTerminate(){}$/;"	f	class:CorrectL1XE30toZB
+SlaveTerminate	CorrectL1XE50toZB/CorrectL1XE50toZB.C	/^void CorrectL1XE50toZB::SlaveTerminate(){}$/;"	f	class:CorrectL1XE50toZB
+SlaveTerminate	old_correction/plotl130dists/BuildEfficiencyL150.C	/^void BuildEfficiencyL150::SlaveTerminate(){}$/;"	f	class:BuildEfficiencyL150
 TTBarenujj_pass	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Bool_t> TTBarenujj_pass = {fReader, "TTBarenujj.pass"};$/;"	m	class:Jburr_Template_Selector
 TTBarenumunu_pass	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Bool_t> TTBarenumunu_pass = {fReader, "TTBarenumunu.pass"};$/;"	m	class:Jburr_Template_Selector
 TTBarmunujj_pass	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Bool_t> TTBarmunujj_pass = {fReader, "TTBarmunujj.pass"};$/;"	m	class:Jburr_Template_Selector
 Terminate	BurrTemplateSelector/Jburr_Template_Selector.C	/^void Jburr_Template_Selector::Terminate(){}$/;"	f	class:Jburr_Template_Selector
-Terminate	CorrectAllTheWay/CorrectingDistributions.C	/^void CorrectingDistributions::Terminate(){$/;"	f	class:CorrectingDistributions
-Terminate	L1XE30toL1XE50/performL130to50Correction/CorrectingDistributions.C	/^void CorrectingDistributions::Terminate(){$/;"	f	class:CorrectingDistributions
-Terminate	L1XE30toL1XE50/plotl130dists/PlotMETDistsVersMu.C	/^void PlotMETDistsVersMu::Terminate() \/\/ Plotting{{{$/;"	f	class:PlotMETDistsVersMu
-Terminate	zbToL1XE30/PerformCorrection/CorrectingDistributions.C	/^void CorrectingDistributions::Terminate(){$/;"	f	class:CorrectingDistributions
-Terminate	zbToL1XE30/plotMETDistsVersusMu/PlotMETDistsVersMu.C	/^void PlotMETDistsVersMu::Terminate() \/\/ Plotting{{{$/;"	f	class:PlotMETDistsVersMu
+Terminate	Compute_L1XE30_Efficiency/ComputeL1XE30toZBEfficiency.C	/^void ComputeL1XE30toZBEfficiency::Terminate() \/\/{{{$/;"	f	class:ComputeL1XE30toZBEfficiency
+Terminate	Compute_L1XE50_L1XE30_Efficiency/ComputeL1XE50toL1XE30Efficiency.C	/^void ComputeL1XE50toL1XE30Efficiency::Terminate()$/;"	f	class:ComputeL1XE50toL1XE30Efficiency
+Terminate	CorrectL1XE30toZB/CorrectL1XE30toZB.C	/^void CorrectL1XE30toZB::Terminate(){\/\/{{{$/;"	f	class:CorrectL1XE30toZB
+Terminate	CorrectL1XE50toZB/CorrectL1XE50toZB.C	/^void CorrectL1XE50toZB::Terminate(){$/;"	f	class:CorrectL1XE50toZB
+Terminate	old_correction/plotl130dists/BuildEfficiencyL150.C	/^void BuildEfficiencyL150::Terminate() \/\/ Plotting{{{$/;"	f	class:BuildEfficiencyL150
 Version	BurrTemplateSelector/Jburr_Template_Selector.h	/^   virtual Int_t   Version() const { return 2; }$/;"	f	class:Jburr_Template_Selector
-Version	CorrectAllTheWay/CorrectingDistributions.h	/^   virtual Int_t   Version() const { return 2; }$/;"	f	class:CorrectingDistributions
-Version	L1XE30toL1XE50/performL130to50Correction/CorrectingDistributions.h	/^   virtual Int_t   Version() const { return 2; }$/;"	f	class:CorrectingDistributions
-Version	L1XE30toL1XE50/plotl130dists/PlotMETDistsVersMu.h	/^   virtual Int_t   Version() const { return 2; }$/;"	f	class:PlotMETDistsVersMu
-Version	zbToL1XE30/PerformCorrection/CorrectingDistributions.h	/^   virtual Int_t   Version() const { return 2; }$/;"	f	class:CorrectingDistributions
-Version	zbToL1XE30/plotMETDistsVersusMu/PlotMETDistsVersMu.h	/^   virtual Int_t   Version() const { return 2; }$/;"	f	class:PlotMETDistsVersMu
+Version	Compute_L1XE30_Efficiency/ComputeL1XE30toZBEfficiency.h	/^   virtual Int_t   Version() const { return 2; }$/;"	f	class:ComputeL1XE30toZBEfficiency
+Version	Compute_L1XE50_L1XE30_Efficiency/ComputeL1XE50toL1XE30Efficiency.h	/^   virtual Int_t   Version() const { return 2; }$/;"	f	class:ComputeL1XE50toL1XE30Efficiency
+Version	CorrectL1XE30toZB/CorrectL1XE30toZB.h	/^   virtual Int_t   Version() const { return 2; }$/;"	f	class:CorrectL1XE30toZB
+Version	CorrectL1XE50toZB/CorrectL1XE50toZB.h	/^   virtual Int_t   Version() const { return 2; }$/;"	f	class:CorrectL1XE50toZB
+Version	old_correction/plotl130dists/BuildEfficiencyL150.h	/^   virtual Int_t   Version() const { return 2; }$/;"	f	class:BuildEfficiencyL150
 W_mt	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Float_t> W_mt = {fReader, "W.mt"};$/;"	m	class:Jburr_Template_Selector
 W_pt	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Float_t> W_pt = {fReader, "W.pt"};$/;"	m	class:Jburr_Template_Selector
 Wenu_pass	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Bool_t> Wenu_pass = {fReader, "Wenu.pass"};$/;"	m	class:Jburr_Template_Selector
 Wmunu_pass	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Bool_t> Wmunu_pass = {fReader, "Wmunu.pass"};$/;"	m	class:Jburr_Template_Selector
-XE	L1XE30toL1XE50/plotl130dists/PlotMETDistsVersMu.h	/^   Float_t XE = 50.0; \/\/ L1 cut$/;"	m	class:PlotMETDistsVersMu
-XE	zbToL1XE30/plotMETDistsVersusMu/PlotMETDistsVersMu.h	/^   Float_t XE = 30.0; \/\/ L1 cut$/;"	m	class:PlotMETDistsVersMu
-ZIP	zbToL1XE30/Plots/CorrectedAndZB/makefile	/^ZIP=zip$/;"	m
+XE	Compute_L1XE30_Efficiency/ComputeL1XE30toZBEfficiency.h	/^   Float_t XE = 30.0; \/\/ L1 cut$/;"	m	class:ComputeL1XE30toZBEfficiency
+XE	Compute_L1XE50_L1XE30_Efficiency/ComputeL1XE50toL1XE30Efficiency.h	/^   Float_t XE = 50.0; \/\/ L1 cut$/;"	m	class:ComputeL1XE50toL1XE30Efficiency
+XE	old_correction/plotl130dists/BuildEfficiencyL150.h	/^   Float_t XE = 50.0; \/\/ L1 cut$/;"	m	class:BuildEfficiencyL150
+ZB_MET_Distributions	CorrectL1XE30toZB/CorrectL1XE30toZB.h	/^    TH1F* ZB_MET_Distributions[Number_Mu_Bins];$/;"	m	class:CorrectL1XE30toZB
+ZB_MET_Distributions	CorrectL1XE50toZB/CorrectL1XE50toZB.h	/^   TH1F* ZB_MET_Distributions[Number_Mu_Bins];$/;"	m	class:CorrectL1XE50toZB
+ZIP	plots/CorrectedAndZB/makefile	/^ZIP=zip$/;"	m
+ZIP	plots/makefile	/^ZIP=zip$/;"	m
 Z_eta	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Float_t> Z_eta = {fReader, "Z.eta"};$/;"	m	class:Jburr_Template_Selector
 Z_mass	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Float_t> Z_mass = {fReader, "Z.mass"};$/;"	m	class:Jburr_Template_Selector
 Z_phi	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Float_t> Z_phi = {fReader, "Z.phi"};$/;"	m	class:Jburr_Template_Selector
 Z_pt	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Float_t> Z_pt = {fReader, "Z.pt"};$/;"	m	class:Jburr_Template_Selector
 Zee_pass	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Bool_t> Zee_pass = {fReader, "Zee.pass"};$/;"	m	class:Jburr_Template_Selector
 Zmumu_pass	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Bool_t> Zmumu_pass = {fReader, "Zmumu.pass"};$/;"	m	class:Jburr_Template_Selector
-alg_name	CorrectAllTheWay/CorrectingDistributions.h	/^    TString alg_name = "METCELL";$/;"	m	class:CorrectingDistributions
-alg_name	L1XE30toL1XE50/performL130to50Correction/CorrectingDistributions.h	/^    TString alg_name = "METCELL";$/;"	m	class:CorrectingDistributions
-alg_name	zbToL1XE30/PerformCorrection/CorrectingDistributions.h	/^    TString alg_name = "METCELL";$/;"	m	class:CorrectingDistributions
-binWidth	CorrectAllTheWay/CorrectingDistributions.h	/^    Float_t binWidth = 1.0;$/;"	m	class:CorrectingDistributions
-binWidth	L1XE30toL1XE50/performL130to50Correction/CorrectingDistributions.h	/^    Float_t binWidth = 1.0;$/;"	m	class:CorrectingDistributions
-binWidth	zbToL1XE30/PerformCorrection/CorrectingDistributions.h	/^    Float_t binWidth = 1.0;$/;"	m	class:CorrectingDistributions
+binWidth	CorrectL1XE30toZB/CorrectL1XE30toZB.h	/^    Float_t binWidth = 1.0;$/;"	m	class:CorrectL1XE30toZB
+binWidth	CorrectL1XE50toZB/CorrectL1XE50toZB.h	/^    Float_t binWidth = 1.0;$/;"	m	class:CorrectL1XE50toZB
 cell_met	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Float_t> cell_met = {fReader, "cell.met"};$/;"	m	class:Jburr_Template_Selector
-cell_met	CorrectAllTheWay/CorrectingDistributions.h	/^   TTreeReaderValue<Float_t> cell_met = {fReader, "cell.met"};$/;"	m	class:CorrectingDistributions
-cell_met	L1XE30toL1XE50/performL130to50Correction/CorrectingDistributions.h	/^   TTreeReaderValue<Float_t> cell_met = {fReader, "cell.met"};$/;"	m	class:CorrectingDistributions
-cell_met	zbToL1XE30/PerformCorrection/CorrectingDistributions.h	/^   TTreeReaderValue<Float_t> cell_met = {fReader, "cell.met"};$/;"	m	class:CorrectingDistributions
+cell_met	CorrectL1XE30toZB/CorrectL1XE30toZB.h	/^   TTreeReaderValue<Float_t> cell_met = {fReader, "cell.met"};$/;"	m	class:CorrectL1XE30toZB
+cell_met	CorrectL1XE50toZB/CorrectL1XE50toZB.h	/^   TTreeReaderValue<Float_t> cell_met = {fReader, "cell.met"};$/;"	m	class:CorrectL1XE50toZB
 cell_mpx	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Float_t> cell_mpx = {fReader, "cell.mpx"};$/;"	m	class:Jburr_Template_Selector
 cell_mpy	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Float_t> cell_mpy = {fReader, "cell.mpy"};$/;"	m	class:Jburr_Template_Selector
 cell_phi	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Float_t> cell_phi = {fReader, "cell.phi"};$/;"	m	class:Jburr_Template_Selector
 cell_sumet	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Float_t> cell_sumet = {fReader, "cell.sumet"};$/;"	m	class:Jburr_Template_Selector
-efficiencyObjectMu0thru10	CorrectAllTheWay/CorrectingDistributions.h	/^    TEfficiency* efficiencyObjectMu0thru10 = 0;$/;"	m	class:CorrectingDistributions
-efficiencyObjectMu0thru10	L1XE30toL1XE50/performL130to50Correction/CorrectingDistributions.h	/^    TEfficiency* efficiencyObjectMu0thru10 = 0;$/;"	m	class:CorrectingDistributions
-efficiencyObjectMu0thru10	zbToL1XE30/PerformCorrection/CorrectingDistributions.h	/^    TEfficiency* efficiencyObjectMu0thru10 = 0;$/;"	m	class:CorrectingDistributions
-efficiencyObjectMu10thru20	CorrectAllTheWay/CorrectingDistributions.h	/^    TEfficiency* efficiencyObjectMu10thru20 =0;$/;"	m	class:CorrectingDistributions
-efficiencyObjectMu10thru20	L1XE30toL1XE50/performL130to50Correction/CorrectingDistributions.h	/^    TEfficiency* efficiencyObjectMu10thru20 =0;$/;"	m	class:CorrectingDistributions
-efficiencyObjectMu10thru20	zbToL1XE30/PerformCorrection/CorrectingDistributions.h	/^    TEfficiency* efficiencyObjectMu10thru20 =0;$/;"	m	class:CorrectingDistributions
-efficiencyObjectMu20thru30	CorrectAllTheWay/CorrectingDistributions.h	/^    TEfficiency* efficiencyObjectMu20thru30 =0;$/;"	m	class:CorrectingDistributions
-efficiencyObjectMu20thru30	L1XE30toL1XE50/performL130to50Correction/CorrectingDistributions.h	/^    TEfficiency* efficiencyObjectMu20thru30 =0;$/;"	m	class:CorrectingDistributions
-efficiencyObjectMu20thru30	zbToL1XE30/PerformCorrection/CorrectingDistributions.h	/^    TEfficiency* efficiencyObjectMu20thru30 =0;$/;"	m	class:CorrectingDistributions
-efficiencyObjectMu30thru40	CorrectAllTheWay/CorrectingDistributions.h	/^    TEfficiency* efficiencyObjectMu30thru40 = 0;$/;"	m	class:CorrectingDistributions
-efficiencyObjectMu30thru40	L1XE30toL1XE50/performL130to50Correction/CorrectingDistributions.h	/^    TEfficiency* efficiencyObjectMu30thru40 = 0;$/;"	m	class:CorrectingDistributions
-efficiencyObjectMu30thru40	zbToL1XE30/PerformCorrection/CorrectingDistributions.h	/^    TEfficiency* efficiencyObjectMu30thru40 = 0;$/;"	m	class:CorrectingDistributions
-efficiencyObjectMu40thru50	CorrectAllTheWay/CorrectingDistributions.h	/^    TEfficiency* efficiencyObjectMu40thru50 = 0;$/;"	m	class:CorrectingDistributions
-efficiencyObjectMu40thru50	L1XE30toL1XE50/performL130to50Correction/CorrectingDistributions.h	/^    TEfficiency* efficiencyObjectMu40thru50 = 0;$/;"	m	class:CorrectingDistributions
-efficiencyObjectMu40thru50	zbToL1XE30/PerformCorrection/CorrectingDistributions.h	/^    TEfficiency* efficiencyObjectMu40thru50 = 0;$/;"	m	class:CorrectingDistributions
-efficiencyObjectMu50thru60	CorrectAllTheWay/CorrectingDistributions.h	/^    TEfficiency* efficiencyObjectMu50thru60 = 0;$/;"	m	class:CorrectingDistributions
-efficiencyObjectMu50thru60	L1XE30toL1XE50/performL130to50Correction/CorrectingDistributions.h	/^    TEfficiency* efficiencyObjectMu50thru60 = 0;$/;"	m	class:CorrectingDistributions
-efficiencyObjectMu50thru60	zbToL1XE30/PerformCorrection/CorrectingDistributions.h	/^    TEfficiency* efficiencyObjectMu50thru60 = 0;$/;"	m	class:CorrectingDistributions
-efficiencyObjectMu60thru70	CorrectAllTheWay/CorrectingDistributions.h	/^    TEfficiency* efficiencyObjectMu60thru70 = 0;$/;"	m	class:CorrectingDistributions
-efficiencyObjectMu60thru70	L1XE30toL1XE50/performL130to50Correction/CorrectingDistributions.h	/^    TEfficiency* efficiencyObjectMu60thru70 = 0;$/;"	m	class:CorrectingDistributions
-efficiencyObjectMu60thru70	zbToL1XE30/PerformCorrection/CorrectingDistributions.h	/^    TEfficiency* efficiencyObjectMu60thru70 = 0;$/;"	m	class:CorrectingDistributions
-efficiency_bin_width	L1XE30toL1XE50/plotl130dists/PlotMETDistsVersMu.h	/^    Float_t efficiency_bin_width = 20.0; \/\/want 20 GeV bins$/;"	m	class:PlotMETDistsVersMu
-efficiency_bin_width	zbToL1XE30/plotMETDistsVersusMu/PlotMETDistsVersMu.h	/^    Float_t efficiency_bin_width = 20.0; \/\/want 20 GeV bins$/;"	m	class:PlotMETDistsVersMu
-efficiency_nbins	L1XE30toL1XE50/plotl130dists/PlotMETDistsVersMu.h	/^    Int_t efficiency_nbins = (gevHigh - gevLow) \/ efficiency_bin_width;$/;"	m	class:PlotMETDistsVersMu
-efficiency_nbins	zbToL1XE30/plotMETDistsVersusMu/PlotMETDistsVersMu.h	/^    Int_t efficiency_nbins = (gevHigh - gevLow) \/ efficiency_bin_width;$/;"	m	class:PlotMETDistsVersMu
-efficiency_title	L1XE30toL1XE50/plotl130dists/PlotMETDistsVersMu.h	/^    TString efficiency_title = zb_alg_name + " Efficiency";$/;"	m	class:PlotMETDistsVersMu
-efficiency_title	zbToL1XE30/plotMETDistsVersusMu/PlotMETDistsVersMu.h	/^    TString efficiency_title = zb_alg_name + " Efficiency";$/;"	m	class:PlotMETDistsVersMu
-efficiency_xaxis	L1XE30toL1XE50/plotl130dists/PlotMETDistsVersMu.h	/^    TString efficiency_xaxis = zb_alg_name + " [GeV]";$/;"	m	class:PlotMETDistsVersMu
-efficiency_xaxis	zbToL1XE30/plotMETDistsVersusMu/PlotMETDistsVersMu.h	/^    TString efficiency_xaxis = zb_alg_name + " [GeV]";$/;"	m	class:PlotMETDistsVersMu
-efficiency_yaxis	L1XE30toL1XE50/plotl130dists/PlotMETDistsVersMu.h	/^    TString efficiency_yaxis = "efficiency";$/;"	m	class:PlotMETDistsVersMu
-efficiency_yaxis	zbToL1XE30/plotMETDistsVersusMu/PlotMETDistsVersMu.h	/^    TString efficiency_yaxis = "efficiency";$/;"	m	class:PlotMETDistsVersMu
+compute_l1xe30_efficiency	Compute_L1XE30_Efficiency/compute_l1xe30_efficiency.C	/^void compute_l1xe30_efficiency(){$/;"	f
+compute_l1xe50_l1xe30Efficiency	Compute_L1XE50_L1XE30_Efficiency/compute_l1xe50_l1xe30Efficiency.C	/^void compute_l1xe50_l1xe30Efficiency(){$/;"	f
+correct_l1xe30_to_zb	CorrectL1XE30toZB/correct_l1xe30_to_zb.C	/^void correct_l1xe30_to_zb()$/;"	f
+efficiency_bin_width	Compute_L1XE30_Efficiency/ComputeL1XE30toZBEfficiency.h	/^    Float_t efficiency_bin_width = 20.0; \/\/want 20 GeV bins$/;"	m	class:ComputeL1XE30toZBEfficiency
+efficiency_bin_width	Compute_L1XE50_L1XE30_Efficiency/ComputeL1XE50toL1XE30Efficiency.h	/^    Float_t efficiency_bin_width = 20.0; \/\/want 20 GeV bins$/;"	m	class:ComputeL1XE50toL1XE30Efficiency
+efficiency_bin_width	old_correction/plotl130dists/BuildEfficiencyL150.h	/^    Float_t efficiency_bin_width = 20.0; \/\/want 20 GeV bins$/;"	m	class:BuildEfficiencyL150
+efficiency_nbins	Compute_L1XE30_Efficiency/ComputeL1XE30toZBEfficiency.h	/^    Int_t efficiency_nbins = (gevHigh - gevLow) \/ efficiency_bin_width;$/;"	m	class:ComputeL1XE30toZBEfficiency
+efficiency_nbins	Compute_L1XE50_L1XE30_Efficiency/ComputeL1XE50toL1XE30Efficiency.h	/^    Int_t efficiency_nbins = (gevHigh - gevLow) \/ efficiency_bin_width;$/;"	m	class:ComputeL1XE50toL1XE30Efficiency
+efficiency_nbins	old_correction/plotl130dists/BuildEfficiencyL150.h	/^    Int_t efficiency_nbins = (gevHigh - gevLow) \/ efficiency_bin_width;$/;"	m	class:BuildEfficiencyL150
+efficiency_title	Compute_L1XE30_Efficiency/ComputeL1XE30toZBEfficiency.h	/^    TString efficiency_title = zb_alg_name + " Efficiency";$/;"	m	class:ComputeL1XE30toZBEfficiency
+efficiency_title	Compute_L1XE50_L1XE30_Efficiency/ComputeL1XE50toL1XE30Efficiency.h	/^    TString efficiency_title = zb_alg_name + " Efficiency";$/;"	m	class:ComputeL1XE50toL1XE30Efficiency
+efficiency_title	old_correction/plotl130dists/BuildEfficiencyL150.h	/^    TString efficiency_title = zb_alg_name + " Efficiency";$/;"	m	class:BuildEfficiencyL150
+efficiency_xaxis	Compute_L1XE30_Efficiency/ComputeL1XE30toZBEfficiency.h	/^    TString efficiency_xaxis = zb_alg_name + " [GeV]";$/;"	m	class:ComputeL1XE30toZBEfficiency
+efficiency_xaxis	Compute_L1XE50_L1XE30_Efficiency/ComputeL1XE50toL1XE30Efficiency.h	/^    TString efficiency_xaxis = zb_alg_name + " [GeV]";$/;"	m	class:ComputeL1XE50toL1XE30Efficiency
+efficiency_xaxis	old_correction/plotl130dists/BuildEfficiencyL150.h	/^    TString efficiency_xaxis = zb_alg_name + " [GeV]";$/;"	m	class:BuildEfficiencyL150
+efficiency_yaxis	Compute_L1XE30_Efficiency/ComputeL1XE30toZBEfficiency.h	/^    TString efficiency_yaxis = "efficiency";$/;"	m	class:ComputeL1XE30toZBEfficiency
+efficiency_yaxis	Compute_L1XE50_L1XE30_Efficiency/ComputeL1XE50toL1XE30Efficiency.h	/^    TString efficiency_yaxis = "efficiency";$/;"	m	class:ComputeL1XE50toL1XE30Efficiency
+efficiency_yaxis	old_correction/plotl130dists/BuildEfficiencyL150.h	/^    TString efficiency_yaxis = "efficiency";$/;"	m	class:BuildEfficiencyL150
 fChain	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTree          *fChain = 0;   \/\/!pointer to the analyzed TTree or TChain$/;"	m	class:Jburr_Template_Selector
-fChain	CorrectAllTheWay/CorrectingDistributions.h	/^   TTree          *fChain = 0;   \/\/!pointer to the analyzed TTree or TChain$/;"	m	class:CorrectingDistributions
-fChain	L1XE30toL1XE50/performL130to50Correction/CorrectingDistributions.h	/^   TTree          *fChain = 0;   \/\/!pointer to the analyzed TTree or TChain$/;"	m	class:CorrectingDistributions
-fChain	L1XE30toL1XE50/plotl130dists/PlotMETDistsVersMu.h	/^   TTree          *fChain = 0;   \/\/!pointer to the analyzed TTree or TChain$/;"	m	class:PlotMETDistsVersMu
-fChain	zbToL1XE30/PerformCorrection/CorrectingDistributions.h	/^   TTree          *fChain = 0;   \/\/!pointer to the analyzed TTree or TChain$/;"	m	class:CorrectingDistributions
-fChain	zbToL1XE30/plotMETDistsVersusMu/PlotMETDistsVersMu.h	/^   TTree          *fChain = 0;   \/\/!pointer to the analyzed TTree or TChain$/;"	m	class:PlotMETDistsVersMu
+fChain	Compute_L1XE30_Efficiency/ComputeL1XE30toZBEfficiency.h	/^   TTree          *fChain = 0;   \/\/!pointer to the analyzed TTree or TChain$/;"	m	class:ComputeL1XE30toZBEfficiency
+fChain	Compute_L1XE50_L1XE30_Efficiency/ComputeL1XE50toL1XE30Efficiency.h	/^   TTree          *fChain = 0;   \/\/!pointer to the analyzed TTree or TChain$/;"	m	class:ComputeL1XE50toL1XE30Efficiency
+fChain	CorrectL1XE30toZB/CorrectL1XE30toZB.h	/^   TTree          *fChain = 0;   \/\/!pointer to the analyzed TTree or TChain$/;"	m	class:CorrectL1XE30toZB
+fChain	CorrectL1XE50toZB/CorrectL1XE50toZB.h	/^   TTree          *fChain = 0;   \/\/!pointer to the analyzed TTree or TChain$/;"	m	class:CorrectL1XE50toZB
+fChain	old_correction/plotl130dists/BuildEfficiencyL150.h	/^   TTree          *fChain = 0;   \/\/!pointer to the analyzed TTree or TChain$/;"	m	class:BuildEfficiencyL150
 fReader	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReader     fReader;  \/\/!the tree reader$/;"	m	class:Jburr_Template_Selector
-fReader	CorrectAllTheWay/CorrectingDistributions.h	/^   TTreeReader     fReader;  \/\/!the tree reader$/;"	m	class:CorrectingDistributions
-fReader	L1XE30toL1XE50/performL130to50Correction/CorrectingDistributions.h	/^   TTreeReader     fReader;  \/\/!the tree reader$/;"	m	class:CorrectingDistributions
-fReader	L1XE30toL1XE50/plotl130dists/PlotMETDistsVersMu.h	/^   TTreeReader     fReader;  \/\/!the tree reader$/;"	m	class:PlotMETDistsVersMu
-fReader	zbToL1XE30/PerformCorrection/CorrectingDistributions.h	/^   TTreeReader     fReader;  \/\/!the tree reader$/;"	m	class:CorrectingDistributions
-fReader	zbToL1XE30/plotMETDistsVersusMu/PlotMETDistsVersMu.h	/^   TTreeReader     fReader;  \/\/!the tree reader$/;"	m	class:PlotMETDistsVersMu
-fa2	zbToL1XE30/Plot_Between_Fits/fa2.C	/^void fa2(){$/;"	f
-fitFunction	L1XE30toL1XE50/plotl130dists/PlotMETDistsVersMu.C	/^Double_t PlotMETDistsVersMu::fitFunction(Double_t *x , Double_t *par ){\/\/{{{$/;"	f	class:PlotMETDistsVersMu
-fitFunction	zbToL1XE30/plotMETDistsVersusMu/PlotMETDistsVersMu.C	/^Double_t PlotMETDistsVersMu::fitFunction(Double_t *x , Double_t *par ){\/\/{{{$/;"	f	class:PlotMETDistsVersMu
-generateFitFunction	L1XE30toL1XE50/plotl130dists/PlotMETDistsVersMu.C	/^TF1* PlotMETDistsVersMu::generateFitFunction(TEfficiency* teff_obj, float gevMax, float initial_slope, float initial_intercept, float initial_sigma ){\/\/{{{$/;"	f	class:PlotMETDistsVersMu
-generateFitFunction	zbToL1XE30/plotMETDistsVersusMu/PlotMETDistsVersMu.C	/^TF1* PlotMETDistsVersMu::generateFitFunction(TEfficiency* teff_obj, float gevMax, float initial_slope, float initial_intercept, float initial_sigma ){\/\/{{{$/;"	f	class:PlotMETDistsVersMu
-gevHigh	CorrectAllTheWay/CorrectingDistributions.h	/^    Float_t gevHigh = 300.0;$/;"	m	class:CorrectingDistributions
-gevHigh	L1XE30toL1XE50/performL130to50Correction/CorrectingDistributions.h	/^    Float_t gevHigh = 300.0;$/;"	m	class:CorrectingDistributions
-gevHigh	L1XE30toL1XE50/plotl130dists/PlotMETDistsVersMu.h	/^    Float_t gevHigh = 300.0;$/;"	m	class:PlotMETDistsVersMu
-gevHigh	zbToL1XE30/PerformCorrection/CorrectingDistributions.h	/^    Float_t gevHigh = 300.0;$/;"	m	class:CorrectingDistributions
-gevHigh	zbToL1XE30/plotMETDistsVersusMu/PlotMETDistsVersMu.h	/^    Float_t gevHigh = 300.0;$/;"	m	class:PlotMETDistsVersMu
-gevLow	CorrectAllTheWay/CorrectingDistributions.h	/^    Float_t gevLow = 0.0;$/;"	m	class:CorrectingDistributions
-gevLow	L1XE30toL1XE50/performL130to50Correction/CorrectingDistributions.h	/^    Float_t gevLow = 0.0;$/;"	m	class:CorrectingDistributions
-gevLow	L1XE30toL1XE50/plotl130dists/PlotMETDistsVersMu.h	/^    Float_t gevLow = 0.0;$/;"	m	class:PlotMETDistsVersMu
-gevLow	zbToL1XE30/PerformCorrection/CorrectingDistributions.h	/^    Float_t gevLow = 0.0;$/;"	m	class:CorrectingDistributions
-gevLow	zbToL1XE30/plotMETDistsVersusMu/PlotMETDistsVersMu.h	/^    Float_t gevLow = 0.0;$/;"	m	class:PlotMETDistsVersMu
+fReader	Compute_L1XE30_Efficiency/ComputeL1XE30toZBEfficiency.h	/^   TTreeReader     fReader;  \/\/!the tree reader$/;"	m	class:ComputeL1XE30toZBEfficiency
+fReader	Compute_L1XE50_L1XE30_Efficiency/ComputeL1XE50toL1XE30Efficiency.h	/^   TTreeReader     fReader;  \/\/!the tree reader$/;"	m	class:ComputeL1XE50toL1XE30Efficiency
+fReader	CorrectL1XE30toZB/CorrectL1XE30toZB.h	/^   TTreeReader     fReader;  \/\/!the tree reader$/;"	m	class:CorrectL1XE30toZB
+fReader	CorrectL1XE50toZB/CorrectL1XE50toZB.h	/^   TTreeReader     fReader;  \/\/!the tree reader$/;"	m	class:CorrectL1XE50toZB
+fReader	old_correction/plotl130dists/BuildEfficiencyL150.h	/^   TTreeReader     fReader;  \/\/!the tree reader$/;"	m	class:BuildEfficiencyL150
+fa2	Plot_Between_Fits/fa2.C	/^void fa2(){$/;"	f
+fitFunction	Compute_L1XE30_Efficiency/ComputeL1XE30toZBEfficiency.C	/^Double_t ComputeL1XE30toZBEfficiency::fitFunction(Double_t *x , Double_t *par ){\/\/{{{$/;"	f	class:ComputeL1XE30toZBEfficiency
+fitFunction	Compute_L1XE50_L1XE30_Efficiency/ComputeL1XE50toL1XE30Efficiency.C	/^Double_t ComputeL1XE50toL1XE30Efficiency::fitFunction(Double_t *x , Double_t *par ){\/\/{{{$/;"	f	class:ComputeL1XE50toL1XE30Efficiency
+fitFunction	old_correction/plotl130dists/BuildEfficiencyL150.C	/^Double_t BuildEfficiencyL150::fitFunction(Double_t *x , Double_t *par ){\/\/{{{$/;"	f	class:BuildEfficiencyL150
+generateFitFunction	Compute_L1XE30_Efficiency/ComputeL1XE30toZBEfficiency.C	/^TF1* ComputeL1XE30toZBEfficiency::generateFitFunction(TEfficiency* teff_obj, float gevMax, float initial_slope, float initial_intercept, float initial_sigma ){\/\/{{{$/;"	f	class:ComputeL1XE30toZBEfficiency
+generateFitFunction	Compute_L1XE50_L1XE30_Efficiency/ComputeL1XE50toL1XE30Efficiency.C	/^TF1* ComputeL1XE50toL1XE30Efficiency::generateFitFunction(TEfficiency* teff_obj, float gevMax, float initial_slope, float initial_intercept, float initial_sigma ){\/\/{{{$/;"	f	class:ComputeL1XE50toL1XE30Efficiency
+generateFitFunction	old_correction/plotl130dists/BuildEfficiencyL150.C	/^TF1* BuildEfficiencyL150::generateFitFunction(TEfficiency* teff_obj, float gevMax, float initial_slope, float initial_intercept, float initial_sigma ){\/\/{{{$/;"	f	class:BuildEfficiencyL150
+gevHigh	Compute_L1XE30_Efficiency/ComputeL1XE30toZBEfficiency.h	/^    Float_t gevHigh = 300.0;$/;"	m	class:ComputeL1XE30toZBEfficiency
+gevHigh	Compute_L1XE50_L1XE30_Efficiency/ComputeL1XE50toL1XE30Efficiency.h	/^    Float_t gevHigh = 300.0;$/;"	m	class:ComputeL1XE50toL1XE30Efficiency
+gevHigh	CorrectL1XE30toZB/CorrectL1XE30toZB.h	/^    Float_t gevHigh = 300.0;$/;"	m	class:CorrectL1XE30toZB
+gevHigh	CorrectL1XE50toZB/CorrectL1XE50toZB.h	/^    Float_t gevHigh = 300.0;$/;"	m	class:CorrectL1XE50toZB
+gevHigh	old_correction/plotl130dists/BuildEfficiencyL150.h	/^    Float_t gevHigh = 300.0;$/;"	m	class:BuildEfficiencyL150
+gevLow	Compute_L1XE30_Efficiency/ComputeL1XE30toZBEfficiency.h	/^    Float_t gevLow = 0.0;$/;"	m	class:ComputeL1XE30toZBEfficiency
+gevLow	Compute_L1XE50_L1XE30_Efficiency/ComputeL1XE50toL1XE30Efficiency.h	/^    Float_t gevLow = 0.0;$/;"	m	class:ComputeL1XE50toL1XE30Efficiency
+gevLow	CorrectL1XE30toZB/CorrectL1XE30toZB.h	/^    Float_t gevLow = 0.0;$/;"	m	class:CorrectL1XE30toZB
+gevLow	CorrectL1XE50toZB/CorrectL1XE50toZB.h	/^    Float_t gevLow = 0.0;$/;"	m	class:CorrectL1XE50toZB
+gevLow	old_correction/plotl130dists/BuildEfficiencyL150.h	/^    Float_t gevLow = 0.0;$/;"	m	class:BuildEfficiencyL150
 inMuRange	BurrTemplateSelector/Jburr_Template_Selector.C	/^Bool_t Jburr_Template_Selector::inMuRange( Float_t a , Float_t b ){ \/\/{{{$/;"	f	class:Jburr_Template_Selector
-inMuRange	CorrectAllTheWay/CorrectingDistributions.C	/^Bool_t CorrectingDistributions::inMuRange( Float_t a , Float_t b ){ \/\/{{{$/;"	f	class:CorrectingDistributions
-inMuRange	L1XE30toL1XE50/performL130to50Correction/CorrectingDistributions.C	/^Bool_t CorrectingDistributions::inMuRange( Float_t a , Float_t b ){ \/\/{{{$/;"	f	class:CorrectingDistributions
-inMuRange	L1XE30toL1XE50/plotl130dists/PlotMETDistsVersMu.C	/^Bool_t PlotMETDistsVersMu::inMuRange( Float_t a , Float_t b ){ \/\/{{{$/;"	f	class:PlotMETDistsVersMu
-inMuRange	zbToL1XE30/PerformCorrection/CorrectingDistributions.C	/^Bool_t CorrectingDistributions::inMuRange( Float_t a , Float_t b ){ \/\/{{{$/;"	f	class:CorrectingDistributions
-inMuRange	zbToL1XE30/plotMETDistsVersusMu/PlotMETDistsVersMu.C	/^Bool_t PlotMETDistsVersMu::inMuRange( Float_t a , Float_t b ){ \/\/{{{$/;"	f	class:PlotMETDistsVersMu
+inMuRange	Compute_L1XE30_Efficiency/ComputeL1XE30toZBEfficiency.C	/^Bool_t ComputeL1XE30toZBEfficiency::inMuRange( Float_t a , Float_t b ){ \/\/{{{$/;"	f	class:ComputeL1XE30toZBEfficiency
+inMuRange	Compute_L1XE50_L1XE30_Efficiency/ComputeL1XE50toL1XE30Efficiency.C	/^Bool_t ComputeL1XE50toL1XE30Efficiency::inMuRange( Float_t a , Float_t b ){ \/\/{{{$/;"	f	class:ComputeL1XE50toL1XE30Efficiency
+inMuRange	CorrectL1XE30toZB/CorrectL1XE30toZB.C	/^Bool_t CorrectL1XE30toZB::inMuRange( Float_t a , Float_t b ){ \/\/{{{$/;"	f	class:CorrectL1XE30toZB
+inMuRange	CorrectL1XE50toZB/CorrectL1XE50toZB.C	/^Bool_t CorrectL1XE50toZB::inMuRange( Float_t a , Float_t b ){ \/\/{{{$/;"	f	class:CorrectL1XE50toZB
+inMuRange	old_correction/plotl130dists/BuildEfficiencyL150.C	/^Bool_t BuildEfficiencyL150::inMuRange( Float_t a , Float_t b ){ \/\/{{{$/;"	f	class:BuildEfficiencyL150
 isGoodRun	BurrTemplateSelector/Jburr_Template_Selector.C	/^Bool_t Jburr_Template_Selector::isGoodRun(){ \/\/{{{$/;"	f	class:Jburr_Template_Selector
-isGoodRun	CorrectAllTheWay/CorrectingDistributions.C	/^Bool_t CorrectingDistributions::isGoodRun(){\/\/{{{$/;"	f	class:CorrectingDistributions
-isGoodRun	L1XE30toL1XE50/performL130to50Correction/CorrectingDistributions.C	/^Bool_t CorrectingDistributions::isGoodRun(){\/\/{{{$/;"	f	class:CorrectingDistributions
-isGoodRun	L1XE30toL1XE50/plotl130dists/PlotMETDistsVersMu.C	/^Bool_t PlotMETDistsVersMu::isGoodRun(){ \/\/{{{$/;"	f	class:PlotMETDistsVersMu
-isGoodRun	zbToL1XE30/PerformCorrection/CorrectingDistributions.C	/^Bool_t CorrectingDistributions::isGoodRun(){\/\/{{{$/;"	f	class:CorrectingDistributions
-isGoodRun	zbToL1XE30/plotMETDistsVersusMu/PlotMETDistsVersMu.C	/^Bool_t PlotMETDistsVersMu::isGoodRun(){ \/\/{{{$/;"	f	class:PlotMETDistsVersMu
-isHLT_zb_L1XE30	L1XE30toL1XE50/plotl130dists/PlotMETDistsVersMu.C	/^Bool_t PlotMETDistsVersMu::isHLT_zb_L1XE30(){ \/\/{{{$/;"	f	class:PlotMETDistsVersMu
-isHLT_zb_L1XE30	zbToL1XE30/plotMETDistsVersusMu/PlotMETDistsVersMu.C	/^Bool_t PlotMETDistsVersMu::isHLT_zb_L1XE30(){ \/\/{{{$/;"	f	class:PlotMETDistsVersMu
-isHLT_zb_L1ZB	L1XE30toL1XE50/plotl130dists/PlotMETDistsVersMu.C	/^Bool_t PlotMETDistsVersMu::isHLT_zb_L1ZB(){ \/\/{{{$/;"	f	class:PlotMETDistsVersMu
-isHLT_zb_L1ZB	zbToL1XE30/plotMETDistsVersusMu/PlotMETDistsVersMu.C	/^Bool_t PlotMETDistsVersMu::isHLT_zb_L1ZB(){ \/\/{{{$/;"	f	class:PlotMETDistsVersMu
-isPassnoAlgL1XE30	CorrectAllTheWay/CorrectingDistributions.C	/^Bool_t CorrectingDistributions::isPassnoAlgL1XE30(){ \/\/ {{{$/;"	f	class:CorrectingDistributions
-isPassnoAlgL1XE30	zbToL1XE30/PerformCorrection/CorrectingDistributions.C	/^Bool_t CorrectingDistributions::isPassnoAlgL1XE30(){ \/\/ {{{$/;"	f	class:CorrectingDistributions
-isPassnoAlgL1XE50	L1XE30toL1XE50/performL130to50Correction/CorrectingDistributions.C	/^Bool_t CorrectingDistributions::isPassnoAlgL1XE50(){ \/\/ {{{$/;"	f	class:CorrectingDistributions
+isGoodRun	Compute_L1XE30_Efficiency/ComputeL1XE30toZBEfficiency.C	/^Bool_t ComputeL1XE30toZBEfficiency::isGoodRun(){ \/\/{{{$/;"	f	class:ComputeL1XE30toZBEfficiency
+isGoodRun	Compute_L1XE50_L1XE30_Efficiency/ComputeL1XE50toL1XE30Efficiency.C	/^Bool_t ComputeL1XE50toL1XE30Efficiency::isGoodRun(){ \/\/{{{$/;"	f	class:ComputeL1XE50toL1XE30Efficiency
+isGoodRun	CorrectL1XE30toZB/CorrectL1XE30toZB.C	/^Bool_t CorrectL1XE30toZB::isGoodRun(){\/\/{{{$/;"	f	class:CorrectL1XE30toZB
+isGoodRun	CorrectL1XE50toZB/CorrectL1XE50toZB.C	/^Bool_t CorrectL1XE50toZB::isGoodRun(){\/\/{{{$/;"	f	class:CorrectL1XE50toZB
+isGoodRun	old_correction/plotl130dists/BuildEfficiencyL150.C	/^Bool_t BuildEfficiencyL150::isGoodRun(){ \/\/{{{$/;"	f	class:BuildEfficiencyL150
+isHLT_zb_L1XE30	Compute_L1XE30_Efficiency/ComputeL1XE30toZBEfficiency.C	/^Bool_t ComputeL1XE30toZBEfficiency::isHLT_zb_L1XE30(){ \/\/{{{$/;"	f	class:ComputeL1XE30toZBEfficiency
+isHLT_zb_L1XE30	Compute_L1XE50_L1XE30_Efficiency/ComputeL1XE50toL1XE30Efficiency.C	/^Bool_t ComputeL1XE50toL1XE30Efficiency::isHLT_zb_L1XE30(){ \/\/{{{$/;"	f	class:ComputeL1XE50toL1XE30Efficiency
+isHLT_zb_L1XE30	old_correction/plotl130dists/BuildEfficiencyL150.C	/^Bool_t BuildEfficiencyL150::isHLT_zb_L1XE30(){ \/\/{{{$/;"	f	class:BuildEfficiencyL150
+isHLT_zb_L1ZB	Compute_L1XE30_Efficiency/ComputeL1XE30toZBEfficiency.C	/^Bool_t ComputeL1XE30toZBEfficiency::isHLT_zb_L1ZB(){ \/\/{{{$/;"	f	class:ComputeL1XE30toZBEfficiency
+isHLT_zb_L1ZB	Compute_L1XE50_L1XE30_Efficiency/ComputeL1XE50toL1XE30Efficiency.C	/^Bool_t ComputeL1XE50toL1XE30Efficiency::isHLT_zb_L1ZB(){ \/\/{{{$/;"	f	class:ComputeL1XE50toL1XE30Efficiency
+isHLT_zb_L1ZB	old_correction/plotl130dists/BuildEfficiencyL150.C	/^Bool_t BuildEfficiencyL150::isHLT_zb_L1ZB(){ \/\/{{{$/;"	f	class:BuildEfficiencyL150
+isPassnoAlgL1XE30	CorrectL1XE30toZB/CorrectL1XE30toZB.C	/^Bool_t CorrectL1XE30toZB::isPassnoAlgL1XE30(){ \/\/ {{{$/;"	f	class:CorrectL1XE30toZB
+isPassnoAlgL1XE50	CorrectL1XE50toZB/CorrectL1XE50toZB.C	/^Bool_t CorrectL1XE50toZB::isPassnoAlgL1XE50(){ \/\/ {{{$/;"	f	class:CorrectL1XE50toZB
 isPassnoAlgXE30	BurrTemplateSelector/Jburr_Template_Selector.C	/^Bool_t Jburr_Template_Selector::isPassnoAlgXE30(){ \/\/{{{$/;"	f	class:Jburr_Template_Selector
-l	zbToL1XE30/PlotParametersVsMu/PlotParameterVals.cpp	/^TList* l = 0;$/;"	v
-l1_alg_name	L1XE30toL1XE50/plotl130dists/PlotMETDistsVersMu.h	/^   TString l1_alg_name = "L1.met";$/;"	m	class:PlotMETDistsVersMu
-l1_alg_name	zbToL1XE30/plotMETDistsVersusMu/PlotMETDistsVersMu.h	/^   TString l1_alg_name = "L1.met";$/;"	m	class:PlotMETDistsVersMu
-met_dist_binwidth	L1XE30toL1XE50/plotl130dists/PlotMETDistsVersMu.h	/^    Float_t met_dist_binwidth = 1.0;$/;"	m	class:PlotMETDistsVersMu
-met_dist_binwidth	zbToL1XE30/plotMETDistsVersusMu/PlotMETDistsVersMu.h	/^    Float_t met_dist_binwidth = 1.0;$/;"	m	class:PlotMETDistsVersMu
-met_dist_nbins	L1XE30toL1XE50/plotl130dists/PlotMETDistsVersMu.h	/^    Int_t met_dist_nbins = (gevHigh - gevLow) \/ met_dist_binwidth; \/\/ compute nbins as function of preferred width$/;"	m	class:PlotMETDistsVersMu
-met_dist_nbins	zbToL1XE30/plotMETDistsVersusMu/PlotMETDistsVersMu.h	/^    Int_t met_dist_nbins = (gevHigh - gevLow) \/ met_dist_binwidth; \/\/ compute nbins as function of preferred width$/;"	m	class:PlotMETDistsVersMu
-met_dist_xaxis	L1XE30toL1XE50/plotl130dists/PlotMETDistsVersMu.h	/^    TString met_dist_xaxis = zb_alg_name + " [GeV]";$/;"	m	class:PlotMETDistsVersMu
-met_dist_xaxis	zbToL1XE30/plotMETDistsVersusMu/PlotMETDistsVersMu.h	/^    TString met_dist_xaxis = zb_alg_name + " [GeV]";$/;"	m	class:PlotMETDistsVersMu
-met_dist_yaxis	L1XE30toL1XE50/plotl130dists/PlotMETDistsVersMu.h	/^    TString met_dist_yaxis = "Number of Entries";$/;"	m	class:PlotMETDistsVersMu
-met_dist_yaxis	zbToL1XE30/plotMETDistsVersusMu/PlotMETDistsVersMu.h	/^    TString met_dist_yaxis = "Number of Entries";$/;"	m	class:PlotMETDistsVersMu
+l	PlotParametersVsMu/PlotParameterVals.cpp	/^TList* l = 0;$/;"	v
+l1_alg_name	Compute_L1XE30_Efficiency/ComputeL1XE30toZBEfficiency.h	/^   TString l1_alg_name = "L1.met";$/;"	m	class:ComputeL1XE30toZBEfficiency
+l1_alg_name	Compute_L1XE50_L1XE30_Efficiency/ComputeL1XE50toL1XE30Efficiency.h	/^   TString l1_alg_name = "L1.met";$/;"	m	class:ComputeL1XE50toL1XE30Efficiency
+l1_alg_name	old_correction/plotl130dists/BuildEfficiencyL150.h	/^   TString l1_alg_name = "L1.met";$/;"	m	class:BuildEfficiencyL150
+met_dist_binwidth	Compute_L1XE30_Efficiency/ComputeL1XE30toZBEfficiency.h	/^    Float_t met_dist_binwidth = 1.0;$/;"	m	class:ComputeL1XE30toZBEfficiency
+met_dist_binwidth	Compute_L1XE50_L1XE30_Efficiency/ComputeL1XE50toL1XE30Efficiency.h	/^    Float_t met_dist_binwidth = 1.0;$/;"	m	class:ComputeL1XE50toL1XE30Efficiency
+met_dist_binwidth	old_correction/plotl130dists/BuildEfficiencyL150.h	/^    Float_t met_dist_binwidth = 1.0;$/;"	m	class:BuildEfficiencyL150
+met_dist_nbins	Compute_L1XE30_Efficiency/ComputeL1XE30toZBEfficiency.h	/^    Int_t met_dist_nbins = (gevHigh - gevLow) \/ met_dist_binwidth; \/\/ compute nbins as function of preferred width$/;"	m	class:ComputeL1XE30toZBEfficiency
+met_dist_nbins	Compute_L1XE50_L1XE30_Efficiency/ComputeL1XE50toL1XE30Efficiency.h	/^    Int_t met_dist_nbins = (gevHigh - gevLow) \/ met_dist_binwidth; \/\/ compute nbins as function of preferred width$/;"	m	class:ComputeL1XE50toL1XE30Efficiency
+met_dist_nbins	old_correction/plotl130dists/BuildEfficiencyL150.h	/^    Int_t met_dist_nbins = (gevHigh - gevLow) \/ met_dist_binwidth; \/\/ compute nbins as function of preferred width$/;"	m	class:BuildEfficiencyL150
+met_dist_xaxis	Compute_L1XE30_Efficiency/ComputeL1XE30toZBEfficiency.h	/^    TString met_dist_xaxis = zb_alg_name + " [GeV]";$/;"	m	class:ComputeL1XE30toZBEfficiency
+met_dist_xaxis	Compute_L1XE50_L1XE30_Efficiency/ComputeL1XE50toL1XE30Efficiency.h	/^    TString met_dist_xaxis = zb_alg_name + " [GeV]";$/;"	m	class:ComputeL1XE50toL1XE30Efficiency
+met_dist_xaxis	old_correction/plotl130dists/BuildEfficiencyL150.h	/^    TString met_dist_xaxis = zb_alg_name + " [GeV]";$/;"	m	class:BuildEfficiencyL150
+met_dist_yaxis	Compute_L1XE30_Efficiency/ComputeL1XE30toZBEfficiency.h	/^    TString met_dist_yaxis = "Number of Entries";$/;"	m	class:ComputeL1XE30toZBEfficiency
+met_dist_yaxis	Compute_L1XE50_L1XE30_Efficiency/ComputeL1XE50toL1XE30Efficiency.h	/^    TString met_dist_yaxis = "Number of Entries";$/;"	m	class:ComputeL1XE50toL1XE30Efficiency
+met_dist_yaxis	old_correction/plotl130dists/BuildEfficiencyL150.h	/^    TString met_dist_yaxis = "Number of Entries";$/;"	m	class:BuildEfficiencyL150
 mht_met	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Float_t> mht_met = {fReader, "mht.met"};$/;"	m	class:Jburr_Template_Selector
 mht_mpx	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Float_t> mht_mpx = {fReader, "mht.mpx"};$/;"	m	class:Jburr_Template_Selector
 mht_mpy	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Float_t> mht_mpy = {fReader, "mht.mpy"};$/;"	m	class:Jburr_Template_Selector
 mht_phi	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Float_t> mht_phi = {fReader, "mht.phi"};$/;"	m	class:Jburr_Template_Selector
 mht_sumet	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Float_t> mht_sumet = {fReader, "mht.sumet"};$/;"	m	class:Jburr_Template_Selector
-mu_analysis_file	CorrectAllTheWay/CorrectingDistributions.h	/^    TFile* mu_analysis_file = 0;$/;"	m	class:CorrectingDistributions
-mu_analysis_file	L1XE30toL1XE50/performL130to50Correction/CorrectingDistributions.h	/^    TFile* mu_analysis_file = 0;$/;"	m	class:CorrectingDistributions
-mu_analysis_file	zbToL1XE30/PerformCorrection/CorrectingDistributions.h	/^    TFile* mu_analysis_file = 0;$/;"	m	class:CorrectingDistributions
-nbins	CorrectAllTheWay/CorrectingDistributions.h	/^    Int_t nbins = (gevHigh-gevLow)\/binWidth;$/;"	m	class:CorrectingDistributions
-nbins	L1XE30toL1XE50/performL130to50Correction/CorrectingDistributions.h	/^    Int_t nbins = (gevHigh-gevLow)\/binWidth;$/;"	m	class:CorrectingDistributions
-nbins	zbToL1XE30/PerformCorrection/CorrectingDistributions.h	/^    Int_t nbins = (gevHigh-gevLow)\/binWidth;$/;"	m	class:CorrectingDistributions
+mu_analysis_file	CorrectL1XE30toZB/CorrectL1XE30toZB.h	/^    TFile* mu_analysis_file = 0;$/;"	m	class:CorrectL1XE30toZB
+mu_analysis_file	CorrectL1XE50toZB/CorrectL1XE50toZB.h	/^    TFile* mu_analysis_file = 0;$/;"	m	class:CorrectL1XE50toZB
+nbins	CorrectL1XE30toZB/CorrectL1XE30toZB.h	/^    Int_t nbins = (gevHigh-gevLow)\/binWidth;$/;"	m	class:CorrectL1XE30toZB
+nbins	CorrectL1XE50toZB/CorrectL1XE50toZB.h	/^    Int_t nbins = (gevHigh-gevLow)\/binWidth;$/;"	m	class:CorrectL1XE50toZB
 passedL1ZB	BurrTemplateSelector/Jburr_Template_Selector.C	/^Bool_t Jburr_Template_Selector::passedL1ZB(){ \/\/{{{$/;"	f	class:Jburr_Template_Selector
-passedL1ZB	CorrectAllTheWay/CorrectingDistributions.C	/^Bool_t CorrectingDistributions::passedL1ZB(){\/\/{{{$/;"	f	class:CorrectingDistributions
-passedL1ZB	L1XE30toL1XE50/performL130to50Correction/CorrectingDistributions.C	/^Bool_t CorrectingDistributions::passedL1ZB(){\/\/{{{$/;"	f	class:CorrectingDistributions
-passedL1ZB	zbToL1XE30/PerformCorrection/CorrectingDistributions.C	/^Bool_t CorrectingDistributions::passedL1ZB(){\/\/{{{$/;"	f	class:CorrectingDistributions
+passedL1ZB	CorrectL1XE30toZB/CorrectL1XE30toZB.C	/^Bool_t CorrectL1XE30toZB::passedL1ZB(){\/\/{{{$/;"	f	class:CorrectL1XE30toZB
+passedL1ZB	CorrectL1XE50toZB/CorrectL1XE50toZB.C	/^Bool_t CorrectL1XE50toZB::passedL1ZB(){\/\/{{{$/;"	f	class:CorrectL1XE50toZB
 pufit_met	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Float_t> pufit_met = {fReader, "pufit.met"};$/;"	m	class:Jburr_Template_Selector
 pufit_mpx	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Float_t> pufit_mpx = {fReader, "pufit.mpx"};$/;"	m	class:Jburr_Template_Selector
 pufit_mpy	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Float_t> pufit_mpy = {fReader, "pufit.mpy"};$/;"	m	class:Jburr_Template_Selector
 pufit_phi	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Float_t> pufit_phi = {fReader, "pufit.phi"};$/;"	m	class:Jburr_Template_Selector
 pufit_sumet	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Float_t> pufit_sumet = {fReader, "pufit.sumet"};$/;"	m	class:Jburr_Template_Selector
-ray	zbToL1XE30/Plot_Between_Fits/ray.C	/^void ray() {$/;"	f
-run_plotMETDist	L1XE30toL1XE50/plotl130dists/run_plotMETDist.C	/^void run_plotMETDist(){$/;"	f
-run_plotMETDist	zbToL1XE30/plotMETDistsVersusMu/run_plotMETDist.C	/^void run_plotMETDist(){$/;"	f
+ray	Plot_Between_Fits/ray.C	/^void ray() {$/;"	f
+run_plotMETDist	old_correction/plotl130dists/run_plotMETDist.C	/^void run_plotMETDist(){$/;"	f
 topocl_met	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Float_t> topocl_met = {fReader, "topocl.met"};$/;"	m	class:Jburr_Template_Selector
 topocl_mpx	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Float_t> topocl_mpx = {fReader, "topocl.mpx"};$/;"	m	class:Jburr_Template_Selector
 topocl_mpy	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Float_t> topocl_mpy = {fReader, "topocl.mpy"};$/;"	m	class:Jburr_Template_Selector
 topocl_phi	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Float_t> topocl_phi = {fReader, "topocl.phi"};$/;"	m	class:Jburr_Template_Selector
 topocl_sumet	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Float_t> topocl_sumet = {fReader, "topocl.sumet"};$/;"	m	class:Jburr_Template_Selector
 totalCorrection	totalCorrection.cpp	/^int totalCorrection(){$/;"	f
-xaxisTitle	CorrectAllTheWay/CorrectingDistributions.h	/^    TString xaxisTitle = alg_name + " [GeV]";$/;"	m	class:CorrectingDistributions
-xaxisTitle	L1XE30toL1XE50/performL130to50Correction/CorrectingDistributions.h	/^    TString xaxisTitle = alg_name + " [GeV]";$/;"	m	class:CorrectingDistributions
-xaxisTitle	zbToL1XE30/PerformCorrection/CorrectingDistributions.h	/^    TString xaxisTitle = alg_name + " [GeV]";$/;"	m	class:CorrectingDistributions
-yaxisTitle	CorrectAllTheWay/CorrectingDistributions.h	/^    TString yaxisTitle = "Number of Entries";$/;"	m	class:CorrectingDistributions
-yaxisTitle	L1XE30toL1XE50/performL130to50Correction/CorrectingDistributions.h	/^    TString yaxisTitle = "Number of Entries";$/;"	m	class:CorrectingDistributions
-yaxisTitle	zbToL1XE30/PerformCorrection/CorrectingDistributions.h	/^    TString yaxisTitle = "Number of Entries";$/;"	m	class:CorrectingDistributions
-zbMETMuBin0thru10	CorrectAllTheWay/CorrectingDistributions.h	/^    TH1D* zbMETMuBin0thru10 = 0;$/;"	m	class:CorrectingDistributions
-zbMETMuBin0thru10	L1XE30toL1XE50/performL130to50Correction/CorrectingDistributions.h	/^    TH1D* zbMETMuBin0thru10 = 0;$/;"	m	class:CorrectingDistributions
-zbMETMuBin0thru10	zbToL1XE30/PerformCorrection/CorrectingDistributions.h	/^    TH1D* zbMETMuBin0thru10 = 0;$/;"	m	class:CorrectingDistributions
-zbMETMuBin0thru10_copy	CorrectAllTheWay/CorrectingDistributions.h	/^    TH1D* zbMETMuBin0thru10_copy = 0;$/;"	m	class:CorrectingDistributions
-zbMETMuBin0thru10_copy	L1XE30toL1XE50/performL130to50Correction/CorrectingDistributions.h	/^    TH1D* zbMETMuBin0thru10_copy = 0;$/;"	m	class:CorrectingDistributions
-zbMETMuBin0thru10_copy	zbToL1XE30/PerformCorrection/CorrectingDistributions.h	/^    TH1D* zbMETMuBin0thru10_copy = 0;$/;"	m	class:CorrectingDistributions
-zbMETMuBin10thru20	CorrectAllTheWay/CorrectingDistributions.h	/^    TH1D* zbMETMuBin10thru20 = 0;$/;"	m	class:CorrectingDistributions
-zbMETMuBin10thru20	L1XE30toL1XE50/performL130to50Correction/CorrectingDistributions.h	/^    TH1D* zbMETMuBin10thru20 = 0;$/;"	m	class:CorrectingDistributions
-zbMETMuBin10thru20	zbToL1XE30/PerformCorrection/CorrectingDistributions.h	/^    TH1D* zbMETMuBin10thru20 = 0;$/;"	m	class:CorrectingDistributions
-zbMETMuBin10thru20_copy	CorrectAllTheWay/CorrectingDistributions.h	/^    TH1D* zbMETMuBin10thru20_copy = 0;$/;"	m	class:CorrectingDistributions
-zbMETMuBin10thru20_copy	L1XE30toL1XE50/performL130to50Correction/CorrectingDistributions.h	/^    TH1D* zbMETMuBin10thru20_copy = 0;$/;"	m	class:CorrectingDistributions
-zbMETMuBin10thru20_copy	zbToL1XE30/PerformCorrection/CorrectingDistributions.h	/^    TH1D* zbMETMuBin10thru20_copy = 0;$/;"	m	class:CorrectingDistributions
-zbMETMuBin20thru30	CorrectAllTheWay/CorrectingDistributions.h	/^    TH1D* zbMETMuBin20thru30 = 0;$/;"	m	class:CorrectingDistributions
-zbMETMuBin20thru30	L1XE30toL1XE50/performL130to50Correction/CorrectingDistributions.h	/^    TH1D* zbMETMuBin20thru30 = 0;$/;"	m	class:CorrectingDistributions
-zbMETMuBin20thru30	zbToL1XE30/PerformCorrection/CorrectingDistributions.h	/^    TH1D* zbMETMuBin20thru30 = 0;$/;"	m	class:CorrectingDistributions
-zbMETMuBin20thru30_copy	CorrectAllTheWay/CorrectingDistributions.h	/^    TH1D* zbMETMuBin20thru30_copy = 0;$/;"	m	class:CorrectingDistributions
-zbMETMuBin20thru30_copy	L1XE30toL1XE50/performL130to50Correction/CorrectingDistributions.h	/^    TH1D* zbMETMuBin20thru30_copy = 0;$/;"	m	class:CorrectingDistributions
-zbMETMuBin20thru30_copy	zbToL1XE30/PerformCorrection/CorrectingDistributions.h	/^    TH1D* zbMETMuBin20thru30_copy = 0;$/;"	m	class:CorrectingDistributions
-zbMETMuBin30thru40	CorrectAllTheWay/CorrectingDistributions.h	/^    TH1D* zbMETMuBin30thru40 = 0;$/;"	m	class:CorrectingDistributions
-zbMETMuBin30thru40	L1XE30toL1XE50/performL130to50Correction/CorrectingDistributions.h	/^    TH1D* zbMETMuBin30thru40 = 0;$/;"	m	class:CorrectingDistributions
-zbMETMuBin30thru40	zbToL1XE30/PerformCorrection/CorrectingDistributions.h	/^    TH1D* zbMETMuBin30thru40 = 0;$/;"	m	class:CorrectingDistributions
-zbMETMuBin30thru40_copy	CorrectAllTheWay/CorrectingDistributions.h	/^    TH1D* zbMETMuBin30thru40_copy = 0;$/;"	m	class:CorrectingDistributions
-zbMETMuBin30thru40_copy	L1XE30toL1XE50/performL130to50Correction/CorrectingDistributions.h	/^    TH1D* zbMETMuBin30thru40_copy = 0;$/;"	m	class:CorrectingDistributions
-zbMETMuBin30thru40_copy	zbToL1XE30/PerformCorrection/CorrectingDistributions.h	/^    TH1D* zbMETMuBin30thru40_copy = 0;$/;"	m	class:CorrectingDistributions
-zbMETMuBin40thru50	CorrectAllTheWay/CorrectingDistributions.h	/^    TH1D* zbMETMuBin40thru50 = 0;$/;"	m	class:CorrectingDistributions
-zbMETMuBin40thru50	L1XE30toL1XE50/performL130to50Correction/CorrectingDistributions.h	/^    TH1D* zbMETMuBin40thru50 = 0;$/;"	m	class:CorrectingDistributions
-zbMETMuBin40thru50	zbToL1XE30/PerformCorrection/CorrectingDistributions.h	/^    TH1D* zbMETMuBin40thru50 = 0;$/;"	m	class:CorrectingDistributions
-zbMETMuBin40thru50_copy	CorrectAllTheWay/CorrectingDistributions.h	/^    TH1D* zbMETMuBin40thru50_copy = 0;$/;"	m	class:CorrectingDistributions
-zbMETMuBin40thru50_copy	L1XE30toL1XE50/performL130to50Correction/CorrectingDistributions.h	/^    TH1D* zbMETMuBin40thru50_copy = 0;$/;"	m	class:CorrectingDistributions
-zbMETMuBin40thru50_copy	zbToL1XE30/PerformCorrection/CorrectingDistributions.h	/^    TH1D* zbMETMuBin40thru50_copy = 0;$/;"	m	class:CorrectingDistributions
-zbMETMuBin50thru60	CorrectAllTheWay/CorrectingDistributions.h	/^    TH1D* zbMETMuBin50thru60 = 0;$/;"	m	class:CorrectingDistributions
-zbMETMuBin50thru60	L1XE30toL1XE50/performL130to50Correction/CorrectingDistributions.h	/^    TH1D* zbMETMuBin50thru60 = 0;$/;"	m	class:CorrectingDistributions
-zbMETMuBin50thru60	zbToL1XE30/PerformCorrection/CorrectingDistributions.h	/^    TH1D* zbMETMuBin50thru60 = 0;$/;"	m	class:CorrectingDistributions
-zbMETMuBin50thru60_copy	CorrectAllTheWay/CorrectingDistributions.h	/^    TH1D* zbMETMuBin50thru60_copy = 0;$/;"	m	class:CorrectingDistributions
-zbMETMuBin50thru60_copy	L1XE30toL1XE50/performL130to50Correction/CorrectingDistributions.h	/^    TH1D* zbMETMuBin50thru60_copy = 0;$/;"	m	class:CorrectingDistributions
-zbMETMuBin50thru60_copy	zbToL1XE30/PerformCorrection/CorrectingDistributions.h	/^    TH1D* zbMETMuBin50thru60_copy = 0;$/;"	m	class:CorrectingDistributions
-zbMETMuBin60thru70	CorrectAllTheWay/CorrectingDistributions.h	/^    TH1D* zbMETMuBin60thru70 = 0;$/;"	m	class:CorrectingDistributions
-zbMETMuBin60thru70	L1XE30toL1XE50/performL130to50Correction/CorrectingDistributions.h	/^    TH1D* zbMETMuBin60thru70 = 0;$/;"	m	class:CorrectingDistributions
-zbMETMuBin60thru70	zbToL1XE30/PerformCorrection/CorrectingDistributions.h	/^    TH1D* zbMETMuBin60thru70 = 0;$/;"	m	class:CorrectingDistributions
-zbMETMuBin60thru70_copy	CorrectAllTheWay/CorrectingDistributions.h	/^    TH1D* zbMETMuBin60thru70_copy = 0;$/;"	m	class:CorrectingDistributions
-zbMETMuBin60thru70_copy	L1XE30toL1XE50/performL130to50Correction/CorrectingDistributions.h	/^    TH1D* zbMETMuBin60thru70_copy = 0;$/;"	m	class:CorrectingDistributions
-zbMETMuBin60thru70_copy	zbToL1XE30/PerformCorrection/CorrectingDistributions.h	/^    TH1D* zbMETMuBin60thru70_copy = 0;$/;"	m	class:CorrectingDistributions
-zb_alg_name	L1XE30toL1XE50/plotl130dists/PlotMETDistsVersMu.h	/^   TString zb_alg_name = "cell.met"; $/;"	m	class:PlotMETDistsVersMu
-zb_alg_name	zbToL1XE30/plotMETDistsVersusMu/PlotMETDistsVersMu.h	/^   TString zb_alg_name = "cell.met"; $/;"	m	class:PlotMETDistsVersMu
-~CorrectingDistributions	CorrectAllTheWay/CorrectingDistributions.h	/^   virtual ~CorrectingDistributions() { }$/;"	f	class:CorrectingDistributions
-~CorrectingDistributions	L1XE30toL1XE50/performL130to50Correction/CorrectingDistributions.h	/^   virtual ~CorrectingDistributions() { }$/;"	f	class:CorrectingDistributions
-~CorrectingDistributions	zbToL1XE30/PerformCorrection/CorrectingDistributions.h	/^   virtual ~CorrectingDistributions() { }$/;"	f	class:CorrectingDistributions
+xaxisTitle	CorrectL1XE30toZB/CorrectL1XE30toZB.h	/^    TString xaxisTitle = Alg_Name + " [GeV]";$/;"	m	class:CorrectL1XE30toZB
+xaxisTitle	CorrectL1XE50toZB/CorrectL1XE50toZB.h	/^    TString xaxisTitle = Alg_Name + " [GeV]";$/;"	m	class:CorrectL1XE50toZB
+yaxisTitle	CorrectL1XE30toZB/CorrectL1XE30toZB.h	/^    TString yaxisTitle = "Number of Entries";$/;"	m	class:CorrectL1XE30toZB
+yaxisTitle	CorrectL1XE50toZB/CorrectL1XE50toZB.h	/^    TString yaxisTitle = "Number of Entries";$/;"	m	class:CorrectL1XE50toZB
+zb_alg_name	Compute_L1XE30_Efficiency/ComputeL1XE30toZBEfficiency.h	/^   TString zb_alg_name = "cell.met"; $/;"	m	class:ComputeL1XE30toZBEfficiency
+zb_alg_name	Compute_L1XE50_L1XE30_Efficiency/ComputeL1XE50toL1XE30Efficiency.h	/^   TString zb_alg_name = "cell.met";$/;"	m	class:ComputeL1XE50toL1XE30Efficiency
+zb_alg_name	old_correction/plotl130dists/BuildEfficiencyL150.h	/^   TString zb_alg_name = "cell.met"; $/;"	m	class:BuildEfficiencyL150
+~BuildEfficiencyL150	old_correction/plotl130dists/BuildEfficiencyL150.h	/^   virtual ~BuildEfficiencyL150() { }$/;"	f	class:BuildEfficiencyL150
+~ComputeL1XE30toZBEfficiency	Compute_L1XE30_Efficiency/ComputeL1XE30toZBEfficiency.h	/^   virtual ~ComputeL1XE30toZBEfficiency() { }$/;"	f	class:ComputeL1XE30toZBEfficiency
+~ComputeL1XE50toL1XE30Efficiency	Compute_L1XE50_L1XE30_Efficiency/ComputeL1XE50toL1XE30Efficiency.h	/^   virtual ~ComputeL1XE50toL1XE30Efficiency() { }$/;"	f	class:ComputeL1XE50toL1XE30Efficiency
+~CorrectL1XE30toZB	CorrectL1XE30toZB/CorrectL1XE30toZB.h	/^   virtual ~CorrectL1XE30toZB() { }$/;"	f	class:CorrectL1XE30toZB
+~CorrectL1XE50toZB	CorrectL1XE50toZB/CorrectL1XE50toZB.h	/^   virtual ~CorrectL1XE50toZB() { }$/;"	f	class:CorrectL1XE50toZB
 ~Jburr_Template_Selector	BurrTemplateSelector/Jburr_Template_Selector.h	/^   virtual ~Jburr_Template_Selector() { }$/;"	f	class:Jburr_Template_Selector
-~PlotMETDistsVersMu	L1XE30toL1XE50/plotl130dists/PlotMETDistsVersMu.h	/^   virtual ~PlotMETDistsVersMu() { }$/;"	f	class:PlotMETDistsVersMu
-~PlotMETDistsVersMu	zbToL1XE30/plotMETDistsVersusMu/PlotMETDistsVersMu.h	/^   virtual ~PlotMETDistsVersMu() { }$/;"	f	class:PlotMETDistsVersMu
