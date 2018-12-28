@@ -3,6 +3,7 @@
 
 void CorrectL1XE30toZB::Begin(TTree * /*tree*/){//{{{
     TString option = GetOption();
+    // initialize the boundaries of each mu bin
    for (int i = 0 ; i < Number_Mu_Bins + 1; i++){
        Mu_Values[i] = i * 10.;
    }
@@ -18,6 +19,7 @@ void CorrectL1XE30toZB::Begin(TTree * /*tree*/){//{{{
 
 
    for (int i = 0 ; i < Number_Mu_Bins ; i++){
+       // initialize empty histograms, efficiency objects, and efficiency fit objects 
        muLow = Mu_Values[i];
        muHigh = Mu_Values[i+1];
        std::cout << "Mu between: " << muLow << " and " << muHigh << std::endl;
@@ -39,25 +41,24 @@ void CorrectL1XE30toZB::Begin(TTree * /*tree*/){//{{{
 
     // Open the root file in update mode
     TFile* mu_analysis_file = TFile::Open("mu_analysis.root","UPDATE");
-    // attempt to open file{{{
+    // check to see if can open file{{{
     if (!mu_analysis_file->IsOpen()){
         std::cout << "mu_analysis.root not opened" << std::endl;
         return;
     }//}}}
-
-
     // get l1xe30 efficiency objects  {{{
     if ( mu_analysis_file->cd("l1xe30_efficiency_curves") ){
         std::cout << "Successfully switched to l1xe30_efficiency_curves" << std::endl;
         for ( int i = 0 ; i  < Number_Mu_Bins ; i++ ) {
            muLow = Mu_Values[i];
            muHigh = Mu_Values[i+1];
+           // generate the name of the current efficiency object
            EfficiencyName.Form("metmu%.0fthru%.0fEfficiency", muLow , muHigh );
+           // load the efficiency object into the array
             gDirectory->GetObject( EfficiencyName , L1XE30_Efficiency_Objects[i] );
         }
     }
 //}}}
-
     // get l1xe30 efficiency fit objects {{{
     TString EfficiencyFitName;
     if ( mu_analysis_file->cd("l1xe30_efficiency_fits")){
@@ -67,6 +68,7 @@ void CorrectL1XE30toZB::Begin(TTree * /*tree*/){//{{{
                muHigh = Mu_Values[i+1];
                 // all the fit functions have the same name , but different cycle number
                EfficiencyFitName.Form("fitFunction;%d", i+1 );
+               // load the fit function object into fit function object array
                 gDirectory->GetObject( EfficiencyFitName , L1XE30_Efficiency_Fit_Objects[i] );
             }
     }
@@ -75,7 +77,6 @@ void CorrectL1XE30toZB::Begin(TTree * /*tree*/){//{{{
         return;
     }
 //}}}
-
     // get the zerobias met distributions {{{
     if (gDirectory->cd("../zb_met_distributions") ){
         std::cout << "Successfully switched to zb_met_distributions" << std::endl;
