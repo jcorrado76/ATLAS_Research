@@ -263,9 +263,11 @@ public :
    virtual void    SlaveTerminate();
    virtual void    Terminate();
    Bool_t isGoodRun();
-   Bool_t passedL1ZB();
-   Bool_t isPassnoAlgXE30();
+   Bool_t isHLT_zb_L1ZB();
+   Bool_t isHLT_zb_L1XE30();
    Bool_t inMuRange( Float_t , Float_t );
+   static Double_t fitFunction(Double_t *x , Double_t *par );
+   TF1* generateFitFunction(TEfficiency* teff_obj, float gevMax = 300.0, float initial_slope = 0.1 , float initial_intercept = 0.0, float initial_sigma = 10.0);
 
    ClassDef(Jburr_Template_Selector,0);
 
