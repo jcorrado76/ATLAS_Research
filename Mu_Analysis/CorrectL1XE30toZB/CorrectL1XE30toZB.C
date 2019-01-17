@@ -189,12 +189,10 @@ void CorrectL1XE30toZB::Terminate(){//{{{
         axis->SetLineColor(kRed);
         axis->SetTextColor(kRed);
         axis->Draw("SAME");
-        plot_name.Form( "../Plots/CorrectedAndZB/zb_l1xe30met_corrected_mubin%d.png" , i+1 );
+        plot_name.Form( "plots/CorrectedAndZB/zb_l1xe30met_corrected_mubin%d.png" , i+1 );
         mu_bin_canv->Print(plot_name);
     }
     //}}}
-
-
     // WRITE CORRECTED MET DISTRIBUTIONS TO FILE{{{
     // this is L1XE30 distribution corrected to ZB
     TFile* mu_analysis_file = TFile::Open("mu_analysis.root","UPDATE");
