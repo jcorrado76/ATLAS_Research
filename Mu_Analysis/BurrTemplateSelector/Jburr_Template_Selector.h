@@ -265,9 +265,11 @@ public :
    Bool_t isGoodRun();
    Bool_t isHLT_zb_L1ZB();
    Bool_t isHLT_zb_L1XE30();
+   Bool_t isHLT_zb_L1XE50();
    Bool_t inMuRange( Float_t , Float_t );
-   static Double_t fitFunction(Double_t *x , Double_t *par );
-   TF1* generateFitFunction(TEfficiency* teff_obj, float gevMax = 300.0, float initial_slope = 0.1 , float initial_intercept = 0.0, float initial_sigma = 10.0);
+   static Double_t fitFunction(Double_t *x , Double_t *par , Double_t l1cut = 30.0 );
+   TF1* generateFitFunction(TEfficiency* teff_obj, float gevMax = 300.0, float initial_slope = 0.1 , float initial_intercept = 0.0, float initial_sigma = 10.0, Bool_t verbose=false );
+   Double_t ComputeWeight(TF1* fitFunc, TF1* fitFunc2 = NULL)
 
    ClassDef(Jburr_Template_Selector,0);
 
