@@ -8,7 +8,7 @@ Alg_Name	Compute_L1XE30_Efficiency/ComputeL1XE30toZBEfficiency.h	/^   TString Al
 Alg_Name	Compute_L1XE50_L1XE30_Efficiency/ComputeL1XE50toL1XE30Efficiency.h	/^   TString Alg_Name = "CELL MET";$/;"	m	class:ComputeL1XE50toL1XE30Efficiency
 Alg_Name	CorrectL1XE30toZB/CorrectL1XE30toZB.h	/^    TString Alg_Name = "METCELL";$/;"	m	class:CorrectL1XE30toZB
 Alg_Name	CorrectL1XE50toZB/CorrectL1XE50toZB.h	/^    TString Alg_Name = "METCELL";$/;"	m	class:CorrectL1XE50toZB
-Begin	BurrTemplateSelector/Jburr_Template_Selector.C	/^void Jburr_Template_Selector::Begin(TTree * \/*tree*\/){TString option = GetOption();}$/;"	f	class:Jburr_Template_Selector
+Begin	BurrTemplateSelector/Jburr_Template_Selector.C	/^virtual void Jburr_Template_Selector::Begin(TTree * \/*tree*\/){TString option = GetOption();}$/;"	f	class:Jburr_Template_Selector
 Begin	Compute_L1XE30_Efficiency/ComputeL1XE30toZBEfficiency.C	/^void ComputeL1XE30toZBEfficiency::Begin(TTree *) \/\/ {{{$/;"	f	class:ComputeL1XE30toZBEfficiency
 Begin	Compute_L1XE50_L1XE30_Efficiency/ComputeL1XE50toL1XE30Efficiency.C	/^void ComputeL1XE50toL1XE30Efficiency::Begin(TTree *) \/\/ {{{$/;"	f	class:ComputeL1XE50toL1XE30Efficiency
 Begin	CorrectL1XE30toZB/CorrectL1XE30toZB.C	/^void CorrectL1XE30toZB::Begin(TTree * \/*tree*\/){\/\/{{{$/;"	f	class:CorrectL1XE30toZB
@@ -80,6 +80,7 @@ ComputeL1XE30toZBEfficiency_h	Compute_L1XE30_Efficiency/ComputeL1XE30toZBEfficie
 ComputeL1XE50toL1XE30Efficiency	Compute_L1XE50_L1XE30_Efficiency/ComputeL1XE50toL1XE30Efficiency.h	/^   ComputeL1XE50toL1XE30Efficiency(TTree * =0) { }$/;"	f	class:ComputeL1XE50toL1XE30Efficiency
 ComputeL1XE50toL1XE30Efficiency	Compute_L1XE50_L1XE30_Efficiency/ComputeL1XE50toL1XE30Efficiency.h	/^class ComputeL1XE50toL1XE30Efficiency : public TSelector {$/;"	c
 ComputeL1XE50toL1XE30Efficiency_h	Compute_L1XE50_L1XE30_Efficiency/ComputeL1XE50toL1XE30Efficiency.h	9;"	d
+ComputeWeight	BurrTemplateSelector/Jburr_Template_Selector.C	/^Double_t CorrectL1XE30toZB::ComputeWeight(TF1* fitFunc)\/\/{{{$/;"	f	class:CorrectL1XE30toZB
 ComputeWeight	CorrectL1XE30toZB/CorrectL1XE30toZB.C	/^Double_t CorrectL1XE30toZB::ComputeWeight(TF1* fitFunc)\/\/{{{$/;"	f	class:CorrectL1XE30toZB
 ComputeWeight	CorrectL1XE50toZB/CorrectL1XE50toZB.C	/^Double_t CorrectL1XE50toZB::ComputeWeight(TF1* fitFunc , TF1* fitFunc2)\/\/{{{$/;"	f	class:CorrectL1XE50toZB
 CorrectL1XE30toZB	CorrectL1XE30toZB/CorrectL1XE30toZB.h	/^   CorrectL1XE30toZB(TTree * \/*tree*\/ =0) { }\/\/{{{$/;"	f	class:CorrectL1XE30toZB
@@ -344,7 +345,7 @@ OutOfTimePileup	CorrectL1XE50toZB/CorrectL1XE50toZB.h	/^   TTreeReaderValue<Floa
 PlotMETDistsVersMu_cxx	Compute_L1XE50_L1XE30_Efficiency/ComputeL1XE50toL1XE30Efficiency.C	1;"	d	file:
 PlotMETDistsVersMu_cxx	old_correction/plotl130dists/BuildEfficiencyL150.C	1;"	d	file:
 PlotParameterVals	PlotParametersVsMu/PlotParameterVals.cpp	/^void PlotParameterVals(){$/;"	f
-Process	BurrTemplateSelector/Jburr_Template_Selector.C	/^Bool_t Jburr_Template_Selector::Process(Long64_t entry){return kTRUE;}$/;"	f	class:Jburr_Template_Selector
+Process	BurrTemplateSelector/Jburr_Template_Selector.C	/^virtual Bool_t Jburr_Template_Selector::Process(Long64_t entry){return kTRUE;}$/;"	f	class:Jburr_Template_Selector
 Process	Compute_L1XE30_Efficiency/ComputeL1XE30toZBEfficiency.C	/^Bool_t ComputeL1XE30toZBEfficiency::Process(Long64_t entry)\/\/{{{$/;"	f	class:ComputeL1XE30toZBEfficiency
 Process	Compute_L1XE50_L1XE30_Efficiency/ComputeL1XE50toL1XE30Efficiency.C	/^Bool_t ComputeL1XE50toL1XE30Efficiency::Process(Long64_t entry)\/\/{{{$/;"	f	class:ComputeL1XE50toL1XE30Efficiency
 Process	CorrectL1XE30toZB/CorrectL1XE30toZB.C	/^Bool_t CorrectL1XE30toZB::Process(Long64_t entry)\/\/{{{$/;"	f	class:CorrectL1XE30toZB
@@ -376,13 +377,13 @@ SetOption	Compute_L1XE50_L1XE30_Efficiency/ComputeL1XE50toL1XE30Efficiency.h	/^ 
 SetOption	CorrectL1XE30toZB/CorrectL1XE30toZB.h	/^   virtual void    SetOption(const char *option) { fOption = option; }$/;"	f	class:CorrectL1XE30toZB
 SetOption	CorrectL1XE50toZB/CorrectL1XE50toZB.h	/^   virtual void    SetOption(const char *option) { fOption = option; }$/;"	f	class:CorrectL1XE50toZB
 SetOption	old_correction/plotl130dists/BuildEfficiencyL150.h	/^   virtual void    SetOption(const char *option) { fOption = option; }$/;"	f	class:BuildEfficiencyL150
-SlaveBegin	BurrTemplateSelector/Jburr_Template_Selector.C	/^void Jburr_Template_Selector::SlaveBegin(TTree * \/*tree*\/){TString option = GetOption();}$/;"	f	class:Jburr_Template_Selector
+SlaveBegin	BurrTemplateSelector/Jburr_Template_Selector.C	/^virtual void Jburr_Template_Selector::SlaveBegin(TTree * \/*tree*\/){TString option = GetOption();}$/;"	f	class:Jburr_Template_Selector
 SlaveBegin	Compute_L1XE30_Efficiency/ComputeL1XE30toZBEfficiency.C	/^void ComputeL1XE30toZBEfficiency::SlaveBegin(TTree * \/*tree*\/) \/\/ {{{$/;"	f	class:ComputeL1XE30toZBEfficiency
 SlaveBegin	Compute_L1XE50_L1XE30_Efficiency/ComputeL1XE50toL1XE30Efficiency.C	/^void ComputeL1XE50toL1XE30Efficiency::SlaveBegin(TTree * \/*tree*\/) \/\/ {{{$/;"	f	class:ComputeL1XE50toL1XE30Efficiency
 SlaveBegin	CorrectL1XE30toZB/CorrectL1XE30toZB.C	/^void CorrectL1XE30toZB::SlaveBegin(TTree * \/*tree*\/)\/\/{{{$/;"	f	class:CorrectL1XE30toZB
 SlaveBegin	CorrectL1XE50toZB/CorrectL1XE50toZB.C	/^void CorrectL1XE50toZB::SlaveBegin(TTree * \/*tree*\/)\/\/{{{$/;"	f	class:CorrectL1XE50toZB
 SlaveBegin	old_correction/plotl130dists/BuildEfficiencyL150.C	/^void BuildEfficiencyL150::SlaveBegin(TTree * \/*tree*\/) \/\/ {{{$/;"	f	class:BuildEfficiencyL150
-SlaveTerminate	BurrTemplateSelector/Jburr_Template_Selector.C	/^void Jburr_Template_Selector::SlaveTerminate(){}$/;"	f	class:Jburr_Template_Selector
+SlaveTerminate	BurrTemplateSelector/Jburr_Template_Selector.C	/^virtual void Jburr_Template_Selector::SlaveTerminate(){}$/;"	f	class:Jburr_Template_Selector
 SlaveTerminate	Compute_L1XE30_Efficiency/ComputeL1XE30toZBEfficiency.C	/^void ComputeL1XE30toZBEfficiency::SlaveTerminate(){}$/;"	f	class:ComputeL1XE30toZBEfficiency
 SlaveTerminate	Compute_L1XE50_L1XE30_Efficiency/ComputeL1XE50toL1XE30Efficiency.C	/^void ComputeL1XE50toL1XE30Efficiency::SlaveTerminate(){}$/;"	f	class:ComputeL1XE50toL1XE30Efficiency
 SlaveTerminate	CorrectL1XE30toZB/CorrectL1XE30toZB.C	/^void CorrectL1XE30toZB::SlaveTerminate(){}$/;"	f	class:CorrectL1XE30toZB
@@ -391,7 +392,7 @@ SlaveTerminate	old_correction/plotl130dists/BuildEfficiencyL150.C	/^void BuildEf
 TTBarenujj_pass	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Bool_t> TTBarenujj_pass = {fReader, "TTBarenujj.pass"};$/;"	m	class:Jburr_Template_Selector
 TTBarenumunu_pass	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Bool_t> TTBarenumunu_pass = {fReader, "TTBarenumunu.pass"};$/;"	m	class:Jburr_Template_Selector
 TTBarmunujj_pass	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Bool_t> TTBarmunujj_pass = {fReader, "TTBarmunujj.pass"};$/;"	m	class:Jburr_Template_Selector
-Terminate	BurrTemplateSelector/Jburr_Template_Selector.C	/^void Jburr_Template_Selector::Terminate(){}$/;"	f	class:Jburr_Template_Selector
+Terminate	BurrTemplateSelector/Jburr_Template_Selector.C	/^virtual void Jburr_Template_Selector::Terminate(){}$/;"	f	class:Jburr_Template_Selector
 Terminate	Compute_L1XE30_Efficiency/ComputeL1XE30toZBEfficiency.C	/^void ComputeL1XE30toZBEfficiency::Terminate() \/\/{{{$/;"	f	class:ComputeL1XE30toZBEfficiency
 Terminate	Compute_L1XE50_L1XE30_Efficiency/ComputeL1XE50toL1XE30Efficiency.C	/^void ComputeL1XE50toL1XE30Efficiency::Terminate()$/;"	f	class:ComputeL1XE50toL1XE30Efficiency
 Terminate	CorrectL1XE30toZB/CorrectL1XE30toZB.C	/^void CorrectL1XE30toZB::Terminate(){\/\/{{{$/;"	f	class:CorrectL1XE30toZB
@@ -460,9 +461,11 @@ fReader	CorrectL1XE30toZB/CorrectL1XE30toZB.h	/^   TTreeReader     fReader;  \/\
 fReader	CorrectL1XE50toZB/CorrectL1XE50toZB.h	/^   TTreeReader     fReader;  \/\/!the tree reader$/;"	m	class:CorrectL1XE50toZB
 fReader	old_correction/plotl130dists/BuildEfficiencyL150.h	/^   TTreeReader     fReader;  \/\/!the tree reader$/;"	m	class:BuildEfficiencyL150
 fa2	Plot_Between_Fits/fa2.C	/^void fa2(){$/;"	f
+fitFunction	BurrTemplateSelector/Jburr_Template_Selector.C	/^Double_t Jburr_Template_Selector::fitFunction(Double_t *x , Double_t *par ){\/\/{{{$/;"	f	class:Jburr_Template_Selector
 fitFunction	Compute_L1XE30_Efficiency/ComputeL1XE30toZBEfficiency.C	/^Double_t ComputeL1XE30toZBEfficiency::fitFunction(Double_t *x , Double_t *par ){\/\/{{{$/;"	f	class:ComputeL1XE30toZBEfficiency
 fitFunction	Compute_L1XE50_L1XE30_Efficiency/ComputeL1XE50toL1XE30Efficiency.C	/^Double_t ComputeL1XE50toL1XE30Efficiency::fitFunction(Double_t *x , Double_t *par ){\/\/{{{$/;"	f	class:ComputeL1XE50toL1XE30Efficiency
 fitFunction	old_correction/plotl130dists/BuildEfficiencyL150.C	/^Double_t BuildEfficiencyL150::fitFunction(Double_t *x , Double_t *par ){\/\/{{{$/;"	f	class:BuildEfficiencyL150
+generateFitFunction	BurrTemplateSelector/Jburr_Template_Selector.C	/^TF1* Jburr_Template_Selector::generateFitFunction(TEfficiency* teff_obj, float gevMax, float initial_slope, float initial_intercept, float initial_sigma ){\/\/{{{$/;"	f	class:Jburr_Template_Selector
 generateFitFunction	Compute_L1XE30_Efficiency/ComputeL1XE30toZBEfficiency.C	/^TF1* ComputeL1XE30toZBEfficiency::generateFitFunction(TEfficiency* teff_obj, float gevMax, float initial_slope, float initial_intercept, float initial_sigma ){\/\/{{{$/;"	f	class:ComputeL1XE30toZBEfficiency
 generateFitFunction	Compute_L1XE50_L1XE30_Efficiency/ComputeL1XE50toL1XE30Efficiency.C	/^TF1* ComputeL1XE50toL1XE30Efficiency::generateFitFunction(TEfficiency* teff_obj, float gevMax, float initial_slope, float initial_intercept, float initial_sigma ){\/\/{{{$/;"	f	class:ComputeL1XE50toL1XE30Efficiency
 generateFitFunction	old_correction/plotl130dists/BuildEfficiencyL150.C	/^TF1* BuildEfficiencyL150::generateFitFunction(TEfficiency* teff_obj, float gevMax, float initial_slope, float initial_intercept, float initial_sigma ){\/\/{{{$/;"	f	class:BuildEfficiencyL150
@@ -476,27 +479,31 @@ gevLow	Compute_L1XE50_L1XE30_Efficiency/ComputeL1XE50toL1XE30Efficiency.h	/^    
 gevLow	CorrectL1XE30toZB/CorrectL1XE30toZB.h	/^    Float_t gevLow = 0.0;$/;"	m	class:CorrectL1XE30toZB
 gevLow	CorrectL1XE50toZB/CorrectL1XE50toZB.h	/^    Float_t gevLow = 0.0;$/;"	m	class:CorrectL1XE50toZB
 gevLow	old_correction/plotl130dists/BuildEfficiencyL150.h	/^    Float_t gevLow = 0.0;$/;"	m	class:BuildEfficiencyL150
+inMuRange	BurrTemplateSelector/Jburr_Template_Selector.C	/^Bool_t CorrectL1XE30toZB::inMuRange( Float_t a , Float_t b ){ \/\/{{{$/;"	f	class:CorrectL1XE30toZB
 inMuRange	BurrTemplateSelector/Jburr_Template_Selector.C	/^Bool_t Jburr_Template_Selector::inMuRange( Float_t a , Float_t b ){ \/\/{{{$/;"	f	class:Jburr_Template_Selector
 inMuRange	Compute_L1XE30_Efficiency/ComputeL1XE30toZBEfficiency.C	/^Bool_t ComputeL1XE30toZBEfficiency::inMuRange( Float_t a , Float_t b ){ \/\/{{{$/;"	f	class:ComputeL1XE30toZBEfficiency
 inMuRange	Compute_L1XE50_L1XE30_Efficiency/ComputeL1XE50toL1XE30Efficiency.C	/^Bool_t ComputeL1XE50toL1XE30Efficiency::inMuRange( Float_t a , Float_t b ){ \/\/{{{$/;"	f	class:ComputeL1XE50toL1XE30Efficiency
 inMuRange	CorrectL1XE30toZB/CorrectL1XE30toZB.C	/^Bool_t CorrectL1XE30toZB::inMuRange( Float_t a , Float_t b ){ \/\/{{{$/;"	f	class:CorrectL1XE30toZB
 inMuRange	CorrectL1XE50toZB/CorrectL1XE50toZB.C	/^Bool_t CorrectL1XE50toZB::inMuRange( Float_t a , Float_t b ){ \/\/{{{$/;"	f	class:CorrectL1XE50toZB
 inMuRange	old_correction/plotl130dists/BuildEfficiencyL150.C	/^Bool_t BuildEfficiencyL150::inMuRange( Float_t a , Float_t b ){ \/\/{{{$/;"	f	class:BuildEfficiencyL150
+isGoodRun	BurrTemplateSelector/Jburr_Template_Selector.C	/^Bool_t CorrectL1XE30toZB::isGoodRun(){\/\/{{{$/;"	f	class:CorrectL1XE30toZB
 isGoodRun	BurrTemplateSelector/Jburr_Template_Selector.C	/^Bool_t Jburr_Template_Selector::isGoodRun(){ \/\/{{{$/;"	f	class:Jburr_Template_Selector
 isGoodRun	Compute_L1XE30_Efficiency/ComputeL1XE30toZBEfficiency.C	/^Bool_t ComputeL1XE30toZBEfficiency::isGoodRun(){ \/\/{{{$/;"	f	class:ComputeL1XE30toZBEfficiency
 isGoodRun	Compute_L1XE50_L1XE30_Efficiency/ComputeL1XE50toL1XE30Efficiency.C	/^Bool_t ComputeL1XE50toL1XE30Efficiency::isGoodRun(){ \/\/{{{$/;"	f	class:ComputeL1XE50toL1XE30Efficiency
 isGoodRun	CorrectL1XE30toZB/CorrectL1XE30toZB.C	/^Bool_t CorrectL1XE30toZB::isGoodRun(){\/\/{{{$/;"	f	class:CorrectL1XE30toZB
 isGoodRun	CorrectL1XE50toZB/CorrectL1XE50toZB.C	/^Bool_t CorrectL1XE50toZB::isGoodRun(){\/\/{{{$/;"	f	class:CorrectL1XE50toZB
 isGoodRun	old_correction/plotl130dists/BuildEfficiencyL150.C	/^Bool_t BuildEfficiencyL150::isGoodRun(){ \/\/{{{$/;"	f	class:BuildEfficiencyL150
+isHLT_zb_L1XE30	BurrTemplateSelector/Jburr_Template_Selector.C	/^Bool_t Jburr_Template_Selector::isHLT_zb_L1XE30(){ \/\/{{{$/;"	f	class:Jburr_Template_Selector
 isHLT_zb_L1XE30	Compute_L1XE30_Efficiency/ComputeL1XE30toZBEfficiency.C	/^Bool_t ComputeL1XE30toZBEfficiency::isHLT_zb_L1XE30(){ \/\/{{{$/;"	f	class:ComputeL1XE30toZBEfficiency
 isHLT_zb_L1XE30	Compute_L1XE50_L1XE30_Efficiency/ComputeL1XE50toL1XE30Efficiency.C	/^Bool_t ComputeL1XE50toL1XE30Efficiency::isHLT_zb_L1XE30(){ \/\/{{{$/;"	f	class:ComputeL1XE50toL1XE30Efficiency
 isHLT_zb_L1XE30	old_correction/plotl130dists/BuildEfficiencyL150.C	/^Bool_t BuildEfficiencyL150::isHLT_zb_L1XE30(){ \/\/{{{$/;"	f	class:BuildEfficiencyL150
+isHLT_zb_L1ZB	BurrTemplateSelector/Jburr_Template_Selector.C	/^Bool_t Jburr_Template_Selector::isHLT_zb_L1ZB(){ \/\/{{{$/;"	f	class:Jburr_Template_Selector
 isHLT_zb_L1ZB	Compute_L1XE30_Efficiency/ComputeL1XE30toZBEfficiency.C	/^Bool_t ComputeL1XE30toZBEfficiency::isHLT_zb_L1ZB(){ \/\/{{{$/;"	f	class:ComputeL1XE30toZBEfficiency
 isHLT_zb_L1ZB	Compute_L1XE50_L1XE30_Efficiency/ComputeL1XE50toL1XE30Efficiency.C	/^Bool_t ComputeL1XE50toL1XE30Efficiency::isHLT_zb_L1ZB(){ \/\/{{{$/;"	f	class:ComputeL1XE50toL1XE30Efficiency
 isHLT_zb_L1ZB	old_correction/plotl130dists/BuildEfficiencyL150.C	/^Bool_t BuildEfficiencyL150::isHLT_zb_L1ZB(){ \/\/{{{$/;"	f	class:BuildEfficiencyL150
+isPassnoAlgL1XE30	BurrTemplateSelector/Jburr_Template_Selector.C	/^Bool_t CorrectL1XE30toZB::isPassnoAlgL1XE30(){ \/\/ {{{$/;"	f	class:CorrectL1XE30toZB
 isPassnoAlgL1XE30	CorrectL1XE30toZB/CorrectL1XE30toZB.C	/^Bool_t CorrectL1XE30toZB::isPassnoAlgL1XE30(){ \/\/ {{{$/;"	f	class:CorrectL1XE30toZB
 isPassnoAlgL1XE50	CorrectL1XE50toZB/CorrectL1XE50toZB.C	/^Bool_t CorrectL1XE50toZB::isPassnoAlgL1XE50(){ \/\/ {{{$/;"	f	class:CorrectL1XE50toZB
-isPassnoAlgXE30	BurrTemplateSelector/Jburr_Template_Selector.C	/^Bool_t Jburr_Template_Selector::isPassnoAlgXE30(){ \/\/{{{$/;"	f	class:Jburr_Template_Selector
 l	PlotParametersVsMu/PlotParameterVals.cpp	/^TList* l = 0;$/;"	v
 l1_alg_name	Compute_L1XE30_Efficiency/ComputeL1XE30toZBEfficiency.h	/^   TString l1_alg_name = "L1.met";$/;"	m	class:ComputeL1XE30toZBEfficiency
 l1_alg_name	Compute_L1XE50_L1XE30_Efficiency/ComputeL1XE50toL1XE30Efficiency.h	/^   TString l1_alg_name = "L1.met";$/;"	m	class:ComputeL1XE50toL1XE30Efficiency
@@ -522,7 +529,7 @@ mu_analysis_file	CorrectL1XE30toZB/CorrectL1XE30toZB.h	/^    TFile* mu_analysis_
 mu_analysis_file	CorrectL1XE50toZB/CorrectL1XE50toZB.h	/^    TFile* mu_analysis_file = 0;$/;"	m	class:CorrectL1XE50toZB
 nbins	CorrectL1XE30toZB/CorrectL1XE30toZB.h	/^    Int_t nbins = (gevHigh-gevLow)\/binWidth;$/;"	m	class:CorrectL1XE30toZB
 nbins	CorrectL1XE50toZB/CorrectL1XE50toZB.h	/^    Int_t nbins = (gevHigh-gevLow)\/binWidth;$/;"	m	class:CorrectL1XE50toZB
-passedL1ZB	BurrTemplateSelector/Jburr_Template_Selector.C	/^Bool_t Jburr_Template_Selector::passedL1ZB(){ \/\/{{{$/;"	f	class:Jburr_Template_Selector
+passedL1ZB	BurrTemplateSelector/Jburr_Template_Selector.C	/^Bool_t CorrectL1XE30toZB::passedL1ZB(){\/\/{{{$/;"	f	class:CorrectL1XE30toZB
 passedL1ZB	CorrectL1XE30toZB/CorrectL1XE30toZB.C	/^Bool_t CorrectL1XE30toZB::passedL1ZB(){\/\/{{{$/;"	f	class:CorrectL1XE30toZB
 passedL1ZB	CorrectL1XE50toZB/CorrectL1XE50toZB.C	/^Bool_t CorrectL1XE50toZB::passedL1ZB(){\/\/{{{$/;"	f	class:CorrectL1XE50toZB
 pufit_met	BurrTemplateSelector/Jburr_Template_Selector.h	/^   TTreeReaderValue<Float_t> pufit_met = {fReader, "pufit.met"};$/;"	m	class:Jburr_Template_Selector
