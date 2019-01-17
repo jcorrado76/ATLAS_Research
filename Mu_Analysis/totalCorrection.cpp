@@ -10,12 +10,13 @@
 
 int totalCorrection(){
 
+    TChain* zb_chain = new TChain( "METTree" , "zb_chain" );
+    zb_chain->Add("~/DATA/ZB/user.jburr.2017_11_17.ZB/*");
+
     std::cout << "Computing L1XE30 Efficiency from ZB MET Data" << std::endl;
     // Compute l1xe30 efficiencies from ZB data
     ComputeL1XE30toZBEfficiency* buildl1xe30Efficiencies =
         (ComputeL1XE30toZBEfficiency*)TSelector::GetSelector("Compute_L1XE30_Efficiency/ComputeL1XE30toZBEfficiency.C+");
-    TChain* zb_chain = new TChain( "METTree" , "zb_chain" );
-    zb_chain->Add("~/DATA/ZB/user.jburr.2017_11_17.ZB/*");
     zb_chain->Process(buildl1xe30Efficiencies);
 
     TChain* jetm10_chain = new TChain( "METTree", "jetm10chain");
