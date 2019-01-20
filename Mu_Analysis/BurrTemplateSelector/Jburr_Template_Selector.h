@@ -9,7 +9,10 @@
 #define Jburr_Template_Selector_h
 
 #include <TROOT.h>
+#include <TEfficiency.h>
 #include <TChain.h>
+#include <TF1.h>
+#include <TMath.h>
 #include <TFile.h>
 #include <TSelector.h>
 #include <TTreeReader.h>

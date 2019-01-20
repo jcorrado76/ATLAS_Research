@@ -1,12 +1,5 @@
 #define Jburr_Template_Selector_cxx
 #include "Jburr_Template_Selector.h"
-
-virtual void Jburr_Template_Selector::Begin(TTree * /*tree*/){TString option = GetOption();}
-virtual void Jburr_Template_Selector::SlaveBegin(TTree * /*tree*/){TString option = GetOption();}
-virtual Bool_t Jburr_Template_Selector::Process(Long64_t entry){return kTRUE;}
-virtual void Jburr_Template_Selector::SlaveTerminate(){}
-virtual void Jburr_Template_Selector::Terminate(){}
-
 Bool_t Jburr_Template_Selector::isGoodRun(){ //{{{
     // return true if the event is not any of the bad run numbers
     return (*RunNumber != 330203 && *RunNumber != 331975 && *RunNumber != 334487);
@@ -58,10 +51,11 @@ TF1* Jburr_Template_Selector::generateFitFunction(TEfficiency* teff_obj, float g
 Double_t Jburr_Template_Selector::ComputeWeight(TF1* fitFunc, TF1* fitFunc2 )//{{{
 {
     Float_t numerator = *HLT_noalg_L1XE30_prescale;
+    Double_t denominator = 1.;
     if (!fitFunc2){
-        Double_t denominator = fitFunc->Eval( *cell_met );
+        denominator = fitFunc->Eval( *cell_met );
     }else{
-        Double_t denominator = fitFunc->Eval( *cell_met ) * fitFunc2->Eval( *cell_met );
+        denominator = fitFunc->Eval( *cell_met ) * fitFunc2->Eval( *cell_met );
     }
     return numerator / denominator;
 }//}}}
