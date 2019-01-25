@@ -20,16 +20,19 @@ Bool_t Jburr_Template_Selector::inMuRange( Float_t a , Float_t b ){ //{{{
     // return true if in local mu bin
     return ( *InTimePileup > a && *InTimePileup < b );
 } //}}}
-Double_t Jburr_Template_Selector::fitFunction(Double_t *x , Double_t *par , Double_t l1cut ){//{{{
+Double_t Jburr_Template_Selector::fitFunction(Double_t *x , Double_t *par ){//{{{
     // return the value of the fitfunction evaluted at x with the given par
+    // TODO: take l1cut as a parameter, but this actually messes up root's system for generating the functor to pass
+    // this function to the generateFitFunction routine. so need to find a workaround
+    Double_t l1cut = 30.0;
     Float_t xx = x[0];
     Double_t fitval = (1./2.)*(1.+TMath::Erf((par[0]*x[0]+par[1]-l1cut)/(par[2]*TMath::Sqrt(2.))));
     return fitval;
 }//}}}
-TF1* Jburr_Template_Selector::generateFitFunction(TEfficiency* teff_obj, float gevMax, float initial_slope, float initial_intercept, float initial_sigma , Bool_t verbose){//{{{
+TF1* Jburr_Template_Selector::generateFitFunction(TEfficiency* teff_obj, float gevMax, float initial_slope, float initial_intercept, float initial_sigma , Bool_t verbose ){//{{{
     // return a fit function object whose parameters have been set
 
-    TF1 *fitErrorFunction = new TF1("fitFunction",fitFunction,0.0,gevMax,3);
+    TF1 *fitErrorFunction = new TF1( "fitFunction" , fitFunction , 0.0 , gevMax , 3 );
     fitErrorFunction->SetParameter(0, initial_slope);
     fitErrorFunction->SetParameter(1, initial_intercept);
     fitErrorFunction->SetParameter(2, initial_sigma);
@@ -58,4 +61,12 @@ Double_t Jburr_Template_Selector::ComputeWeight(TF1* fitFunc, TF1* fitFunc2 )//{
         denominator = fitFunc->Eval( *cell_met ) * fitFunc2->Eval( *cell_met );
     }
     return numerator / denominator;
+}//}}}
+void Jburr_Template_Selector::Init(TTree *tree)//{{{
+{
+   fReader.SetTree(tree);
+}//}}}
+Bool_t Jburr_Template_Selector::Notify()//{{{
+{
+   return kTRUE;
 }//}}}

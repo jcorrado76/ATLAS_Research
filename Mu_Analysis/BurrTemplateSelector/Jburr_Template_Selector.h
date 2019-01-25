@@ -4,10 +4,9 @@
 // from TTree METTree/METTree
 // found on file: /home/joseph/ATLAS_DATA/totalJburrTuple.root
 //////////////////////////////////////////////////////////
-
 #ifndef Jburr_Template_Selector_h
 #define Jburr_Template_Selector_h
-
+// includes{{{
 #include <TROOT.h>
 #include <TEfficiency.h>
 #include <TChain.h>
@@ -21,15 +20,13 @@
 #include <TH2.h>
 #include <TStyle.h>
 #include <vector>
-
-
-
+// end includes}}}
+//class definition {{{
 class Jburr_Template_Selector : public TSelector {
 public :
    TTreeReader     fReader;  //!the tree reader
    TTree          *fChain = 0;   //!pointer to the analyzed TTree or TChain
-
-   // Readers to access the data (delete the ones you do not need).
+   // Readers to access the data (delete the ones you do not need){{{
    TTreeReaderValue<UInt_t> RunNumber = {fReader, "RunNumber"};
    TTreeReaderValue<ULong64_t> EventNumber = {fReader, "EventNumber"};
    TTreeReaderValue<UInt_t> LumiBlock = {fReader, "LumiBlock"};
@@ -248,9 +245,9 @@ public :
    TTreeReaderArray<float> CalAntiKt4EMTopoJets_eta = {fReader, "CalAntiKt4EMTopoJets.eta"};
    TTreeReaderArray<float> CalAntiKt4EMTopoJets_phi = {fReader, "CalAntiKt4EMTopoJets.phi"};
    TTreeReaderArray<float> CalAntiKt4EMTopoJets_m = {fReader, "CalAntiKt4EMTopoJets.m"};
-
-
-   Jburr_Template_Selector(TTree * /*tree*/ =0) { }
+   //}}}
+   // Member Functions {{{
+   Jburr_Template_Selector(TTree * = 0) { }
    virtual ~Jburr_Template_Selector() { }
    virtual Int_t   Version() const { return 2; }
    virtual void    Begin(TTree *tree);
@@ -270,26 +267,11 @@ public :
    Bool_t isHLT_zb_L1XE30();
    Bool_t isHLT_zb_L1XE50();
    Bool_t inMuRange( Float_t , Float_t );
-   static Double_t fitFunction(Double_t *x , Double_t *par , Double_t l1cut = 30.0 );
+   // TODO: make sure you add default val for l1cut parameter once you figured out workaround for making it an argument
+   static Double_t fitFunction(Double_t *x , Double_t *par );
    TF1* generateFitFunction(TEfficiency* teff_obj, float gevMax = 300.0, float initial_slope = 0.1 , float initial_intercept = 0.0, float initial_sigma = 10.0, Bool_t verbose=false );
-   Double_t ComputeWeight(TF1* fitFunc, TF1* fitFunc2 = NULL);
-
+   Double_t ComputeWeight(TF1* fitFunc, TF1* fitFunc2 = NULL);//}}}
    ClassDef(Jburr_Template_Selector,0);
-
 };
-
+// end class definition }}}
 #endif
-
-#ifdef Jburr_Template_Selector_cxx
-void Jburr_Template_Selector::Init(TTree *tree)
-{
-   fReader.SetTree(tree);
-}
-
-Bool_t Jburr_Template_Selector::Notify()
-{
-   return kTRUE;
-}
-
-
-#endif // #ifdef Jburr_Template_Selector_cxx
