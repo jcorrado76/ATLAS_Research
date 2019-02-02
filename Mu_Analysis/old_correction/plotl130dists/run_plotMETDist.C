@@ -1,8 +1,0 @@
-#include "./PlotMETDistsVersMu.h"
-void run_plotMETDist(){
-    PlotMETDistsVersMu* myAnalysis = (PlotMETDistsVersMu*)TSelector::GetSelector("PlotMETDistsVersMu.C+");
-    TChain* mychain = new TChain( "METTree" , "mychain" );
-    mychain->Add("~/DATA/PhysicsMain/user.jburr.2017_11_17.JETM10/*");
-    mychain->Process(myAnalysis);
-}
-
