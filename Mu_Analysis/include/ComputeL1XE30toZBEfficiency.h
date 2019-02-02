@@ -22,7 +22,7 @@
 #include <TString.h>
 #include <TEfficiency.h>
 #include <TF1.h>
-#include "../BurrTemplateSelector/Jburr_Template_Selector.h"
+#include "Jburr_Template_Selector.h"
 
 class ComputeL1XE30toZBEfficiency : public Jburr_Template_Selector{
 public :
