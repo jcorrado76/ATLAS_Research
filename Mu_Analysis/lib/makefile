@@ -5,7 +5,7 @@ HEADERS = $(wildcard ../include/*.h)
 OBJS = $(patsubst %.C,%.o,$(SOURCES))
 
 myLib.so: MyDict.cxx $(SOURCES)
-	g++ -shared -o$@ `root-config --ldflags` $(CXXFLAGS) -I$(ROOTSYS)/include  -I../include $^
+	g++ -shared -o$@ `root-config --ldflags` $(CXXFLAGS) -I$(ROOTSYS)/include -I../include $^
 
 MyDict.cxx: $(HEADERS) Linkdef.h
 	rootcling -f $@ -c -I../include -p $^
