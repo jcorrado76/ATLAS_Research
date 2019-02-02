@@ -1,6 +1,0 @@
-FillFunc	fa2.C	/^Double_t FillFunc(double x)$/
-curves	readme.md	1
-data	readme.md	2
-fa2	fa2.C	/^void fa2(){$/
-plots	readme.md	3
-ray	ray.C	/^void ray() {$/
