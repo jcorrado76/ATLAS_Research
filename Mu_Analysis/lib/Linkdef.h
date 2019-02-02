@@ -4,6 +4,9 @@
 #pragma link off all functions;
 #pragma link C++ nestedclasses;
 
-#pragma link C++ defined_in "ComputeL1XE30toZBEfficiency.h";
-#pragma link C++ defined_in "Jburr_Template_Selector.h";
+#pragma link C++ defined_in "ComputeL1XE30toZBEfficiency.h+";
+#pragma link C++ defined_in "ComputeL1XE50toL1XE30Efficiency.h+";
+#pragma link C++ defined_in "CorrectL1XE30toZB.h+";
+#pragma link C++ defined_in "CorrectL1XE50toZB.h+";
+#pragma link C++ defined_in "Jburr_Template_Selector.h+";
 #endif
