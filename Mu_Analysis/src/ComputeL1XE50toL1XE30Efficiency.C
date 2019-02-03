@@ -1,5 +1,6 @@
 #define PlotMETDistsVersMu_cxx
 #include "ComputeL1XE50toL1XE30Efficiency.h"
+ClassImp(ComputeL1XE50toL1XE30Efficiency);
 void ComputeL1XE50toL1XE30Efficiency::Begin(TTree *) // {{{
 {
    TString option = GetOption();
@@ -47,7 +48,7 @@ Bool_t ComputeL1XE50toL1XE30Efficiency::Process(Long64_t entry)//{{{
    }
    return kTRUE;
 }//}}}
-void ComputeL1XE50toL1XE30Efficiency::Terminate()
+void ComputeL1XE50toL1XE30Efficiency::Terminate()//{{{
 {
     for (int i = 0 ; i < Number_Mu_Bins ; i++ ){
        L1XE50_Efficiency_Objects[i]->SetLineColor( Colors[i] );
@@ -82,7 +83,7 @@ void ComputeL1XE50toL1XE30Efficiency::Terminate()
         L1XE50_Efficiency_Fit_Objects[i]->Write();
     }
 
-    Mu_Analysis_File->Close();
+    Mu_Analysis_File->Close();//}}}
 }//}}}
 void ComputeL1XE50toL1XE30Efficiency::SlaveBegin(TTree * /*tree*/) // {{{
 {

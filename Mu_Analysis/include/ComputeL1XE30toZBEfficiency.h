@@ -76,6 +76,7 @@ public :
    TTreeReaderValue<Float_t> HLT_noalg_zb_L1ZB_prescale = {fReader, "HLT_noalg_zb_L1ZB.prescale"};
 
 
+   ComputeL1XE30toZBEfficiency() { }
    ComputeL1XE30toZBEfficiency(TTree * =0) { }
    virtual ~ComputeL1XE30toZBEfficiency() { }
    virtual Int_t   Version() const { return 2; }

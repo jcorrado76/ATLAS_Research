@@ -73,6 +73,7 @@ public :
    TTreeReaderValue<Float_t> HLT_noalg_L1XE30_prescale = {fReader, "HLT_noalg_L1XE30.prescale"};
 
 
+   ComputeL1XE50toL1XE30Efficiency() { }
    ComputeL1XE50toL1XE30Efficiency(TTree * =0) { }
    virtual ~ComputeL1XE50toL1XE30Efficiency() { }
    virtual Int_t   Version() const { return 2; }
