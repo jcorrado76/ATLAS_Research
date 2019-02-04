@@ -211,22 +211,3 @@ void CorrectL1XE30toZB::SlaveBegin(TTree * /*tree*/)//{{{
 {
    TString option = GetOption();
 }//}}}
-Bool_t CorrectL1XE30toZB::Notify(){return kTRUE;}
-Double_t CorrectL1XE30toZB::ComputeWeight(TF1* fitFunc)//{{{
-{
-    Float_t numerator = *HLT_noalg_L1XE30_prescale;
-    Double_t denominator = fitFunc->Eval( *cell_met );
-    return numerator / denominator;
-}//}}}
-Bool_t CorrectL1XE30toZB::isGoodRun(){//{{{
-    return (*RunNumber != 330203 && *RunNumber != 331975 && *RunNumber != 334487);
-}//}}}
-Bool_t CorrectL1XE30toZB::passedL1ZB(){//{{{
-    return (*HLT_noalg_zb_L1ZB_passed);
-}//}}}
-Bool_t CorrectL1XE30toZB::inMuRange( Float_t a , Float_t b ){ //{{{
-    return ( *InTimePileup > a && *InTimePileup < b );
-} //}}}
-Bool_t CorrectL1XE30toZB::isPassnoAlgL1XE30(){ // {{{
-    return (*HLT_noalg_L1XE30_passed);
-} // }}}

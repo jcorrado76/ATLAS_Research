@@ -131,7 +131,7 @@ Bool_t CorrectL1XE50toZB::Process(Long64_t entry)//{{{
    return kTRUE;
 }//}}}
 void CorrectL1XE50toZB::SlaveTerminate(){}
-void CorrectL1XE50toZB::Terminate(){
+void CorrectL1XE50toZB::Terminate(){//{{{
 	// Relative Normalization{{{
     // BinWidth = 1.0 GeV
 
@@ -143,7 +143,6 @@ void CorrectL1XE50toZB::Terminate(){
     }
 
     //}}}
-
     // plot corrected distributions {{{
     for (int i = 0 ; i < Number_Mu_Bins ; i++ ) {
         ZB_MET_Distributions[i]->SetLineColor( Colors[i] );
@@ -228,30 +227,11 @@ void CorrectL1XE50toZB::Terminate(){
     for (int i = 0 ; i < Number_Mu_Bins ; i++ ) {
         Corrected_MET_Distributions[i]->Write( "" , TObject::kOverwrite );
     }
-    //}}}
     mu_analysis_file->Close();
-}
+    //}}}
+}//}}}
 void CorrectL1XE50toZB::Init(TTree *tree){fReader.SetTree(tree);}
 void CorrectL1XE50toZB::SlaveBegin(TTree * /*tree*/)//{{{
 {
    TString option = GetOption();
-}//}}}
-Bool_t CorrectL1XE50toZB::Notify(){return kTRUE;}
-Bool_t CorrectL1XE50toZB::isGoodRun(){//{{{
-    return (*RunNumber != 330203 && *RunNumber != 331975 && *RunNumber != 334487);
-}//}}}
-Bool_t CorrectL1XE50toZB::passedL1ZB(){//{{{
-    return (*HLT_noalg_zb_L1ZB_passed);
-}//}}}
-Bool_t CorrectL1XE50toZB::inMuRange( Float_t a , Float_t b ){ //{{{
-    return ( *InTimePileup > a && *InTimePileup < b );
-} //}}}
-Bool_t CorrectL1XE50toZB::isPassnoAlgL1XE50(){ // {{{
-    return (*L1_XE50_passed);
-} // }}}
-Double_t CorrectL1XE50toZB::ComputeWeight(TF1* fitFunc , TF1* fitFunc2)//{{{
-{
-    Float_t numerator = *L1_XE50_prescale;
-    Double_t denominator = fitFunc->Eval( *cell_met ) * fitFunc2->Eval( *cell_met );
-    return numerator / denominator;
 }//}}}
