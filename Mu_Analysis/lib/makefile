@@ -4,6 +4,9 @@ HEADERS = $(wildcard ../include/*.h)
 # not needed, but shows an example of usage for patsubst
 OBJS = $(patsubst %.C,%.o,$(SOURCES))
 
+# $@ means filename of target
+# $^ means filenames of all prerequisites, separated by spaces
+
 INCLUDE_FLAG = -I$(ROOTSYS)/include -I../include
 
 myLib.so: MyDict.cxx $(SOURCES)

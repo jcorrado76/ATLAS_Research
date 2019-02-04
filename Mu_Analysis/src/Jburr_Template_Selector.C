@@ -26,7 +26,6 @@ Double_t Jburr_Template_Selector::fitFunction(Double_t *x , Double_t *par ){//{{
     // TODO: take l1cut as a parameter, but this actually messes up root's system for generating the functor to pass
     // this function to the generateFitFunction routine. so need to find a workaround
     Double_t l1cut = 30.0;
-    Float_t xx = x[0];
     Double_t fitval = (1./2.)*(1.+TMath::Erf((par[0]*x[0]+par[1]-l1cut)/(par[2]*TMath::Sqrt(2.))));
     return fitval;
 }//}}}

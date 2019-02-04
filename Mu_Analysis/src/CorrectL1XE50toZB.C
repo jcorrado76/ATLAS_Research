@@ -7,7 +7,6 @@ void CorrectL1XE50toZB::Begin(TTree * /*tree*/)//{{{
    for (int i = 0 ; i < Number_Mu_Bins + 1; i++){
        Mu_Values[i] = i * 10.;
    }
-   Int_t n;
    Float_t muLow;
    Float_t muHigh;
    TString Name;
