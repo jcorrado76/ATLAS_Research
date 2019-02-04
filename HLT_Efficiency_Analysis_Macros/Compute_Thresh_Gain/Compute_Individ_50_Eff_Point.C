@@ -5,10 +5,8 @@
 
 void tree::Begin(TTree * /*tree*/)
 {
-  userInfo* parameters =
-     dynamic_cast<userInfo*>(fInput->FindObject("parameters"));
+  userInfo* parameters = dynamic_cast<userInfo*>(fInput->FindObject("parameters"));
   AlgName = parameters->Get_AlgAName();
-
 
    TString option = GetOption();
 }

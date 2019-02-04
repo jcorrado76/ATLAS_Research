@@ -1,13 +1,9 @@
 
 int Compute_Constraint_Solutions( const TString AlgAName, const TString AlgBName )
 {
-     /*This macro is going to compute solutions to the constraint equation for
-      * combinations of the individual fractions that we are able to try */
-
-    /* ^ that was a terrible docstring.
-     * This macro is going to take in two algorithms, and return the pairs of points lying on the PPF curve. 
+    /*
+     * This macro is going to take in the names of two algorithms, and return the pairs of points lying on the PPF curve. This will be the curve such that cutting at those thresholds on both of these algorithms together yields an acceptable value for the trigger rate.
      */
-
 
     userInfo* parameters = new userInfo();
     parameters->Set_AlgAName(AlgAName);
@@ -39,13 +35,13 @@ int Compute_Constraint_Solutions( const TString AlgAName, const TString AlgBName
     Float_t lwrbnd = 0.5 * frac;
     Float_t uprbnd = 0.13;
     Float_t x1,x3; //thresholds of individual algorithms
-    Float_t Process2FracX1WithActintCut,Process2FracX2WithActintCut,Process2FracX3WithActintCut = 0; //fractions of events kept out of passrndm
+    Float_t Process2FracX1WithActintCut = 0;
+    Float_t Process2FracX2WithActintCut = 0;
+    Float_t Process2FracX3WithActintCut = 0; //fractions of events kept out of passrndm
     x1 = lwrbnd;
     x3 = uprbnd;
     Float_t initialGuess = ( x1 + x3 ) / 2.0;
     Float_t firstGuess = initialGuess;
-
-
 
     //this is not true anymore, if the two algs keep differrent fractions, the number kept
     //by cutting both of them at their respective fractions is not simply this sum; you
@@ -54,14 +50,13 @@ int Compute_Constraint_Solutions( const TString AlgAName, const TString AlgBName
     for (int i = 0 ; i < nentries ;i++)
     {
 
-    Float_t numKeepx1 = NumPassNoAlgPassedProcess1* x1;
-    Float_t numKeepx2 = NumPassNoAlgPassedProcess1* initialGuess;
-    Float_t numKeepx3 = NumPassNoAlgPassedProcess1* x3;
+    Float_t numKeepx1 = NumPassNoAlgPassedProcess1 * x1;
+    Float_t numKeepx2 = NumPassNoAlgPassedProcess1 * initialGuess;
+    Float_t numKeepx3 = NumPassNoAlgPassedProcess1 * x3;
 
     //compute the cumulative right hand sum hists
     TH1F *algAMETtarget = (TH1F*) algAHist->GetCumulative(kFALSE);
     TH1F *algBMETtarget = (TH1F*) algBHist->GetCumulative(kFALSE);
-
 
     //rename for clarity later on
     algAMETtarget->SetName(algAMETtarget->GetName() + (const TString)"A");
