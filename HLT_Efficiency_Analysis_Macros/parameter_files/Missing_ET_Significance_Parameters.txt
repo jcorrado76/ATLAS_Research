@@ -1,0 +1,27 @@
+Created: 2/5/19 by Joseph Corrado
+Parameters for Missing ET Significance Analysis:
+=================================================
+THRESHOLDFILE:
+
+SIGNALFILE:
+
+NBINS:
+1200
+METMIN:
+0.0
+METMAX:
+300.0
+METL1THRESH:
+0.0
+PROCESS2FRAC:
+0.0059
+ACTINTCUT:
+0.0
+EPSILON:
+25
+NUMBPROCESS2EVENTSTOKEEP:
+5600
+PASSNOALGCUT:
+0.0
+PASSRNDMCUT:
+0.5

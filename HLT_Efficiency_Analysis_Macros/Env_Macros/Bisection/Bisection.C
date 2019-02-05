@@ -4,16 +4,17 @@
 Float_t Efficiency_Lib::bisection( userInfo* parameters , TH1F* algAHist , TH1F* algBHist, TTree* passnoalgTree )
 {
     // Get Parameters from UserInfo {{{
-    const Float_t frac = parameters->Get_Frac();
-    Float_t metl1thresh = parameters->Get_MetL1Thresh();
-    Float_t actintCut = parameters->Get_ActintCut();
-    Int_t epsilon = parameters->Get_Epsilon();
-    Float_t passrndmcut = parameters->Get_Passrndmcut();
-    const Int_t NumPassNoAlgPassedProcess1 = parameters->Get_NumThreshPassProcess1();
-    const Float_t BinWidth = parameters->Get_BinWidth();
-    const Float_t passnoalgcut     = parameters->Get_Passnoalgcut();
+    const Float_t frac                          = parameters->Get_Frac();
+    Float_t metl1thresh                         = parameters->Get_MetL1Thresh();
+    Float_t actintCut                           = parameters->Get_ActintCut();
+    Int_t epsilon                               = parameters->Get_Epsilon();
+    Float_t passrndmcut                         = parameters->Get_Passrndmcut();
+    const Int_t NumPassNoAlgPassedProcess1      = parameters->Get_NumThreshPassProcess1();
+    const Float_t BinWidth                      = parameters->Get_BinWidth();
+    const Float_t passnoalgcut                  = parameters->Get_Passnoalgcut();
     Int_t target = NumPassNoAlgPassedProcess1 * frac;
     //}}}
+    // printing the number of entries in histograms 
     std::cout << "NumPassNoAlgPassedProcess1: " << NumPassNoAlgPassedProcess1 << std::endl;
     std::cout << "algAHist nentries: " << algAHist->GetEntries() << std::endl;
     std::cout << "algBHist nentries: " << algBHist->GetEntries() << std::endl;

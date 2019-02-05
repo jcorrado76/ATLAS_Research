@@ -10,9 +10,9 @@
     TString include_path = gSystem->GetIncludePath();
 
     //add include directory to include path
-    if (!include_path.Contains("-I$HOME/ATLAS_Research/HLT_EFFICIENCY_ANALYSIS_MACROS/include"))
+    if (!include_path.Contains("-I$HOME/ATLAS_Research/HLT_Efficiency_Analysis_Macros/include"))
     {
-        gSystem->AddIncludePath("-I$HOME/ATLAS_Research/HLT_EFFICIENCY_ANALYSIS_MACROS/include");
+        gSystem->AddIncludePath("-I$HOME/ATLAS_Research/HLT_Efficiency_Analysis_Macros/include");
     }
     std::cout << "Added local include directory to the include path" << std::endl;
     
