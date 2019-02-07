@@ -63,7 +63,7 @@ Float_t Efficiency_Lib::determineZeroBiasThresh( userInfo* parameters, const Boo
     const Float_t passnoalgcut     = parameters->Get_Passnoalgcut();
     const Float_t passrndmcut      = parameters->Get_Passrndmcut();
     std::cout << "threshfilename: " << threshFileName << std::endl;
-    const TString threshFilePath = "../../ATLAS_DATA/" + threshFileName;
+    const TString threshFilePath = "../DATA/mincer_data/" + threshFileName;
 	TFile *threshFileHandle = TFile::Open(threshFilePath, "READ");
 	TTree *threshTree = (TTree*)(threshFileHandle->Get("tree"));
     const Int_t passnoAlgNentries = threshTree->GetEntries();

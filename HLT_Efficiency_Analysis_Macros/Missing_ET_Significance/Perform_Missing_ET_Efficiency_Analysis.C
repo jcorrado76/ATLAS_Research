@@ -1,10 +1,10 @@
 #include "Efficiency_Library.h"
 
 
-TFile* threeEfficiencies( const TString& AlgAName )
+TFile* Perform_Missing_ET_Efficiency_Analysis( const TString& AlgAName )
 {
 
-    TString DATA_PATH =  "../../DATA/" ;
+    TString DATA_PATH =  "../DATA/mincer_data/";
 
     const TString& AlgBName = "missing_et_significance";
 
@@ -13,8 +13,13 @@ TFile* threeEfficiencies( const TString& AlgAName )
     parameters->Set_AlgAName(AlgAName);
     parameters->Set_AlgBName(AlgBName);
 
+    //FILES
+    TString zerobiasFileName = parameters->Get_ThreshFileName();
+    TString muonFilename = parameters->Get_MuonFileName();
+
     //read the parameter file for HLT analysis
-    parameters->Read_Parameter_File("parameter_files/Missing_ET_Significance_Parameters.txt");
+    //parameters->Read_Parameter_File("parameter_files/Missing_ET_Significance_Parameters.txt");
+    parameters->Read_Parameter_File("parameter_files/HLTAnalysisParameters.txt");
 
     //THREEFF BENCHMARK
     TBenchmark* threeEfficienciesBenchmark = new TBenchmark();
@@ -23,15 +28,17 @@ TFile* threeEfficiencies( const TString& AlgAName )
     threeEfficienciesBenchmark->Start("Three Efficiencies");
 
     //MUON FILE; MUON TREE{{{
-    TFile* muonFile = TFile::Open( DATA_PATH + "JETM10_missing_et_significance.root");
-    TTree* myMuonTree = (TTree*)muonFile->Get("METTree");
-    Int_t muonNentries = muonTree->GetEntries();
+    const TString muonFilePath = DATA_PATH + muonFilename;
+    TFile * muonFile = TFile::Open(muonFilePath, "READ");
+    TTree* myMuonTree = (TTree*)muonFile->Get("tree");
+    Int_t muonNentries = myMuonTree->GetEntries();
     parameters->Set_MuonNentries( muonNentries );
     //}}}
     //ZBTREE{{{
-    TFile* zbFile = TFile::Open( DATA_PATH + "ZB_missing_et_significance.root");
-    TTree* zeroBiasTree = (TTree*)zbFile->Get("METTree");
-    Int_t zerobiasNentries = zbTree->GetEntries();
+     TString zerobiasFilePath = DATA_PATH + zerobiasFileName;
+    TFile * zeroBiasFile = TFile::Open(zerobiasFilePath, "READ");
+    TTree* zeroBiasTree = (TTree*)zeroBiasFile->Get("tree");
+    Int_t zerobiasNentries = zeroBiasTree->GetEntries();
     parameters->Set_PassnoalgNentries( zerobiasNentries );
     //}}}
     
@@ -50,19 +57,21 @@ TFile* threeEfficiencies( const TString& AlgAName )
     Float_t algAMET,algBMET,metoffrecal,mexoffrecal,meyoffrecal,mexoffrecalmuon, zb_actint,
             meyoffrecalmuon, metl1,metcell,metrefmuon,mexrefmuon,meyrefmuon,metoffrecalmuon;
     Int_t passnoalgL1XE10,passnoalgL1XE30,passnoalgL1XE40,passnoalgL1XE45;
+    Float_t algAmuonMET = 0;
+    Float_t algBmuonMET = 0;
     Float_t algAMETx1thresh,algBMETx1thresh;
     Float_t algAMETx2thresh,algBMETx2thresh;
     Bool_t HLT_noalg_zb_L1ZB_passed;
     //ZB BRANCHES{{{
     zeroBiasTree->SetBranchAddress(AlgAName,&algAMET);
     zeroBiasTree->SetBranchAddress(AlgBName,&algBMET);
-    zeroBiasTree->SetBranchAddress("HLT_noalg_zb_L1ZB.passed",& HLT_noalg_zb_L1ZB_passed );
-    //zeroBiasTree->SetBranchAddress("passrndm", &passrndm);
-    //zeroBiasTree->SetBranchAddress("metl1",&metl1);
-    //zeroBiasTree->SetBranchAddress("passnoalgL1XE10",&passnoalgL1XE10);
-    //zeroBiasTree->SetBranchAddress("passnoalgL1XE30",&passnoalgL1XE30);
-    //zeroBiasTree->SetBranchAddress("passnoalgL1XE40",&passnoalgL1XE40);
-    //zeroBiasTree->SetBranchAddress("passnoalgL1XE45",&passnoalgL1XE45);
+    //zeroBiasTree->SetBranchAddress("HLT_noalg_zb_L1ZB.passed",& HLT_noalg_zb_L1ZB_passed );
+    zeroBiasTree->SetBranchAddress("passrndm", &passrndm);
+    zeroBiasTree->SetBranchAddress("metl1",&metl1);
+    zeroBiasTree->SetBranchAddress("passnoalgL1XE10",&passnoalgL1XE10);
+    zeroBiasTree->SetBranchAddress("passnoalgL1XE30",&passnoalgL1XE30);
+    zeroBiasTree->SetBranchAddress("passnoalgL1XE40",&passnoalgL1XE40);
+    zeroBiasTree->SetBranchAddress("passnoalgL1XE45",&passnoalgL1XE45);
     //zeroBiasTree->SetBranchAddress("actint",&zb_actint);
     //}}}
     //MUON BRANCHES{{{
@@ -81,7 +90,7 @@ TFile* threeEfficiencies( const TString& AlgAName )
     myMuonTree->SetBranchAddress("meyrefmuon", &meyrefmuon);
     myMuonTree->SetBranchAddress(AlgAName,&algAmuonMET);
     myMuonTree->SetBranchAddress(AlgBName,&algBmuonMET);
-    myMuonTree->SetBranchAddress("actint", &muonActint);
+    //myMuonTree->SetBranchAddress("actint", &muonActint);
     //myMuonTree->SetBranchAddress("metl1",&muonMetl1);
     //}}}
 
@@ -119,7 +128,7 @@ TFile* threeEfficiencies( const TString& AlgAName )
 
         Bool_t isHLT_zb_L1ZB = HLT_noalg_zb_L1ZB_passed;
 
-	    if ( /*( isL1 ) && ( isactint ) && (isPassnoalg || isPassrndm) || */ HLT_noalg_zb_L1ZB_passed /*)*/)
+	    if ( ( isL1 ) && /*( isactint ) &&*/ (isPassnoalg || isPassrndm /*|| HLT_noalg_zb_L1ZB_passed */))
         {
     		algAMETHist->Fill(algAMET);
     		algBMETHist->Fill(algBMET);
@@ -164,8 +173,6 @@ TFile* threeEfficiencies( const TString& AlgAName )
 
     threeEfficienciesBenchmark->Start("Fill TEfficiencies");
 
-    Float_t algAmuonMET = 0;
-    Float_t algBmuonMET = 0;
     Float_t muonMetl1 = 0;
     Float_t muonActint = 0;
 
