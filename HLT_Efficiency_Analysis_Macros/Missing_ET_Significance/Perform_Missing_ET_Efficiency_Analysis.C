@@ -6,6 +6,8 @@ TFile* threeEfficiencies( const TString& AlgAName )
 
     TString DATA_PATH =  "../../DATA/" ;
 
+    const TString& AlgBName = "missing_et_significance";
+
     //GLOBAL DEFINITION
     userInfo* parameters = new userInfo();
     parameters->Set_AlgAName(AlgAName);

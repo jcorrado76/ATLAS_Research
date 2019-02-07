@@ -11,6 +11,7 @@ HLT_Efficiency_Analysis_Macros/RootFiles/*
 HLT_Efficiency_Analysis_Macros/lib/*
 HLT_Efficiency_Analysis_Macros/Practice\ Macros/*
 HLT_Efficiency_Analysis_Macros/Analysis/*
+DATA
 !HLT_Efficiency_Analysis_Macros/
 !Curve_Reconstruction/
 !Jburr_Dataset_Analysis/
