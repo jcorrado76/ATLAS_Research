@@ -1,3 +1,6 @@
+// this version shows how to add a new branch to a tchain so that you can create a single file consisting of a tree
+// created from a tchain using many files together
+
 {
     TChain* muonChain = new TChain("METTree","JETM10Chain");
     muonChain->Add("PhysicsMain/JburrJETM10*");

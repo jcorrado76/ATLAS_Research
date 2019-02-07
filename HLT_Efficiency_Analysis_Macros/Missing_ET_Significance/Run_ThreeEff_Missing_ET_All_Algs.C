@@ -7,7 +7,7 @@
 
 Int_t generateEfficiencies( const TString& folderName = "")
 {
-    TString algArray[7] = {"metl1","metcell","metmht","mettopocl","mettopoclps","mettopoclpuc","mettopoclem"};
+    TString algArray[6] = {"metcell","metmht","mettopocl","mettopoclps","mettopoclpuc","mettopoclem"};
     
     for ( std::size_t i = 0 ; i < sizeof(algArray) ; i++)
     {
