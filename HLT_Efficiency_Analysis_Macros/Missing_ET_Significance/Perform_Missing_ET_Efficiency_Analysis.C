@@ -23,15 +23,15 @@ TFile* threeEfficiencies( const TString& AlgAName )
     threeEfficienciesBenchmark->Start("Three Efficiencies");
 
     //MUON FILE; MUON TREE{{{
-    TChain* muonchain = new TChain( "METTree" , "muonchain");
-    muonchain->Add( DATA_PATH + "PhysicsMain/user.jburr.2017_11_17.JETM10";
-    Int_t muonNentries = muonchain->GetEntries();
+    TFile* muonFile = TFile::Open( DATA_PATH + "JETM10_missing_et_significance.root");
+    TTree* muonTree = (TTree*)muonFile->Get("METTree");
+    Int_t muonNentries = muonTree->GetEntries();
     parameters->Set_MuonNentries( muonNentries );
     //}}}
     //ZBTREE{{{
-    TChain* zbchain = new TChain("METTree","zbchain");
-    zbchain->Add( DATA_PATH + "ZB/user.jburr.2017_11_17.ZB/*");
-    Int_t zerobiasNentries = zbchain->GetEntries();
+    TFile* zbFile = TFile::Open( DATA_PATH + "ZB_missing_et_significance.root");
+    TTree* zbTree = (TTree*)zbFile->Get("METTree");
+    Int_t zerobiasNentries = zbTree->GetEntries();
     parameters->Set_PassnoalgNentries( zerobiasNentries );
     //}}}
     
