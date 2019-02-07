@@ -24,13 +24,13 @@ TFile* threeEfficiencies( const TString& AlgAName )
 
     //MUON FILE; MUON TREE{{{
     TFile* muonFile = TFile::Open( DATA_PATH + "JETM10_missing_et_significance.root");
-    TTree* muonTree = (TTree*)muonFile->Get("METTree");
+    TTree* myMuonTree = (TTree*)muonFile->Get("METTree");
     Int_t muonNentries = muonTree->GetEntries();
     parameters->Set_MuonNentries( muonNentries );
     //}}}
     //ZBTREE{{{
     TFile* zbFile = TFile::Open( DATA_PATH + "ZB_missing_et_significance.root");
-    TTree* zbTree = (TTree*)zbFile->Get("METTree");
+    TTree* zeroBiasTree = (TTree*)zbFile->Get("METTree");
     Int_t zerobiasNentries = zbTree->GetEntries();
     parameters->Set_PassnoalgNentries( zerobiasNentries );
     //}}}
@@ -52,19 +52,18 @@ TFile* threeEfficiencies( const TString& AlgAName )
     Int_t passnoalgL1XE10,passnoalgL1XE30,passnoalgL1XE40,passnoalgL1XE45;
     Float_t algAMETx1thresh,algBMETx1thresh;
     Float_t algAMETx2thresh,algBMETx2thresh;
-
+    Bool_t HLT_noalg_zb_L1ZB_passed;
     //ZB BRANCHES{{{
-    zeroBiasTree->SetBranchAddress("passrndm", &passrndm);
     zeroBiasTree->SetBranchAddress(AlgAName,&algAMET);
     zeroBiasTree->SetBranchAddress(AlgBName,&algBMET);
+    zeroBiasTree->SetBranchAddress("HLT_noalg_zb_L1ZB.passed",& HLT_noalg_zb_L1ZB_passed );
+    //zeroBiasTree->SetBranchAddress("passrndm", &passrndm);
     //zeroBiasTree->SetBranchAddress("metl1",&metl1);
-/*
-    zeroBiasTree->SetBranchAddress("passnoalgL1XE10",&passnoalgL1XE10);
-    zeroBiasTree->SetBranchAddress("passnoalgL1XE30",&passnoalgL1XE30);
-    zeroBiasTree->SetBranchAddress("passnoalgL1XE40",&passnoalgL1XE40);
-    zeroBiasTree->SetBranchAddress("passnoalgL1XE45",&passnoalgL1XE45);
-    */
-    zeroBiasTree->SetBranchAddress("actint",&zb_actint);
+    //zeroBiasTree->SetBranchAddress("passnoalgL1XE10",&passnoalgL1XE10);
+    //zeroBiasTree->SetBranchAddress("passnoalgL1XE30",&passnoalgL1XE30);
+    //zeroBiasTree->SetBranchAddress("passnoalgL1XE40",&passnoalgL1XE40);
+    //zeroBiasTree->SetBranchAddress("passnoalgL1XE45",&passnoalgL1XE45);
+    //zeroBiasTree->SetBranchAddress("actint",&zb_actint);
     //}}}
     //MUON BRANCHES{{{
     myMuonTree->SetBranchAddress("passmu26med", &passmuon);
@@ -82,8 +81,8 @@ TFile* threeEfficiencies( const TString& AlgAName )
     myMuonTree->SetBranchAddress("meyrefmuon", &meyrefmuon);
     myMuonTree->SetBranchAddress(AlgAName,&algAmuonMET);
     myMuonTree->SetBranchAddress(AlgBName,&algBmuonMET);
-    //myMuonTree->SetBranchAddress("metl1",&muonMetl1);
     myMuonTree->SetBranchAddress("actint", &muonActint);
+    //myMuonTree->SetBranchAddress("metl1",&muonMetl1);
     //}}}
 
     //ZB INDIVID HISTS
@@ -118,7 +117,9 @@ TFile* threeEfficiencies( const TString& AlgAName )
         passnoalgL1XE40 > passnoalgcut || passnoalgL1XE45 > passnoalgcut;
         Bool_t isPassrndm = passrndm > passrndmcut;
 
-	    if ( /*( isL1 ) && ( isactint ) && (isPassnoalg || */isPassrndm/*)*/)
+        Bool_t isHLT_zb_L1ZB = HLT_noalg_zb_L1ZB_passed;
+
+	    if ( /*( isL1 ) && ( isactint ) && (isPassnoalg || isPassrndm) || */ HLT_noalg_zb_L1ZB_passed /*)*/)
         {
     		algAMETHist->Fill(algAMET);
     		algBMETHist->Fill(algBMET);
@@ -211,7 +212,8 @@ TFile* threeEfficiencies( const TString& AlgAName )
 
     efficiencyCanvas->SetTitle(canvName);
 
-    Ateff->SetLineColor(kBlue);//{{{
+    // Draw efficiencies and color them //{{{
+    Ateff->SetLineColor(kBlue);
     Cteff->SetLineColor(kRed);
     Bteff->SetLineColor(kGreen);
     Dteff->SetLineColor(kBlack);
@@ -228,10 +230,9 @@ TFile* threeEfficiencies( const TString& AlgAName )
     legend->AddEntry(Dteff, dstring);
     legend->Draw();
     //}}}
-
-    //compute number muon events actually kept using external macro
+    //compute number muon events actually kept using external macro as an external check we did it correctly 
     Int_t muonEventsCombined = Efficiency_Lib::determineMuonEventsKeptCombined( AlgAName , CombinedThreshAlgA , AlgBName , CombinedThreshAlgB , muonFilename , metl1thresh );
-
+    // update the parameters object with resulting numbers {{{
     parameters->Set_NumPassNoAlgPassProcess1( NumbRndmProcess1 );
     parameters->Set_NumMuonPassProcess1( NumMuonPassProcess1WithActintCut );
 
@@ -252,6 +253,7 @@ TFile* threeEfficiencies( const TString& AlgAName )
     parameters->Set_NumMuonKeptCombinedAtThresh( muonEventsCombined );
     parameters->Set_NumTotal((Ateff->GetTotalHistogram())->GetEntries());
 
+    //}}}
     TString fileName = "./RootFiles/" + AlgAName + "_" + AlgBName + "Efficiencies.root";
     //if file already exists, not opened
     TFile* rootFile = new TFile(fileName,"CREATE");
