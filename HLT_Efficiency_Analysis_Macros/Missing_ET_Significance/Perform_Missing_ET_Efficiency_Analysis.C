@@ -1,10 +1,10 @@
 #include "Efficiency_Library.h"
 
 
-TFile* threeEfficiencies( const TString& AlgAName , const TString& AlgBName )
+TFile* threeEfficiencies( const TString& AlgAName )
 {
 
-    TString DATA_PATH =  "../../ATLAS_DATA/" ;
+    TString DATA_PATH =  "../../DATA/" ;
 
     //GLOBAL DEFINITION
     userInfo* parameters = new userInfo();
@@ -12,11 +12,7 @@ TFile* threeEfficiencies( const TString& AlgAName , const TString& AlgBName )
     parameters->Set_AlgBName(AlgBName);
 
     //read the parameter file for HLT analysis
-    parameters->Read_Parameter_File("parameter_files/HLTAnalysisParameters.txt");
-
-    //FILES
-    TString zerobiasFileName = parameters->Get_ThreshFileName();
-    TString muonFilename = parameters->Get_MuonFileName();
+    parameters->Read_Parameter_File("parameter_files/Missing_ET_Significance_Parameters.txt");
 
     //THREEFF BENCHMARK
     TBenchmark* threeEfficienciesBenchmark = new TBenchmark();
@@ -25,17 +21,15 @@ TFile* threeEfficiencies( const TString& AlgAName , const TString& AlgBName )
     threeEfficienciesBenchmark->Start("Three Efficiencies");
 
     //MUON FILE; MUON TREE{{{
-    const TString muonFilePath = DATA_PATH + muonFilename;
-    TFile * muonFile = TFile::Open(muonFilePath, "READ");
-    TTree* myMuonTree = (TTree*)muonFile->Get("tree");
-    Int_t muonNentries = myMuonTree->GetEntries();
+    TChain* muonchain = new TChain( "METTree" , "muonchain");
+    muonchain->Add( DATA_PATH + "PhysicsMain/user.jburr.2017_11_17.JETM10";
+    Int_t muonNentries = muonchain->GetEntries();
     parameters->Set_MuonNentries( muonNentries );
     //}}}
     //ZBTREE{{{
-    TString zerobiasFilePath = DATA_PATH + zerobiasFileName;
-    TFile * zeroBiasFile = TFile::Open(zerobiasFilePath, "READ");
-    TTree* zeroBiasTree = (TTree*)zeroBiasFile->Get("tree");
-    Int_t zerobiasNentries = zeroBiasTree->GetEntries();
+    TChain* zbchain = new TChain("METTree","zbchain");
+    zbchain->Add( DATA_PATH + "ZB/user.jburr.2017_11_17.ZB/*");
+    Int_t zerobiasNentries = zbchain->GetEntries();
     parameters->Set_PassnoalgNentries( zerobiasNentries );
     //}}}
     
