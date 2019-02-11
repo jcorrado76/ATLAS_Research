@@ -57,7 +57,7 @@ TFile* Perform_Missing_ET_Efficiency_Analysis( const TString& AlgAName )
     Int_t NumbRndmProcess1 = 0; Int_t counter1 = 0; Int_t counter2 = 0; Int_t counter3 = 0;
     Int_t passrndm, numPassMuon,passmuon,passmuvarmed,cleanCutsFlag,recalBrokeFlag;
     Float_t algAMET,algBMET,metoffrecal,mexoffrecal,meyoffrecal,mexoffrecalmuon, zb_actint,
-            meyoffrecalmuon, metl1,metcell,metrefmuon,mexrefmuon,meyrefmuon,metoffrecalmuon;
+            meyoffrecalmuon, metl1,metcell,metoffrecalmuon;
     Int_t passnoalgL1XE10,passnoalgL1XE30,passnoalgL1XE40,passnoalgL1XE45;
     Float_t algAmuonMET = 0;
     Float_t algBmuonMET = 0;
@@ -87,13 +87,10 @@ TFile* Perform_Missing_ET_Efficiency_Analysis( const TString& AlgAName )
     myMuonTree->SetBranchAddress("metoffrecalmuon", &metoffrecalmuon);
     myMuonTree->SetBranchAddress("mexoffrecalmuon", &mexoffrecalmuon);
     myMuonTree->SetBranchAddress("meyoffrecalmuon", &meyoffrecalmuon);
-    myMuonTree->SetBranchAddress("metrefmuon", &metrefmuon);
-    myMuonTree->SetBranchAddress("mexrefmuon", &mexrefmuon);
-    myMuonTree->SetBranchAddress("meyrefmuon", &meyrefmuon);
     myMuonTree->SetBranchAddress(AlgAName,&algAmuonMET);
     myMuonTree->SetBranchAddress(AlgBName,&algBmuonMET);
-    //myMuonTree->SetBranchAddress("actint", &muonActint);
-    //myMuonTree->SetBranchAddress("metl1",&muonMetl1);
+    myMuonTree->SetBranchAddress("actint", &muonActint);
+    myMuonTree->SetBranchAddress("metl1",&muonMetl1);
     //}}}
 
     //ZB INDIVID HISTS
