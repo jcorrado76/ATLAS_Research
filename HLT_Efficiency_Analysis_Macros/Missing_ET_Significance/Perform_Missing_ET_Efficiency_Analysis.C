@@ -163,13 +163,14 @@ TFile* Perform_Missing_ET_Efficiency_Analysis( const TString& AlgAName )
     //Initialize TEfficiencies {{{
     TString astring = AlgAName + " > " + Form(" %.2f", AlgAIndividThresh );
     TString bstring = AlgBName + " > " + Form(" %.2f", AlgBIndividThresh );
-    TString cstring = AlgAName+ " > " + Form(" %.2f", CombinedThreshAlgA) + " and " + AlgBName + " > " + Form(" %.2f", CombinedThreshAlgB);
+    TString cstring = AlgAName + " > " + Form(" %.2f", CombinedThreshAlgA) + " and " + AlgBName + " > " + Form(" %.2f", CombinedThreshAlgB);
     TString dstring = (TString) "L1 > " + Form(" %.2f" , metl1thresh);
 
-    TEfficiency* Ateff  = new TEfficiency(astring , "Efficiency", muonNbins, metMin, metMax);
-    TEfficiency* Bteff  = new TEfficiency(bstring , "Efficiency", muonNbins, metMin, metMax);
-    TEfficiency* Cteff  = new TEfficiency(cstring,  "Efficiency", muonNbins, metMin, metMax);
-    TEfficiency* Dteff  = new TEfficiency(dstring,  "Efficiency", muonNbins, metMin, metMax);//combined just L1 cut, 0 on others
+    TString CName = AlgAName + "_" + AlgBName + "_efficiency";
+    TEfficiency* Ateff  = new TEfficiency( AlgAName + "_efficiency" , astring , muonNbins, metMin, metMax);
+    TEfficiency* Bteff  = new TEfficiency( AlgBName + "_efficiency" , bstring , muonNbins, metMin, metMax);
+    TEfficiency* Cteff  = new TEfficiency( CName ,  cstring , muonNbins, metMin, metMax);
+    TEfficiency* Dteff  = new TEfficiency( "metcell_efficiency" ,  dstring , muonNbins, metMin, metMax);//combined just L1 cut, 0 on others
     //}}}
 
     threeEfficienciesBenchmark->Start("Fill TEfficiencies");
