@@ -1,20 +1,12 @@
 #include "TString.h"
 #include "TROOT.h"
-
-//TODO: write some file handling code that generates a folder within TEfficienciesPics and time stamps it to keep everything
-//organized
-
-
-Int_t generateEfficiencies( const TString& folderName = "")
+Int_t Run_ThreeEff_Missing_ET_All_Algs( const TString& folderName = "")
 {
-    TString algArray[6] = {"metcell","metmht","mettopocl","mettopoclps","mettopoclpuc","mettopoclem"};
+    TString algArray[5] = {"metcell","metmht","mettopocl","mettopoclps","mettopoclpuc"};
     
-    for ( std::size_t i = 0 ; i < sizeof(algArray) ; i++)
+    for ( std::size_t i = i+1 ; i < sizeof(algArray) ; i++)
     {
-    	for ( std::size_t j = i+1 ; j < sizeof(algArray) ; j++)
-    	{
-    	    gROOT->ProcessLine(".x threeEfficiencies.C(\"" + algArray[i] + "\",\"missing_et_significance\")" );
-    	}
+        gROOT->ProcessLine(".x Perform_Missing_ET_Efficiency_Analysis.C(\"" + algArray[i] + "\");");
     }
 
   return(0);
