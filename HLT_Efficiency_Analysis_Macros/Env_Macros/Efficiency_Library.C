@@ -48,7 +48,6 @@ Float_t Efficiency_Lib::determineZeroBiasThresh( userInfo* parameters, const Boo
 {
     //this function determines thresh to keep proper trigger rate for process 2 on algs A and B
     //these thresholds are used on both passnoalg and muon data
-    parameters->Print();
     const Float_t metL1Thresh      = parameters->Get_MetL1Thresh();
     const Float_t actintCut        = parameters->Get_ActintCut();
     const TString threshFileName   = parameters->Get_ThreshFileName(); 
@@ -93,13 +92,11 @@ Float_t Efficiency_Lib::determineZeroBiasThresh( userInfo* parameters, const Boo
 	threshTree->SetBranchAddress(algAName,&algAMET);
 	threshTree->SetBranchAddress(algBName,&algBMET);
     
-	//threshTree->SetBranchAddress("metl1",&metl1);
-    /*
+    threshTree->SetBranchAddress("metl1",&metl1);
     threshTree->SetBranchAddress("passnoalgL1XE10",&passnoalgL1XE10);
     threshTree->SetBranchAddress("passnoalgL1XE30",&passnoalgL1XE30);
     threshTree->SetBranchAddress("passnoalgL1XE40",&passnoalgL1XE40);
     threshTree->SetBranchAddress("passnoalgL1XE45",&passnoalgL1XE45);
-    */
 
     threshTree->SetBranchAddress("actint",&actint);
     threshTree->SetBranchAddress("passrndm",&passrndm);
@@ -183,7 +180,7 @@ Float_t Efficiency_Lib::determineMuonEventsKeptCombined( const TString& algA, co
     << algB << " at: " << threshB /*<< " and metl1 at: " << metL1Thresh*/ << std::endl;
 
     //get muon tree
-    TString muonFilePath = "../myData/"+muonFileName;
+    TString muonFilePath = "../DATA/mincer_data/" + muonFileName;
     TFile * muonFile = TFile::Open(muonFilePath, "READ");
     TTree* muonTree = (TTree*)muonFile->Get("tree");
     Int_t muonNentries = muonTree->GetEntries();
@@ -201,7 +198,7 @@ Float_t Efficiency_Lib::determineMuonEventsKeptCombined( const TString& algA, co
     muonTree->SetBranchAddress("recalbroke",&recalBrokeFlag);
     muonTree->SetBranchAddress("passcleancuts",&cleanCutsFlag);
     muonTree->SetBranchAddress(algA,&algAMET);
-    //muonTree->SetBranchAddress("metl1",&metl1);
+    muonTree->SetBranchAddress("metl1",&metl1);
     muonTree->SetBranchAddress("metoffrecal", &metoffrecal);
     muonTree->SetBranchAddress("mexoffrecal", &mexoffrecal);
     muonTree->SetBranchAddress("meyoffrecal", &meyoffrecal);
@@ -231,7 +228,7 @@ Float_t Efficiency_Lib::determineMuonEventsKeptCombined( const TString& algA, co
             {
               numberMuonEvents++;
             }
-                if (((algAMET > threshA) && (algBMET > threshB) /*&& (metl1 > metl1thresh)*/))
+                if (((algAMET > threshA) && (algBMET > threshB) && (metl1 > metl1thresh)))
                 {
                     numbPassedEvents++;
                 }

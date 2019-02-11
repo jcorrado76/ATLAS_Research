@@ -16,6 +16,8 @@ TFile* Perform_Missing_ET_Efficiency_Analysis( const TString& AlgAName )
     //read the parameter file for HLT analysis
     //parameters->Read_Parameter_File("parameter_files/Missing_ET_Significance_Parameters.txt");
     parameters->Read_Parameter_File("parameter_files/Missing_ET_Significance_Parameters.txt");
+    parameters->Print();
+    std::cout << "Userinfo object initialized" << std::endl;
 
     //FILES
     TString zerobiasFileName = parameters->Get_ThreshFileName();
@@ -136,12 +138,11 @@ TFile* Perform_Missing_ET_Efficiency_Analysis( const TString& AlgAName )
 	    }
 	}
     //}}}
-
-    parameters->Set_NumPassNoAlgPassProcess1(NumbRndmProcess1);
+    // this needs to happen before bisection because it is used in bisection
+    parameters->Set_NumPassNoAlgPassProcess1( NumbRndmProcess1 );
 
     //the individual fraction needed such that when both algs constrained to keep the same fraction individually,
     //keep the proper amount when combined
-
     Float_t bisectionIndividFrac;
 
     //start bisection timer
@@ -188,7 +189,7 @@ TFile* Perform_Missing_ET_Efficiency_Analysis( const TString& AlgAName )
         isMuon = (passmuvarmed > 0.1 || passmuon > 0.1);
         isClean = (cleanCutsFlag > 0.1) && (recalBrokeFlag < 0.1);
 
-        if ( isMuon && isClean /*&& muonMetl1 > metl1thresh*/)
+        if ( isMuon && isClean && muonMetl1 > metl1thresh)
         {
             NumMuonPassProcess1WithActintCut++;
         }
@@ -199,11 +200,11 @@ TFile* Perform_Missing_ET_Efficiency_Analysis( const TString& AlgAName )
             {
         	    Float_t metnomu = Efficiency_Lib::computeMetNoMu(  mexoffrecal , meyoffrecal , mexoffrecalmuon , meyoffrecalmuon );
 
-                Ateff->Fill((algAmuonMET > AlgAIndividThresh ) /*&& (muonMetl1 > metl1thresh)*/ && ( muonActint > actintCut ), metnomu);
-        	    Bteff->Fill((algBmuonMET > AlgBIndividThresh ) /*&& (muonMetl1 > metl1thresh)*/&& ( muonActint > actintCut ), metnomu);
+                Ateff->Fill((algAmuonMET > AlgAIndividThresh ) && (muonMetl1 > metl1thresh) && ( muonActint > actintCut ), metnomu);
+        	    Bteff->Fill((algBmuonMET > AlgBIndividThresh ) && (muonMetl1 > metl1thresh) && ( muonActint > actintCut ), metnomu);
         	    Cteff->Fill(((algAmuonMET > CombinedThreshAlgA) && (algBmuonMET > CombinedThreshAlgB)
-                && ( muonActint > actintCut )/*&& (muonMetl1 > metl1thresh)*/), metnomu);
-                Dteff->Fill(/*(muonMetl1 >= metl1thresh) &&*/ ( muonActint > actintCut ), metnomu);
+                && ( muonActint > actintCut ) && (muonMetl1 > metl1thresh) ), metnomu);
+                Dteff->Fill((muonMetl1 >= metl1thresh) && ( muonActint > actintCut ), metnomu);
             }
     	}
     }
@@ -285,7 +286,7 @@ TFile* Perform_Missing_ET_Efficiency_Analysis( const TString& AlgAName )
     Ateff->Write( AlgAName + " Efficiency" );
     Bteff->Write( bstring );
     Cteff->Write( cstring );
-    Dteff->Write( "METL1" );
+    //Dteff->Write( "METL1" );
     efficiencyCanvas->Write("efficiencyCanvas");
 
     parameters->Print();
