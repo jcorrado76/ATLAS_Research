@@ -51,8 +51,7 @@ Float_t Efficiency_Lib::determineZeroBiasThresh( userInfo* parameters, const Boo
     parameters->Print();
     const Float_t metL1Thresh      = parameters->Get_MetL1Thresh();
     const Float_t actintCut        = parameters->Get_ActintCut();
-    const TString threshFileName = "ZeroBiasL1KF2016R307195R311481.51Runs.root"; 
-    //const TString threshFileName   = parameters->Get_ThreshFileName();
+    const TString threshFileName   = parameters->Get_ThreshFileName(); 
     const TString algAName         = parameters->Get_AlgAName();
     const TString algBName         = parameters->Get_AlgBName();
     const Float_t frac             = parameters->Get_Frac();
@@ -114,7 +113,7 @@ Float_t Efficiency_Lib::determineZeroBiasThresh( userInfo* parameters, const Boo
         || passnoalgL1XE40 > passnoalgcut || passnoalgL1XE45 > passnoalgcut;
         Bool_t isPassrndm = passrndm > passrndmcut;
 
-		if (/* ( passl1 ) && ( passactint ) && ( isPassnoalg || */ isPassrndm/* )*/)
+		if ( ( passl1 ) && ( passactint ) && ( isPassnoalg || isPassrndm ))
 		{
 		    AlgAHist->Fill(algAMET);
 		    AlgBHist->Fill(algBMET);
@@ -139,14 +138,14 @@ Float_t Efficiency_Lib::determineZeroBiasThresh( userInfo* parameters, const Boo
 	for (Int_t l = 0 ; l < passnoAlgNentries ; l++)
 	{
 		threshTree->GetEntry(l);
-        //Bool_t passl1 = metl1 > metL1Thresh ;
+        Bool_t passl1 = metl1 > metL1Thresh ;
         Bool_t passactint = actint > actintCut;
         Bool_t isPassnoalg = passnoalgL1XE10 > passnoalgcut || passnoalgL1XE30 > passnoalgcut ||
         passnoalgL1XE40 > passnoalgcut || passnoalgL1XE45 > passnoalgcut;
         Bool_t isPassrndm = passrndm > passrndmcut;
 
 
-		if (/*( passl1 ) && ( passactint ) && ( isPassnoalg || */isPassrndm /*)*/ )
+		if (( passl1 ) && ( passactint ) && ( isPassnoalg || isPassrndm ) )
 		{
             if (algAMET > AlgAThresh){
                 numberEventsAlgAKept++;
