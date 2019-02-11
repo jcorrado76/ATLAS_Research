@@ -13,13 +13,13 @@ TFile* Perform_Missing_ET_Efficiency_Analysis( const TString& AlgAName )
     parameters->Set_AlgAName(AlgAName);
     parameters->Set_AlgBName(AlgBName);
 
+    //read the parameter file for HLT analysis
+    //parameters->Read_Parameter_File("parameter_files/Missing_ET_Significance_Parameters.txt");
+    parameters->Read_Parameter_File("parameter_files/Missing_ET_Significance_Parameters.txt");
+
     //FILES
     TString zerobiasFileName = parameters->Get_ThreshFileName();
     TString muonFilename = parameters->Get_MuonFileName();
-
-    //read the parameter file for HLT analysis
-    //parameters->Read_Parameter_File("parameter_files/Missing_ET_Significance_Parameters.txt");
-    parameters->Read_Parameter_File("parameter_files/HLTAnalysisParameters.txt");
 
     //THREEFF BENCHMARK
     TBenchmark* threeEfficienciesBenchmark = new TBenchmark();
