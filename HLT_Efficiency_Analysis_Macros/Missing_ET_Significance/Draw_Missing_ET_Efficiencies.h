@@ -22,10 +22,16 @@ public :
    TTree          *fChain = 0;
    TString AlgAName = "metcell";
    TString AlgBName = "missing_et_significance";
+   TString AlgCName = AlgAName + "_" + AlgBName;
     const Float_t AlgAIndividThresh = 113.38;
     const Float_t AlgBIndividThresh = 7.12;
     const Float_t CombinedThreshAlgA = 63.62;
     const Float_t CombinedThreshAlgB = 4.12;
+    Float_t metnomu = 0.0;
+    Float_t algAmuonMET = 0;
+    Float_t algBmuonMET = 0;
+    Float_t muonActint = 0;
+    Float_t muonMetl1 = 0;
    const TString astring = AlgAName + " > " + Form(" %.2f", AlgAIndividThresh ); // titles
    const TString bstring = AlgBName + " > " + Form(" %.2f", AlgBIndividThresh );
    const TString cstring = AlgAName + " > " + Form(" %.2f", CombinedThreshAlgA) + " and " + AlgBName + " > " + Form(" %.2f", CombinedThreshAlgB);
