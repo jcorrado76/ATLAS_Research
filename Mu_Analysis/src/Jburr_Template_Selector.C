@@ -1,5 +1,5 @@
 #define Jburr_Template_Selector_cxx
-#include "../include/Jburr_Template_Selector.h"
+#include "Jburr_Template_Selector.h"
 ClassImp(Jburr_Template_Selector);
 Bool_t Jburr_Template_Selector::isGoodRun(){ //{{{
     // return true if the event is not any of the bad run numbers
