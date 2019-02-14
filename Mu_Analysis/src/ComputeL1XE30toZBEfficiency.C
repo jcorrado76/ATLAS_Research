@@ -1,5 +1,5 @@
 #define ComputeL1XE30toZBEfficiency_cxx
-#include "ComputeL1XE30toZBEfficiency.h"
+#include "../include/ComputeL1XE30toZBEfficiency.h"
 ClassImp(ComputeL1XE30toZBEfficiency);
 void ComputeL1XE30toZBEfficiency::Begin(TTree *) // {{{
 {

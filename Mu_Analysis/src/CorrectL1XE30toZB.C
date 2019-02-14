@@ -1,5 +1,5 @@
 #define CorrectL1XE30toZB_cxx
-#include "CorrectL1XE30toZB.h"
+#include "../include/CorrectL1XE30toZB.h"
 ClassImp(CorrectL1XE30toZB);
 void CorrectL1XE30toZB::Begin(TTree * /*tree*/){//{{{
     TString option = GetOption();

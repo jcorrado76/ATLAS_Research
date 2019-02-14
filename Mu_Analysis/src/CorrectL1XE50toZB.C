@@ -1,5 +1,5 @@
 #define CorrectL1XE50toZB_cxx
-#include "CorrectL1XE50toZB.h"
+#include "../include/CorrectL1XE50toZB.h"
 ClassImp(CorrectL1XE50toZB);
 void CorrectL1XE50toZB::Begin(TTree * /*tree*/)//{{{
 {

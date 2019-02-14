@@ -4,7 +4,7 @@
 //macros, and my custom class that records the parameters of bisection
 
 {
-    std::cout << "Started ATLAS_Research Environmnet" << std::endl;
+    std::cout << "Started ATLAS_Research Environment" << std::endl;
 
     //set up include path
     TString include_path = gSystem->GetIncludePath();
