@@ -43,8 +43,9 @@ public :
    const Float_t gevHigh =                                                      300.0;
    const Float_t met_dist_binwidth =                                            1.0;
    const Float_t efficiency_bin_width =                                         20.0; //want 20 GeV bins
-   const Int_t met_dist_nbins =                                        (gevHigh - gevLow) / met_dist_binwidth; // compute nbins as function of preferred width
+   const Int_t met_dist_nbins =                                        (gevHigh - gevLow) / met_dist_binwidth; 
    const Int_t efficiency_nbins =                                      (gevHigh - gevLow) / efficiency_bin_width;
+   // collections
    TH1F* Met_Distributions_By_Mu_Bin[Number_Mu_Bins];
    TH1F* Normalized_Met_Distributions[Number_Mu_Bins];
    TEfficiency* L1XE30_Efficiency_Objects[Number_Mu_Bins];
