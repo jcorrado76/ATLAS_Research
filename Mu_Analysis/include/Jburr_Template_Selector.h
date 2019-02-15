@@ -20,6 +20,12 @@
 #include <TH2.h>
 #include <TStyle.h>
 #include <vector>
+#include <TH1.h>
+#include <TCanvas.h>
+#include <TLegend.h>
+#include <TPad.h>
+#include <TDirectory.h>
+#include <TGaxis.h>
 // end includes}}}
 //class definition {{{
 class Jburr_Template_Selector : public TSelector {
@@ -31,14 +37,12 @@ public :
    TH1F* MET_Distribution =                                                     0;
    TEfficiency* MET_L1XE30Efficiency =                                          0;
    TF1* MET_L1XE30EfficiencyFit =                                               0;
-   Float_t gevLow =                                                             0.0;
-   Float_t gevHigh =                                                            300.0;
-   Float_t met_dist_binwidth =                                                  1.0;
-   Float_t efficiency_bin_width =                                               20.0; //want 20 GeV bins
-   Int_t met_dist_nbins =                                                       0;
-   Int_t efficiency_nbins =                                                     0;
-   met_dist_nbins =                                        (gevHigh - gevLow) / met_dist_binwidth; // compute nbins as function of preferred width
-   efficiency_nbins =                                      (gevHigh - gevLow) / efficiency_bin_width;
+   const Float_t gevLow =                                                             0.0;
+   const Float_t gevHigh =                                                            300.0;
+   const Float_t met_dist_binwidth =                                                  1.0;
+   const Float_t efficiency_bin_width =                                               20.0; //want 20 GeV bins
+   const Int_t met_dist_nbins =                                        (gevHigh - gevLow) / met_dist_binwidth; // compute nbins as function of preferred width
+   const Int_t efficiency_nbins =                                      (gevHigh - gevLow) / efficiency_bin_width;
    TH1F* Met_Distributions_By_Mu_Bin[Number_Mu_Bins];
    TH1F* Normalized_Met_Distributions[Number_Mu_Bins];
    TEfficiency* L1XE30_Efficiency_Objects[Number_Mu_Bins];

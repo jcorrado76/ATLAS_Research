@@ -24,7 +24,9 @@
 #include <TEfficiency.h>
 #include <TDirectory.h>
 #include <TGaxis.h>
-class CorrectL1XE30toZB : public TSelector {
+#include "Jburr_Template_Selector.h"
+
+class CorrectL1XE30toZB : public Jburr_Template_Selector {
 public :
    TTreeReader     fReader;  //!the tree reader
    TTree          *fChain = 0;   //!pointer to the analyzed TTree or TChain

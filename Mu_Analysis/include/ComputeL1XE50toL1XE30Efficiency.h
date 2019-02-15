@@ -22,8 +22,9 @@
 #include <TString.h>
 #include <TEfficiency.h>
 #include <TF1.h>
+#include "Jburr_Template_Selector.h"
 
-class ComputeL1XE50toL1XE30Efficiency : public TSelector {
+class ComputeL1XE50toL1XE30Efficiency : public Jburr_Template_Selector {
 public :
    TTreeReader     fReader;  //!the tree reader
    TTree          *fChain = 0;   //!pointer to the analyzed TTree or TChain
