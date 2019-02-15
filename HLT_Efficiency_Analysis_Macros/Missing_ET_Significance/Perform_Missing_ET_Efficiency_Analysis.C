@@ -194,7 +194,6 @@ TFile* Perform_Missing_ET_Efficiency_Analysis( const TString& AlgAName )
             if ( Efficiency_Lib::passTransverseMassCut(metoffrecal,mexoffrecal,meyoffrecal,metoffrecalmuon,mexoffrecalmuon,meyoffrecalmuon) )
             {
         	    Float_t metnomu = Efficiency_Lib::computeMetNoMu(  mexoffrecal , meyoffrecal , mexoffrecalmuon , meyoffrecalmuon );
-
                 Ateff->Fill((algAmuonMET > AlgAIndividThresh ) && (muonMetl1 > metl1thresh) && ( muonActint > actintCut ), metnomu);
         	    Bteff->Fill((algBmuonMET > AlgBIndividThresh ) && (muonMetl1 > metl1thresh) && ( muonActint > actintCut ), metnomu);
         	    Cteff->Fill(((algAmuonMET > CombinedThreshAlgA) && (algBmuonMET > CombinedThreshAlgB)
@@ -224,13 +223,13 @@ TFile* Perform_Missing_ET_Efficiency_Analysis( const TString& AlgAName )
     Ateff->Draw();
     Bteff->Draw("same");
     Cteff->Draw("same");
-    Dteff->Draw("same");
+    //Dteff->Draw("same");
 
     TLegend *legend = new TLegend(0.57,0.15,0.9, 0.4 ,"","NDC");
     legend->AddEntry(Ateff, astring);
     legend->AddEntry(Bteff, bstring);
     legend->AddEntry(Cteff, cstring);
-    legend->AddEntry(Dteff, dstring);
+    //legend->AddEntry(Dteff, dstring);
     legend->Draw();
     //}}}
     //compute number muon events actually kept using external macro as an external check we did it correctly 
