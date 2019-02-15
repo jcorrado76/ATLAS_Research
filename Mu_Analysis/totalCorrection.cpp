@@ -2,40 +2,39 @@
 #include <TSelector.h>
 #include <TEfficiency.h>
 
-#include "Compute_L1XE30_Efficiency/ComputeL1XE30toZBEfficiency.h"
-#include "Compute_L1XE50_L1XE30_Efficiency/ComputeL1XE50toL1XE30Efficiency.h"
-
-#include "CorrectL1XE30toZB/CorrectL1XE30toZB.h"
-#include "CorrectL1XE50toZB/CorrectL1XE50toZB.h"
+#include "include/ComputeL1XE30toZBEfficiency.h"
+#include "include/ComputeL1XE50toL1XE30Efficiency.h"
+#include "include/CorrectL1XE30toZB.h"
+#include "include/CorrectL1XE50toZB.h"
 
 int totalCorrection(){
 
     TChain* zb_chain = new TChain( "METTree" , "zb_chain" );
-    zb_chain->Add("~/DATA/ZB/user.jburr.2017_11_17.ZB/*");
+    zb_chain->Add("~/DATA/ZB/ZB_jburr_15thru17_with_missing_et_significance.root");
 
     std::cout << "Computing L1XE30 Efficiency from ZB MET Data" << std::endl;
     // Compute l1xe30 efficiencies from ZB data
     ComputeL1XE30toZBEfficiency* buildl1xe30Efficiencies =
-        (ComputeL1XE30toZBEfficiency*)TSelector::GetSelector("Compute_L1XE30_Efficiency/ComputeL1XE30toZBEfficiency.C+");
+        (ComputeL1XE30toZBEfficiency*)TSelector::GetSelector("src/ComputeL1XE30toZBEfficiency.C+");
     zb_chain->Process(buildl1xe30Efficiencies);
 
     TChain* jetm10_chain = new TChain( "METTree", "jetm10chain");
-    jetm10_chain->Add("~/DATA/PhysicsMain/JburrJETM10*");
+    jetm10_chain->Add("~/DATA/PhysicsMain/JETM10_15thru17_with_missing_et_significance.root");
 
     std::cout << "Correcting L1XE30 Data back to ZB MET Data" << std::endl;
     // correct the l1xe30 data back to match ZB data
-    CorrectL1XE30toZB* correctToZB = (CorrectL1XE30toZB*) TSelector::GetSelector("CorrectL1XE30toZB/CorrectL1XE30toZB.C+");
+    CorrectL1XE30toZB* correctToZB = (CorrectL1XE30toZB*) TSelector::GetSelector("src/CorrectL1XE30toZB.C+");
     jetm10_chain->Process(correctToZB);
 
     std::cout << "Computing L1XE50 Efficiency from L1XE30 JETM10 Data" << std::endl;
     // Compute l1xe50 efficiencies from the jetm10 l1xe30 data
     ComputeL1XE50toL1XE30Efficiency* createL1XE50Efficiencies =
-        (ComputeL1XE50toL1XE30Efficiency*) TSelector::GetSelector("Compute_L1XE50_L1XE30_Efficiency/ComputeL1XE50toL1XE30Efficiency.C+");
+        (ComputeL1XE50toL1XE30Efficiency*) TSelector::GetSelector("src/ComputeL1XE50toL1XE30Efficiency.C+");
     jetm10_chain->Process( createL1XE50Efficiencies );
 
     std::cout << "Correcting L1XE50 all the way back to ZB MET Data" << std::endl;
     // Correct L1XE50 data back to zerobias data
-    CorrectL1XE50toZB* CorrectL1XE50DataAllWay = (CorrectL1XE50toZB*) TSelector::GetSelector("CorrectL1XE50toZB/CorrectL1XE50toZB.C+");
+    CorrectL1XE50toZB* CorrectL1XE50DataAllWay = (CorrectL1XE50toZB*) TSelector::GetSelector("src/CorrectL1XE50toZB.C+");
     jetm10_chain->Process( CorrectL1XE50DataAllWay );
 
     std::cout << "Successfully performed all of the corrections all the way back to zerobias" << std::endl;

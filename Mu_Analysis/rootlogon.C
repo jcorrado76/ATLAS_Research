@@ -1,6 +1,10 @@
 {
     std::cout << "Starting mu analysis environment" << std::endl;
-    gSystem->AddIncludePath("-I$HOME/ATLAS_Research/Mu_Analysis/include");
+    // this is for ACLiC
+    gSystem->AddIncludePath("-I/home/joseph/ATLAS_Research/Mu_Analysis/include");
+    // shell variables are not expanded in this, nor with .include <path>
+    // must give entire path explicitly like this
+    gInterpreter->AddIncludePath("-I/home/joseph/ATLAS_Research/Mu_Analysis/include");
 
     //if (gSystem->CompileMacro("src/Jburr_Template_Selector.C",
             //"k-",
