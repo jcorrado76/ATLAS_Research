@@ -99,7 +99,7 @@ Bool_t CorrectL1XE30toZB::Process(Long64_t entry)//{{{
    fReader.SetLocalEntry(entry);
    // still need to compute new error and pass it to this fill function somehow
    // if the entry is passnoalg L1XE30, and it one of the good runs
-   if ( isPassnoAlgL1XE30() && isGoodRun() ){
+   if ( isHLT_zb_L1XE30() && isGoodRun() ){
        for ( int i = 0 ; i < Number_Mu_Bins ; i++ ) {
            if ( inMuRange( Mu_Values[i] , Mu_Values[i+1] )){
                 Corrected_MET_Distributions[i]->Fill( *cell_met , ComputeWeight( L1XE30_Efficiency_Fit_Objects[i] ) );
@@ -206,7 +206,4 @@ void CorrectL1XE30toZB::Terminate(){//{{{
 }//}}}
 void CorrectL1XE30toZB::SlaveTerminate(){}
 void CorrectL1XE30toZB::Init(TTree *tree){fReader.SetTree(tree);}
-void CorrectL1XE30toZB::SlaveBegin(TTree * /*tree*/)//{{{
-{
-   TString option = GetOption();
-}//}}}
+void CorrectL1XE30toZB::SlaveBegin(TTree *){TString option = GetOption();}
