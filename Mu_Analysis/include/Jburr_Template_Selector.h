@@ -52,9 +52,11 @@ public :
    TF1* L1XE30_Efficiency_Fit_Objects[Number_Mu_Bins];
    TF1* L1XE50_Efficiency_Fit_Objects[Number_Mu_Bins];
    
-   Float_t Mu_Values[Number_Mu_Bins+1] =        { 0.0 };
-   Int_t Colors[Number_Mu_Bins] =               {1,2,3,4,12,6,9};
-   Int_t MarkerStyles[Number_Mu_Bins] =         {29,20,3,4,27,22,21};
+   Float_t Mu_Values[Number_Mu_Bins+1] =                    { 0.0 };
+   Int_t Colors[Number_Mu_Bins] =                           {1,2,3,4,12,6,9};
+   Int_t MarkerStyles[Number_Mu_Bins] =                     {29,20,3,4,27,22,21};
+   Int_t Normalization_Bin_Numbers[Number_Mu_Bins] =        {40,52,60,56,55,52,40};
+   Float_t Scale_Factors[Number_Mu_Bins] =                  { 0.0 };
 
    Float_t XE = 50.0; // L1 cut
    TString Alg_Name =                       "CELL MET";
@@ -67,6 +69,9 @@ public :
    TString met_dist_xaxis =                 zb_alg_name + " [GeV]";
    // }}}
    // Readers to access the data (delete the ones you do not need){{{
+   TTreeReaderValue<Float_t> MET_Data = {fReader, zb_alg_name };
+   TTreeReaderValue<Float_t> L1_MET = {fReader, l1_alg_name};
+
    TTreeReaderValue<UInt_t> RunNumber = {fReader, "RunNumber"};
    TTreeReaderValue<ULong64_t> EventNumber = {fReader, "EventNumber"};
    TTreeReaderValue<UInt_t> LumiBlock = {fReader, "LumiBlock"};

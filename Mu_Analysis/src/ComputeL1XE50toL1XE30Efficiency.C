@@ -84,12 +84,6 @@ void ComputeL1XE50toL1XE30Efficiency::Terminate()//{{{
 
     Mu_Analysis_File->Close();//}}}
 }//}}}
-void ComputeL1XE50toL1XE30Efficiency::SlaveBegin(TTree * /*tree*/) // {{{
-{
-   TString option = GetOption();
-} // }}}
+void ComputeL1XE50toL1XE30Efficiency::SlaveBegin(TTree*){TString option = GetOption();}
 void ComputeL1XE50toL1XE30Efficiency::SlaveTerminate(){}
-void ComputeL1XE50toL1XE30Efficiency::Init(TTree *tree) //{{{
-{
-   fReader.SetTree(tree);
-} //}}}
+void ComputeL1XE50toL1XE30Efficiency::Init(TTree *tree){fReader.SetTree(tree);}
