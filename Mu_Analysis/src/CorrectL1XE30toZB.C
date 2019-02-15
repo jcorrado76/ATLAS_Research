@@ -28,9 +28,9 @@ void CorrectL1XE30toZB::Begin(TTree * /*tree*/){//{{{
        EfficiencyTitle.Form("Efficiency of L1XE 30 As a Function of %s for Actint Between %.0f and %.0f", Alg_Name.Data() , muLow , muHigh );
        Corrected_Name.Form("L1XE30CorrectedToZBmu%.0fthru%.0f" , muLow , muHigh );
        Corrected_Title.Form("L1XE30 Data Corrected back to Zerobias For Actint Between %.0f and %.0f" , muLow , muHigh );
-       Met_Distributions_By_Mu_Bin[i] = new TH1F( Name , Title , nbins , gevLow , gevHigh );
-       Normalized_Met_Distributions[i] = new TH1F( Corrected_Name , Corrected_Title , nbins , gevLow , gevHigh );
-       L1XE30_Efficiency_Objects[i] = new TEfficiency( EfficiencyName , EfficiencyTitle , nbins , gevLow , gevHigh );
+       Met_Distributions_By_Mu_Bin[i] = new TH1F( Name , Title , met_dist_nbins , gevLow , gevHigh );
+       Normalized_Met_Distributions[i] = new TH1F( Corrected_Name , Corrected_Title , met_dist_nbins , gevLow , gevHigh );
+       L1XE30_Efficiency_Objects[i] = new TEfficiency( EfficiencyName , EfficiencyTitle , efficiency_nbins , gevLow , gevHigh );
        L1XE30_Efficiency_Fit_Objects[i] = new TF1();
    }
     // TH1 OBJECTS DO NOT BELONG TO TFILE SCOPE. THEY WILL STAY
