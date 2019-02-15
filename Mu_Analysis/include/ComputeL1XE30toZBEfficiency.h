@@ -29,7 +29,7 @@ public :
    TTreeReader     fReader;  //!the tree reader
    TTree          *fChain = 0;   //!pointer to the analyzed TTree or TChain
 
-    const static Int_t Number_Mu_Bins = 7;
+   const static Int_t Number_Mu_Bins = 7;
    TH1F* Met_Distributions_By_Mu_Bin[Number_Mu_Bins];
    TH1F* Normalized_Met_Distributions[Number_Mu_Bins];
    TEfficiency* L1XE30_Efficiency_Objects[Number_Mu_Bins];
@@ -37,14 +37,12 @@ public :
    TH1F* MET_Distribution = 0;
    TEfficiency* MET_L1XE30Efficiency = 0;
    TF1* MET_L1XE30EfficiencyFit = 0;
-
-
-    Float_t gevLow = 0.0;
-    Float_t gevHigh = 300.0;
-    Float_t met_dist_binwidth = 1.0;
-    Float_t efficiency_bin_width = 20.0; //want 20 GeV bins
-    Int_t met_dist_nbins = (gevHigh - gevLow) / met_dist_binwidth; // compute nbins as function of preferred width
-    Int_t efficiency_nbins = (gevHigh - gevLow) / efficiency_bin_width;
+   Float_t gevLow = 0.0;
+   Float_t gevHigh = 300.0;
+   Float_t met_dist_binwidth = 1.0;
+   Float_t efficiency_bin_width = 20.0; //want 20 GeV bins
+   Int_t met_dist_nbins = (gevHigh - gevLow) / met_dist_binwidth; // compute nbins as function of preferred width
+   Int_t efficiency_nbins = (gevHigh - gevLow) / efficiency_bin_width;
 
    // initialize all entries to 0
    Float_t Mu_Values[Number_Mu_Bins+1] = { 0.0 };
@@ -78,26 +76,20 @@ public :
 
    ComputeL1XE30toZBEfficiency() { }
    ComputeL1XE30toZBEfficiency(TTree * =0) { }
-   virtual ~ComputeL1XE30toZBEfficiency() { }
-   virtual Int_t   Version() const { return 2; }
-   virtual void    Begin(TTree *tree);
-   virtual void    SlaveBegin(TTree *tree);
-   virtual void    Init(TTree *tree);
-   virtual Bool_t  Notify();
-   virtual Bool_t  Process(Long64_t entry);
-   virtual Int_t   GetEntry(Long64_t entry, Int_t getall = 0) { return fChain ? fChain->GetTree()->GetEntry(entry, getall) : 0; }
-   virtual void    SetOption(const char *option) { fOption = option; }
-   virtual void    SetObject(TObject *obj) { fObject = obj; }
-   virtual void    SetInputList(TList *input) { fInput = input; }
-   virtual TList  *GetOutputList() const { return fOutput; }
-   virtual void    SlaveTerminate();
-   virtual void    Terminate();
-   Bool_t isGoodRun();
-   Bool_t isHLT_zb_L1ZB();
-   Bool_t isHLT_zb_L1XE30();
-   Bool_t inMuRange( Float_t , Float_t );
-   static Double_t fitFunction(Double_t *x , Double_t *par );
-   TF1* generateFitFunction(TEfficiency* teff_obj, float gevMax = 300.0, float initial_slope = 0.1 , float initial_intercept = 0.0, float initial_sigma = 10.0);
+   ~ComputeL1XE30toZBEfficiency() { }
+   Int_t   Version() const { return 2; }
+   void    Begin(TTree *tree);
+   void    SlaveBegin(TTree *tree);
+   void    Init(TTree *tree);
+   Bool_t  Notify();
+   Bool_t  Process(Long64_t entry);
+   Int_t   GetEntry(Long64_t entry, Int_t getall = 0) { return fChain ? fChain->GetTree()->GetEntry(entry, getall) : 0; }
+   void    SetOption(const char *option) { fOption = option; }
+   void    SetObject(TObject *obj) { fObject = obj; }
+   void    SetInputList(TList *input) { fInput = input; }
+   TList  *GetOutputList() const { return fOutput; }
+   void    SlaveTerminate();
+   void    Terminate();
 
    ClassDef(ComputeL1XE30toZBEfficiency,0);
 

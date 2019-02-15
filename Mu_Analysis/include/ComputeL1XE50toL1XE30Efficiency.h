@@ -75,27 +75,20 @@ public :
 
    ComputeL1XE50toL1XE30Efficiency() { }
    ComputeL1XE50toL1XE30Efficiency(TTree * =0) { }
-   virtual ~ComputeL1XE50toL1XE30Efficiency() { }
-   virtual Int_t   Version() const { return 2; }
-   virtual void    Begin(TTree *tree);
-   virtual void    SlaveBegin(TTree *tree);
-   virtual void    Init(TTree *tree);
-   virtual Bool_t  Notify();
-   virtual Bool_t  Process(Long64_t entry);
-   virtual Int_t   GetEntry(Long64_t entry, Int_t getall = 0) { return fChain ? fChain->GetTree()->GetEntry(entry, getall) : 0; }
-   virtual void    SetOption(const char *option) { fOption = option; }
-   virtual void    SetObject(TObject *obj) { fObject = obj; }
-   virtual void    SetInputList(TList *input) { fInput = input; }
-   virtual TList  *GetOutputList() const { return fOutput; }
-   virtual void    SlaveTerminate();
-   virtual void    Terminate();
-   Bool_t isGoodRun();
-   Bool_t isHLT_zb_L1ZB();
-   Bool_t isHLT_zb_L1XE30();
-   Bool_t inMuRange( Float_t , Float_t );
-   static Double_t fitFunction(Double_t *x , Double_t *par );
-   TF1* generateFitFunction(TEfficiency* teff_obj, float gevMax = 300.0, float initial_slope = 0.1 , float initial_intercept = 0.0, float initial_sigma = 10.0);
-
+   ~ComputeL1XE50toL1XE30Efficiency() { }
+   Int_t   Version() const { return 2; }
+   void    Begin(TTree *tree);
+   void    SlaveBegin(TTree *tree);
+   void    Init(TTree *tree);
+   Bool_t  Notify();
+   Bool_t  Process(Long64_t entry);
+   Int_t   GetEntry(Long64_t entry, Int_t getall = 0) { return fChain ? fChain->GetTree()->GetEntry(entry, getall) : 0; }
+   void    SetOption(const char *option) { fOption = option; }
+   void    SetObject(TObject *obj) { fObject = obj; }
+   void    SetInputList(TList *input) { fInput = input; }
+   TList  *GetOutputList() const { return fOutput; }
+   void    SlaveTerminate();
+   void    Terminate();
    ClassDef(ComputeL1XE50toL1XE30Efficiency,0);
 
 };
