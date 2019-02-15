@@ -24,8 +24,40 @@
 //class definition {{{
 class Jburr_Template_Selector : public TSelector {
 public :
+   // Member Variables {{{
    TTreeReader     fReader;  //!the tree reader
-   TTree          *fChain = 0;   //!pointer to the analyzed TTree or TChain
+   TTree          *fChain =                                                     0;   //!pointer to the analyzed TTree or TChain
+   const static Int_t Number_Mu_Bins =                                          7;   // 7 mu bins
+   TH1F* MET_Distribution =                                                     0;
+   TEfficiency* MET_L1XE30Efficiency =                                          0;
+   TF1* MET_L1XE30EfficiencyFit =                                               0;
+   Float_t gevLow =                                                             0.0;
+   Float_t gevHigh =                                                            300.0;
+   Float_t met_dist_binwidth =                                                  1.0;
+   Float_t efficiency_bin_width =                                               20.0; //want 20 GeV bins
+   Int_t met_dist_nbins =                                                       0;
+   Int_t efficiency_nbins =                                                     0;
+   met_dist_nbins =                                        (gevHigh - gevLow) / met_dist_binwidth; // compute nbins as function of preferred width
+   efficiency_nbins =                                      (gevHigh - gevLow) / efficiency_bin_width;
+   TH1F* Met_Distributions_By_Mu_Bin[Number_Mu_Bins];
+   TH1F* Normalized_Met_Distributions[Number_Mu_Bins];
+   TEfficiency* L1XE30_Efficiency_Objects[Number_Mu_Bins];
+   TF1* L1XE30_Efficiency_Fit_Objects[Number_Mu_Bins];
+   
+   Float_t Mu_Values[Number_Mu_Bins+1] =        { 0.0 };
+   Int_t Colors[Number_Mu_Bins] =               {1,2,3,4,12,6,9};
+   Int_t MarkerStyles[Number_Mu_Bins] =         {29,20,3,4,27,22,21};
+
+   Float_t XE = 30.0; // L1 cut
+   TString Alg_Name =                       "CELL MET";
+   TString zb_alg_name =                    "cell.met"; 
+   TString l1_alg_name =                    "L1.met";
+   TString efficiency_yaxis =               "efficiency";
+   TString met_dist_yaxis =                 "Number of Entries";
+   TString efficiency_title =               zb_alg_name + " Efficiency";
+   TString efficiency_xaxis =               zb_alg_name + " [GeV]";
+   TString met_dist_xaxis =                 zb_alg_name + " [GeV]";
+   // }}}
    // Readers to access the data (delete the ones you do not need){{{
    TTreeReaderValue<UInt_t> RunNumber = {fReader, "RunNumber"};
    TTreeReaderValue<ULong64_t> EventNumber = {fReader, "EventNumber"};
