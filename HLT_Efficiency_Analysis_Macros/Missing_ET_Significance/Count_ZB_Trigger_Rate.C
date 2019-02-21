@@ -39,13 +39,9 @@ Bool_t Count_ZB_Trigger_Rate::Process(Long64_t entry)
    return kTRUE;
 }
 
-void Count_ZB_Trigger_Rate::SlaveTerminate()
-{
-}
-
+void Count_ZB_Trigger_Rate::SlaveTerminate(){}
 void Count_ZB_Trigger_Rate::Terminate()
 {
-    std::cout << "Number of entries in tree: " << fChain->GetEntries() << std::endl;
     std::cout << "Number of events passing cell: " << pass_cell << std::endl;
     std::cout << "Number of events passing puc: " << pass_puc << std::endl;
     std::cout << "Number of events passing etmiss > 7.12: " << pass_etmiss_7 << std::endl;

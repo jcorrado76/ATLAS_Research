@@ -47,7 +47,7 @@ public :
    const Double_t metMax = 300.0;
    const Double_t metl1thresh = 50.0;
    const Double_t actintCut = 0.0;
-   Bool_t isRndm = 0;
+   Int_t isRndm = 0;
    Bool_t isClean = 0;
    Bool_t passTransverseMassCut = 0; //}}}
    // TTreeReaders {{{
