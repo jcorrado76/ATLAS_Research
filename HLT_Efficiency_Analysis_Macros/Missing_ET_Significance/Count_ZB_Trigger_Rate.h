@@ -32,6 +32,7 @@ public :
    const Float_t met_significance_thresh_one = 7.12;
    const Float_t met_significance_thresh_two = 5.0;
    const Float_t met_significance_thresh_three = 3.0;
+   Int_t numb_passnoalg = 0;
    Int_t pass_puc = 0;
    Int_t pass_cell = 0;
    Int_t pass_etmiss_3 = 0;

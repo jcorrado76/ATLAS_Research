@@ -27,6 +27,9 @@ Bool_t Count_ZB_Trigger_Rate::Process(Long64_t entry)
     if ( isClean ){
         pass_clean_cuts++;
     }
+    if ( isPassnoalg ){
+        numb_passnoalg++;
+    }
     if ( ( isRndm || isPassnoalg ) && isL1 && isClean && passTransverseMassCut && ( *actint > actintCut ) )
     {
         if ( *mettopoclpuc > puc_efficiency_thresh ){
@@ -58,4 +61,5 @@ void Count_ZB_Trigger_Rate::Terminate()
     std::cout << "Number of events passing etmiss > 3: " << pass_etmiss_3 << std::endl;
     std::cout << "Number of events passing transverse mass cut: " << pass_transverse_mass << std::endl;
     std::cout << "Number of events passing clean cuts: " << pass_clean_cuts << std::endl;
+    std::cout << "Number of events passing passnoalg: " << numb_passnoalg << std::endl;
 }
