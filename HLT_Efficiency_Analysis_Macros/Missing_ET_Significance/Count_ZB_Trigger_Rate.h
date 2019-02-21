@@ -23,6 +23,7 @@ class Count_ZB_Trigger_Rate : public TSelector {
 public :
    TTreeReader     fReader;  
    TTree          *fChain = 0;
+   // TObjects {{{
    TString AlgCellName = "metcell";
    TString AlgPucName = "mettopoclpuc";
    TString AlgMissingEtName = "missing_et_significance";
@@ -49,7 +50,7 @@ public :
    Bool_t isRndm = 0;
    Bool_t isClean = 0;
    Bool_t passTransverseMassCut = 0; //}}}
-
+   // TTreeReaders {{{
    TTreeReaderValue<Float_t> metl1 = {fReader, "metl1"};
    TTreeReaderValue<Float_t> metcell = {fReader, "metcell"};
    TTreeReaderValue<Float_t> mettopoclps = {fReader, "mettopoclps"};
@@ -65,10 +66,8 @@ public :
    TTreeReaderValue<Int_t> recalbroke = {fReader, "recalbroke"};
    TTreeReaderValue<Int_t> passcleancuts = {fReader, "passcleancuts"};
    TTreeReaderValue<Float_t> actint = {fReader, "actint"};
-   TTreeReaderValue<Float_t> avint = {fReader, "avint"};
-   TTreeReaderValue<Float_t> missing_et_significance = {fReader, "missing_et_significance"};
-
-
+   TTreeReaderValue<Float_t> missing_et_significance = {fReader, "missing_et_significance"};//}}}
+   // Functions {{{
    Count_ZB_Trigger_Rate(TTree * /*tree*/ =0) { }
    virtual ~Count_ZB_Trigger_Rate() { }
    virtual Int_t   Version() const { return 2; }
@@ -84,23 +83,10 @@ public :
    virtual TList  *GetOutputList() const { return fOutput; }
    virtual void    SlaveTerminate();
    virtual void    Terminate();
-
-   ClassDef(Count_ZB_Trigger_Rate,0);
-
+   ClassDef(Count_ZB_Trigger_Rate,0); //}}}
 };
-
 #endif
-
 #ifdef Count_ZB_Trigger_Rate_cxx
-void Count_ZB_Trigger_Rate::Init(TTree *tree)
-{
-   fReader.SetTree(tree);
-}
-
-Bool_t Count_ZB_Trigger_Rate::Notify()
-{
-   return kTRUE;
-}
-
-
+void Count_ZB_Trigger_Rate::Init(TTree *tree){fReader.SetTree(tree);}
+Bool_t Count_ZB_Trigger_Rate::Notify(){return kTRUE;}
 #endif // #ifdef Count_ZB_Trigger_Rate_cxx
