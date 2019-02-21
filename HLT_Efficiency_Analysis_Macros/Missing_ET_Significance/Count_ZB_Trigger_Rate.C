@@ -17,8 +17,17 @@ Bool_t Count_ZB_Trigger_Rate::Process(Long64_t entry)
     isRndm = *passrndm;
     isClean = (*passcleancuts > 0.1) && ( *recalbroke < 0.1);
     passTransverseMassCut = Efficiency_Lib::passTransverseMassCut( *metoffrecal , *mexoffrecal , *meyoffrecal , *metoffrecalmuon , *mexoffrecalmuon , *meyoffrecalmuon );
+    isL1 = *metl1 > metl1thresh;
+    isPassnoalg = *passnoalgL1XE10 > passnoalgcut || *passnoalgL1XE30 > passnoalgcut ||
+        *passnoalgL1XE40 > passnoalgcut || *passnoalgL1XE45 > passnoalgcut;
 
-    if ( isRndm && isClean && passTransverseMassCut && ( *actint > actintCut ) )
+    if (passTransverseMassCut){
+        pass_transverse_mass++;
+    }
+    if ( isClean ){
+        pass_clean_cuts++;
+    }
+    if ( ( isRndm || isPassnoalg ) && isL1 && isClean && passTransverseMassCut && ( *actint > actintCut ) )
     {
         if ( *mettopoclpuc > puc_efficiency_thresh ){
             pass_puc++;
@@ -47,4 +56,6 @@ void Count_ZB_Trigger_Rate::Terminate()
     std::cout << "Number of events passing etmiss > 7.12: " << pass_etmiss_7 << std::endl;
     std::cout << "Number of events passing etmiss > 5: " << pass_etmiss_5 << std::endl;
     std::cout << "Number of events passing etmiss > 3: " << pass_etmiss_3 << std::endl;
+    std::cout << "Number of events passing transverse mass cut: " << pass_transverse_mass << std::endl;
+    std::cout << "Number of events passing clean cuts: " << pass_clean_cuts << std::endl;
 }

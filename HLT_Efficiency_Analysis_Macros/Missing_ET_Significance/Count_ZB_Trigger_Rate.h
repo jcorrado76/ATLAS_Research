@@ -37,6 +37,8 @@ public :
    Int_t pass_etmiss_3 = 0;
    Int_t pass_etmiss_5 = 0;
    Int_t pass_etmiss_7 = 0;
+   Int_t pass_transverse_mass = 0;
+   Int_t pass_clean_cuts = 0;
    const TString cell_efficiency_title = AlgCellName + " > " + Form(" %.2f", cell_efficiency_thresh ); 
    const TString puc_efficiency_title = AlgPucName + " > " + Form(" %.2f", puc_efficiency_thresh ); 
    const TString met_significance_efficiency_title_one = AlgMissingEtName + " > " + Form(" %.2f", met_significance_thresh_one ); 
@@ -47,8 +49,11 @@ public :
    const Double_t metMax = 300.0;
    const Double_t metl1thresh = 50.0;
    const Double_t actintCut = 0.0;
+   const Double_t passnoalgcut = 0.5;
    Int_t isRndm = 0;
    Bool_t isClean = 0;
+   Bool_t isL1 = 0;
+   Bool_t isPassnoalg = 0;
    Bool_t passTransverseMassCut = 0; //}}}
    // TTreeReaders {{{
    TTreeReaderValue<Float_t> metl1 = {fReader, "metl1"};
@@ -62,6 +67,11 @@ public :
    TTreeReaderValue<Float_t> metoffrecalmuon = {fReader, "metoffrecalmuon"};
    TTreeReaderValue<Float_t> mexoffrecalmuon = {fReader, "mexoffrecalmuon"};
    TTreeReaderValue<Float_t> meyoffrecalmuon = {fReader, "meyoffrecalmuon"};
+   TTreeReaderValue<Int_t> passnoalgL1XE10 = {fReader, "passnoalgL1XE10"};
+   TTreeReaderValue<Int_t> passnoalgL1XE30 = {fReader, "passnoalgL1XE30"};
+   TTreeReaderValue<Int_t> passnoalgL1XE40 = {fReader, "passnoalgL1XE40"};
+   TTreeReaderValue<Int_t> passnoalgL1XE45 = {fReader, "passnoalgL1XE45"};
+   TTreeReaderValue<Int_t> passnoalgL1XE300 = {fReader, "passnoalgL1XE300"};
    TTreeReaderValue<Int_t> passrndm = {fReader, "passrndm"};
    TTreeReaderValue<Int_t> recalbroke = {fReader, "recalbroke"};
    TTreeReaderValue<Int_t> passcleancuts = {fReader, "passcleancuts"};
