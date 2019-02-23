@@ -1,6 +1,2 @@
-
-
-.PHONY: clean
-
-clean:
-	rm lib/*.so
+clean :
+	rm *.so *.d *.pcm 

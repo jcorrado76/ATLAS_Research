@@ -27,10 +27,10 @@ Bool_t Count_ZB_Trigger_Rate::Process(Long64_t entry)
     if ( isClean ){
         pass_clean_cuts++;
     }
-    if ( isPassnoalg ){
+    if ( isPassnoalg && isL1 ){
         numb_passnoalg++;
     }
-    if ( ( isRndm || isPassnoalg ) && isL1 && isClean && passTransverseMassCut && ( *actint > actintCut ) )
+    if ( ( isRndm || isPassnoalg ) && isL1 && isClean /*&& passTransverseMassCut*/ && ( *actint > actintCut ) )
     {
         if ( *mettopoclpuc > puc_efficiency_thresh ){
             pass_puc++;
