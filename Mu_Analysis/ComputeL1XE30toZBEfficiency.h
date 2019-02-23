@@ -12,9 +12,9 @@
 
 class ComputeL1XE30toZBEfficiency : public Jburr_Template_Selector {
 public :
-   ComputeL1XE30toZBEfficiency() { }
-   ComputeL1XE30toZBEfficiency(TTree * =0) { }
-   ~ComputeL1XE30toZBEfficiency() { }
+   ComputeL1XE30toZBEfficiency();
+   ComputeL1XE30toZBEfficiency(TTree * =0) { };
+   ~ComputeL1XE30toZBEfficiency() { };
    Int_t   Version() const { return 2; }
    void    Begin(TTree *tree);
    void    SlaveBegin(TTree *tree);
@@ -27,10 +27,6 @@ public :
    TList  *GetOutputList() const { return fOutput; }
    void    SlaveTerminate();
    void    Terminate();
-
    ClassDef(ComputeL1XE30toZBEfficiency,0);
-
 };
-
 #endif
-

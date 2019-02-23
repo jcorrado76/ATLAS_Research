@@ -6,9 +6,9 @@
 #include "ComputeL1XE50toL1XE30Efficiency.h"
 #include "CorrectL1XE30toZB.h"
 #include "CorrectL1XE50toZB.h"
+#include "Jburr_Template_Selector.h"
 
 int totalCorrection(){
-
     TChain* zb_chain = new TChain( "METTree" , "zb_chain" );
     zb_chain->Add("~/DATA/ZB/ZB_jburr_15thru17_with_missing_et_significance.root");
 
