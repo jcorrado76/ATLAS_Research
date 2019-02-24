@@ -17,9 +17,6 @@ Int_t epson = 25;
 Int_t numbtokeep  = 5600;
 //Float_t passnoalgcut = 0.5;
 Float_t m_passnoalgcut = 0.0;
-
-
-
 //default constructor
 userInfo::userInfo()
     :M_Nbins(Nbins),
@@ -137,7 +134,7 @@ void userInfo::Print(Option_t *option) const{
     std::cout << "METMAX: " << M_Metmax << std::endl;
     std::cout << "PROCESS 1 L1 THRESH: " << M_Metl1thresh << std::endl;
     std::cout << "Actint cut: " << M_ActintCut << std::endl;
-    std::cout << "PROCESS2 FRAC TO KEEP: " << M_Frac << std::endl;
+    std::cout << "Trigger rate: " << M_Frac << std::endl;
     std::cout << "Thresh File: " << M_ThreshFileName << std::endl;
     std::cout << "Muon File: " << M_MuonFileName << std::endl;
     std::cout << "Muon Nentries: " << M_MuonNentries << std::endl;

@@ -54,8 +54,8 @@ TFile* Perform_Missing_ET_Efficiency_Analysis( const TString& AlgAName )
     Int_t nbins = parameters->Get_Nbins();
     Double_t metMin = parameters->Get_MetMin();
     Double_t metMax = parameters->Get_MetMax();
-    Int_t NumbRndmProcess1 = 0; Int_t counter1 = 0; Int_t counter2 = 0; Int_t counter3 = 0;
-    Int_t passrndm, numPassMuon,passmuon,passmuvarmed,cleanCutsFlag,recalBrokeFlag;
+    Int_t NumbZBEvents = 0; Int_t counter1 = 0; Int_t counter2 = 0; Int_t counter3 = 0;
+    Int_t passrndm, numPassMuon,passmuon,passmuvarmed,cleanCutsFlag,recalBrokeFlag, cleancutsZB,recalbrokeZB;
     Float_t algAMET,algBMET,metoffrecal,mexoffrecal,meyoffrecal,mexoffrecalmuon, zb_actint, muonActint,
             meyoffrecalmuon, metl1,muonMetl1,metcell,metoffrecalmuon;
     Int_t passnoalgL1XE10,passnoalgL1XE30,passnoalgL1XE40,passnoalgL1XE45;
@@ -74,6 +74,8 @@ TFile* Perform_Missing_ET_Efficiency_Analysis( const TString& AlgAName )
     zeroBiasTree->SetBranchAddress("passnoalgL1XE30",&passnoalgL1XE30);
     zeroBiasTree->SetBranchAddress("passnoalgL1XE40",&passnoalgL1XE40);
     zeroBiasTree->SetBranchAddress("passnoalgL1XE45",&passnoalgL1XE45);
+    zeroBiasTree->SetBranchAddress("passcleancuts", &cleancutsZB);
+    zeroBiasTree->SetBranchAddress("recalbroke", &recalbrokeZB);
     //zeroBiasTree->SetBranchAddress("actint",&zb_actint);
     //}}}
     //MUON BRANCHES{{{
@@ -115,10 +117,12 @@ TFile* Perform_Missing_ET_Efficiency_Analysis( const TString& AlgAName )
     //}}}
 
     //Loop to fill hist rndm {{{
-    NumbRndmProcess1 = 0 ;
+    // number of events that passed an l1 cut of 50, and is passnoalg data
+    NumbZBEvents = 0 ;
 	for (Int_t k = 0; k < zerobiasNentries; k++)
 	{
 	    zeroBiasTree->GetEntry(k);
+        Bool_t isClean = recalbrokeZB < 0.1 && cleancutsZB > 0.1;
         Bool_t isL1 = metl1 > metl1thresh;
         Bool_t isactint = zb_actint > actintCut;
         Bool_t isPassnoalg = passnoalgL1XE10 > passnoalgcut || passnoalgL1XE30 > passnoalgcut ||
@@ -127,16 +131,16 @@ TFile* Perform_Missing_ET_Efficiency_Analysis( const TString& AlgAName )
 
         Bool_t isHLT_zb_L1ZB = HLT_noalg_zb_L1ZB_passed;
 
-	    if ( ( isL1 ) && /*( isactint ) &&*/ (isPassnoalg || isPassrndm /*|| HLT_noalg_zb_L1ZB_passed */))
+	    if ( ( isL1 ) && /*( isactint ) &&*/ isClean && (isPassnoalg || isPassrndm /*|| HLT_noalg_zb_L1ZB_passed */))
         {
     		algAMETHist->Fill(algAMET);
     		algBMETHist->Fill(algBMET);
-            NumbRndmProcess1++;
+            NumbZBEvents++;
 	    }
 	}
     //}}}
-    // this needs to happen before bisection because it is used in bisection
-    parameters->Set_NumPassNoAlgPassProcess1( NumbRndmProcess1 );
+    // this is the denominator for the trigger rate
+    parameters->Set_NumPassNoAlgPassProcess1( NumbZBEvents );
 
     //the individual fraction needed such that when both algs constrained to keep the same fraction individually,
     //keep the proper amount when combined
@@ -172,7 +176,7 @@ TFile* Perform_Missing_ET_Efficiency_Analysis( const TString& AlgAName )
 
     threeEfficienciesBenchmark->Start("Fill TEfficiencies");
 
-    std::cout << "Starting to fill TEfficiencies.." << std::endl;//{{{
+    std::cout << "Computing Efficiencies of Signal Data..." << std::endl;//{{{
 
     Int_t NumMuonPassProcess1WithActintCut = 0 ;
 
@@ -205,15 +209,10 @@ TFile* Perform_Missing_ET_Efficiency_Analysis( const TString& AlgAName )
     //}}}
 
     threeEfficienciesBenchmark->Show("Fill TEfficiencies");
-
     const TString canvName = AlgAName + " and " + AlgBName + " Combined Efficiency" + ";Offline Recalibrated MET w/o Muon term [GeV];Efficiency";
-
     TCanvas* efficiencyCanvas = new TCanvas("Efficiency Canvas", "Efficiency Canvas");
-
     efficiencyCanvas->RangeAxis(0,0,500,1.0);
-
     efficiencyCanvas->SetTitle(canvName);
-
     // Draw efficiencies and color them //{{{
     Ateff->SetLineColor(kBlue);
     Cteff->SetLineColor(kRed);
@@ -235,7 +234,7 @@ TFile* Perform_Missing_ET_Efficiency_Analysis( const TString& AlgAName )
     //compute number muon events actually kept using external macro as an external check we did it correctly 
     Int_t muonEventsCombined = Efficiency_Lib::determineMuonEventsKeptCombined( AlgAName , CombinedThreshAlgA , AlgBName , CombinedThreshAlgB , muonFilename , metl1thresh );
     // update the parameters object with resulting numbers {{{
-    parameters->Set_NumPassNoAlgPassProcess1( NumbRndmProcess1 );
+    parameters->Set_NumPassNoAlgPassProcess1( NumbZBEvents );
     parameters->Set_NumMuonPassProcess1( NumMuonPassProcess1WithActintCut );
 
     Int_t NumberMuonEventsProcess2CombinedActintCut = (Cteff->GetPassedHistogram())->GetEntries() ;
