@@ -56,7 +56,7 @@ void Count_ZB_Trigger_Rate::Terminate()
 {
     std::cout << "Number of events passing cell: " << pass_cell << std::endl;
     std::cout << "Number of events passing puc: " << pass_puc << std::endl;
-    std::cout << "Number of events passing etmiss > 7.12: " << pass_etmiss_7 << std::endl;
+    std::cout << "Number of events passing etmiss > " << met_significance_thresh_one << ": " << pass_etmiss_7 << std::endl;
     std::cout << "Number of events passing etmiss > 5: " << pass_etmiss_5 << std::endl;
     std::cout << "Number of events passing etmiss > 3: " << pass_etmiss_3 << std::endl;
     std::cout << "Number of events passing transverse mass cut: " << pass_transverse_mass << std::endl;

@@ -28,8 +28,8 @@ public :
    TString AlgPucName = "mettopoclpuc";
    TString AlgMissingEtName = "missing_et_significance";
    const Float_t puc_efficiency_thresh = 138.62;
-   const Float_t cell_efficiency_thresh = 113.38;
-   const Float_t met_significance_thresh_one = 7.12;
+   const Float_t cell_efficiency_thresh = 99.875;
+   const Float_t met_significance_thresh_one = 6.375;
    const Float_t met_significance_thresh_two = 5.0;
    const Float_t met_significance_thresh_three = 3.0;
    Int_t numb_passnoalg = 0;
