@@ -1,6 +1,8 @@
 #define Jburr_Template_Selector_cxx
 #include "Jburr_Template_Selector.h"
+#if !defined(__CINT__)
 ClassImp(Jburr_Template_Selector);
+#endif
 Bool_t Jburr_Template_Selector::isGoodRun(){ //{{{
     // return true if the event is not any of the bad run numbers
     return (*RunNumber != 330203 && *RunNumber != 331975 && *RunNumber != 334487);
