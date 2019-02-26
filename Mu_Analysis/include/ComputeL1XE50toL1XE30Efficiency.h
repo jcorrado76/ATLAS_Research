@@ -13,7 +13,6 @@
 class ComputeL1XE50toL1XE30Efficiency : public Jburr_Template_Selector {
 public :
    ComputeL1XE50toL1XE30Efficiency() { }
-   ComputeL1XE50toL1XE30Efficiency(TTree * =0) { }
    ~ComputeL1XE50toL1XE30Efficiency() { }
    Int_t   Version() const { return 2; }
    void    Begin(TTree *tree);

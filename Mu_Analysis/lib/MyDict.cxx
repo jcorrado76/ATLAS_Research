@@ -142,6 +142,8 @@ namespace ROOT {
 } // end of namespace ROOT
 
 namespace ROOT {
+   static void *new_ComputeL1XE30toZBEfficiency(void *p = 0);
+   static void *newArray_ComputeL1XE30toZBEfficiency(Long_t size, void *p);
    static void delete_ComputeL1XE30toZBEfficiency(void *p);
    static void deleteArray_ComputeL1XE30toZBEfficiency(void *p);
    static void destruct_ComputeL1XE30toZBEfficiency(void *p);
@@ -156,6 +158,8 @@ namespace ROOT {
                   typeid(::ComputeL1XE30toZBEfficiency), ::ROOT::Internal::DefineBehavior(ptr, ptr),
                   &::ComputeL1XE30toZBEfficiency::Dictionary, isa_proxy, 4,
                   sizeof(::ComputeL1XE30toZBEfficiency) );
+      instance.SetNew(&new_ComputeL1XE30toZBEfficiency);
+      instance.SetNewArray(&newArray_ComputeL1XE30toZBEfficiency);
       instance.SetDelete(&delete_ComputeL1XE30toZBEfficiency);
       instance.SetDeleteArray(&deleteArray_ComputeL1XE30toZBEfficiency);
       instance.SetDestructor(&destruct_ComputeL1XE30toZBEfficiency);
@@ -170,6 +174,8 @@ namespace ROOT {
 } // end of namespace ROOT
 
 namespace ROOT {
+   static void *new_ComputeL1XE50toL1XE30Efficiency(void *p = 0);
+   static void *newArray_ComputeL1XE50toL1XE30Efficiency(Long_t size, void *p);
    static void delete_ComputeL1XE50toL1XE30Efficiency(void *p);
    static void deleteArray_ComputeL1XE50toL1XE30Efficiency(void *p);
    static void destruct_ComputeL1XE50toL1XE30Efficiency(void *p);
@@ -184,6 +190,8 @@ namespace ROOT {
                   typeid(::ComputeL1XE50toL1XE30Efficiency), ::ROOT::Internal::DefineBehavior(ptr, ptr),
                   &::ComputeL1XE50toL1XE30Efficiency::Dictionary, isa_proxy, 4,
                   sizeof(::ComputeL1XE50toL1XE30Efficiency) );
+      instance.SetNew(&new_ComputeL1XE50toL1XE30Efficiency);
+      instance.SetNewArray(&newArray_ComputeL1XE50toL1XE30Efficiency);
       instance.SetDelete(&delete_ComputeL1XE50toL1XE30Efficiency);
       instance.SetDeleteArray(&deleteArray_ComputeL1XE50toL1XE30Efficiency);
       instance.SetDestructor(&destruct_ComputeL1XE50toL1XE30Efficiency);
@@ -484,6 +492,13 @@ void ComputeL1XE30toZBEfficiency::Streamer(TBuffer &R__b)
 }
 
 namespace ROOT {
+   // Wrappers around operator new
+   static void *new_ComputeL1XE30toZBEfficiency(void *p) {
+      return  p ? new(p) ::ComputeL1XE30toZBEfficiency : new ::ComputeL1XE30toZBEfficiency;
+   }
+   static void *newArray_ComputeL1XE30toZBEfficiency(Long_t nElements, void *p) {
+      return p ? new(p) ::ComputeL1XE30toZBEfficiency[nElements] : new ::ComputeL1XE30toZBEfficiency[nElements];
+   }
    // Wrapper around operator delete
    static void delete_ComputeL1XE30toZBEfficiency(void *p) {
       delete ((::ComputeL1XE30toZBEfficiency*)p);
@@ -510,6 +525,13 @@ void ComputeL1XE50toL1XE30Efficiency::Streamer(TBuffer &R__b)
 }
 
 namespace ROOT {
+   // Wrappers around operator new
+   static void *new_ComputeL1XE50toL1XE30Efficiency(void *p) {
+      return  p ? new(p) ::ComputeL1XE50toL1XE30Efficiency : new ::ComputeL1XE50toL1XE30Efficiency;
+   }
+   static void *newArray_ComputeL1XE50toL1XE30Efficiency(Long_t nElements, void *p) {
+      return p ? new(p) ::ComputeL1XE50toL1XE30Efficiency[nElements] : new ::ComputeL1XE50toL1XE30Efficiency[nElements];
+   }
    // Wrapper around operator delete
    static void delete_ComputeL1XE50toL1XE30Efficiency(void *p) {
       delete ((::ComputeL1XE50toL1XE30Efficiency*)p);
