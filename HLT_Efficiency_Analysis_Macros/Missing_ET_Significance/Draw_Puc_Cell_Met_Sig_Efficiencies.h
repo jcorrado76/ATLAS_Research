@@ -108,7 +108,3 @@ public :
    ClassDef(Draw_Puc_Cell_Met_Sig_Efficiencies,0); // }}}
 };
 #endif
-#ifdef Draw_Puc_Cell_Met_Sig_Efficiencies_cxx
-void Draw_Puc_Cell_Met_Sig_Efficiencies::Init(TTree *tree){fReader.SetTree(tree);}
-Bool_t Draw_Puc_Cell_Met_Sig_Efficiencies::Notify(){return kTRUE;}
-#endif // #ifdef Draw_Puc_Cell_Met_Sig_Efficiencies_cxx

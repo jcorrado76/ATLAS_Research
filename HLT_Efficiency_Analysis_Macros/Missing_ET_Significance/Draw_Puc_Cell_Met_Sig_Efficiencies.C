@@ -67,3 +67,5 @@ void Draw_Puc_Cell_Met_Sig_Efficiencies::Terminate(){
     img->FromPad( efficiencyCanvas );
     img->WriteImage("Missing_ET_Significance/metcell_mettopoclpuc_etmiss_3_5_7.png");
 }
+void Draw_Puc_Cell_Met_Sig_Efficiencies::Init(TTree *tree){fReader.SetTree(tree);}
+Bool_t Draw_Puc_Cell_Met_Sig_Efficiencies::Notify(){return kTRUE;}
