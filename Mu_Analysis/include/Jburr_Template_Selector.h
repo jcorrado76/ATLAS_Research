@@ -293,7 +293,8 @@ public :
    TTreeReaderArray<float> CalAntiKt4EMTopoJets_m = {fReader, "CalAntiKt4EMTopoJets.m"};
    //}}}
    // Member Functions {{{
-   Jburr_Template_Selector(TTree * = 0) { }
+   //Jburr_Template_Selector(TTree * = 0) { }
+   Jburr_Template_Selector() { }
    virtual ~Jburr_Template_Selector() { }
    virtual Int_t   Version() const { return 2; }
    virtual void    Begin(TTree *tree);
