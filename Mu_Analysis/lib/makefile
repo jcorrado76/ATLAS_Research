@@ -1,4 +1,4 @@
-CXXFLAGS = -Wall -fPIC
+CXXFLAGS = -Wall -fPIC -g
 SOURCES = $(wildcard ../src/*.C)
 HEADERS = $(wildcard ../include/*.h)
 # not needed, but shows an example of usage for patsubst

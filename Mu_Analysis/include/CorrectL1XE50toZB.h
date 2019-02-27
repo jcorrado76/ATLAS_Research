@@ -11,7 +11,7 @@
 
 class CorrectL1XE50toZB : public Jburr_Template_Selector {
 public :
-   CorrectL1XE50toZB(TTree * = 0) { }
+   CorrectL1XE50toZB() { }
    ~CorrectL1XE50toZB() { }
    Int_t   Version() const { return 2; }
    void    Begin(TTree *tree);

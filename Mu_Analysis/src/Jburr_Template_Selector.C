@@ -89,10 +89,6 @@ Double_t Jburr_Template_Selector::ComputeWeight(TF1* fitFunc, TF1* fitFunc2 )//{
     }
     return numerator / denominator;
 }//}}}
-void Jburr_Template_Selector::Init(TTree *tree)//{{{
-{
-   fReader.SetTree(tree);
-}//}}}
 Bool_t Jburr_Template_Selector::Notify()//{{{
 {
    return kTRUE;
