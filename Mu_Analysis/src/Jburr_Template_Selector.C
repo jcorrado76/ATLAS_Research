@@ -7,21 +7,6 @@ void Jburr_Template_Selector::Begin(TTree *){}
 Bool_t Jburr_Template_Selector::Process(Long64_t entry)//{{{
 {
    fReader.SetLocalEntry(entry);
-
-   // if the event has passed HLT_noalg_zb_L1ZB_passed, and is not one of the bad run numbers
-   if ( isHLT_zb_L1ZB()  && isGoodRun() ){
-       Float_t muLow, muHigh;
-       for ( int i = 0; i < Number_Mu_Bins ; i++ ){
-           muLow = Mu_Values[ i ];
-           muHigh = Mu_Values[ i + 1 ];
-           if ( inMuRange( muLow , muHigh ) ){
-               for ( int j = 0 ; j < Number_Mu_Bins ; j++ ){
-                   Met_Distributions_By_Mu_Bin[j]->Fill(*MET_Data , *HLT_noalg_zb_L1ZB_prescale);
-                   L1XE30_Efficiency_Objects[j]->Fill(*L1_MET > XE , *MET_Data);
-               }
-           }
-       }
-   }
    return kTRUE;
 }//}}}
 void Jburr_Template_Selector::Terminate(){}
@@ -52,14 +37,13 @@ Double_t Jburr_Template_Selector::fitFunction(Double_t *x , Double_t *par ){//{{
     // return the value of the fitfunction evaluted at x with the given par
     // TODO: take l1cut as a parameter, but this actually messes up root's system for generating the functor to pass
     // this function to the generateFitFunction routine. so need to find a workaround
-    Double_t l1cut = 30.0;
-    Double_t fitval = (1./2.)*(1.+TMath::Erf((par[0]*x[0]+par[1]-l1cut)/(par[2]*TMath::Sqrt(2.))));
+    Double_t fitval = (1./2.)*(1.+TMath::Erf((par[0]*x[0]+par[1]-L1XE)/(par[2]*TMath::Sqrt(2.))));
     return fitval;
 }//}}}
 TF1* Jburr_Template_Selector::generateFitFunction(TEfficiency* teff_obj, float gevMax, float initial_slope, float initial_intercept, float initial_sigma , Bool_t verbose ){//{{{
     // return a fit function object whose parameters have been set
 
-    TF1 *fitErrorFunction = new TF1( "fitFunction" , fitFunction , 0.0 , gevMax , 3 );
+    TF1 *fitErrorFunction = new TF1( "fitFunction" , fitFunction , gevLow , gevHigh , 3 );
     fitErrorFunction->SetParameter(0, initial_slope);
     fitErrorFunction->SetParameter(1, initial_intercept);
     fitErrorFunction->SetParameter(2, initial_sigma);

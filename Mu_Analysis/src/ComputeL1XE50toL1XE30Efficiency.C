@@ -29,7 +29,7 @@ Bool_t ComputeL1XE50toL1XE30Efficiency::Process(Long64_t entry)//{{{
            if ( inMuRange( muLow , muHigh ) ){
                for ( int j = 0 ; j < Number_Mu_Bins ; j++ ){
                    Met_Distributions_By_Mu_Bin[j]->Fill(*MET_Data , *HLT_noalg_L1XE30_prescale);
-                   L1XE50_Efficiency_Objects[j]->Fill(*L1_MET > XE , *MET_Data);
+                   L1XE50_Efficiency_Objects[j]->Fill(*L1_MET > L1XE , *MET_Data);
                }
            }
        }

@@ -31,7 +31,7 @@ Bool_t ComputeL1XE30toZBEfficiency::Process(Long64_t entry)//{{{
            if ( inMuRange( muLow , muHigh ) ){
                for ( int j = 0 ; j < Number_Mu_Bins ; j++ ){
                    Met_Distributions_By_Mu_Bin[j]->Fill(*MET_Data , *HLT_noalg_zb_L1ZB_prescale);
-                   L1XE30_Efficiency_Objects[j]->Fill(*L1_MET > XE , *MET_Data);
+                   L1XE30_Efficiency_Objects[j]->Fill(*L1_MET > L1XE , *MET_Data);
                }
            }
        }
@@ -55,7 +55,6 @@ void ComputeL1XE30toZBEfficiency::Terminate() //{{{
     TDirectory* zb_met_distributions = Mu_Analysis_File->mkdir("zb_met_distributions");
     zb_met_distributions->cd();
     for ( int  i = 0 ; i < Number_Mu_Bins ; i++ ){
-
         Name.Form("zb_met_dist_mubin%d" , i );
         Met_Distributions_By_Mu_Bin[i]->Write(Name);
     }

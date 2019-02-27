@@ -68,7 +68,7 @@ void CorrectL1XE30toZB::Begin(TTree * /*tree*/){//{{{
         for (int i = 0 ; i < Number_Mu_Bins ; i++ ) {
            muLow = Mu_Values[i];
            muHigh = Mu_Values[i+1];
-           Name.Form("metmu%.0fthru%.0f", muLow , muHigh );
+           Name.Form("zb_met_dist_mubin%d" , i );
            gDirectory->GetObject( Name , Met_Distributions_By_Mu_Bin[i] );
             // Is this necessary?
            Met_Distributions_By_Mu_Bin[i]->SetDirectory(0);

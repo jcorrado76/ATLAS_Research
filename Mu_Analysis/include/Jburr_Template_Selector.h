@@ -52,6 +52,14 @@ public :
    TEfficiency* L1XE50_Efficiency_Objects[Number_Mu_Bins];
    TF1* L1XE30_Efficiency_Fit_Objects[Number_Mu_Bins];
    TF1* L1XE50_Efficiency_Fit_Objects[Number_Mu_Bins];
+
+   // names for objects in collections
+    TString* Met_Distributions_By_Mu_Bin_Names[Number_Mu_Bins];
+    TString* Normalized_Met_Distributions_Names[Number_Mu_Bins];
+    TString* L1XE30_Efficiency_Objects_Names[Number_Mu_Bins];
+    TString* L1XE50_Efficiency_Objects_Names[Number_Mu_Bins];
+    TString* L1XE30_Efficiency_Fit_Objects_Names[Number_Mu_Bins];
+    TString* L1XE50_Efficiency_Fit_Objects_Names[Number_Mu_Bins];
    
    Float_t Mu_Values[Number_Mu_Bins+1] =                    { 0.0 };
    Int_t Colors[Number_Mu_Bins] =                           {1,2,3,4,12,6,9};
@@ -68,7 +76,7 @@ public :
    TString EfficiencyName;
    TString EfficiencyTitle;
 
-   Float_t XE = 50.0; // L1 cut
+   constexpr static Float_t L1XE = 50.0; // L1 cut
    TString Alg_Name =                       "CELL MET";
    TString zb_alg_name =                    "cell.met"; 
    TString l1_alg_name =                    "L1.met";
@@ -306,6 +314,16 @@ public :
    Jburr_Template_Selector(){ 
        for (int i = 0 ; i < Number_Mu_Bins + 1; i++){
            Mu_Values[i] = i * 10.;
+            Name.Form("zb_met_dist_mubin%d" , i );
+            // TODO: set names and initialize all objects in here so every
+            // derived class has access to the names and the objects
+            // remove the initializations from the derived classes
+            Met_Distributions_By_Mu_Bin_Names[i] = Name;
+            Normalized_Met_Distributions_Names[i];
+            L1XE30_Efficiency_Objects_Names[i];
+            L1XE50_Efficiency_Objects_Names[i];
+            L1XE30_Efficiency_Fit_Objects_Names[i];
+            L1XE50_Efficiency_Fit_Objects_Names[i];
    }
    }
    ~Jburr_Template_Selector() { }
