@@ -3,6 +3,31 @@
 #if !defined(__CINT__)
 ClassImp(Jburr_Template_Selector);
 #endif
+void Jburr_Template_Selector::Begin(TTree *){} 
+Bool_t Jburr_Template_Selector::Process(Long64_t entry)//{{{
+{
+   fReader.SetLocalEntry(entry);
+
+   // if the event has passed HLT_noalg_zb_L1ZB_passed, and is not one of the bad run numbers
+   if ( isHLT_zb_L1ZB()  && isGoodRun() ){
+       Float_t muLow, muHigh;
+       for ( int i = 0; i < Number_Mu_Bins ; i++ ){
+           muLow = Mu_Values[ i ];
+           muHigh = Mu_Values[ i + 1 ];
+           if ( inMuRange( muLow , muHigh ) ){
+               for ( int j = 0 ; j < Number_Mu_Bins ; j++ ){
+                   Met_Distributions_By_Mu_Bin[j]->Fill(*MET_Data , *HLT_noalg_zb_L1ZB_prescale);
+                   L1XE30_Efficiency_Objects[j]->Fill(*L1_MET > XE , *MET_Data);
+               }
+           }
+       }
+   }
+   return kTRUE;
+}//}}}
+void Jburr_Template_Selector::Terminate(){}
+void Jburr_Template_Selector::SlaveBegin(TTree*){TString option = GetOption();}
+void Jburr_Template_Selector::SlaveTerminate(){}
+void Jburr_Template_Selector::Init(TTree *tree){fReader.SetTree(tree);}
 Bool_t Jburr_Template_Selector::isGoodRun(){ //{{{
     // return true if the event is not any of the bad run numbers
     return (*RunNumber != 330203 && *RunNumber != 331975 && *RunNumber != 334487);
