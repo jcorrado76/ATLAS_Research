@@ -3,18 +3,6 @@
 ClassImp(CorrectL1XE30toZB);
 void CorrectL1XE30toZB::Begin(TTree * /*tree*/){//{{{
     TString option = GetOption();
-    // initialize the boundaries of each mu bin
-   for (int i = 0 ; i < Number_Mu_Bins + 1; i++){
-       Mu_Values[i] = i * 10.;
-   }
-   Float_t muLow;
-   Float_t muHigh;
-   TString Name;
-   TString Title;
-   TString Corrected_Name;
-   TString Corrected_Title;
-   TString EfficiencyName;
-   TString EfficiencyTitle;
    for (int i = 0 ; i < Number_Mu_Bins ; i++){
        // initialize empty histograms, efficiency objects, and efficiency fit objects 
        muLow = Mu_Values[i];
@@ -25,7 +13,8 @@ void CorrectL1XE30toZB::Begin(TTree * /*tree*/){//{{{
        EfficiencyName.Form("metmu%.0fthru%.0fEfficiency", muLow , muHigh );
        delete gROOT->FindObject(EfficiencyName);
        Title.Form("ZeroBias MET Distribution for %s With Actint Between %.0f and %.0f" ,Alg_Name.Data(), muLow , muHigh );
-       EfficiencyTitle.Form("Efficiency of L1XE 30 As a Function of %s for Actint Between %.0f and %.0f", Alg_Name.Data() , muLow , muHigh );
+       EfficiencyTitle.Form("Efficiency of L1XE 30 As a Function of %s for Actint Between %.0f and %.0f", 
+               Alg_Name.Data() , muLow , muHigh );
        Corrected_Name.Form("L1XE30CorrectedToZBmu%.0fthru%.0f" , muLow , muHigh );
        Corrected_Title.Form("L1XE30 Data Corrected back to Zerobias For Actint Between %.0f and %.0f" , muLow , muHigh );
        Met_Distributions_By_Mu_Bin[i] = new TH1F( Name , Title , met_dist_nbins , gevLow , gevHigh );

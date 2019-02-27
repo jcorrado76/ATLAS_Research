@@ -31,7 +31,7 @@
 class Jburr_Template_Selector : public TSelector {
 public :
    // Member Variables {{{
-   TTreeReader     fReader;  //!the tree reader
+   TTreeReader     fReader;
    TTree          *fChain =                                                     0;   //!pointer to the analyzed TTree or TChain
    const static Int_t Number_Mu_Bins =                                          7;   // 7 mu bins
    TH1F* MET_Distribution =                                                     0;
@@ -58,6 +58,15 @@ public :
    Int_t MarkerStyles[Number_Mu_Bins] =                     {29,20,3,4,27,22,21};
    Int_t Normalization_Bin_Numbers[Number_Mu_Bins] =        {40,52,60,56,55,52,40};
    Float_t Scale_Factors[Number_Mu_Bins] =                  { 0.0 };
+
+   Float_t muLow;
+   Float_t muHigh;
+   TString Name;
+   TString Title;
+   TString Corrected_Name;
+   TString Corrected_Title;
+   TString EfficiencyName;
+   TString EfficiencyTitle;
 
    Float_t XE = 50.0; // L1 cut
    TString Alg_Name =                       "CELL MET";
@@ -293,8 +302,11 @@ public :
    TTreeReaderArray<float> CalAntiKt4EMTopoJets_m = {fReader, "CalAntiKt4EMTopoJets.m"};
    //}}}
    // Member Functions {{{
-   //Jburr_Template_Selector(TTree * = 0) { }
-   Jburr_Template_Selector() { }
+   // Default Constructor 
+   Jburr_Template_Selector(){ 
+       for (int i = 0 ; i < Number_Mu_Bins + 1; i++){
+           Mu_Values[i] = i * 10.;
+   }
    ~Jburr_Template_Selector() { }
    virtual Int_t   Version() const { return 2; }
    virtual void    Begin(TTree *tree);
