@@ -26,7 +26,7 @@ void CorrectL1XE30toZB::Begin(TTree * /*tree*/){//{{{
     TH1::AddDirectory(false);
 
     // Open the root file in update mode
-    TFile* mu_analysis_file = TFile::Open("mu_analysis.root","UPDATE");
+    TFile* mu_analysis_file = TFile::Open("run_files/mu_analysis.root","UPDATE");
     // check to see if can open file{{{
     if (!mu_analysis_file->IsOpen()){
         std::cout << "mu_analysis.root not opened" << std::endl;
@@ -181,7 +181,7 @@ void CorrectL1XE30toZB::Terminate(){//{{{
     //}}}
     // WRITE CORRECTED MET DISTRIBUTIONS TO FILE{{{
     // this is L1XE30 distribution corrected to ZB
-    TFile* mu_analysis_file = TFile::Open("mu_analysis.root","UPDATE");
+    TFile* mu_analysis_file = TFile::Open("run_files/mu_analysis.root","UPDATE");
     std::cout << "Making a directory for corrected met distributions" << std::endl;
     TDirectory* corrected_directory = mu_analysis_file->mkdir("L1XE30CorrectedToZB");
     corrected_directory->cd();

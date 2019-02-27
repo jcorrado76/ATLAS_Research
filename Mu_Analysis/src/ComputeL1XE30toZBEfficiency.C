@@ -61,7 +61,7 @@ void ComputeL1XE30toZBEfficiency::Terminate() //{{{
    //}}}
     // Write MET Histograms, Efficiency Objects and Efficiency Fits to File {{{
     std::cout << "Writing the met distributions to zb_met_distributions" << std::endl;
-    TFile* Mu_Analysis_File = TFile::Open("mu_analysis.root", "RECREATE");
+    TFile* Mu_Analysis_File = TFile::Open("run_files/mu_analysis.root", "RECREATE");
     TDirectory* zb_met_distributions = Mu_Analysis_File->mkdir("zb_met_distributions");
     zb_met_distributions->cd();
     for ( int  i = 0 ; i < Number_Mu_Bins ; i++ ){

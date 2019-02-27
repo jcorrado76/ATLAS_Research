@@ -4,27 +4,16 @@ ClassImp(CorrectL1XE50toZB);
 void CorrectL1XE50toZB::Begin(TTree * /*tree*/)//{{{
 {
     TString option = GetOption();
-   for (int i = 0 ; i < Number_Mu_Bins + 1; i++){
-       Mu_Values[i] = i * 10.;
-   }
-   Float_t muLow;
-   Float_t muHigh;
-   TString Name;
-   TString Title;
-   TString Corrected_Name;
-   TString Corrected_Title;
-   TString EfficiencyName;
-   TString EfficiencyTitle;
    // initialize empty histograms, efficiency objects, etc.
    for (int i = 0 ; i < Number_Mu_Bins ; i++){
        muLow = Mu_Values[i];
        muHigh = Mu_Values[i+1];
-       std::cout << "Mu between: " << muLow << " and " << muHigh << std::endl;
        Name.Form("metmu%.0fthru%.0f" , muLow , muHigh );
        Title.Form("L1XE 50 MET Distribution for %s With Actint Between %.0f and %.0f" ,Alg_Name.Data(), muLow , muHigh );
 
        EfficiencyName.Form("metmu%.0fthru%.0fL1XE30Efficiency", muLow , muHigh );
-       EfficiencyTitle.Form("Efficiency of L1XE 30 As a Function of %s for Actint Between %.0f and %.0f", Alg_Name.Data() , muLow , muHigh );
+       EfficiencyTitle.Form("Efficiency of L1XE 30 As a Function of %s for Actint Between %.0f and %.0f", 
+               Alg_Name.Data() , muLow , muHigh );
 
        Corrected_Name.Form("L1XE50CorrectedToZBmu%.0fthru%.0f" , muLow , muHigh );
        Corrected_Title.Form("L1XE50 Data Corrected back to Zerobias For Actint Between %.0f and %.0f" , muLow , muHigh );
@@ -43,7 +32,7 @@ void CorrectL1XE50toZB::Begin(TTree * /*tree*/)//{{{
    }
     // TH1 OBJECTS DO NOT BELONG TO TFILE SCOPE. THEY WILL STAY
     TH1::AddDirectory(false);
-    TFile* mu_analysis_file = TFile::Open("mu_analysis.root","UPDATE");
+    TFile* mu_analysis_file = TFile::Open("run_files/mu_analysis.root","UPDATE");
     if (!mu_analysis_file->IsOpen()){
         std::cout << "mu_analysis.root not opened" << std::endl;
         return;
@@ -220,7 +209,7 @@ void CorrectL1XE50toZB::Terminate(){//{{{
     }
 
     // WRITE CORRECTED MET DISTRIBUTIONS TO FILE{{{
-    TFile* mu_analysis_file = TFile::Open("mu_analysis.root","UPDATE");
+    TFile* mu_analysis_file = TFile::Open("run_files/mu_analysis.root","UPDATE");
     TDirectory* corrected_directory = mu_analysis_file->mkdir("L1XE50CorrectedToZB");
     corrected_directory->cd();
     for (int i = 0 ; i < Number_Mu_Bins ; i++ ) {

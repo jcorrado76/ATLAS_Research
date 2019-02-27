@@ -60,7 +60,7 @@ void ComputeL1XE50toL1XE30Efficiency::Terminate()//{{{
     }
 
     // WRITE TO FILE {{{
-    TFile* Mu_Analysis_File = TFile::Open("mu_analysis.root", "UPDATE");
+    TFile* Mu_Analysis_File = TFile::Open("run_files/mu_analysis.root", "UPDATE");
     TDirectory* l1xe30_met_distributions = (TDirectory*) Mu_Analysis_File->Get("l1xe30_met_distributions");
     if (!l1xe30_met_distributions){
         l1xe30_met_distributions = Mu_Analysis_File->mkdir("l1xe30_met_distributions");
