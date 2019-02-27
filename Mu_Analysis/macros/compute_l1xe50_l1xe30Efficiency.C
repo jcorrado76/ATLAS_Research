@@ -1,8 +1,7 @@
-#include "ComputeL1XE50toL1XE30Efficiency.h"
-void compute_l1xe50_l1xe30Efficiency(){
-    ComputeL1XE50toL1XE30Efficiency* myAnalysis = (ComputeL1XE50toL1XE30Efficiency*)TSelector::GetSelector("ComputeL1XE50toL1XE30Efficiency.C+");
+{
+    ComputeL1XE50toL1XE30Efficiency* myAnalysis = new ComputeL1XE50toL1XE30Efficiency();
     TChain* mychain = new TChain( "METTree" , "mychain" );
-    mychain->Add("~/DATA/PhysicsMain/user.jburr.2017_11_17.JETM10/*");
+    mychain->Add("/home/joseph/ATLAS_Research/DATA/PhysicsMain/JETM10_15thru17_with_missing_et_significance.root");
     mychain->Process(myAnalysis);
 }
 
