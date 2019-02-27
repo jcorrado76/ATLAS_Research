@@ -7,7 +7,6 @@ void CorrectL1XE30toZB::Begin(TTree * /*tree*/){//{{{
        // initialize empty histograms, efficiency objects, and efficiency fit objects 
        muLow = Mu_Values[i];
        muHigh = Mu_Values[i+1];
-       std::cout << "Mu between: " << muLow << " and " << muHigh << std::endl;
        Name.Form("metmu%.0fthru%.0f" , muLow , muHigh );
        delete gROOT->FindObject(Name);
        EfficiencyName.Form("metmu%.0fthru%.0fEfficiency", muLow , muHigh );
@@ -183,7 +182,7 @@ void CorrectL1XE30toZB::Terminate(){//{{{
     // this is L1XE30 distribution corrected to ZB
     TFile* mu_analysis_file = TFile::Open("run_files/mu_analysis.root","UPDATE");
     std::cout << "Making a directory for corrected met distributions" << std::endl;
-    TDirectory* corrected_directory = mu_analysis_file->mkdir("L1XE30CorrectedToZB");
+    TDirectory* corrected_directory = mu_analysis_file->mkdir("l1xe30correctedtozb");
     corrected_directory->cd();
     for (int i = 0 ; i < Number_Mu_Bins ; i++ ) {
         Normalized_Met_Distributions[i]->Write( "" , TObject::kOverwrite );

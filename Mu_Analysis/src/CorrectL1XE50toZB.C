@@ -1,5 +1,6 @@
 #define CorrectL1XE50toZB_cxx
 #include "CorrectL1XE50toZB.h"
+#include <math.h>
 ClassImp(CorrectL1XE50toZB);
 void CorrectL1XE50toZB::Begin(TTree * /*tree*/)//{{{
 {
@@ -106,9 +107,7 @@ void CorrectL1XE50toZB::Begin(TTree * /*tree*/)//{{{
 Bool_t CorrectL1XE50toZB::Process(Long64_t entry)//{{{
 {
    fReader.SetLocalEntry(entry);
-   // just make sure this is the correct flag L1XE30
    // still need to compute new error and pass it to this fill function somehow
-   // if the entry is passnoalg L1XE30, and it one of the good runs
    if ( isHLT_zb_L1XE50() && isGoodRun() ){
        for ( int i = 0 ; i < Number_Mu_Bins ; i++ ) {
            if ( inMuRange( Mu_Values[i] , Mu_Values[i+1] )){
@@ -121,10 +120,20 @@ Bool_t CorrectL1XE50toZB::Process(Long64_t entry)//{{{
 void CorrectL1XE50toZB::SlaveTerminate(){}
 void CorrectL1XE50toZB::Terminate(){//{{{
 	// Relative Normalization{{{
-    // BinWidth = 1.0 GeV
-
     for ( int i = 0 ; i < Number_Mu_Bins ; i++ ){
-        Scale_Factors[i] = Met_Distributions_By_Mu_Bin[i]->GetBinContent( Normalization_Bin_Numbers[i] ) / Normalized_Met_Distributions[i]->GetBinContent( Normalization_Bin_Numbers[i] );
+        std::cout << "Nentries in mubin " << i << " met distribution: " << 
+            Met_Distributions_By_Mu_Bin[i]->GetEntries() << std::endl;
+        Scale_Factors[i] = Met_Distributions_By_Mu_Bin[i]->GetBinContent( Normalization_Bin_Numbers[i] ) / 
+            Normalized_Met_Distributions[i]->GetBinContent( Normalization_Bin_Numbers[i] );
+        if (isnan( Scale_Factors[i] )){
+            std::cout << "Scale factor " << i << ": " << Scale_Factors[i] << " is NaN" << std::endl;
+            std::cout << "MET Counts in mubin " << i << ": " << 
+                Met_Distributions_By_Mu_Bin[i]->GetBinContent( Normalization_Bin_Numbers[i] ) << 
+                " in normalization bin number: " << Normalization_Bin_Numbers[i] << std::endl;
+            std::cout << "Counts in the Normalized MET distribution bin: " << 
+                Normalized_Met_Distributions[i]->GetBinContent( Normalization_Bin_Numbers[i] ) << std::endl;
+        }
+        std::cout << "Scale factor: " << i << " = " << Scale_Factors[i] << std::endl;
         Met_Distributions_By_Mu_Bin[i]->SetNormFactor( 1. );
         Normalized_Met_Distributions[i]->SetNormFactor( 1. );
         Normalized_Met_Distributions[i]->Scale( Scale_Factors[i] );

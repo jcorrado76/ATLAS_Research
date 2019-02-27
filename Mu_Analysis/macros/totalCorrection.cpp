@@ -9,8 +9,12 @@
     ComputeL1XE50toL1XE30Efficiency* createL1XE50Efficiencies = new ComputeL1XE50toL1XE30Efficiency();
     CorrectL1XE50toZB* CorrectL1XE50DataAllWay = new CorrectL1XE50toZB();
 
+    std::cout << "Processing L1XE30toZBEfficiency..." << std::endl;
     zb_chain->Process( buildl1xe30Efficiencies );
+    std::cout << "Processing CorrectL1XE30toZB..." << std::endl;
     jetm10_chain->Process( correctToZB );
+    std::cout << "Processing L1XE50toL1XE30Efficiency..." << std::endl;
     jetm10_chain->Process( createL1XE50Efficiencies );
+    std::cout << "Processing CorretL1XE50toZB..." << std::endl;
     jetm10_chain->Process( CorrectL1XE50DataAllWay );
 }
