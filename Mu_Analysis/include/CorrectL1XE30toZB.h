@@ -17,7 +17,6 @@ public :
    void    Begin(TTree *tree);
    void    SlaveBegin(TTree *tree);
    void    Init(TTree *tree);
-   Bool_t  Notify();
    Bool_t  Process(Long64_t entry);
    Int_t   GetEntry(Long64_t entry, Int_t getall = 0) { return fChain ? fChain->GetTree()->GetEntry(entry, getall) : 0; }
    void    SetOption(const char *option) { fOption = option; }
