@@ -222,7 +222,8 @@ void CorrectL1XE50toZB::Terminate(){//{{{
     TDirectory* corrected_directory = mu_analysis_file->mkdir("L1XE50CorrectedToZB");
     corrected_directory->cd();
     for (int i = 0 ; i < Number_Mu_Bins ; i++ ) {
-        Normalized_Met_Distributions[i]->Write( "" , TObject::kOverwrite );
+        Name.Form("l1xe50correctedToZBMETmubin%d" , i );
+        Normalized_Met_Distributions[i]->Write( Name , TObject::kOverwrite );
     }
     mu_analysis_file->Close();
     //}}}

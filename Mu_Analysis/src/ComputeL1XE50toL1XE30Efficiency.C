@@ -56,19 +56,22 @@ void ComputeL1XE50toL1XE30Efficiency::Terminate()//{{{
     }
     l1xe30_met_distributions->cd();
     for ( int i = 0 ; i < Number_Mu_Bins ; i++ ) {
-        Met_Distributions_By_Mu_Bin[i]->Write();
+        Name.Form("l1xe30_met_distribution_mubin%d" , i );
+        Met_Distributions_By_Mu_Bin[i]->Write(Name);
     }
 
     TDirectory* efficiency_curves = Mu_Analysis_File->mkdir("l1xe50_efficiency_curves");
     efficiency_curves->cd();
     for ( int i = 0 ; i < Number_Mu_Bins ; i++ ){
-        L1XE50_Efficiency_Objects[i]->Write();
+        Name.Form("l1xe50_efficiency_object_mubin%d" , i );
+        L1XE50_Efficiency_Objects[i]->Write(Name);
     }
 
     TDirectory* L1XE50_Efficiency_Fit_Objects_Dir = Mu_Analysis_File->mkdir("l1xe50_efficiency_fits");
     L1XE50_Efficiency_Fit_Objects_Dir->cd();
     for ( int i = 0 ; i < Number_Mu_Bins ; i++ ){
-        L1XE50_Efficiency_Fit_Objects[i]->Write();
+        Name.Form("l1xe50_efficiency_fit_mubin%d" , i );
+        L1XE50_Efficiency_Fit_Objects[i]->Write(Name);
     }
 
     Mu_Analysis_File->Close();//}}}

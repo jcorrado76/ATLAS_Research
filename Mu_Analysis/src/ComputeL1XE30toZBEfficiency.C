@@ -4,16 +4,6 @@ ClassImp(ComputeL1XE30toZBEfficiency);
 void ComputeL1XE30toZBEfficiency::Begin(TTree *) // {{{
 {
    TString option = GetOption();
-   // fill Mu_Values
-   for (int i = 0 ; i < Number_Mu_Bins + 1; i++){
-       Mu_Values[i] = i * 10.;
-   }
-   Float_t muLow;
-   Float_t muHigh;
-   TString Name;
-   TString Title;
-   TString EfficiencyName;
-   TString EfficiencyTitle;
    std::cout << "Creating the proper met distribution, l1xe30 efficiency and l1xe30 efficiency fit objects" << std::endl;
    for (int i = 0 ; i < Number_Mu_Bins ; i++){
        muLow = Mu_Values[i];
@@ -65,21 +55,25 @@ void ComputeL1XE30toZBEfficiency::Terminate() //{{{
     TDirectory* zb_met_distributions = Mu_Analysis_File->mkdir("zb_met_distributions");
     zb_met_distributions->cd();
     for ( int  i = 0 ; i < Number_Mu_Bins ; i++ ){
-        Met_Distributions_By_Mu_Bin[i]->Write();
+
+        Name.Form("zb_met_dist_mubin%d" , i );
+        Met_Distributions_By_Mu_Bin[i]->Write(Name);
     }
 
     std::cout << "Writing the l1xe30 efficiency curves to l1xe30_efficiency_curves" << std::endl;
     TDirectory* efficiency_curves = Mu_Analysis_File->mkdir("l1xe30_efficiency_curves");
     efficiency_curves->cd();
     for ( int  i = 0 ; i < Number_Mu_Bins ; i++ ){
-        L1XE30_Efficiency_Objects[i]->Write();
+        Name.Form("l1xe30_efficiency_object%d" , i );
+        L1XE30_Efficiency_Objects[i]->Write(Name);
     }
 
     std::cout << "Writing the l1xe30 efficiency curve objects to l1xe30_efficiency_curves" << std::endl;
     TDirectory* L1XE30_Efficiency_Fit_Objects_Dir = Mu_Analysis_File->mkdir("l1xe30_efficiency_fits");
     L1XE30_Efficiency_Fit_Objects_Dir->cd();
     for ( int  i = 0 ; i < Number_Mu_Bins ; i++ ){
-        L1XE30_Efficiency_Fit_Objects[i]->Write();
+        Name.Form("l1xe30_efficiency_fit%d" , i );
+        L1XE30_Efficiency_Fit_Objects[i]->Write(Name);
     }
 
     Mu_Analysis_File->Close();//}}}

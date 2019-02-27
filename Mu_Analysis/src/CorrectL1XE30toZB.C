@@ -181,11 +181,11 @@ void CorrectL1XE30toZB::Terminate(){//{{{
     // WRITE CORRECTED MET DISTRIBUTIONS TO FILE{{{
     // this is L1XE30 distribution corrected to ZB
     TFile* mu_analysis_file = TFile::Open("run_files/mu_analysis.root","UPDATE");
-    std::cout << "Making a directory for corrected met distributions" << std::endl;
     TDirectory* corrected_directory = mu_analysis_file->mkdir("l1xe30correctedtozb");
     corrected_directory->cd();
     for (int i = 0 ; i < Number_Mu_Bins ; i++ ) {
-        Normalized_Met_Distributions[i]->Write( "" , TObject::kOverwrite );
+        Name.Form("l1xe30correctedToZBMETmubin%d" , i );
+        Normalized_Met_Distributions[i]->Write( Name , TObject::kOverwrite );
     }
     //}}}
     mu_analysis_file->Close();
