@@ -72,6 +72,7 @@ Float_t Efficiency_Lib::determineZeroBiasThresh( userInfo* parameters, const Boo
     Int_t numberEventsAlgAKept = 0;
     Int_t numberEventsAlgBKept = 0;
     Int_t passnoalgL1XE10 , passnoalgL1XE30 , passnoalgL1XE40 , passnoalgL1XE45,passrndm;
+    Int_t cleanCutsFlag, recalBrokeFlag;
 
 
     if (verbose){
@@ -100,17 +101,20 @@ Float_t Efficiency_Lib::determineZeroBiasThresh( userInfo* parameters, const Boo
 
     threshTree->SetBranchAddress("actint",&actint);
     threshTree->SetBranchAddress("passrndm",&passrndm);
+    threshTree->SetBranchAddress("passcleancuts", &cleanCutsFlag);
+    threshTree->SetBranchAddress("recalbroke", &recalBrokeFlag);
 
     for (Int_t k = 0; k < passnoAlgNentries; k++)
 	{
 		threshTree->GetEntry(k);
         Bool_t passl1 = metl1 > metL1Thresh ;
         Bool_t passactint = actint > actintCut;
+        Bool_t isClean = (cleanCutsFlag > 0.1) && (recalBrokeFlag < 0.1);
         Bool_t isPassnoalg = passnoalgL1XE10 > passnoalgcut || passnoalgL1XE30 > passnoalgcut
         || passnoalgL1XE40 > passnoalgcut || passnoalgL1XE45 > passnoalgcut;
         Bool_t isPassrndm = passrndm > passrndmcut;
 
-		if ( ( passl1 ) && ( passactint ) && ( isPassnoalg || isPassrndm ))
+		if ( (isClean) && ( passl1 ) && ( passactint ) && ( isPassnoalg || isPassrndm ))
 		{
 		    AlgAHist->Fill(algAMET);
 		    AlgBHist->Fill(algBMET);
@@ -136,13 +140,14 @@ Float_t Efficiency_Lib::determineZeroBiasThresh( userInfo* parameters, const Boo
 	{
 		threshTree->GetEntry(l);
         Bool_t passl1 = metl1 > metL1Thresh ;
+        Bool_t isClean = (cleanCutsFlag > 0.1) && (recalBrokeFlag < 0.1);
         Bool_t passactint = actint > actintCut;
         Bool_t isPassnoalg = passnoalgL1XE10 > passnoalgcut || passnoalgL1XE30 > passnoalgcut ||
         passnoalgL1XE40 > passnoalgcut || passnoalgL1XE45 > passnoalgcut;
         Bool_t isPassrndm = passrndm > passrndmcut;
 
 
-		if (( passl1 ) && ( passactint ) && ( isPassnoalg || isPassrndm ) )
+		if ( (isClean ) && ( passl1 ) && ( passactint ) && ( isPassnoalg || isPassrndm ) )
 		{
             if (algAMET > AlgAThresh){
                 numberEventsAlgAKept++;

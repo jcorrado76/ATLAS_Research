@@ -82,7 +82,7 @@ Float_t Efficiency_Lib::bisection( userInfo* parameters , TH1F* algAHist , TH1F*
     Float_t algAMET,algBMET, metl1;
     Float_t passnoalg_actint = 0 ;
     Int_t passnoalgL1XE10,passnoalgL1XE30,passnoalgL1XE40,passnoalgL1XE45, passrndm;
-    Float_t recalbrokeflag , passcleancutsflag;
+    Int_t recalbrokeflag , passcleancutsflag;
 
     TString algA = algAHist->GetName();
     TString algB = algBHist->GetName();
