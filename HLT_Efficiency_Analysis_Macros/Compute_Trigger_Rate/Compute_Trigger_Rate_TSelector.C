@@ -40,7 +40,8 @@ void Compute_Trigger_Rate_TSelector::SlaveTerminate()
 
 void Compute_Trigger_Rate_TSelector::Terminate()
 {
-    std::cout << "Number of random (process 1) entries: " << RandomHist->GetEntries() << std::endl;
-    std::cout << "Number of metl1 > 50.0 ( process 2 ) entries: " << MetL1Hist->GetEntries() << std::endl;
-    std::cout << "Trigger rate = ( numb kept process 1 ) / ( numb kept process 2 ): " << ((MetL1Hist->GetEntries())/(RandomHist->GetEntries())) << std::endl;
+    std::cout << "Number of ZB events: " << RandomHist->GetEntries() << std::endl;
+    std::cout << "Number of events that pass metl1 > 50.0: " << MetL1Hist->GetEntries() << std::endl;
+    std::cout << "Trigger rate = Number of events that pass L1>50 / Number Zerobias events: " 
+        << ((MetL1Hist->GetEntries())/(RandomHist->GetEntries())) << std::endl;
 }
