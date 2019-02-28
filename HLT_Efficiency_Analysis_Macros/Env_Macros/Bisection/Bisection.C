@@ -23,7 +23,7 @@ Float_t Efficiency_Lib::bisection( userInfo* parameters , TH1F* algAHist , TH1F*
     Float_t lwrbnd = 0.5 * trigger_rate;
     Float_t uprbnd = 0.13;
     Float_t x1,x3; //thresholds of individual algorithms
-    Float_t NumberEventsKeptCombinedCutAtX1,NumberEventsKeptCombinedCutAtX2,NumberEventsKeptCombinedCutAtX3 = 0; //trigger_ratetions of events kept out of passrndm
+    Float_t FractionEventsKeptCombinedCutAtX1,FractionEventsKeptCombinedCutAtX2,FractionEventsKeptCombinedCutAtX3 = 0; //trigger_ratetions of events kept out of passrndm
     x1 = lwrbnd;
     x3 = uprbnd;
     Float_t initialGuess = ( x1 + x3 ) / 2.0;
@@ -133,16 +133,16 @@ Float_t Efficiency_Lib::bisection( userInfo* parameters , TH1F* algAHist , TH1F*
     }
 //}}}
     //compute trigger_ratetions kept at initial guesses{{{
-    NumberEventsKeptCombinedCutAtX1 = (Float_t) number_events_kept_combined_at_x1 / (Float_t) Number_ZeroBias_Events;
-    NumberEventsKeptCombinedCutAtX2 = (Float_t) number_events_kept_combined_at_x2 / (Float_t) Number_ZeroBias_Events;
-    NumberEventsKeptCombinedCutAtX3 = (Float_t) number_events_kept_combined_at_x3 / (Float_t) Number_ZeroBias_Events;
+    FractionEventsKeptCombinedCutAtX1 = (Float_t) number_events_kept_combined_at_x1 / (Float_t) Number_ZeroBias_Events;
+    FractionEventsKeptCombinedCutAtX2 = (Float_t) number_events_kept_combined_at_x2 / (Float_t) Number_ZeroBias_Events;
+    FractionEventsKeptCombinedCutAtX3 = (Float_t) number_events_kept_combined_at_x3 / (Float_t) Number_ZeroBias_Events;
 
     std::cout << "At x1 = " << x1 << " number_events_kept_combined_at_x1: " << number_events_kept_combined_at_x1 << " events " << std::endl;
-    std::cout << "NumberEventsKeptCombinedCutAtX1: " << NumberEventsKeptCombinedCutAtX1 << std::endl;
+    std::cout << "FractionEventsKeptCombinedCutAtX1: " << FractionEventsKeptCombinedCutAtX1 << std::endl;
     std::cout << "At x2 = " << initialGuess << " number_events_kept_combined_at_x2: " << number_events_kept_combined_at_x2 << " events " << std::endl;
-    std::cout << "NumberEventsKeptCombinedCutAtX2: " << NumberEventsKeptCombinedCutAtX2 << std::endl;
+    std::cout << "FractionEventsKeptCombinedCutAtX2: " << FractionEventsKeptCombinedCutAtX2 << std::endl;
     std::cout << "At x3 = " << x3 << " number_events_kept_combined_at_x3: " << number_events_kept_combined_at_x3 << " events " << std::endl;
-    std::cout << "NumberEventsKeptCombinedCutAtX3: " << NumberEventsKeptCombinedCutAtX3 << std::endl;
+    std::cout << "FractionEventsKeptCombinedCutAtX3: " << FractionEventsKeptCombinedCutAtX3 << std::endl;
 
 
     Float_t inputArray[100];
@@ -154,9 +154,9 @@ Float_t Efficiency_Lib::bisection( userInfo* parameters , TH1F* algAHist , TH1F*
     inputArray[0] = x1;
     inputArray[2] = initialGuess;
     inputArray[1] = x3;
-    outputArray[0] = NumberEventsKeptCombinedCutAtX1;
-    outputArray[2] = NumberEventsKeptCombinedCutAtX2;
-    outputArray[1] = NumberEventsKeptCombinedCutAtX3;
+    outputArray[0] = FractionEventsKeptCombinedCutAtX1;
+    outputArray[2] = FractionEventsKeptCombinedCutAtX2;
+    outputArray[1] = FractionEventsKeptCombinedCutAtX3;
     numEventsArray[0] = number_events_kept_combined_at_x1;
     numEventsArray[2] = number_events_kept_combined_at_x2;
     numEventsArray[1] = number_events_kept_combined_at_x3;
@@ -176,16 +176,16 @@ Float_t Efficiency_Lib::bisection( userInfo* parameters , TH1F* algAHist , TH1F*
     do{
         j++;
         std::cout << "Inside iteration number: " << j << std::endl;
-        if ( (NumberEventsKeptCombinedCutAtX1-trigger_rate)*(NumberEventsKeptCombinedCutAtX2-trigger_rate) < 0 ) //root is in left half of interval
+        if ( (FractionEventsKeptCombinedCutAtX1-trigger_rate)*(FractionEventsKeptCombinedCutAtX2-trigger_rate) < 0 ) //root is in left half of interval
         {
           std::cout << "Root is to the left of " << initialGuess << std::endl;
-          NumberEventsKeptCombinedCutAtX3 = NumberEventsKeptCombinedCutAtX2;
+          FractionEventsKeptCombinedCutAtX3 = FractionEventsKeptCombinedCutAtX2;
           x3 = initialGuess;
         }
         else //root is in right half of  interval
         {
           std::cout << "Root is to the right of " << initialGuess << std::endl;
-          NumberEventsKeptCombinedCutAtX1 = NumberEventsKeptCombinedCutAtX2;
+          FractionEventsKeptCombinedCutAtX1 = FractionEventsKeptCombinedCutAtX2;
           x1 = initialGuess;
         }
         initialGuess = ( x1 + x3 ) / 2.0;
@@ -221,10 +221,10 @@ Float_t Efficiency_Lib::bisection( userInfo* parameters , TH1F* algAHist , TH1F*
         std::cout << "algAMETx2thresh: " << algAMETx2thresh << std::endl;
         std::cout << "algBMETx2thresh: " << algBMETx2thresh << std::endl;
         std::cout << "Number of events keep combined at midpoint: " << number_events_kept_combined_at_x2 << std::endl;
-        NumberEventsKeptCombinedCutAtX2 = (Float_t) number_events_kept_combined_at_x2 / (Float_t) Number_ZeroBias_Events;
-        std::cout << "NumberEventsKeptCombinedCutAtX2: " << NumberEventsKeptCombinedCutAtX2 << std::endl;
+        FractionEventsKeptCombinedCutAtX2 = (Float_t) number_events_kept_combined_at_x2 / (Float_t) Number_ZeroBias_Events;
+        std::cout << "FractionEventsKeptCombinedCutAtX2: " << FractionEventsKeptCombinedCutAtX2 << std::endl;
         std::cout << "Condition: " << abs(target - number_events_kept_combined_at_x2) << " > " << epsilon << std::endl;
-        outputArray[j+2] = NumberEventsKeptCombinedCutAtX2;
+        outputArray[j+2] = FractionEventsKeptCombinedCutAtX2;
 
         algAThreshDiff = thresholdAarray[j+2] - thresholdAarray[j+1];
         algBThreshDiff = thresholdBarray[j+2] - thresholdBarray[j+1];
@@ -246,8 +246,8 @@ Float_t Efficiency_Lib::bisection( userInfo* parameters , TH1F* algAHist , TH1F*
       {
         std::cout << "A root at x = " <<  initialGuess << " was found to within one bin: " << BinWidth << " GeV"
                   << " in " << j << " iterations" << std::endl;
-        std::cout << "The number of combined events kept is  " << NumberEventsKeptCombinedCutAtX2 * Number_ZeroBias_Events << std::endl;
-        std::cout << "The fraction of combined events kept is  " << NumberEventsKeptCombinedCutAtX2 << std::endl;
+        std::cout << "The number of combined events kept is  " << FractionEventsKeptCombinedCutAtX2 * Number_ZeroBias_Events << std::endl;
+        std::cout << "The fraction of combined events kept is  " << FractionEventsKeptCombinedCutAtX2 << std::endl;
       }
       else{
         std::cout << "No root found; max iterations exceeded" << std::endl;
