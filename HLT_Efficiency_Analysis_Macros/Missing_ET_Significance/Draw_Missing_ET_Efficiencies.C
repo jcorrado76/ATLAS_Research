@@ -3,6 +3,11 @@
 #include <TH2.h>
 #include <TStyle.h>
 
+/*
+ * Draw efficiency curve for algorithm A individually, for missing et significance individually, 
+ * and then the efficiency curve for using both of them combined
+ */
+
 void Draw_Missing_ET_Efficiencies::Begin(TTree *){
     TString option = GetOption();
 
@@ -22,7 +27,8 @@ Bool_t Draw_Missing_ET_Efficiencies::Process(Long64_t entry)
 
     isMuon = (*passmu26varmed > 0.1 || *passmu26med > 0.1);
     isClean = (*passcleancuts > 0.1) && ( *recalbroke < 0.1);
-    passTransverseMassCut = Efficiency_Lib::passTransverseMassCut( *metoffrecal , *mexoffrecal , *meyoffrecal , *metoffrecalmuon , *mexoffrecalmuon , *meyoffrecalmuon );
+    passTransverseMassCut = Efficiency_Lib::passTransverseMassCut( *metoffrecal , *mexoffrecal , 
+            *meyoffrecal , *metoffrecalmuon , *mexoffrecalmuon , *meyoffrecalmuon );
 
     if ( isMuon && isClean && passTransverseMassCut && ( muonActint > actintCut ) )
     {
