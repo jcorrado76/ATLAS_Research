@@ -310,21 +310,31 @@ public :
    TTreeReaderArray<float> CalAntiKt4EMTopoJets_m = {fReader, "CalAntiKt4EMTopoJets.m"};
    //}}}
    // Member Functions {{{
-   // Default Constructor 
+   // Default Constructor {{{
    Jburr_Template_Selector(){ 
        for (int i = 0 ; i < Number_Mu_Bins + 1; i++){
            Mu_Values[i] = i * 10.;
-            Name.Form("zb_met_dist_mubin%d" , i );
-            // TODO: set names and initialize all objects in here so every
-            // derived class has access to the names and the objects
-            // remove the initializations from the derived classes
-            Met_Distributions_By_Mu_Bin_Names[i] = Name;
-            Normalized_Met_Distributions_Names[i];
-            L1XE30_Efficiency_Objects_Names[i];
-            L1XE50_Efficiency_Objects_Names[i];
-            L1XE30_Efficiency_Fit_Objects_Names[i];
-            L1XE50_Efficiency_Fit_Objects_Names[i];
-   }
+           Name.Form("zb_met_dist_mubin%d" , i );
+           Title.Form("ZeroBias MET Distribution for %s With Actint Between %.0f and %.0f" ,Alg_Name.Data(), muLow , muHigh );
+           EfficiencyName.Form("metL1XE30EfficiencyMubin%d", i);
+           EfficiencyTitle.Form("Efficiency of L1XE 30 As a Function of %s for Actint bin %d", Alg_Name.Data() , i);
+           Met_Distributions_By_Mu_Bin[i] = new TH1F( Name , Title , met_dist_nbins , gevLow , gevHigh );
+           Normalized_Met_Distributions[i] = new TH1F( Corrected_Name , Corrected_Title , met_dist_nbins , gevLow , gevHigh );
+           L1XE30_Efficiency_Objects[i] = new TEfficiency( EfficiencyName , EfficiencyTitle , efficiency_nbins , gevLow , gevHigh );
+           EfficiencyName.Form("metL1XE30EfficiencyMubin%d", i);           
+           EfficiencyTitle.Form("Efficiency of L1XE 50 As a Function of %s for Actint bin %d", Alg_Name.Data() , i);
+           L1XE50_Efficiency_Objects[i] = new TEfficiency( EfficiencyName , EfficiencyTitle , efficiency_nbins , gevLow , gevHigh );
+           L1XE30_Efficiency_Fit_Objects[i] = new TF1();
+           L1XE50_Efficiency_Fit_Objects[i] = new TF1();
+
+            // set line colors on the TH1F objects 
+           Met_Distributions_By_Mu_Bin[i]->SetLineColor( Colors[i] );
+           Normalized_Met_Distributions[i]->SetLineColor( Colors[i] );
+
+           L1XE30_Efficiency_Objects[i]->SetLineColor( Colors[i] );
+           L1XE30_Efficiency_Objects[i]->SetMarkerStyle( Colors[i] );
+           L1XE30_Efficiency_Fit_Objects[i]->SetLineColor( Colors[i] );
+   }//}}}
    }
    ~Jburr_Template_Selector() { }
    virtual Int_t   Version() const { return 2; }

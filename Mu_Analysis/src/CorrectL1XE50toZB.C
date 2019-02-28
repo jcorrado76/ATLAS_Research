@@ -2,10 +2,9 @@
 #include "CorrectL1XE50toZB.h"
 #include <math.h>
 ClassImp(CorrectL1XE50toZB);
-void CorrectL1XE50toZB::Begin(TTree * /*tree*/)//{{{
+void CorrectL1XE50toZB::Begin(TTree *)//{{{
 {
     TString option = GetOption();
-   // initialize empty histograms, efficiency objects, etc.
    for (int i = 0 ; i < Number_Mu_Bins ; i++){
        muLow = Mu_Values[i];
        muHigh = Mu_Values[i+1];
