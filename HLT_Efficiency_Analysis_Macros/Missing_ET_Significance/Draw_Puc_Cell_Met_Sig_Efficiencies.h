@@ -48,6 +48,7 @@ public :
    TEfficiency* missing_et_efficiency_one = 0;
    TEfficiency* missing_et_efficiency_two = 0;
    TEfficiency* missing_et_efficiency_three = 0;
+   TH1F* l1metofdenominator = 0;
    const Int_t muonNbins = 200;
    const Double_t metMin = 0.0;
    const Double_t metMax = 300.0;

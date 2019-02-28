@@ -4,6 +4,7 @@
 void Draw_Puc_Cell_Met_Sig_Efficiencies::Begin(TTree *){
     TString option = GetOption();
 
+    l1metofdenominator = new TH1F("l1metdenominator","l1metdenominator",muonNbins,metMin,metMax);
    puc_efficiency = new TEfficiency( AlgPucName + "_efficiency" , puc_efficiency_title , muonNbins, metMin, metMax);
    cell_efficiency = new TEfficiency( AlgCellName + "_efficiency" , cell_efficiency_title , muonNbins , metMin , metMax );
    missing_et_efficiency_one = new TEfficiency( AlgMissingEtName + "_efficiency" , met_significance_efficiency_title_one , muonNbins , metMin , metMax );
@@ -19,9 +20,10 @@ Bool_t Draw_Puc_Cell_Met_Sig_Efficiencies::Process(Long64_t entry)
     isClean = (*passcleancuts > 0.1) && ( *recalbroke < 0.1);
     passTransverseMassCut = Efficiency_Lib::passTransverseMassCut( *metoffrecal , *mexoffrecal , *meyoffrecal , *metoffrecalmuon , *mexoffrecalmuon , *meyoffrecalmuon );
 
-    if ( isMuon && isClean && passTransverseMassCut && ( *metl1 > metl1thresh ) && ( *actint > actintCut ) )
+    if ( isMuon && isClean && passTransverseMassCut &&( *metl1 > metl1thresh ) && ( *actint > actintCut ) )
     {
         metnomu = Efficiency_Lib::computeMetNoMu(  *mexoffrecal , *meyoffrecal , *mexoffrecalmuon , *meyoffrecalmuon );
+        l1metofdenominator->Fill(*metl1);
         cell_efficiency->Fill( ( *metcell > cell_efficiency_thresh ) && ( *metl1 > metl1thresh ) && ( *actint > actintCut ) , metnomu );
         puc_efficiency->Fill( ( *mettopoclpuc > puc_efficiency_thresh ) && ( *metl1 > metl1thresh ) && ( *actint > actintCut ) , metnomu );
         missing_et_efficiency_one->Fill( ( *missing_et_significance > met_significance_thresh_one ) && ( *metl1 > metl1thresh ) && ( *actint > actintCut ) , metnomu );
@@ -66,6 +68,15 @@ void Draw_Puc_Cell_Met_Sig_Efficiencies::Terminate(){
     TImage *img = TImage::Create();
     img->FromPad( efficiencyCanvas );
     img->WriteImage("Missing_ET_Significance/metcell_mettopoclpuc_etmiss_3_5_7.png");
+
+    TCanvas* l1denominatorCanvas = new TCanvas("L1Denominator Canvas", "L1 Denominator");
+    l1denominatorCanvas->RangeAxis(0,0,500,1.0);
+    l1denominatorCanvas->SetTitle("L1 Denominator");
+    l1denominatorCanvas->SetLogy();
+    l1metofdenominator->Draw();
+    legend = new TLegend(0.57,0.15,0.9, 0.4 ,"","NDC");
+    legend->AddEntry(l1metofdenominator, "L1 Denominator");
+    legend->Draw("SAME");
 }
 void Draw_Puc_Cell_Met_Sig_Efficiencies::Init(TTree *tree){fReader.SetTree(tree);}
 Bool_t Draw_Puc_Cell_Met_Sig_Efficiencies::Notify(){return kTRUE;}
