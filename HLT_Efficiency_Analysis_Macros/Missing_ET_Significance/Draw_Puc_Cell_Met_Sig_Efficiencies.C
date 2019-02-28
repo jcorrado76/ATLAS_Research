@@ -19,7 +19,7 @@ Bool_t Draw_Puc_Cell_Met_Sig_Efficiencies::Process(Long64_t entry)
     isClean = (*passcleancuts > 0.1) && ( *recalbroke < 0.1);
     passTransverseMassCut = Efficiency_Lib::passTransverseMassCut( *metoffrecal , *mexoffrecal , *meyoffrecal , *metoffrecalmuon , *mexoffrecalmuon , *meyoffrecalmuon );
 
-    if ( isMuon && isClean && passTransverseMassCut && ( *actint > actintCut ) )
+    if ( isMuon && isClean && passTransverseMassCut && ( *metl1 > metl1thresh ) && ( *actint > actintCut ) )
     {
         metnomu = Efficiency_Lib::computeMetNoMu(  *mexoffrecal , *meyoffrecal , *mexoffrecalmuon , *meyoffrecalmuon );
         cell_efficiency->Fill( ( *metcell > cell_efficiency_thresh ) && ( *metl1 > metl1thresh ) && ( *actint > actintCut ) , metnomu );
