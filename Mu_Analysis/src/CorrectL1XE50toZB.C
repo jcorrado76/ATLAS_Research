@@ -24,11 +24,6 @@ void CorrectL1XE50toZB::Begin(TTree *)//{{{
        L1XE30_Efficiency_Objects[i] = new TEfficiency( EfficiencyName , EfficiencyTitle , efficiency_nbins , gevLow , gevHigh );
        L1XE30_Efficiency_Fit_Objects[i] = new TF1();
 
-       EfficiencyName.Form("metmu%.0fthru%.0fL1XE50Efficiency", muLow , muHigh );
-       EfficiencyTitle.Form("Efficiency of L1XE 50 As a Function of %s for Actint Between %.0f and %.0f", Alg_Name.Data() , muLow , muHigh );
-
-       L1XE50_Efficiency_Objects[i] = new TEfficiency( EfficiencyName , EfficiencyTitle , efficiency_nbins , gevLow , gevHigh );
-       L1XE50_Efficiency_Fit_Objects[i] = new TF1();
    }
     // TH1 OBJECTS DO NOT BELONG TO TFILE SCOPE. THEY WILL STAY
     TH1::AddDirectory(false);

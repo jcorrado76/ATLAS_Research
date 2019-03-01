@@ -3,7 +3,6 @@ ClassImp(ComputeL1XE50toL1XE30Efficiency);
 Bool_t ComputeL1XE50toL1XE30Efficiency::Process(Long64_t entry)//{{{
 {
    fReader.SetLocalEntry(entry);
-   // if the event has passed HLT_noalg_zb_L1ZB_passed, and is not one of the bad run numbers
    if ( isHLT_zb_L1XE30()  && isGoodRun() ){
        Float_t muLow , muHigh;
        for ( int i = 0; i < Number_Mu_Bins ; i++ ){

@@ -84,15 +84,29 @@ public :
        for (int i = 0 ; i < Number_Mu_Bins + 1; i++){
            Mu_Values[i] = i * 10.;
            Name.Form("hlt_zb_l1zb_met_dist_mubin%d" , i );
-           Title.Form("ZeroBias MET Distribution for %s With Actint Between %.0f and %.0f" ,Alg_Name.Data(), muLow , muHigh );
+           Title.Form("HLT ZB L1ZB MET Distribution for %s for Actint bin %d" , Alg_Name.Data(), i);
+           HLT_ZB_L1ZB_MET_Distributions_by_Mubin[i] = new TH1F( Name , Title , met_dist_nbins , gevLow , gevHigh );
+
+           Name.Form("hlt_zb_l1zb_met_dist_mubin%d" , i );
+           Title.Form("HLT ZB L1XE30 MET Distribution for %s for Actint bin %d" , Alg_Name.Data(), i);
+           HLT_ZB_L1XE30_MET_Distributions_by_Mubin[i] = new TH1F( Name , Title , met_dist_nbins , gevLow , gevHigh );
+
+           Corrected_Name.Form("L1XE30CorrectedToZBmubin%d" , i);
+           Corrected_Title.Form("L1XE30 Data Corrected back to Zerobias For Actint bin %d", i);
+           HLT_ZB_L1XE30_Corrected_to_ZB_MET_Distribution[i] = new TH1F( Corrected_Name , Corrected_Title , met_dist_nbins , gevLow , gevHigh );
+
+           Corrected_Name.Form("L1XE50CorrectedToZBmu%.0fthru%.0f" , muLow , muHigh );
+           Corrected_Title.Form("L1XE50 Data Corrected back to Zerobias For Actint Between %.0f and %.0f" , muLow , muHigh );
+           HLT_ZB_L1XE50_Corrected_to_ZB_MET_Distribution[i] = new TH1F( Corrected_Name , Corrected_Title , met_dist_nbins , gevLow , gevHigh );
+
            EfficiencyName.Form("metL1XE30EfficiencyMubin%d", i);
            EfficiencyTitle.Form("Efficiency of L1XE 30 As a Function of %s for Actint bin %d", Alg_Name.Data() , i);
-           HLT_ZB_L1ZB_MET_Distributions_by_Mubin[i] = new TH1F( Name , Title , met_dist_nbins , gevLow , gevHigh );
-           Normalized_Met_Distributions[i] = new TH1F( Corrected_Name , Corrected_Title , met_dist_nbins , gevLow , gevHigh );
            L1XE30_Efficiency_Objects[i] = new TEfficiency( EfficiencyName , EfficiencyTitle , efficiency_nbins , gevLow , gevHigh );
+
            EfficiencyName.Form("metL1XE50EfficiencyMubin%d", i);           
            EfficiencyTitle.Form("Efficiency of L1XE 50 As a Function of %s for Actint bin %d", Alg_Name.Data() , i);
            L1XE50_Efficiency_Objects[i] = new TEfficiency( EfficiencyName , EfficiencyTitle , efficiency_nbins , gevLow , gevHigh );
+
            L1XE30_Efficiency_Fit_Objects[i] = new TF1();
            L1XE50_Efficiency_Fit_Objects[i] = new TF1();
 

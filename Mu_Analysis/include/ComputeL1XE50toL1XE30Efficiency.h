@@ -14,20 +14,12 @@ class ComputeL1XE50toL1XE30Efficiency : public Jburr_Template_Selector {
 public :
    ComputeL1XE50toL1XE30Efficiency() { }
    ~ComputeL1XE50toL1XE30Efficiency() { }
-   Int_t   Version() const { return 2; }
-   void    Begin(TTree *tree);
-   void    SlaveBegin(TTree *tree);
-   void    Init(TTree *tree);
    Bool_t  Process(Long64_t entry);
-   Int_t   GetEntry(Long64_t entry, Int_t getall = 0) { return fChain ? fChain->GetTree()->GetEntry(entry, getall) : 0; }
-   void    SetOption(const char *option) { fOption = option; }
-   void    SetObject(TObject *obj) { fObject = obj; }
-   void    SetInputList(TList *input) { fInput = input; }
-   TList  *GetOutputList() const { return fOutput; }
-   void    SlaveTerminate();
    void    Terminate();
    ClassDef(ComputeL1XE50toL1XE30Efficiency,0);
 
+
+   const float L1XE = 50.0;
 };
 
 #endif
