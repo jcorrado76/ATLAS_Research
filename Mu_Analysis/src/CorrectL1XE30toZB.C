@@ -1,7 +1,8 @@
-#define CorrectL1XE30toZB_cxx
 #include "CorrectL1XE30toZB.h"
 ClassImp(CorrectL1XE30toZB);
-void CorrectL1XE30toZB::Begin(TTree * /*tree*/){//{{{
+void CorrectL1XE30toZB::Begin(TTree*){//{{{
+    // TODO: get rid of this entire function. it only serves to load objects from a file, but when I get copy
+    // constructor working, will already have access to these objects
     TString option = GetOption();
     // TH1 OBJECTS DO NOT BELONG TO TFILE SCOPE. THEY WILL STAY
     TH1::AddDirectory(false);
@@ -50,9 +51,9 @@ void CorrectL1XE30toZB::Begin(TTree * /*tree*/){//{{{
            muLow = Mu_Values[i];
            muHigh = Mu_Values[i+1];
            Name.Form("zb_met_dist_mubin%d" , i );
-           gDirectory->GetObject( Name , Met_Distributions_By_Mu_Bin[i] );
+           gDirectory->GetObject( Name , HLT_ZB_L1ZB_MET_Distributions_by_Mubin[i] );
             // Is this necessary?
-           Met_Distributions_By_Mu_Bin[i]->SetDirectory(0);
+           HLT_ZB_L1ZB_MET_Distributions_by_Mubin[i]->SetDirectory(0);
         }
     }
     else{
@@ -64,39 +65,37 @@ void CorrectL1XE30toZB::Begin(TTree * /*tree*/){//{{{
 Bool_t CorrectL1XE30toZB::Process(Long64_t entry)//{{{
 {
    fReader.SetLocalEntry(entry);
-   // still need to compute new error and pass it to this fill function somehow
-   // if the entry is passnoalg L1XE30, and it one of the good runs
-   if ( isHLT_zb_L1XE30() && isGoodRun() ){
-       for ( int i = 0 ; i < Number_Mu_Bins ; i++ ) {
-           if ( inMuRange( Mu_Values[i] , Mu_Values[i+1] )){
-                Normalized_Met_Distributions[i]->Fill( *cell_met , ComputeWeight( L1XE30_Efficiency_Fit_Objects[i] ) );
+    if ( isHLT_zb_L1XE30() && isGoodRun() ){
+        for ( int i = 0 ; i < Number_Mu_Bins ; i++ ) {
+            if ( inMuRange( Mu_Values[i] , Mu_Values[i+1] )){
+                HLT_ZB_L1XE30_Corrected_to_ZB_MET_Distribution[i]->Fill( *cell_met , ComputeWeight( L1XE30_Efficiency_Fit_Objects[i] ) );
             }
         }
-   }
+    }
    return kTRUE;
 }//}}}
 void CorrectL1XE30toZB::Terminate(){//{{{
 	// Relative Normalization{{{
     // Scale the corrected ones to the original zb ones
     for (int i = 0 ;i < Number_Mu_Bins ; i++ ) {
-        Scale_Factors[i] = Met_Distributions_By_Mu_Bin[i]->GetBinContent( Normalization_Bin_Numbers[i] ) / Normalized_Met_Distributions[i]->GetBinContent( Normalization_Bin_Numbers[i] );
-        Met_Distributions_By_Mu_Bin[i]->SetNormFactor( 1. );
-        Normalized_Met_Distributions[i]->SetNormFactor( 1. );
-        Normalized_Met_Distributions[i]->Scale( Scale_Factors[i] );
+        Scale_Factors[i] = HLT_ZB_L1ZB_MET_Distributions_by_Mubin[i]->GetBinContent( Normalization_Bin_Numbers[i] ) / HLT_ZB_L1XE30_Corrected_to_ZB_MET_Distribution[i]->GetBinContent( Normalization_Bin_Numbers[i] );
+        HLT_ZB_L1ZB_MET_Distributions_by_Mubin[i]->SetNormFactor( 1. );
+        HLT_ZB_L1XE30_Corrected_to_ZB_MET_Distribution[i]->SetNormFactor( 1. );
+        HLT_ZB_L1XE30_Corrected_to_ZB_MET_Distribution[i]->Scale( Scale_Factors[i] );
     }
     //}}}
     // plot corrected distributions {{{
     for (int i = 0 ; i < Number_Mu_Bins ; i++ ) {
-        Met_Distributions_By_Mu_Bin[i]->SetLineColor( Colors[i] );
-        Normalized_Met_Distributions[i]->SetLineColor( Colors[i] );
+        HLT_ZB_L1ZB_MET_Distributions_by_Mubin[i]->SetLineColor( Colors[i] );
+        HLT_ZB_L1XE30_Corrected_to_ZB_MET_Distribution[i]->SetLineColor( Colors[i] );
     }
     TCanvas* correctedCanvas = new TCanvas("correctedCanvas","Canvas with Mu Bin Distributions for L1XE30 Corrected to ZB");
 	TLegend* correctedLegend = new TLegend(0.48,0.7,0.9,0.9);
-    Normalized_Met_Distributions[0]->Draw();
-    correctedLegend->AddEntry( Normalized_Met_Distributions[0] );
+    HLT_ZB_L1XE30_Corrected_to_ZB_MET_Distribution[0]->Draw();
+    correctedLegend->AddEntry( HLT_ZB_L1XE30_Corrected_to_ZB_MET_Distribution[0] );
     for (int i = 1; i < Number_Mu_Bins ; i++ ) {
-        Normalized_Met_Distributions[i]->Draw("SAME");
-        correctedLegend->AddEntry( Normalized_Met_Distributions[i] );
+        HLT_ZB_L1XE30_Corrected_to_ZB_MET_Distribution[i]->Draw("SAME");
+        correctedLegend->AddEntry( HLT_ZB_L1XE30_Corrected_to_ZB_MET_Distribution[i] );
     }
 	correctedLegend->Draw("SAME");
     correctedCanvas->SetLogy();
@@ -106,16 +105,16 @@ void CorrectL1XE30toZB::Terminate(){//{{{
 	// PLOT ZERO BIAS DISTRIBUTIONS {{{
 	TCanvas* zb_MET_Canvas = new TCanvas("zbCanvas","Canvas with zerobias data");
     TLegend* zbDistLegend = new TLegend(0.48,0.7,0.9,0.9);
-    Met_Distributions_By_Mu_Bin[0]->Draw();
-    zbDistLegend->AddEntry( Met_Distributions_By_Mu_Bin[0] );
+    HLT_ZB_L1ZB_MET_Distributions_by_Mubin[0]->Draw();
+    zbDistLegend->AddEntry( HLT_ZB_L1ZB_MET_Distributions_by_Mubin[0] );
     for (int i = 1; i < Number_Mu_Bins ; i++ ) {
-        Met_Distributions_By_Mu_Bin[i]->Draw("SAME");
-        zbDistLegend->AddEntry( Met_Distributions_By_Mu_Bin[i] );
+        HLT_ZB_L1ZB_MET_Distributions_by_Mubin[i]->Draw("SAME");
+        zbDistLegend->AddEntry( HLT_ZB_L1ZB_MET_Distributions_by_Mubin[i] );
     }
     zbDistLegend->Draw("SAME");
     zb_MET_Canvas->SetLogy();
     gStyle->SetOptStat(0);
-    zb_MET_Canvas->Print("../Plots/CorrectedAndZB/Met_Distributions_By_Mu_Bin.png");
+    zb_MET_Canvas->Print("../Plots/CorrectedAndZB/HLT_ZB_L1ZB_MET_Distributions_by_Mubin.png");
     //}}}
     // PLOT CORRECTED MET WITH THE ZB MET {{{
     TString Canvas_Name;
@@ -137,12 +136,12 @@ void CorrectL1XE30toZB::Terminate(){//{{{
         pad2->SetFillStyle(4000); // transparent
         pad1->Draw();
         pad1->cd();
-        Normalized_Met_Distributions[i]->Draw();
-        Met_Distributions_By_Mu_Bin[i]->SetLineColor(3);
-        Met_Distributions_By_Mu_Bin[i]->Draw("SAMES");
+        HLT_ZB_L1XE30_Corrected_to_ZB_MET_Distribution[i]->Draw();
+        HLT_ZB_L1ZB_MET_Distributions_by_Mubin[i]->SetLineColor(3);
+        HLT_ZB_L1ZB_MET_Distributions_by_Mubin[i]->Draw("SAMES");
         pad1->Update();
-        legend->AddEntry( Normalized_Met_Distributions[i] );
-        legend->AddEntry( Met_Distributions_By_Mu_Bin[i] );
+        legend->AddEntry( HLT_ZB_L1XE30_Corrected_to_ZB_MET_Distribution[i] );
+        legend->AddEntry( HLT_ZB_L1ZB_MET_Distributions_by_Mubin[i] );
         legend->Draw("SAME");
         pad1->SetLogy();
         pad1->Modified();
@@ -166,11 +165,8 @@ void CorrectL1XE30toZB::Terminate(){//{{{
     corrected_directory->cd();
     for (int i = 0 ; i < Number_Mu_Bins ; i++ ) {
         Name.Form("l1xe30correctedToZBMETmubin%d" , i );
-        Normalized_Met_Distributions[i]->Write( Name , TObject::kOverwrite );
+        HLT_ZB_L1XE30_Corrected_to_ZB_MET_Distribution[i]->Write( Name , TObject::kOverwrite );
     }
     //}}}
     mu_analysis_file->Close();
 }//}}}
-void CorrectL1XE30toZB::SlaveTerminate(){}
-void CorrectL1XE30toZB::Init(TTree *tree){fReader.SetTree(tree);}
-void CorrectL1XE30toZB::SlaveBegin(TTree *){TString option = GetOption();}

@@ -26,12 +26,12 @@ void ComputeL1XE30toZBEfficiency::Terminate() //{{{
     L1XE30_Efficiency_Fit_Objects[i] = generateFitFunction( L1XE30_Efficiency_Objects[i] );
     }
     TFile* Mu_Analysis_File = TFile::Open("run_files/mu_analysis.root", "RECREATE");
-    TDirectory* zb_met_distributions = Mu_Analysis_File->mkdir("zb_met_distributions");
+    TDirectory* zb_met_distributions = Mu_Analysis_File->mkdir("hlt_zb_l1zb_met_distributions");
     TDirectory* efficiency_curves = Mu_Analysis_File->mkdir("l1xe30_efficiency_curves");
     TDirectory* L1XE30_Efficiency_Fit_Objects_Dir = Mu_Analysis_File->mkdir("l1xe30_efficiency_fits");
 
     for ( int  i = 0 ; i < Number_Mu_Bins ; i++ ){
-        Name.Form("zb_met_dist_mubin%d" , i );
+        Name.Form("hlt_zb_l1zb_met_dist_mubin%d" , i );
         zb_met_distributions->WriteObject(HLT_ZB_L1ZB_MET_Distributions_by_Mubin[i], Name);
         Name.Form("l1xe30_efficiency_object%d" , i );
         efficiency_curves->WriteObject(L1XE30_Efficiency_Objects[i], Name);
