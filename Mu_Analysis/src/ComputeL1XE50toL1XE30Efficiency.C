@@ -4,14 +4,6 @@ ClassImp(ComputeL1XE50toL1XE30Efficiency);
 void ComputeL1XE50toL1XE30Efficiency::Begin(TTree *) // {{{
 {
    TString option = GetOption();
-   for (int i = 0 ; i < Number_Mu_Bins ; i++){
-       muLow = Mu_Values[i];
-       muHigh = Mu_Values[i+1];
-       Name.Form("metmu%.0fthru%.0f" , muLow , muHigh );
-       EfficiencyName.Form("metmu%.0fthru%.0fEfficiency", muLow , muHigh );
-       Title.Form("L1 XE 30 MET Distribution for %s With Actint Between %.0f and %.0f" ,Alg_Name.Data(), muLow , muHigh );
-       EfficiencyTitle.Form("Efficiency of L1XE 50 As a Function of %s for Actint Between %.0f and %.0f", Alg_Name.Data() , muLow , muHigh );
-
        Met_Distributions_By_Mu_Bin[i] = new TH1F( Name , Title , met_dist_nbins , gevLow , gevHigh );
        L1XE50_Efficiency_Objects[i] = new TEfficiency( EfficiencyName , EfficiencyTitle , efficiency_nbins , gevLow , gevHigh );
        L1XE50_Efficiency_Fit_Objects[i] = new TF1();
@@ -47,7 +39,6 @@ void ComputeL1XE50toL1XE30Efficiency::Terminate()//{{{
        Normalized_Met_Distributions[i] = ((TH1F*)(Met_Distributions_By_Mu_Bin[i])->Clone());
        Normalized_Met_Distributions[i]->SetNormFactor(1.);
     }
-
     // WRITE TO FILE {{{
     TFile* Mu_Analysis_File = TFile::Open("run_files/mu_analysis.root", "UPDATE");
     TDirectory* l1xe30_met_distributions = (TDirectory*) Mu_Analysis_File->Get("l1xe30_met_distributions");

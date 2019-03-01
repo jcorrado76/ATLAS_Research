@@ -106,22 +106,13 @@ public :
         }
    }//}}}
     // Copy Constructor {{{
-    Jburr_Template_Selector(const Jburr_Template_Selector* rhs) {
-       for (int i = 0 ; i < Number_Mu_Bins + 1; i++){
-           Met_Distributions_By_Mu_Bin[i] = new TH1F();
-           Normalized_Met_Distributions[i] = new TH1F();
-           L1XE30_Efficiency_Objects[i] = new TEfficiency();
-           L1XE50_Efficiency_Objects[i] = new TEfficiency();
-           L1XE30_Efficiency_Fit_Objects[i] = new TF1();
-           L1XE50_Efficiency_Fit_Objects[i] = new TF1();
-        }
-    // TODO: copy the results of rhs into these
-   TH1F* Met_Distributions_By_Mu_Bin[Number_Mu_Bins];
-   TH1F* Normalized_Met_Distributions[Number_Mu_Bins];
-   TEfficiency* L1XE30_Efficiency_Objects[Number_Mu_Bins];
-   TEfficiency* L1XE50_Efficiency_Objects[Number_Mu_Bins];
-   TF1* L1XE30_Efficiency_Fit_Objects[Number_Mu_Bins];
-   TF1* L1XE50_Efficiency_Fit_Objects[Number_Mu_Bins];
+    Jburr_Template_Selector(const Jburr_Template_Selector* rhs){
+   Met_Distributions_By_Mu_Bin = rhs->Get_Met_Distributions_By_Mu_Bin();
+   Normalized_Met_Distributions = rhs->Get_Normalized_Met_Distributions();
+   L1XE30_Efficiency_Objects = rhs->Get_L1XE30_Efficiency_Objects;
+   L1XE50_Efficiency_Objects = rhs->Get_L1XE50_Efficiency_Objects();
+   L1XE30_Efficiency_Fit_Objects = rhs->Get_L1XE30_Efficiency_Fit_Objects();
+   L1XE50_Efficiency_Fit_Objects = rhs->Get_L1XE50_Efficiency_Fit_Objects();
     }// }}}
    ~Jburr_Template_Selector() { }
    virtual Int_t   Version() const { return 2; }
@@ -142,12 +133,13 @@ public :
    Bool_t isHLT_zb_L1XE30();
    Bool_t isHLT_zb_L1XE50();
    Bool_t inMuRange( Float_t , Float_t );
-   TH1F* Get_Met_Distributions_By_Mu_Bin;
-   TH1F* Get_Normalized_Met_Distributions;
-   TEfficiency* Get_L1XE30_Efficiency_Objects;
-   TEfficiency* Get_L1XE50_Efficiency_Objects;
-   TF1* Get_L1XE30_Efficiency_Fit_Objects;
-   TF1* Get_L1XE50_Efficiency_Fit_Objects;
+   // getters
+   TH1F* Get_Met_Distributions_By_Mu_Bin{ return Met_Distributions_By_Mu_Bin; }
+   TH1F* Get_Normalized_Met_Distributions{ return Normalized_Met_Distributions; }
+   TEfficiency* Get_L1XE30_Efficiency_Objects{ return L1XE30_Efficiency_Objects; }
+   TEfficiency* Get_L1XE50_Efficiency_Objects{ return L1XE50_Efficiency_Objects; }
+   TF1* Get_L1XE30_Efficiency_Fit_Objects{ return L1XE30_Efficiency_Fit_Objects; }
+   TF1* Get_L1XE50_Efficiency_Fit_Objects{ return L1XE50_Efficiency_Fit_Objects; }
    // TODO: make sure you add default val for l1cut parameter once you figured out workaround for making it an argument
    static Double_t fitFunction(Double_t *x , Double_t *par );
    TF1* generateFitFunction(TEfficiency* teff_obj, float gevMax = 300.0, float initial_slope = 0.1 , float initial_intercept = 0.0, float initial_sigma = 10.0, Bool_t verbose=false );

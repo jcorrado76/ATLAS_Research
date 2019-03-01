@@ -3,27 +3,8 @@
 ClassImp(CorrectL1XE30toZB);
 void CorrectL1XE30toZB::Begin(TTree * /*tree*/){//{{{
     TString option = GetOption();
-   for (int i = 0 ; i < Number_Mu_Bins ; i++){
-       // initialize empty histograms, efficiency objects, and efficiency fit objects 
-       muLow = Mu_Values[i];
-       muHigh = Mu_Values[i+1];
-       Name.Form("metmu%.0fthru%.0f" , muLow , muHigh );
-       delete gROOT->FindObject(Name);
-       EfficiencyName.Form("metmu%.0fthru%.0fEfficiency", muLow , muHigh );
-       delete gROOT->FindObject(EfficiencyName);
-       Title.Form("ZeroBias MET Distribution for %s With Actint Between %.0f and %.0f" ,Alg_Name.Data(), muLow , muHigh );
-       EfficiencyTitle.Form("Efficiency of L1XE 30 As a Function of %s for Actint Between %.0f and %.0f", 
-               Alg_Name.Data() , muLow , muHigh );
-       Corrected_Name.Form("L1XE30CorrectedToZBmu%.0fthru%.0f" , muLow , muHigh );
-       Corrected_Title.Form("L1XE30 Data Corrected back to Zerobias For Actint Between %.0f and %.0f" , muLow , muHigh );
-       Met_Distributions_By_Mu_Bin[i] = new TH1F( Name , Title , met_dist_nbins , gevLow , gevHigh );
-       Normalized_Met_Distributions[i] = new TH1F( Corrected_Name , Corrected_Title , met_dist_nbins , gevLow , gevHigh );
-       L1XE30_Efficiency_Objects[i] = new TEfficiency( EfficiencyName , EfficiencyTitle , efficiency_nbins , gevLow , gevHigh );
-       L1XE30_Efficiency_Fit_Objects[i] = new TF1();
-   }
     // TH1 OBJECTS DO NOT BELONG TO TFILE SCOPE. THEY WILL STAY
     TH1::AddDirectory(false);
-
     // Open the root file in update mode
     TFile* mu_analysis_file = TFile::Open("run_files/mu_analysis.root","UPDATE");
     // check to see if can open file{{{
