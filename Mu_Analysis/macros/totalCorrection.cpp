@@ -27,4 +27,8 @@
         std::cout << "JETM10 Jburr data file not found..." << std::endl;
         return 0;
     }
+
+    // TODO: take all plotting and saving of stuff out of these selectors. 
+    // save the final object to a root file out here in the macro
+    // plot the things in a separate macro that loads the info
 }

@@ -1,9 +1,3 @@
-//////////////////////////////////////////////////////////
-// This class has been automatically generated on
-// Wed Jul 11 09:26:49 2018 by ROOT version 6.15/01
-// from TChain METTree/jburrntuplechain
-//////////////////////////////////////////////////////////
-
 #ifndef CorrectL1XE50ToZB_h
 #define CorrectL1XE50ToZB_h
 
@@ -14,17 +8,13 @@ public :
    CorrectL1XE50toZB() { }
    ~CorrectL1XE50toZB() { }
    // copy constructor
-   CorrectL1XE50toZB( const CorrectL1XE50toZB* rhs ){}
+   CorrectL1XE50toZB( const Jburr_Template_Selector* rhs ){
+   HLT_ZB_L1ZB_MET_Distributions_by_Mubin = rhs->Get_HLT_ZB_L1ZB_MET_Distributions_by_Mubin();
+   L1XE30_Efficiency_Fit_Objects = rhs->Get_L1XE30_Efficiency_Fit_Objects();
+   L1XE50_Efficiency_Fit_Objects = rhs->Get_L1XE50_Efficiency_Fit_Objects();
+   }
    void    Begin(TTree *tree);
-   void    SlaveBegin(TTree *tree);
-   void    Init(TTree *tree);
    Bool_t  Process(Long64_t entry);
-   Int_t   GetEntry(Long64_t entry, Int_t getall = 0) { return fChain ? fChain->GetTree()->GetEntry(entry, getall) : 0; }
-   void    SetOption(const char *option) { fOption = option; }
-   void    SetObject(TObject *obj) { fObject = obj; }
-   void    SetInputList(TList *input) { fInput = input; }
-   TList  *GetOutputList() const { return fOutput; }
-   void    SlaveTerminate();
    void    Terminate();
    ClassDef(CorrectL1XE50toZB,0);
 };

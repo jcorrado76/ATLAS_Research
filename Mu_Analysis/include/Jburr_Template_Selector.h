@@ -124,10 +124,6 @@ public :
            L1XE50_Efficiency_Objects[i]->SetLineColor( Colors[i] );
            L1XE50_Efficiency_Objects[i]->SetMarkerStyle( Colors[i] );
            L1XE50_Efficiency_Fit_Objects[i]->SetLineColor( Colors[i] );
-
-           HLT_ZB_L1ZB_MET_Distributions_by_Mubin[i]->SetLineColor( Colors[i] );
-           HLT_ZB_L1XE30_Corrected_to_ZB_MET_Distribution[i]->SetLineColor( Colors[i] );
-
         }
    }//}}}
     // Copy Constructor {{{
