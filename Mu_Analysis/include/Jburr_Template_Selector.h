@@ -124,17 +124,17 @@ public :
         }
    }//}}}
     // Copy Constructor {{{
-    Jburr_Template_Selector(const Jburr_Template_Selector& rhs){
+    Jburr_Template_Selector(const Jburr_Template_Selector* rhs){
        for (int i = 0 ; i < Number_Mu_Bins + 1; i++){
            Mu_Values[i] = i * 10.;
-           HLT_ZB_L1ZB_MET_Distributions_by_Mubin[i] = rhs.Get_HLT_ZB_L1ZB_MET_Distributions_by_Mubin()[i];
-           HLT_ZB_L1XE30_MET_Distributions_by_Mubin[i] = rhs.Get_HLT_ZB_L1XE30_MET_Distributions_by_Mubin()[i];
-           HLT_ZB_L1XE30_Corrected_to_ZB_MET_Distribution[i] = rhs.Get_HLT_ZB_L1XE30_Corrected_to_ZB_MET_Distribution()[i];
-           HLT_ZB_L1XE50_Corrected_to_ZB_MET_Distribution[i] = rhs.Get_HLT_ZB_L1XE50_Corrected_to_ZB_MET_Distribution()[i];
-           L1XE30_Efficiency_Objects[i] = rhs.Get_L1XE30_Efficiency_Objects()[i];
-           L1XE50_Efficiency_Objects[i] = rhs.Get_L1XE50_Efficiency_Objects()[i];
-           L1XE30_Efficiency_Fit_Objects[i] = rhs.Get_L1XE30_Efficiency_Fit_Objects()[i];
-           L1XE50_Efficiency_Fit_Objects[i] = rhs.Get_L1XE50_Efficiency_Fit_Objects()[i];
+           HLT_ZB_L1ZB_MET_Distributions_by_Mubin[i] = rhs->Get_HLT_ZB_L1ZB_MET_Distributions_by_Mubin()[i];
+           HLT_ZB_L1XE30_MET_Distributions_by_Mubin[i] = rhs->Get_HLT_ZB_L1XE30_MET_Distributions_by_Mubin()[i];
+           HLT_ZB_L1XE30_Corrected_to_ZB_MET_Distribution[i] = rhs->Get_HLT_ZB_L1XE30_Corrected_to_ZB_MET_Distribution()[i];
+           HLT_ZB_L1XE50_Corrected_to_ZB_MET_Distribution[i] = rhs->Get_HLT_ZB_L1XE50_Corrected_to_ZB_MET_Distribution()[i];
+           L1XE30_Efficiency_Objects[i] = rhs->Get_L1XE30_Efficiency_Objects()[i];
+           L1XE50_Efficiency_Objects[i] = rhs->Get_L1XE50_Efficiency_Objects()[i];
+           L1XE30_Efficiency_Fit_Objects[i] = rhs->Get_L1XE30_Efficiency_Fit_Objects()[i];
+           L1XE50_Efficiency_Fit_Objects[i] = rhs->Get_L1XE50_Efficiency_Fit_Objects()[i];
 
             // set line colors on the TH1F objects 
            HLT_ZB_L1ZB_MET_Distributions_by_Mubin[i]->SetLineColor( Colors[i] );

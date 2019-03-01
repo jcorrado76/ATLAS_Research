@@ -1,16 +1,12 @@
 #ifndef CorrectL1XE30toZB_h
 #define CorrectL1XE30toZB_h
 #include "Jburr_Template_Selector.h"
+#include "ComputeL1XE30toZBEfficiency.h"
 class CorrectL1XE30toZB : public Jburr_Template_Selector {
 public :
    CorrectL1XE30toZB() { }
    ~CorrectL1XE30toZB() { }
-   // copy constructor {{{
-   CorrectL1XE30toZB( const Jburr_Template_Selector* rhs ){
-   HLT_ZB_L1ZB_MET_Distributions_by_Mubin = rhs->Get_HLT_ZB_L1ZB_MET_Distributions_by_Mubin();
-   L1XE30_Efficiency_Fit_Objects = rhs->Get_L1XE30_Efficiency_Fit_Objects();
-   }//}}}
-    // TODO: eventually the copy constructor will replace what begin does
+   CorrectL1XE30toZB( const ComputeL1XE30toZBEfficiency* rhs ): Jburr_Template_Selector(rhs){}
    void    Begin(TTree *tree);
    Bool_t  Process(Long64_t entry);
    void    Terminate();

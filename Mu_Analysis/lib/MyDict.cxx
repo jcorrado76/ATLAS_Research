@@ -79,70 +79,6 @@ namespace ROOT {
 } // end of namespace ROOT
 
 namespace ROOT {
-   static void *new_CorrectL1XE30toZB(void *p = 0);
-   static void *newArray_CorrectL1XE30toZB(Long_t size, void *p);
-   static void delete_CorrectL1XE30toZB(void *p);
-   static void deleteArray_CorrectL1XE30toZB(void *p);
-   static void destruct_CorrectL1XE30toZB(void *p);
-
-   // Function generating the singleton type initializer
-   static TGenericClassInfo *GenerateInitInstanceLocal(const ::CorrectL1XE30toZB*)
-   {
-      ::CorrectL1XE30toZB *ptr = 0;
-      static ::TVirtualIsAProxy* isa_proxy = new ::TInstrumentedIsAProxy< ::CorrectL1XE30toZB >(0);
-      static ::ROOT::TGenericClassInfo 
-         instance("CorrectL1XE30toZB", ::CorrectL1XE30toZB::Class_Version(), "CorrectL1XE30toZB.h", 4,
-                  typeid(::CorrectL1XE30toZB), ::ROOT::Internal::DefineBehavior(ptr, ptr),
-                  &::CorrectL1XE30toZB::Dictionary, isa_proxy, 4,
-                  sizeof(::CorrectL1XE30toZB) );
-      instance.SetNew(&new_CorrectL1XE30toZB);
-      instance.SetNewArray(&newArray_CorrectL1XE30toZB);
-      instance.SetDelete(&delete_CorrectL1XE30toZB);
-      instance.SetDeleteArray(&deleteArray_CorrectL1XE30toZB);
-      instance.SetDestructor(&destruct_CorrectL1XE30toZB);
-      return &instance;
-   }
-   TGenericClassInfo *GenerateInitInstance(const ::CorrectL1XE30toZB*)
-   {
-      return GenerateInitInstanceLocal((::CorrectL1XE30toZB*)0);
-   }
-   // Static variable to force the class initialization
-   static ::ROOT::TGenericClassInfo *_R__UNIQUE_DICT_(Init) = GenerateInitInstanceLocal((const ::CorrectL1XE30toZB*)0x0); R__UseDummy(_R__UNIQUE_DICT_(Init));
-} // end of namespace ROOT
-
-namespace ROOT {
-   static void *new_CorrectL1XE50toZB(void *p = 0);
-   static void *newArray_CorrectL1XE50toZB(Long_t size, void *p);
-   static void delete_CorrectL1XE50toZB(void *p);
-   static void deleteArray_CorrectL1XE50toZB(void *p);
-   static void destruct_CorrectL1XE50toZB(void *p);
-
-   // Function generating the singleton type initializer
-   static TGenericClassInfo *GenerateInitInstanceLocal(const ::CorrectL1XE50toZB*)
-   {
-      ::CorrectL1XE50toZB *ptr = 0;
-      static ::TVirtualIsAProxy* isa_proxy = new ::TInstrumentedIsAProxy< ::CorrectL1XE50toZB >(0);
-      static ::ROOT::TGenericClassInfo 
-         instance("CorrectL1XE50toZB", ::CorrectL1XE50toZB::Class_Version(), "CorrectL1XE50toZB.h", 6,
-                  typeid(::CorrectL1XE50toZB), ::ROOT::Internal::DefineBehavior(ptr, ptr),
-                  &::CorrectL1XE50toZB::Dictionary, isa_proxy, 4,
-                  sizeof(::CorrectL1XE50toZB) );
-      instance.SetNew(&new_CorrectL1XE50toZB);
-      instance.SetNewArray(&newArray_CorrectL1XE50toZB);
-      instance.SetDelete(&delete_CorrectL1XE50toZB);
-      instance.SetDeleteArray(&deleteArray_CorrectL1XE50toZB);
-      instance.SetDestructor(&destruct_CorrectL1XE50toZB);
-      return &instance;
-   }
-   TGenericClassInfo *GenerateInitInstance(const ::CorrectL1XE50toZB*)
-   {
-      return GenerateInitInstanceLocal((::CorrectL1XE50toZB*)0);
-   }
-   // Static variable to force the class initialization
-   static ::ROOT::TGenericClassInfo *_R__UNIQUE_DICT_(Init) = GenerateInitInstanceLocal((const ::CorrectL1XE50toZB*)0x0); R__UseDummy(_R__UNIQUE_DICT_(Init));
-} // end of namespace ROOT
-
-namespace ROOT {
    static void *new_ComputeL1XE30toZBEfficiency(void *p = 0);
    static void *newArray_ComputeL1XE30toZBEfficiency(Long_t size, void *p);
    static void delete_ComputeL1XE30toZBEfficiency(void *p);
@@ -175,6 +111,38 @@ namespace ROOT {
 } // end of namespace ROOT
 
 namespace ROOT {
+   static void *new_CorrectL1XE30toZB(void *p = 0);
+   static void *newArray_CorrectL1XE30toZB(Long_t size, void *p);
+   static void delete_CorrectL1XE30toZB(void *p);
+   static void deleteArray_CorrectL1XE30toZB(void *p);
+   static void destruct_CorrectL1XE30toZB(void *p);
+
+   // Function generating the singleton type initializer
+   static TGenericClassInfo *GenerateInitInstanceLocal(const ::CorrectL1XE30toZB*)
+   {
+      ::CorrectL1XE30toZB *ptr = 0;
+      static ::TVirtualIsAProxy* isa_proxy = new ::TInstrumentedIsAProxy< ::CorrectL1XE30toZB >(0);
+      static ::ROOT::TGenericClassInfo 
+         instance("CorrectL1XE30toZB", ::CorrectL1XE30toZB::Class_Version(), "CorrectL1XE30toZB.h", 5,
+                  typeid(::CorrectL1XE30toZB), ::ROOT::Internal::DefineBehavior(ptr, ptr),
+                  &::CorrectL1XE30toZB::Dictionary, isa_proxy, 4,
+                  sizeof(::CorrectL1XE30toZB) );
+      instance.SetNew(&new_CorrectL1XE30toZB);
+      instance.SetNewArray(&newArray_CorrectL1XE30toZB);
+      instance.SetDelete(&delete_CorrectL1XE30toZB);
+      instance.SetDeleteArray(&deleteArray_CorrectL1XE30toZB);
+      instance.SetDestructor(&destruct_CorrectL1XE30toZB);
+      return &instance;
+   }
+   TGenericClassInfo *GenerateInitInstance(const ::CorrectL1XE30toZB*)
+   {
+      return GenerateInitInstanceLocal((::CorrectL1XE30toZB*)0);
+   }
+   // Static variable to force the class initialization
+   static ::ROOT::TGenericClassInfo *_R__UNIQUE_DICT_(Init) = GenerateInitInstanceLocal((const ::CorrectL1XE30toZB*)0x0); R__UseDummy(_R__UNIQUE_DICT_(Init));
+} // end of namespace ROOT
+
+namespace ROOT {
    static void *new_ComputeL1XE50toL1XE30Efficiency(void *p = 0);
    static void *newArray_ComputeL1XE50toL1XE30Efficiency(Long_t size, void *p);
    static void delete_ComputeL1XE50toL1XE30Efficiency(void *p);
@@ -187,7 +155,7 @@ namespace ROOT {
       ::ComputeL1XE50toL1XE30Efficiency *ptr = 0;
       static ::TVirtualIsAProxy* isa_proxy = new ::TInstrumentedIsAProxy< ::ComputeL1XE50toL1XE30Efficiency >(0);
       static ::ROOT::TGenericClassInfo 
-         instance("ComputeL1XE50toL1XE30Efficiency", ::ComputeL1XE50toL1XE30Efficiency::Class_Version(), "ComputeL1XE50toL1XE30Efficiency.h", 13,
+         instance("ComputeL1XE50toL1XE30Efficiency", ::ComputeL1XE50toL1XE30Efficiency::Class_Version(), "ComputeL1XE50toL1XE30Efficiency.h", 14,
                   typeid(::ComputeL1XE50toL1XE30Efficiency), ::ROOT::Internal::DefineBehavior(ptr, ptr),
                   &::ComputeL1XE50toL1XE30Efficiency::Dictionary, isa_proxy, 4,
                   sizeof(::ComputeL1XE50toL1XE30Efficiency) );
@@ -204,6 +172,38 @@ namespace ROOT {
    }
    // Static variable to force the class initialization
    static ::ROOT::TGenericClassInfo *_R__UNIQUE_DICT_(Init) = GenerateInitInstanceLocal((const ::ComputeL1XE50toL1XE30Efficiency*)0x0); R__UseDummy(_R__UNIQUE_DICT_(Init));
+} // end of namespace ROOT
+
+namespace ROOT {
+   static void *new_CorrectL1XE50toZB(void *p = 0);
+   static void *newArray_CorrectL1XE50toZB(Long_t size, void *p);
+   static void delete_CorrectL1XE50toZB(void *p);
+   static void deleteArray_CorrectL1XE50toZB(void *p);
+   static void destruct_CorrectL1XE50toZB(void *p);
+
+   // Function generating the singleton type initializer
+   static TGenericClassInfo *GenerateInitInstanceLocal(const ::CorrectL1XE50toZB*)
+   {
+      ::CorrectL1XE50toZB *ptr = 0;
+      static ::TVirtualIsAProxy* isa_proxy = new ::TInstrumentedIsAProxy< ::CorrectL1XE50toZB >(0);
+      static ::ROOT::TGenericClassInfo 
+         instance("CorrectL1XE50toZB", ::CorrectL1XE50toZB::Class_Version(), "CorrectL1XE50toZB.h", 7,
+                  typeid(::CorrectL1XE50toZB), ::ROOT::Internal::DefineBehavior(ptr, ptr),
+                  &::CorrectL1XE50toZB::Dictionary, isa_proxy, 4,
+                  sizeof(::CorrectL1XE50toZB) );
+      instance.SetNew(&new_CorrectL1XE50toZB);
+      instance.SetNewArray(&newArray_CorrectL1XE50toZB);
+      instance.SetDelete(&delete_CorrectL1XE50toZB);
+      instance.SetDeleteArray(&deleteArray_CorrectL1XE50toZB);
+      instance.SetDestructor(&destruct_CorrectL1XE50toZB);
+      return &instance;
+   }
+   TGenericClassInfo *GenerateInitInstance(const ::CorrectL1XE50toZB*)
+   {
+      return GenerateInitInstanceLocal((::CorrectL1XE50toZB*)0);
+   }
+   // Static variable to force the class initialization
+   static ::ROOT::TGenericClassInfo *_R__UNIQUE_DICT_(Init) = GenerateInitInstanceLocal((const ::CorrectL1XE50toZB*)0x0); R__UseDummy(_R__UNIQUE_DICT_(Init));
 } // end of namespace ROOT
 
 //______________________________________________________________________________
@@ -238,76 +238,6 @@ TClass *Jburr_Template_Selector::Dictionary()
 TClass *Jburr_Template_Selector::Class()
 {
    if (!fgIsA.load()) { R__LOCKGUARD(gInterpreterMutex); fgIsA = ::ROOT::GenerateInitInstanceLocal((const ::Jburr_Template_Selector*)0x0)->GetClass(); }
-   return fgIsA;
-}
-
-//______________________________________________________________________________
-atomic_TClass_ptr CorrectL1XE30toZB::fgIsA(0);  // static to hold class pointer
-
-//______________________________________________________________________________
-const char *CorrectL1XE30toZB::Class_Name()
-{
-   return "CorrectL1XE30toZB";
-}
-
-//______________________________________________________________________________
-const char *CorrectL1XE30toZB::ImplFileName()
-{
-   return ::ROOT::GenerateInitInstanceLocal((const ::CorrectL1XE30toZB*)0x0)->GetImplFileName();
-}
-
-//______________________________________________________________________________
-int CorrectL1XE30toZB::ImplFileLine()
-{
-   return ::ROOT::GenerateInitInstanceLocal((const ::CorrectL1XE30toZB*)0x0)->GetImplFileLine();
-}
-
-//______________________________________________________________________________
-TClass *CorrectL1XE30toZB::Dictionary()
-{
-   fgIsA = ::ROOT::GenerateInitInstanceLocal((const ::CorrectL1XE30toZB*)0x0)->GetClass();
-   return fgIsA;
-}
-
-//______________________________________________________________________________
-TClass *CorrectL1XE30toZB::Class()
-{
-   if (!fgIsA.load()) { R__LOCKGUARD(gInterpreterMutex); fgIsA = ::ROOT::GenerateInitInstanceLocal((const ::CorrectL1XE30toZB*)0x0)->GetClass(); }
-   return fgIsA;
-}
-
-//______________________________________________________________________________
-atomic_TClass_ptr CorrectL1XE50toZB::fgIsA(0);  // static to hold class pointer
-
-//______________________________________________________________________________
-const char *CorrectL1XE50toZB::Class_Name()
-{
-   return "CorrectL1XE50toZB";
-}
-
-//______________________________________________________________________________
-const char *CorrectL1XE50toZB::ImplFileName()
-{
-   return ::ROOT::GenerateInitInstanceLocal((const ::CorrectL1XE50toZB*)0x0)->GetImplFileName();
-}
-
-//______________________________________________________________________________
-int CorrectL1XE50toZB::ImplFileLine()
-{
-   return ::ROOT::GenerateInitInstanceLocal((const ::CorrectL1XE50toZB*)0x0)->GetImplFileLine();
-}
-
-//______________________________________________________________________________
-TClass *CorrectL1XE50toZB::Dictionary()
-{
-   fgIsA = ::ROOT::GenerateInitInstanceLocal((const ::CorrectL1XE50toZB*)0x0)->GetClass();
-   return fgIsA;
-}
-
-//______________________________________________________________________________
-TClass *CorrectL1XE50toZB::Class()
-{
-   if (!fgIsA.load()) { R__LOCKGUARD(gInterpreterMutex); fgIsA = ::ROOT::GenerateInitInstanceLocal((const ::CorrectL1XE50toZB*)0x0)->GetClass(); }
    return fgIsA;
 }
 
@@ -347,6 +277,41 @@ TClass *ComputeL1XE30toZBEfficiency::Class()
 }
 
 //______________________________________________________________________________
+atomic_TClass_ptr CorrectL1XE30toZB::fgIsA(0);  // static to hold class pointer
+
+//______________________________________________________________________________
+const char *CorrectL1XE30toZB::Class_Name()
+{
+   return "CorrectL1XE30toZB";
+}
+
+//______________________________________________________________________________
+const char *CorrectL1XE30toZB::ImplFileName()
+{
+   return ::ROOT::GenerateInitInstanceLocal((const ::CorrectL1XE30toZB*)0x0)->GetImplFileName();
+}
+
+//______________________________________________________________________________
+int CorrectL1XE30toZB::ImplFileLine()
+{
+   return ::ROOT::GenerateInitInstanceLocal((const ::CorrectL1XE30toZB*)0x0)->GetImplFileLine();
+}
+
+//______________________________________________________________________________
+TClass *CorrectL1XE30toZB::Dictionary()
+{
+   fgIsA = ::ROOT::GenerateInitInstanceLocal((const ::CorrectL1XE30toZB*)0x0)->GetClass();
+   return fgIsA;
+}
+
+//______________________________________________________________________________
+TClass *CorrectL1XE30toZB::Class()
+{
+   if (!fgIsA.load()) { R__LOCKGUARD(gInterpreterMutex); fgIsA = ::ROOT::GenerateInitInstanceLocal((const ::CorrectL1XE30toZB*)0x0)->GetClass(); }
+   return fgIsA;
+}
+
+//______________________________________________________________________________
 atomic_TClass_ptr ComputeL1XE50toL1XE30Efficiency::fgIsA(0);  // static to hold class pointer
 
 //______________________________________________________________________________
@@ -378,6 +343,41 @@ TClass *ComputeL1XE50toL1XE30Efficiency::Dictionary()
 TClass *ComputeL1XE50toL1XE30Efficiency::Class()
 {
    if (!fgIsA.load()) { R__LOCKGUARD(gInterpreterMutex); fgIsA = ::ROOT::GenerateInitInstanceLocal((const ::ComputeL1XE50toL1XE30Efficiency*)0x0)->GetClass(); }
+   return fgIsA;
+}
+
+//______________________________________________________________________________
+atomic_TClass_ptr CorrectL1XE50toZB::fgIsA(0);  // static to hold class pointer
+
+//______________________________________________________________________________
+const char *CorrectL1XE50toZB::Class_Name()
+{
+   return "CorrectL1XE50toZB";
+}
+
+//______________________________________________________________________________
+const char *CorrectL1XE50toZB::ImplFileName()
+{
+   return ::ROOT::GenerateInitInstanceLocal((const ::CorrectL1XE50toZB*)0x0)->GetImplFileName();
+}
+
+//______________________________________________________________________________
+int CorrectL1XE50toZB::ImplFileLine()
+{
+   return ::ROOT::GenerateInitInstanceLocal((const ::CorrectL1XE50toZB*)0x0)->GetImplFileLine();
+}
+
+//______________________________________________________________________________
+TClass *CorrectL1XE50toZB::Dictionary()
+{
+   fgIsA = ::ROOT::GenerateInitInstanceLocal((const ::CorrectL1XE50toZB*)0x0)->GetClass();
+   return fgIsA;
+}
+
+//______________________________________________________________________________
+TClass *CorrectL1XE50toZB::Class()
+{
+   if (!fgIsA.load()) { R__LOCKGUARD(gInterpreterMutex); fgIsA = ::ROOT::GenerateInitInstanceLocal((const ::CorrectL1XE50toZB*)0x0)->GetClass(); }
    return fgIsA;
 }
 
@@ -415,72 +415,6 @@ namespace ROOT {
 } // end of namespace ROOT for class ::Jburr_Template_Selector
 
 //______________________________________________________________________________
-void CorrectL1XE30toZB::Streamer(TBuffer &R__b)
-{
-   // Stream an object of class CorrectL1XE30toZB.
-
-   if (R__b.IsReading()) {
-      R__b.ReadClassBuffer(CorrectL1XE30toZB::Class(),this);
-   } else {
-      R__b.WriteClassBuffer(CorrectL1XE30toZB::Class(),this);
-   }
-}
-
-namespace ROOT {
-   // Wrappers around operator new
-   static void *new_CorrectL1XE30toZB(void *p) {
-      return  p ? new(p) ::CorrectL1XE30toZB : new ::CorrectL1XE30toZB;
-   }
-   static void *newArray_CorrectL1XE30toZB(Long_t nElements, void *p) {
-      return p ? new(p) ::CorrectL1XE30toZB[nElements] : new ::CorrectL1XE30toZB[nElements];
-   }
-   // Wrapper around operator delete
-   static void delete_CorrectL1XE30toZB(void *p) {
-      delete ((::CorrectL1XE30toZB*)p);
-   }
-   static void deleteArray_CorrectL1XE30toZB(void *p) {
-      delete [] ((::CorrectL1XE30toZB*)p);
-   }
-   static void destruct_CorrectL1XE30toZB(void *p) {
-      typedef ::CorrectL1XE30toZB current_t;
-      ((current_t*)p)->~current_t();
-   }
-} // end of namespace ROOT for class ::CorrectL1XE30toZB
-
-//______________________________________________________________________________
-void CorrectL1XE50toZB::Streamer(TBuffer &R__b)
-{
-   // Stream an object of class CorrectL1XE50toZB.
-
-   if (R__b.IsReading()) {
-      R__b.ReadClassBuffer(CorrectL1XE50toZB::Class(),this);
-   } else {
-      R__b.WriteClassBuffer(CorrectL1XE50toZB::Class(),this);
-   }
-}
-
-namespace ROOT {
-   // Wrappers around operator new
-   static void *new_CorrectL1XE50toZB(void *p) {
-      return  p ? new(p) ::CorrectL1XE50toZB : new ::CorrectL1XE50toZB;
-   }
-   static void *newArray_CorrectL1XE50toZB(Long_t nElements, void *p) {
-      return p ? new(p) ::CorrectL1XE50toZB[nElements] : new ::CorrectL1XE50toZB[nElements];
-   }
-   // Wrapper around operator delete
-   static void delete_CorrectL1XE50toZB(void *p) {
-      delete ((::CorrectL1XE50toZB*)p);
-   }
-   static void deleteArray_CorrectL1XE50toZB(void *p) {
-      delete [] ((::CorrectL1XE50toZB*)p);
-   }
-   static void destruct_CorrectL1XE50toZB(void *p) {
-      typedef ::CorrectL1XE50toZB current_t;
-      ((current_t*)p)->~current_t();
-   }
-} // end of namespace ROOT for class ::CorrectL1XE50toZB
-
-//______________________________________________________________________________
 void ComputeL1XE30toZBEfficiency::Streamer(TBuffer &R__b)
 {
    // Stream an object of class ComputeL1XE30toZBEfficiency.
@@ -512,6 +446,39 @@ namespace ROOT {
       ((current_t*)p)->~current_t();
    }
 } // end of namespace ROOT for class ::ComputeL1XE30toZBEfficiency
+
+//______________________________________________________________________________
+void CorrectL1XE30toZB::Streamer(TBuffer &R__b)
+{
+   // Stream an object of class CorrectL1XE30toZB.
+
+   if (R__b.IsReading()) {
+      R__b.ReadClassBuffer(CorrectL1XE30toZB::Class(),this);
+   } else {
+      R__b.WriteClassBuffer(CorrectL1XE30toZB::Class(),this);
+   }
+}
+
+namespace ROOT {
+   // Wrappers around operator new
+   static void *new_CorrectL1XE30toZB(void *p) {
+      return  p ? new(p) ::CorrectL1XE30toZB : new ::CorrectL1XE30toZB;
+   }
+   static void *newArray_CorrectL1XE30toZB(Long_t nElements, void *p) {
+      return p ? new(p) ::CorrectL1XE30toZB[nElements] : new ::CorrectL1XE30toZB[nElements];
+   }
+   // Wrapper around operator delete
+   static void delete_CorrectL1XE30toZB(void *p) {
+      delete ((::CorrectL1XE30toZB*)p);
+   }
+   static void deleteArray_CorrectL1XE30toZB(void *p) {
+      delete [] ((::CorrectL1XE30toZB*)p);
+   }
+   static void destruct_CorrectL1XE30toZB(void *p) {
+      typedef ::CorrectL1XE30toZB current_t;
+      ((current_t*)p)->~current_t();
+   }
+} // end of namespace ROOT for class ::CorrectL1XE30toZB
 
 //______________________________________________________________________________
 void ComputeL1XE50toL1XE30Efficiency::Streamer(TBuffer &R__b)
@@ -546,6 +513,39 @@ namespace ROOT {
    }
 } // end of namespace ROOT for class ::ComputeL1XE50toL1XE30Efficiency
 
+//______________________________________________________________________________
+void CorrectL1XE50toZB::Streamer(TBuffer &R__b)
+{
+   // Stream an object of class CorrectL1XE50toZB.
+
+   if (R__b.IsReading()) {
+      R__b.ReadClassBuffer(CorrectL1XE50toZB::Class(),this);
+   } else {
+      R__b.WriteClassBuffer(CorrectL1XE50toZB::Class(),this);
+   }
+}
+
+namespace ROOT {
+   // Wrappers around operator new
+   static void *new_CorrectL1XE50toZB(void *p) {
+      return  p ? new(p) ::CorrectL1XE50toZB : new ::CorrectL1XE50toZB;
+   }
+   static void *newArray_CorrectL1XE50toZB(Long_t nElements, void *p) {
+      return p ? new(p) ::CorrectL1XE50toZB[nElements] : new ::CorrectL1XE50toZB[nElements];
+   }
+   // Wrapper around operator delete
+   static void delete_CorrectL1XE50toZB(void *p) {
+      delete ((::CorrectL1XE50toZB*)p);
+   }
+   static void deleteArray_CorrectL1XE50toZB(void *p) {
+      delete [] ((::CorrectL1XE50toZB*)p);
+   }
+   static void destruct_CorrectL1XE50toZB(void *p) {
+      typedef ::CorrectL1XE50toZB current_t;
+      ((current_t*)p)->~current_t();
+   }
+} // end of namespace ROOT for class ::CorrectL1XE50toZB
+
 namespace {
   void TriggerDictionaryInitialization_MyDict_Impl() {
     static const char* headers[] = {
@@ -571,10 +571,10 @@ namespace {
 #pragma clang diagnostic ignored "-Wreturn-type-c-linkage"
 extern int __Cling_Autoloading_Map;
 class __attribute__((annotate("$clingAutoload$Jburr_Template_Selector.h")))  __attribute__((annotate("$clingAutoload$../include/CorrectL1XE30toZB.h")))  Jburr_Template_Selector;
+class __attribute__((annotate("$clingAutoload$ComputeL1XE30toZBEfficiency.h")))  __attribute__((annotate("$clingAutoload$../include/CorrectL1XE30toZB.h")))  ComputeL1XE30toZBEfficiency;
 class __attribute__((annotate("$clingAutoload$../include/CorrectL1XE30toZB.h")))  CorrectL1XE30toZB;
+class __attribute__((annotate("$clingAutoload$ComputeL1XE50toL1XE30Efficiency.h")))  __attribute__((annotate("$clingAutoload$../include/CorrectL1XE50toZB.h")))  ComputeL1XE50toL1XE30Efficiency;
 class __attribute__((annotate("$clingAutoload$../include/CorrectL1XE50toZB.h")))  CorrectL1XE50toZB;
-class __attribute__((annotate("$clingAutoload$../include/ComputeL1XE30toZBEfficiency.h")))  ComputeL1XE30toZBEfficiency;
-class __attribute__((annotate("$clingAutoload$../include/ComputeL1XE50toL1XE30Efficiency.h")))  ComputeL1XE50toL1XE30Efficiency;
 )DICTFWDDCLS";
     static const char* payloadCode = R"DICTPAYLOAD(
 #line 1 "MyDict dictionary payload"

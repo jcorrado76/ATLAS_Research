@@ -9,11 +9,13 @@
 #define ComputeL1XE50toL1XE30Efficiency_h
 
 #include "Jburr_Template_Selector.h"
+#include "CorrectL1XE30toZB.h"
 
 class ComputeL1XE50toL1XE30Efficiency : public Jburr_Template_Selector {
 public :
    ComputeL1XE50toL1XE30Efficiency() { }
    ~ComputeL1XE50toL1XE30Efficiency() { }
+   ComputeL1XE50toL1XE30Efficiency( const CorrectL1XE30toZB* rhs ): Jburr_Template_Selector(rhs){}
    Bool_t  Process(Long64_t entry);
    void    Terminate();
    ClassDef(ComputeL1XE50toL1XE30Efficiency,0);
