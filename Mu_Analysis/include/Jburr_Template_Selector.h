@@ -34,11 +34,6 @@ public :
    TTreeReader     fReader;
    TTree          *fChain =                                                     0;   //!pointer to the analyzed TTree or TChain
    const static Int_t Number_Mu_Bins =                                          7;   // 7 mu bins
-   TH1F* MET_Distribution =                                                     0;
-   TEfficiency* MET_L1XE30Efficiency =                                          0;
-   TEfficiency* MET_L1XE50Efficiency =                                          0;
-   TF1* MET_L1XE30EfficiencyFit =                                               0;
-   TF1* MET_L1XE50EfficiencyFit =                                               0;
    const Float_t gevLow =                                                       0.0;
    const Float_t gevHigh =                                                      300.0;
    const Float_t met_dist_binwidth =                                            1.0;
@@ -46,10 +41,15 @@ public :
    const Int_t met_dist_nbins =                                        (gevHigh - gevLow) / met_dist_binwidth; 
    const Int_t efficiency_nbins =                                      (gevHigh - gevLow) / efficiency_bin_width;
    // collections
-   TH1F* Met_Distributions_By_Mu_Bin[Number_Mu_Bins];
-   TH1F* Normalized_Met_Distributions[Number_Mu_Bins];
+   TH1F* HLT_ZB_L1ZB_MET_Distributions_by_Mubin[Number_Mu_Bins];
+   TH1F* HLT_ZB_L1XE30_MET_Distributions_by_Mubin[Number_Mu_Bins];
+
+   TH1F* HLT_ZB_L1XE30_Corrected_to_ZB_MET_Distribution[Number_Mu_Bins];
+   TH1F* HLT_ZB_L1XE50_Corrected_to_ZB_MET_Distribution[Number_Mu_Bins];
+
    TEfficiency* L1XE30_Efficiency_Objects[Number_Mu_Bins];
    TEfficiency* L1XE50_Efficiency_Objects[Number_Mu_Bins];
+
    TF1* L1XE30_Efficiency_Fit_Objects[Number_Mu_Bins];
    TF1* L1XE50_Efficiency_Fit_Objects[Number_Mu_Bins];
    
@@ -83,11 +83,11 @@ public :
    Jburr_Template_Selector(){ 
        for (int i = 0 ; i < Number_Mu_Bins + 1; i++){
            Mu_Values[i] = i * 10.;
-           Name.Form("zb_met_dist_mubin%d" , i );
+           Name.Form("hlt_zb_l1zb_met_dist_mubin%d" , i );
            Title.Form("ZeroBias MET Distribution for %s With Actint Between %.0f and %.0f" ,Alg_Name.Data(), muLow , muHigh );
            EfficiencyName.Form("metL1XE30EfficiencyMubin%d", i);
            EfficiencyTitle.Form("Efficiency of L1XE 30 As a Function of %s for Actint bin %d", Alg_Name.Data() , i);
-           Met_Distributions_By_Mu_Bin[i] = new TH1F( Name , Title , met_dist_nbins , gevLow , gevHigh );
+           HLT_ZB_L1ZB_MET_Distributions_by_Mubin[i] = new TH1F( Name , Title , met_dist_nbins , gevLow , gevHigh );
            Normalized_Met_Distributions[i] = new TH1F( Corrected_Name , Corrected_Title , met_dist_nbins , gevLow , gevHigh );
            L1XE30_Efficiency_Objects[i] = new TEfficiency( EfficiencyName , EfficiencyTitle , efficiency_nbins , gevLow , gevHigh );
            EfficiencyName.Form("metL1XE50EfficiencyMubin%d", i);           
@@ -98,11 +98,16 @@ public :
 
             // set line colors on the TH1F objects 
            Met_Distributions_By_Mu_Bin[i]->SetLineColor( Colors[i] );
+           Met_Distributions_By_Mu_Bin[i]->SetLineColor( Colors[i] );
            Normalized_Met_Distributions[i]->SetLineColor( Colors[i] );
 
            L1XE30_Efficiency_Objects[i]->SetLineColor( Colors[i] );
            L1XE30_Efficiency_Objects[i]->SetMarkerStyle( Colors[i] );
            L1XE30_Efficiency_Fit_Objects[i]->SetLineColor( Colors[i] );
+
+           L1XE50_Efficiency_Objects[i]->SetLineColor( Colors[i] );
+           L1XE50_Efficiency_Objects[i]->SetMarkerStyle( Colors[i] );
+           L1XE50_Efficiency_Fit_Objects[i]->SetLineColor( Colors[i] );
         }
    }//}}}
     // Copy Constructor {{{
@@ -134,8 +139,10 @@ public :
    Bool_t isHLT_zb_L1XE50();
    Bool_t inMuRange( Float_t , Float_t );
    // getters
-   TH1F* Get_Met_Distributions_By_Mu_Bin{ return Met_Distributions_By_Mu_Bin; }
-   TH1F* Get_Normalized_Met_Distributions{ return Normalized_Met_Distributions; }
+   TH1F* Get_HLT_ZB_L1ZB_MET_Distributions_by_Mubin{ return HLT_ZB_L1ZB_MET_Distributions_by_Mubin; }
+   TH1F* Get_HLT_ZB_L1XE30_MET_Distributions_by_Mubin{ return HLT_ZB_L1XE30_MET_Distributions_by_Mubin; }
+   TH1F* Get_HLT_ZB_L1XE30_Corrected_to_ZB_MET_Distribution{ return HLT_ZB_L1XE30_Corrected_to_ZB_MET_Distribution; }
+   TH1F* Get_HLT_ZB_L1XE50_Corrected_to_ZB_MET_Distribution{ return HLT_ZB_L1XE50_Corrected_to_ZB_MET_Distribution; }
    TEfficiency* Get_L1XE30_Efficiency_Objects{ return L1XE30_Efficiency_Objects; }
    TEfficiency* Get_L1XE50_Efficiency_Objects{ return L1XE50_Efficiency_Objects; }
    TF1* Get_L1XE30_Efficiency_Fit_Objects{ return L1XE30_Efficiency_Fit_Objects; }

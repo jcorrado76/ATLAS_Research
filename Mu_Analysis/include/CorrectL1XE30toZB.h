@@ -16,7 +16,7 @@ public :
    // copy constructor
    CorrectL1XE30toZB( const Jburr_Template_Selector* rhs ){//{{{
     // we only need these collections from the computel1xe30efficiencies code
-   Met_Distributions_By_Mu_Bin = rhs->Get_Met_Distributions_By_Mu_Bin();
+   HLT_ZB_L1ZB_MET_Distributions_by_Mubin = rhs->Get_Met_Distributions_By_Mu_Bin();
    Normalized_Met_Distributions = rhs->Get_Normalized_Met_Distributions();
    L1XE30_Efficiency_Objects = rhs->Get_L1XE30_Efficiency_Objects;
    L1XE30_Efficiency_Fit_Objects = rhs->Get_L1XE30_Efficiency_Fit_Objects();
