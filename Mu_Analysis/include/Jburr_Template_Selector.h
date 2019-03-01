@@ -52,14 +52,6 @@ public :
    TEfficiency* L1XE50_Efficiency_Objects[Number_Mu_Bins];
    TF1* L1XE30_Efficiency_Fit_Objects[Number_Mu_Bins];
    TF1* L1XE50_Efficiency_Fit_Objects[Number_Mu_Bins];
-
-   // names for objects in collections
-    TString* Met_Distributions_By_Mu_Bin_Names[Number_Mu_Bins];
-    TString* Normalized_Met_Distributions_Names[Number_Mu_Bins];
-    TString* L1XE30_Efficiency_Objects_Names[Number_Mu_Bins];
-    TString* L1XE50_Efficiency_Objects_Names[Number_Mu_Bins];
-    TString* L1XE30_Efficiency_Fit_Objects_Names[Number_Mu_Bins];
-    TString* L1XE50_Efficiency_Fit_Objects_Names[Number_Mu_Bins];
    
    Float_t Mu_Values[Number_Mu_Bins+1] =                    { 0.0 };
    Int_t Colors[Number_Mu_Bins] =                           {1,2,3,4,12,6,9};
@@ -321,7 +313,7 @@ public :
            Met_Distributions_By_Mu_Bin[i] = new TH1F( Name , Title , met_dist_nbins , gevLow , gevHigh );
            Normalized_Met_Distributions[i] = new TH1F( Corrected_Name , Corrected_Title , met_dist_nbins , gevLow , gevHigh );
            L1XE30_Efficiency_Objects[i] = new TEfficiency( EfficiencyName , EfficiencyTitle , efficiency_nbins , gevLow , gevHigh );
-           EfficiencyName.Form("metL1XE30EfficiencyMubin%d", i);           
+           EfficiencyName.Form("metL1XE50EfficiencyMubin%d", i);           
            EfficiencyTitle.Form("Efficiency of L1XE 50 As a Function of %s for Actint bin %d", Alg_Name.Data() , i);
            L1XE50_Efficiency_Objects[i] = new TEfficiency( EfficiencyName , EfficiencyTitle , efficiency_nbins , gevLow , gevHigh );
            L1XE30_Efficiency_Fit_Objects[i] = new TF1();
@@ -334,8 +326,13 @@ public :
            L1XE30_Efficiency_Objects[i]->SetLineColor( Colors[i] );
            L1XE30_Efficiency_Objects[i]->SetMarkerStyle( Colors[i] );
            L1XE30_Efficiency_Fit_Objects[i]->SetLineColor( Colors[i] );
+        }
    }//}}}
-   }
+    // Copy Constructor {{{
+    Jburr_Template_Selector(const Jburr_Template_Selector* rhs) {
+     p = new int;  // Allocate
+    *p = *rhs.p;   // Initialize (well, actually "set").
+    }// }}}
    ~Jburr_Template_Selector() { }
    virtual Int_t   Version() const { return 2; }
    virtual void    Begin(TTree *tree);
