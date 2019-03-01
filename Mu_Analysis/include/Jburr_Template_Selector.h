@@ -78,6 +78,81 @@ public :
    TString efficiency_xaxis =               zb_alg_name + " [GeV]";
    TString met_dist_xaxis =                 zb_alg_name + " [GeV]";
    // }}}
+   // Member Functions {{{
+   // Default Constructor {{{
+   Jburr_Template_Selector(){ 
+       for (int i = 0 ; i < Number_Mu_Bins + 1; i++){
+           Mu_Values[i] = i * 10.;
+           Name.Form("zb_met_dist_mubin%d" , i );
+           Title.Form("ZeroBias MET Distribution for %s With Actint Between %.0f and %.0f" ,Alg_Name.Data(), muLow , muHigh );
+           EfficiencyName.Form("metL1XE30EfficiencyMubin%d", i);
+           EfficiencyTitle.Form("Efficiency of L1XE 30 As a Function of %s for Actint bin %d", Alg_Name.Data() , i);
+           Met_Distributions_By_Mu_Bin[i] = new TH1F( Name , Title , met_dist_nbins , gevLow , gevHigh );
+           Normalized_Met_Distributions[i] = new TH1F( Corrected_Name , Corrected_Title , met_dist_nbins , gevLow , gevHigh );
+           L1XE30_Efficiency_Objects[i] = new TEfficiency( EfficiencyName , EfficiencyTitle , efficiency_nbins , gevLow , gevHigh );
+           EfficiencyName.Form("metL1XE50EfficiencyMubin%d", i);           
+           EfficiencyTitle.Form("Efficiency of L1XE 50 As a Function of %s for Actint bin %d", Alg_Name.Data() , i);
+           L1XE50_Efficiency_Objects[i] = new TEfficiency( EfficiencyName , EfficiencyTitle , efficiency_nbins , gevLow , gevHigh );
+           L1XE30_Efficiency_Fit_Objects[i] = new TF1();
+           L1XE50_Efficiency_Fit_Objects[i] = new TF1();
+
+            // set line colors on the TH1F objects 
+           Met_Distributions_By_Mu_Bin[i]->SetLineColor( Colors[i] );
+           Normalized_Met_Distributions[i]->SetLineColor( Colors[i] );
+
+           L1XE30_Efficiency_Objects[i]->SetLineColor( Colors[i] );
+           L1XE30_Efficiency_Objects[i]->SetMarkerStyle( Colors[i] );
+           L1XE30_Efficiency_Fit_Objects[i]->SetLineColor( Colors[i] );
+        }
+   }//}}}
+    // Copy Constructor {{{
+    Jburr_Template_Selector(const Jburr_Template_Selector* rhs) {
+       for (int i = 0 ; i < Number_Mu_Bins + 1; i++){
+           Met_Distributions_By_Mu_Bin[i] = new TH1F();
+           Normalized_Met_Distributions[i] = new TH1F();
+           L1XE30_Efficiency_Objects[i] = new TEfficiency();
+           L1XE50_Efficiency_Objects[i] = new TEfficiency();
+           L1XE30_Efficiency_Fit_Objects[i] = new TF1();
+           L1XE50_Efficiency_Fit_Objects[i] = new TF1();
+        }
+    // TODO: copy the results of rhs into these
+   TH1F* Met_Distributions_By_Mu_Bin[Number_Mu_Bins];
+   TH1F* Normalized_Met_Distributions[Number_Mu_Bins];
+   TEfficiency* L1XE30_Efficiency_Objects[Number_Mu_Bins];
+   TEfficiency* L1XE50_Efficiency_Objects[Number_Mu_Bins];
+   TF1* L1XE30_Efficiency_Fit_Objects[Number_Mu_Bins];
+   TF1* L1XE50_Efficiency_Fit_Objects[Number_Mu_Bins];
+    }// }}}
+   ~Jburr_Template_Selector() { }
+   virtual Int_t   Version() const { return 2; }
+   virtual void    Begin(TTree *tree);
+   virtual void    SlaveBegin(TTree *tree);
+   virtual void    Init(TTree *tree);
+   Bool_t  Notify();
+   virtual Bool_t  Process(Long64_t entry);
+   virtual Int_t   GetEntry(Long64_t entry, Int_t getall = 0) { return fChain ? fChain->GetTree()->GetEntry(entry, getall) : 0; }
+   virtual void    SetOption(const char *option) { fOption = option; }
+   virtual void    SetObject(TObject *obj) { fObject = obj; }
+   virtual void    SetInputList(TList *input) { fInput = input; }
+   virtual TList  *GetOutputList() const { return fOutput; }
+   virtual void    SlaveTerminate();
+   virtual void    Terminate();
+   Bool_t isGoodRun();
+   Bool_t isHLT_zb_L1ZB();
+   Bool_t isHLT_zb_L1XE30();
+   Bool_t isHLT_zb_L1XE50();
+   Bool_t inMuRange( Float_t , Float_t );
+   TH1F* Get_Met_Distributions_By_Mu_Bin;
+   TH1F* Get_Normalized_Met_Distributions;
+   TEfficiency* Get_L1XE30_Efficiency_Objects;
+   TEfficiency* Get_L1XE50_Efficiency_Objects;
+   TF1* Get_L1XE30_Efficiency_Fit_Objects;
+   TF1* Get_L1XE50_Efficiency_Fit_Objects;
+   // TODO: make sure you add default val for l1cut parameter once you figured out workaround for making it an argument
+   static Double_t fitFunction(Double_t *x , Double_t *par );
+   TF1* generateFitFunction(TEfficiency* teff_obj, float gevMax = 300.0, float initial_slope = 0.1 , float initial_intercept = 0.0, float initial_sigma = 10.0, Bool_t verbose=false );
+   Double_t ComputeWeight(TF1* fitFunc, TF1* fitFunc2 = NULL);//}}}
+   ClassDef(Jburr_Template_Selector,0);
    // Readers to access the data (delete the ones you do not need){{{
    TTreeReaderValue<Float_t> MET_Data = {fReader, zb_alg_name };
    TTreeReaderValue<Float_t> L1_MET = {fReader, l1_alg_name};
@@ -301,62 +376,6 @@ public :
    TTreeReaderArray<float> CalAntiKt4EMTopoJets_phi = {fReader, "CalAntiKt4EMTopoJets.phi"};
    TTreeReaderArray<float> CalAntiKt4EMTopoJets_m = {fReader, "CalAntiKt4EMTopoJets.m"};
    //}}}
-   // Member Functions {{{
-   // Default Constructor {{{
-   Jburr_Template_Selector(){ 
-       for (int i = 0 ; i < Number_Mu_Bins + 1; i++){
-           Mu_Values[i] = i * 10.;
-           Name.Form("zb_met_dist_mubin%d" , i );
-           Title.Form("ZeroBias MET Distribution for %s With Actint Between %.0f and %.0f" ,Alg_Name.Data(), muLow , muHigh );
-           EfficiencyName.Form("metL1XE30EfficiencyMubin%d", i);
-           EfficiencyTitle.Form("Efficiency of L1XE 30 As a Function of %s for Actint bin %d", Alg_Name.Data() , i);
-           Met_Distributions_By_Mu_Bin[i] = new TH1F( Name , Title , met_dist_nbins , gevLow , gevHigh );
-           Normalized_Met_Distributions[i] = new TH1F( Corrected_Name , Corrected_Title , met_dist_nbins , gevLow , gevHigh );
-           L1XE30_Efficiency_Objects[i] = new TEfficiency( EfficiencyName , EfficiencyTitle , efficiency_nbins , gevLow , gevHigh );
-           EfficiencyName.Form("metL1XE50EfficiencyMubin%d", i);           
-           EfficiencyTitle.Form("Efficiency of L1XE 50 As a Function of %s for Actint bin %d", Alg_Name.Data() , i);
-           L1XE50_Efficiency_Objects[i] = new TEfficiency( EfficiencyName , EfficiencyTitle , efficiency_nbins , gevLow , gevHigh );
-           L1XE30_Efficiency_Fit_Objects[i] = new TF1();
-           L1XE50_Efficiency_Fit_Objects[i] = new TF1();
-
-            // set line colors on the TH1F objects 
-           Met_Distributions_By_Mu_Bin[i]->SetLineColor( Colors[i] );
-           Normalized_Met_Distributions[i]->SetLineColor( Colors[i] );
-
-           L1XE30_Efficiency_Objects[i]->SetLineColor( Colors[i] );
-           L1XE30_Efficiency_Objects[i]->SetMarkerStyle( Colors[i] );
-           L1XE30_Efficiency_Fit_Objects[i]->SetLineColor( Colors[i] );
-        }
-   }//}}}
-    // Copy Constructor {{{
-    Jburr_Template_Selector(const Jburr_Template_Selector* rhs) {
-     p = new int;  // Allocate
-    *p = *rhs.p;   // Initialize (well, actually "set").
-    }// }}}
-   ~Jburr_Template_Selector() { }
-   virtual Int_t   Version() const { return 2; }
-   virtual void    Begin(TTree *tree);
-   virtual void    SlaveBegin(TTree *tree);
-   virtual void    Init(TTree *tree);
-   Bool_t  Notify();
-   virtual Bool_t  Process(Long64_t entry);
-   virtual Int_t   GetEntry(Long64_t entry, Int_t getall = 0) { return fChain ? fChain->GetTree()->GetEntry(entry, getall) : 0; }
-   virtual void    SetOption(const char *option) { fOption = option; }
-   virtual void    SetObject(TObject *obj) { fObject = obj; }
-   virtual void    SetInputList(TList *input) { fInput = input; }
-   virtual TList  *GetOutputList() const { return fOutput; }
-   virtual void    SlaveTerminate();
-   virtual void    Terminate();
-   Bool_t isGoodRun();
-   Bool_t isHLT_zb_L1ZB();
-   Bool_t isHLT_zb_L1XE30();
-   Bool_t isHLT_zb_L1XE50();
-   Bool_t inMuRange( Float_t , Float_t );
-   // TODO: make sure you add default val for l1cut parameter once you figured out workaround for making it an argument
-   static Double_t fitFunction(Double_t *x , Double_t *par );
-   TF1* generateFitFunction(TEfficiency* teff_obj, float gevMax = 300.0, float initial_slope = 0.1 , float initial_intercept = 0.0, float initial_sigma = 10.0, Bool_t verbose=false );
-   Double_t ComputeWeight(TF1* fitFunc, TF1* fitFunc2 = NULL);//}}}
-   ClassDef(Jburr_Template_Selector,0);
 };
 // end class definition }}}
 #endif

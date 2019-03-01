@@ -14,6 +14,8 @@ class ComputeL1XE50toL1XE30Efficiency : public Jburr_Template_Selector {
 public :
    ComputeL1XE50toL1XE30Efficiency() { }
    ~ComputeL1XE50toL1XE30Efficiency() { }
+   // call copy constructor of base class
+   ComputeL1XE50toL1XE30Efficiency(const ComputeL1XE50toL1XE30Efficiency* rhs){ }
    Int_t   Version() const { return 2; }
    void    Begin(TTree *tree);
    void    SlaveBegin(TTree *tree);

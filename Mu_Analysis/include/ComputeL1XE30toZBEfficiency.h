@@ -14,6 +14,8 @@ class ComputeL1XE30toZBEfficiency : public Jburr_Template_Selector {
 public :
    ComputeL1XE30toZBEfficiency(){};
    ~ComputeL1XE30toZBEfficiency() { };
+   // call the copy constructor of the base class in copy constructor of derived class
+   ComputeL1XE30toZBEfficiency(const ComputeL1XE30toZBEfficiency* rhs){};
    Int_t   Version() const { return 2; }
    void    Begin(TTree *tree);
    void    SlaveBegin(TTree *tree);

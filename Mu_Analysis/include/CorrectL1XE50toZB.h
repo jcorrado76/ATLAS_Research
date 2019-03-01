@@ -13,6 +13,8 @@ class CorrectL1XE50toZB : public Jburr_Template_Selector {
 public :
    CorrectL1XE50toZB() { }
    ~CorrectL1XE50toZB() { }
+   // copy constructor
+   CorrectL1XE50toZB( const CorrectL1XE50toZB* rhs ){}
    Int_t   Version() const { return 2; }
    void    Begin(TTree *tree);
    void    SlaveBegin(TTree *tree);
