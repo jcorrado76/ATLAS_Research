@@ -32,7 +32,8 @@ public :
    const Float_t gevLow =                                                       0.0;
    const Float_t gevHigh =                                                      300.0;
    const Float_t met_dist_binwidth =                                            1.0;
-   const Float_t efficiency_bin_width =                                         20.0; //want 20 GeV bins
+   const Float_t efficiency_bin_width =                                         20.0; // 20 GeV bins
+   float L1XE =                                                                  0.0;    
    const Int_t met_dist_nbins =                                        (gevHigh - gevLow) / met_dist_binwidth; 
    const Int_t efficiency_nbins =                                      (gevHigh - gevLow) / efficiency_bin_width;
    // collections
@@ -180,7 +181,8 @@ public :
     std::array<TF1*, Number_Mu_Bins> Get_L1XE50_Efficiency_Fit_Objects() const { return L1XE50_Efficiency_Fit_Objects; }
    // TODO: make sure you add default val for l1cut parameter once you figured out workaround for making it an argument
    static Double_t fitFunction(Double_t *x , Double_t *par );
-   TF1* generateFitFunction(TEfficiency* teff_obj, float gevMax = 300.0, float initial_slope = 0.1 , float initial_intercept = 0.0, float initial_sigma = 10.0, Bool_t verbose=false );
+   TF1* generateFitFunction(TEfficiency* teff_obj, float gevMax = 300.0, float initial_slope = 0.1 , 
+           float initial_intercept = 0.0, float initial_sigma = 10.0, Bool_t verbose=false );
    Double_t ComputeWeight(TF1* fitFunc, TF1* fitFunc2 = NULL);//}}}
    ClassDef(Jburr_Template_Selector,0);
    // Readers to access the data (delete the ones you do not need){{{

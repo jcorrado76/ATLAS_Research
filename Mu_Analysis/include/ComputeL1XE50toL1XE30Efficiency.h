@@ -19,7 +19,7 @@ public :
    ClassDef(ComputeL1XE50toL1XE30Efficiency,0);
 
 
-   const float L1XE = 50.0;
+   float L1XE = 50.0;
 };
 
 #endif

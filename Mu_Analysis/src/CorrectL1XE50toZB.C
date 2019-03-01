@@ -7,7 +7,7 @@ void CorrectL1XE50toZB::Begin(TTree *)//{{{
     TString option = GetOption();
     // TH1 OBJECTS DO NOT BELONG TO TFILE SCOPE. THEY WILL STAY
     // TODO: remove all of this
-    TH1::AddDirectory(false);
+    TH1::AddDirectory(false);/*
     TFile* mu_analysis_file = TFile::Open("run_files/mu_analysis.root","UPDATE");
     if (!mu_analysis_file->IsOpen()){
         std::cout << "mu_analysis.root not opened" << std::endl;
@@ -77,7 +77,7 @@ void CorrectL1XE50toZB::Begin(TTree *)//{{{
     else{
         std::cout << "Unable to open zerobias MET distribution directory" << std::endl;
         return;
-    }//}}}
+    }//}}} */
 }//}}}
 Bool_t CorrectL1XE50toZB::Process(Long64_t entry)//{{{
 {
@@ -96,19 +96,19 @@ void CorrectL1XE50toZB::Terminate(){//{{{
 	// Relative Normalization{{{
     for ( int i = 0 ; i < Number_Mu_Bins ; i++ ){
         std::cout << "Nentries in mubin " << i << " met distribution: " << 
-            Met_Distributions_By_Mu_Bin[i]->GetEntries() << std::endl;
-        Scale_Factors[i] = Met_Distributions_By_Mu_Bin[i]->GetBinContent( Normalization_Bin_Numbers[i] ) / 
+            HLT_ZB_L1ZB_MET_Distributions_by_Mubin[i]->GetEntries() << std::endl;
+        Scale_Factors[i] = HLT_ZB_L1ZB_MET_Distributions_by_Mubin[i]->GetBinContent( Normalization_Bin_Numbers[i] ) / 
             HLT_ZB_L1XE50_Corrected_to_ZB_MET_Distribution[i]->GetBinContent( Normalization_Bin_Numbers[i] );
         if (isnan( Scale_Factors[i] )){
             std::cout << "Scale factor " << i << ": " << Scale_Factors[i] << " is NaN" << std::endl;
             std::cout << "MET Counts in mubin " << i << ": " << 
-                Met_Distributions_By_Mu_Bin[i]->GetBinContent( Normalization_Bin_Numbers[i] ) << 
+                HLT_ZB_L1ZB_MET_Distributions_by_Mubin[i]->GetBinContent( Normalization_Bin_Numbers[i] ) << 
                 " in normalization bin number: " << Normalization_Bin_Numbers[i] << std::endl;
             std::cout << "Counts in the Normalized MET distribution bin: " << 
                 HLT_ZB_L1XE50_Corrected_to_ZB_MET_Distribution[i]->GetBinContent( Normalization_Bin_Numbers[i] ) << std::endl;
         }
         std::cout << "Scale factor: " << i << " = " << Scale_Factors[i] << std::endl;
-        Met_Distributions_By_Mu_Bin[i]->SetNormFactor( 1. );
+        HLT_ZB_L1ZB_MET_Distributions_by_Mubin[i]->SetNormFactor( 1. );
         HLT_ZB_L1XE50_Corrected_to_ZB_MET_Distribution[i]->SetNormFactor( 1. );
         HLT_ZB_L1XE50_Corrected_to_ZB_MET_Distribution[i]->Scale( Scale_Factors[i] );
     }

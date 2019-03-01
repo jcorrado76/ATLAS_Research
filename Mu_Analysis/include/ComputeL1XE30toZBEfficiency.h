@@ -9,6 +9,6 @@ public :
    void    Terminate();
    ClassDef(ComputeL1XE30toZBEfficiency,0);
 
-   const float L1XE = 30.0;
+   float L1XE = 30.0;
 };
 #endif 
