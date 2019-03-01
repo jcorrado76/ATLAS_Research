@@ -1,9 +1,3 @@
-//////////////////////////////////////////////////////////
-// This class has been automatically generated on
-// Tue Jun 19 12:37:50 2018 by ROOT version 6.15/01
-// from TTree METTree/METTree
-// found on file: /home/joseph/ATLAS_DATA/totalJburrTuple.root
-//////////////////////////////////////////////////////////
 #ifndef Jburr_Template_Selector_h
 #define Jburr_Template_Selector_h
 // includes{{{
@@ -26,6 +20,7 @@
 #include <TPad.h>
 #include <TDirectory.h>
 #include <TGaxis.h>
+#include <array>
 // end includes}}}
 //class definition {{{
 class Jburr_Template_Selector : public TSelector {
@@ -41,17 +36,17 @@ public :
    const Int_t met_dist_nbins =                                        (gevHigh - gevLow) / met_dist_binwidth; 
    const Int_t efficiency_nbins =                                      (gevHigh - gevLow) / efficiency_bin_width;
    // collections
-   TH1F* HLT_ZB_L1ZB_MET_Distributions_by_Mubin[Number_Mu_Bins];
-   TH1F* HLT_ZB_L1XE30_MET_Distributions_by_Mubin[Number_Mu_Bins];
+   std::array<TH1F*, Number_Mu_Bins> HLT_ZB_L1ZB_MET_Distributions_by_Mubin;
+   std::array<TH1F*, Number_Mu_Bins> HLT_ZB_L1XE30_MET_Distributions_by_Mubin;
 
-   TH1F* HLT_ZB_L1XE30_Corrected_to_ZB_MET_Distribution[Number_Mu_Bins];
-   TH1F* HLT_ZB_L1XE50_Corrected_to_ZB_MET_Distribution[Number_Mu_Bins];
+   std::array<TH1F*, Number_Mu_Bins> HLT_ZB_L1XE30_Corrected_to_ZB_MET_Distribution;
+   std::array<TH1F*, Number_Mu_Bins> HLT_ZB_L1XE50_Corrected_to_ZB_MET_Distribution;
 
-   TEfficiency* L1XE30_Efficiency_Objects[Number_Mu_Bins];
-   TEfficiency* L1XE50_Efficiency_Objects[Number_Mu_Bins];
+   std::array<TEfficiency*, Number_Mu_Bins> L1XE30_Efficiency_Objects;
+   std::array<TEfficiency*, Number_Mu_Bins> L1XE50_Efficiency_Objects;
 
-   TF1* L1XE30_Efficiency_Fit_Objects[Number_Mu_Bins];
-   TF1* L1XE50_Efficiency_Fit_Objects[Number_Mu_Bins];
+   std::array<TF1*, Number_Mu_Bins> L1XE30_Efficiency_Fit_Objects;
+   std::array<TF1*, Number_Mu_Bins> L1XE50_Efficiency_Fit_Objects;
    
    Float_t Mu_Values[Number_Mu_Bins+1] =                    { 0.0 };
    Int_t Colors[Number_Mu_Bins] =                           {1,2,3,4,12,6,9};
@@ -76,7 +71,7 @@ public :
    TString efficiency_title =               zb_alg_name + " Efficiency";
    TString efficiency_xaxis =               zb_alg_name + " [GeV]";
    TString met_dist_xaxis =                 zb_alg_name + " [GeV]";
-   TString plots_dir =                      "plots/"
+   TString plots_dir =                      "plots/";
    // }}}
    // Member Functions {{{
    // Default Constructor {{{
@@ -127,13 +122,33 @@ public :
         }
    }//}}}
     // Copy Constructor {{{
-    Jburr_Template_Selector(const Jburr_Template_Selector* rhs){
-   Met_Distributions_By_Mu_Bin = rhs->Get_Met_Distributions_By_Mu_Bin();
-   Normalized_Met_Distributions = rhs->Get_Normalized_Met_Distributions();
-   L1XE30_Efficiency_Objects = rhs->Get_L1XE30_Efficiency_Objects;
-   L1XE50_Efficiency_Objects = rhs->Get_L1XE50_Efficiency_Objects();
-   L1XE30_Efficiency_Fit_Objects = rhs->Get_L1XE30_Efficiency_Fit_Objects();
-   L1XE50_Efficiency_Fit_Objects = rhs->Get_L1XE50_Efficiency_Fit_Objects();
+    Jburr_Template_Selector(const Jburr_Template_Selector& rhs){
+       for (int i = 0 ; i < Number_Mu_Bins + 1; i++){
+           Mu_Values[i] = i * 10.;
+           HLT_ZB_L1ZB_MET_Distributions_by_Mubin[i] = rhs.Get_HLT_ZB_L1ZB_MET_Distributions_by_Mubin()[i];
+           HLT_ZB_L1XE30_MET_Distributions_by_Mubin[i] = rhs.Get_HLT_ZB_L1XE30_MET_Distributions_by_Mubin()[i];
+           HLT_ZB_L1XE30_Corrected_to_ZB_MET_Distribution[i] = rhs.Get_HLT_ZB_L1XE30_Corrected_to_ZB_MET_Distribution()[i];
+           HLT_ZB_L1XE50_Corrected_to_ZB_MET_Distribution[i] = rhs.Get_HLT_ZB_L1XE50_Corrected_to_ZB_MET_Distribution()[i];
+           L1XE30_Efficiency_Objects[i] = rhs.Get_L1XE30_Efficiency_Objects()[i];
+           L1XE50_Efficiency_Objects[i] = rhs.Get_L1XE50_Efficiency_Objects()[i];
+           L1XE30_Efficiency_Fit_Objects[i] = rhs.Get_L1XE30_Efficiency_Fit_Objects()[i];
+           L1XE50_Efficiency_Fit_Objects[i] = rhs.Get_L1XE50_Efficiency_Fit_Objects()[i];
+
+            // set line colors on the TH1F objects 
+           HLT_ZB_L1ZB_MET_Distributions_by_Mubin[i]->SetLineColor( Colors[i] );
+           HLT_ZB_L1XE30_MET_Distributions_by_Mubin[i]->SetLineColor( Colors[i] );
+
+           HLT_ZB_L1XE30_Corrected_to_ZB_MET_Distribution[i]->SetLineColor( Colors[i] );
+           HLT_ZB_L1XE50_Corrected_to_ZB_MET_Distribution[i]->SetLineColor( Colors[i] );
+
+           L1XE30_Efficiency_Objects[i]->SetLineColor( Colors[i] );
+           L1XE30_Efficiency_Objects[i]->SetMarkerStyle( Colors[i] );
+           L1XE30_Efficiency_Fit_Objects[i]->SetLineColor( Colors[i] );
+
+           L1XE50_Efficiency_Objects[i]->SetLineColor( Colors[i] );
+           L1XE50_Efficiency_Objects[i]->SetMarkerStyle( Colors[i] );
+           L1XE50_Efficiency_Fit_Objects[i]->SetLineColor( Colors[i] );
+        }
     }// }}}
    ~Jburr_Template_Selector() { }
    virtual Int_t   Version() const { return 2; }
@@ -155,14 +170,14 @@ public :
    Bool_t isHLT_zb_L1XE50();
    Bool_t inMuRange( Float_t , Float_t );
    // getters
-   TH1F* Get_HLT_ZB_L1ZB_MET_Distributions_by_Mubin{ return HLT_ZB_L1ZB_MET_Distributions_by_Mubin; }
-   TH1F* Get_HLT_ZB_L1XE30_MET_Distributions_by_Mubin{ return HLT_ZB_L1XE30_MET_Distributions_by_Mubin; }
-   TH1F* Get_HLT_ZB_L1XE30_Corrected_to_ZB_MET_Distribution{ return HLT_ZB_L1XE30_Corrected_to_ZB_MET_Distribution; }
-   TH1F* Get_HLT_ZB_L1XE50_Corrected_to_ZB_MET_Distribution{ return HLT_ZB_L1XE50_Corrected_to_ZB_MET_Distribution; }
-   TEfficiency* Get_L1XE30_Efficiency_Objects{ return L1XE30_Efficiency_Objects; }
-   TEfficiency* Get_L1XE50_Efficiency_Objects{ return L1XE50_Efficiency_Objects; }
-   TF1* Get_L1XE30_Efficiency_Fit_Objects{ return L1XE30_Efficiency_Fit_Objects; }
-   TF1* Get_L1XE50_Efficiency_Fit_Objects{ return L1XE50_Efficiency_Fit_Objects; }
+   std::array<TH1F*, Number_Mu_Bins> Get_HLT_ZB_L1ZB_MET_Distributions_by_Mubin() const { return HLT_ZB_L1ZB_MET_Distributions_by_Mubin; }
+   std::array<TH1F*, Number_Mu_Bins> Get_HLT_ZB_L1XE30_MET_Distributions_by_Mubin() const { return HLT_ZB_L1XE30_MET_Distributions_by_Mubin; }
+    std::array<TH1F*, Number_Mu_Bins> Get_HLT_ZB_L1XE30_Corrected_to_ZB_MET_Distribution() const { return HLT_ZB_L1XE30_Corrected_to_ZB_MET_Distribution; }
+    std::array<TH1F*, Number_Mu_Bins> Get_HLT_ZB_L1XE50_Corrected_to_ZB_MET_Distribution() const { return HLT_ZB_L1XE50_Corrected_to_ZB_MET_Distribution; }
+    std::array<TEfficiency*, Number_Mu_Bins> Get_L1XE30_Efficiency_Objects() const { return L1XE30_Efficiency_Objects; }
+    std::array<TEfficiency*, Number_Mu_Bins> Get_L1XE50_Efficiency_Objects() const { return L1XE50_Efficiency_Objects; }
+    std::array<TF1*, Number_Mu_Bins> Get_L1XE30_Efficiency_Fit_Objects() const { return L1XE30_Efficiency_Fit_Objects; }
+    std::array<TF1*, Number_Mu_Bins> Get_L1XE50_Efficiency_Fit_Objects() const { return L1XE50_Efficiency_Fit_Objects; }
    // TODO: make sure you add default val for l1cut parameter once you figured out workaround for making it an argument
    static Double_t fitFunction(Double_t *x , Double_t *par );
    TF1* generateFitFunction(TEfficiency* teff_obj, float gevMax = 300.0, float initial_slope = 0.1 , float initial_intercept = 0.0, float initial_sigma = 10.0, Bool_t verbose=false );

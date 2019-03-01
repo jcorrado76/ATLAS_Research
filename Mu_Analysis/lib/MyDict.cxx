@@ -58,7 +58,7 @@ namespace ROOT {
       ::Jburr_Template_Selector *ptr = 0;
       static ::TVirtualIsAProxy* isa_proxy = new ::TInstrumentedIsAProxy< ::Jburr_Template_Selector >(0);
       static ::ROOT::TGenericClassInfo 
-         instance("Jburr_Template_Selector", ::Jburr_Template_Selector::Class_Version(), "Jburr_Template_Selector.h", 31,
+         instance("Jburr_Template_Selector", ::Jburr_Template_Selector::Class_Version(), "Jburr_Template_Selector.h", 26,
                   typeid(::Jburr_Template_Selector), ::ROOT::Internal::DefineBehavior(ptr, ptr),
                   &::Jburr_Template_Selector::Dictionary, isa_proxy, 4,
                   sizeof(::Jburr_Template_Selector) );
@@ -90,7 +90,7 @@ namespace ROOT {
       ::CorrectL1XE30toZB *ptr = 0;
       static ::TVirtualIsAProxy* isa_proxy = new ::TInstrumentedIsAProxy< ::CorrectL1XE30toZB >(0);
       static ::ROOT::TGenericClassInfo 
-         instance("CorrectL1XE30toZB", ::CorrectL1XE30toZB::Class_Version(), "CorrectL1XE30toZB.h", 12,
+         instance("CorrectL1XE30toZB", ::CorrectL1XE30toZB::Class_Version(), "CorrectL1XE30toZB.h", 4,
                   typeid(::CorrectL1XE30toZB), ::ROOT::Internal::DefineBehavior(ptr, ptr),
                   &::CorrectL1XE30toZB::Dictionary, isa_proxy, 4,
                   sizeof(::CorrectL1XE30toZB) );
@@ -122,7 +122,7 @@ namespace ROOT {
       ::CorrectL1XE50toZB *ptr = 0;
       static ::TVirtualIsAProxy* isa_proxy = new ::TInstrumentedIsAProxy< ::CorrectL1XE50toZB >(0);
       static ::ROOT::TGenericClassInfo 
-         instance("CorrectL1XE50toZB", ::CorrectL1XE50toZB::Class_Version(), "CorrectL1XE50toZB.h", 12,
+         instance("CorrectL1XE50toZB", ::CorrectL1XE50toZB::Class_Version(), "CorrectL1XE50toZB.h", 6,
                   typeid(::CorrectL1XE50toZB), ::ROOT::Internal::DefineBehavior(ptr, ptr),
                   &::CorrectL1XE50toZB::Dictionary, isa_proxy, 4,
                   sizeof(::CorrectL1XE50toZB) );
@@ -154,7 +154,7 @@ namespace ROOT {
       ::ComputeL1XE30toZBEfficiency *ptr = 0;
       static ::TVirtualIsAProxy* isa_proxy = new ::TInstrumentedIsAProxy< ::ComputeL1XE30toZBEfficiency >(0);
       static ::ROOT::TGenericClassInfo 
-         instance("ComputeL1XE30toZBEfficiency", ::ComputeL1XE30toZBEfficiency::Class_Version(), "ComputeL1XE30toZBEfficiency.h", 13,
+         instance("ComputeL1XE30toZBEfficiency", ::ComputeL1XE30toZBEfficiency::Class_Version(), "ComputeL1XE30toZBEfficiency.h", 4,
                   typeid(::ComputeL1XE30toZBEfficiency), ::ROOT::Internal::DefineBehavior(ptr, ptr),
                   &::ComputeL1XE30toZBEfficiency::Dictionary, isa_proxy, 4,
                   sizeof(::ComputeL1XE30toZBEfficiency) );
