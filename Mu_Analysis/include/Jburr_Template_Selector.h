@@ -21,6 +21,7 @@
 #include <TDirectory.h>
 #include <TGaxis.h>
 #include <array>
+#include "fitFunction.h"
 // end includes}}}
 //class definition {{{
 class Jburr_Template_Selector : public TSelector {
@@ -180,7 +181,7 @@ public :
     std::array<TF1*, Number_Mu_Bins> Get_L1XE30_Efficiency_Fit_Objects() const { return L1XE30_Efficiency_Fit_Objects; }
     std::array<TF1*, Number_Mu_Bins> Get_L1XE50_Efficiency_Fit_Objects() const { return L1XE50_Efficiency_Fit_Objects; }
    // TODO: make sure you add default val for l1cut parameter once you figured out workaround for making it an argument
-   static Double_t fitFunction(Double_t *x , Double_t *par );
+   //static Double_t fitFunction(Double_t *x , Double_t *par );
    TF1* generateFitFunction(TEfficiency* teff_obj, float gevMax = 300.0, float initial_slope = 0.1 , 
            float initial_intercept = 0.0, float initial_sigma = 10.0, Bool_t verbose=false );
    Double_t ComputeWeight(TF1* fitFunc, TF1* fitFunc2 = NULL);//}}}
@@ -193,43 +194,40 @@ public :
    TTreeReaderValue<ULong64_t> EventNumber = {fReader, "EventNumber"};
    TTreeReaderValue<Float_t> InTimePileup = {fReader, "InTimePileup"};
    TTreeReaderValue<Float_t> OutOfTimePileup = {fReader, "OutOfTimePileup"};
-   TTreeReaderValue<Float_t> L1_sumet = {fReader, "L1.sumet"};
+
    TTreeReaderValue<Float_t> L1_met = {fReader, "L1.met"};
-   TTreeReaderValue<Float_t> cell_sumet = {fReader, "cell.sumet"};
    TTreeReaderValue<Float_t> cell_met = {fReader, "cell.met"};
-   TTreeReaderValue<Float_t> mht_sumet = {fReader, "mht.sumet"};
    TTreeReaderValue<Float_t> mht_met = {fReader, "mht.met"};
-   TTreeReaderValue<Float_t> pufit_sumet = {fReader, "pufit.sumet"};
    TTreeReaderValue<Float_t> pufit_met = {fReader, "pufit.met"};
-   TTreeReaderValue<Float_t> topocl_sumet = {fReader, "topocl.sumet"};
    TTreeReaderValue<Float_t> topocl_met = {fReader, "topocl.met"};
+
+   TTreeReaderValue<Float_t> L1_sumet = {fReader, "L1.sumet"};
+   TTreeReaderValue<Float_t> cell_sumet = {fReader, "cell.sumet"};
+   TTreeReaderValue<Float_t> mht_sumet = {fReader, "mht.sumet"};
+   TTreeReaderValue<Float_t> pufit_sumet = {fReader, "pufit.sumet"};
+   TTreeReaderValue<Float_t> topocl_sumet = {fReader, "topocl.sumet"};
+
    TTreeReaderValue<Bool_t> L1_XE50_passed = {fReader, "L1_XE50.passed"};
-   TTreeReaderValue<Float_t> L1_XE50_prescale = {fReader, "L1_XE50.prescale"};
-   TTreeReaderValue<UInt_t> L1_XE50_passBits = {fReader, "L1_XE50.passBits"};
    TTreeReaderValue<Bool_t> L1_XE55_passed = {fReader, "L1_XE55.passed"};
-   TTreeReaderValue<Float_t> L1_XE55_prescale = {fReader, "L1_XE55.prescale"};
-   TTreeReaderValue<UInt_t> L1_XE55_passBits = {fReader, "L1_XE55.passBits"};
    TTreeReaderValue<Bool_t> L1_XE60_passed = {fReader, "L1_XE60.passed"};
+
+   TTreeReaderValue<Float_t> L1_XE50_prescale = {fReader, "L1_XE50.prescale"};
+   TTreeReaderValue<Float_t> L1_XE55_prescale = {fReader, "L1_XE55.prescale"};
    TTreeReaderValue<Float_t> L1_XE60_prescale = {fReader, "L1_XE60.prescale"};
-   TTreeReaderValue<UInt_t> L1_XE60_passBits = {fReader, "L1_XE60.passBits"};
-   TTreeReaderValue<Bool_t> HLT_noalg_zb_L1ZB_passed = {fReader, "HLT_noalg_zb_L1ZB.passed"};
+
    TTreeReaderValue<Float_t> HLT_noalg_zb_L1ZB_prescale = {fReader, "HLT_noalg_zb_L1ZB.prescale"};
-   TTreeReaderValue<UInt_t> HLT_noalg_zb_L1ZB_passBits = {fReader, "HLT_noalg_zb_L1ZB.passBits"};
-   TTreeReaderValue<Bool_t> HLT_noalg_L1XE10_passed = {fReader, "HLT_noalg_L1XE10.passed"};
    TTreeReaderValue<Float_t> HLT_noalg_L1XE10_prescale = {fReader, "HLT_noalg_L1XE10.prescale"};
-   TTreeReaderValue<UInt_t> HLT_noalg_L1XE10_passBits = {fReader, "HLT_noalg_L1XE10.passBits"};
-   TTreeReaderValue<Bool_t> HLT_noalg_L1XE20_passed = {fReader, "HLT_noalg_L1XE20.passed"};
    TTreeReaderValue<Float_t> HLT_noalg_L1XE20_prescale = {fReader, "HLT_noalg_L1XE20.prescale"};
-   TTreeReaderValue<UInt_t> HLT_noalg_L1XE20_passBits = {fReader, "HLT_noalg_L1XE20.passBits"};
-   TTreeReaderValue<Bool_t> HLT_noalg_L1XE30_passed = {fReader, "HLT_noalg_L1XE30.passed"};
    TTreeReaderValue<Float_t> HLT_noalg_L1XE30_prescale = {fReader, "HLT_noalg_L1XE30.prescale"};
-   TTreeReaderValue<UInt_t> HLT_noalg_L1XE30_passBits = {fReader, "HLT_noalg_L1XE30.passBits"};
-   TTreeReaderValue<Bool_t> HLT_noalg_L1XE40_passed = {fReader, "HLT_noalg_L1XE40.passed"};
    TTreeReaderValue<Float_t> HLT_noalg_L1XE40_prescale = {fReader, "HLT_noalg_L1XE40.prescale"};
-   TTreeReaderValue<UInt_t> HLT_noalg_L1XE40_passBits = {fReader, "HLT_noalg_L1XE40.passBits"};
-   TTreeReaderValue<Bool_t> HLT_noalg_L1XE45_passed = {fReader, "HLT_noalg_L1XE45.passed"};
    TTreeReaderValue<Float_t> HLT_noalg_L1XE45_prescale = {fReader, "HLT_noalg_L1XE45.prescale"};
-   TTreeReaderValue<UInt_t> HLT_noalg_L1XE45_passBits = {fReader, "HLT_noalg_L1XE45.passBits"};
+
+   TTreeReaderValue<Bool_t> HLT_noalg_zb_L1ZB_passed = {fReader, "HLT_noalg_zb_L1ZB.passed"};
+   TTreeReaderValue<Bool_t> HLT_noalg_L1XE10_passed = {fReader, "HLT_noalg_L1XE10.passed"};
+   TTreeReaderValue<Bool_t> HLT_noalg_L1XE20_passed = {fReader, "HLT_noalg_L1XE20.passed"};
+   TTreeReaderValue<Bool_t> HLT_noalg_L1XE30_passed = {fReader, "HLT_noalg_L1XE30.passed"};
+   TTreeReaderValue<Bool_t> HLT_noalg_L1XE40_passed = {fReader, "HLT_noalg_L1XE40.passed"};
+   TTreeReaderValue<Bool_t> HLT_noalg_L1XE45_passed = {fReader, "HLT_noalg_L1XE45.passed"};
    //}}}
 };
 // end class definition }}}

@@ -1,4 +1,4 @@
-#include <TMath.h>
+#include "fitFunction.h"
 double fitFunction(double *x , double *par ){
     /*
      * Parameter 0 - initial slope

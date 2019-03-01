@@ -58,17 +58,16 @@ TF1* Jburr_Template_Selector::generateFitFunction(TEfficiency* teff_obj, float g
 }//}}}
 Double_t Jburr_Template_Selector::ComputeWeight(TF1* fitFunc, TF1* fitFunc2 )//{{{
 {
-    // To override functions, must implement one in derived class with exact same signature
-    // If you want to avoid the if else block, must define two different compute weight functions here
-    Double_t denominator = 1.;
+    Double_t factor = 1.;
     if (!fitFunc2){
         // inside correct l1xe30 to zb
-        denominator = fitFunc->Eval( *cell_met );
+        factor = *HLT_noalg_zb_L1ZB_prescale / fitFunc->Eval( *cell_met );
     }else{
         // inside correct l1xe50 to zb
-        denominator = fitFunc->Eval( *cell_met ) * fitFunc2->Eval( *cell_met );
+        factor = (*HLT_noalg_zb_L1ZB_prescale * *HLT_noalg_L1XE30_prescale) / 
+            (fitFunc->Eval( *cell_met ) * fitFunc2->Eval( *cell_met ));
     }
-    return *HLT_noalg_L1XE30_prescale / denominator;
+    return factor;
 }//}}}
 Bool_t Jburr_Template_Selector::Notify()//{{{
 {

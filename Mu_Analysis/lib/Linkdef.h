@@ -7,5 +7,5 @@
 #pragma link C++ class ComputeL1XE50toL1XE30Efficiency+;
 #pragma link C++ class CorrectL1XE30toZB+;
 #pragma link C++ class CorrectL1XE50toZB+;
-#pragma link C++ function fitFunction(*int, *double)+;
+#pragma link C++ function fitFunction(*double, *double)+;
 #endif
