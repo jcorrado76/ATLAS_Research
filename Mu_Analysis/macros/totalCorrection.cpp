@@ -12,13 +12,16 @@
         return 0;
     }
     if (jetm10_chain->Add("/home/joseph/ATLAS_Research/DATA/PhysicsMain/JETM10_15thru17_with_missing_et_significance.root")){
-        CorrectL1XE30toZB* correctToZB( buildl1xe30Efficiencies );
+        CorrectL1XE30toZB* correctToZB = new CorrectL1XE30toZB();
+        correctToZB->Set_L1XE30_Efficiency_Fit_Objects(buildl1xe30Efficiencies->Get_L1XE30_Efficiency_Fit_Objects());
         jetm10_chain->Process( correctToZB );
 
-        ComputeL1XE50toL1XE30Efficiency* createL1XE50Efficiencies( correctToZB );
+        ComputeL1XE50toL1XE30Efficiency* createL1XE50Efficiencies = new ComputeL1XE50toL1XE30Efficiency();
         jetm10_chain->Process( createL1XE50Efficiencies );
 
-        CorrectL1XE50toZB* CorrectL1XE50DataAllWay( createL1XE50Efficiencies );
+        CorrectL1XE50toZB* CorrectL1XE50DataAllWay = new CorrectL1XE50toZB();
+        CorrectL1XE50DataAllWay->Set_L1XE30_Efficiency_Fit_Objects(buildl1xe30Efficiencies->Get_L1XE30_Efficiency_Fit_Objects());
+        CorrectL1XE50DataAllWay->Set_L1XE50_Efficiency_Fit_Objects(createL1XE50Efficiencies->Get_L1XE50_Efficiency_Fit_Objects());
         jetm10_chain->Process( CorrectL1XE50DataAllWay );
     }
     else{
