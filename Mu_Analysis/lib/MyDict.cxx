@@ -155,7 +155,7 @@ namespace ROOT {
       ::ComputeL1XE50toL1XE30Efficiency *ptr = 0;
       static ::TVirtualIsAProxy* isa_proxy = new ::TInstrumentedIsAProxy< ::ComputeL1XE50toL1XE30Efficiency >(0);
       static ::ROOT::TGenericClassInfo 
-         instance("ComputeL1XE50toL1XE30Efficiency", ::ComputeL1XE50toL1XE30Efficiency::Class_Version(), "ComputeL1XE50toL1XE30Efficiency.h", 14,
+         instance("ComputeL1XE50toL1XE30Efficiency", ::ComputeL1XE50toL1XE30Efficiency::Class_Version(), "ComputeL1XE50toL1XE30Efficiency.h", 7,
                   typeid(::ComputeL1XE50toL1XE30Efficiency), ::ROOT::Internal::DefineBehavior(ptr, ptr),
                   &::ComputeL1XE50toL1XE30Efficiency::Dictionary, isa_proxy, 4,
                   sizeof(::ComputeL1XE50toL1XE30Efficiency) );
