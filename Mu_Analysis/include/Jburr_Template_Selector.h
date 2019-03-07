@@ -79,49 +79,9 @@ public :
    // Default Constructor {{{
    Jburr_Template_Selector(){ 
        std::cout << "Calling Jburr Constructor" << std::endl;
-       for (int i = 0 ; i < Number_Mu_Bins + 1; i++){
+       for (int i = 0 ; i < Number_Mu_Bins; i++){
            Mu_Values[i] = i * 10.;
-           Name.Form("hlt_zb_l1zb_met_dist_mubin%d" , i );
-           Title.Form("HLT ZB L1ZB MET Distribution for %s for Actint bin %d" , Alg_Name.Data(), i);
-           HLT_ZB_L1ZB_MET_Distributions_by_Mubin[i] = new TH1F( Name , Title , met_dist_nbins , gevLow , gevHigh );
-
-           Name.Form("hlt_zb_l1xe30_met_dist_mubin%d" , i );
-           Title.Form("HLT ZB L1XE30 MET Distribution for %s for Actint bin %d" , Alg_Name.Data(), i);
-           HLT_ZB_L1XE30_MET_Distributions_by_Mubin[i] = new TH1F( Name , Title , met_dist_nbins , gevLow , gevHigh );
-
-           Corrected_Name.Form("L1XE30CorrectedToZBmubin%d" , i);
-           Corrected_Title.Form("L1XE30 Data Corrected back to Zerobias For Actint bin %d", i);
-           HLT_ZB_L1XE30_Corrected_to_ZB_MET_Distribution[i] = new TH1F( Corrected_Name , Corrected_Title , met_dist_nbins , gevLow , gevHigh );
-
-           Corrected_Name.Form("L1XE50CorrectedToZBmubin%d", i);
-           Corrected_Title.Form("L1XE50 Data Corrected back to Zerobias For Actint bin %d" , i);
-           HLT_ZB_L1XE50_Corrected_to_ZB_MET_Distribution[i] = new TH1F( Corrected_Name , Corrected_Title , met_dist_nbins , gevLow , gevHigh );
-
-           EfficiencyName.Form("metL1XE30EfficiencyMubin%d", i);
-           EfficiencyTitle.Form("Efficiency of L1XE 30 As a Function of %s for Actint bin %d", Alg_Name.Data() , i);
-           L1XE30_Efficiency_Objects[i] = new TEfficiency( EfficiencyName , EfficiencyTitle , efficiency_nbins , gevLow , gevHigh );
-
-           EfficiencyName.Form("metL1XE50EfficiencyMubin%d", i);           
-           EfficiencyTitle.Form("Efficiency of L1XE 50 As a Function of %s for Actint bin %d", Alg_Name.Data() , i);
-           L1XE50_Efficiency_Objects[i] = new TEfficiency( EfficiencyName , EfficiencyTitle , efficiency_nbins , gevLow , gevHigh );
-
-           L1XE30_Efficiency_Fit_Objects[i] = new TF1();
-           L1XE50_Efficiency_Fit_Objects[i] = new TF1();
-
-            // set line colors on the TH1F objects 
-           HLT_ZB_L1ZB_MET_Distributions_by_Mubin[i]->SetLineColor( Colors[i] );
-           HLT_ZB_L1XE30_MET_Distributions_by_Mubin[i]->SetLineColor( Colors[i] );
-
-           HLT_ZB_L1XE30_Corrected_to_ZB_MET_Distribution[i]->SetLineColor( Colors[i] );
-           HLT_ZB_L1XE50_Corrected_to_ZB_MET_Distribution[i]->SetLineColor( Colors[i] );
-
-           L1XE30_Efficiency_Objects[i]->SetLineColor( Colors[i] );
-           L1XE30_Efficiency_Objects[i]->SetMarkerStyle( Colors[i] );
-           L1XE30_Efficiency_Fit_Objects[i]->SetLineColor( Colors[i] );
-
-           L1XE50_Efficiency_Objects[i]->SetLineColor( Colors[i] );
-           L1XE50_Efficiency_Objects[i]->SetMarkerStyle( Colors[i] );
-           L1XE50_Efficiency_Fit_Objects[i]->SetLineColor( Colors[i] );
+           Mu_Values[i+1] = (i+1) * 10.;
         }
    }//}}}
    ~Jburr_Template_Selector() { }
