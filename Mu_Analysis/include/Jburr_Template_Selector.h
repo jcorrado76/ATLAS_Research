@@ -84,7 +84,7 @@ public :
            Title.Form("HLT ZB L1ZB MET Distribution for %s for Actint bin %d" , Alg_Name.Data(), i);
            HLT_ZB_L1ZB_MET_Distributions_by_Mubin[i] = new TH1F( Name , Title , met_dist_nbins , gevLow , gevHigh );
 
-           Name.Form("hlt_zb_l1zb_met_dist_mubin%d" , i );
+           Name.Form("hlt_zb_l1xe30_met_dist_mubin%d" , i );
            Title.Form("HLT ZB L1XE30 MET Distribution for %s for Actint bin %d" , Alg_Name.Data(), i);
            HLT_ZB_L1XE30_MET_Distributions_by_Mubin[i] = new TH1F( Name , Title , met_dist_nbins , gevLow , gevHigh );
 
@@ -92,8 +92,8 @@ public :
            Corrected_Title.Form("L1XE30 Data Corrected back to Zerobias For Actint bin %d", i);
            HLT_ZB_L1XE30_Corrected_to_ZB_MET_Distribution[i] = new TH1F( Corrected_Name , Corrected_Title , met_dist_nbins , gevLow , gevHigh );
 
-           Corrected_Name.Form("L1XE50CorrectedToZBmu%.0fthru%.0f" , muLow , muHigh );
-           Corrected_Title.Form("L1XE50 Data Corrected back to Zerobias For Actint Between %.0f and %.0f" , muLow , muHigh );
+           Corrected_Name.Form("L1XE50CorrectedToZBmubin%d", i);
+           Corrected_Title.Form("L1XE50 Data Corrected back to Zerobias For Actint bin %d" , i);
            HLT_ZB_L1XE50_Corrected_to_ZB_MET_Distribution[i] = new TH1F( Corrected_Name , Corrected_Title , met_dist_nbins , gevLow , gevHigh );
 
            EfficiencyName.Form("metL1XE30EfficiencyMubin%d", i);

@@ -3,7 +3,7 @@
 #include "Jburr_Template_Selector.h"
 class ComputeL1XE30toZBEfficiency : public Jburr_Template_Selector {
 public :
-   ComputeL1XE30toZBEfficiency(){std::cout << "L1 cut: " << L1XE << std::endl;};
+   ComputeL1XE30toZBEfficiency(){};
    ~ComputeL1XE30toZBEfficiency() { };
    Bool_t  Process(Long64_t entry);
    void    Terminate();
