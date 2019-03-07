@@ -196,9 +196,6 @@ public :
    Double_t ComputeWeight(TF1* fitFunc, TF1* fitFunc2 = NULL);//}}}
    ClassDef(Jburr_Template_Selector,0);
    // Readers to access the data (delete the ones you do not need){{{
-   TTreeReaderValue<Float_t> MET_Data = {fReader, zb_alg_name };
-   TTreeReaderValue<Float_t> L1_MET = {fReader, l1_alg_name};
-
    TTreeReaderValue<UInt_t> RunNumber = {fReader, "RunNumber"};
    TTreeReaderValue<ULong64_t> EventNumber = {fReader, "EventNumber"};
    TTreeReaderValue<Float_t> InTimePileup = {fReader, "InTimePileup"};

@@ -12,8 +12,8 @@ Bool_t ComputeL1XE30toZBEfficiency::Process(Long64_t entry)//{{{
            muHigh = Mu_Values[ i + 1 ];
            if ( inMuRange( muLow , muHigh ) ){
                for ( int j = 0 ; j < Number_Mu_Bins ; j++ ){
-                   HLT_ZB_L1ZB_MET_Distributions_by_Mubin[j]->Fill(*MET_Data , *HLT_noalg_zb_L1ZB_prescale);
-                   L1XE30_Efficiency_Objects[j]->Fill(*L1_MET > L1XE , *MET_Data);
+                   HLT_ZB_L1ZB_MET_Distributions_by_Mubin[j]->Fill(*cell_met , *HLT_noalg_zb_L1ZB_prescale);
+                   L1XE30_Efficiency_Objects[j]->Fill(*L1_met > L1XE , *cell_met);
                }
            }
        }
