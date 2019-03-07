@@ -78,6 +78,7 @@ public :
    // Member Functions {{{
    // Default Constructor {{{
    Jburr_Template_Selector(){ 
+       std::cout << "Calling Jburr Constructor" << std::endl;
        for (int i = 0 ; i < Number_Mu_Bins + 1; i++){
            Mu_Values[i] = i * 10.;
            Name.Form("hlt_zb_l1zb_met_dist_mubin%d" , i );

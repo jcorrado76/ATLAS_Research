@@ -3,6 +3,7 @@
 ClassImp(ComputeL1XE30toZBEfficiency);
 Bool_t ComputeL1XE30toZBEfficiency::Process(Long64_t entry)//{{{
 {
+    std::cout << HLT_ZB_L1ZB_MET_Distributions_by_Mubin[0]->GetName() << std::endl;
    fReader.SetLocalEntry(entry);
    // if the event has passed HLT_noalg_zb_L1ZB_passed, and is not one of the bad run numbers
    if ( isHLT_zb_L1ZB()  && isGoodRun() ){
@@ -12,9 +13,10 @@ Bool_t ComputeL1XE30toZBEfficiency::Process(Long64_t entry)//{{{
            muHigh = Mu_Values[ i + 1 ];
            if ( inMuRange( muLow , muHigh ) ){
                for ( int j = 0 ; j < Number_Mu_Bins ; j++ ){
-                   HLT_ZB_L1ZB_MET_Distributions_by_Mubin[j]->Fill(*cell_met , *HLT_noalg_zb_L1ZB_prescale);
-                   std::cout << L1XE30_Efficiency_Objects[j]->GetName() << std::endl;
-                   L1XE30_Efficiency_Objects[j]->Fill(*L1_met > L1XE , *cell_met);
+                   // at does bounds checking
+                   HLT_ZB_L1ZB_MET_Distributions_by_Mubin.at(j)->Fill(*cell_met , *HLT_noalg_zb_L1ZB_prescale);
+                   std::cout << L1XE30_Efficiency_Objects.at(j)->GetName() << std::endl;
+                   L1XE30_Efficiency_Objects.at(j)->Fill(*L1_met > L1XE , *cell_met);
                }
            }
        }
