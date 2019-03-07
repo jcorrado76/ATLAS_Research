@@ -8,7 +8,7 @@
         std::cout << "Processing L1XE30toZBEfficiency..." << std::endl;
         // create an analysis object to generate the l1xe30 efficiencies
         ComputeL1XE30toZBEfficiency* buildl1xe30Efficiencies = new ComputeL1XE30toZBEfficiency();
-        zb_chain->Process( buildl1xe30Efficiencies );
+        zb_chain->Process( buildl1xe30Efficiencies);
     }
     else{
         std::cout << "ZB Jburr data file not found..." << std::endl;
