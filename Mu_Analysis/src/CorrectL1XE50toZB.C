@@ -9,7 +9,7 @@ Bool_t CorrectL1XE50toZB::Process(Long64_t entry)//{{{
    if ( isHLT_zb_L1XE50() && isGoodRun() ){
        for ( int i = 0 ; i < Number_Mu_Bins ; i++ ) {
            if ( inMuRange( Mu_Values[i] , Mu_Values[i+1] )){
-                HLT_ZB_L1XE50_Corrected_to_ZB_MET_Distribution[i]->Fill( *cell_met , ComputeWeight( L1XE30_Efficiency_Fit_Objects[i], L1XE50_Efficiency_Fit_Objects[i] ) );
+                ((TH1F*)HLT_ZB_L1XE50_Corrected_to_ZB_MET_Distribution[i])->Fill( *cell_met , ComputeWeight( L1XE30_Efficiency_Fit_Objects[i], L1XE50_Efficiency_Fit_Objects[i] ) );
             }
         }
    }
@@ -31,16 +31,14 @@ void CorrectL1XE50toZB::Write( TString fname ){//{{{
     TFile* mu_analysis_file = TFile::Open("mu_analysis.root","UPDATE");
     if ( mu_analysis_file->IsOpen() ){
         printf("File opened successfully\n");
-        for ( int i = 0 ; i < Number_Mu_Bins ; i++ ){
-            HLT_ZB_L1ZB_MET_Distributions_by_Mubin.at(i)->Write("",kOverwrite);
-            HLT_ZB_L1XE30_MET_Distributions_by_Mubin.at(i)->Write("",kOverwrite);
-            HLT_ZB_L1XE30_Corrected_to_ZB_MET_Distribution.at(i)->Write("",kOverwrite);
-            HLT_ZB_L1XE50_Corrected_to_ZB_MET_Distribution.at(i)->Write("",kOverwrite);
-            L1XE30_Efficiency_Objects.at(i)->Write("",kOverwrite);
-            L1XE50_Efficiency_Objects.at(i)->Write("",kOverwrite);
-            L1XE30_Efficiency_Fit_Objects.at(i)->Write("",kOverwrite);
-            L1XE50_Efficiency_Fit_Objects.at(i)->Write("",kOverwrite);
-      }
+            HLT_ZB_L1ZB_MET_Distributions_by_Mubin->Write("",{TObject::kSingleKey,TObject::kOverwrite});
+            HLT_ZB_L1XE30_MET_Distributions_by_Mubin->Write("",{TObject::kSingleKey,TObject::kOverwrite});
+            HLT_ZB_L1XE30_Corrected_to_ZB_MET_Distribution->Write("",{TObject::kSingleKey,TObject::kOverwrite});
+            HLT_ZB_L1XE50_Corrected_to_ZB_MET_Distribution->Write("",{TObject::kSingleKey,TObject::kOverwrite});
+            L1XE30_Efficiency_Objects->Write("",{TObject::kSingleKey,TObject::kOverwrite});
+            L1XE50_Efficiency_Objects->Write("",{TObject::kSingleKey,TObject::kOverwrite});
+            L1XE30_Efficiency_Fit_Objects->Write("",{TObject::kSingleKey,TObject::kOverwrite});
+            L1XE50_Efficiency_Fit_Objects->Write("",{TObject::kSingleKey,TObject::kOverwrite});
     }else{
         printf("Unable to open file\n");
     }

@@ -6,7 +6,7 @@ Bool_t CorrectL1XE30toZB::Process(Long64_t entry)//{{{
     if ( isHLT_zb_L1XE30() && isGoodRun() ){
         for ( int i = 0 ; i < Number_Mu_Bins ; i++ ) {
             if ( inMuRange( Mu_Values[i] , Mu_Values[i+1] )){
-                HLT_ZB_L1XE30_Corrected_to_ZB_MET_Distribution[i]->Fill( *cell_met , ComputeWeight( L1XE30_Efficiency_Fit_Objects[i] ) );
+                ((TH1F*)HLT_ZB_L1XE30_Corrected_to_ZB_MET_Distribution[i])->Fill( *cell_met , ComputeWeight( L1XE30_Efficiency_Fit_Objects[i] ) );
             }
         }
     }
