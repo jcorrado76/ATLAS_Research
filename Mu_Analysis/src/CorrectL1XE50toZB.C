@@ -34,18 +34,31 @@ void CorrectL1XE50toZB::Terminate(){//{{{
         HLT_ZB_L1XE50_Corrected_to_ZB_MET_Distribution[i]->Scale( Scale_Factors[i] );
     }
 }//}}}
-void CorrectL1XE50toZB::Streamer( TBuffer &R__b ){//{{{
-    if (R__b.IsReading()) {
-      TObject::Streamer(R__b);
-      for ( int i = 0 ; i < Number_Mu_Bins ; i++ ){
-       R__b >> HLT_ZB_L1XE50_Corrected_to_ZB_MET_Distribution.at(i);
+void CorrectL1XE50toZB::Write( TString* fname ){//{{{
+    TFile* mu_analysis_file = TFile::Open("mu_analysis.root","UPDATE");
+    if ( mu_analysis_file->IsOpen() ){
+        printf("File opened successfully\n");
+        for ( int i = 0 ; i < Number_Mu_Bins ; i++ ){
+            HLT_ZB_L1ZB_MET_Distributions_by_Mubin.at(i)->Write("",kOverwrite);
+            std::cout << "wrote hlt_zb_l1_zb_dist_" << i << std::endl;
+            HLT_ZB_L1XE30_MET_Distributions_by_Mubin.at(i)->Write("",kOverwrite);
+            std::cout << "wrote hlt_zb_l1_zb_dist_" << i << std::endl;
+            HLT_ZB_L1XE30_Corrected_to_ZB_MET_Distribution.at(i)->Write("",kOverwrite);
+            std::cout << "wrote corrected_hlt_zb_l1_xe30_tozb_dist_" << i << std::endl;
+            HLT_ZB_L1XE50_Corrected_to_ZB_MET_Distribution.at(i)->Write("",kOverwrite);
+            std::cout << "wrote corrected_hlt_zb_l1xe50_tozb_dist_" << i << std::endl;
+            L1XE30_Efficiency_Objects.at(i)->Write("",kOverwrite);
+            std::cout << "wrote l1xe30EfficiencyObject_" << i << std::endl;
+            L1XE50_Efficiency_Objects.at(i)->Write("",kOverwrite);
+            std::cout << "wrote l1xe50efficiencyObject_" << i << std::endl;
+            L1XE30_Efficiency_Fit_Objects.at(i)->Write("",kOverwrite);
+            std::cout << "l1xe30efficiencyFitObject_" << i << std::endl;
+            L1XE50_Efficiency_Fit_Objects.at(i)->Write("",kOverwrite);
+            std::cout << "wrote l1xe50efficiencyFitObject_" << i << std::endl;
       }
-   } else {
-      R__b.WriteVersion(Jburr_Template_Selector::IsA());
-      TObject::Streamer(R__b);
-      for ( int i = 0 ; i < Number_Mu_Bins ; i++ ){
-       R__b << HLT_ZB_L1XE50_Corrected_to_ZB_MET_Distribution.at(i);
-       std::cout << "wrote corrected_hlt_zb_l1xe50_tozb_dist_" << i << std::endl;
-      }
-   }
+    }else{
+        printf("Unable to open file\n");
+    }
+
+    mu_analysis_file->Close();
 }//}}}

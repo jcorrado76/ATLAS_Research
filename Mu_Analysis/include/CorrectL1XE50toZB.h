@@ -17,6 +17,7 @@ public :
    ~CorrectL1XE50toZB() { }
    Bool_t  Process(Long64_t entry);
    void    Terminate();
+   void Write( TString* fname );
    ClassDef(CorrectL1XE50toZB,0);
 };
 

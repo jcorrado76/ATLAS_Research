@@ -25,24 +25,3 @@ void ComputeL1XE30toZBEfficiency::Terminate() //{{{
     L1XE30_Efficiency_Fit_Objects[i] = generateFitFunction( L1XE30_Efficiency_Objects[i] );
     }
 }//}}}
-void ComputeL1XE30toZBEfficiency::Streamer( TBuffer &R__b ){//{{{
-    if (R__b.IsReading()) {
-      TObject::Streamer(R__b);
-      for ( int i = 0 ; i < Number_Mu_Bins ; i++ ){
-       R__b >> HLT_ZB_L1ZB_MET_Distributions_by_Mubin.at(i);
-       R__b >> L1XE30_Efficiency_Objects.at(i);
-       R__b >> L1XE30_Efficiency_Fit_Objects.at(i);
-      }
-   } else {
-      R__b.WriteVersion(Jburr_Template_Selector::IsA());
-      TObject::Streamer(R__b);
-      for ( int i = 0 ; i < Number_Mu_Bins ; i++ ){
-       R__b << HLT_ZB_L1ZB_MET_Distributions_by_Mubin.at(i);
-       std::cout << "wrote hlt_zb_l1_zb_dist_" << i << std::endl;
-       R__b << L1XE30_Efficiency_Objects.at(i);
-       std::cout << "wrote l1xe30EfficiencyObject_" << i << std::endl;
-       R__b << L1XE30_Efficiency_Fit_Objects.at(i);
-       std::cout << "l1xe30efficiencyFitObject_" << i << std::endl;
-      }
-   }
-}//}}}
