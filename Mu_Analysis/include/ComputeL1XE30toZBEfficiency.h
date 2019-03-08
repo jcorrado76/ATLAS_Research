@@ -7,17 +7,17 @@ public :
        for (int i = 0 ; i < Number_Mu_Bins; i++){
            Name.Form("hlt_zb_l1zb_met_dist_mubin%d" , i );
            Title.Form("HLT ZB L1ZB MET Distribution for %s for Actint bin %d" , Alg_Name.Data(), i);
-           (TH1F*)HLT_ZB_L1ZB_MET_Distributions_by_Mubin[i] = new TH1F( Name , Title , met_dist_nbins , gevLow , gevHigh );
-           (TH1F*)HLT_ZB_L1ZB_MET_Distributions_by_Mubin[i]->SetLineColor( Colors[i] );
+           HLT_ZB_L1ZB_MET_Distributions_by_Mubin->Add(new TH1F( Name , Title , met_dist_nbins , gevLow , gevHigh ));
+           ((TH1F*)HLT_ZB_L1ZB_MET_Distributions_by_Mubin->At(i))->SetLineColor( Colors[i] );
 
            EfficiencyName.Form("metL1XE30EfficiencyMubin%d", i);
            EfficiencyTitle.Form("Efficiency of L1XE 30 As a Function of %s for Actint bin %d", Alg_Name.Data() , i);
-           (TEfficiency*)L1XE30_Efficiency_Objects[i] = new TEfficiency( EfficiencyName , EfficiencyTitle , efficiency_nbins , gevLow , gevHigh );
-           (TF1*)L1XE30_Efficiency_Fit_Objects[i] = new TF1();
+           L1XE30_Efficiency_Objects->Add(new TEfficiency( EfficiencyName , EfficiencyTitle , efficiency_nbins , gevLow , gevHigh ));
+           L1XE30_Efficiency_Fit_Objects->Add(new TF1());
 
-           (TEfficiency*)L1XE30_Efficiency_Objects[i]->SetLineColor( Colors[i] );
-           (TEfficiency*)L1XE30_Efficiency_Objects[i]->SetMarkerStyle( Colors[i] );
-           (TF1*);L1XE30_Efficiency_Fit_Objects[i]->SetLineColor( Colors[i] );
+           ((TEfficiency*)L1XE30_Efficiency_Objects->At(i))->SetLineColor( Colors[i] );
+           ((TEfficiency*)L1XE30_Efficiency_Objects->At(i))->SetMarkerStyle( Colors[i] );
+           ((TF1*)L1XE30_Efficiency_Fit_Objects->At(i))->SetLineColor( Colors[i] );
        }
    }
    ~ComputeL1XE30toZBEfficiency() { };

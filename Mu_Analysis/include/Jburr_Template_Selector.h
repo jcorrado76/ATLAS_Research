@@ -113,14 +113,14 @@ public :
     TObjArray* Get_L1XE30_Efficiency_Fit_Objects() const { return L1XE30_Efficiency_Fit_Objects; }
     TObjArray* Get_L1XE50_Efficiency_Fit_Objects() const { return L1XE50_Efficiency_Fit_Objects; }
     // setters
-   void Set_HLT_ZB_L1ZB_MET_Distributions_by_Mubin(const TObjArray* const other){ HLT_ZB_L1ZB_MET_Distributions_by_Mubin = other; }
-   void Set_HLT_ZB_L1XE30_MET_Distributions_by_Mubin(const TObjArray* const other){ HLT_ZB_L1XE30_MET_Distributions_by_Mubin = other ; }
-   void Set_HLT_ZB_L1XE30_Corrected_to_ZB_MET_Distribution(const TObjArray* const other){ HLT_ZB_L1XE30_Corrected_to_ZB_MET_Distribution = other ; }
-   void Set_HLT_ZB_L1XE50_Corrected_to_ZB_MET_Distribution(const TObjArray* const other){ HLT_ZB_L1XE50_Corrected_to_ZB_MET_Distribution = other ; }
-   void Set_L1XE30_Efficiency_Objects(const TObjArray* const other){ L1XE30_Efficiency_Objects = other ; }
-   void Set_L1XE50_Efficiency_Objects(const TObjArray* const other){ L1XE50_Efficiency_Objects = other ; }
-   void Set_L1XE30_Efficiency_Fit_Objects(const TObjArray* const other){ L1XE30_Efficiency_Fit_Objects = other ; }
-   void Set_L1XE50_Efficiency_Fit_Objects(const TObjArray* const other){ L1XE50_Efficiency_Fit_Objects = other; }
+   void Set_HLT_ZB_L1ZB_MET_Distributions_by_Mubin(TObjArray* const other){ HLT_ZB_L1ZB_MET_Distributions_by_Mubin = other; }
+   void Set_HLT_ZB_L1XE30_MET_Distributions_by_Mubin(TObjArray* const other){ HLT_ZB_L1XE30_MET_Distributions_by_Mubin = other ; }
+   void Set_HLT_ZB_L1XE30_Corrected_to_ZB_MET_Distribution(TObjArray* const other){ HLT_ZB_L1XE30_Corrected_to_ZB_MET_Distribution = other ; }
+   void Set_HLT_ZB_L1XE50_Corrected_to_ZB_MET_Distribution(TObjArray* const other){ HLT_ZB_L1XE50_Corrected_to_ZB_MET_Distribution = other ; }
+   void Set_L1XE30_Efficiency_Objects(TObjArray* const other){ L1XE30_Efficiency_Objects = other ; }
+   void Set_L1XE50_Efficiency_Objects(TObjArray* const other){ L1XE50_Efficiency_Objects = other ; }
+   void Set_L1XE30_Efficiency_Fit_Objects(TObjArray* const other){ L1XE30_Efficiency_Fit_Objects = other ; }
+   void Set_L1XE50_Efficiency_Fit_Objects(TObjArray* const other){ L1XE50_Efficiency_Fit_Objects = other; }
    // TODO: make sure you add default val for l1cut parameter once you figured out workaround for making it an argument
    //static Double_t fitFunction(Double_t *x , Double_t *par );
    TF1* generateFitFunction(TEfficiency* teff_obj, float gevMax = 300.0, float initial_slope = 0.1 , 
