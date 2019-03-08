@@ -43,6 +43,11 @@
     }
 
     TFile* mu_analysis_file = TFile::Open("mu_analysis.root","UPDATE");
+    if ( mu_analysis_file->IsOpen() ){
+        printf("File opened successfully\n");
+        CorrectL1XE50DataAllWay->Write();
+    }
+    mu_analysis_file->Close();
 
     // TODO: write the full correction object to file
 
