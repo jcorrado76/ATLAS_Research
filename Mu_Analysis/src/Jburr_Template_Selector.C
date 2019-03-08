@@ -72,7 +72,6 @@ Double_t Jburr_Template_Selector::ComputeWeight(TF1* fitFunc, TF1* fitFunc2 )//{
 Bool_t Jburr_Template_Selector::Notify(){return kTRUE;}
 void Jburr_Template_Selector::Streamer( TBuffer &R__b ){//{{{
     if (R__b.IsReading()) {
-      Version_t R__v = R__b.ReadVersion();
       TObject::Streamer(R__b);
       for ( int i = 0 ; i < Number_Mu_Bins ; i++ ){
        R__b >> HLT_ZB_L1ZB_MET_Distributions_by_Mubin.at(i);
@@ -89,13 +88,21 @@ void Jburr_Template_Selector::Streamer( TBuffer &R__b ){//{{{
       TObject::Streamer(R__b);
       for ( int i = 0 ; i < Number_Mu_Bins ; i++ ){
        R__b << HLT_ZB_L1ZB_MET_Distributions_by_Mubin.at(i);
+       std::cout << "wrote hlt_zb_l1_zb_dist_" << i << std::endl;
        R__b << HLT_ZB_L1XE30_MET_Distributions_by_Mubin.at(i);
+       std::cout << "wrote hlt_zb_l1_zb_dist_" << i << std::endl;
        R__b << HLT_ZB_L1XE30_Corrected_to_ZB_MET_Distribution.at(i);
+       std::cout << "wrote hlt_zb_l1_xe30_dist_" << i << std::endl;
        R__b << HLT_ZB_L1XE50_Corrected_to_ZB_MET_Distribution.at(i);
+       std::cout << "wrote corrected_hlt_zb_l1xe50_tozb_dist_" << i << std::endl;
        R__b << L1XE30_Efficiency_Objects.at(i);
+       std::cout << "wrote l1xe30EfficiencyObject_" << i << std::endl;
        R__b << L1XE50_Efficiency_Objects.at(i);
+       std::cout << "wrote l1xe50efficiencyObject_" << i << std::endl;
        R__b << L1XE30_Efficiency_Fit_Objects.at(i);
+       std::cout << "l1xe30efficiencyFitObject_" << i << std::endl;
        R__b << L1XE50_Efficiency_Fit_Objects.at(i);
+       std::cout << "wrote l1xe50efficiencyFitObject_" << i << std::endl;
       }
    }
 }//}}}

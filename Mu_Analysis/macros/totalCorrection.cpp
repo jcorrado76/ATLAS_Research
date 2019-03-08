@@ -34,7 +34,7 @@
         CorrectL1XE50DataAllWay->Set_L1XE50_Efficiency_Fit_Objects(computeL1XE50toL1XE30Efficiency->Get_L1XE50_Efficiency_Fit_Objects());
         CorrectL1XE50DataAllWay->Set_L1XE30_Efficiency_Objects(computeL1XE30toZBEfficiency->Get_L1XE30_Efficiency_Objects());
         CorrectL1XE50DataAllWay->Set_L1XE50_Efficiency_Objects(computeL1XE50toL1XE30Efficiency->Get_L1XE50_Efficiency_Objects());
-        CorrectL1XE50DataAllWay->Set_HLT_ZB_L1XE30_Corrected_to_ZB_MET_Distribution(computeL1XE50toL1XE30Efficiency->Get_HLT_ZB_L1XE30_Corrected_to_ZB_MET_Distribution());
+        CorrectL1XE50DataAllWay->Set_HLT_ZB_L1XE30_Corrected_to_ZB_MET_Distribution(correctL1XE30ToZB->Get_HLT_ZB_L1XE30_Corrected_to_ZB_MET_Distribution());
         // then correct the l1xe50 data back to zerobias
         std::cout << "Processing Correct L1XE50 Data to ZB..." << std::endl;
         jetm10_chain->Process( CorrectL1XE50DataAllWay );

@@ -86,6 +86,7 @@ namespace ROOT {
    static void delete_CorrectL1XE30toZB(void *p);
    static void deleteArray_CorrectL1XE30toZB(void *p);
    static void destruct_CorrectL1XE30toZB(void *p);
+   static void streamer_CorrectL1XE30toZB(TBuffer &buf, void *obj);
 
    // Function generating the singleton type initializer
    static TGenericClassInfo *GenerateInitInstanceLocal(const ::CorrectL1XE30toZB*)
@@ -95,13 +96,14 @@ namespace ROOT {
       static ::ROOT::TGenericClassInfo 
          instance("CorrectL1XE30toZB", ::CorrectL1XE30toZB::Class_Version(), "CorrectL1XE30toZB.h", 4,
                   typeid(::CorrectL1XE30toZB), ::ROOT::Internal::DefineBehavior(ptr, ptr),
-                  &::CorrectL1XE30toZB::Dictionary, isa_proxy, 4,
+                  &::CorrectL1XE30toZB::Dictionary, isa_proxy, 17,
                   sizeof(::CorrectL1XE30toZB) );
       instance.SetNew(&new_CorrectL1XE30toZB);
       instance.SetNewArray(&newArray_CorrectL1XE30toZB);
       instance.SetDelete(&delete_CorrectL1XE30toZB);
       instance.SetDeleteArray(&deleteArray_CorrectL1XE30toZB);
       instance.SetDestructor(&destruct_CorrectL1XE30toZB);
+      instance.SetStreamerFunc(&streamer_CorrectL1XE30toZB);
       return &instance;
    }
    TGenericClassInfo *GenerateInitInstance(const ::CorrectL1XE30toZB*)
@@ -118,6 +120,7 @@ namespace ROOT {
    static void delete_CorrectL1XE50toZB(void *p);
    static void deleteArray_CorrectL1XE50toZB(void *p);
    static void destruct_CorrectL1XE50toZB(void *p);
+   static void streamer_CorrectL1XE50toZB(TBuffer &buf, void *obj);
 
    // Function generating the singleton type initializer
    static TGenericClassInfo *GenerateInitInstanceLocal(const ::CorrectL1XE50toZB*)
@@ -127,13 +130,14 @@ namespace ROOT {
       static ::ROOT::TGenericClassInfo 
          instance("CorrectL1XE50toZB", ::CorrectL1XE50toZB::Class_Version(), "CorrectL1XE50toZB.h", 6,
                   typeid(::CorrectL1XE50toZB), ::ROOT::Internal::DefineBehavior(ptr, ptr),
-                  &::CorrectL1XE50toZB::Dictionary, isa_proxy, 4,
+                  &::CorrectL1XE50toZB::Dictionary, isa_proxy, 17,
                   sizeof(::CorrectL1XE50toZB) );
       instance.SetNew(&new_CorrectL1XE50toZB);
       instance.SetNewArray(&newArray_CorrectL1XE50toZB);
       instance.SetDelete(&delete_CorrectL1XE50toZB);
       instance.SetDeleteArray(&deleteArray_CorrectL1XE50toZB);
       instance.SetDestructor(&destruct_CorrectL1XE50toZB);
+      instance.SetStreamerFunc(&streamer_CorrectL1XE50toZB);
       return &instance;
    }
    TGenericClassInfo *GenerateInitInstance(const ::CorrectL1XE50toZB*)
@@ -150,6 +154,7 @@ namespace ROOT {
    static void delete_ComputeL1XE30toZBEfficiency(void *p);
    static void deleteArray_ComputeL1XE30toZBEfficiency(void *p);
    static void destruct_ComputeL1XE30toZBEfficiency(void *p);
+   static void streamer_ComputeL1XE30toZBEfficiency(TBuffer &buf, void *obj);
 
    // Function generating the singleton type initializer
    static TGenericClassInfo *GenerateInitInstanceLocal(const ::ComputeL1XE30toZBEfficiency*)
@@ -159,13 +164,14 @@ namespace ROOT {
       static ::ROOT::TGenericClassInfo 
          instance("ComputeL1XE30toZBEfficiency", ::ComputeL1XE30toZBEfficiency::Class_Version(), "ComputeL1XE30toZBEfficiency.h", 4,
                   typeid(::ComputeL1XE30toZBEfficiency), ::ROOT::Internal::DefineBehavior(ptr, ptr),
-                  &::ComputeL1XE30toZBEfficiency::Dictionary, isa_proxy, 4,
+                  &::ComputeL1XE30toZBEfficiency::Dictionary, isa_proxy, 17,
                   sizeof(::ComputeL1XE30toZBEfficiency) );
       instance.SetNew(&new_ComputeL1XE30toZBEfficiency);
       instance.SetNewArray(&newArray_ComputeL1XE30toZBEfficiency);
       instance.SetDelete(&delete_ComputeL1XE30toZBEfficiency);
       instance.SetDeleteArray(&deleteArray_ComputeL1XE30toZBEfficiency);
       instance.SetDestructor(&destruct_ComputeL1XE30toZBEfficiency);
+      instance.SetStreamerFunc(&streamer_ComputeL1XE30toZBEfficiency);
       return &instance;
    }
    TGenericClassInfo *GenerateInitInstance(const ::ComputeL1XE30toZBEfficiency*)
@@ -182,6 +188,7 @@ namespace ROOT {
    static void delete_ComputeL1XE50toL1XE30Efficiency(void *p);
    static void deleteArray_ComputeL1XE50toL1XE30Efficiency(void *p);
    static void destruct_ComputeL1XE50toL1XE30Efficiency(void *p);
+   static void streamer_ComputeL1XE50toL1XE30Efficiency(TBuffer &buf, void *obj);
 
    // Function generating the singleton type initializer
    static TGenericClassInfo *GenerateInitInstanceLocal(const ::ComputeL1XE50toL1XE30Efficiency*)
@@ -191,13 +198,14 @@ namespace ROOT {
       static ::ROOT::TGenericClassInfo 
          instance("ComputeL1XE50toL1XE30Efficiency", ::ComputeL1XE50toL1XE30Efficiency::Class_Version(), "ComputeL1XE50toL1XE30Efficiency.h", 6,
                   typeid(::ComputeL1XE50toL1XE30Efficiency), ::ROOT::Internal::DefineBehavior(ptr, ptr),
-                  &::ComputeL1XE50toL1XE30Efficiency::Dictionary, isa_proxy, 4,
+                  &::ComputeL1XE50toL1XE30Efficiency::Dictionary, isa_proxy, 17,
                   sizeof(::ComputeL1XE50toL1XE30Efficiency) );
       instance.SetNew(&new_ComputeL1XE50toL1XE30Efficiency);
       instance.SetNewArray(&newArray_ComputeL1XE50toL1XE30Efficiency);
       instance.SetDelete(&delete_ComputeL1XE50toL1XE30Efficiency);
       instance.SetDeleteArray(&deleteArray_ComputeL1XE50toL1XE30Efficiency);
       instance.SetDestructor(&destruct_ComputeL1XE50toL1XE30Efficiency);
+      instance.SetStreamerFunc(&streamer_ComputeL1XE50toL1XE30Efficiency);
       return &instance;
    }
    TGenericClassInfo *GenerateInitInstance(const ::ComputeL1XE50toL1XE30Efficiency*)
@@ -408,18 +416,6 @@ namespace ROOT {
    }
 } // end of namespace ROOT for class ::Jburr_Template_Selector
 
-//______________________________________________________________________________
-void CorrectL1XE30toZB::Streamer(TBuffer &R__b)
-{
-   // Stream an object of class CorrectL1XE30toZB.
-
-   if (R__b.IsReading()) {
-      R__b.ReadClassBuffer(CorrectL1XE30toZB::Class(),this);
-   } else {
-      R__b.WriteClassBuffer(CorrectL1XE30toZB::Class(),this);
-   }
-}
-
 namespace ROOT {
    // Wrappers around operator new
    static void *new_CorrectL1XE30toZB(void *p) {
@@ -439,19 +435,11 @@ namespace ROOT {
       typedef ::CorrectL1XE30toZB current_t;
       ((current_t*)p)->~current_t();
    }
-} // end of namespace ROOT for class ::CorrectL1XE30toZB
-
-//______________________________________________________________________________
-void CorrectL1XE50toZB::Streamer(TBuffer &R__b)
-{
-   // Stream an object of class CorrectL1XE50toZB.
-
-   if (R__b.IsReading()) {
-      R__b.ReadClassBuffer(CorrectL1XE50toZB::Class(),this);
-   } else {
-      R__b.WriteClassBuffer(CorrectL1XE50toZB::Class(),this);
+   // Wrapper around a custom streamer member function.
+   static void streamer_CorrectL1XE30toZB(TBuffer &buf, void *obj) {
+      ((::CorrectL1XE30toZB*)obj)->::CorrectL1XE30toZB::Streamer(buf);
    }
-}
+} // end of namespace ROOT for class ::CorrectL1XE30toZB
 
 namespace ROOT {
    // Wrappers around operator new
@@ -472,19 +460,11 @@ namespace ROOT {
       typedef ::CorrectL1XE50toZB current_t;
       ((current_t*)p)->~current_t();
    }
-} // end of namespace ROOT for class ::CorrectL1XE50toZB
-
-//______________________________________________________________________________
-void ComputeL1XE30toZBEfficiency::Streamer(TBuffer &R__b)
-{
-   // Stream an object of class ComputeL1XE30toZBEfficiency.
-
-   if (R__b.IsReading()) {
-      R__b.ReadClassBuffer(ComputeL1XE30toZBEfficiency::Class(),this);
-   } else {
-      R__b.WriteClassBuffer(ComputeL1XE30toZBEfficiency::Class(),this);
+   // Wrapper around a custom streamer member function.
+   static void streamer_CorrectL1XE50toZB(TBuffer &buf, void *obj) {
+      ((::CorrectL1XE50toZB*)obj)->::CorrectL1XE50toZB::Streamer(buf);
    }
-}
+} // end of namespace ROOT for class ::CorrectL1XE50toZB
 
 namespace ROOT {
    // Wrappers around operator new
@@ -505,19 +485,11 @@ namespace ROOT {
       typedef ::ComputeL1XE30toZBEfficiency current_t;
       ((current_t*)p)->~current_t();
    }
-} // end of namespace ROOT for class ::ComputeL1XE30toZBEfficiency
-
-//______________________________________________________________________________
-void ComputeL1XE50toL1XE30Efficiency::Streamer(TBuffer &R__b)
-{
-   // Stream an object of class ComputeL1XE50toL1XE30Efficiency.
-
-   if (R__b.IsReading()) {
-      R__b.ReadClassBuffer(ComputeL1XE50toL1XE30Efficiency::Class(),this);
-   } else {
-      R__b.WriteClassBuffer(ComputeL1XE50toL1XE30Efficiency::Class(),this);
+   // Wrapper around a custom streamer member function.
+   static void streamer_ComputeL1XE30toZBEfficiency(TBuffer &buf, void *obj) {
+      ((::ComputeL1XE30toZBEfficiency*)obj)->::ComputeL1XE30toZBEfficiency::Streamer(buf);
    }
-}
+} // end of namespace ROOT for class ::ComputeL1XE30toZBEfficiency
 
 namespace ROOT {
    // Wrappers around operator new
@@ -537,6 +509,10 @@ namespace ROOT {
    static void destruct_ComputeL1XE50toL1XE30Efficiency(void *p) {
       typedef ::ComputeL1XE50toL1XE30Efficiency current_t;
       ((current_t*)p)->~current_t();
+   }
+   // Wrapper around a custom streamer member function.
+   static void streamer_ComputeL1XE50toL1XE30Efficiency(TBuffer &buf, void *obj) {
+      ((::ComputeL1XE50toL1XE30Efficiency*)obj)->::ComputeL1XE50toL1XE30Efficiency::Streamer(buf);
    }
 } // end of namespace ROOT for class ::ComputeL1XE50toL1XE30Efficiency
 

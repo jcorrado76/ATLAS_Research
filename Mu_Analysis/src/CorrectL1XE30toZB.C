@@ -108,3 +108,31 @@ void CorrectL1XE30toZB::Terminate(){//{{{
     ////}}}
     //mu_analysis_file->Close();
 }//}}}
+void CorrectL1XE30toZB::Streamer( TBuffer &R__b ){//{{{
+    if (R__b.IsReading()) {
+      TObject::Streamer(R__b);
+      for ( int i = 0 ; i < Number_Mu_Bins ; i++ ){
+       R__b >> HLT_ZB_L1ZB_MET_Distributions_by_Mubin.at(i);
+       R__b >> HLT_ZB_L1XE30_MET_Distributions_by_Mubin.at(i);
+       R__b >> HLT_ZB_L1XE30_Corrected_to_ZB_MET_Distribution.at(i);
+       R__b >> HLT_ZB_L1XE50_Corrected_to_ZB_MET_Distribution.at(i);
+       R__b >> L1XE30_Efficiency_Objects.at(i);
+       R__b >> L1XE50_Efficiency_Objects.at(i);
+       R__b >> L1XE30_Efficiency_Fit_Objects.at(i);
+       R__b >> L1XE50_Efficiency_Fit_Objects.at(i);
+      }
+   } else {
+      R__b.WriteVersion(Jburr_Template_Selector::IsA());
+      TObject::Streamer(R__b);
+      for ( int i = 0 ; i < Number_Mu_Bins ; i++ ){
+       R__b << HLT_ZB_L1ZB_MET_Distributions_by_Mubin.at(i);
+       R__b << HLT_ZB_L1XE30_MET_Distributions_by_Mubin.at(i);
+       R__b << HLT_ZB_L1XE30_Corrected_to_ZB_MET_Distribution.at(i);
+       R__b << HLT_ZB_L1XE50_Corrected_to_ZB_MET_Distribution.at(i);
+       R__b << L1XE30_Efficiency_Objects.at(i);
+       R__b << L1XE50_Efficiency_Objects.at(i);
+       R__b << L1XE30_Efficiency_Fit_Objects.at(i);
+       R__b << L1XE50_Efficiency_Fit_Objects.at(i);
+      }
+   }
+}//}}}
