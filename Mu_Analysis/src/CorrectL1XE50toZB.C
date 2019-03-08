@@ -34,7 +34,7 @@ void CorrectL1XE50toZB::Terminate(){//{{{
         HLT_ZB_L1XE50_Corrected_to_ZB_MET_Distribution[i]->Scale( Scale_Factors[i] );
     }
 }//}}}
-void CorrectL1XE50toZB::Write( TString* fname ){//{{{
+void CorrectL1XE50toZB::Write( TString fname ){//{{{
     TFile* mu_analysis_file = TFile::Open("mu_analysis.root","UPDATE");
     if ( mu_analysis_file->IsOpen() ){
         printf("File opened successfully\n");

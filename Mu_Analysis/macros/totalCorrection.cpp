@@ -44,7 +44,8 @@
         return 0;
     }
 
-    CorrectL1XE50DataAllWay->Write();
+    TString filename("mu_analysis.root");
+    CorrectL1XE50DataAllWay->Write( filename );
 
     // TODO: write the full correction object to file
 
