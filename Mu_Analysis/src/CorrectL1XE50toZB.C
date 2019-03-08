@@ -17,17 +17,10 @@ Bool_t CorrectL1XE50toZB::Process(Long64_t entry)//{{{
 }//}}}
 void CorrectL1XE50toZB::Terminate(){//{{{
 	// Relative Normalization
+    // TODO: do this better
     for ( int i = 0 ; i < Number_Mu_Bins ; i++ ){
         Scale_Factors[i] = HLT_ZB_L1ZB_MET_Distributions_by_Mubin[i]->GetBinContent( Normalization_Bin_Numbers[i] ) / 
             HLT_ZB_L1XE50_Corrected_to_ZB_MET_Distribution[i]->GetBinContent( Normalization_Bin_Numbers[i] );
-        //if (isnan( Scale_Factors[i] )){
-            //std::cout << "Scale factor " << i << ": " << Scale_Factors[i] << " is NaN" << std::endl;
-            //std::cout << "MET Counts in mubin " << i << ": " << 
-                //HLT_ZB_L1ZB_MET_Distributions_by_Mubin[i]->GetBinContent( Normalization_Bin_Numbers[i] ) << 
-                //" in normalization bin number: " << Normalization_Bin_Numbers[i] << std::endl;
-            //std::cout << "Counts in the Normalized MET distribution bin: " << 
-                //HLT_ZB_L1XE50_Corrected_to_ZB_MET_Distribution[i]->GetBinContent( Normalization_Bin_Numbers[i] ) << std::endl;
-        //}
         std::cout << "Scale factor: " << i << " = " << Scale_Factors[i] << std::endl;
         HLT_ZB_L1ZB_MET_Distributions_by_Mubin[i]->SetNormFactor( 1. );
         HLT_ZB_L1XE50_Corrected_to_ZB_MET_Distribution[i]->SetNormFactor( 1. );
