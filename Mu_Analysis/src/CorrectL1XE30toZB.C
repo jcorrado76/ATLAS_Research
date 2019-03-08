@@ -6,7 +6,7 @@ Bool_t CorrectL1XE30toZB::Process(Long64_t entry)//{{{
     if ( isHLT_zb_L1XE30() && isGoodRun() ){
         for ( int i = 0 ; i < Number_Mu_Bins ; i++ ) {
             if ( inMuRange( Mu_Values[i] , Mu_Values[i+1] )){
-                ((TH1F*)HLT_ZB_L1XE30_Corrected_to_ZB_MET_Distribution[i])->Fill( *cell_met , ComputeWeight( L1XE30_Efficiency_Fit_Objects[i] ) );
+                ((TH1F*)HLT_ZB_L1XE30_Corrected_to_ZB_MET_Distribution[i])->Fill( *cell_met , ComputeWeight( (TF1*)L1XE30_Efficiency_Fit_Objects[i] ) );
             }
         }
     }
@@ -16,10 +16,10 @@ void CorrectL1XE30toZB::Terminate(){//{{{
 	// Relative Normalization{{{
     // Scale the corrected ones to the original zb ones
     for (int i = 0 ;i < Number_Mu_Bins ; i++ ) {
-        Scale_Factors[i] = HLT_ZB_L1ZB_MET_Distributions_by_Mubin[i]->GetBinContent( Normalization_Bin_Numbers[i] ) / HLT_ZB_L1XE30_Corrected_to_ZB_MET_Distribution[i]->GetBinContent( Normalization_Bin_Numbers[i] );
-        HLT_ZB_L1ZB_MET_Distributions_by_Mubin[i]->SetNormFactor( 1. );
-        HLT_ZB_L1XE30_Corrected_to_ZB_MET_Distribution[i]->SetNormFactor( 1. );
-        HLT_ZB_L1XE30_Corrected_to_ZB_MET_Distribution[i]->Scale( Scale_Factors[i] );
+        Scale_Factors[i] = (TH1F*)HLT_ZB_L1ZB_MET_Distributions_by_Mubin[i]->GetBinContent( Normalization_Bin_Numbers[i] ) / (TH1F*)HLT_ZB_L1XE30_Corrected_to_ZB_MET_Distribution[i]->GetBinContent( Normalization_Bin_Numbers[i] );
+        (TH1F*)HLT_ZB_L1ZB_MET_Distributions_by_Mubin[i]->SetNormFactor( 1. );
+        (TH1F*)HLT_ZB_L1XE30_Corrected_to_ZB_MET_Distribution[i]->SetNormFactor( 1. );
+        (TH1F*)HLT_ZB_L1XE30_Corrected_to_ZB_MET_Distribution[i]->Scale( Scale_Factors[i] );
     }
     //}}}
     //// plot corrected distributions {{{

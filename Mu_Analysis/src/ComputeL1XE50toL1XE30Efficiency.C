@@ -21,6 +21,6 @@ Bool_t ComputeL1XE50toL1XE30Efficiency::Process(Long64_t entry)//{{{
 void ComputeL1XE50toL1XE30Efficiency::Terminate()//{{{
 {
     for (int i = 0 ; i < Number_Mu_Bins ; i++ ){
-       L1XE50_Efficiency_Fit_Objects[i] = generateFitFunction( L1XE50_Efficiency_Objects[i] );
+       (TF1*)L1XE50_Efficiency_Fit_Objects[i] = generateFitFunction( (TH1F*)L1XE50_Efficiency_Objects[i] );
     }
 }//}}}
