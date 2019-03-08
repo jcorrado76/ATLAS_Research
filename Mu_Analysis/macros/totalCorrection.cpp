@@ -34,12 +34,15 @@
         // need l1xe50 to l1xe30 efficiencies
         CorrectL1XE50DataAllWay->Set_L1XE50_Efficiency_Fit_Objects(computeL1XE50toL1XE30Efficiency->Get_L1XE50_Efficiency_Fit_Objects());
         // then correct the l1xe50 data back to zerobias
+        std::cout << "Processing Correct L1XE50 Data to ZB..." << std::endl;
         jetm10_chain->Process( CorrectL1XE50DataAllWay );
     }
     else{
         std::cout << "JETM10 Jburr data file not found..." << std::endl;
         return 0;
     }
+
+    TFile* mu_analysis_file = TFile::Open("mu_analysis.root","UPDATE");
 
     // TODO: write the full correction object to file
 
