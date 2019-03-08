@@ -16,7 +16,6 @@ public :
    }
 
    ~CorrectL1XE50toZB() { }
-   void    Begin(TTree *tree);
    Bool_t  Process(Long64_t entry);
    void    Terminate();
    ClassDef(CorrectL1XE50toZB,0);
