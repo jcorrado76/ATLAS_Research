@@ -61,11 +61,12 @@ Double_t Jburr_Template_Selector::ComputeWeight(TF1* fitFunc, TF1* fitFunc2 )//{
     Double_t factor = 1.;
     if (!fitFunc2){
         // inside correct l1xe30 to zb
+        // TODO: correct with XE30 prescale
         factor = *HLT_noalg_zb_L1ZB_prescale / fitFunc->Eval( *cell_met );
     }else{
         // inside correct l1xe50 to zb
-        // TODO: is this correct? I added in the extra prescale factor. It might only need to be L1XE30
-        // prescale
+        // TODO: correct with only L1XE50 prescale, but use both efficiency curves
+        //
         factor = (*HLT_noalg_zb_L1ZB_prescale * *HLT_noalg_L1XE30_prescale) / 
             (fitFunc->Eval( *cell_met ) * fitFunc2->Eval( *cell_met ));
     }

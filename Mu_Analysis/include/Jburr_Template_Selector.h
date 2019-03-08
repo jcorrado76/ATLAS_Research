@@ -22,7 +22,7 @@
 #include <TGaxis.h>
 #include <array>
 #include "fitFunction.h"
-#include <TBuffer.h>
+#include <TObjArray.h>
 // end includes}}}
 //class definition {{{
 class Jburr_Template_Selector : public TSelector {
@@ -39,17 +39,17 @@ public :
    const Int_t met_dist_nbins =                                        (gevHigh - gevLow) / met_dist_binwidth; 
    const Int_t efficiency_nbins =                                      (gevHigh - gevLow) / efficiency_bin_width;
    // collections
-   std::array<TH1F*, Number_Mu_Bins> HLT_ZB_L1ZB_MET_Distributions_by_Mubin;
-   std::array<TH1F*, Number_Mu_Bins> HLT_ZB_L1XE30_MET_Distributions_by_Mubin;
+   TObjArray* HLT_ZB_L1ZB_MET_Distributions_by_Mubin;
+   TObjArray* HLT_ZB_L1XE30_MET_Distributions_by_Mubin;
 
-   std::array<TH1F*, Number_Mu_Bins> HLT_ZB_L1XE30_Corrected_to_ZB_MET_Distribution;
-   std::array<TH1F*, Number_Mu_Bins> HLT_ZB_L1XE50_Corrected_to_ZB_MET_Distribution;
+   TObjArray* HLT_ZB_L1XE30_Corrected_to_ZB_MET_Distribution;
+   TObjArray* HLT_ZB_L1XE50_Corrected_to_ZB_MET_Distribution;
 
-   std::array<TEfficiency*, Number_Mu_Bins> L1XE30_Efficiency_Objects;
-   std::array<TEfficiency*, Number_Mu_Bins> L1XE50_Efficiency_Objects;
+   TObjArray* L1XE30_Efficiency_Objects;
+   TObjArray* L1XE50_Efficiency_Objects;
 
-   std::array<TF1*, Number_Mu_Bins> L1XE30_Efficiency_Fit_Objects;
-   std::array<TF1*, Number_Mu_Bins> L1XE50_Efficiency_Fit_Objects;
+   TObjArray* L1XE30_Efficiency_Fit_Objects;
+   TObjArray* L1XE50_Efficiency_Fit_Objects;
    
    Float_t Mu_Values[Number_Mu_Bins+1] =                    { 0.0 };
    Int_t Colors[Number_Mu_Bins] =                           {1,2,3,4,12,6,9};
