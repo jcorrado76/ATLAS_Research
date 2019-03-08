@@ -6,6 +6,8 @@
 class ComputeL1XE50toL1XE30Efficiency : public Jburr_Template_Selector {
 public :
    ComputeL1XE50toL1XE30Efficiency(){ 
+
+       std::cout << "Calling the ComputeL1XE50toL1XE30Efficiency Constructor" << std::endl;
        for (int i = 0 ; i < Number_Mu_Bins; i++){
            Name.Form("hlt_zb_l1xe30_met_dist_mubin%d" , i );
            Title.Form("HLT ZB L1XE30 MET Distribution for %s for Actint bin %d" , Alg_Name.Data(), i);
