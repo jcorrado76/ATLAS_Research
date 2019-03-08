@@ -4,7 +4,6 @@
 class ComputeL1XE30toZBEfficiency : public Jburr_Template_Selector {
 public :
    ComputeL1XE30toZBEfficiency(){
-       std::cout << "Calling the ComputeL1XE30toZBEfficiency Constructor" << std::endl;
        for (int i = 0 ; i < Number_Mu_Bins; i++){
            Name.Form("hlt_zb_l1zb_met_dist_mubin%d" , i );
            Title.Form("HLT ZB L1ZB MET Distribution for %s for Actint bin %d" , Alg_Name.Data(), i);

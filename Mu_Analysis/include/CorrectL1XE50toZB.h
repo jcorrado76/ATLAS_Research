@@ -6,7 +6,6 @@
 class CorrectL1XE50toZB : public Jburr_Template_Selector {
 public :
    CorrectL1XE50toZB(){ 
-       std::cout << "Calling CorrectL1XE50toZB Constructor" << std::endl;
        for (int i = 0 ; i < Number_Mu_Bins; i++){
            Corrected_Name.Form("L1XE50CorrectedToZBmubin%d", i);
            Corrected_Title.Form("L1XE50 Data Corrected back to Zerobias For Actint bin %d" , i);

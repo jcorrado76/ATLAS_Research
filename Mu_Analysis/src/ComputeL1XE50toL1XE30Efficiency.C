@@ -23,31 +23,4 @@ void ComputeL1XE50toL1XE30Efficiency::Terminate()//{{{
     for (int i = 0 ; i < Number_Mu_Bins ; i++ ){
        L1XE50_Efficiency_Fit_Objects[i] = generateFitFunction( L1XE50_Efficiency_Objects[i] );
     }
-    // WRITE TO FILE {{{
-    TFile* Mu_Analysis_File = TFile::Open("run_files/mu_analysis.root", "UPDATE");
-    TDirectory* l1xe30_met_distributions = (TDirectory*) Mu_Analysis_File->Get("l1xe30_met_distributions");
-    if (!l1xe30_met_distributions){
-        l1xe30_met_distributions = Mu_Analysis_File->mkdir("l1xe30_met_distributions");
-    }
-    l1xe30_met_distributions->cd();
-    for ( int i = 0 ; i < Number_Mu_Bins ; i++ ) {
-        Name.Form("l1xe30_met_distribution_mubin%d" , i );
-        HLT_ZB_L1XE30_MET_Distributions_by_Mubin[i]->Write(Name);
-    }
-
-    TDirectory* efficiency_curves = Mu_Analysis_File->mkdir("l1xe50_efficiency_curves");
-    efficiency_curves->cd();
-    for ( int i = 0 ; i < Number_Mu_Bins ; i++ ){
-        Name.Form("l1xe50_efficiency_object_mubin%d" , i );
-        L1XE50_Efficiency_Objects[i]->Write(Name);
-    }
-
-    TDirectory* L1XE50_Efficiency_Fit_Objects_Dir = Mu_Analysis_File->mkdir("l1xe50_efficiency_fits");
-    L1XE50_Efficiency_Fit_Objects_Dir->cd();
-    for ( int i = 0 ; i < Number_Mu_Bins ; i++ ){
-        Name.Form("l1xe50_efficiency_fit_mubin%d" , i );
-        L1XE50_Efficiency_Fit_Objects[i]->Write(Name);
-    }
-
-    Mu_Analysis_File->Close();//}}}
 }//}}}

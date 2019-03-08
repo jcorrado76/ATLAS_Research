@@ -27,8 +27,11 @@
         // create the l1xe50 to l1xe30 efficiency curves
         jetm10_chain->Process( computeL1XE50toL1XE30Efficiency );
 
-        // pass all the efficiency curves to correct all the way 
+        // need zb l1 zb met dist for normalization
+        CorrectL1XE50DataAllWay->Set_HLT_ZB_L1ZB_MET_Distributions_by_Mubin(computeL1XE30toZBEfficiency->Get_HLT_ZB_L1ZB_MET_Distributions_by_Mubin());
+        // need l1xe30 efficiencies
         CorrectL1XE50DataAllWay->Set_L1XE30_Efficiency_Fit_Objects(computeL1XE30toZBEfficiency->Get_L1XE30_Efficiency_Fit_Objects());
+        // need l1xe50 to l1xe30 efficiencies
         CorrectL1XE50DataAllWay->Set_L1XE50_Efficiency_Fit_Objects(computeL1XE50toL1XE30Efficiency->Get_L1XE50_Efficiency_Fit_Objects());
         // then correct the l1xe50 data back to zerobias
         jetm10_chain->Process( CorrectL1XE50DataAllWay );
