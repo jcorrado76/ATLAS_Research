@@ -73,7 +73,7 @@ Bool_t Jburr_Template_Selector::Notify(){return kTRUE;}
 void Jburr_Template_Selector::Streamer( TBuffer &R__b ){//{{{
     if (R__b.IsReading()) {
       Version_t R__v = R__b.ReadVersion();
-      TObject::(R__b);
+      TObject::Streamer(R__b);
       for ( int i = 0 ; i < Number_Mu_Bins ; i++ ){
        R__b >> HLT_ZB_L1ZB_MET_Distributions_by_Mubin.at(i);
        R__b >> HLT_ZB_L1XE30_MET_Distributions_by_Mubin.at(i);
@@ -85,7 +85,7 @@ void Jburr_Template_Selector::Streamer( TBuffer &R__b ){//{{{
        R__b >> L1XE50_Efficiency_Fit_Objects.at(i);
       }
    } else {
-      R__b.WriteVersion(TEvent::IsA());
+      R__b.WriteVersion(Jburr_Template_Selector::IsA());
       TObject::Streamer(R__b);
       for ( int i = 0 ; i < Number_Mu_Bins ; i++ ){
        R__b << HLT_ZB_L1ZB_MET_Distributions_by_Mubin.at(i);
