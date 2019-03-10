@@ -12,6 +12,7 @@ public :
            HLT_ZB_L1XE50_Corrected_to_ZB_MET_Distribution->Add(new TH1F( Corrected_Name , Corrected_Title , met_dist_nbins , gevLow , gevHigh ));
            ((TH1F*)HLT_ZB_L1XE50_Corrected_to_ZB_MET_Distribution->At(i))->SetLineColor( Colors[i] );
        }
+       float L1XE = 50.0;
    }
 
    ~CorrectL1XE50toZB() { }
