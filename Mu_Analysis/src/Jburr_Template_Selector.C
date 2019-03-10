@@ -36,13 +36,12 @@ Bool_t Jburr_Template_Selector::inMuRange( Float_t a , Float_t b ){ //{{{
 TF1* Jburr_Template_Selector::generateFitFunction(TEfficiency* teff_obj, float gevMax, float initial_slope, float initial_intercept, float initial_sigma , Bool_t verbose ){//{{{
     // return a fit function object whose parameters have been set
 
-    TF1 *fitErrorFunction = new TF1( "fitFunction" , fitFunction , gevLow , gevHigh , 4 );
+    TF1 *fitErrorFunction = new TF1( "fitFunction" , fitFunction , gevLow , gevHigh , 3);
     fitErrorFunction->SetParameter(0, initial_slope);
     fitErrorFunction->SetParameter(1, initial_intercept);
     fitErrorFunction->SetParameter(2, initial_sigma);
-    fitErrorFunction->SetParameter(3, L1XE );
     //initializing parameters reasonably is important because it is a maximum likelihood fit
-    fitErrorFunction->SetParNames("Slope","Translation","Sigma", "L1XE");
+    fitErrorFunction->SetParNames("Slope","Translation","Sigma");
     //"R" tells the fit function from BinomialEfficiency::Fit to use the range of the TF1 as the fitting range
     teff_obj->Fit( fitErrorFunction  , "R+");
 
@@ -68,5 +67,15 @@ Double_t Jburr_Template_Selector::ComputeWeight(TF1* fitFunc, TF1* fitFunc2 )//{
             (fitFunc->Eval( *cell_met ) * fitFunc2->Eval( *cell_met ));
     }
     return factor;
+}//}}}
+double Jburr_Template_Selector::fitFunction(double *x , double *par){//{{{
+    /*
+     * Parameter 0 - initial slope
+     * Parameter 1 - initial intercept
+     * Parameter 2 - initial sigma
+     */
+
+    double fitval = (1./2.)*(1.+TMath::Erf((par[0]*x[0]+par[1]-L1XE)/(par[2]*TMath::Sqrt(2.))));
+    return fitval;
 }//}}}
 Bool_t Jburr_Template_Selector::Notify(){return kTRUE;}

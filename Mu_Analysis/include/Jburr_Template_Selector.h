@@ -121,11 +121,10 @@ public :
    void Set_L1XE50_Efficiency_Objects(TObjArray* const other){ L1XE50_Efficiency_Objects = other ; }
    void Set_L1XE30_Efficiency_Fit_Objects(TObjArray* const other){ L1XE30_Efficiency_Fit_Objects = other ; }
    void Set_L1XE50_Efficiency_Fit_Objects(TObjArray* const other){ L1XE50_Efficiency_Fit_Objects = other; }
-   // TODO: make sure you add default val for l1cut parameter once you figured out workaround for making it an argument
-   //static Double_t fitFunction(Double_t *x , Double_t *par );
    TF1* generateFitFunction(TEfficiency* teff_obj, float gevMax = 300.0, float initial_slope = 0.1 , 
            float initial_intercept = 0.0, float initial_sigma = 10.0, Bool_t verbose=false );
    Double_t ComputeWeight(TF1* fitFunc, TF1* fitFunc2 = NULL);//}}}
+   static double fitFunction(double *x , double *par );
    ClassDef(Jburr_Template_Selector,0);
    // Readers to access the data (delete the ones you do not need){{{
    TTreeReaderValue<UInt_t> RunNumber = {fReader, "RunNumber"};
