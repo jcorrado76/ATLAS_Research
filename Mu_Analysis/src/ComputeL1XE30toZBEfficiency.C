@@ -11,8 +11,8 @@ Bool_t ComputeL1XE30toZBEfficiency::Process(Long64_t entry)//{{{
            muLow = Mu_Values[ i ];
            muHigh = Mu_Values[ i + 1 ];
            if ( inMuRange( muLow , muHigh ) ){
-               ((TH1F*)HLT_ZB_L1ZB_MET_Distributions_by_Mubin.at(i))->Fill(*cell_met , *HLT_noalg_zb_L1ZB_prescale);
-               ((TEfficiency*)L1XE30_Efficiency_Objects.at(i))->Fill(*L1_met > L1XE , *cell_met);
+               ((TH1F*)HLT_ZB_L1ZB_MET_Distributions_by_Mubin->At(i))->Fill(*cell_met , *HLT_noalg_zb_L1ZB_prescale);
+               ((TEfficiency*)L1XE30_Efficiency_Objects->At(i))->Fill(*L1_met > L1XE , *cell_met);
            }
        }
    }
@@ -22,6 +22,6 @@ void ComputeL1XE30toZBEfficiency::Terminate() //{{{
 {
     // create the fit function for the l1xe30 efficiencies
     for ( int i = 0; i < Number_Mu_Bins ; i++ ){
-    (TF1*)L1XE30_Efficiency_Fit_Objects[i] = generateFitFunction( (TEfficiency*)L1XE30_Efficiency_Objects[i] );
+    ((TF1*)L1XE30_Efficiency_Fit_Objects->At(i)) = generateFitFunction( (TEfficiency*)L1XE30_Efficiency_Objects[i] );
     }
 }//}}}
