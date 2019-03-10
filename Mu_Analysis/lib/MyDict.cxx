@@ -39,7 +39,6 @@ namespace std {} using namespace std;
 // Header files passed as explicit arguments
 #include "../include/CorrectL1XE30toZB.h"
 #include "../include/CorrectL1XE50toZB.h"
-#include "../include/fitFunction.h"
 #include "../include/ComputeL1XE30toZBEfficiency.h"
 #include "../include/ComputeL1XE50toL1XE30Efficiency.h"
 #include "../include/Jburr_Template_Selector.h"
@@ -59,7 +58,7 @@ namespace ROOT {
       ::Jburr_Template_Selector *ptr = 0;
       static ::TVirtualIsAProxy* isa_proxy = new ::TInstrumentedIsAProxy< ::Jburr_Template_Selector >(0);
       static ::ROOT::TGenericClassInfo 
-         instance("Jburr_Template_Selector", ::Jburr_Template_Selector::Class_Version(), "Jburr_Template_Selector.h", 28,
+         instance("Jburr_Template_Selector", ::Jburr_Template_Selector::Class_Version(), "Jburr_Template_Selector.h", 27,
                   typeid(::Jburr_Template_Selector), ::ROOT::Internal::DefineBehavior(ptr, ptr),
                   &::Jburr_Template_Selector::Dictionary, isa_proxy, 4,
                   sizeof(::Jburr_Template_Selector) );
@@ -551,7 +550,6 @@ namespace {
     static const char* headers[] = {
 "../include/CorrectL1XE30toZB.h",
 "../include/CorrectL1XE50toZB.h",
-"../include/fitFunction.h",
 "../include/ComputeL1XE30toZBEfficiency.h",
 "../include/ComputeL1XE50toL1XE30Efficiency.h",
 "../include/Jburr_Template_Selector.h",
@@ -586,7 +584,6 @@ class __attribute__((annotate("$clingAutoload$../include/ComputeL1XE50toL1XE30Ef
 #define _BACKWARD_BACKWARD_WARNING_H
 #include "../include/CorrectL1XE30toZB.h"
 #include "../include/CorrectL1XE50toZB.h"
-#include "../include/fitFunction.h"
 #include "../include/ComputeL1XE30toZBEfficiency.h"
 #include "../include/ComputeL1XE50toL1XE30Efficiency.h"
 #include "../include/Jburr_Template_Selector.h"

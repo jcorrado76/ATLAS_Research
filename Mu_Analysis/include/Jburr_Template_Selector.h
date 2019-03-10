@@ -21,7 +21,6 @@
 #include <TDirectory.h>
 #include <TGaxis.h>
 #include <array>
-#include "fitFunction.h"
 #include <TObjArray.h>
 // end includes}}}
 //class definition {{{
