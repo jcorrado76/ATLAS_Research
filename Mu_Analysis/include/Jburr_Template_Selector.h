@@ -39,17 +39,17 @@ public :
    const Int_t met_dist_nbins =                                        (gevHigh - gevLow) / met_dist_binwidth; 
    const Int_t efficiency_nbins =                                      (gevHigh - gevLow) / efficiency_bin_width;
    // collections
-   TObjArray* HLT_ZB_L1ZB_MET_Distributions_by_Mubin;
-   TObjArray* HLT_ZB_L1XE30_MET_Distributions_by_Mubin;
+   TObjArray* HLT_ZB_L1ZB_MET_Distributions_by_Mubin = new TObjArray();
+   TObjArray* HLT_ZB_L1XE30_MET_Distributions_by_Mubin = new TObjArray();
 
-   TObjArray* HLT_ZB_L1XE30_Corrected_to_ZB_MET_Distribution;
-   TObjArray* HLT_ZB_L1XE50_Corrected_to_ZB_MET_Distribution;
+   TObjArray* HLT_ZB_L1XE30_Corrected_to_ZB_MET_Distribution = new TObjArray();
+   TObjArray* HLT_ZB_L1XE50_Corrected_to_ZB_MET_Distribution = new TObjArray();
 
-   TObjArray* L1XE30_Efficiency_Objects;
-   TObjArray* L1XE50_Efficiency_Objects;
+   TObjArray* L1XE30_Efficiency_Objects = new TObjArray();
+   TObjArray* L1XE50_Efficiency_Objects = new TObjArray();
 
-   TObjArray* L1XE30_Efficiency_Fit_Objects;
-   TObjArray* L1XE50_Efficiency_Fit_Objects;
+   TObjArray* L1XE30_Efficiency_Fit_Objects = new TObjArray();
+   TObjArray* L1XE50_Efficiency_Fit_Objects = new TObjArray();
    
    Float_t Mu_Values[Number_Mu_Bins+1] =                    { 0.0 };
    Int_t Colors[Number_Mu_Bins] =                           {1,2,3,4,12,6,9};

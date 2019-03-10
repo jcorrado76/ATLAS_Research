@@ -36,7 +36,7 @@ Bool_t Jburr_Template_Selector::inMuRange( Float_t a , Float_t b ){ //{{{
 TF1* Jburr_Template_Selector::generateFitFunction(TEfficiency* teff_obj, float gevMax, float initial_slope, float initial_intercept, float initial_sigma , Bool_t verbose ){//{{{
     // return a fit function object whose parameters have been set
 
-    TF1 *fitErrorFunction = new TF1( "fitFunction" , fitFunction , gevLow , gevHigh , 3 );
+    TF1 *fitErrorFunction = new TF1( "fitFunction" , fitFunction , gevLow , gevHigh , 4 );
     fitErrorFunction->SetParameter(0, initial_slope);
     fitErrorFunction->SetParameter(1, initial_intercept);
     fitErrorFunction->SetParameter(2, initial_sigma);
