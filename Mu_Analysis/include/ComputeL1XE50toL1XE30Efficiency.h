@@ -15,11 +15,9 @@ public :
            EfficiencyName.Form("metL1XE50EfficiencyMubin%d", i);           
            EfficiencyTitle.Form("Efficiency of L1XE 50 As a Function of %s for Actint bin %d", Alg_Name.Data() , i);
            L1XE50_Efficiency_Objects->Add(new TEfficiency( EfficiencyName , EfficiencyTitle , efficiency_nbins , gevLow , gevHigh ));
-           L1XE50_Efficiency_Fit_Objects->Add(new TF1());
 
            ((TEfficiency*)L1XE50_Efficiency_Objects->At(i))->SetLineColor( Colors[i] );
            ((TEfficiency*)L1XE50_Efficiency_Objects->At(i))->SetMarkerStyle( Colors[i] );
-           ((TF1*)L1XE50_Efficiency_Fit_Objects->At(i))->SetLineColor( Colors[i] );
        }
    }
    ~ComputeL1XE50toL1XE30Efficiency() { }

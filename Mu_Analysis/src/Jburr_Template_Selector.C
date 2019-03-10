@@ -37,16 +37,10 @@ TF1* Jburr_Template_Selector::generateFitFunction(TEfficiency* teff_obj, float L
     // return a fit function object whose parameters have been set
 
     std::cout << "Generating fit function..." << std::endl;
-    TF1* fitErrorFunction = new TF1();
+    //TF1* fitErrorFunction = new TF1();
+    TF1* fitErrorFunction = new TF1( "fitFunction" , L1XE30fitFunction , gevLow , gevHigh , 3);
     //TODO: eventually implement this as a general C++ function object with parameters so you can set the 
     //parameters i.e. L1 cut at runtime
-    if ( L1XE == 30.0 ){
-        std::cout << "Initialized L1xE30 fitfunction" << std::endl;
-        fitErrorFunction = new TF1( "fitFunction" , L1XE30fitFunction , gevLow , gevHigh , 3);
-    }else{
-        std::cout << "Initialized L1XE50 fitFunction" << std::endl;
-        fitErrorFunction = new TF1( "fitFunction" , L1XE50fitFunction , gevLow , gevHigh , 3);
-    }
 
     fitErrorFunction->SetParameters(initial_slope, initial_intercept , initial_sigma);
     //initializing parameters reasonably is important because it is a maximum likelihood fit
