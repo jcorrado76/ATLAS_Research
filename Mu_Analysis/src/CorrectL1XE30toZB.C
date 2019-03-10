@@ -96,15 +96,4 @@ void CorrectL1XE30toZB::Terminate(){//{{{
         //mu_bin_canv->Print(plot_name);
     //}
     ////}}}
-    //// WRITE CORRECTED MET DISTRIBUTIONS TO FILE{{{
-    //// this is L1XE30 distribution corrected to ZB
-    //TFile* mu_analysis_file = TFile::Open("run_files/mu_analysis.root","UPDATE");
-    //TDirectory* corrected_directory = mu_analysis_file->mkdir("l1xe30correctedtozb");
-    //corrected_directory->cd();
-    //for (int i = 0 ; i < Number_Mu_Bins ; i++ ) {
-        //Name.Form("l1xe30correctedToZBMETmubin%d" , i );
-        //HLT_ZB_L1XE30_Corrected_to_ZB_MET_Distribution[i]->Write( Name , TObject::kOverwrite );
-    //}
-    ////}}}
-    //mu_analysis_file->Close();
 }//}}}
