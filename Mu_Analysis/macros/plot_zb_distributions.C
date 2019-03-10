@@ -11,6 +11,7 @@
     TH1F* zb_dist;
     TH1F* l1xe30_corrected_zb_dist;
     TH1F* l1xe50_corrected_zb_dist;
+    TString outFileName = "";
     for (int i = 0; i < hlt_zb_l1_zb_distributions->GetLast(); i++){
         zb_dist = ((TH1F*)(hlt_zb_l1_zb_distributions->At(i)));
         l1xe30_corrected_zb_dist = ((TH1F*)(l1xe30_corrected_zb_distributions->At(i)));
@@ -30,7 +31,8 @@
         correctedLegend->Draw("SAME");
         correctedCanvas->SetLogy();
         gStyle->SetOptStat(0);
-        //correctedCanvas->Print("zb_met_distributions.png");
+        outFileName.Form("plots/zerobias_distributions_corrected/zb_met_distributions_mubin_%d.png",i);
+        correctedCanvas->Print(outFileName);
     }
     mu_analysis_file->Close()
 }
