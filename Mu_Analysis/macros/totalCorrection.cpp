@@ -10,7 +10,6 @@
 
     // if successfully get the jburr zb data
     if (zb_chain->Add("/home/joseph/ATLAS_Research/DATA/ZB/ZB_jburr_15thru17_with_missing_et_significance.root")){
-        std::cout << "Processing L1XE30toZBEfficiency..." << std::endl;
         zb_chain->Process( computeL1XE30toZBEfficiency );
     }
     else{
@@ -19,7 +18,6 @@
     }
     // if successfully get the JETM10 data
     if (jetm10_chain->Add("/home/joseph/ATLAS_Research/DATA/PhysicsMain/JETM10_15thru17_with_missing_et_significance.root")){
-        std::cout << "Processing CorrectL1XE30toZB..." << std::endl;
         correctL1XE30ToZB->Set_L1XE30_Efficiency_Fit_Objects((TObjArray*)computeL1XE30toZBEfficiency->Get_L1XE30_Efficiency_Fit_Objects());
         correctL1XE30ToZB->Set_HLT_ZB_L1ZB_MET_Distributions_by_Mubin((TObjArray*)computeL1XE30toZBEfficiency->Get_HLT_ZB_L1ZB_MET_Distributions_by_Mubin());
         jetm10_chain->Process( correctL1XE30ToZB );
@@ -36,7 +34,6 @@
         CorrectL1XE50DataAllWay->Set_L1XE50_Efficiency_Objects((TObjArray*)computeL1XE50toL1XE30Efficiency->Get_L1XE50_Efficiency_Objects());
         CorrectL1XE50DataAllWay->Set_HLT_ZB_L1XE30_Corrected_to_ZB_MET_Distribution((TObjArray*)correctL1XE30ToZB->Get_HLT_ZB_L1XE30_Corrected_to_ZB_MET_Distribution());
         // then correct the l1xe50 data back to zerobias
-        std::cout << "Processing Correct L1XE50 Data to ZB..." << std::endl;
         jetm10_chain->Process( CorrectL1XE50DataAllWay );
     }
     else{
@@ -47,9 +44,6 @@
     TString filename("mu_analysis.root");
     CorrectL1XE50DataAllWay->Write( filename );
 
-    // TODO: write the full correction object to file
-
     // TODO: take all plotting and saving of stuff out of these selectors. 
-    // save the final object to a root file out here in the macro
     // plot the things in a separate macro that loads the object
 }

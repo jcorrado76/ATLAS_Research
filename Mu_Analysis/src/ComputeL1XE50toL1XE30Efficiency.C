@@ -9,10 +9,8 @@ Bool_t ComputeL1XE50toL1XE30Efficiency::Process(Long64_t entry)//{{{
            muLow = Mu_Values[ i ];
            muHigh = Mu_Values[ i + 1 ];
            if ( inMuRange( muLow , muHigh ) ){
-               for ( int j = 0 ; j < Number_Mu_Bins ; j++ ){
-                   ((TH1F*)HLT_ZB_L1XE30_MET_Distributions_by_Mubin->At(j))->Fill(*cell_met , *HLT_noalg_L1XE30_prescale);
-                   ((TEfficiency*)L1XE50_Efficiency_Objects->At(j))->Fill(*L1_met > L1XE , *cell_met);
-               }
+               ((TH1F*)HLT_ZB_L1XE30_MET_Distributions_by_Mubin->At(j))->Fill(*cell_met , *HLT_noalg_L1XE30_prescale);
+               ((TEfficiency*)L1XE50_Efficiency_Objects->At(j))->Fill(*L1_met > L1XE , *cell_met);
            }
        }
    }
