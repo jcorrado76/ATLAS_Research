@@ -22,6 +22,6 @@ void ComputeL1XE30toZBEfficiency::Terminate() //{{{
 {
     // create the fit function for the l1xe30 efficiencies
     for ( int i = 0; i < Number_Mu_Bins ; i++ ){
-    ((TF1*)L1XE30_Efficiency_Fit_Objects->At(i)) = generateFitFunction( (TEfficiency*)L1XE30_Efficiency_Objects[i] );
+        L1XE30_Efficiency_Fit_Objects->Add( generateFitFunction( ((TEfficiency*)L1XE30_Efficiency_Objects->At(i)) ));
     }
 }//}}}
