@@ -14,7 +14,7 @@ public :
    TTreeReader     fReader;  
    TTree          *fChain = 0;   
    TString AlgAName, AlgBName;
-   Float_t AlgAThreshold, AlgBThreshold, MetL1Threshold;
+   Float_t AlgAThreshold, AlgBThreshold, MetL1Threshold, ActintCut;
    Int_t NumberEventsKept;
    Float_t RndmCut = 0.5;
 
@@ -85,6 +85,7 @@ public :
    void SetAlgAThresh( Float_t thresh ){ AlgAThreshold = thresh; }
    void SetAlgBThresh( Float_t thresh ){ AlgBThreshold = thresh; }
    void SetL1Thresh( Float_t thresh ){ MetL1Threshold = thresh; }
+   void SetActintCut( Float_t thresh ){ ActintCut = thresh; }
    void Clear(){ NumberEventsKept = 0; }
 
 
