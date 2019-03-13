@@ -2,13 +2,16 @@
     TString zb_file_path = "/home/joseph/DATA/ZB_jburr_15thru17_with_missing_et_significance.root";
     TString physics_main_file_path = "/home/joseph/DATA/JETM10_15thru17_with_missing_et_significance.root";
         
-    if ( !gSystem->AccessPathName( zb_file_path ) ){
-        std::cout << "Could not access " << zb_file_path << std::endl;
-        return 0;
-    }else if (!gSystem->AccessPathName( physics_main_file_path ) ){
-        std::cout << "Could not access " << physics_main_file_path << std::endl;
-        return 0;
-    }
+    // this doesn't even work. when I use it, one of them says the file doesn't exist, but the macro runs
+    // successfully. also, return doesn't return inside a ROOT macro???
+    //
+    //if ( !gSystem->AccessPathName( zb_file_path ) ){
+        //std::cout << "Could not access " << zb_file_path << std::endl;
+        //return 0;
+    //}else if (!gSystem->AccessPathName( physics_main_file_path ) ){
+        //std::cout << "Could not access " << physics_main_file_path << std::endl;
+        //return 0;
+    //}
     // initialize tchains
     TChain* zb_chain = new TChain( "METTree" , "zb_chain" );
     TChain* jetm10_chain = new TChain( "METTree", "jetm10chain");

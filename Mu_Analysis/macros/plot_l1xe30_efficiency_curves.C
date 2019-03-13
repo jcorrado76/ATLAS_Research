@@ -3,6 +3,7 @@
     TObjArray* l1xe30_efficiency_objects = 0;
 
     mu_analysis_file->GetObject("l1xe30_efficiency_objects", l1xe30_efficiency_objects);
+    std::cout << "Successfully got the l1xe30_efficiency_objects: " << l1xe30_efficiency_objects->GetName() << std::endl;
     int number_mu_bins = 7;
     // this needs to be the literal 7 for some reason..
     int Colors[7] = {1,2,3,4,12,6,9};
