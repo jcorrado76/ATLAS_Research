@@ -15,29 +15,24 @@ void TEfficiency_Selector::Begin(TTree * /*tree*/)
    AlgBCombinedThresh = M_Parameters->Get_CombinedAlgBThresh();
    metl1thresh = M_Parameters->Get_MetL1Thresh();
    muonNbins = M_Parameters->Get_Nbins();
-   metMin = M_Parameters->Get_metMin();
-   metMax = M_Parameters->Get_metMax();
+   metMin = M_Parameters->Get_MetMin();
+   metMax = M_Parameters->Get_MetMax();
        
 }
 
 void TEfficiency_Selector::SlaveBegin(TTree * /*tree*/)
 {
    TString option = GetOption();
-   TString astring = AlgAName + " > " + Form(" %.2f", AlgAIndividThresh );
-   TString bstring = AlgBName + " > " + Form(" %.2f", AlgBIndividThresh );
-   TString cstring = AlgAName + " > " + Form(" %.2f", AlgACombinedThresh) + 
+   astring = AlgAName + " > " + Form(" %.2f", AlgAIndividThresh );
+   bstring = AlgBName + " > " + Form(" %.2f", AlgBIndividThresh );
+   cstring = AlgAName + " > " + Form(" %.2f", AlgACombinedThresh) + 
        " and " + AlgBName + " > " + Form(" %.2f", AlgBCombinedThresh);
-   TString dstring = (TString) "L1 > " + Form(" %.2f" , metl1thresh);
+   dstring = (TString) "L1 > " + Form(" %.2f" , metl1thresh);
 
-   TEfficiency* Ateff  = new TEfficiency(astring , "Efficiency", muonNbins, metMin, metMax);
-   TEfficiency* Bteff  = new TEfficiency(bstring , "Efficiency", muonNbins, metMin, metMax);
-   TEfficiency* Cteff  = new TEfficiency(cstring,  "Efficiency", muonNbins, metMin, metMax);
-   TEfficiency* Dteff  = new TEfficiency(dstring,  "Efficiency", muonNbins, metMin, metMax);//combined just L1 cut, 0 on others
-
-   fOutput->Add( Ateff );
-   fOutput->Add( Bteff );
-   fOutput->Add( Cteff );
-   fOutput->Add( Dteff );
+   Ateff  = new TEfficiency(astring.Data() , "Efficiency", muonNbins, metMin, metMax);
+   Bteff  = new TEfficiency(bstring.Data() , "Efficiency", muonNbins, metMin, metMax);
+   Cteff  = new TEfficiency(cstring.Data(),  "Efficiency", muonNbins, metMin, metMax);
+   Dteff  = new TEfficiency(dstring.Data(),  "Efficiency", muonNbins, metMin, metMax);//combined just L1 cut, 0 on others
 }
 
 Bool_t TEfficiency_Selector::Process(Long64_t entry)
@@ -45,10 +40,10 @@ Bool_t TEfficiency_Selector::Process(Long64_t entry)
    fReader.SetEntry(entry);
     if ( IsMuon() && IsClean() && PassActintCut() && PassTransverseMassCut() ){
            Float_t metnomu = ComputeMetnomu();
-           Ateff->Fill((algAmuonMET > AlgAIndividThresh ) && ( PassL1Cut() )          && ( PassActintCut() )                               , metnomu);
-           Bteff->Fill((algBmuonMET > AlgBIndividThresh ) && ( PassL1Cut() )          && ( PassActintCut() )                               , metnomu);
-           Cteff->Fill((algAmuonMET > CombinedThreshAlgA) && (algBmuonMET > CombinedThreshAlgB) && ( PassL1Cut() ) && ( PassActintCut() )  , metnomu);
-           Dteff->Fill( PassL1Cut() && PassActintCut , metnomu);
+           Ateff->Fill(( *algAmuonMET > AlgAIndividThresh ) && ( PassL1Cut() )          && ( PassActintCut() )                               , metnomu);
+           Bteff->Fill(( *algBmuonMET > AlgBIndividThresh ) && ( PassL1Cut() )          && ( PassActintCut() )                               , metnomu);
+           Cteff->Fill(( *algAmuonMET > AlgACombinedThresh) && ( *algBmuonMET > AlgBCombinedThresh) && ( PassL1Cut() ) && ( PassActintCut() )  , metnomu);
+           Dteff->Fill( PassL1Cut() && PassActintCut() , metnomu);
     }
    return kTRUE;
 }

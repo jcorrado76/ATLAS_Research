@@ -24,8 +24,16 @@ public :
    Float_t AlgAIndividThresh, AlgBIndividThresh, AlgACombinedThresh,AlgBCombinedThresh;
    Float_t metMin, metMax;
    Int_t muonNbins;
+   TString astring, bstring, cstring, dstring;
+   TEfficiency* Ateff;
+   TEfficiency* Bteff;
+   TEfficiency* Cteff;
+    TEfficiency* Dteff;
 
    // Readers to access the data (delete the ones you do not need){{{
+   TTreeReaderValue<Float_t> algAmuonMET = {fReader, AlgAName};
+   TTreeReaderValue<Float_t> algBmuonMET = {fReader, AlgBName };
+
    TTreeReaderValue<Float_t> metl1 = {fReader, "metl1"};
    TTreeReaderValue<Float_t> mexl1 = {fReader, "mexl1"};
    TTreeReaderValue<Float_t> meyl1 = {fReader, "meyl1"};
