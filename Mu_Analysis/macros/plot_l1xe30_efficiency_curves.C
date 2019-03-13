@@ -29,9 +29,6 @@
         l1xe30_eff_canv->SetLogy();
     }
     title->Draw("SAME");
-    auto graph = l1xe30_efficiency_curve->GetPaintedGraph();
-    graph->SetMinimum(0);
-    graph->SetMaximum(1);
     outFileName.Form("plots/L1XE30Efficiency_Curves.png");
     l1xe30_eff_canv->Print(outFileName);
     mu_analysis_file->Close()
