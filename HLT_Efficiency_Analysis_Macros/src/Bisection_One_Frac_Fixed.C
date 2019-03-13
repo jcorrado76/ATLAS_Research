@@ -1,6 +1,6 @@
 #include "Efficiency_Library.h"
 
-Float_t Efficiency_Lib::bisection_one_frac_fixed(const float fracA, userInfo* parameters, const TH1F* AlgAHist , const TH1F* AlgBHist , TTree* passnoalgTree  ){
+Float_t bisection_one_frac_fixed(const float fracA, userInfo* parameters, const TH1F* AlgAHist , const TH1F* AlgBHist , TTree* passnoalgTree  ){
     /*
     This macro is going to do a bisection given one fixed fraction as a parameter 
     fraction A will be the one held constant

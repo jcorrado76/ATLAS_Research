@@ -1,7 +1,8 @@
 #include "Efficiency_Library.h"
+#include "Bisection_Objective_Function.h"
 
 
-Float_t Efficiency_Lib::bisection( userInfo* parameters , TH1F* algAHist , TH1F* algBHist, TTree* passnoalgTree )
+Float_t bisection( userInfo* parameters , TH1F* algAHist , TH1F* algBHist, TTree* passnoalgTree )
 {
     // Get Parameters from UserInfo {{{
     const Float_t trigger_rate                          = parameters->Get_Frac(); 
@@ -47,14 +48,14 @@ Float_t Efficiency_Lib::bisection( userInfo* parameters , TH1F* algAHist , TH1F*
     //compute thresholds at boundaris to use
     Float_t algAMETx1thresh,algAMETx2thresh,algAMETx3thresh,algBMETx1thresh,algBMETx2thresh, algBMETx3thresh;
     //Compute Thresholds to keep each of the numbers {{{
-    algAMETx1thresh = Efficiency_Lib::computeThresh(algAMETtarget, numKeepx1);
-    algBMETx1thresh = Efficiency_Lib::computeThresh(algBMETtarget, numKeepx1);
+    algAMETx1thresh = computeThresh(algAMETtarget, numKeepx1);
+    algBMETx1thresh = computeThresh(algBMETtarget, numKeepx1);
 
-    algAMETx2thresh = Efficiency_Lib::computeThresh(algAMETtarget, numKeepx2);
-    algBMETx2thresh = Efficiency_Lib::computeThresh(algBMETtarget, numKeepx2);
+    algAMETx2thresh = computeThresh(algAMETtarget, numKeepx2);
+    algBMETx2thresh = computeThresh(algBMETtarget, numKeepx2);
 
-    algAMETx3thresh = Efficiency_Lib::computeThresh(algAMETtarget, numKeepx3);
-    algBMETx3thresh = Efficiency_Lib::computeThresh(algBMETtarget, numKeepx3);
+    algAMETx3thresh = computeThresh(algAMETtarget, numKeepx3);
+    algBMETx3thresh = computeThresh(algBMETtarget, numKeepx3);
     //}}}
     //Display parameters of bisection {{{
     std::cout << "Number Zero Bias Events: " << Number_ZeroBias_Events << std::endl;
@@ -72,12 +73,12 @@ Float_t Efficiency_Lib::bisection( userInfo* parameters , TH1F* algAHist , TH1F*
     algBMETtarget->SetName(algBMETtarget->GetName() + (const TString)"B");
     //}}}
     //compute initial individual thresholds at each of the extrema and first guess{{{
-    algAMETx1thresh = Efficiency_Lib::computeThresh(algAMETtarget, numKeepx1);
-    algBMETx1thresh = Efficiency_Lib::computeThresh(algBMETtarget, numKeepx1);
-    algAMETx2thresh = Efficiency_Lib::computeThresh(algAMETtarget, numKeepx2);
-    algBMETx2thresh = Efficiency_Lib::computeThresh(algBMETtarget, numKeepx2);
-    algAMETx3thresh = Efficiency_Lib::computeThresh(algAMETtarget, numKeepx3);
-    algBMETx3thresh = Efficiency_Lib::computeThresh(algBMETtarget, numKeepx3);
+    algAMETx1thresh = computeThresh(algAMETtarget, numKeepx1);
+    algBMETx1thresh = computeThresh(algBMETtarget, numKeepx1);
+    algAMETx2thresh = computeThresh(algAMETtarget, numKeepx2);
+    algBMETx2thresh = computeThresh(algBMETtarget, numKeepx2);
+    algAMETx3thresh = computeThresh(algAMETtarget, numKeepx3);
+    algBMETx3thresh = computeThresh(algBMETtarget, numKeepx3);
     //}}}
     // Initialize Variables {{{
     Float_t algAMET,algBMET, metl1;
@@ -195,8 +196,8 @@ Float_t Efficiency_Lib::bisection( userInfo* parameters , TH1F* algAHist , TH1F*
         std::cout << "numPassedProcess1WithActintCut: " << Number_ZeroBias_Events << std::endl;
         numKeepx2 = Number_ZeroBias_Events * initialGuess;
         std::cout << "numKeepx2: " << numKeepx2 << std::endl;
-        algAMETx2thresh = Efficiency_Lib::computeThresh(algAMETtarget, numKeepx2);
-        algBMETx2thresh = Efficiency_Lib::computeThresh(algBMETtarget, numKeepx2);
+        algAMETx2thresh = computeThresh(algAMETtarget, numKeepx2);
+        algBMETx2thresh = computeThresh(algBMETtarget, numKeepx2);
 
         thresholdAarray[j+2] = (Float_t) algAMETx2thresh;
         thresholdBarray[j+2] = (Float_t) algBMETx2thresh;

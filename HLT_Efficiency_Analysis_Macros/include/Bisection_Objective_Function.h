@@ -14,7 +14,8 @@ public :
    TTreeReader     fReader;  
    TTree          *fChain = 0;   
    TString AlgAName, AlgBName;
-   Float_t AlgAThreshold, AlgBThreshold, MetL1Threshold, ActintCut;
+   Float_t AlgAThreshold = 0.0;
+   Float_t AlgBThreshold, MetL1Threshold, ActintCut;
    Int_t NumberEventsKept;
    Float_t RndmCut = 0.5;
 
@@ -70,13 +71,12 @@ public :
    void    SlaveTerminate();
    void    Terminate();
 
-   Bool_t IsPassnoAlgOrRndm() const { return ( *passrndm > RndmCut || *passnoalgL1XE10 > RndmCut || 
-           *passnoalgL1XE30 > RndmCut || *passnoalgL1XE40 > RndmCut || *passnoalgL1XE45 > RndmCut  );}
-   Bool_t IsClean() const { return *passcleancuts > 0.1 && *recalbroke < 0.1; }
-   Bool_t PassActint() const { return *actint > ActintCut; }
-   Bool_t AlgAPass() const { return *AlgA > AlgAThreshold; }
-   Bool_t AlgBPass() const { return *AlgB > AlgBThreshold; }
-   Bool_t PassL1() const { return *metl1 > MetL1Threshold; }
+   Bool_t IsPassnoAlgOrRndm(); 
+   Bool_t IsClean(); 
+   Bool_t PassActint(); 
+   Bool_t AlgAPass();
+   Bool_t AlgBPass(); 
+   Bool_t PassL1();
 
    Int_t GetNumbEventsKeptCombined() const { return NumberEventsKept; }
 

@@ -41,7 +41,7 @@ void Single_Frac_Steerer(){
 
     Int_t numPassnoalgPassProcess1AlgA = 0;
 
-    Float_t returns = Efficiency_Lib::determineZeroBiasThresh( parameters, true );
+    Float_t returns = determineZeroBiasThresh( parameters, true );
 
 
     std::cout << "Returned to threeEfficiencies.C" << std::endl;
@@ -71,7 +71,7 @@ void Single_Frac_Steerer(){
     for ( int i = 0 ; i < N_SOLNS ; i++ )
     {
 
-            Efficiency_Lib::bisection_one_frac_fixed( AlgAInputArray[i]  ,parameters , algAMETHist , algBMETHist, zeroBiasTree ); 
+            bisection_one_frac_fixed( AlgAInputArray[i]  ,parameters , algAMETHist , algBMETHist, zeroBiasTree ); 
 
     }
 

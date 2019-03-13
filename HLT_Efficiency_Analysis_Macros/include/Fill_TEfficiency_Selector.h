@@ -1,10 +1,3 @@
-//////////////////////////////////////////////////////////
-// This class has been automatically generated on
-// Mon Jan 15 19:20:16 2018 by ROOT version 6.13/01
-// from TTree tree/tree
-// found on file: ../../ATLAS_DATA/PhysicsMain.L1KFmuontriggers.2016.f731f758_m1659m1710.Run309759.48Runs.root
-//////////////////////////////////////////////////////////
-
 #ifndef TEfficiency_Selector_h
 #define TEfficiency_Selector_h
 
@@ -17,7 +10,7 @@
 #include <TTreeReaderArray.h>
 #include <TH2.h>
 #include <TStyle.h>
-#include "Efficiency_Lib.h"
+#include "Efficiency_Library.h"
 
 
 class TEfficiency_Selector : public TSelector {
@@ -25,8 +18,12 @@ public :
    TTreeReader     fReader;  //!the tree reader
    TTree          *fChain = 0;   //!pointer to the analyzed TTree or TChain
    userInfo		  *M_Parameters;
-   Float_t 			ACTINT_CUT=0.0;
-   Float_t 			METL1_CUT=0.0;
+   Float_t 			actintCut;
+   Float_t 			metl1thresh;
+   TString AlgAName, AlgBName;
+   Float_t AlgAIndividThresh, AlgBIndividThresh, AlgACombinedThresh,AlgBCombinedThresh;
+   Float_t metMin, metMax;
+   Int_t muonNbins;
 
    // Readers to access the data (delete the ones you do not need){{{
    TTreeReaderValue<Float_t> metl1 = {fReader, "metl1"};
@@ -108,19 +105,6 @@ public :
    TTreeReaderValue<Int_t> passnoalgL1XE45 = {fReader, "passnoalgL1XE45"};
    TTreeReaderValue<Int_t> passnoalgL1XE300 = {fReader, "passnoalgL1XE300"};
    TTreeReaderValue<Int_t> passxe100 = {fReader, "passxe100"};
-   TTreeReaderValue<Int_t> passxe100mu = {fReader, "passxe100mu"};
-   TTreeReaderValue<Int_t> passxe160tclcw = {fReader, "passxe160tclcw"};
-   TTreeReaderValue<Int_t> passxe160tclcwmu = {fReader, "passxe160tclcwmu"};
-   TTreeReaderValue<Int_t> passxe130tcem = {fReader, "passxe130tcem"};
-   TTreeReaderValue<Int_t> passxe130tcemmu = {fReader, "passxe130tcemmu"};
-   TTreeReaderValue<Int_t> passxe110mht = {fReader, "passxe110mht"};
-   TTreeReaderValue<Int_t> passxe110mhtmu = {fReader, "passxe110mhtmu"};
-   TTreeReaderValue<Int_t> passxe105pufit = {fReader, "passxe105pufit"};
-   TTreeReaderValue<Int_t> passxe110pufit = {fReader, "passxe110pufit"};
-   TTreeReaderValue<Int_t> passxe140pufit = {fReader, "passxe140pufit"};
-   TTreeReaderValue<Int_t> passxe140pufitmu = {fReader, "passxe140pufitmu"};
-   TTreeReaderValue<Int_t> passxe140pueta = {fReader, "passxe140pueta"};
-   TTreeReaderValue<Int_t> passxe140puetamu = {fReader, "passxe140puetamu"};
    TTreeReaderValue<Int_t> recalbroke = {fReader, "recalbroke"};
    TTreeReaderValue<Int_t> passcleancuts = {fReader, "passcleancuts"};
    TTreeReaderValue<Int_t> runnum = {fReader, "runnum"};
@@ -146,30 +130,12 @@ public :
    virtual void    Terminate();
    //}}}
 
-    Bool_t IsMuon(){
-            return( *passmuvarmed > 0.1 || *passmuon > 0.1 );
-    }
-
-    Bool_t IsClean(){
-            return( *passcleancuts > 0.1 && *recalbroke < 0.1 );
-    }
-
-    Bool_t PassActintCut(){
-            return( *actint > ACTINT_CUT );
-    } 
-
-	Bool_t PassTransverseMassCut(){
-			return( Efficiency_Lib::passTransverseMassCut( *metoffrecal , *mexoffrecal  , *meyoffrecal ,
-									*metoffrecalmuon , *mexoffrecalmuon , *meyoffrecalmuon ) );
-	}
-
-	Bool_t PassL1Cut(){
-			return( *metl1 > METL1_CUT );
-	}
-
-	Float_t ComputeMetnomu(){
-			return( Efficiency_Lib::computeMetNoMu( *mexoffrecal , *meyoffrecal , *mexoffrecalmuon , *meyoffrecalmuon ) );
-	}
+    Bool_t IsMuon();
+    Bool_t IsClean();
+    Bool_t PassActintCut();
+	Bool_t PassTransverseMassCut();
+	Bool_t PassL1Cut();
+	Float_t ComputeMetnomu();
 
 
    ClassDef(TEfficiency_Selector,0);
