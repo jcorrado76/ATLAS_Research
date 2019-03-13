@@ -11,7 +11,7 @@
     TString outFileName = "";
     TCanvas* l1xe50_eff_canv = new TCanvas("l1xe50_eff_canv","Canvas with l1xe50 Efficiencies");
     l1xe50_eff_canv->SetFillColor(42);
-    TLegend* correctedLegend = new TLegend(0.48,0.1,0.9,0.4);
+    TLegend* correctedLegend = new TLegend(0.48,0.2,0.9,0.4);
     // "NDC" means make limits represent fractions of pad
     TPaveLabel *title = new TPaveLabel(0.2,0.9,0.8,0.95, "L1xe50 Efficiencies", "NDC");
     // remove showing of random things
