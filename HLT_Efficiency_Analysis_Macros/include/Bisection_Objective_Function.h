@@ -80,6 +80,13 @@ public :
 
    Int_t GetNumbEventsKeptCombined() const { return NumberEventsKept; }
 
+   void SetAlgAName( TString name ){ AlgAName = name; }
+   void SetAlgBName( TString name ){ AlgBName = name; }
+   void SetAlgAThresh( Float_t thresh ){ AlgAThreshold = thresh; }
+   void SetAlgBThresh( Float_t thresh ){ AlgBThreshold = thresh; }
+   void SetL1Thresh( Float_t thresh ){ MetL1Threshold = thresh; }
+   void Clear(){ NumberEventsKept = 0; }
+
 
    ClassDef(Bisection_Objective_Function,0);
 };
@@ -87,15 +94,8 @@ public :
 #endif
 
 #ifdef Bisection_Objective_Function_cxx
-void Bisection_Objective_Function::Init(TTree *tree)
-{
-   fReader.SetTree(tree);
-}
-
-Bool_t Bisection_Objective_Function::Notify()
-{
-   return kTRUE;
-}
+void Bisection_Objective_Function::Init(TTree *tree){fReader.SetTree(tree);}
+Bool_t Bisection_Objective_Function::Notify(){return kTRUE;}
 
 
 #endif 

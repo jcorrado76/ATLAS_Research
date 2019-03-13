@@ -28,4 +28,6 @@ void Bisection_Objective_Function::SlaveTerminate()
 
 void Bisection_Objective_Function::Terminate()
 {
+    std::cout << "Number of events kept when " << AlgAName << " > " << AlgAThreshold << " and " << 
+        AlgBName << " > " << AlgBThreshold << ": " << NumberEventsKept << std::endl;
 }

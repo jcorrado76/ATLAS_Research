@@ -15,6 +15,7 @@ Float_t Efficiency_Lib::bisection( userInfo* parameters , TH1F* algAHist , TH1F*
     const Float_t passnoalgcut                  = parameters->Get_Passnoalgcut();
     Int_t target = Number_ZeroBias_Events * trigger_rate;
     //}}}
+    Bisection_Objective_Function* f;
     // printing the number of entries in histograms 
     std::cout << "Number_ZeroBias_Events: " << Number_ZeroBias_Events << std::endl;
     std::cout << "algAHist nentries: " << algAHist->GetEntries() << std::endl;
@@ -202,19 +203,9 @@ Float_t Efficiency_Lib::bisection( userInfo* parameters , TH1F* algAHist , TH1F*
 
 
         number_events_kept_combined_at_x2 = 0;
-
-        Bool_t isClean;
-    	for (Int_t i  = 0 ; i < passnoalgNentries ;i++)
-    	{
-    	  passnoalgTree->GetEntry(i);
-        isClean = (passcleancutsflag > 0.1) && ( recalbrokeflag < 0.1);
-
-    	  if ((algAMET > algAMETx2thresh) && (algBMET > algBMETx2thresh) && (metl1 > metl1thresh)&& (passnoalg_actint > actintCut) &&
-          ( passrndm > passrndmcut || passnoalgL1XE10 > passnoalgcut || passnoalgL1XE30 > passnoalgcut || passnoalgL1XE40 > passnoalgcut || passnoalgL1XE45 > passnoalgcut  ) && isClean )
-    	  {
-    	    number_events_kept_combined_at_x2++;
-    	  }
-        }
+        passnoalgTree->Process( f );
+        number_events_kept_combined_at_x2 = f->GetNumbEventsKeptCombined();
+        f->Clear();
 
         numEventsArray[j+2] = number_events_kept_combined_at_x2;
 
