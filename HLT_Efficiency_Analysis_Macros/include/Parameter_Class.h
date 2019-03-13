@@ -129,8 +129,5 @@ public:
     ClassDef( userInfo, 1)
 };
 
-/*#ifndef __CINT__
-extern userInfo* parameters;
-#endif*/
 
 #endif
