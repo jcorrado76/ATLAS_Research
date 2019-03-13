@@ -51,7 +51,7 @@ public :
    TObjArray* L1XE50_Efficiency_Fit_Objects = new TObjArray();
    
    Float_t Mu_Values[Number_Mu_Bins+1] =                    { 0.0 };
-   Int_t Colors[Number_Mu_Bins] =                           {1,2,3,4,12,6,9};
+   int Colors[Number_Mu_Bins] =                           {1,2,3,4,12,6,9};
    Int_t MarkerStyles[Number_Mu_Bins] =                     {29,20,3,4,27,22,21};
    Int_t Normalization_Bin_Numbers[Number_Mu_Bins] =        {40,52,60,56,55,52,40};
    Float_t Scale_Factors[Number_Mu_Bins] =                  { 0.0 };
@@ -111,6 +111,7 @@ public :
     TObjArray* Get_L1XE50_Efficiency_Objects() const { return L1XE50_Efficiency_Objects; }
     TObjArray* Get_L1XE30_Efficiency_Fit_Objects() const { return L1XE30_Efficiency_Fit_Objects; }
     TObjArray* Get_L1XE50_Efficiency_Fit_Objects() const { return L1XE50_Efficiency_Fit_Objects; }
+    Int_t GetNumberMuBins() const {return Number_Mu_Bins; }
     // setters
    void Set_HLT_ZB_L1ZB_MET_Distributions_by_Mubin(TObjArray* const other){ HLT_ZB_L1ZB_MET_Distributions_by_Mubin = other; }
    void Set_HLT_ZB_L1XE30_MET_Distributions_by_Mubin(TObjArray* const other){ HLT_ZB_L1XE30_MET_Distributions_by_Mubin = other ; }
