@@ -17,13 +17,12 @@ TList* l = 0;
 void HighlightTeff(TVirtualPad *pad , TObject *obj , Int_t ihp , Int_t y);
 void plot_fit_parameters_vers_mu(){
 
-    l = new TList();
-
     TFile *mu_analysis_file = TFile::Open("mu_analysis.root", "READ");
     
     TObjArray* l1xe30_efficiency_objects = 0;
     mu_analysis_file->GetObject( "l1xe30_efficiency_objects" , l1xe30_efficiency_objects );
 
+    l = new TList();
     for ( int i = 0 ; i < l1xe30_efficiency_objects->GetLast() ; i++ ){
         l->Add( (TEfficiency*)l1xe30_efficiency_objects->At(i));
     }
@@ -40,19 +39,43 @@ void plot_fit_parameters_vers_mu(){
 
 
     const Int_t n = 7;
-    Double_t mu[n] = {10,20,30,40,50,60,70};
-
-    Double_t intercept[n] = {-7.58999,-3.25036,-2.84429,-1.82258,-1.26243,7.67782,-0.33278};
-    Double_t intercept_yerr[n] = {3.31817,0.707999,0.0209936,0.286969,0.569592,2.16848,23.9325};
+    std::cout << "Using number of mu bins: " << n << std::endl;
+    Double_t mu[n] = {0.0};
     Double_t intercept_xerr[n] = {0};
-
-    Double_t slope[n] = {0.57763,0.339169,0.335548,0.296387,0.27781,0.181505,0.238594};
-    Double_t slope_yerr[n] = {0.0532006,0.707107,2.8289e-24,0.00294974,0.00545491,0.0177855,0.188133};
     Double_t slope_xerr[n] = {0};
-
-    Double_t sigma[n] = {8.22652,8.72053,8.63395,8.91276,9.16529,7.07223,10.2882};
-    Double_t sigma_yerr[n] = {0.731322,0.707108,2.74936e-23,0.0809516,0.167048,-.687461,8.11952};
     Double_t sigma_xerr[n] = {0};
+
+    Double_t intercept[n] = {0};
+    Double_t slope[n] = {0};
+    Double_t sigma[n] = {0};
+
+    Double_t intercept_yerr[n] = {0};
+    Double_t slope_yerr[n] = {0};
+    Double_t sigma_yerr[n] = {0};
+
+    Float_t avgs[3] = { 0.0 };
+    Float_t intercept_sum = 0.0;
+    Float_t slope_sum = 0.0;
+    Float_t sigma_sum = 0.0;
+    for ( int i = 0 ; i < n ; i++ ){
+        mu[i] = i * 10;
+        intercept[i] = ((TF1*)((TEfficiency*)l1xe30_efficiency_objects->At(i))->GetListOfFunctions()->At(0))->GetParameter("Translation");
+        slope[i] = ((TF1*)((TEfficiency*)l1xe30_efficiency_objects->At(i))->GetListOfFunctions()->At(0))->GetParameter("Slope");
+        sigma[i] = ((TF1*)((TEfficiency*)l1xe30_efficiency_objects->At(i))->GetListOfFunctions()->At(0))->GetParameter("Sigma");
+
+        intercept_sum += intercept[i];
+        slope_sum += slope[i];
+        sigma_sum += sigma[i];
+    }
+
+    avgs[0] = intercept_sum / n;
+    avgs[1] = slope_sum / n;
+    avgs[2] = sigma_sum / n;
+
+    std::cout << "Average intercept: " << avgs[0] << std::endl;
+    std::cout << "Average slope: " << avgs[1] << std::endl;
+    std::cout << "Average sigma: " << avgs[2] << std::endl;
+
 
     TGraphErrors* interceptGraph = new TGraphErrors(n,mu,intercept,intercept_xerr,intercept_yerr);
     interceptGraph->SetMarkerStyle(20);
@@ -114,7 +137,7 @@ void plot_fit_parameters_vers_mu(){
     slopeGraph->SetHighlight();
     interceptGraph->SetHighlight();
     sigmaGraph->SetHighlight();
-    Canvas->HighlightConnect("HighlightTeff(TVirtualPad*, TObject* , Int_t , Int_t)");
+    Canvas->HighlightConnect("HighlightTeff(TVirtualPad*, TObject* , Int_t , Int_t )");
     Canvas->cd(2);
     gPad->Draw();
 
@@ -125,9 +148,9 @@ void HighlightTeff( TVirtualPad *pad , TObject *obj , Int_t ihp , Int_t y){
     if (ihp == -1){
         return;
     }
-    Double_t avg_intercept = -1.902488;
-    Double_t avg_slope = 0.2975016;
-    Double_t avg_sigma = 9.144146;
+    Double_t avg_intercept = -2.21539;
+    Double_t avg_slope = 0.334675;
+    Double_t avg_sigma = 8.91092;
     Double_t l1cut = 30.0;
     TF1 *avg_errFunc= new TF1("AvgErrorFunc","(1./2.)*(1.+TMath::Erf(([0]*x+[1]-[3])/([2]*TMath::Sqrt(2.))))",0.0,300.0);
     avg_errFunc->SetParameter(0,avg_slope);
@@ -138,7 +161,7 @@ void HighlightTeff( TVirtualPad *pad , TObject *obj , Int_t ihp , Int_t y){
     pad->GetCanvas()->cd(2);
     avg_errFunc->Draw();
     avg_errFunc->SetLineColor(kBlue);
-    l->At(ihp)->Draw("SAME");
+    ((TF1*)l->At(ihp))->Draw("SAME");
     gPad->Update();
     savepad->cd();
 }

@@ -50,7 +50,7 @@ TF1* Jburr_Template_Selector::generateFitFunction(TEfficiency* teff_obj, float L
 
     fitErrorFunction->SetParameters(initial_slope, initial_intercept , initial_sigma);
     //initializing parameters reasonably is important because it is a maximum likelihood fit
-    fitErrorFunction->SetParNames("Slope","Translation","Sigma");
+    fitErrorFunction->SetParNames("Slope","Intercept","Sigma");
     //"R" tells the fit function from BinomialEfficiency::Fit to use the range of the TF1 as the fitting range
     teff_obj->Fit( fitErrorFunction  , "R+");
 
