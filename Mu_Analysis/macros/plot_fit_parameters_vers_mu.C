@@ -15,21 +15,17 @@
 
 TList* l = 0;
 void HighlightTeff(TVirtualPad *pad , TObject *obj , Int_t ihp , Int_t y);
-void PlotParameterVals(){
+void plot_fit_parameters_vers_mu(){
 
     l = new TList();
 
-    TFile *mu_analysis_file = TFile::Open("../mu_analysis.root");
+    TFile *mu_analysis_file = TFile::Open("mu_analysis.root", "READ");
     
-    TDirectory* efficiency_dir = mu_analysis_file->GetDirectory("efficiency_curves");
-    TIter next(efficiency_dir->GetListOfKeys());
-    TKey *key;
+    TObjArray* l1xe30_efficiency_objects = 0;
+    mu_analysis_file->GetObject( "l1xe30_efficiency_objects" , l1xe30_efficiency_objects );
 
-    while ((key = (TKey*)next())){
-            TClass *cl = gROOT->GetClass(key->GetClassName());
-            if (!cl->InheritsFrom("TEfficiency")) continue;
-            TEfficiency * teff = (TEfficiency*)key->ReadObj();
-            l->Add(teff);
+    for ( int i = 0 ; i < l1xe30_efficiency_objects->GetLast() ; i++ ){
+        l->Add( (TEfficiency*)l1xe30_efficiency_objects->At(i));
     }
 
     TCanvas *Canvas = new TCanvas("Canvas","Fit Parameters versus Mu",200,10,700,900);

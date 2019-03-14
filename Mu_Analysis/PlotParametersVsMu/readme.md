@@ -1,1 +1,0 @@
-This is an interactive plot of the values of the fit parameters for the efficiency curve, as a function of mu. I took a single algorithm, and computed the efficiencies at different actint values and looked at their progression as we increased actint. 

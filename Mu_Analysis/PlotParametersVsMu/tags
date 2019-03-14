@@ -1,5 +1,0 @@
-HighlightTeff	PlotParameterVals.cpp	/^void HighlightTeff( TVirtualPad *pad , TObject *ob/
-PlotParameterVals	PlotParameterVals.cpp	/^void PlotParameterVals(){$/
-PlotParameterVals_cpp__ROOTBUILDVERSION	PlotParameterVals_cpp.d	105
-clean	makefile	/^clean :$/
-l	PlotParameterVals.cpp	16
