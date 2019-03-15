@@ -58,8 +58,10 @@ public :
    Float_t Scale_Factors[Number_Mu_Bins] =                  { 0.0 };
    Double_t L1XE30CorrectedToZBErrors[Number_Mu_Bins][met_dist_nbins] =    { 0.0 };
    Double_t L1XE50CorrectedToZBErrors[Number_Mu_Bins][met_dist_nbins] =    { 0.0 };
-    float fitPars[Number_Mu_Bins][3];
-    float fitParsErrs[Number_Mu_Bins][3];
+    float L1XE30fitPars[Number_Mu_Bins][3];
+    float L1XE30fitParsErrs[Number_Mu_Bins][3];
+    float L1XE50fitPars[Number_Mu_Bins][3];
+    float L1XE50fitParsErrs[Number_Mu_Bins][3];
 
    Float_t muLow;
    Float_t muHigh;

@@ -4,14 +4,14 @@ void CorrectL1XE30toZB::Begin(){//{{{
     // getting these parameters needs to happen before process, but after construction
     // get values of efficiency fit parameters
    for (int i = 0 ; i < Number_Mu_Bins; i++){
-        fitPars[i][0] = ((TF1*)L1XE30_Efficiency_Fit_Objects->At(i))->GetParameter( 0 );
-        fitPars[i][1] = ((TF1*)L1XE30_Efficiency_Fit_Objects->At(i))->GetParameter( 1 );
-        fitPars[i][2] = ((TF1*)L1XE30_Efficiency_Fit_Objects->At(i))->GetParameter( 2 );
+        L1XE30fitPars[i][0] = ((TF1*)L1XE30_Efficiency_Fit_Objects->At(i))->GetParameter( 0 );
+        L1XE30fitPars[i][1] = ((TF1*)L1XE30_Efficiency_Fit_Objects->At(i))->GetParameter( 1 );
+        L1XE30fitPars[i][2] = ((TF1*)L1XE30_Efficiency_Fit_Objects->At(i))->GetParameter( 2 );
 
         // get values of uncertainties on efficiency fit parameters
-        fitParsErrs[i][0] = ((TF1*)L1XE30_Efficiency_Fit_Objects->At(i))->GetParError( 0 );
-        fitParsErrs[i][1] = ((TF1*)L1XE30_Efficiency_Fit_Objects->At(i))->GetParError( 1 );
-        fitParsErrs[i][2] = ((TF1*)L1XE30_Efficiency_Fit_Objects->At(i))->GetParError( 2 );
+        L1XE30fitParsErrs[i][0] = ((TF1*)L1XE30_Efficiency_Fit_Objects->At(i))->GetParError( 0 );
+        L1XE30fitParsErrs[i][1] = ((TF1*)L1XE30_Efficiency_Fit_Objects->At(i))->GetParError( 1 );
+        L1XE30fitParsErrs[i][2] = ((TF1*)L1XE30_Efficiency_Fit_Objects->At(i))->GetParError( 2 );
    }
 }//}}}
 Bool_t CorrectL1XE30toZB::Process(Long64_t entry)//{{{
@@ -24,8 +24,8 @@ Bool_t CorrectL1XE30toZB::Process(Long64_t entry)//{{{
                 // find the index of bin that this event falls into
                 Int_t idx = ((TH1F*)HLT_ZB_L1XE30_Corrected_to_ZB_MET_Distribution->At(i))->GetBin( *cell_met );
                 // error on the estimate of efficiency (de)
-                Double_t de = TeffFitErr( *cell_met , fitPars[i][0] , fitPars[i][1] , fitPars[i][2] , 
-                            fitParsErrs[i][0] , fitParsErrs[i][1] , fitParsErrs[i][2] , L1XE );
+                Double_t de = TeffFitErr( *cell_met , L1XE30fitPars[i][0] , L1XE30fitPars[i][1] , L1XE30fitPars[i][2] , 
+                            L1XE30fitParsErrs[i][0] , L1XE30fitParsErrs[i][1] , L1XE30fitParsErrs[i][2] , L1XE );
                 // compute error on event: dn = (P * de / e**2); computeweight is P / e
                 Double_t dn = de * ComputeWeight( ((TF1*)L1XE30_Efficiency_Fit_Objects->At(i)) ) / 
                     ((TF1*)L1XE30_Efficiency_Fit_Objects->At(i))->Eval( *cell_met );
