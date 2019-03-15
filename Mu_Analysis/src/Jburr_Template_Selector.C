@@ -37,7 +37,6 @@ TF1* Jburr_Template_Selector::generateFitFunction(TEfficiency* teff_obj, float L
     // return a fit function object whose parameters have been set
 
     TF1* fitErrorFunction = new TF1();
-    //TF1* fitErrorFunction = new TF1( "fitFunction" , L1XE30fitFunction , gevLow , gevHigh , 3);
     if ( L1XE == 30.0 ){
         fitErrorFunction = new TF1( "fitFunction" , L1XE30fitFunction , gevLow , gevHigh , 3);
     }else{
@@ -45,12 +44,12 @@ TF1* Jburr_Template_Selector::generateFitFunction(TEfficiency* teff_obj, float L
     }
 
 
-    //TODO: eventually implement this as a general C++ function object with parameters so you can set the 
-    //parameters i.e. L1 cut at runtime
+    //TODO: eventually change the fitfunction to have another parameter and use TF1->FixParameter to fix the l1cut  as 4th parameter
 
     fitErrorFunction->SetParameters(initial_slope, initial_intercept , initial_sigma);
     //initializing parameters reasonably is important because it is a maximum likelihood fit
     fitErrorFunction->SetParNames("Slope","Intercept","Sigma");
+
     //"R" tells the fit function from BinomialEfficiency::Fit to use the range of the TF1 as the fitting range
     teff_obj->Fit( fitErrorFunction  , "R+");
 
