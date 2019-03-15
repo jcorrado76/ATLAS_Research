@@ -17,7 +17,6 @@
 
     std::cout << "Computing L1XE30 efficiency curves" << std::endl;
     zb_chain->Process( computeL1XE30toZBEfficiency );
-    std::cout << "Processing l1xe30tozb efficiency" << std::endl;
     correctL1XE30ToZB->Set_L1XE30_Efficiency_Fit_Objects((TObjArray*)computeL1XE30toZBEfficiency->Get_L1XE30_Efficiency_Fit_Objects());
     correctL1XE30ToZB->Set_HLT_ZB_L1ZB_MET_Distributions_by_Mubin((TObjArray*)computeL1XE30toZBEfficiency->Get_HLT_ZB_L1ZB_MET_Distributions_by_Mubin());
     std::cout << "Correcting L1XE30 Data to ZB" << std::endl;

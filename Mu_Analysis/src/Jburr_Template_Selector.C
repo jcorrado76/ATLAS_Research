@@ -53,6 +53,8 @@ TF1* Jburr_Template_Selector::generateFitFunction(TEfficiency* teff_obj, float L
     //"R" tells the fit function from BinomialEfficiency::Fit to use the range of the TF1 as the fitting range
     teff_obj->Fit( fitErrorFunction  , "R+");
 
+    std::cout << "Testing Eval for error fit function: " << fitErrorFunction->Eval(20.0) << std::endl;
+
     if (verbose){
         std::cout << "Value of fit for a: " << fitErrorFunction->GetParameter(0) << std::endl;
         std::cout << "Value of error on a: " << fitErrorFunction->GetParError(0) << std::endl;
