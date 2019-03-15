@@ -97,4 +97,11 @@ double Jburr_Template_Selector::L1XE50fitFunction(double *x , double *par){//{{{
     double fitval = (1./2.)*(1.+TMath::Erf((par[0]*x[0]+par[1]-50.0)/(par[2]*TMath::Sqrt(2.))));
     return fitval;
 }//}}}
+Double_t Jburr_Template_Selector::TeffFitErr( x , m , b , sigma , dm , db , ds , L1XE ){//{{{
+    Double_t z = ( m * x - L1XE ) / ( TMath::Sqrt(2) * sigma );
+    Double_t prefactor = TMath::Sqrt( 1. / ( 2 * TMath::Pi() * sigma ** 2 ) );
+    Double_t exp = TMath::Exp( -(z)**2 );
+    Double_t factor = TMath::Sqrt( (dm * x)**2 + (db)**2 + (ds * z)**2);
+    return prefactor * exp * factor;
+}//}}}
 Bool_t Jburr_Template_Selector::Notify(){return kTRUE;}

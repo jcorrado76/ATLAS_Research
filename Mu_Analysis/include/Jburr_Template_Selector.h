@@ -126,12 +126,12 @@ public :
    Double_t ComputeWeight(TF1* fitFunc, TF1* fitFunc2 = NULL);//}}}
    static double L1XE30fitFunction(double *x , double *par );
    static double L1XE50fitFunction(double *x , double *par );
+   double TeffFitErr( Double_t , Double_t , Double_t, Double_t, Double_t, Double_t, Double_t, Double_t);
    ClassDef(Jburr_Template_Selector,0);
    // Readers to access the data (delete the ones you do not need){{{
    TTreeReaderValue<UInt_t> RunNumber = {fReader, "RunNumber"};
    TTreeReaderValue<ULong64_t> EventNumber = {fReader, "EventNumber"};
-   TTreeReaderValue<Float_t> InTimePileup = {fReader, "InTimePileup"};
-   TTreeReaderValue<Float_t> OutOfTimePileup = {fReader, "OutOfTimePileup"};
+   TTreeReaderValue<Float_t> InTimePileup = {fReader, "ActualInteractionsPerCrossing"};
 
    TTreeReaderValue<Float_t> L1_met = {fReader, "L1.met"};
    TTreeReaderValue<Float_t> cell_met = {fReader, "cell.met"};
