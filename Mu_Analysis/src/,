@@ -9,15 +9,12 @@ Bool_t CorrectL1XE30toZB::Process(Long64_t entry)//{{{
                 ((TH1F*)HLT_ZB_L1XE30_Corrected_to_ZB_MET_Distribution->At(i))->Fill( *cell_met , ComputeWeight( ((TF1*)L1XE30_Efficiency_Fit_Objects->At(i)) ) );
                 // TODO: increment the appropriate entry in the error array with error accrued in
                 // need to get all the params and their uncertainties on this fit object 
-                float m = ((TF1*)L1XE30_Efficiency_Fit_Objects->At(i))->GetParameter( 0 );
-                float dm = ((TF1*)L1XE30_Efficiency_Fit_Objects->At(i))->GetParError( 0 );
-                float b = ((TF1*)L1XE30_Efficiency_Fit_Objects->At(i))->GetParameter( 1 );
-                float db = ((TF1*)L1XE30_Efficiency_Fit_Objects->At(i))->GetParError( 1 );
-                float sigma = ((TF1*)L1XE30_Efficiency_Fit_Objects->At(i))->GetParameter( 2 );
-                float ds = ((TF1*)L1XE30_Efficiency_Fit_Objects->At(i))->GetParError( 2 );
+                float m = ((TF1*)L1XE30_Efficiency_Fit_Objects->At(i))->GetParameter( "Slope" );
+                float dm = ((TF1*)L1XE30_Efficiency_Fit_Objects->At(i))->GetParError( "Slope" );
                 idx = ((TH1F*)HLT_ZB_L1XE30_Corrected_to_ZB_MET_Distribution->At(i))->GetBin( *cell_met );
                 L1XE30CorrectedToZBErrors[i][idx] = L1XE30CorrectedToZBErrors[i][idx] + 
                     TeffFitErr( *cell_met , m , b , sigma , dm , db , ds , L1XE );
+
             }
         }
     }

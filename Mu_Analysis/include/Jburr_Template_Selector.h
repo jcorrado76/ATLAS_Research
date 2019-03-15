@@ -55,6 +55,8 @@ public :
    Int_t MarkerStyles[Number_Mu_Bins] =                     {29,20,3,4,27,22,21};
    Int_t Normalization_Bin_Numbers[Number_Mu_Bins] =        {40,52,60,56,55,52,40};
    Float_t Scale_Factors[Number_Mu_Bins] =                  { 0.0 };
+   Double_t L1XE30CorrectedToZBErrors[Number_Mu_Bins][met_dist_nbins] =    { 0.0 };
+   Double_t L1XE50CorrectedToZBErrors[Number_Mu_Bins][met_dist_nbins] =    { 0.0 };
 
    Float_t muLow;
    Float_t muHigh;
