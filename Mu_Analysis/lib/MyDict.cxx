@@ -58,7 +58,7 @@ namespace ROOT {
       ::Jburr_Template_Selector *ptr = 0;
       static ::TVirtualIsAProxy* isa_proxy = new ::TInstrumentedIsAProxy< ::Jburr_Template_Selector >(0);
       static ::ROOT::TGenericClassInfo 
-         instance("Jburr_Template_Selector", ::Jburr_Template_Selector::Class_Version(), "Jburr_Template_Selector.h", 27,
+         instance("Jburr_Template_Selector", ::Jburr_Template_Selector::Class_Version(), "Jburr_Template_Selector.h", 28,
                   typeid(::Jburr_Template_Selector), ::ROOT::Internal::DefineBehavior(ptr, ptr),
                   &::Jburr_Template_Selector::Dictionary, isa_proxy, 4,
                   sizeof(::Jburr_Template_Selector) );

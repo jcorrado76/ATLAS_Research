@@ -21,6 +21,7 @@
 #include <TDirectory.h>
 #include <TGaxis.h>
 #include <array>
+#include <cmath>
 #include <TObjArray.h>
 // end includes}}}
 //class definition {{{
@@ -30,13 +31,13 @@ public :
    TTreeReader     fReader;
    TTree          *fChain =                                                     0;   //!pointer to the analyzed TTree or TChain
    const static Int_t Number_Mu_Bins =                                          7;   // 7 mu bins
-   const Float_t gevLow =                                                       0.0;
-   const Float_t gevHigh =                                                      300.0;
-   const Float_t met_dist_binwidth =                                            1.0;
-   const Float_t efficiency_bin_width =                                         20.0; // 20 GeV bins
+   constexpr static Float_t gevLow =                                                       0.0;
+   constexpr static Float_t gevHigh =                                                      300.0;
+   constexpr static Float_t met_dist_binwidth =                                            1.0;
+   constexpr static Float_t efficiency_bin_width =                                         20.0; // 20 GeV bins
    float L1XE =                                                                  0.0;    
-   const Int_t met_dist_nbins =                                        (gevHigh - gevLow) / met_dist_binwidth; 
-   const Int_t efficiency_nbins =                                      (gevHigh - gevLow) / efficiency_bin_width;
+   const static Int_t met_dist_nbins =                                        (gevHigh - gevLow) / met_dist_binwidth; 
+   const static Int_t efficiency_nbins =                                      (gevHigh - gevLow) / efficiency_bin_width;
    // collections
    TObjArray* HLT_ZB_L1ZB_MET_Distributions_by_Mubin = new TObjArray();
    TObjArray* HLT_ZB_L1XE30_MET_Distributions_by_Mubin = new TObjArray();
@@ -104,7 +105,7 @@ public :
    Bool_t isHLT_zb_L1XE30();
    Bool_t isHLT_zb_L1XE50();
    Bool_t inMuRange( Float_t , Float_t );
-   // getters
+   // getters{{{
    TObjArray* Get_HLT_ZB_L1ZB_MET_Distributions_by_Mubin() const { return HLT_ZB_L1ZB_MET_Distributions_by_Mubin; }
    TObjArray* Get_HLT_ZB_L1XE30_MET_Distributions_by_Mubin() const { return HLT_ZB_L1XE30_MET_Distributions_by_Mubin; }
     TObjArray* Get_HLT_ZB_L1XE30_Corrected_to_ZB_MET_Distribution() const { return HLT_ZB_L1XE30_Corrected_to_ZB_MET_Distribution; }
@@ -113,8 +114,8 @@ public :
     TObjArray* Get_L1XE50_Efficiency_Objects() const { return L1XE50_Efficiency_Objects; }
     TObjArray* Get_L1XE30_Efficiency_Fit_Objects() const { return L1XE30_Efficiency_Fit_Objects; }
     TObjArray* Get_L1XE50_Efficiency_Fit_Objects() const { return L1XE50_Efficiency_Fit_Objects; }
-    Int_t GetNumberMuBins() const {return Number_Mu_Bins; }
-    // setters
+    Int_t GetNumberMuBins() const {return Number_Mu_Bins; }//}}}
+    // setters{{{
    void Set_HLT_ZB_L1ZB_MET_Distributions_by_Mubin(TObjArray* const other){ HLT_ZB_L1ZB_MET_Distributions_by_Mubin = other; }
    void Set_HLT_ZB_L1XE30_MET_Distributions_by_Mubin(TObjArray* const other){ HLT_ZB_L1XE30_MET_Distributions_by_Mubin = other ; }
    void Set_HLT_ZB_L1XE30_Corrected_to_ZB_MET_Distribution(TObjArray* const other){ HLT_ZB_L1XE30_Corrected_to_ZB_MET_Distribution = other ; }
@@ -129,7 +130,7 @@ public :
    static double L1XE30fitFunction(double *x , double *par );
    static double L1XE50fitFunction(double *x , double *par );
    double TeffFitErr( Double_t , Double_t , Double_t, Double_t, Double_t, Double_t, Double_t, Double_t);
-   ClassDef(Jburr_Template_Selector,0);
+   ClassDef(Jburr_Template_Selector,0);//}}}
    // Readers to access the data (delete the ones you do not need){{{
    TTreeReaderValue<UInt_t> RunNumber = {fReader, "RunNumber"};
    TTreeReaderValue<ULong64_t> EventNumber = {fReader, "EventNumber"};
