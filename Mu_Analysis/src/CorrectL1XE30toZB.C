@@ -13,6 +13,7 @@ void CorrectL1XE30toZB::Begin(){//{{{
         L1XE30fitParsErrs[i][1] = ((TF1*)L1XE30_Efficiency_Fit_Objects->At(i))->GetParError( 1 );
         L1XE30fitParsErrs[i][2] = ((TF1*)L1XE30_Efficiency_Fit_Objects->At(i))->GetParError( 2 );
    }
+   std::cout << "Evaluation of function inside correct l1xe30 to zb: " << ((TF1*)L1XE30_Efficiency_Fit_Objects->At(2))->Eval(20.) << std::endl;
 }//}}}
 Bool_t CorrectL1XE30toZB::Process(Long64_t entry)//{{{
 {
