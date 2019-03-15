@@ -1,9 +1,19 @@
 #include "CorrectL1XE30toZB.h"
 ClassImp(CorrectL1XE30toZB);
-void    Begin(TTree *tree){
+void CorrectL1XE30toZB::Begin(){
+    // getting these parameters needs to happen before process, but after construction
+    // get values of efficiency fit parameters
+   for (int i = 0 ; i < Number_Mu_Bins; i++){
+        std::cout << ((TF1*)L1XE30_Efficiency_Fit_Objects->At(i))->GetParameter( 0 ) << std::endl;
+        fitPars[i][0] = ((TF1*)L1XE30_Efficiency_Fit_Objects->At(i))->GetParameter( 0 );
+        fitPars[i][1] = ((TF1*)L1XE30_Efficiency_Fit_Objects->At(i))->GetParameter( 1 );
+        fitPars[i][2] = ((TF1*)L1XE30_Efficiency_Fit_Objects->At(i))->GetParameter( 2 );
 
-
-
+        // get values of uncertainties on efficiency fit parameters
+        fitParsErrs[i][0] = ((TF1*)L1XE30_Efficiency_Fit_Objects->At(i))->GetParError( 0 );
+        fitParsErrs[i][1] = ((TF1*)L1XE30_Efficiency_Fit_Objects->At(i))->GetParError( 1 );
+        fitParsErrs[i][2] = ((TF1*)L1XE30_Efficiency_Fit_Objects->At(i))->GetParError( 2 );
+   }
 }
 Bool_t CorrectL1XE30toZB::Process(Long64_t entry)//{{{
 {

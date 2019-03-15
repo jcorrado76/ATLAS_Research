@@ -568,7 +568,7 @@ namespace {
 #pragma clang diagnostic ignored "-Wignored-attributes"
 #pragma clang diagnostic ignored "-Wreturn-type-c-linkage"
 extern int __Cling_Autoloading_Map;
-class __attribute__((annotate("$clingAutoload$Jburr_Template_Selector.h")))  __attribute__((annotate("$clingAutoload$../include/CorrectL1XE30toZB.h")))  Jburr_Template_Selector;
+class __attribute__((annotate(R"ATTRDUMP(}}})ATTRDUMP"))) __attribute__((annotate(R"ATTRDUMP(}}})ATTRDUMP"))) __attribute__((annotate(R"ATTRDUMP(}}})ATTRDUMP"))) __attribute__((annotate(R"ATTRDUMP(}}})ATTRDUMP"))) __attribute__((annotate("$clingAutoload$Jburr_Template_Selector.h")))  __attribute__((annotate("$clingAutoload$../include/CorrectL1XE30toZB.h")))  Jburr_Template_Selector;
 class __attribute__((annotate("$clingAutoload$../include/CorrectL1XE30toZB.h")))  CorrectL1XE30toZB;
 class __attribute__((annotate("$clingAutoload$../include/CorrectL1XE50toZB.h")))  CorrectL1XE50toZB;
 class __attribute__((annotate("$clingAutoload$../include/ComputeL1XE30toZBEfficiency.h")))  ComputeL1XE30toZBEfficiency;
