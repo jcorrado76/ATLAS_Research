@@ -33,7 +33,8 @@ Bool_t Jburr_Template_Selector::inMuRange( Float_t a , Float_t b ){ //{{{
     // return true if in local mu bin
     return ( *InTimePileup > a && *InTimePileup < b );
 } //}}}
-TF1* Jburr_Template_Selector::generateFitFunction(TEfficiency* teff_obj, float L1XE , float gevMax, float initial_slope, float initial_intercept, float initial_sigma ,  Bool_t verbose ){//{{{
+TF1* Jburr_Template_Selector::generateFitFunction(TEfficiency* teff_obj, float L1XE , 
+        float initial_slope, float initial_intercept, float initial_sigma ,  Bool_t verbose ){//{{{
     // return a fit function object whose parameters have been set
 
     TF1* fitErrorFunction = new TF1();
@@ -52,8 +53,6 @@ TF1* Jburr_Template_Selector::generateFitFunction(TEfficiency* teff_obj, float L
 
     //"R" tells the fit function from BinomialEfficiency::Fit to use the range of the TF1 as the fitting range
     teff_obj->Fit( fitErrorFunction  , "R+");
-
-    std::cout << "Testing Eval for error fit function: " << fitErrorFunction->Eval(20.0) << std::endl;
 
     if (verbose){
         std::cout << "Value of fit for a: " << fitErrorFunction->GetParameter(0) << std::endl;
@@ -99,7 +98,7 @@ double Jburr_Template_Selector::L1XE50fitFunction(double *x , double *par){//{{{
     return fitval;
 }//}}}
 Double_t Jburr_Template_Selector::TeffFitErr( Double_t x , Double_t m , Double_t b , Double_t sigma , Double_t dm ,Double_t db ,Double_t ds ,Double_t l1xe ){//{{{
-    Double_t z = ( m * x - l1xe ) / ( TMath::Sqrt(2) * sigma );
+    Double_t z = ( b + m * x - l1xe ) / ( TMath::Sqrt(2) * sigma );
     Double_t prefactor = TMath::Sqrt( 1. / ( 2 * TMath::Pi() * pow(sigma ,2) ) );
     Double_t exp = TMath::Exp( -pow(z,2) );
     Double_t factor = TMath::Sqrt( pow(dm * x,2) + pow(db,2) + pow(ds * z,2));

@@ -22,6 +22,7 @@
     std::cout << "Correcting L1XE30 Data to ZB" << std::endl;
     jetm10_chain->Process( correctL1XE30ToZB );
 
+    std::cout << "Computing L1XE50 versus l1xe30 efficiency curves" << std::endl;
     jetm10_chain->Process( computeL1XE50toL1XE30Efficiency );
 
     // need zb l1 zb met dist for normalization
@@ -33,6 +34,7 @@
     CorrectL1XE50DataAllWay->Set_L1XE50_Efficiency_Objects((TObjArray*)computeL1XE50toL1XE30Efficiency->Get_L1XE50_Efficiency_Objects());
     CorrectL1XE50DataAllWay->Set_HLT_ZB_L1XE30_Corrected_to_ZB_MET_Distribution((TObjArray*)correctL1XE30ToZB->Get_HLT_ZB_L1XE30_Corrected_to_ZB_MET_Distribution());
     // then correct the l1xe50 data back to zerobias
+    std::cout << "Correcting L1XE50 Data to ZB" << std::endl;
     jetm10_chain->Process( CorrectL1XE50DataAllWay );
 
     TString filename("mu_analysis.root");
