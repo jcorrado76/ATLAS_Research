@@ -24,6 +24,5 @@ void ComputeL1XE30toZBEfficiency::Terminate() //{{{
        Name.Form("l1xe30_efficiency_fit_obj_%d" , i );
        ((TF1*)L1XE30_Efficiency_Fit_Objects->At(i))->SetName( Name );
        ((TF1*)L1XE30_Efficiency_Fit_Objects->At(i))->SetTitle( Name );
-       std::cout << "Create eficiency fit object " << i << ": " << ((TF1*)L1XE30_Efficiency_Fit_Objects->At(i))->GetName() << std::endl;
     }
 }//}}}
