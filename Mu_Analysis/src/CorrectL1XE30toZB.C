@@ -40,7 +40,7 @@ void CorrectL1XE30toZB::Terminate(){//{{{
     // do errors correctly
     for ( int i = 0 ; i < Number_Mu_Bins ; i++ ){
         for ( int j = 0 ; j < met_dist_nbins ; j++ ){
-            ((TH1F*)HLT_ZB_L1XE30_Corrected_to_ZB_MET_Distribution->At(i))->SetBinError( j , L1XE30CorrectedToZBErrors[i][j] );
+            ((TH1F*)HLT_ZB_L1XE30_Corrected_to_ZB_MET_Distribution->At(i))->SetBinError( j , TMath::Sqrt(L1XE30CorrectedToZBErrors[i][j]) );
         }
     }
 	// Relative Normalization{{{
