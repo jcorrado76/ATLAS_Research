@@ -12,8 +12,6 @@ public :
        }
     }
    float L1XE = 30.0;
-    float fitPars[Number_Mu_Bins][3];
-    float fitParsErrs[Number_Mu_Bins][3];
    ~CorrectL1XE30toZB() { }
    void    Begin();
    Bool_t  Process(Long64_t entry);

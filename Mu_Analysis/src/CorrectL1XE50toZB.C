@@ -2,6 +2,20 @@
 #include "CorrectL1XE50toZB.h"
 #include <math.h>
 ClassImp(CorrectL1XE50toZB);
+void CorrectL1XE50toZB::Begin(){//{{{
+    // getting these parameters needs to happen before process, but after construction
+    // get values of efficiency fit parameters
+   for (int i = 0 ; i < Number_Mu_Bins; i++){
+        fitPars[i][0] = ((TF1*)L1XE50_Efficiency_Fit_Objects->At(i))->GetParameter( 0 );
+        fitPars[i][1] = ((TF1*)L1XE50_Efficiency_Fit_Objects->At(i))->GetParameter( 1 );
+        fitPars[i][2] = ((TF1*)L1XE50_Efficiency_Fit_Objects->At(i))->GetParameter( 2 );
+
+        // get values of uncertainties on efficiency fit parameters
+        fitParsErrs[i][0] = ((TF1*)L1XE50_Efficiency_Fit_Objects->At(i))->GetParError( 0 );
+        fitParsErrs[i][1] = ((TF1*)L1XE50_Efficiency_Fit_Objects->At(i))->GetParError( 1 );
+        fitParsErrs[i][2] = ((TF1*)L1XE50_Efficiency_Fit_Objects->At(i))->GetParError( 2 );
+   }
+}//}}}
 Bool_t CorrectL1XE50toZB::Process(Long64_t entry)//{{{
 {
    fReader.SetLocalEntry(entry);
@@ -16,6 +30,12 @@ Bool_t CorrectL1XE50toZB::Process(Long64_t entry)//{{{
    return kTRUE;
 }//}}}
 void CorrectL1XE50toZB::Terminate(){//{{{
+    // do errors correctly
+    for ( int i = 0 ; i < Number_Mu_Bins ; i++ ){
+        for ( int j = 0 ; j < met_dist_nbins ; j++ ){
+            ((TH1F*)HLT_ZB_L1XE50_Corrected_to_ZB_MET_Distribution->At(i))->SetBinError( j , L1XE50CorrectedToZBErrors[i][j] );
+        }
+    }
 	// Relative Normalization
     // TODO: do this better
     for ( int i = 0 ; i < Number_Mu_Bins ; i++ ){
