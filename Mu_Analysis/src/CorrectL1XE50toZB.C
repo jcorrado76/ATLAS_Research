@@ -2,7 +2,7 @@
 #include "CorrectL1XE50toZB.h"
 #include <math.h>
 ClassImp(CorrectL1XE50toZB);
-void CorrectL1XE50toZB::Begin(){//{{{
+void CorrectL1XE50toZB::UpdateFitParameters(){//{{{
     // getting these parameters needs to happen before process, but after construction
     // get values of efficiency fit parameters
    for (int i = 0 ; i < Number_Mu_Bins; i++){
@@ -43,6 +43,14 @@ Bool_t CorrectL1XE50toZB::Process(Long64_t entry)//{{{
 }//}}}
 void CorrectL1XE50toZB::Terminate(){//{{{
     // do errors correctly
+   for (int i = 0 ; i < Number_Mu_Bins; i++){
+        std::cout << "First parameter of mu bin " << i << ": " << ((TF1*)L1XE50_Efficiency_Fit_Objects->At(i))->GetParameter( 0 ) << std::endl;
+        std::cout << "Second parameter of mu bin " << i << ": " << ((TF1*)L1XE50_Efficiency_Fit_Objects->At(i))->GetParameter( 1 ) << std::endl;
+        std::cout << "Third parameter of mu bin " << i << ": " << ((TF1*)L1XE50_Efficiency_Fit_Objects->At(i))->GetParameter( 2 ) << std::endl;
+        std::cout << "First parameter error of mu bin " << i << ": " << ((TF1*)L1XE50_Efficiency_Fit_Objects->At(i))->GetParError( 0 ) << std::endl;
+        std::cout << "Second parameter error of mu bin " << i << ": " << ((TF1*)L1XE50_Efficiency_Fit_Objects->At(i))->GetParError( 1 ) << std::endl;
+        std::cout << "Third parameter error of mu bin " << i << ": " << ((TF1*)L1XE50_Efficiency_Fit_Objects->At(i))->GetParError( 2 ) << std::endl;
+   }
     for ( int i = 0 ; i < Number_Mu_Bins ; i++ ){
         for ( int j = 0 ; j < met_dist_nbins ; j++ ){
             std::cout << "Error on i , j: " << i << " , " << j << ": " << L1XE50CorrectedToZBErrors[i][j] << std::endl;

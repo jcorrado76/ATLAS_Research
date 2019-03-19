@@ -13,7 +13,7 @@ public :
     }
    float L1XE = 30.0;
    ~CorrectL1XE30toZB() { }
-   void    Begin();
+   void    UpdateFitParameters();
    Bool_t  Process(Long64_t entry);
    void    Terminate();
    ClassDef(CorrectL1XE30toZB,0);

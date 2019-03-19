@@ -14,7 +14,7 @@ public :
        }
    }
    float L1XE = 50.0;
-   void    Begin();
+   void    UpdateFitParameters();
    ~CorrectL1XE50toZB() { }
    Bool_t  Process(Long64_t entry);
    void    Terminate();
