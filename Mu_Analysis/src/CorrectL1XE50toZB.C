@@ -46,7 +46,7 @@ void CorrectL1XE50toZB::Terminate(){//{{{
     for ( int i = 0 ; i < Number_Mu_Bins ; i++ ){
         for ( int j = 0 ; j < met_dist_nbins ; j++ ){
             std::cout << "Error on i , j: " << i << " , " << j << ": " << L1XE50CorrectedToZBErrors[i][j] << std::endl;
-            ((TH1F*)HLT_ZB_L1XE50_Corrected_to_ZB_MET_Distribution->At(i))->SetBinError( j , L1XE50CorrectedToZBErrors[i][j] );
+            ((TH1F*)HLT_ZB_L1XE50_Corrected_to_ZB_MET_Distribution->At(i))->SetBinError( j , TMath::Sqrt(L1XE50CorrectedToZBErrors[i][j]) );
         }
     }
 	// Relative Normalization

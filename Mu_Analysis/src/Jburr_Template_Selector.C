@@ -99,9 +99,9 @@ double Jburr_Template_Selector::L1XE50fitFunction(double *x , double *par){//{{{
 }//}}}
 Double_t Jburr_Template_Selector::TeffFitErr( Double_t x , Double_t m , Double_t b , Double_t sigma , Double_t dm ,Double_t db ,Double_t ds ,Double_t l1xe ){//{{{
     Double_t z = ( b + m * x - l1xe ) / ( TMath::Sqrt(2) * sigma );
-    Double_t prefactor = TMath::Sqrt( 1. / ( 2 * TMath::Pi() * pow(sigma ,2) ) );
+    Double_t prefactor = 1. / TMath::Sqrt( 2 * TMath::Pi() * pow(sigma ,2));
     Double_t exp = TMath::Exp( -pow(z,2) );
-    Double_t factor = TMath::Sqrt( pow(dm * x,2) + pow(db,2) + pow(ds * z,2));
+    Double_t factor = TMath::Sqrt( pow(dm * x,2) + pow(db,2) + pow(ds * (( m * x + b - l1xe ) / ( pow( sigma , 2 ) ) ),2));
     return prefactor * exp * factor;
 }//}}}
 Bool_t Jburr_Template_Selector::Notify(){return kTRUE;}

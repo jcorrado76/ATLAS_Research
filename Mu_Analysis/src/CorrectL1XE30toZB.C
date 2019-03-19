@@ -1,6 +1,6 @@
 #include "CorrectL1XE30toZB.h"
 ClassImp(CorrectL1XE30toZB);
-void CorrectL1XE30toZB::UpdateFitParameters(){
+void CorrectL1XE30toZB::UpdateFitParameters(){//{{{
     // getting these parameters needs to happen before process, but after construction
     // get values of efficiency fit parameters
    for (int i = 0 ; i < Number_Mu_Bins; i++){
@@ -13,8 +13,7 @@ void CorrectL1XE30toZB::UpdateFitParameters(){
         L1XE30fitParsErrs[i][1] = ((TF1*)L1XE30_Efficiency_Fit_Objects->At(i))->GetParError( 1 );
         L1XE30fitParsErrs[i][2] = ((TF1*)L1XE30_Efficiency_Fit_Objects->At(i))->GetParError( 2 );
    }
-}
-
+}//}}}
 Bool_t CorrectL1XE30toZB::Process(Long64_t entry)//{{{
 {
    fReader.SetLocalEntry(entry);
