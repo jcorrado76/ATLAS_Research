@@ -43,14 +43,6 @@ Bool_t CorrectL1XE50toZB::Process(Long64_t entry)//{{{
 }//}}}
 void CorrectL1XE50toZB::Terminate(){//{{{
     // do errors correctly
-   for (int i = 0 ; i < Number_Mu_Bins; i++){
-        std::cout << "First parameter of mu bin " << i << ": " << L1XE50fitPars[i][0] << std::endl;
-        std::cout << "Second parameter of mu bin " << i << ": " << L1XE50fitPars[i][1] << std::endl;
-        std::cout << "Third parameter of mu bin " << i << ": " << L1XE50fitPars[i][2] << std::endl;
-        std::cout << "First parameter error of mu bin " << i << ": " << L1XE50fitParsErrs[i][0] << std::endl;
-        std::cout << "Second parameter error of mu bin " << i << ": " << L1XE50fitParsErrs[i][1] << std::endl;
-        std::cout << "Third parameter error of mu bin " << i << ": " << L1XE50fitParsErrs[i][2] << std::endl;
-   }
     for ( int i = 0 ; i < Number_Mu_Bins ; i++ ){
         for ( int j = 0 ; j < met_dist_nbins ; j++ ){
             std::cout << "Error on i , j: " << i << " , " << j << ": " << L1XE50CorrectedToZBErrors[i][j] << std::endl;
