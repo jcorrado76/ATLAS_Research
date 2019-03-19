@@ -55,8 +55,8 @@ TF1* Jburr_Template_Selector::generateFitFunction(TEfficiency* teff_obj, float L
     teff_obj->Fit( fitErrorFunction  , "R+");
 
     if (verbose){
-        std::cout << "Value of fit for a: " << fitErrorFunction->GetParameter(0) << std::endl;
-        std::cout << "Value of error on a: " << fitErrorFunction->GetParError(0) << std::endl;
+        std::cout << "Value of fit for m: " << fitErrorFunction->GetParameter(0) << std::endl;
+        std::cout << "Value of error on m: " << fitErrorFunction->GetParError(0) << std::endl;
         std::cout << "Value of fit for b: " << fitErrorFunction->GetParameter(1) << std::endl;
         std::cout << "Value of error on b: " << fitErrorFunction->GetParError(1) << std::endl;
         std::cout << "Value of fit for sigma: " << fitErrorFunction->GetParameter(2) << std::endl;
