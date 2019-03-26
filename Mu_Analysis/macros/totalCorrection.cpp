@@ -1,6 +1,6 @@
 {
-    TString zb_file_path = "/home/joseph/DATA/ZB_jburr_15thru17_with_missing_et_significance.root";
-    TString physics_main_file_path = "/home/joseph/DATA/user.jburr.JETM10.151617.root";
+    TString zb_file_path = "/home/joseph/DATA/user_jburr_METPerfNTUP_ZB*";
+    TString physics_main_file_path = "/home/joseph/DATA/user_jburr_METPerfNTUP_JET*";
     // initialize tchains
     TChain* zb_chain = new TChain( "METTree" , "zb_chain" );
     TChain* jetm10_chain = new TChain( "METTree", "jetm10chain");
