@@ -48,7 +48,7 @@
     l1xe50_eff_canv->SetLogy();
     title->Draw("SAME");
 
-    outFileName.Form("plots/l1xe50Efficiency_Curves.png");
+    outFileName.Form("plots/L1XE50Efficiency_Curves.png");
     l1xe50_eff_canv->Print(outFileName);
     mu_analysis_file->Close()
 }
