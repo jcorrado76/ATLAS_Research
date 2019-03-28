@@ -23,9 +23,9 @@
 
         TCanvas* corrected_canvas = new TCanvas("correctedCanvas","Canvas with ZB Distributions");
         TLegend* correctedLegend = new TLegend(0.48,0.7,0.9,0.9);
-        zb_dist->Draw();
+        l1xe50_corrected_zb_dist->Draw("P E1");
+        zb_dist->Draw("P E1 SAME");
         l1xe30_corrected_zb_dist->Draw("P E1 SAME");
-        l1xe50_corrected_zb_dist->Draw("P E1 SAME");
         correctedLegend->AddEntry( zb_dist );
         correctedLegend->AddEntry( l1xe30_corrected_zb_dist );
         correctedLegend->AddEntry( l1xe50_corrected_zb_dist );
