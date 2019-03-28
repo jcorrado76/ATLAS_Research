@@ -13,7 +13,7 @@
     TString funcName = "";
 
     for (int i = 0; i <= l1xe30_efficiency_objects->GetLast(); i++){
-        canvName.Form("l1xe30_eff_canv","L1XE30 Efficiency for %d < #mu < %d", i*10 , (i+1)*10);
+        canvName.Form("L1XE30 Efficiency for %d < #mu < %d", i*10 , (i+1)*10);
         TCanvas* l1xe30_eff_canv = new TCanvas( canvName );
         l1xe30_eff_canv->SetFillColor(42);
         TLegend* correctedLegend = new TLegend(0.48,0.2,0.9,0.4);
@@ -34,6 +34,5 @@
         outFileName.Form("plots/l1xe30_efficiencies/L1XE30Efficiency_mu_between_%d_%d.png", i*10, (i+1)*10);
         l1xe30_eff_canv->Print(outFileName);
     }
-
     mu_analysis_file->Close()
 }

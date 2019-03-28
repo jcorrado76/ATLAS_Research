@@ -9,46 +9,30 @@
 
     TEfficiency* l1xe50_efficiency_curve;
     TString outFileName = "";
-    TCanvas* l1xe50_eff_canv = new TCanvas("l1xe50_eff_canv","Canvas with l1xe50 Efficiencies");
-    l1xe50_eff_canv->SetFillColor(42);
-    TLegend* correctedLegend = new TLegend(0.48,0.2,0.9,0.4);
-    // "NDC" means make limits represent fractions of pad
-    TPaveLabel *title = new TPaveLabel(0.2,0.9,0.8,0.95, "L1xe50 Efficiencies", "NDC");
-    // remove showing of random things
-    gStyle->SetOptStat(0);
-    // suppress the title of the first object to be drawn
-    gStyle->SetOptTitle(0);
-    title->SetTextFont(72);
-    l1xe50_efficiency_curve = ((TEfficiency*)(l1xe50_efficiency_objects->At(1)));
-    // don't plot fit functions
-    l1xe50_efficiency_curve->GetListOfFunctions()->Clear();
-    l1xe50_efficiency_curve->SetLineColor( Colors[1] );
-    correctedLegend->AddEntry( l1xe50_efficiency_curve );
-    l1xe50_efficiency_curve->Draw();
-    //gPad->Update();
-    //l1xe50_efficiency_curve->GetPaintedGraph()->GetXaxis()->SetRangeUser(0.0,200.0);
-    //l1xe50_efficiency_curve->GetPaintedGraph()->GetYaxis()->SetRangeUser(0.0,1.0);
+    TString canvName = "";
+    TString funcName = "";
 
-    // to fix plotting. draw the mubin 0 first because it was messing everything up
-    for (int i = 2; i <= l1xe50_efficiency_objects->GetLast(); i++){
+    for (int i = 0; i <= l1xe50_efficiency_objects->GetLast(); i++){
+        canvName.Form("L1XE50 Efficiency for %d < #mu < %d", i*10 , (i+1)*10);
+        TCanvas* l1xe50_eff_canv = new TCanvas(canvName);
+        l1xe50_eff_canv->SetFillColor(42);
+        TLegend* correctedLegend = new TLegend(0.48,0.2,0.9,0.4);
+        TPaveLabel *title = new TPaveLabel(0.2,0.9,0.8,0.95, "L1XE50 Efficiencies", "NDC");
+        gStyle->SetOptStat(0);
+        gStyle->SetOptTitle(0);
+        title->SetTextFont(72);
         l1xe50_efficiency_curve = ((TEfficiency*)(l1xe50_efficiency_objects->At(i)));
+       funcName.Form("L1XE50 Efficiency Fit for %d < #mu < %d" , i*10, (i+1)*10 );
+       l1xe50_efficiency_curve->SetTitle( funcName );
         correctedLegend->AddEntry( l1xe50_efficiency_curve );
-        l1xe50_efficiency_curve->GetListOfFunctions()->Clear();
         l1xe50_efficiency_curve->SetLineColor( Colors[i] );
+        l1xe50_efficiency_curve->Draw();
+        correctedLegend->Draw("SAME");
+        l1xe50_eff_canv->SetLogy();
+        title->Draw("SAME");
 
-        l1xe50_efficiency_curve->Draw("SAME");
+        outFileName.Form("plots/l1xe50_efficiencies/L1XE50Efficiency_mu_between_%d_%d.png", i*10, (i+1)*10);
+        l1xe50_eff_canv->Print(outFileName);
     }
-    l1xe50_efficiency_curve = ((TEfficiency*)(l1xe50_efficiency_objects->At(0)));
-    correctedLegend->AddEntry( l1xe50_efficiency_curve );
-    l1xe50_efficiency_curve->GetListOfFunctions()->Clear();
-    l1xe50_efficiency_curve->SetLineColor( Colors[0] );
-
-    l1xe50_efficiency_curve->Draw("SAME");
-    correctedLegend->Draw("SAME");
-    l1xe50_eff_canv->SetLogy();
-    title->Draw("SAME");
-
-    outFileName.Form("plots/L1XE50Efficiency_Curves.png");
-    l1xe50_eff_canv->Print(outFileName);
     mu_analysis_file->Close()
 }
