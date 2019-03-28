@@ -23,7 +23,7 @@
     l1xe30_efficiency_fit = ((TF1*)(l1xe30_efficiency_fit_objects->At(1)));
     // don't plot fit functions
     l1xe30_efficiency_fit->SetLineColor( Colors[1] );
-   Name.Form("L1XE30 Efficiency for %d < #mu < %d" , 10, 20 );
+   Name.Form("L1XE30 Efficiency Fit for %d < #mu < %d" , 10, 20 );
    l1xe30_efficiency_fit->SetTitle( Name );
     correctedLegend->AddEntry( l1xe30_efficiency_fit );
     l1xe30_efficiency_fit->Draw();
@@ -31,14 +31,14 @@
     // to fix plotting. draw the mubin 0 first because it was messing everything up
     for (int i = 2; i <= l1xe30_efficiency_fit_objects->GetLast(); i++){
         l1xe30_efficiency_fit = ((TF1*)(l1xe30_efficiency_fit_objects->At(i)));
-       Name.Form("L1XE30 Efficiency for %d < #mu < %d" , i*10,(i+1)*10  );
+       Name.Form("L1XE30 Efficiency Fit for %d < #mu < %d" , i*10,(i+1)*10  );
        l1xe30_efficiency_fit->SetTitle( Name );
         correctedLegend->AddEntry( l1xe30_efficiency_fit );
         l1xe30_efficiency_fit->SetLineColor( Colors[i] );
        l1xe30_efficiency_fit->Draw("SAME");
     }
     l1xe30_efficiency_fit = ((TF1*)(l1xe30_efficiency_fit_objects->At(0)));
-   Name.Form("L1XE30 Efficiency for %d < #mu < %d" , 0,10  );
+   Name.Form("L1XE30 Efficiency Fit for %d < #mu < %d" , 0,10  );
    l1xe30_efficiency_fit->SetTitle( Name );
     correctedLegend->AddEntry( l1xe30_efficiency_fit );
     l1xe30_efficiency_fit->SetLineColor( Colors[0] );

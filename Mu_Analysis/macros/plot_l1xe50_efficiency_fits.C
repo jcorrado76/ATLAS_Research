@@ -9,6 +9,7 @@
 
     TF1* l1xe50_efficiency_fit;
     TString outFileName = "";
+    TString Name;
     TCanvas* l1xe50_eff_canv = new TCanvas("l1xe50_eff_canv","Canvas with L1xe50 Efficiency Fits");
     l1xe50_eff_canv->SetFillColor(42);
     TLegend* correctedLegend = new TLegend(0.48,0.2,0.9,0.4);
@@ -21,18 +22,24 @@
     title->SetTextFont(72);
     l1xe50_efficiency_fit = ((TF1*)(l1xe50_efficiency_fit_objects->At(1)));
     l1xe50_efficiency_fit->SetLineColor( Colors[1] );
+   Name.Form("L1XE50 Efficiency Fit for %d < #mu < %d" , 10, 20 );
+   l1xe50_efficiency_fit->SetTitle( Name );
     correctedLegend->AddEntry( l1xe50_efficiency_fit );
     l1xe50_efficiency_fit->Draw();
 
     // to fix plotting. draw the mubin 0 first because it was messing everything up
     for (int i = 2; i <= l1xe50_efficiency_fit_objects->GetLast(); i++){
         l1xe50_efficiency_fit = ((TF1*)(l1xe50_efficiency_fit_objects->At(i)));
+           Name.Form("L1XE50 Efficiency Fit for %d < #mu < %d" , i*10,(i+1)*10  );
+           l1xe50_efficiency_fit->SetTitle( Name );
         correctedLegend->AddEntry( l1xe50_efficiency_fit );
         l1xe50_efficiency_fit->SetLineColor( Colors[i] );
 
         l1xe50_efficiency_fit->Draw("SAME");
     }
     l1xe50_efficiency_fit = ((TF1*)(l1xe50_efficiency_fit_objects->At(0)));
+   Name.Form("L1XE50 Efficiency Fit for %d < #mu < %d" , 0,10  );
+   l1xe50_efficiency_fit->SetTitle( Name );
     correctedLegend->AddEntry( l1xe50_efficiency_fit );
     l1xe50_efficiency_fit->SetLineColor( Colors[0] );
 
