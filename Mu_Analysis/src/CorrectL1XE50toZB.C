@@ -51,14 +51,45 @@ void CorrectL1XE50toZB::Terminate(){//{{{
 	// Relative Normalization
     TH1F* zb_dist;
     TH1F* l1xe50_corrected_zb_dist;
-    for ( int i = 0 ; i < Number_Mu_Bins ; i++ ){
-        Scale_Factors[i] = ((TH1F*)HLT_ZB_L1ZB_MET_Distributions_by_Mubin->At(i))->GetBinContent( Normalization_Bin_Numbers[i] ) / 
-            ((TH1F*)HLT_ZB_L1XE50_Corrected_to_ZB_MET_Distribution->At(i))->GetBinContent( Normalization_Bin_Numbers[i] );
-        std::cout << "L1XE50 Scale factor: " << i << " = " << Scale_Factors[i] << std::endl;
+    for (int i = 0 ;i < Number_Mu_Bins ; i++ ) {
+        // get histograms
+        zb_dist = ((TH1F*)(HLT_ZB_L1ZB_MET_Distributions_by_Mubin->At(i)));
+        l1xe50_corrected_zb_dist = ((TH1F*)(HLT_ZB_L1XE50_Corrected_to_ZB_MET_Distribution->At(i)));
+        for (int j = 0 ; j < Number_Scale_Factor_Samples ; j++ ){
+            // compute f_i's, how to pick the samples determines j dependency of rhs here
+            L1XE50Scale_Factors[i][j] = zb_dist->GetBinContent( Normalization_Bin_Numbers[i] + j * 3 ) / 
+                l1xe50_corrected_zb_dist->GetBinContent( Normalization_Bin_Numbers[i] + j * 3 ); // shift bin number by 3 for each sample
+            // compute (sigma_i)^2's
+            L1XE50Scale_Factor_Errors[i][j] = pow(L1XE50Scale_Factors[i][j],2) *
+                ( pow( L1XE50CorrectedToZBErrors[i][Normalization_Bin_Numbers[i]] / 
+                      l1xe50_corrected_zb_dist->GetBinContent( Normalization_Bin_Numbers[i] ) ,2) +
+                  pow( zb_dist->GetBinError(Normalization_Bin_Numbers[i]) / 
+                      zb_dist->GetBinContent( Normalization_Bin_Numbers[i] ) ,2)
+                  );
+        }
+        // TODO: compare zb_dist->GetBinError with just tracking it on your own using Sqrt(Sum(p_i^2)) (look
+        // at l2_norm)
+        // compute f_mle
+        Double_t numerator = 0.0;
+        Double_t denominator = 0.0;
+        for (int j = 0 ; j < Number_Scale_Factor_Samples ; j++ ){
+            numerator = numerator + (L1XE50Scale_Factors[i][j] / L1XE50Scale_Factor_Errors[i][j]); // these errs are already squared
+            denominator = denominator + (1./L1XE50Scale_Factor_Errors[i][j]);
+        }
+        Double_t f_mle = numerator / denominator;
+        std::cout << "L1XE50 Scale factor: " << i << " = " << f_mle << std::endl;
         ((TH1F*)HLT_ZB_L1ZB_MET_Distributions_by_Mubin->At(i))->SetNormFactor( 1. );
         ((TH1F*)HLT_ZB_L1XE50_Corrected_to_ZB_MET_Distribution->At(i))->SetNormFactor( 1. );
-        ((TH1F*)HLT_ZB_L1XE50_Corrected_to_ZB_MET_Distribution->At(i))->Scale( Scale_Factors[i] );
+        ((TH1F*)HLT_ZB_L1XE50_Corrected_to_ZB_MET_Distribution->At(i))->Scale( f_mle );
     }
+    //for ( int i = 0 ; i < Number_Mu_Bins ; i++ ){
+        //Scale_Factors[i] = ((TH1F*)HLT_ZB_L1ZB_MET_Distributions_by_Mubin->At(i))->GetBinContent( Normalization_Bin_Numbers[i] ) / 
+            //((TH1F*)HLT_ZB_L1XE50_Corrected_to_ZB_MET_Distribution->At(i))->GetBinContent( Normalization_Bin_Numbers[i] );
+        //std::cout << "L1XE50 Scale factor: " << i << " = " << Scale_Factors[i] << std::endl;
+        //((TH1F*)HLT_ZB_L1ZB_MET_Distributions_by_Mubin->At(i))->SetNormFactor( 1. );
+        //((TH1F*)HLT_ZB_L1XE50_Corrected_to_ZB_MET_Distribution->At(i))->SetNormFactor( 1. );
+        //((TH1F*)HLT_ZB_L1XE50_Corrected_to_ZB_MET_Distribution->At(i))->Scale( Scale_Factors[i] );
+    //}
 }//}}}
 void CorrectL1XE50toZB::Write( TString fname ){//{{{
     TFile* mu_analysis_file = TFile::Open("mu_analysis.root","UPDATE");

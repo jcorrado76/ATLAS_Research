@@ -50,8 +50,8 @@ void CorrectL1XE30toZB::Terminate(){//{{{
     TH1F* l1xe30_corrected_zb_dist;
     for (int i = 0 ;i < Number_Mu_Bins ; i++ ) {
         // get histograms
-        zb_dist = ((TH1F*)(hlt_zb_l1_zb_distributions->At(i)));
-        l1xe30_corrected_zb_dist = ((TH1F*)(l1xe30_corrected_zb_distributions->At(i)));
+        zb_dist = ((TH1F*)(HLT_ZB_L1ZB_MET_Distributions_by_Mubin->At(i)));
+        l1xe30_corrected_zb_dist = ((TH1F*)(HLT_ZB_L1XE30_Corrected_to_ZB_MET_Distribution->At(i)));
         for (int j = 0 ; j < Number_Scale_Factor_Samples ; j++ ){
             // compute f_i's, how to pick the samples determines j dependency of rhs here
             L1XE30Scale_Factors[i][j] = zb_dist->GetBinContent( Normalization_Bin_Numbers[i] + j * 3 ) / 
@@ -60,7 +60,7 @@ void CorrectL1XE30toZB::Terminate(){//{{{
             L1XE30Scale_Factor_Errors[i][j] = pow(L1XE30Scale_Factors[i][j],2) *
                 ( pow( L1XE30CorrectedToZBErrors[i][Normalization_Bin_Numbers[i]] / 
                       l1xe30_corrected_zb_dist->GetBinContent( Normalization_Bin_Numbers[i] ) ,2) +
-                  pow( zb_dist->GetBinError([Normalization_Bin_Numbers[i]]) / 
+                  pow( zb_dist->GetBinError(Normalization_Bin_Numbers[i]) / 
                       zb_dist->GetBinContent( Normalization_Bin_Numbers[i] ) ,2)
                   );
         }
