@@ -26,11 +26,12 @@ Bool_t CorrectL1XE30toZB::Process(Long64_t entry)//{{{
                 // error on the estimate of efficiency (de)
                 Double_t de = TeffFitErr( *cell_met , L1XE30fitPars[i][0] , L1XE30fitPars[i][1] , L1XE30fitPars[i][2] , 
                             L1XE30fitParsErrs[i][0] , L1XE30fitParsErrs[i][1] , L1XE30fitParsErrs[i][2] , L1XE );
-                // compute error on event: dn = (P * de / e**2); computeweight is P / e
-                Double_t dn = de * ComputeWeight( ((TF1*)L1XE30_Efficiency_Fit_Objects->At(i)) ) / 
-                    ((TF1*)L1XE30_Efficiency_Fit_Objects->At(i))->Eval( *cell_met );
+                // (dn)^2 = (P/e)^2 * [ (de/e)^2 + 1 ];computeweight is P / e
+                Double_t e30ZB = ((TF1*)L1XE30_Efficiency_Fit_Objects->At(i))->Eval( *cell_met );
+                Double_t dn2 = pow( ComputeWeight( ((TF1*)L1XE30_Efficiency_Fit_Objects->At(i)) ),2 ) * 
+                    ( pow(de / e30ZB,2) + 1 );
                 // increment error on that bin with the square of error on event (dn)^2
-                L1XE30CorrectedToZBErrors[i][idx] = L1XE30CorrectedToZBErrors[i][idx] + pow(dn,2);
+                L1XE30CorrectedToZBErrors[i][idx] = L1XE30CorrectedToZBErrors[i][idx] + dn2;
             }
         }
     }
