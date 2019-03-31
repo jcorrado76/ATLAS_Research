@@ -16,7 +16,7 @@
     TString zb_name, l1xe30_corrected_name, l1xe50_corrected_name ;
 
     TString outFileName = "";
-    for (int i = 0; i <= hlt_zb_l1_zb_distributions->GetLast(); i++){
+    for (int i = 1; i <= hlt_zb_l1_zb_distributions->GetLast(); i++){
         zb_dist = ((TH1F*)(hlt_zb_l1_zb_distributions->At(i)));
         l1xe30_corrected_zb_dist = ((TH1F*)(l1xe30_corrected_zb_distributions->At(i)));
         l1xe50_corrected_zb_dist = ((TH1F*)(l1xe50_corrected_zb_distributions->At(i)));
