@@ -12,11 +12,24 @@
     TH1F* zb_dist;
     TH1F* l1xe30_corrected_zb_dist;
     TH1F* l1xe50_corrected_zb_dist;
+
+    TString zb_name, l1xe30_corrected_name, l1xe50_corrected_name ;
+
     TString outFileName = "";
     for (int i = 0; i <= hlt_zb_l1_zb_distributions->GetLast(); i++){
         zb_dist = ((TH1F*)(hlt_zb_l1_zb_distributions->At(i)));
         l1xe30_corrected_zb_dist = ((TH1F*)(l1xe30_corrected_zb_distributions->At(i)));
         l1xe50_corrected_zb_dist = ((TH1F*)(l1xe50_corrected_zb_distributions->At(i)));
+
+        // set appropriate titles
+       zb_name.Form("Zero Bias Distribution for %d < #mu < %d" , i*10,(i+1)*10  );
+       zb_dist->SetTitle( zb_name );
+       l1xe30_corrected_name.Form("L1XE30 Corrected to ZeroBias Distribution for %d < #mu < %d" , i*10,(i+1)*10  );
+       l1xe30_corrected_zb_dist->SetTitle( l1xe30_corrected_name );
+       l1xe50_corrected_name.Form("L1XE50 Corrected to Zero Bias Distribution for %d < #mu < %d" , i*10,(i+1)*10  );
+       l1xe50_corrected_zb_dist->SetTitle( l1xe50_corrected_name );
+
+        // set line colors
         zb_dist->SetLineColor( kBlue );
         l1xe30_corrected_zb_dist->SetLineColor( kGreen );
         l1xe50_corrected_zb_dist->SetLineColor( kRed );
