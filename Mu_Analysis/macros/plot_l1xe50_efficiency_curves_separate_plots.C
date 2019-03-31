@@ -22,7 +22,7 @@
         gStyle->SetOptTitle(0);
         title->SetTextFont(72);
         l1xe50_efficiency_curve = ((TEfficiency*)(l1xe50_efficiency_objects->At(i)));
-       funcName.Form("L1XE50 Efficiency Fit for %d < #mu < %d" , i*10, (i+1)*10 );
+       funcName.Form("L1XE50 Efficiency for %d < #mu < %d" , i*10, (i+1)*10 );
        l1xe50_efficiency_curve->SetTitle( funcName );
         correctedLegend->AddEntry( l1xe50_efficiency_curve );
         l1xe50_efficiency_curve->SetLineColor( Colors[i] );
