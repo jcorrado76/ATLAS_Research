@@ -36,6 +36,8 @@ Bool_t CorrectL1XE50toZB::Process(Long64_t entry)//{{{
                     (pow(deXE30/(((TF1*)L1XE30_Efficiency_Fit_Objects->At(i))->Eval(*cell_met)),2) + pow(deXE50/(((TF1*)L1XE50_Efficiency_Fit_Objects->At(i))->Eval(*cell_met)),2)+1.);
                 // increment error on that bin with the square of error on event (dn)^2
                 L1XE50CorrectedToZBErrors[i][idx] = L1XE50CorrectedToZBErrors[i][idx] + dn2;
+                ZBErrors[i][idx] = ZBErrors[i][idx] + pow(*HLT_noalg_zb_L1ZB_prescale,2);
+                RootZBErrVersMyErrL2Norm[i][idx] = RootZBErrVersMyErrL2Norm[i][idx] + pow(*HLT_noalg_zb_L1ZB_prescale,2);
             }
         }
    }
@@ -43,11 +45,17 @@ Bool_t CorrectL1XE50toZB::Process(Long64_t entry)//{{{
 }//}}}
 void CorrectL1XE50toZB::Terminate(){//{{{
     // do errors correctly
+    Double_t sumOfSquareDeviations = 0.0;
+    Double_t average_Deviation_Over_all_mu_bins = 0.0;
     for ( int i = 0 ; i < Number_Mu_Bins ; i++ ){
         for ( int j = 0 ; j < met_dist_nbins ; j++ ){
             ((TH1F*)HLT_ZB_L1XE50_Corrected_to_ZB_MET_Distribution->At(i))->SetBinError( j , TMath::Sqrt(L1XE50CorrectedToZBErrors[i][j]) );
+            sumOfSquareDeviations = sumOfSquareDeviations + pow(TMath::Sqrt(RootZBErrVersMyErrL2Norm[i][j]) - 
+                    ((TH1F*)HLT_ZB_L1ZB_MET_Distributions_by_Mubin->At(i))->GetBinError(j),2);
         }
+        average_Deviation_Over_all_mu_bins = average_Deviation_Over_all_mu_bins + sumOfSquareDeviations/met_dist_nbins;
     }
+    std::cout << "For L1XE50 Data, ROOT's Error on ZB Bins Deviated via L2 Norm on Average from my computation of it by: " << average_Deviation_Over_all_mu_bins / Number_Mu_Bins << std::endl;
 	// Relative Normalization
     TH1F* zb_dist;
     TH1F* l1xe50_corrected_zb_dist;
@@ -82,14 +90,6 @@ void CorrectL1XE50toZB::Terminate(){//{{{
         ((TH1F*)HLT_ZB_L1XE50_Corrected_to_ZB_MET_Distribution->At(i))->SetNormFactor( 1. );
         ((TH1F*)HLT_ZB_L1XE50_Corrected_to_ZB_MET_Distribution->At(i))->Scale( f_mle );
     }
-    //for ( int i = 0 ; i < Number_Mu_Bins ; i++ ){
-        //Scale_Factors[i] = ((TH1F*)HLT_ZB_L1ZB_MET_Distributions_by_Mubin->At(i))->GetBinContent( Normalization_Bin_Numbers[i] ) / 
-            //((TH1F*)HLT_ZB_L1XE50_Corrected_to_ZB_MET_Distribution->At(i))->GetBinContent( Normalization_Bin_Numbers[i] );
-        //std::cout << "L1XE50 Scale factor: " << i << " = " << Scale_Factors[i] << std::endl;
-        //((TH1F*)HLT_ZB_L1ZB_MET_Distributions_by_Mubin->At(i))->SetNormFactor( 1. );
-        //((TH1F*)HLT_ZB_L1XE50_Corrected_to_ZB_MET_Distribution->At(i))->SetNormFactor( 1. );
-        //((TH1F*)HLT_ZB_L1XE50_Corrected_to_ZB_MET_Distribution->At(i))->Scale( Scale_Factors[i] );
-    //}
 }//}}}
 void CorrectL1XE50toZB::Write( TString fname ){//{{{
     TFile* mu_analysis_file = TFile::Open("mu_analysis.root","UPDATE");

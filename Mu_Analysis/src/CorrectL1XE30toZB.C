@@ -32,6 +32,10 @@ Bool_t CorrectL1XE30toZB::Process(Long64_t entry)//{{{
                     ( pow(de / e30ZB,2) + 1 );
                 // increment error on that bin with the square of error on event (dn)^2
                 L1XE30CorrectedToZBErrors[i][idx] = L1XE30CorrectedToZBErrors[i][idx] + dn2;
+                // compute this just in case. ROOT does it on its own, but i want to compare my error to ROOTS
+                // error
+                ZBErrors[i][idx] = ZBErrors[i][idx] + pow(*HLT_noalg_zb_L1ZB_prescale,2);
+                RootZBErrVersMyErrL2Norm[i][idx] = RootZBErrVersMyErrL2Norm[i][idx] + pow(*HLT_noalg_zb_L1ZB_prescale,2);
             }
         }
     }
@@ -39,11 +43,18 @@ Bool_t CorrectL1XE30toZB::Process(Long64_t entry)//{{{
 }//}}}
 void CorrectL1XE30toZB::Terminate(){//{{{
     // do errors correctly
+    Double_t sumOfSquareDeviations = 0.0;
+    Double_t average_Deviation_Over_all_mu_bins = 0.0;
     for ( int i = 0 ; i < Number_Mu_Bins ; i++ ){
         for ( int j = 0 ; j < met_dist_nbins ; j++ ){
             ((TH1F*)HLT_ZB_L1XE30_Corrected_to_ZB_MET_Distribution->At(i))->SetBinError( j , TMath::Sqrt(L1XE30CorrectedToZBErrors[i][j]) );
+            sumOfSquareDeviations = sumOfSquareDeviations + pow(TMath::Sqrt(RootZBErrVersMyErrL2Norm[i][j]) - 
+                    ((TH1F*)HLT_ZB_L1ZB_MET_Distributions_by_Mubin->At(i))->GetBinError(j),2);
         }
+        average_Deviation_Over_all_mu_bins = average_Deviation_Over_all_mu_bins + sumOfSquareDeviations/met_dist_nbins;
     }
+    std::cout << "For L1XE30 Data, ROOT's Error on ZB Bins Deviated via L2 Norm on Average from my computation of it by: " << average_Deviation_Over_all_mu_bins / Number_Mu_Bins << std::endl;
+
     // Relative Normalization{{{
     // Scale the corrected ones to the original zb ones
     TH1F* zb_dist;
