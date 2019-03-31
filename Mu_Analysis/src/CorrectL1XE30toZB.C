@@ -44,14 +44,40 @@ void CorrectL1XE30toZB::Terminate(){//{{{
             ((TH1F*)HLT_ZB_L1XE30_Corrected_to_ZB_MET_Distribution->At(i))->SetBinError( j , TMath::Sqrt(L1XE30CorrectedToZBErrors[i][j]) );
         }
     }
-	// Relative Normalization{{{
+    // Relative Normalization{{{
     // Scale the corrected ones to the original zb ones
+    TH1F* zb_dist;
+    TH1F* l1xe30_corrected_zb_dist;
     for (int i = 0 ;i < Number_Mu_Bins ; i++ ) {
-        Scale_Factors[i] = ((TH1F*)HLT_ZB_L1ZB_MET_Distributions_by_Mubin->At(i))->GetBinContent( Normalization_Bin_Numbers[i] ) / 
-            ((TH1F*)HLT_ZB_L1XE30_Corrected_to_ZB_MET_Distribution->At(i))->GetBinContent( Normalization_Bin_Numbers[i] );
+        // get histograms
+        zb_dist = ((TH1F*)(hlt_zb_l1_zb_distributions->At(i)));
+        l1xe30_corrected_zb_dist = ((TH1F*)(l1xe30_corrected_zb_distributions->At(i)));
+        for (int j = 0 ; j < Number_Scale_Factor_Samples ; j++ ){
+            // compute f_i's, how to pick the samples determines j dependency of rhs here
+            L1XE30Scale_Factors[i][j] = zb_dist->GetBinContent( Normalization_Bin_Numbers[i] + j * 3 ) / 
+                l1xe30_corrected_zb_dist->GetBinContent( Normalization_Bin_Numbers[i] + j * 3 ); // shift bin number by 3 for each sample
+            // compute (sigma_i)^2's
+            L1XE30Scale_Factor_Errors[i][j] = pow(L1XE30Scale_Factors[i][j],2) *
+                ( pow( L1XE30CorrectedToZBErrors[i][Normalization_Bin_Numbers[i]] / 
+                      l1xe30_corrected_zb_dist->GetBinContent( Normalization_Bin_Numbers[i] ) ,2) +
+                  pow( zb_dist->GetBinError([Normalization_Bin_Numbers[i]]) / 
+                      zb_dist->GetBinContent( Normalization_Bin_Numbers[i] ) ,2)
+                  );
+        }
+        // TODO: compare zb_dist->GetBinError with just tracking it on your own using Sqrt(Sum(p_i^2)) (look
+        // at l2_norm)
+        // compute f_mle
+        Double_t numerator = 0.0;
+        Double_t denominator = 0.0;
+        for (int j = 0 ; j < Number_Scale_Factor_Samples ; j++ ){
+            numerator = numerator + (L1XE30Scale_Factors[i][j] / L1XE30Scale_Factor_Errors[i][j]); // these errs are already squared
+            denominator = denominator + (1./L1XE30Scale_Factor_Errors[i][j]);
+        }
+        Double_t f_mle = numerator / denominator;
+        std::cout << "L1XE30 Scale factor: " << i << " = " << f_mle << std::endl;
         ((TH1F*)HLT_ZB_L1ZB_MET_Distributions_by_Mubin->At(i))->SetNormFactor( 1. );
         ((TH1F*)HLT_ZB_L1XE30_Corrected_to_ZB_MET_Distribution->At(i))->SetNormFactor( 1. );
-        ((TH1F*)HLT_ZB_L1XE30_Corrected_to_ZB_MET_Distribution->At(i))->Scale( Scale_Factors[i] );
+        ((TH1F*)HLT_ZB_L1XE30_Corrected_to_ZB_MET_Distribution->At(i))->Scale( f_mle );
     }
     //}}}
 }//}}}

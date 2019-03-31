@@ -49,11 +49,12 @@ void CorrectL1XE50toZB::Terminate(){//{{{
         }
     }
 	// Relative Normalization
-    // TODO: do this better
+    TH1F* zb_dist;
+    TH1F* l1xe50_corrected_zb_dist;
     for ( int i = 0 ; i < Number_Mu_Bins ; i++ ){
         Scale_Factors[i] = ((TH1F*)HLT_ZB_L1ZB_MET_Distributions_by_Mubin->At(i))->GetBinContent( Normalization_Bin_Numbers[i] ) / 
             ((TH1F*)HLT_ZB_L1XE50_Corrected_to_ZB_MET_Distribution->At(i))->GetBinContent( Normalization_Bin_Numbers[i] );
-        std::cout << "Scale factor: " << i << " = " << Scale_Factors[i] << std::endl;
+        std::cout << "L1XE50 Scale factor: " << i << " = " << Scale_Factors[i] << std::endl;
         ((TH1F*)HLT_ZB_L1ZB_MET_Distributions_by_Mubin->At(i))->SetNormFactor( 1. );
         ((TH1F*)HLT_ZB_L1XE50_Corrected_to_ZB_MET_Distribution->At(i))->SetNormFactor( 1. );
         ((TH1F*)HLT_ZB_L1XE50_Corrected_to_ZB_MET_Distribution->At(i))->Scale( Scale_Factors[i] );

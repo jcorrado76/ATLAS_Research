@@ -38,6 +38,7 @@ public :
    float L1XE =                                                                  0.0;    
    const static Int_t met_dist_nbins =                                        (gevHigh - gevLow) / met_dist_binwidth; 
    const static Int_t efficiency_nbins =                                      (gevHigh - gevLow) / efficiency_bin_width;
+   const static Int_t Number_Scale_Factor_Samples =             3; // number of points used in weighted average to compute relative normalization scale factor
    // collections
    TObjArray* HLT_ZB_L1ZB_MET_Distributions_by_Mubin = new TObjArray();
    TObjArray* HLT_ZB_L1XE30_MET_Distributions_by_Mubin = new TObjArray();
@@ -54,8 +55,15 @@ public :
    Float_t Mu_Values[Number_Mu_Bins+1] =                    { 0.0 };
    int Colors[Number_Mu_Bins] =                           {1,2,3,4,12,6,9};
    Int_t MarkerStyles[Number_Mu_Bins] =                     {29,20,3,4,27,22,21};
+
+   // left edge of interval to sample from for scale factors
    Int_t Normalization_Bin_Numbers[Number_Mu_Bins] =        {40,52,60,56,55,52,40};
-   Float_t Scale_Factors[Number_Mu_Bins] =                  { 0.0 };
+
+   Float_t L1XE30Scale_Factors[Number_Mu_Bins][Number_Scale_Factor_Samples] =                  { 0.0 };
+   Float_t L1XE30Scale_Factor_Errors[Number_Mu_Bins][Number_Scale_Factor_Samples] =                  { 0.0 };
+   Float_t L1XE50Scale_Factors[Number_Mu_Bins][Number_Scale_Factor_Samples] =                  { 0.0 };
+   Float_t L1XE50Scale_Factor_Errors[Number_Mu_Bins][Number_Scale_Factor_Samples] =                  { 0.0 };
+
    Double_t L1XE30CorrectedToZBErrors[Number_Mu_Bins][met_dist_nbins] =    { 0.0 };
    Double_t L1XE50CorrectedToZBErrors[Number_Mu_Bins][met_dist_nbins] =    { 0.0 };
     float L1XE30fitPars[Number_Mu_Bins][3];
