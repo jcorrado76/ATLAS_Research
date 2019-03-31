@@ -46,16 +46,14 @@ Bool_t CorrectL1XE50toZB::Process(Long64_t entry)//{{{
 void CorrectL1XE50toZB::Terminate(){//{{{
     // do errors correctly
     Double_t sumOfSquareDeviations = 0.0;
-    Double_t average_Deviation_Over_all_mu_bins = 0.0;
     for ( int i = 0 ; i < Number_Mu_Bins ; i++ ){
         for ( int j = 0 ; j < met_dist_nbins ; j++ ){
             ((TH1F*)HLT_ZB_L1XE50_Corrected_to_ZB_MET_Distribution->At(i))->SetBinError( j , TMath::Sqrt(L1XE50CorrectedToZBErrors[i][j]) );
             sumOfSquareDeviations = sumOfSquareDeviations + pow(TMath::Sqrt(RootZBErrVersMyErrL2Norm[i][j]) - 
                     ((TH1F*)HLT_ZB_L1ZB_MET_Distributions_by_Mubin->At(i))->GetBinError(j),2);
         }
-        average_Deviation_Over_all_mu_bins = average_Deviation_Over_all_mu_bins + sumOfSquareDeviations/met_dist_nbins;
+        std::cout << "For mu bin " << i << " , Average square loss on my determination of the error on zb bins: " << sumOfSquareDeviations/met_dist_nbins << std::endl;
     }
-    std::cout << "For L1XE50 Data, ROOT's Error on ZB Bins Deviated via L2 Norm on Average from my computation of it by: " << average_Deviation_Over_all_mu_bins / Number_Mu_Bins << std::endl;
 	// Relative Normalization
     TH1F* zb_dist;
     TH1F* l1xe50_corrected_zb_dist;
