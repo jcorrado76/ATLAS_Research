@@ -33,7 +33,7 @@ public :
    const static Int_t Number_Mu_Bins =                                          7;   // 7 mu bins
    constexpr static Float_t gevLow =                                                       0.0;
    constexpr static Float_t gevHigh =                                                      300.0;
-   constexpr static Float_t met_dist_binwidth =                                            1.0;
+   constexpr static Float_t met_dist_binwidth =                                            5.0; // 5 GeV bins
    constexpr static Float_t efficiency_bin_width =                                         20.0; // 20 GeV bins
    float L1XE =                                                                  0.0;    
    const static Int_t met_dist_nbins =                                        (gevHigh - gevLow) / met_dist_binwidth; 

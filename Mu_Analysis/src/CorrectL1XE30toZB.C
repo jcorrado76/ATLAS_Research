@@ -72,8 +72,6 @@ void CorrectL1XE30toZB::Terminate(){//{{{
                       zb_dist->GetBinContent( Normalization_Bin_Numbers[i] ) ,2)
                   );
         }
-        // TODO: compare zb_dist->GetBinError with just tracking it on your own using Sqrt(Sum(p_i^2)) (look
-        // at l2_norm)
         // compute f_mle
         Double_t numerator = 0.0;
         Double_t denominator = 0.0;
@@ -82,10 +80,14 @@ void CorrectL1XE30toZB::Terminate(){//{{{
             denominator = denominator + (1./L1XE30Scale_Factor_Errors[i][j]);
         }
         Double_t f_mle = numerator / denominator;
-        std::cout << "L1XE30 Scale factor: " << i << " = " << f_mle << std::endl;
-        ((TH1F*)HLT_ZB_L1ZB_MET_Distributions_by_Mubin->At(i))->SetNormFactor( 1. );
-        ((TH1F*)HLT_ZB_L1XE30_Corrected_to_ZB_MET_Distribution->At(i))->SetNormFactor( 1. );
-        ((TH1F*)HLT_ZB_L1XE30_Corrected_to_ZB_MET_Distribution->At(i))->Scale( f_mle );
+        if (isnan( f_mle )){
+            std::cout << "Got a NaN value for the scale factor: " << f_mle << std::endl;
+        }else{
+            std::cout << "L1XE30 Scale factor: " << i << " = " << f_mle << std::endl;
+            ((TH1F*)HLT_ZB_L1ZB_MET_Distributions_by_Mubin->At(i))->SetNormFactor( 1. );
+            ((TH1F*)HLT_ZB_L1XE30_Corrected_to_ZB_MET_Distribution->At(i))->SetNormFactor( 1. );
+            ((TH1F*)HLT_ZB_L1XE30_Corrected_to_ZB_MET_Distribution->At(i))->Scale( f_mle );
+        }
     }
     //}}}
 }//}}}
