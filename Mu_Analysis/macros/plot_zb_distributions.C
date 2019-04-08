@@ -9,17 +9,17 @@
     mu_analysis_file->GetObject("hlt_zb_l1xe50_corrected_zb_met_distributions",l1xe50_corrected_zb_distributions);
 
     std::cout << "Number of objects in hlt_zb_l1_zb_distributions: " << hlt_zb_l1_zb_distributions->GetEntries() << std::endl;
-    TH1F* zb_dist;
-    TH1F* l1xe30_corrected_zb_dist;
-    TH1F* l1xe50_corrected_zb_dist;
+    TH1D* zb_dist;
+    TH1D* l1xe30_corrected_zb_dist;
+    TH1D* l1xe50_corrected_zb_dist;
 
     TString zb_name, l1xe30_corrected_name, l1xe50_corrected_name ;
 
     TString outFileName = "";
     for (int i = 1; i <= hlt_zb_l1_zb_distributions->GetLast(); i++){
-        zb_dist = ((TH1F*)(hlt_zb_l1_zb_distributions->At(i)));
-        l1xe30_corrected_zb_dist = ((TH1F*)(l1xe30_corrected_zb_distributions->At(i)));
-        l1xe50_corrected_zb_dist = ((TH1F*)(l1xe50_corrected_zb_distributions->At(i)));
+        zb_dist = ((TH1D*)(hlt_zb_l1_zb_distributions->At(i)));
+        l1xe30_corrected_zb_dist = ((TH1D*)(l1xe30_corrected_zb_distributions->At(i)));
+        l1xe50_corrected_zb_dist = ((TH1D*)(l1xe50_corrected_zb_distributions->At(i)));
 
         // set appropriate titles
        zb_name.Form("Zero Bias Distribution for %d < #mu < %d" , i*10,(i+1)*10  );

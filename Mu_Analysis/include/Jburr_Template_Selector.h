@@ -61,7 +61,7 @@ public :
 
    Double_t L1XE30Scale_Factors[Number_Mu_Bins][Number_Scale_Factor_Samples] =                  { 0.0 };
    Double_t L1XE30Scale_Factor_Errors[Number_Mu_Bins][Number_Scale_Factor_Samples] =                  { 0.0 };
-   Double_t Float_t L1XE50Scale_Factors[Number_Mu_Bins][Number_Scale_Factor_Samples] =                  { 0.0 };
+   Double_t L1XE50Scale_Factors[Number_Mu_Bins][Number_Scale_Factor_Samples] =                  { 0.0 };
    Double_t L1XE50Scale_Factor_Errors[Number_Mu_Bins][Number_Scale_Factor_Samples] =                  { 0.0 };
 
    Double_t RootZBErrVersMyErrL2Norm[Number_Mu_Bins][met_dist_nbins] = {0.0};
