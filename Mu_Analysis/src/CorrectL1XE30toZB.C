@@ -22,7 +22,7 @@ Bool_t CorrectL1XE30toZB::Process(Long64_t entry)//{{{
             if ( inMuRange( Mu_Values[i] , Mu_Values[i+1] )){
                 ((TH1D*)HLT_ZB_L1XE30_Corrected_to_ZB_MET_Distribution->At(i))->Fill( *cell_met , ComputeWeight( ((TF1*)L1XE30_Efficiency_Fit_Objects->At(i)) ) );
                 // find the index of bin that this event falls into
-                Int_t idx = ((TH1D*)HLT_ZB_L1XE30_Corrected_to_ZB_MET_Distribution->At(i))->GetBin( *cell_met );
+                Int_t idx = ((TH1D*)HLT_ZB_L1XE30_Corrected_to_ZB_MET_Distribution->At(i))->FindBin( *cell_met );
                 // error on the estimate of efficiency (de)
                 Double_t de = TeffFitErr( *cell_met , L1XE30fitPars[i][0] , L1XE30fitPars[i][1] , L1XE30fitPars[i][2] , 
                             L1XE30fitParsErrs[i][0] , L1XE30fitParsErrs[i][1] , L1XE30fitParsErrs[i][2] , L1XE );
@@ -50,7 +50,7 @@ void CorrectL1XE30toZB::Terminate(){//{{{
             sumOfSquareDeviations = sumOfSquareDeviations + pow(TMath::Sqrt(RootZBErrVersMyErrL2Norm[i][j]) - 
                     ((TH1D*)HLT_ZB_L1ZB_MET_Distributions_by_Mubin->At(i))->GetBinError(j),2);
         }
-        std::cout << "For mu bin " << i << " , Average square loss on my determination of the error on zb bins: " << sumOfSquareDeviations/met_dist_nbins << std::endl;
+        //std::cout << "For mu bin " << i << " , Average square loss on my determination of the error on zb bins: " << sumOfSquareDeviations/met_dist_nbins << std::endl;
     }
     // Relative Normalization{{{
     // Scale the corrected ones to the original zb ones

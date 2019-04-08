@@ -23,7 +23,7 @@ Bool_t CorrectL1XE50toZB::Process(Long64_t entry)//{{{
            if ( inMuRange( Mu_Values[i] , Mu_Values[i+1] )){
                 ((TH1D*)HLT_ZB_L1XE50_Corrected_to_ZB_MET_Distribution->At(i))->Fill( *cell_met , ComputeWeight( ((TF1*)L1XE30_Efficiency_Fit_Objects->At(i)), ((TF1*)L1XE50_Efficiency_Fit_Objects->At(i)) ) );
                 // find the index of bin that this event falls into
-                Int_t idx = ((TH1D*)HLT_ZB_L1XE50_Corrected_to_ZB_MET_Distribution->At(i))->GetBin( *cell_met );
+                Int_t idx = ((TH1D*)HLT_ZB_L1XE50_Corrected_to_ZB_MET_Distribution->At(i))->FindBin( *cell_met );
                 // error on the estimate of efficiency (de)
                 Double_t deXE30 = TeffFitErr( *cell_met , L1XE30fitPars[i][0] , L1XE30fitPars[i][1] , L1XE30fitPars[i][2] , 
                             L1XE30fitParsErrs[i][0] , L1XE30fitParsErrs[i][1] , L1XE30fitParsErrs[i][2] , 30.0 );
@@ -89,8 +89,8 @@ void CorrectL1XE50toZB::Terminate(){//{{{
         }else{
             std::cout << "L1XE30 Scale factor: " << i << " = " << f_mle << std::endl;
             ((TH1D*)HLT_ZB_L1ZB_MET_Distributions_by_Mubin->At(i))->SetNormFactor( 1. );
-            ((TH1D*)HLT_ZB_L1XE30_Corrected_to_ZB_MET_Distribution->At(i))->SetNormFactor( 1. );
-            ((TH1D*)HLT_ZB_L1XE30_Corrected_to_ZB_MET_Distribution->At(i))->Scale( f_mle );
+            ((TH1D*)HLT_ZB_L1XE50_Corrected_to_ZB_MET_Distribution->At(i))->SetNormFactor( 1. );
+            ((TH1D*)HLT_ZB_L1XE50_Corrected_to_ZB_MET_Distribution->At(i))->Scale( f_mle );
         }
     }
 }//}}}
