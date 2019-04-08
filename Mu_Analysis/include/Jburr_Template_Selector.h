@@ -57,22 +57,21 @@ public :
    Int_t MarkerStyles[Number_Mu_Bins] =                     {29,20,3,4,27,22,21};
 
    // left edge of interval to sample from for scale factors
-   Int_t Normalization_Bin_Numbers[Number_Mu_Bins] =        {40,52,60,56,55,52,40};
+   Int_t Normalization_Bin_Numbers[Number_Mu_Bins] =        {20};
 
-   Float_t L1XE30Scale_Factors[Number_Mu_Bins][Number_Scale_Factor_Samples] =                  { 0.0 };
-   Float_t L1XE30Scale_Factor_Errors[Number_Mu_Bins][Number_Scale_Factor_Samples] =                  { 0.0 };
-   Float_t L1XE50Scale_Factors[Number_Mu_Bins][Number_Scale_Factor_Samples] =                  { 0.0 };
-   Float_t L1XE50Scale_Factor_Errors[Number_Mu_Bins][Number_Scale_Factor_Samples] =                  { 0.0 };
-
+   Double_t L1XE30Scale_Factors[Number_Mu_Bins][Number_Scale_Factor_Samples] =                  { 0.0 };
+   Double_t L1XE30Scale_Factor_Errors[Number_Mu_Bins][Number_Scale_Factor_Samples] =                  { 0.0 };
+   Double_t Float_t L1XE50Scale_Factors[Number_Mu_Bins][Number_Scale_Factor_Samples] =                  { 0.0 };
+   Double_t L1XE50Scale_Factor_Errors[Number_Mu_Bins][Number_Scale_Factor_Samples] =                  { 0.0 };
 
    Double_t RootZBErrVersMyErrL2Norm[Number_Mu_Bins][met_dist_nbins] = {0.0};
    Double_t ZBErrors[Number_Mu_Bins][met_dist_nbins] =    { 0.0 };
    Double_t L1XE30CorrectedToZBErrors[Number_Mu_Bins][met_dist_nbins] =    { 0.0 };
    Double_t L1XE50CorrectedToZBErrors[Number_Mu_Bins][met_dist_nbins] =    { 0.0 };
-    float L1XE30fitPars[Number_Mu_Bins][3];
-    float L1XE30fitParsErrs[Number_Mu_Bins][3];
-    float L1XE50fitPars[Number_Mu_Bins][3];
-    float L1XE50fitParsErrs[Number_Mu_Bins][3];
+   Double_t L1XE30fitPars[Number_Mu_Bins][3];
+   Double_t L1XE30fitParsErrs[Number_Mu_Bins][3];
+   Double_t L1XE50fitPars[Number_Mu_Bins][3];
+   Double_t L1XE50fitParsErrs[Number_Mu_Bins][3];
 
    Float_t muLow;
    Float_t muHigh;

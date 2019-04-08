@@ -20,9 +20,9 @@ Bool_t CorrectL1XE30toZB::Process(Long64_t entry)//{{{
     if ( isHLT_zb_L1XE30() && isGoodRun() ){
         for ( int i = 0 ; i < Number_Mu_Bins ; i++ ) {
             if ( inMuRange( Mu_Values[i] , Mu_Values[i+1] )){
-                ((TH1F*)HLT_ZB_L1XE30_Corrected_to_ZB_MET_Distribution->At(i))->Fill( *cell_met , ComputeWeight( ((TF1*)L1XE30_Efficiency_Fit_Objects->At(i)) ) );
+                ((TH1D*)HLT_ZB_L1XE30_Corrected_to_ZB_MET_Distribution->At(i))->Fill( *cell_met , ComputeWeight( ((TF1*)L1XE30_Efficiency_Fit_Objects->At(i)) ) );
                 // find the index of bin that this event falls into
-                Int_t idx = ((TH1F*)HLT_ZB_L1XE30_Corrected_to_ZB_MET_Distribution->At(i))->GetBin( *cell_met );
+                Int_t idx = ((TH1D*)HLT_ZB_L1XE30_Corrected_to_ZB_MET_Distribution->At(i))->GetBin( *cell_met );
                 // error on the estimate of efficiency (de)
                 Double_t de = TeffFitErr( *cell_met , L1XE30fitPars[i][0] , L1XE30fitPars[i][1] , L1XE30fitPars[i][2] , 
                             L1XE30fitParsErrs[i][0] , L1XE30fitParsErrs[i][1] , L1XE30fitParsErrs[i][2] , L1XE );
@@ -46,20 +46,20 @@ void CorrectL1XE30toZB::Terminate(){//{{{
     Double_t sumOfSquareDeviations = 0.0;
     for ( int i = 0 ; i < Number_Mu_Bins ; i++ ){
         for ( int j = 0 ; j < met_dist_nbins ; j++ ){
-            ((TH1F*)HLT_ZB_L1XE30_Corrected_to_ZB_MET_Distribution->At(i))->SetBinError( j , TMath::Sqrt(L1XE30CorrectedToZBErrors[i][j]) );
+            ((TH1D*)HLT_ZB_L1XE30_Corrected_to_ZB_MET_Distribution->At(i))->SetBinError( j , TMath::Sqrt(L1XE30CorrectedToZBErrors[i][j]) );
             sumOfSquareDeviations = sumOfSquareDeviations + pow(TMath::Sqrt(RootZBErrVersMyErrL2Norm[i][j]) - 
-                    ((TH1F*)HLT_ZB_L1ZB_MET_Distributions_by_Mubin->At(i))->GetBinError(j),2);
+                    ((TH1D*)HLT_ZB_L1ZB_MET_Distributions_by_Mubin->At(i))->GetBinError(j),2);
         }
         std::cout << "For mu bin " << i << " , Average square loss on my determination of the error on zb bins: " << sumOfSquareDeviations/met_dist_nbins << std::endl;
     }
     // Relative Normalization{{{
     // Scale the corrected ones to the original zb ones
-    TH1F* zb_dist;
-    TH1F* l1xe30_corrected_zb_dist;
+    TH1D* zb_dist;
+    TH1D* l1xe30_corrected_zb_dist;
     for (int i = 0 ;i < Number_Mu_Bins ; i++ ) {
         // get histograms
-        zb_dist = ((TH1F*)(HLT_ZB_L1ZB_MET_Distributions_by_Mubin->At(i)));
-        l1xe30_corrected_zb_dist = ((TH1F*)(HLT_ZB_L1XE30_Corrected_to_ZB_MET_Distribution->At(i)));
+        zb_dist = ((TH1D*)(HLT_ZB_L1ZB_MET_Distributions_by_Mubin->At(i)));
+        l1xe30_corrected_zb_dist = ((TH1D*)(HLT_ZB_L1XE30_Corrected_to_ZB_MET_Distribution->At(i)));
         for (int j = 0 ; j < Number_Scale_Factor_Samples ; j++ ){
             // compute f_i's, how to pick the samples determines j dependency of rhs here
             L1XE30Scale_Factors[i][j] = zb_dist->GetBinContent( Normalization_Bin_Numbers[i] + j * 3 ) / 
@@ -82,11 +82,13 @@ void CorrectL1XE30toZB::Terminate(){//{{{
         Double_t f_mle = numerator / denominator;
         if (isnan( f_mle )){
             std::cout << "Got a NaN value for the scale factor: " << f_mle << std::endl;
+            std::cout << "Numerator = " << numerator << std::endl;
+            std::cout << "Denominator = " << denominator << std::endl;
         }else{
             std::cout << "L1XE30 Scale factor: " << i << " = " << f_mle << std::endl;
-            ((TH1F*)HLT_ZB_L1ZB_MET_Distributions_by_Mubin->At(i))->SetNormFactor( 1. );
-            ((TH1F*)HLT_ZB_L1XE30_Corrected_to_ZB_MET_Distribution->At(i))->SetNormFactor( 1. );
-            ((TH1F*)HLT_ZB_L1XE30_Corrected_to_ZB_MET_Distribution->At(i))->Scale( f_mle );
+            ((TH1D*)HLT_ZB_L1ZB_MET_Distributions_by_Mubin->At(i))->SetNormFactor( 1. );
+            ((TH1D*)HLT_ZB_L1XE30_Corrected_to_ZB_MET_Distribution->At(i))->SetNormFactor( 1. );
+            ((TH1D*)HLT_ZB_L1XE30_Corrected_to_ZB_MET_Distribution->At(i))->Scale( f_mle );
         }
     }
     //}}}

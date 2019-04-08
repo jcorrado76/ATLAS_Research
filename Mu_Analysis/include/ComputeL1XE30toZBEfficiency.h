@@ -7,9 +7,9 @@ public :
        for (int i = 0 ; i < Number_Mu_Bins; i++){
            Name.Form("hlt_zb_l1zb_met_dist_mubin%d" , i );
            Title.Form("HLT ZB L1ZB MET Distribution for %s for Actint bin %d" , Alg_Name.Data(), i);
-           TH1F* tmpHist = new TH1F( Name , Title , met_dist_nbins , gevLow , gevHigh );
+           TH1D* tmpHist = new TH1F( Name , Title , met_dist_nbins , gevLow , gevHigh );
            HLT_ZB_L1ZB_MET_Distributions_by_Mubin->Add( tmpHist );
-           ((TH1F*)HLT_ZB_L1ZB_MET_Distributions_by_Mubin->At(i))->SetLineColor( Colors[i] );
+           ((TH1D*)HLT_ZB_L1ZB_MET_Distributions_by_Mubin->At(i))->SetLineColor( Colors[i] );
 
            EfficiencyName.Form("metL1XE30EfficiencyMubin%d", i);
            EfficiencyTitle.Form("Efficiency of L1XE 30 As a Function of %s for Actint bin %d", Alg_Name.Data() , i);
