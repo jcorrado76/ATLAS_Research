@@ -28,7 +28,7 @@ Bool_t CorrectL1XE50toZB::Process(Long64_t entry)//{{{
 {
    fReader.SetLocalEntry(entry);
    // still need to compute new error and pass it to this fill function somehow
-   if ( isHLT_zb_L1XE50() && isGoodRun()  && *RunNumber < 325500){
+   if ( isHLT_zb_L1XE50() && isGoodRun()  ){
        for ( int i = 0 ; i < Number_Mu_Bins ; i++ ) {
            if ( inMuRange( Mu_Values[i] , Mu_Values[i+1] )){
                 ((TH1D*)HLT_ZB_L1XE50_Corrected_to_ZB_MET_Distribution->At(i))->Fill( *cell_met , ComputeWeight( ((TF1*)L1XE30_Efficiency_Fit_Objects->At(i)), ((TF1*)L1XE50_Efficiency_Fit_Objects->At(i)) ) );
