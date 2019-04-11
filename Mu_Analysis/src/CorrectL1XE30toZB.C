@@ -76,6 +76,7 @@ void CorrectL1XE30toZB::Terminate(){//{{{
         Double_t numerator = 0.0;
         Double_t denominator = 0.0;
         for (int j = 0 ; j < Number_Scale_Factor_Samples ; j++ ){
+            std::cout << "Scale factor: " << L1XE30Scale_Factors[3][j] << " Error: " << L1XE30Scale_Factor_Errors[3][j] << std::endl;
             numerator = numerator + (L1XE30Scale_Factors[i][j] / L1XE30Scale_Factor_Errors[i][j]); // these errs are already squared
             denominator = denominator + (1./L1XE30Scale_Factor_Errors[i][j]);
         }

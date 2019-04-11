@@ -87,7 +87,7 @@ void CorrectL1XE50toZB::Terminate(){//{{{
             std::cout << "Numerator = " << numerator << std::endl;
             std::cout << "Denominator = " << denominator << std::endl;
         }else{
-            std::cout << "L1XE30 Scale factor: " << i << " = " << f_mle << std::endl;
+            std::cout << "L1XE50 Scale factor: " << i << " = " << f_mle << std::endl;
             ((TH1D*)HLT_ZB_L1ZB_MET_Distributions_by_Mubin->At(i))->SetNormFactor( 1. );
             ((TH1D*)HLT_ZB_L1XE50_Corrected_to_ZB_MET_Distribution->At(i))->SetNormFactor( 1. );
             ((TH1D*)HLT_ZB_L1XE50_Corrected_to_ZB_MET_Distribution->At(i))->Scale( f_mle );
