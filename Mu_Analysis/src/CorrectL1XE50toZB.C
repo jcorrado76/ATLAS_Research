@@ -28,7 +28,7 @@ Bool_t CorrectL1XE50toZB::Process(Long64_t entry)//{{{
 {
    fReader.SetLocalEntry(entry);
    // still need to compute new error and pass it to this fill function somehow
-   if ( isHLT_zb_L1XE50() && isGoodRun() ){
+   if ( isHLT_zb_L1XE50() && isGoodRun()  && *RunNumber < 325500){
        for ( int i = 0 ; i < Number_Mu_Bins ; i++ ) {
            if ( inMuRange( Mu_Values[i] , Mu_Values[i+1] )){
                 ((TH1D*)HLT_ZB_L1XE50_Corrected_to_ZB_MET_Distribution->At(i))->Fill( *cell_met , ComputeWeight( ((TF1*)L1XE30_Efficiency_Fit_Objects->At(i)), ((TF1*)L1XE50_Efficiency_Fit_Objects->At(i)) ) );
@@ -69,7 +69,6 @@ void CorrectL1XE50toZB::Terminate(){//{{{
             sumOfSquareDeviations = sumOfSquareDeviations + pow(TMath::Sqrt(RootZBErrVersMyErrL2Norm[i][j]) - 
                     ((TH1D*)HLT_ZB_L1ZB_MET_Distributions_by_Mubin->At(i))->GetBinError(j),2);
         }
-        //std::cout << std::endl;
     }
 	// Relative Normalization
     TH1D* zb_dist;
@@ -85,8 +84,6 @@ void CorrectL1XE50toZB::Terminate(){//{{{
             L1XE50Scale_Factors[i][j] = zb_dist->GetBinContent(bin_number) / 
                 l1xe50_corrected_zb_dist->GetBinContent(bin_number); // shift bin number by 1 for each sample; 5 GeV shift
             // compute (sigma_i)^2's
-            
-            // THE ORIGINAL
             L1XE50Scale_Factor_Errors[i][j] = pow(L1XE50Scale_Factors[i][j],2) *
                 ( pow( L1XE50CorrectedToZBErrors[i][bin_number] / 
                       l1xe50_corrected_zb_dist->GetBinContent(bin_number) ,2) +
@@ -101,7 +98,6 @@ void CorrectL1XE50toZB::Terminate(){//{{{
                 std::cout << "Trying bin number: " << bin_number << " for j=" << j << std::endl;
                 std::cout << "L1XE50CorrectedToZBErrors[i][Normalization_Bin_Number]: " << L1XE50CorrectedToZBErrors[i][bin_number] << std::endl;
                 std::cout << "l1xe50_corrected_zb_dist->GetBinContent( bin_number ): " << l1xe50_corrected_zb_dist->GetBinContent(bin_number) << std::endl;
-
             }
         }
         // compute f_mle
