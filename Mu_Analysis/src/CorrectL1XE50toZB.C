@@ -4,6 +4,16 @@ void CorrectL1XE50toZB::UpdateFitParameters(){//{{{
     // getting these parameters needs to happen before process, but after construction
     // get values of efficiency fit parameters
    for (int i = 0 ; i < Number_Mu_Bins; i++){
+        L1XE30fitPars[i][0] = ((TF1*)L1XE30_Efficiency_Fit_Objects->At(i))->GetParameter( 0 );
+        L1XE30fitPars[i][1] = ((TF1*)L1XE30_Efficiency_Fit_Objects->At(i))->GetParameter( 1 );
+        L1XE30fitPars[i][2] = ((TF1*)L1XE30_Efficiency_Fit_Objects->At(i))->GetParameter( 2 );
+
+        // get values of uncertainties on efficiency fit parameters
+        L1XE30fitParsErrs[i][0] = ((TF1*)L1XE30_Efficiency_Fit_Objects->At(i))->GetParError( 0 );
+        L1XE30fitParsErrs[i][1] = ((TF1*)L1XE30_Efficiency_Fit_Objects->At(i))->GetParError( 1 );
+        L1XE30fitParsErrs[i][2] = ((TF1*)L1XE30_Efficiency_Fit_Objects->At(i))->GetParError( 2 );
+
+
         L1XE50fitPars[i][0] = ((TF1*)L1XE50_Efficiency_Fit_Objects->At(i))->GetParameter( 0 );
         L1XE50fitPars[i][1] = ((TF1*)L1XE50_Efficiency_Fit_Objects->At(i))->GetParameter( 1 );
         L1XE50fitPars[i][2] = ((TF1*)L1XE50_Efficiency_Fit_Objects->At(i))->GetParameter( 2 );
@@ -32,13 +42,13 @@ Bool_t CorrectL1XE50toZB::Process(Long64_t entry)//{{{
                 // compute error on event: dn^2 = (P /(e1 * e2))^2*((de1/e1)^2+(de2/e2)^2); computeweight is P / (e1 * e2)
                 Double_t dn2 = pow(ComputeWeight( ((TF1*)L1XE30_Efficiency_Fit_Objects->At(i)),((TF1*)L1XE50_Efficiency_Fit_Objects->At(i)) ),2) *
                     (pow(deXE30/(((TF1*)L1XE30_Efficiency_Fit_Objects->At(i))->Eval(*cell_met)),2) + pow(deXE50/(((TF1*)L1XE50_Efficiency_Fit_Objects->At(i))->Eval(*cell_met)),2)+1.);
+                if (isnan(dn2)){
+                    std::cout << "got a dn2 that was a nan at: idx = " << idx << " and i = " << i << std::endl;
+                }
                 // increment error on that bin with the square of error on event (dn)^2
                 L1XE50CorrectedToZBErrors[i][idx] = L1XE50CorrectedToZBErrors[i][idx] + dn2;
                 ZBErrors[i][idx] = ZBErrors[i][idx] + pow(*HLT_noalg_zb_L1ZB_prescale,2);
                 RootZBErrVersMyErrL2Norm[i][idx] = RootZBErrVersMyErrL2Norm[i][idx] + pow(*HLT_noalg_zb_L1ZB_prescale,2);
-                if ( *cell_met < 160 && *cell_met > 150 && i == 3){
-                    std::cout << "in met bin: " << idx << " dn2: " << dn2 << std::endl;
-                }
             }
         }
    }
@@ -47,13 +57,16 @@ Bool_t CorrectL1XE50toZB::Process(Long64_t entry)//{{{
 void CorrectL1XE50toZB::Terminate(){//{{{
     // do errors correctly
     Double_t sumOfSquareDeviations = 0.0;
+    std::cout << "L1XE50 Corrected to ZB Errors: " << std::endl;
     for ( int i = 0 ; i < Number_Mu_Bins ; i++ ){
         for ( int j = 0 ; j < met_dist_nbins ; j++ ){
+            std::cout << L1XE50CorrectedToZBErrors[i][j] << " ";
             ((TH1D*)HLT_ZB_L1XE50_Corrected_to_ZB_MET_Distribution->At(i))->SetBinError( j , TMath::Sqrt(L1XE50CorrectedToZBErrors[i][j]) );
             sumOfSquareDeviations = sumOfSquareDeviations + pow(TMath::Sqrt(RootZBErrVersMyErrL2Norm[i][j]) - 
                     ((TH1D*)HLT_ZB_L1ZB_MET_Distributions_by_Mubin->At(i))->GetBinError(j),2);
         }
-        std::cout << "For mu bin " << i << " , Average square loss on my determination of the error on zb bins: " << sumOfSquareDeviations/met_dist_nbins << std::endl;
+        std::cout << std::endl;
+        //std::cout << "For mu bin " << i << " , Average square loss on my determination of the error on zb bins: " << sumOfSquareDeviations/met_dist_nbins << std::endl;
     }
 	// Relative Normalization
     TH1D* zb_dist;

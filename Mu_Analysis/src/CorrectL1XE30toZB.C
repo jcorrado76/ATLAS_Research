@@ -44,12 +44,15 @@ Bool_t CorrectL1XE30toZB::Process(Long64_t entry)//{{{
 void CorrectL1XE30toZB::Terminate(){//{{{
     // do errors correctly
     Double_t sumOfSquareDeviations = 0.0;
+    std::cout << "L1XE30 Corrected to ZB Errors: " << std::endl;
     for ( int i = 0 ; i < Number_Mu_Bins ; i++ ){
         for ( int j = 0 ; j < met_dist_nbins ; j++ ){
+            std::cout << L1XE30CorrectedToZBErrors[i][j] << " ";
             ((TH1D*)HLT_ZB_L1XE30_Corrected_to_ZB_MET_Distribution->At(i))->SetBinError( j , TMath::Sqrt(L1XE30CorrectedToZBErrors[i][j]) );
             sumOfSquareDeviations = sumOfSquareDeviations + pow(TMath::Sqrt(RootZBErrVersMyErrL2Norm[i][j]) - 
                     ((TH1D*)HLT_ZB_L1ZB_MET_Distributions_by_Mubin->At(i))->GetBinError(j),2);
         }
+        std::cout << std::endl;
         //std::cout << "For mu bin " << i << " , Average square loss on my determination of the error on zb bins: " << sumOfSquareDeviations/met_dist_nbins << std::endl;
     }
     // Relative Normalization{{{
