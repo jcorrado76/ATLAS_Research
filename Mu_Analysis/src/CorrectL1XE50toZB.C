@@ -95,6 +95,9 @@ void CorrectL1XE50toZB::Terminate(){//{{{
         Double_t numerator = 0.0;
         Double_t denominator = 0.0;
         for (int j = 0 ; j < Number_Scale_Factor_Samples ; j++ ){
+            if (isnan(L1XE50Scale_Factors[i][j])){
+                std::cout << "Got Nan for L1XE50Scale Factor at i= " << i << " and j= " << j << std::endl;
+            }
             numerator = numerator + (L1XE50Scale_Factors[i][j] / L1XE50Scale_Factor_Errors[i][j]); // these errs are already squared
             denominator = denominator + (1./L1XE50Scale_Factor_Errors[i][j]);
         }
