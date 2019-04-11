@@ -70,7 +70,6 @@ void CorrectL1XE50toZB::Terminate(){//{{{
                     ((TH1D*)HLT_ZB_L1ZB_MET_Distributions_by_Mubin->At(i))->GetBinError(j),2);
         }
         //std::cout << std::endl;
-        //std::cout << "For mu bin " << i << " , Average square loss on my determination of the error on zb bins: " << sumOfSquareDeviations/met_dist_nbins << std::endl;
     }
 	// Relative Normalization
     TH1D* zb_dist;
@@ -80,34 +79,55 @@ void CorrectL1XE50toZB::Terminate(){//{{{
         zb_dist = ((TH1D*)(HLT_ZB_L1ZB_MET_Distributions_by_Mubin->At(i)));
         l1xe50_corrected_zb_dist = ((TH1D*)(HLT_ZB_L1XE50_Corrected_to_ZB_MET_Distribution->At(i)));
         for (int j = 0 ; j < Number_Scale_Factor_Samples ; j++ ){
+            // determine j dependence on samples
+            int bin_number = Normalization_Bin_Number + j * 1;
             // compute f_i's, how to pick the samples determines j dependency of rhs here
-            L1XE50Scale_Factors[i][j] = zb_dist->GetBinContent( Normalization_Bin_Numbers[i] + j * 1 ) / 
-                l1xe50_corrected_zb_dist->GetBinContent( Normalization_Bin_Numbers[i] + j * 1 ); // shift bin number by 1 for each sample; 5 GeV shift
+            L1XE50Scale_Factors[i][j] = zb_dist->GetBinContent(bin_number) / 
+                l1xe50_corrected_zb_dist->GetBinContent(bin_number); // shift bin number by 1 for each sample; 5 GeV shift
             // compute (sigma_i)^2's
+            
+            // THE ORIGINAL
             L1XE50Scale_Factor_Errors[i][j] = pow(L1XE50Scale_Factors[i][j],2) *
-                ( pow( L1XE50CorrectedToZBErrors[i][Normalization_Bin_Numbers[i]] / 
-                      l1xe50_corrected_zb_dist->GetBinContent( Normalization_Bin_Numbers[i] ) ,2) +
-                  pow( zb_dist->GetBinError(Normalization_Bin_Numbers[i]) / 
-                      zb_dist->GetBinContent( Normalization_Bin_Numbers[i] ) ,2)
+                ( pow( L1XE50CorrectedToZBErrors[i][bin_number] / 
+                      l1xe50_corrected_zb_dist->GetBinContent(bin_number) ,2) +
+                  pow( zb_dist->GetBinError(bin_number) / 
+                      zb_dist->GetBinContent(bin_number) ,2)
                   );
+
+            if (isnan(L1XE50Scale_Factor_Errors[i][j])){
+                std::cout << "Got a nan for scale factor error in mu bin " << i << " and on scale factor " << j << std::endl;
+                std::cout << "The scale factor value: " << L1XE50Scale_Factors[i][j] << std::endl;
+                std::cout << "Normalization_Bin_Number: " << Normalization_Bin_Number << std::endl;
+                std::cout << "Trying bin number: " << bin_number << " for j=" << j << std::endl;
+                std::cout << "L1XE50CorrectedToZBErrors[i][Normalization_Bin_Number]: " << L1XE50CorrectedToZBErrors[i][bin_number] << std::endl;
+                std::cout << "l1xe50_corrected_zb_dist->GetBinContent( bin_number ): " << l1xe50_corrected_zb_dist->GetBinContent(bin_number) << std::endl;
+
+            }
         }
         // compute f_mle
         Double_t numerator = 0.0;
         Double_t denominator = 0.0;
         for (int j = 0 ; j < Number_Scale_Factor_Samples ; j++ ){
-            if (isnan(L1XE50Scale_Factors[i][j])){
-                std::cout << "Got Nan for L1XE50Scale Factor at i= " << i << " and j= " << j << std::endl;
-            }
             numerator = numerator + (L1XE50Scale_Factors[i][j] / L1XE50Scale_Factor_Errors[i][j]); // these errs are already squared
             denominator = denominator + (1./L1XE50Scale_Factor_Errors[i][j]);
         }
         Double_t f_mle = numerator / denominator;
         if (isnan( f_mle )){
-            std::cout << "Got a NaN value for the scale factor: " << f_mle << std::endl;
+            std::cout << "Got a NaN value for the mle scale factor in mubin " << i << ": " << f_mle << std::endl;
             std::cout << "Numerator = " << numerator << std::endl;
             std::cout << "Denominator = " << denominator << std::endl;
+            std::cout << "L1XE50 Scale Factors: " << std::endl;
+            for (int j = 0 ; j < Number_Scale_Factor_Samples ; j++ ){
+                std::cout << L1XE50Scale_Factors[i][j] << " ";
+            }
+            std::cout << std::endl;
+            std::cout << "L1XE50 Scale Factor Errors: " << std::endl;
+            for (int j = 0 ; j < Number_Scale_Factor_Samples ; j++ ){
+                std::cout << L1XE50Scale_Factor_Errors[i][j] << " ";
+            }
+            std::cout << std::endl;
         }else{
-            std::cout << "L1XE50 Scale factor: " << i << " = " << f_mle << std::endl;
+            std::cout << "L1XE50 Scale factor for mu bin " << i << " = " << f_mle << std::endl;
             ((TH1D*)HLT_ZB_L1ZB_MET_Distributions_by_Mubin->At(i))->SetNormFactor( 1. );
             ((TH1D*)HLT_ZB_L1XE50_Corrected_to_ZB_MET_Distribution->At(i))->SetNormFactor( 1. );
             ((TH1D*)HLT_ZB_L1XE50_Corrected_to_ZB_MET_Distribution->At(i))->Scale( f_mle );

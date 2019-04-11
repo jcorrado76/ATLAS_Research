@@ -67,15 +67,16 @@ void CorrectL1XE30toZB::Terminate(){//{{{
         zb_dist = ((TH1D*)(HLT_ZB_L1ZB_MET_Distributions_by_Mubin->At(i)));
         l1xe30_corrected_zb_dist = ((TH1D*)(HLT_ZB_L1XE30_Corrected_to_ZB_MET_Distribution->At(i)));
         for (int j = 0 ; j < Number_Scale_Factor_Samples ; j++ ){
+            int bin_number = Normalization_Bin_Number + j * 1;
             // compute f_i's, how to pick the samples determines j dependency of rhs here
-            L1XE30Scale_Factors[i][j] = zb_dist->GetBinContent( Normalization_Bin_Numbers[i] + j * 1 ) / 
-                l1xe30_corrected_zb_dist->GetBinContent( Normalization_Bin_Numbers[i] + j * 1 ); // shift bin number by 1 for each sample; this corresponds to 5GeV
+            L1XE30Scale_Factors[i][j] = zb_dist->GetBinContent(bin_number) / 
+                l1xe30_corrected_zb_dist->GetBinContent(bin_number); // shift bin number by 1 for each sample; this corresponds to 5GeV
             // compute (sigma_i)^2's
             L1XE30Scale_Factor_Errors[i][j] = pow(L1XE30Scale_Factors[i][j],2) *
-                ( pow( L1XE30CorrectedToZBErrors[i][Normalization_Bin_Numbers[i]] / 
-                      l1xe30_corrected_zb_dist->GetBinContent( Normalization_Bin_Numbers[i] ) ,2) +
-                  pow( zb_dist->GetBinError(Normalization_Bin_Numbers[i]) / 
-                      zb_dist->GetBinContent( Normalization_Bin_Numbers[i] ) ,2)
+                ( pow( L1XE30CorrectedToZBErrors[i][bin_number] / 
+                      l1xe30_corrected_zb_dist->GetBinContent(bin_number) ,2) +
+                  pow( zb_dist->GetBinError(bin_number) / 
+                      zb_dist->GetBinContent(bin_number) ,2)
                   );
         }
         // compute f_mle

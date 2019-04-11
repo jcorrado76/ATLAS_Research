@@ -57,7 +57,8 @@ public :
    Int_t MarkerStyles[Number_Mu_Bins] =                     {29,20,3,4,27,22,21};
 
    // left edge of interval to sample from for scale factors
-   Int_t Normalization_Bin_Numbers[Number_Mu_Bins] =        {30};
+   //Int_t Normalization_Bin_Numbers[Number_Mu_Bins] =        {14};
+   Int_t Normalization_Bin_Number =        14;
 
    Double_t L1XE30Scale_Factors[Number_Mu_Bins][Number_Scale_Factor_Samples] =                  { 0.0 };
    Double_t L1XE30Scale_Factor_Errors[Number_Mu_Bins][Number_Scale_Factor_Samples] =                  { 0.0 };
