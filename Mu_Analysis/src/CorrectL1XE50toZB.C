@@ -60,12 +60,16 @@ void CorrectL1XE50toZB::Terminate(){//{{{
     std::cout << "L1XE50 Corrected to ZB Errors: " << std::endl;
     for ( int i = 0 ; i < Number_Mu_Bins ; i++ ){
         for ( int j = 0 ; j < met_dist_nbins ; j++ ){
-            std::cout << L1XE50CorrectedToZBErrors[i][j] << " ";
+            //std::cout << L1XE50CorrectedToZBErrors[i][j] << " ";
+            if (L1XE50CorrectedToZBErrors[i][j] == 0 && ((TH1D*)HLT_ZB_L1XE50_Corrected_to_ZB_MET_Distribution->At(i))->GetBinContent( j ) != 0 ){
+                std::cout << "Got zero error, but nonzero number of entries in corrected bin" << std::endl;
+                std::cout << "At i= " << i << " and j = " << j << std::endl;
+            }
             ((TH1D*)HLT_ZB_L1XE50_Corrected_to_ZB_MET_Distribution->At(i))->SetBinError( j , TMath::Sqrt(L1XE50CorrectedToZBErrors[i][j]) );
             sumOfSquareDeviations = sumOfSquareDeviations + pow(TMath::Sqrt(RootZBErrVersMyErrL2Norm[i][j]) - 
                     ((TH1D*)HLT_ZB_L1ZB_MET_Distributions_by_Mubin->At(i))->GetBinError(j),2);
         }
-        std::cout << std::endl;
+        //std::cout << std::endl;
         //std::cout << "For mu bin " << i << " , Average square loss on my determination of the error on zb bins: " << sumOfSquareDeviations/met_dist_nbins << std::endl;
     }
 	// Relative Normalization
@@ -77,8 +81,8 @@ void CorrectL1XE50toZB::Terminate(){//{{{
         l1xe50_corrected_zb_dist = ((TH1D*)(HLT_ZB_L1XE50_Corrected_to_ZB_MET_Distribution->At(i)));
         for (int j = 0 ; j < Number_Scale_Factor_Samples ; j++ ){
             // compute f_i's, how to pick the samples determines j dependency of rhs here
-            L1XE50Scale_Factors[i][j] = zb_dist->GetBinContent( Normalization_Bin_Numbers[i] + j * 3 ) / 
-                l1xe50_corrected_zb_dist->GetBinContent( Normalization_Bin_Numbers[i] + j * 3 ); // shift bin number by 3 for each sample
+            L1XE50Scale_Factors[i][j] = zb_dist->GetBinContent( Normalization_Bin_Numbers[i] + j * 1 ) / 
+                l1xe50_corrected_zb_dist->GetBinContent( Normalization_Bin_Numbers[i] + j * 1 ); // shift bin number by 1 for each sample; 5 GeV shift
             // compute (sigma_i)^2's
             L1XE50Scale_Factor_Errors[i][j] = pow(L1XE50Scale_Factors[i][j],2) *
                 ( pow( L1XE50CorrectedToZBErrors[i][Normalization_Bin_Numbers[i]] / 
