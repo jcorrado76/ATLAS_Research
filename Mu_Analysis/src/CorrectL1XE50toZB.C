@@ -133,7 +133,7 @@ void CorrectL1XE50toZB::Terminate(){//{{{
 void CorrectL1XE50toZB::Write( TString fname ){//{{{
     TFile* mu_analysis_file = TFile::Open("mu_analysis.root","UPDATE");
     if ( mu_analysis_file->IsOpen() ){
-        printf("File opened successfully\n");
+            std::cout << "File opened successfully" << std::endl;
             HLT_ZB_L1ZB_MET_Distributions_by_Mubin->Write("hlt_zb_l1zb_met_distributions",TObject::kSingleKey | TObject::kWriteDelete);
             HLT_ZB_L1XE30_MET_Distributions_by_Mubin->Write("hlt_zb_l1xe30_met_distributions",TObject::kSingleKey | TObject::kWriteDelete);
             HLT_ZB_L1XE30_Corrected_to_ZB_MET_Distribution->Write("hlt_zb_l1xe30_corrected_zb_met_distributions",TObject::kSingleKey | TObject::kWriteDelete);
@@ -142,9 +142,11 @@ void CorrectL1XE50toZB::Write( TString fname ){//{{{
             L1XE50_Efficiency_Objects->Write("l1xe50_efficiency_objects",TObject::kSingleKey | TObject::kWriteDelete);
             L1XE30_Efficiency_Fit_Objects->Write("l1xe30_efficiency_fit_objects",TObject::kSingleKey | TObject::kWriteDelete);
             L1XE50_Efficiency_Fit_Objects->Write("l1xe50_efficiency_fit_objects",TObject::kSingleKey | TObject::kWriteDelete);
+            std::cout << "All folders written" << std::endl;
     }else{
-        printf("Unable to open file\n");
+        std::cout << "Unable to open file" << std::endl;
     }
 
     mu_analysis_file->Close();
+    std::cout << "File Closed" << std::endl;
 }//}}}

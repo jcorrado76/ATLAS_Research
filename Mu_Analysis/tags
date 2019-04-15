@@ -35,7 +35,6 @@ CorrectL1XE50ToZB_h	include/CorrectL1XE50toZB.h	2;"	d
 CorrectL1XE50toZB	include/CorrectL1XE50toZB.h	/^   CorrectL1XE50toZB(){ $/;"	f	class:CorrectL1XE50toZB
 CorrectL1XE50toZB	include/CorrectL1XE50toZB.h	/^class CorrectL1XE50toZB : public Jburr_Template_Selector {$/;"	c
 CorrectL1XE50toZB	src/CorrectL1XE50toZB.C	/^ClassImp(CorrectL1XE50toZB);$/;"	v
-CorrectL1XE50toZB_cxx	src/CorrectL1XE50toZB.C	1;"	d	file:
 Corrected_Name	include/Jburr_Template_Selector.h	/^   TString Corrected_Name;$/;"	m	class:Jburr_Template_Selector
 Corrected_Title	include/Jburr_Template_Selector.h	/^   TString Corrected_Title;$/;"	m	class:Jburr_Template_Selector
 Dictionary	lib/MyDict.cxx	/^TClass *ComputeL1XE30toZBEfficiency::Dictionary()$/;"	f	class:ComputeL1XE30toZBEfficiency
@@ -60,7 +59,7 @@ GenerateInitInstanceLocal	lib/MyDict.cxx	/^   static TGenericClassInfo *Generate
 GenerateInitInstanceLocal	lib/MyDict.cxx	/^   static TGenericClassInfo *GenerateInitInstanceLocal(const ::CorrectL1XE50toZB*)$/;"	f	namespace:ROOT
 GenerateInitInstanceLocal	lib/MyDict.cxx	/^   static TGenericClassInfo *GenerateInitInstanceLocal(const ::Jburr_Template_Selector*)$/;"	f	namespace:ROOT
 GetEntry	include/Jburr_Template_Selector.h	/^   virtual Int_t   GetEntry(Long64_t entry, Int_t getall = 0) { return fChain ? fChain->GetTree()->GetEntry(entry, getall) : 0; }$/;"	f	class:Jburr_Template_Selector
-GetNumberMuBins	include/Jburr_Template_Selector.h	/^    Int_t GetNumberMuBins() const {return Number_Mu_Bins; }$/;"	f	class:Jburr_Template_Selector
+GetNumberMuBins	include/Jburr_Template_Selector.h	/^    Int_t GetNumberMuBins() const {return Number_Mu_Bins; }\/\/}}}$/;"	f	class:Jburr_Template_Selector
 GetOutputList	include/Jburr_Template_Selector.h	/^   virtual TList  *GetOutputList() const { return fOutput; }$/;"	f	class:Jburr_Template_Selector
 Get_HLT_ZB_L1XE30_Corrected_to_ZB_MET_Distribution	include/Jburr_Template_Selector.h	/^    TObjArray* Get_HLT_ZB_L1XE30_Corrected_to_ZB_MET_Distribution() const { return HLT_ZB_L1XE30_Corrected_to_ZB_MET_Distribution; }$/;"	f	class:Jburr_Template_Selector
 Get_HLT_ZB_L1XE30_MET_Distributions_by_Mubin	include/Jburr_Template_Selector.h	/^   TObjArray* Get_HLT_ZB_L1XE30_MET_Distributions_by_Mubin() const { return HLT_ZB_L1XE30_MET_Distributions_by_Mubin; }$/;"	f	class:Jburr_Template_Selector
@@ -113,15 +112,25 @@ Jburr_Template_Selector_cxx	src/Jburr_Template_Selector.C	1;"	d	file:
 Jburr_Template_Selector_h	include/Jburr_Template_Selector.h	2;"	d
 L1XE	include/ComputeL1XE30toZBEfficiency.h	/^   float L1XE = 30.0;$/;"	m	class:ComputeL1XE30toZBEfficiency
 L1XE	include/ComputeL1XE50toL1XE30Efficiency.h	/^   float L1XE = 50.0;$/;"	m	class:ComputeL1XE50toL1XE30Efficiency
+L1XE	include/CorrectL1XE30toZB.h	/^   float L1XE = 30.0;$/;"	m	class:CorrectL1XE30toZB
+L1XE	include/CorrectL1XE50toZB.h	/^   float L1XE = 50.0;$/;"	m	class:CorrectL1XE50toZB
 L1XE	include/Jburr_Template_Selector.h	/^   float L1XE =                                                                  0.0;    $/;"	m	class:Jburr_Template_Selector
 L1XE30CorrectedToZBErrors	include/Jburr_Template_Selector.h	/^   Double_t L1XE30CorrectedToZBErrors[Number_Mu_Bins][met_dist_nbins] =    { 0.0 };$/;"	m	class:Jburr_Template_Selector
+L1XE30Scale_Factor_Errors	include/Jburr_Template_Selector.h	/^   Double_t L1XE30Scale_Factor_Errors[Number_Mu_Bins][Number_Scale_Factor_Samples] =                  { 0.0 };$/;"	m	class:Jburr_Template_Selector
+L1XE30Scale_Factors	include/Jburr_Template_Selector.h	/^   Double_t L1XE30Scale_Factors[Number_Mu_Bins][Number_Scale_Factor_Samples] =                  { 0.0 };$/;"	m	class:Jburr_Template_Selector
 L1XE30_Efficiency_Fit_Objects	include/Jburr_Template_Selector.h	/^   TObjArray* L1XE30_Efficiency_Fit_Objects = new TObjArray();$/;"	m	class:Jburr_Template_Selector
 L1XE30_Efficiency_Objects	include/Jburr_Template_Selector.h	/^   TObjArray* L1XE30_Efficiency_Objects = new TObjArray();$/;"	m	class:Jburr_Template_Selector
 L1XE30fitFunction	src/Jburr_Template_Selector.C	/^double Jburr_Template_Selector::L1XE30fitFunction(double *x , double *par){\/\/{{{$/;"	f	class:Jburr_Template_Selector
+L1XE30fitPars	include/Jburr_Template_Selector.h	/^   Double_t L1XE30fitPars[Number_Mu_Bins][3];$/;"	m	class:Jburr_Template_Selector
+L1XE30fitParsErrs	include/Jburr_Template_Selector.h	/^   Double_t L1XE30fitParsErrs[Number_Mu_Bins][3];$/;"	m	class:Jburr_Template_Selector
 L1XE50CorrectedToZBErrors	include/Jburr_Template_Selector.h	/^   Double_t L1XE50CorrectedToZBErrors[Number_Mu_Bins][met_dist_nbins] =    { 0.0 };$/;"	m	class:Jburr_Template_Selector
+L1XE50Scale_Factor_Errors	include/Jburr_Template_Selector.h	/^   Double_t L1XE50Scale_Factor_Errors[Number_Mu_Bins][Number_Scale_Factor_Samples] =                  { 0.0 };$/;"	m	class:Jburr_Template_Selector
+L1XE50Scale_Factors	include/Jburr_Template_Selector.h	/^   Double_t L1XE50Scale_Factors[Number_Mu_Bins][Number_Scale_Factor_Samples] =                  { 0.0 };$/;"	m	class:Jburr_Template_Selector
 L1XE50_Efficiency_Fit_Objects	include/Jburr_Template_Selector.h	/^   TObjArray* L1XE50_Efficiency_Fit_Objects = new TObjArray();$/;"	m	class:Jburr_Template_Selector
 L1XE50_Efficiency_Objects	include/Jburr_Template_Selector.h	/^   TObjArray* L1XE50_Efficiency_Objects = new TObjArray();$/;"	m	class:Jburr_Template_Selector
 L1XE50fitFunction	src/Jburr_Template_Selector.C	/^double Jburr_Template_Selector::L1XE50fitFunction(double *x , double *par){\/\/{{{$/;"	f	class:Jburr_Template_Selector
+L1XE50fitPars	include/Jburr_Template_Selector.h	/^   Double_t L1XE50fitPars[Number_Mu_Bins][3];$/;"	m	class:Jburr_Template_Selector
+L1XE50fitParsErrs	include/Jburr_Template_Selector.h	/^   Double_t L1XE50fitParsErrs[Number_Mu_Bins][3];$/;"	m	class:Jburr_Template_Selector
 L1_XE50_passed	include/Jburr_Template_Selector.h	/^   TTreeReaderValue<Bool_t> L1_XE50_passed = {fReader, "L1_XE50.passed"};$/;"	m	class:Jburr_Template_Selector
 L1_XE50_prescale	include/Jburr_Template_Selector.h	/^   TTreeReaderValue<Float_t> L1_XE50_prescale = {fReader, "L1_XE50.prescale"};$/;"	m	class:Jburr_Template_Selector
 L1_XE55_passed	include/Jburr_Template_Selector.h	/^   TTreeReaderValue<Bool_t> L1_XE55_passed = {fReader, "L1_XE55.passed"};$/;"	m	class:Jburr_Template_Selector
@@ -133,12 +142,13 @@ L1_sumet	include/Jburr_Template_Selector.h	/^   TTreeReaderValue<Float_t> L1_sum
 MarkerStyles	include/Jburr_Template_Selector.h	/^   Int_t MarkerStyles[Number_Mu_Bins] =                     {29,20,3,4,27,22,21};$/;"	m	class:Jburr_Template_Selector
 Mu_Values	include/Jburr_Template_Selector.h	/^   Float_t Mu_Values[Number_Mu_Bins+1] =                    { 0.0 };$/;"	m	class:Jburr_Template_Selector
 Name	include/Jburr_Template_Selector.h	/^   TString Name;$/;"	m	class:Jburr_Template_Selector
-Normalization_Bin_Numbers	include/Jburr_Template_Selector.h	/^   Int_t Normalization_Bin_Numbers[Number_Mu_Bins] =        {40,52,60,56,55,52,40};$/;"	m	class:Jburr_Template_Selector
+Normalization_Bin_Number	include/Jburr_Template_Selector.h	/^   Int_t Normalization_Bin_Number =        14;$/;"	m	class:Jburr_Template_Selector
 Notify	src/Jburr_Template_Selector.C	/^Bool_t Jburr_Template_Selector::Notify(){return kTRUE;}$/;"	f	class:Jburr_Template_Selector
 Number_Mu_Bins	include/Jburr_Template_Selector.h	/^   const static Int_t Number_Mu_Bins =                                          7;   \/\/ 7 mu bins$/;"	m	class:Jburr_Template_Selector
+Number_Scale_Factor_Samples	include/Jburr_Template_Selector.h	/^   const static Int_t Number_Scale_Factor_Samples =             3; \/\/ number of points used in weighted average to compute relative normalization scale factor$/;"	m	class:Jburr_Template_Selector
 OBJ	plots/makefile	/^OBJ=$(wildcard *.png)$/;"	m
 OBJS	lib/makefile	/^OBJS = $(patsubst %.C,%.o,$(SOURCES))$/;"	m
-PNG	plots/zerobias_distributions_corrected/makefile	/^PNG=$(wildcard *.png)$/;"	m
+PNG	plots/zerobias_distributions_corrected_withoutCorrectErrorBars/makefile	/^PNG=$(wildcard *.png)$/;"	m
 Process	src/ComputeL1XE30toZBEfficiency.C	/^Bool_t ComputeL1XE30toZBEfficiency::Process(Long64_t entry)\/\/{{{$/;"	f	class:ComputeL1XE30toZBEfficiency
 Process	src/ComputeL1XE50toL1XE30Efficiency.C	/^Bool_t ComputeL1XE50toL1XE30Efficiency::Process(Long64_t entry)\/\/{{{$/;"	f	class:ComputeL1XE50toL1XE30Efficiency
 Process	src/CorrectL1XE30toZB.C	/^Bool_t CorrectL1XE30toZB::Process(Long64_t entry)\/\/{{{$/;"	f	class:CorrectL1XE30toZB
@@ -146,9 +156,9 @@ Process	src/CorrectL1XE50toZB.C	/^Bool_t CorrectL1XE50toZB::Process(Long64_t ent
 Process	src/Jburr_Template_Selector.C	/^Bool_t Jburr_Template_Selector::Process(Long64_t entry)\/\/{{{$/;"	f	class:Jburr_Template_Selector
 ROOT	lib/MyDict.cxx	/^namespace ROOT {$/;"	n	file:
 R__DICTIONARY_FILENAME	lib/MyDict.cxx	3;"	d	file:
+RootZBErrVersMyErrL2Norm	include/Jburr_Template_Selector.h	/^   Double_t RootZBErrVersMyErrL2Norm[Number_Mu_Bins][met_dist_nbins] = {0.0};$/;"	m	class:Jburr_Template_Selector
 RunNumber	include/Jburr_Template_Selector.h	/^   TTreeReaderValue<UInt_t> RunNumber = {fReader, "RunNumber"};$/;"	m	class:Jburr_Template_Selector
 SOURCES	lib/makefile	/^SOURCES = $(wildcard ..\/src\/*.C)$/;"	m
-Scale_Factors	include/Jburr_Template_Selector.h	/^   Float_t Scale_Factors[Number_Mu_Bins] =                  { 0.0 };$/;"	m	class:Jburr_Template_Selector
 SetInputList	include/Jburr_Template_Selector.h	/^   virtual void    SetInputList(TList *input) { fInput = input; }$/;"	f	class:Jburr_Template_Selector
 SetObject	include/Jburr_Template_Selector.h	/^   virtual void    SetObject(TObject *obj) { fObject = obj; }$/;"	f	class:Jburr_Template_Selector
 SetOption	include/Jburr_Template_Selector.h	/^   virtual void    SetOption(const char *option) { fOption = option; }$/;"	f	class:Jburr_Template_Selector
@@ -158,7 +168,7 @@ Set_HLT_ZB_L1XE50_Corrected_to_ZB_MET_Distribution	include/Jburr_Template_Select
 Set_HLT_ZB_L1ZB_MET_Distributions_by_Mubin	include/Jburr_Template_Selector.h	/^   void Set_HLT_ZB_L1ZB_MET_Distributions_by_Mubin(TObjArray* const other){ HLT_ZB_L1ZB_MET_Distributions_by_Mubin = other; }$/;"	f	class:Jburr_Template_Selector
 Set_L1XE30_Efficiency_Fit_Objects	include/Jburr_Template_Selector.h	/^   void Set_L1XE30_Efficiency_Fit_Objects(TObjArray* const other){ L1XE30_Efficiency_Fit_Objects = other ; }$/;"	f	class:Jburr_Template_Selector
 Set_L1XE30_Efficiency_Objects	include/Jburr_Template_Selector.h	/^   void Set_L1XE30_Efficiency_Objects(TObjArray* const other){ L1XE30_Efficiency_Objects = other ; }$/;"	f	class:Jburr_Template_Selector
-Set_L1XE50_Efficiency_Fit_Objects	include/Jburr_Template_Selector.h	/^   void Set_L1XE50_Efficiency_Fit_Objects(TObjArray* const other){ L1XE50_Efficiency_Fit_Objects = other; }$/;"	f	class:Jburr_Template_Selector
+Set_L1XE50_Efficiency_Fit_Objects	include/Jburr_Template_Selector.h	/^   void Set_L1XE50_Efficiency_Fit_Objects(TObjArray* const other){ L1XE50_Efficiency_Fit_Objects = other; }\/\/}}}$/;"	f	class:Jburr_Template_Selector
 Set_L1XE50_Efficiency_Objects	include/Jburr_Template_Selector.h	/^   void Set_L1XE50_Efficiency_Objects(TObjArray* const other){ L1XE50_Efficiency_Objects = other ; }$/;"	f	class:Jburr_Template_Selector
 SlaveBegin	src/Jburr_Template_Selector.C	/^void Jburr_Template_Selector::SlaveBegin(TTree*){TString option = GetOption();}$/;"	f	class:Jburr_Template_Selector
 SlaveTerminate	src/Jburr_Template_Selector.C	/^void Jburr_Template_Selector::SlaveTerminate(){}$/;"	f	class:Jburr_Template_Selector
@@ -175,10 +185,13 @@ Terminate	src/CorrectL1XE50toZB.C	/^void CorrectL1XE50toZB::Terminate(){\/\/{{{$
 Terminate	src/Jburr_Template_Selector.C	/^void Jburr_Template_Selector::Terminate(){}$/;"	f	class:Jburr_Template_Selector
 Title	include/Jburr_Template_Selector.h	/^   TString Title;$/;"	m	class:Jburr_Template_Selector
 TriggerDictionaryInitialization_MyDict_Impl	lib/MyDict.cxx	/^  void TriggerDictionaryInitialization_MyDict_Impl() {$/;"	f	namespace:__anon2
+UpdateFitParameters	src/CorrectL1XE30toZB.C	/^void CorrectL1XE30toZB::UpdateFitParameters(){\/\/{{{$/;"	f	class:CorrectL1XE30toZB
+UpdateFitParameters	src/CorrectL1XE50toZB.C	/^void CorrectL1XE50toZB::UpdateFitParameters(){\/\/{{{$/;"	f	class:CorrectL1XE50toZB
 Version	include/Jburr_Template_Selector.h	/^   virtual Int_t   Version() const { return 2; }$/;"	f	class:Jburr_Template_Selector
 Write	src/CorrectL1XE50toZB.C	/^void CorrectL1XE50toZB::Write( TString fname ){\/\/{{{$/;"	f	class:CorrectL1XE50toZB
+ZBErrors	include/Jburr_Template_Selector.h	/^   Double_t ZBErrors[Number_Mu_Bins][met_dist_nbins] =    { 0.0 };$/;"	m	class:Jburr_Template_Selector
 ZIP	plots/makefile	/^ZIP=zip$/;"	m
-ZIP	plots/zerobias_distributions_corrected/makefile	/^ZIP=zip$/;"	m
+ZIP	plots/zerobias_distributions_corrected_withoutCorrectErrorBars/makefile	/^ZIP=zip$/;"	m
 _BACKWARD_BACKWARD_WARNING_H	lib/MyDict.cxx	584;"	d	file:
 _BACKWARD_BACKWARD_WARNING_H	lib/MyDict.cxx	591;"	d	file:
 cell_met	include/Jburr_Template_Selector.h	/^   TTreeReaderValue<Float_t> cell_met = {fReader, "cell.met"};$/;"	m	class:Jburr_Template_Selector
@@ -205,9 +218,7 @@ efficiency_xaxis	include/Jburr_Template_Selector.h	/^   TString efficiency_xaxis
 efficiency_yaxis	include/Jburr_Template_Selector.h	/^   TString efficiency_yaxis =               "efficiency";$/;"	m	class:Jburr_Template_Selector
 fChain	include/Jburr_Template_Selector.h	/^   TTree          *fChain =                                                     0;   \/\/!pointer to the analyzed TTree or TChain$/;"	m	class:Jburr_Template_Selector
 fReader	include/Jburr_Template_Selector.h	/^   TTreeReader     fReader;$/;"	m	class:Jburr_Template_Selector
-fitPars	include/CorrectL1XE30toZB.h	/^    float fitPars[Number_Mu_Bins][3];$/;"	m	class:CorrectL1XE30toZB
-fitParsErrs	include/CorrectL1XE30toZB.h	/^    float fitParsErrs[Number_Mu_Bins][3];$/;"	m	class:CorrectL1XE30toZB
-generateFitFunction	src/Jburr_Template_Selector.C	/^TF1* Jburr_Template_Selector::generateFitFunction(TEfficiency* teff_obj, float L1XE , float gevMax, float initial_slope, float initial_intercept, float initial_sigma ,  Bool_t verbose ){\/\/{{{$/;"	f	class:Jburr_Template_Selector
+generateFitFunction	src/Jburr_Template_Selector.C	/^TF1* Jburr_Template_Selector::generateFitFunction(TEfficiency* teff_obj, float L1XE , $/;"	f	class:Jburr_Template_Selector
 gevHigh	include/Jburr_Template_Selector.h	/^   constexpr static Float_t gevHigh =                                                      300.0;$/;"	m	class:Jburr_Template_Selector
 gevLow	include/Jburr_Template_Selector.h	/^   constexpr static Float_t gevLow =                                                       0.0;$/;"	m	class:Jburr_Template_Selector
 inMuRange	src/Jburr_Template_Selector.C	/^Bool_t Jburr_Template_Selector::inMuRange( Float_t a , Float_t b ){ \/\/{{{$/;"	f	class:Jburr_Template_Selector
@@ -217,7 +228,7 @@ isHLT_zb_L1XE50	src/Jburr_Template_Selector.C	/^Bool_t Jburr_Template_Selector::
 isHLT_zb_L1ZB	src/Jburr_Template_Selector.C	/^Bool_t Jburr_Template_Selector::isHLT_zb_L1ZB(){ \/\/{{{$/;"	f	class:Jburr_Template_Selector
 l	macros/plot_fit_parameters_vers_mu.C	/^TList* l = 0;$/;"	v
 l1_alg_name	include/Jburr_Template_Selector.h	/^   TString l1_alg_name =                    "L1.met";$/;"	m	class:Jburr_Template_Selector
-met_dist_binwidth	include/Jburr_Template_Selector.h	/^   constexpr static Float_t met_dist_binwidth =                                            1.0;$/;"	m	class:Jburr_Template_Selector
+met_dist_binwidth	include/Jburr_Template_Selector.h	/^   constexpr static Float_t met_dist_binwidth =                                            5.0; \/\/ 5 GeV bins$/;"	m	class:Jburr_Template_Selector
 met_dist_nbins	include/Jburr_Template_Selector.h	/^   const static Int_t met_dist_nbins =                                        (gevHigh - gevLow) \/ met_dist_binwidth; $/;"	m	class:Jburr_Template_Selector
 met_dist_xaxis	include/Jburr_Template_Selector.h	/^   TString met_dist_xaxis =                 zb_alg_name + " [GeV]";$/;"	m	class:Jburr_Template_Selector
 met_dist_yaxis	include/Jburr_Template_Selector.h	/^   TString met_dist_yaxis =                 "Number of Entries";$/;"	m	class:Jburr_Template_Selector

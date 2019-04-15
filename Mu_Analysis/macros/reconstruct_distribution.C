@@ -36,7 +36,7 @@
         l1xe50_corrected_zb_dist = ((TH1D*)(l1xe50_corrected_zb_distributions->At(i)));
 
         // initialize the new histogram
-        reconstructed_name.Form("Zero Bias Distribution for %d < #mu < %d" , i*10,(i+1)*10  );
+        reconstructed_name.Form("Reconstructed Zero Bias Distribution for %d < #mu < %d" , i*10,(i+1)*10  );
         Reconstructed_MET_Distribution->SetTitle(reconstructed_name);
 
         for ( int j = 1 ; j < nbins ; j++ ){
