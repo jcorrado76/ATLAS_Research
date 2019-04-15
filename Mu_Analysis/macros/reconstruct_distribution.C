@@ -24,6 +24,8 @@
     TH1D* Reconstructed_MET_Distribution = new TH1D("reconst", "reconst" , nbins , met_low , met_high );
 
     TString reconstructed_name;
+    TString x_axis_label = "Cell Algorithm MET [GeV]";
+    TString y_axis_label = "Fraction of events / 5 GeV";
 
     Int_t L1XE30BinThreshes[7] = {11,11,14,15,15,12,11}; 
     Int_t L1XE50BinThreshes[7] = {20,20,20,20,16,18,18};
@@ -38,6 +40,8 @@
         // initialize the new histogram
         reconstructed_name.Form("Reconstructed Zero Bias Distribution for %d < #mu < %d" , i*10,(i+1)*10  );
         Reconstructed_MET_Distribution->SetTitle(reconstructed_name);
+        Reconstructed_MET_Distribution->GetXaxis()->SetTitle(x_axis_label);
+        Reconstructed_MET_Distribution->GetYaxis()->SetTitle(y_axis_label);
 
         for ( int j = 1 ; j < nbins ; j++ ){
             if (j < L1XE30BinThreshes[i]){
