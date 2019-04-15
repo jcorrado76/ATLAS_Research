@@ -25,11 +25,11 @@
 
     TString reconstructed_name;
 
-    Int_t L1XE30BinThreshes[6] = {11,14,15,15,12,11}; 
-    Int_t L1XE50BinThreshes[6] = {20,20,20,16,18,18};
+    Int_t L1XE30BinThreshes[7] = {11,11,14,15,15,12,11}; 
+    Int_t L1XE50BinThreshes[7] = {20,20,20,20,16,18,18};
 
     TString outFileName = "";
-    for (int i = 1; i <= hlt_zb_l1_zb_distributions->GetLast(); i++){
+    for (int i = 0; i <= hlt_zb_l1_zb_distributions->GetLast(); i++){
         // read the histograms into memory
         zb_dist = ((TH1D*)(hlt_zb_l1_zb_distributions->At(i)));
         l1xe30_corrected_zb_dist = ((TH1D*)(l1xe30_corrected_zb_distributions->At(i)));
@@ -54,6 +54,7 @@
 
         // set line color
         Reconstructed_MET_Distribution->SetLineColor( kBlack );
+        Reconstructed_MET_Distribution->SetNormFactor(1.);
 
         TCanvas* reconstructed_canvas = new TCanvas("reconstructedCanvas","Canvas with Reconstructed MET Distribution");
         TLegend* reconstructedLegend = new TLegend(0.48,0.7,0.9,0.9);
