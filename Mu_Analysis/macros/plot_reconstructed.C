@@ -24,6 +24,8 @@
 
     std::cout << "Number of objects in hlt_zb_l1_zb_distributions: " << hlt_zb_l1_zb_distributions->GetEntries() << std::endl;
     TH1D* zb_dist;
+    TH1D* l1xe30_noalg_dist;
+    TH1D* l1xe50_noalg_dist;
     TH1D* l1xe30_corrected_zb_dist;
     TH1D* l1xe50_corrected_zb_dist;
     TEfficiency* l1xe30_efficiency_curve;
@@ -50,6 +52,8 @@
     for (int i = 0; i <= hlt_zb_l1_zb_distributions->GetLast(); i++){
         // READ IN HISTOGRAMS {{{ 
         zb_dist = ((TH1D*)(hlt_zb_l1_zb_distributions->At(i)));
+        l1xe30_noalg_dist = ((TH1D*)(hlt_zb_l1xe30_met_distributions->At(i)));
+        l1xe50_noalg_dist = ((TH1D*)(hlt_zb_l1xe50_met_distributions->At(i)));
         l1xe30_corrected_zb_dist = ((TH1D*)(l1xe30_corrected_zb_distributions->At(i)));
         l1xe50_corrected_zb_dist = ((TH1D*)(l1xe50_corrected_zb_distributions->At(i)));
         l1xe30_efficiency_curve = ((TEfficiency*)(l1xe30_efficiency_objects->At(i)));
@@ -109,6 +113,34 @@
         Reconstructed_MET_Distribution->SetTitle(reconstructed_name);
         Reconstructed_MET_Distribution->GetXaxis()->SetTitle(x_axis_label);
         Reconstructed_MET_Distribution->GetYaxis()->SetTitle(y_axis_label);
+        //}}}
+        //PLOT HLTnoalgL1XE30 DISTS{{{
+        TCanvas* HLTnoalgL1XE30_canvas = new TCanvas("HLTnoalgL1XE30canv","Canvas with HLT noalg L1XE30 Distributions");
+        gStyle->SetOptStat(0);
+        l1xe30_corrected_zb_dist->Draw("P E1");
+        l1xe30_noalg_dist->Draw("P E1 SAME");
+        TLegend* HLTnoalgL1XE30_Legend = new TLegend(0.48,0.7,0.9,0.9);
+        HLTnoalgL1XE30_Legend->AddEntry( zb_dist );
+        HLTnoalgL1XE30_Legend->AddEntry( l1xe30_corrected_zb_dist );
+        HLTnoalgL1XE30_Legend->AddEntry( l1xe30_noalg_dist);
+        HLTnoalgL1XE30_Legend->Draw("SAME");
+        HLTnoalgL1XE30_canvas->SetLogy();
+        outFileName.Form("plots/hlt_noalg_l1xe30_plots/hlt_noalg_L1XE30_dist_mubin_%d.png",i);
+        HLTnoalgL1XE30_canvas->Print(outFileName);
+        //}}}
+        //PLOT HLTnoalgL1XE50 DISTS{{{
+        TCanvas* HLTnoalgL1XE50_canvas = new TCanvas("HLTnoalgL1XE50canv","Canvas with HLT noalg L1XE50 Distributions");
+        gStyle->SetOptStat(0);
+        l1xe50_corrected_zb_dist->Draw("P E1");
+        l1xe50_noalg_dist->Draw("P E1 SAME");
+        TLegend* HLTnoalgL1XE50_Legend = new TLegend(0.48,0.7,0.9,0.9);
+        HLTnoalgL1XE50_Legend->AddEntry( zb_dist );
+        HLTnoalgL1XE50_Legend->AddEntry( l1xe50_corrected_zb_dist );
+        HLTnoalgL1XE50_Legend->AddEntry( l1xe50_noalg_dist);
+        HLTnoalgL1XE50_Legend->Draw("SAME");
+        HLTnoalgL1XE50_canvas->SetLogy();
+        outFileName.Form("plots/hlt_noalg_l1xe50_plots/hlt_noalg_L1XE50_dist_mubin_%d.png",i);
+        HLTnoalgL1XE50_canvas->Print(outFileName);
         //}}}
         // PERFORM RECONSTRUCTION {{{
         for ( int j = 1 ; j < nbins ; j++ ){
