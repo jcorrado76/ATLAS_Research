@@ -1,6 +1,8 @@
 {
+    // OPEN FILE {{{
     TFile* mu_analysis_file = TFile::Open("mu_analysis.root","READ");
-
+    //}}}
+    // INITIALIZE TOBJARRAYS {{{
     TObjArray* hlt_zb_l1_zb_distributions = 0;
     TObjArray* l1xe30_corrected_zb_distributions = 0;
     TObjArray* l1xe50_corrected_zb_distributions = 0;
@@ -9,7 +11,8 @@
     TObjArray* l1xe50_efficiency_objects = 0;
     TObjArray* hlt_zb_l1xe30_met_distributions = 0;
     TObjArray* hlt_zb_l1xe50_met_distributions = 0;
-
+    //}}}
+    // GET TOBJARRAYS FROM FILE {{{
     mu_analysis_file->GetObject("hlt_zb_l1zb_met_distributions",hlt_zb_l1_zb_distributions);
     mu_analysis_file->GetObject("hlt_zb_l1xe30_corrected_zb_met_distributions",l1xe30_corrected_zb_distributions);
     mu_analysis_file->GetObject("hlt_zb_l1xe50_corrected_zb_met_distributions",l1xe50_corrected_zb_distributions);
@@ -17,6 +20,7 @@
     mu_analysis_file->GetObject("l1xe50_efficiency_objects", l1xe50_efficiency_objects);
     mu_analysis_file->GetObject("hlt_zb_l1xe30__met_distributions",hlt_zb_l1xe30_met_distributions);
     mu_analysis_file->GetObject("hlt_zb_l1xe50__met_distributions",hlt_zb_l1xe50_met_distributions);
+    //}}}
 
     std::cout << "Number of objects in hlt_zb_l1_zb_distributions: " << hlt_zb_l1_zb_distributions->GetEntries() << std::endl;
     TH1D* zb_dist;
@@ -81,8 +85,8 @@
         corrected_canvas->cd(2);
         l1xe30_efficiency_curve->Draw();
         l1xe50_efficiency_curve->Draw("SAME");
-        auto graph = l1xe30_efficiency_curve->GetPaintedGraph();
-        graph->GetXaxis()->SetRange(0.0,300.0);
+        //auto graph = l1xe30_efficiency_curve->GetPaintedGraph();
+        //graph->GetXaxis()->SetRange(0.0,300.0);
         Double_t l1xe30Discriminant = L1XE30BinThreshes[i] * 5.0;
         Double_t l1xe50Discriminant = L1XE50BinThreshes[i] * 5.0;
         TLine* l1xe30Line = new TLine( l1xe30Discriminant , 0.0 , l1xe30Discriminant, 1.0 );
@@ -118,25 +122,11 @@
 
         TCanvas* reconstructed_canvas = new TCanvas("reconstructedCanvas","Canvas with Reconstructed MET Distribution");
         gStyle->SetOptStat(0);
-        reconstructed_canvas->Divide(1,2);
-        reconstructed_canvas->cd(1);
         Reconstructed_MET_Distribution->Draw("P E1");
         TLegend* reconstructedLegend = new TLegend(0.48,0.7,0.9,0.9);
         reconstructedLegend->AddEntry( Reconstructed_MET_Distribution );
         reconstructed_canvas->SetLogy();
         reconstructedLegend->Draw("SAME");
-
-        reconstructed_canvas->cd(2);
-        l1xe30_efficiency_curve->Draw();
-        l1xe50_efficiency_curve->Draw("SAME");
-        auto graph = l1xe30_efficiency_curve->GetPaintedGraph();
-        graph->GetXaxis()->SetRange(0.0,300.0);
-        Double_t l1xe30Discriminant = L1XE30BinThreshes[i] * 5.0;
-        Double_t l1xe50Discriminant = L1XE50BinThreshes[i] * 5.0;
-        TLine* l1xe30Line = new TLine( l1xe30Discriminant , 0.0 , l1xe30Discriminant, 1.0 );
-        TLine* l1xe50Line = new TLine( l1xe50Discriminant , 0.0 , l1xe50Discriminant , 1.0 );
-        l1xe30Line->Draw("SAME");
-        l1xe50Line->Draw("SAME");
         outFileName.Form("plots/reconstructed_distributions/reconstructed_distribution_mubin_%d.png",i);
         reconstructed_canvas->Print(outFileName);
         // }}}
