@@ -3,9 +3,6 @@
     TObjArray* l1xe50_efficiency_objects = 0;
 
     mu_analysis_file->GetObject("l1xe50_efficiency_objects", l1xe50_efficiency_objects);
-    int number_mu_bins = 7;
-    // this needs to be the literal 7 for some reason..
-    int Colors[7] = {1,2,3,4,5,6,9};
 
     TEfficiency* l1xe50_efficiency_curve;
     TString outFileName = "";
@@ -22,7 +19,6 @@
     l1xe50_efficiency_curve = ((TEfficiency*)(l1xe50_efficiency_objects->At(1)));
     // don't plot fit functions
     l1xe50_efficiency_curve->GetListOfFunctions()->Clear();
-    l1xe50_efficiency_curve->SetLineColor( Colors[1] );
     correctedLegend->AddEntry( l1xe50_efficiency_curve );
     l1xe50_efficiency_curve->Draw();
     //gPad->Update();
@@ -34,14 +30,12 @@
         l1xe50_efficiency_curve = ((TEfficiency*)(l1xe50_efficiency_objects->At(i)));
         correctedLegend->AddEntry( l1xe50_efficiency_curve );
         l1xe50_efficiency_curve->GetListOfFunctions()->Clear();
-        l1xe50_efficiency_curve->SetLineColor( Colors[i] );
 
         l1xe50_efficiency_curve->Draw("SAME");
     }
     l1xe50_efficiency_curve = ((TEfficiency*)(l1xe50_efficiency_objects->At(0)));
     correctedLegend->AddEntry( l1xe50_efficiency_curve );
     l1xe50_efficiency_curve->GetListOfFunctions()->Clear();
-    l1xe50_efficiency_curve->SetLineColor( Colors[0] );
 
     l1xe50_efficiency_curve->Draw("SAME");
     correctedLegend->Draw("SAME");
