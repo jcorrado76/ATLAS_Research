@@ -19,7 +19,6 @@
         title->SetTextFont(72);
         l1xe50_efficiency_curve = ((TEfficiency*)(l1xe50_efficiency_objects->At(i)));
         correctedLegend->AddEntry( l1xe50_efficiency_curve );
-        l1xe50_efficiency_curve->SetLineColor( Colors[i] );
         l1xe50_efficiency_curve->Draw();
         correctedLegend->Draw("SAME");
         l1xe50_eff_canv->SetLogy();

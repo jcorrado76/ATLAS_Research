@@ -42,6 +42,7 @@ public :
    // collections
    TObjArray* HLT_ZB_L1ZB_MET_Distributions_by_Mubin = new TObjArray();
    TObjArray* HLT_ZB_L1XE30_MET_Distributions_by_Mubin = new TObjArray();
+   TObjArray* HLT_ZB_L1XE50_MET_Distributions_by_Mubin = new TObjArray();
 
    TObjArray* HLT_ZB_L1XE30_Corrected_to_ZB_MET_Distribution = new TObjArray();
    TObjArray* HLT_ZB_L1XE50_Corrected_to_ZB_MET_Distribution = new TObjArray();
