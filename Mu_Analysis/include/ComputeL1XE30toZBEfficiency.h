@@ -7,7 +7,7 @@ public :
        for (int i = 0 ; i < Number_Mu_Bins; i++){
            // create good name, and good title
            Name.Form("hlt_zb_l1zb_met_dist_mubin%d" , i );
-           Title.Form("HLT ZB L1ZB MET Distribution for %s for Actint bin %d" , Alg_Name.Data(), i);
+           Title.Form("HLT ZB L1ZB MET Distribution for %s for %d < #mu < %d" , Alg_Name.Data(), i*10, (i+1)*10);
            // initialize the histograms for HLT_ZB L1ZB distributions
            TH1D* tmpHist = new TH1D( Name , Title , met_dist_nbins , gevLow , gevHigh );
            // set the array line color
@@ -16,7 +16,7 @@ public :
            HLT_ZB_L1ZB_MET_Distributions_by_Mubin->Add( tmpHist );
 
            EfficiencyName.Form("metL1XE30EfficiencyMubin%d", i);
-           EfficiencyTitle.Form("Efficiency of L1XE 30 As a Function of %s for Actint bin %d", Alg_Name.Data() , i);
+           EfficiencyTitle.Form("Efficiency of L1XE 30 As a Function of %s for %d < #mu < %d", Alg_Name.Data() , i*10, (i+1)*10);
            TEfficiency* tmpEff = new TEfficiency( EfficiencyName , EfficiencyTitle , efficiency_nbins , gevLow , gevHigh );
            tmpEff->SetLineColor( Colors[i] );
            //tmpEff->SetMarkerStyle( Colors[i] );
