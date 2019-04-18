@@ -69,30 +69,19 @@
         Reconstructed_MET_Distribution->SetNormFactor(1.);
 
         TCanvas* reconstructed_canvas = new TCanvas("reconstructedCanvas","Canvas with Reconstructed MET Distribution");
-        TPad *pad1 = new TPad("pad1","pad1",0,0.3,1.,1.0);
-        pad1->SetBottomMargin(0);
-        pad1->Draw();
-        pad1->cd();
-        TLegend* reconstructedLegend = new TLegend(0.48,0.7,0.9,0.9);
+        gStyle->SetOptStat(0);
+        reconstructed_canvas->Divide(1,2);
+        reconstructed_canvas->cd(1);
         Reconstructed_MET_Distribution->Draw("P E1");
+        TLegend* reconstructedLegend = new TLegend(0.48,0.7,0.9,0.9);
         reconstructedLegend->AddEntry( Reconstructed_MET_Distribution );
         reconstructed_canvas->SetLogy();
         reconstructedLegend->Draw("SAME");
-        gStyle->SetOptStat(0);
 
-        reconstructed_canvas->cd();
-        TPad* pad2 = new TPad("pad2","pad2",0,0.05,1,0.3);
-        pad2->SetTopMargin(0);
-        pad2->SetBottomMargin(0.2);
-        pad2->Draw();
-        pad2->cd();
+        reconstructed_canvas->cd(2);
         l1xe30_efficiency_curve->Draw();
         l1xe50_efficiency_curve->Draw("SAME");
-        pad2->Update();
         auto graph = l1xe30_efficiency_curve->GetPaintedGraph();
-        graph->SetMinimum(0.0);
-        graph->SetMaximum(300.0);
-        gPad->Update();
         Double_t l1xe30Discriminant = L1XE30BinThreshes[i] * 5.0;
         Double_t l1xe50Discriminant = L1XE50BinThreshes[i] * 5.0;
         TLine* l1xe30Line = new TLine( l1xe30Discriminant , 0.0 , l1xe30Discriminant, 1.0 );
