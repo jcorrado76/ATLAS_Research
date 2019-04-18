@@ -14,16 +14,6 @@ Bool_t ComputeL1XE50toL1XE30Efficiency::Process(Long64_t entry)//{{{
            }
        }
    }
-   if ( isHLT_zb_L1XE50()  && isGoodRun() ){
-       Float_t muLow , muHigh;
-       for ( int i = 0; i < Number_Mu_Bins ; i++ ){
-           muLow = Mu_Values[ i ];
-           muHigh = Mu_Values[ i + 1 ];
-           if ( inMuRange( muLow , muHigh ) ){
-               ((TH1D*)HLT_ZB_L1XE50_MET_Distributions_by_Mubin->At(i))->Fill(*cell_met , *L1_XE50_prescale);
-           }
-       }
-   }
    return kTRUE;
 }//}}}
 void ComputeL1XE50toL1XE30Efficiency::Terminate()//{{{

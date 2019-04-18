@@ -31,6 +31,7 @@ Bool_t CorrectL1XE50toZB::Process(Long64_t entry)//{{{
    if ( isHLT_zb_L1XE50() && isGoodRun()  ){
        for ( int i = 0 ; i < Number_Mu_Bins ; i++ ) {
            if ( inMuRange( Mu_Values[i] , Mu_Values[i+1] )){
+                ((TH1D*)HLT_ZB_L1XE50_MET_Distributions_by_Mubin->At(i))->Fill(*cell_met , *L1_XE50_prescale);
                 ((TH1D*)HLT_ZB_L1XE50_Corrected_to_ZB_MET_Distribution->At(i))->Fill( *cell_met , ComputeWeight( ((TF1*)L1XE30_Efficiency_Fit_Objects->At(i)), ((TF1*)L1XE50_Efficiency_Fit_Objects->At(i)) ) );
                 // find the index of bin that this event falls into
                 Int_t idx = ((TH1D*)HLT_ZB_L1XE50_Corrected_to_ZB_MET_Distribution->At(i))->FindBin( *cell_met );
@@ -136,6 +137,7 @@ void CorrectL1XE50toZB::Write( TString fname ){//{{{
             std::cout << "File opened successfully" << std::endl;
             HLT_ZB_L1ZB_MET_Distributions_by_Mubin->Write("hlt_zb_l1zb_met_distributions",TObject::kSingleKey | TObject::kWriteDelete);
             HLT_ZB_L1XE30_MET_Distributions_by_Mubin->Write("hlt_zb_l1xe30_met_distributions",TObject::kSingleKey | TObject::kWriteDelete);
+            HLT_ZB_L1XE50_MET_Distributions_by_Mubin->Write("hlt_zb_l1xe50_met_distributions",TObject::kSingleKey | TObject::kWriteDelete);
             HLT_ZB_L1XE30_Corrected_to_ZB_MET_Distribution->Write("hlt_zb_l1xe30_corrected_zb_met_distributions",TObject::kSingleKey | TObject::kWriteDelete);
             HLT_ZB_L1XE50_Corrected_to_ZB_MET_Distribution->Write("hlt_zb_l1xe50_corrected_zb_met_distributions",TObject::kSingleKey | TObject::kWriteDelete);
             L1XE30_Efficiency_Objects->Write("l1xe30_efficiency_objects",TObject::kSingleKey | TObject::kWriteDelete);

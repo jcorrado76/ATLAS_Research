@@ -16,7 +16,7 @@ public :
            HLT_ZB_L1ZB_MET_Distributions_by_Mubin->Add( tmpHist );
 
            EfficiencyName.Form("metL1XE30EfficiencyMubin%d", i);
-           EfficiencyTitle.Form("Efficiency of L1XE 30 As a Function of %s for %d < #mu < %d", Alg_Name.Data() , i*10, (i+1)*10);
+           EfficiencyTitle.Form("Efficiency of L1XE 30 As a Function of %s for %d < #mu < %d;CELL MET [GeV];Efficiency", Alg_Name.Data() , i*10, (i+1)*10);
            TEfficiency* tmpEff = new TEfficiency( EfficiencyName , EfficiencyTitle , efficiency_nbins , gevLow , gevHigh );
            tmpEff->SetLineColor( Colors[i] );
            //tmpEff->SetMarkerStyle( Colors[i] );
