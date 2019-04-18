@@ -141,7 +141,7 @@ public :
    void Set_L1XE50_Efficiency_Objects(TObjArray* const other){ L1XE50_Efficiency_Objects = other ; }
    void Set_L1XE30_Efficiency_Fit_Objects(TObjArray* const other){ L1XE30_Efficiency_Fit_Objects = other ; }
    void Set_L1XE50_Efficiency_Fit_Objects(TObjArray* const other){ L1XE50_Efficiency_Fit_Objects = other; }//}}}
-   TF1* generateFitFunction(TEfficiency* teff_obj, float L1XE = 0.0 , float initial_slope = 0.1 , 
+   TF1* generateFitFunction(TEfficiency* teff_obj, float L1XE = 0.0 , int i = 0 , float initial_slope = 0.1 , 
            float initial_intercept = 0.0, float initial_sigma = 10.0,  Bool_t verbose=false );
    Double_t ComputeWeight(TF1* fitFunc, TF1* fitFunc2 = NULL);
    static double L1XE30fitFunction(double *x , double *par );

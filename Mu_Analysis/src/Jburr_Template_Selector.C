@@ -33,7 +33,7 @@ Bool_t Jburr_Template_Selector::inMuRange( Float_t a , Float_t b ){ //{{{
     // return true if in local mu bin
     return ( *InTimePileup > a && *InTimePileup < b );
 } //}}}
-TF1* Jburr_Template_Selector::generateFitFunction(TEfficiency* teff_obj, float L1XE , 
+TF1* Jburr_Template_Selector::generateFitFunction(TEfficiency* teff_obj, float L1XE , int i ,
         float initial_slope, float initial_intercept, float initial_sigma ,  Bool_t verbose ){//{{{
     // return a fit function object whose parameters have been set
 
@@ -44,8 +44,8 @@ TF1* Jburr_Template_Selector::generateFitFunction(TEfficiency* teff_obj, float L
         fitErrorFunction = new TF1( "fitFunction" , L1XE50fitFunction , gevLow , gevHigh , 3);
     }
 
-
-    //TODO: eventually change the fitfunction to have another parameter and use TF1->FixParameter to fix the l1cut  as 4th parameter
+    fitErrorFunction->SetLineColor( Colors[i] );
+    //TODO: use a class the static fitting function with an evsl method
 
     fitErrorFunction->SetParameters(initial_slope, initial_intercept , initial_sigma);
     //initializing parameters reasonably is important because it is a maximum likelihood fit

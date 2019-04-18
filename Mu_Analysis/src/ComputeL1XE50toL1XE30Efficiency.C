@@ -19,9 +19,7 @@ Bool_t ComputeL1XE50toL1XE30Efficiency::Process(Long64_t entry)//{{{
 void ComputeL1XE50toL1XE30Efficiency::Terminate()//{{{
 {
     for (int i = 0 ; i < Number_Mu_Bins ; i++ ){
-       //L1XE50_Efficiency_Fit_Objects->Add(generateFitFunction( ((TEfficiency*)L1XE50_Efficiency_Objects->At(i)), L1XE ,0.1,0.0,10.0,true));
-       L1XE50_Efficiency_Fit_Objects->Add(generateFitFunction( ((TEfficiency*)L1XE50_Efficiency_Objects->At(i)) ) );
-       //L1XE50_Efficiency_Fit_Objects->Add(generateFitFunction( ((TEfficiency*)L1XE50_Efficiency_Objects->At(i)), 0.0 ,0.1,0.0,10.0,true));
+       L1XE50_Efficiency_Fit_Objects->Add(generateFitFunction( ((TEfficiency*)L1XE50_Efficiency_Objects->At(i)), L1XE, i  ) );
        ((TF1*)L1XE50_Efficiency_Fit_Objects->At(i))->SetLineColor( Colors[i] );
        Name.Form("l1xe50_efficiency_fit_obj_%d" , i );
        ((TF1*)L1XE50_Efficiency_Fit_Objects->At(i))->SetName( Name );
