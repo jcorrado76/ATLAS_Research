@@ -3,9 +3,6 @@
     TObjArray* l1xe50_efficiency_fit_objects = 0;
 
     mu_analysis_file->GetObject("l1xe50_efficiency_fit_objects", l1xe50_efficiency_fit_objects);
-    int number_mu_bins = 7;
-    // this needs to be the literal 7 for some reason..
-    int Colors[7] = {1,2,3,4,5,6,9};
 
     TF1* l1xe50_efficiency_fit;
     TString outFileName = "";
@@ -21,8 +18,7 @@
     gStyle->SetOptTitle(0);
     title->SetTextFont(72);
     l1xe50_efficiency_fit = ((TF1*)(l1xe50_efficiency_fit_objects->At(1)));
-    l1xe50_efficiency_fit->SetLineColor( Colors[1] );
-   Name.Form("L1XE50 Efficiency Fit for %d < #mu < %d" , 10, 20 );
+   Name.Form("L1XE50 Efficiency Fit for %d < #mu < %d;CELL MET [GeV];#epsilon" , 10, 20 );
    l1xe50_efficiency_fit->SetTitle( Name );
     correctedLegend->AddEntry( l1xe50_efficiency_fit );
     l1xe50_efficiency_fit->Draw();
@@ -30,18 +26,16 @@
     // to fix plotting. draw the mubin 0 first because it was messing everything up
     for (int i = 2; i <= l1xe50_efficiency_fit_objects->GetLast(); i++){
         l1xe50_efficiency_fit = ((TF1*)(l1xe50_efficiency_fit_objects->At(i)));
-           Name.Form("L1XE50 Efficiency Fit for %d < #mu < %d" , i*10,(i+1)*10  );
+           Name.Form("L1XE50 Efficiency Fit for %d < #mu < %d;CELL MET [GeV];#epsilon" , i*10,(i+1)*10  );
            l1xe50_efficiency_fit->SetTitle( Name );
         correctedLegend->AddEntry( l1xe50_efficiency_fit );
-        l1xe50_efficiency_fit->SetLineColor( Colors[i] );
 
         l1xe50_efficiency_fit->Draw("SAME");
     }
     l1xe50_efficiency_fit = ((TF1*)(l1xe50_efficiency_fit_objects->At(0)));
-   Name.Form("L1XE50 Efficiency Fit for %d < #mu < %d" , 0,10  );
+   Name.Form("L1XE50 Efficiency Fit for %d < #mu < %d;CELL MET [GeV];#epsilon" , 0,10  );
    l1xe50_efficiency_fit->SetTitle( Name );
     correctedLegend->AddEntry( l1xe50_efficiency_fit );
-    l1xe50_efficiency_fit->SetLineColor( Colors[0] );
 
     l1xe50_efficiency_fit->Draw("SAME");
     correctedLegend->Draw("SAME");
