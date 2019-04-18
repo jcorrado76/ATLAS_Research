@@ -96,8 +96,8 @@
         l1xe30_efficiency_curve->GetPaintedGraph()->GetXaxis()->SetRange(0.0,300.0);
         Double_t l1xe30Discriminant = L1XE30BinThreshes[i] * 5.0;
         Double_t l1xe50Discriminant = L1XE50BinThreshes[i] * 5.0;
-        TLine* l1xe30Line = new TLine( l1xe30Discriminant , 0.0 , l1xe30Discriminant, 1.0 );
-        TLine* l1xe50Line = new TLine( l1xe50Discriminant , 0.0 , l1xe50Discriminant , 1.0 );
+        TLine* l1xe30Line = new TLine( l1xe30Discriminant , 0.0 , l1xe30Discriminant, 1.0);
+        TLine* l1xe50Line = new TLine( l1xe50Discriminant , 0.0 , l1xe50Discriminant ,1.0);
         correctedLegend2->Draw("SAME");
         l1xe30Line->Draw("SAME");
         l1xe50Line->Draw("SAME");
