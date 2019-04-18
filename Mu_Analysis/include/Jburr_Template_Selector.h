@@ -52,12 +52,12 @@ public :
    TObjArray* L1XE30_Efficiency_Fit_Objects = new TObjArray();
    TObjArray* L1XE50_Efficiency_Fit_Objects = new TObjArray();
    
+   // styling options
    Float_t Mu_Values[Number_Mu_Bins+1] =                    { 0.0 };
-   int Colors[Number_Mu_Bins] =                           {1,2,3,4,12,6,9};
+   int Colors[Number_Mu_Bins] =                           {1,2,3,4,5,6,9};
    Int_t MarkerStyles[Number_Mu_Bins] =                     {29,20,3,4,27,22,21};
 
    // left edge of interval to sample from for scale factors
-   //Int_t Normalization_Bin_Numbers[Number_Mu_Bins] =        {14};
    Int_t Normalization_Bin_Number =        14;
 
    Double_t L1XE30Scale_Factors[Number_Mu_Bins][Number_Scale_Factor_Samples] =                  { 0.0 };
@@ -65,6 +65,8 @@ public :
    Double_t L1XE50Scale_Factors[Number_Mu_Bins][Number_Scale_Factor_Samples] =                  { 0.0 };
    Double_t L1XE50Scale_Factor_Errors[Number_Mu_Bins][Number_Scale_Factor_Samples] =                  { 0.0 };
 
+   // keep track of the fit parameters and their errors
+   // as well as the errors on each of the bin of the MET distributions for each mu bin
    Double_t RootZBErrVersMyErrL2Norm[Number_Mu_Bins][met_dist_nbins] = {0.0};
    Double_t ZBErrors[Number_Mu_Bins][met_dist_nbins] =    { 0.0 };
    Double_t L1XE30CorrectedToZBErrors[Number_Mu_Bins][met_dist_nbins] =    { 0.0 };

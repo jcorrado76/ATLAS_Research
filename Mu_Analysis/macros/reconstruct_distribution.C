@@ -88,6 +88,11 @@
         pad2->cd();
         l1xe30_efficiency_curve->Draw();
         l1xe50_efficiency_curve->Draw("SAME");
+        pad2->Update();
+        auto graph = l1xe30_efficiency_curve->GetPaintedGraph();
+        graph->SetMinimum(0.0);
+        graph->SetMaximum(300.0);
+        gPad->Update();
         Double_t l1xe30Discriminant = L1XE30BinThreshes[i] * 5.0;
         Double_t l1xe50Discriminant = L1XE50BinThreshes[i] * 5.0;
         TLine* l1xe30Line = new TLine( l1xe30Discriminant , 0.0 , l1xe30Discriminant, 1.0 );
