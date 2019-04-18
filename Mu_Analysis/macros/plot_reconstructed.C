@@ -18,8 +18,8 @@
     mu_analysis_file->GetObject("hlt_zb_l1xe50_corrected_zb_met_distributions",l1xe50_corrected_zb_distributions);
     mu_analysis_file->GetObject("l1xe30_efficiency_objects", l1xe30_efficiency_objects);
     mu_analysis_file->GetObject("l1xe50_efficiency_objects", l1xe50_efficiency_objects);
-    mu_analysis_file->GetObject("hlt_zb_l1xe30__met_distributions",hlt_zb_l1xe30_met_distributions);
-    mu_analysis_file->GetObject("hlt_zb_l1xe50__met_distributions",hlt_zb_l1xe50_met_distributions);
+    mu_analysis_file->GetObject("hlt_zb_l1xe30_met_distributions",hlt_zb_l1xe30_met_distributions);
+    mu_analysis_file->GetObject("hlt_zb_l1xe50_met_distributions",hlt_zb_l1xe50_met_distributions);
     //}}}
 
     std::cout << "Number of objects in hlt_zb_l1_zb_distributions: " << hlt_zb_l1_zb_distributions->GetEntries() << std::endl;
@@ -108,19 +108,12 @@
         outFileName.Form("plots/zerobias_distributions_corrected/zb_met_distributions_mubin_%d.png",i);
         correctedCanvas->Print(outFileName);
         // }}}
-        // CREATE RECONSTRUCTED HISTOGRAM{{{
-        reconstructed_name.Form("Reconstructed Zero Bias Distribution for %d < #mu < %d" , i*10,(i+1)*10  );
-        Reconstructed_MET_Distribution->SetTitle(reconstructed_name);
-        Reconstructed_MET_Distribution->GetXaxis()->SetTitle(x_axis_label);
-        Reconstructed_MET_Distribution->GetYaxis()->SetTitle(y_axis_label);
-        //}}}
         //PLOT HLTnoalgL1XE30 DISTS{{{
         TCanvas* HLTnoalgL1XE30_canvas = new TCanvas("HLTnoalgL1XE30canv","Canvas with HLT noalg L1XE30 Distributions");
         gStyle->SetOptStat(0);
         l1xe30_corrected_zb_dist->Draw("P E1");
         l1xe30_noalg_dist->Draw("P E1 SAME");
         TLegend* HLTnoalgL1XE30_Legend = new TLegend(0.48,0.7,0.9,0.9);
-        HLTnoalgL1XE30_Legend->AddEntry( zb_dist );
         HLTnoalgL1XE30_Legend->AddEntry( l1xe30_corrected_zb_dist );
         HLTnoalgL1XE30_Legend->AddEntry( l1xe30_noalg_dist);
         HLTnoalgL1XE30_Legend->Draw("SAME");
@@ -134,13 +127,18 @@
         l1xe50_corrected_zb_dist->Draw("P E1");
         l1xe50_noalg_dist->Draw("P E1 SAME");
         TLegend* HLTnoalgL1XE50_Legend = new TLegend(0.48,0.7,0.9,0.9);
-        HLTnoalgL1XE50_Legend->AddEntry( zb_dist );
         HLTnoalgL1XE50_Legend->AddEntry( l1xe50_corrected_zb_dist );
         HLTnoalgL1XE50_Legend->AddEntry( l1xe50_noalg_dist);
         HLTnoalgL1XE50_Legend->Draw("SAME");
         HLTnoalgL1XE50_canvas->SetLogy();
         outFileName.Form("plots/hlt_noalg_l1xe50_plots/hlt_noalg_L1XE50_dist_mubin_%d.png",i);
         HLTnoalgL1XE50_canvas->Print(outFileName);
+        //}}}
+        // CREATE RECONSTRUCTED HISTOGRAM{{{
+        reconstructed_name.Form("Reconstructed Zero Bias Distribution for %d < #mu < %d" , i*10,(i+1)*10  );
+        Reconstructed_MET_Distribution->SetTitle(reconstructed_name);
+        Reconstructed_MET_Distribution->GetXaxis()->SetTitle(x_axis_label);
+        Reconstructed_MET_Distribution->GetYaxis()->SetTitle(y_axis_label);
         //}}}
         // PERFORM RECONSTRUCTION {{{
         for ( int j = 1 ; j < nbins ; j++ ){
