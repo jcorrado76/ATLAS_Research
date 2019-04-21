@@ -1,3 +1,21 @@
 \chapter{Introduction}
+\section{ATLAS Experiment}
+\textbf{ATLAS (A Toroidal LHC ApparatuS)} is one of seven particle detector experiments constructed at the Large Hadron Collider, a particle accelerator at CERN. 
+When the LHC runs at full energy and intensity, about 600 million proton-proton collisions take place every second inside the ATLAS detector. 
+There are $10^{11}$ protons in a bunch. 
+The proton-proton interaction cross section is approximately $100mB$.
 
-By default, only works cited in the text will be added to the bibliography~\cite{latexcompanion}.
+
+\section{Efficiency Curves}
+An efficiency curve illustrates the probability of a given test algorithm to classify an event as above or below a certain threshold as a function of some given true determination of the MET. 
+So we can ask, what is the efficiency of L1 $> 30$ as a function of CELL MET. What this is means is we are taking the MET as determined by CELL to be the true MET, and we want to know how well L1 does at classifying events as having MET above or below $30$ at each value of the MET determine by CELL. 
+The way one would read a plot of this efficiency is to pick a value of CELL MET ( on the x-axis ) and ask ``when CELL determined events had this MET, how often did L1 determine the MET of those same events was greater than the threshold [30 GeV]''. 
+The fraction [of the total amount of events CELL determined was in that MET bin] that L1 determined was greater than the threshold would be the height of the efficiency curve at that value of CELL MET.
+A perfect efficiency curve would look like a step function centered at the threshold around which one is trying to classify the MET of events. 
+The fact that efficiency curves in reality do not look like step functions can be understood in terms of Type I and Type II error. 
+The step function for the efficiency curve would be centered on the threshold one is asking for the efficiency about. 
+The fact that the efficiency curve immediately to the left of the threshold is not zero means that there were events that CELL said had an MET lower than the threshold, but L1 said those same events were higher than the threshold. 
+The fact that the efficiency curve, immediately to the right of the threshold is not one means that there were events that CELL said had a higher MET than the threshold, but L1 said those same events were lower than the threshold. 
+In this case, the fraction of events L1 determined had an MET higher than the threshold, given that CELL said the MET was higher than the threshold, is less than one.
+\section{Missing Transverse Momentum}
+

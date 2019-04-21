@@ -6,5 +6,7 @@
 \contentsline {chapter}{List of Tables}{vii}{section*.10}
 \contentsline {chapter}{List of Figures}{viii}{section*.11}
 \contentsline {chapter}{\numberline {1}Introduction}{1}{chapter.1}
-\contentsline {chapter}{Bibliography}{2}{section*.12}
-\contentsline {chapter}{Appendix \numberline {A}Code}{2}{Appendix.a.A}
+\contentsline {section}{\numberline {1.1}ATLAS Experiment}{1}{section.1.1}
+\contentsline {section}{\numberline {1.2}Efficiency Curves}{1}{section.1.2}
+\contentsline {chapter}{Bibliography}{3}{section*.12}
+\contentsline {chapter}{Appendix \numberline {A}Code}{3}{Appendix.a.A}
