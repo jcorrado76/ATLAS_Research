@@ -8,5 +8,9 @@
 \contentsline {chapter}{\numberline {1}Introduction}{1}{chapter.1}
 \contentsline {section}{\numberline {1.1}ATLAS Experiment}{1}{section.1.1}
 \contentsline {section}{\numberline {1.2}Efficiency Curves}{1}{section.1.2}
-\contentsline {chapter}{Bibliography}{3}{section*.12}
-\contentsline {chapter}{Appendix \numberline {A}Code}{3}{Appendix.a.A}
+\contentsline {section}{\numberline {1.3}Missing Transverse Momentum}{2}{section.1.3}
+\contentsline {section}{\numberline {1.4}Bisection}{2}{section.1.4}
+\contentsline {subsection}{\numberline {1.4.1}Transverse Mass Cut}{3}{subsection.1.4.1}
+\contentsline {section}{\numberline {1.5}Results}{3}{section.1.5}
+\contentsline {chapter}{Bibliography}{4}{section*.12}
+\contentsline {chapter}{Appendix \numberline {A}Code}{4}{Appendix.a.A}
