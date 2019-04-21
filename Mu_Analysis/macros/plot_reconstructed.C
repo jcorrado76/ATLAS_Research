@@ -76,6 +76,7 @@
         TCanvas* corrected_canvas = new TCanvas("correctedCanvas","Canvas with ZB Distributions");
         gStyle->SetOptStat(0);
         corrected_canvas->Divide(1,2);
+        // PAD 1
         corrected_canvas->cd(1);
         l1xe50_corrected_zb_dist->Draw("P E1");
         zb_dist->Draw("P E1 SAME");
@@ -85,7 +86,8 @@
         correctedLegend->AddEntry( l1xe30_corrected_zb_dist );
         correctedLegend->AddEntry( l1xe50_corrected_zb_dist );
         correctedLegend->Draw("SAME");
-        correctedCanvas->SetLogy();
+        gPad->SetLogy();
+        // PAD 2
         corrected_canvas->cd(2);
         l1xe30_efficiency_curve->SetLineColor(kGreen);
         ((TF1*)l1xe30_efficiency_curve->GetListOfFunctions()->At(0))->SetLineColor(kGreen);
@@ -111,6 +113,7 @@
         //PLOT HLTnoalgL1XE30 DISTS{{{
         TCanvas* HLTnoalgL1XE30_canvas = new TCanvas("HLTnoalgL1XE30canv","Canvas with HLT noalg L1XE30 Distributions");
         gStyle->SetOptStat(0);
+        l1xe30_noalg_dist->SetNormFactor(1.);
         l1xe30_corrected_zb_dist->Draw("P E1");
         l1xe30_noalg_dist->Draw("P E1 SAME");
         TLegend* HLTnoalgL1XE30_Legend = new TLegend(0.48,0.7,0.9,0.9);
@@ -124,6 +127,7 @@
         //PLOT HLTnoalgL1XE50 DISTS{{{
         TCanvas* HLTnoalgL1XE50_canvas = new TCanvas("HLTnoalgL1XE50canv","Canvas with HLT noalg L1XE50 Distributions");
         gStyle->SetOptStat(0);
+        l1xe50_noalg_dist->SetNormFactor(1.);
         l1xe50_corrected_zb_dist->Draw("P E1");
         l1xe50_noalg_dist->Draw("P E1 SAME");
         TLegend* HLTnoalgL1XE50_Legend = new TLegend(0.48,0.7,0.9,0.9);
