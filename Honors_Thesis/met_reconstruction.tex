@@ -1,15 +1,15 @@
 \section{Reconstructing the MET Distribution}
 Our goal is to empirically reconstruct the unbiased MET distribution using ZeroBias HLT noalg L1XE30 and HLT noalg L1XE50 data. 
 We want to use this data to determine the CELL MET distribution as a function of $\mu$.
-Because the zerobias events only allow us to go up to about 80 GeV, we use the HLTnoalg_L1XExx triggered events in order to extend to higher MET.
-We correct the HLTnoalg_L1XExx data using the efficiency curves determined from lower threshold triggers.
+Because the zerobias events only allow us to go up to about $80$ GeV, we use the \texttt{HLTnoalg\_L1XExx} triggered events in order to extend to higher MET.
+We correct the \texttt{HLTnoalg\_L1XExx} data using the efficiency curves determined from lower threshold triggers.
 In addition to performing this correction, we needed to propagate the errors properly on the corrected distribution because it depends on the fit functions to the efficiency in which the fitting parameters have some uncertainty. 
 In order to do the reconstruction, we needed to perform several steps:
 \begin{enumerate}
-		\item compute the efficiency of $L1>30$GeV for HLT_ZB_L1ZB data as a function of CELL MET
-		\item correct the HLT_ZB_L1XE30 data back to the HLT_ZB_L1ZB distribution by multiplying by the prescale and dividing by the efficiency. 
-		\item compute the efficiency of $L1>50GeV$ for HLT_ZB_L1XE30 data as a function of CELL MET
-		\item correct the HLT_ZB_L1XE50 data back to the HLT_ZB_L1ZB distribution by multiplying by the corresponding prescale, and dividing by both of the previously computed efficiencies. 
+        \item compute the efficiency of $L1>30$GeV for \texttt{HLT\_ZB\_L1ZB} data as a function of CELL MET
+        \item correct the \texttt{HLT\_ZB\_L1XE30} data back to the \texttt{HLT\_ZB\_L1ZB} distribution by multiplying by the prescale and dividing by the efficiency. 
+        \item compute the efficiency of $L1>50GeV$ for \texttt{HLT\_ZB\_L1XE30} data as a function of CELL MET
+        \item correct the \texttt{HLT\_ZB\_L1XE50} data back to the \texttt{HLT\_ZB\_L1ZB} distribution by multiplying by the corresponding prescale, and dividing by both of the previously computed efficiencies. 
 \end{enumerate}
-For this project, we used the 2015, 2016 and 2017 combined HLTnoalg_L1ZB, HLTnoalg_L1XE30 and HLTnoalg_L1XE50 data produced by Jonathan Burr on 11/17/2017 from the zerobias and JETM10 trees.
+For this project, we used the 2015, 2016 and 2017 combined \texttt{HLTnoalg\_L1Z} , \texttt{HLTnoalg\_L1XE30} and \texttt{HLTnoalg\_L1XE50} data produced by Jonathan Burr on 11/17/2017 from the zerobias and JETM10 trees.
 In addition, we removed the events from runs 330203, 331975 and 334487 because these events had large MET events without jets and the logbook says there were calorimeter noise problems in these runs. 
