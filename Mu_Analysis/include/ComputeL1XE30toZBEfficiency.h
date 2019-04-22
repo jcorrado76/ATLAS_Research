@@ -12,6 +12,7 @@ public :
            TH1D* tmpHist = new TH1D( Name , Title , met_dist_nbins , gevLow , gevHigh );
            // set the array line color
            tmpHist->SetLineColor( Colors[i] );
+           tmpHist->SetLineWidth( lineWidth );
            // add the hist to the objarray
            HLT_ZB_L1ZB_MET_Distributions_by_Mubin->Add( tmpHist );
 
@@ -19,6 +20,7 @@ public :
            EfficiencyTitle.Form("Efficiency of L1XE 30 As a Function of %s for %d < #mu < %d;CELL MET [GeV];Efficiency", Alg_Name.Data() , i*10, (i+1)*10);
            TEfficiency* tmpEff = new TEfficiency( EfficiencyName , EfficiencyTitle , efficiency_nbins , gevLow , gevHigh );
            tmpEff->SetLineColor( Colors[i] );
+           tmpEff->SetLineWidth( lineWidth );
            //tmpEff->SetMarkerStyle( Colors[i] );
            L1XE30_Efficiency_Objects->Add( tmpEff );
        }
