@@ -1,5 +1,8 @@
 
-\documentclass[]{beamer}
+% without plots
+\documentclass[draft]{beamer}
+% with plots
+%\documentclass[]{beamer}
 % Class options include: notes, notesonly, handout, trans,
 %                        hidesubsections, shadesubsections,
 %                        inrow, blue, red, grey, brown
@@ -23,6 +26,7 @@
   \titlepage
 \end{frame}
 
+\section{Objective}
 \begin{frame}
 \frametitle{Objective}
 \begin{itemize}
@@ -34,6 +38,7 @@
 \end{itemize}
 \end{frame}
 
+\section{Method}
 \begin{frame}
 \frametitle{Method}
 For each bin of actual number of interactions per bunch crossing (actint/InTimePileup):
@@ -45,6 +50,7 @@ For each bin of actual number of interactions per bunch crossing (actint/InTimeP
 \end{enumerate}
 \end{frame}
 
+\section{Data Used}
 \begin{frame}
   \frametitle{Data Used}   
   \begin{itemize}
@@ -53,7 +59,7 @@ For each bin of actual number of interactions per bunch crossing (actint/InTimeP
   \end{itemize}
 \end{frame}
 
-
+\section{Efficiency Fits}
 \begin{frame}
 		\frametitle{Efficiency Fits}
 		\begin{itemize}
@@ -66,6 +72,7 @@ For each bin of actual number of interactions per bunch crossing (actint/InTimeP
 \end{frame}
 
 % PLOTS OF ALL EFFICIENCIES AND FITS TOGETHER
+\section{All Efficiencies and Fits}
 \begin{frame}
 		\framebox{\includegraphics[height=2.65in,width=4.25in]{L1XE30Efficiency_Curves}}
 \end{frame}
@@ -79,6 +86,7 @@ For each bin of actual number of interactions per bunch crossing (actint/InTimeP
 		\framebox{\includegraphics[height=2.65in,width=4.25in]{L1XE50Efficiency_Fits}}
 \end{frame}
 
+\section{Performing Correction}
 \begin{frame}
 		\frametitle{Correcting the \texttt{HLTnoalg} Distribution}
 		\begin{itemize}
@@ -92,6 +100,7 @@ For each bin of actual number of interactions per bunch crossing (actint/InTimeP
 \end{frame}
 
 
+\section{Error Propagation}
 \begin{frame}
 		\frametitle{Error Propagation}
 		\begin{itemize}
@@ -103,7 +112,6 @@ For each bin of actual number of interactions per bunch crossing (actint/InTimeP
 	} \end{itemize}
 \end{frame}
 
-
 \begin{frame}
 		\framebox{\includegraphics[height=2.65in,width=4.25in]{hlt_noalg_l1xe30_plots/hlt_noalg_L1XE30_dist_mubin_3}}
 \end{frame}
@@ -112,6 +120,7 @@ For each bin of actual number of interactions per bunch crossing (actint/InTimeP
 \end{frame}
 
 
+\section{Relative Normalization}
 \begin{frame}
 		\frametitle{Relative Normalization}
 		\begin{itemize}
@@ -120,6 +129,7 @@ For each bin of actual number of interactions per bunch crossing (actint/InTimeP
 		\end{itemize}
 \end{frame}
 
+\section{Reconstructed Distributions}
 \begin{frame}
 		\framebox{\includegraphics[height=2.65in,width=4.25in]{zerobias_distributions_corrected/zb_met_distributions_mubin_3}}
 \end{frame}

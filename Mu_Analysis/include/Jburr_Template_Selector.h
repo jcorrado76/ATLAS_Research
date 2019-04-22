@@ -57,7 +57,7 @@ public :
    Float_t Mu_Values[Number_Mu_Bins+1] =                    { 0.0 };
    int Colors[Number_Mu_Bins] =                           {1,2,3,4,5,6,9};
    Int_t MarkerStyles[Number_Mu_Bins] =                     {29,20,3,4,27,22,21};
-   Int_t lineWidth = 8;
+   Int_t lineWidth = 5;
 
    // left edge of interval to sample from for scale factors
    Int_t Normalization_Bin_Number =        14;
