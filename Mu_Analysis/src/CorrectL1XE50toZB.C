@@ -125,9 +125,8 @@ void CorrectL1XE50toZB::Terminate(){//{{{
             std::cout << std::endl;
         }else{
             std::cout << "L1XE50 Scale factor for mu bin " << i << " = " << f_mle << std::endl;
-            ((TH1D*)HLT_ZB_L1ZB_MET_Distributions_by_Mubin->At(i))->SetNormFactor( 1. );
-            ((TH1D*)HLT_ZB_L1XE50_Corrected_to_ZB_MET_Distribution->At(i))->SetNormFactor( 1. );
-            ((TH1D*)HLT_ZB_L1XE50_Corrected_to_ZB_MET_Distribution->At(i))->Scale( f_mle );
+            (l1xe50_corrected_zb_dist)->SetNormFactor( 1. );
+            (l1xe50_corrected_zb_dist)->Scale( f_mle );
         }
     }
 }//}}}

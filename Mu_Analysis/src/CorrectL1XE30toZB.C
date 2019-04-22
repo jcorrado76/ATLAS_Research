@@ -51,12 +51,10 @@ void CorrectL1XE30toZB::Terminate(){//{{{
                 std::cout << "Got zero error, but nonzero number of entries in corrected bin" << std::endl;
                 std::cout << "At i= " << i << " and j = " << j << std::endl;
             }
-            //std::cout << L1XE30CorrectedToZBErrors[i][j] << " ";
             ((TH1D*)HLT_ZB_L1XE30_Corrected_to_ZB_MET_Distribution->At(i))->SetBinError( j , TMath::Sqrt(L1XE30CorrectedToZBErrors[i][j]) );
             sumOfSquareDeviations = sumOfSquareDeviations + pow(TMath::Sqrt(RootZBErrVersMyErrL2Norm[i][j]) - 
                     ((TH1D*)HLT_ZB_L1ZB_MET_Distributions_by_Mubin->At(i))->GetBinError(j),2);
         }
-        //std::cout << std::endl;
     }
     // Relative Normalization{{{
     // Scale the corrected ones to the original zb ones
@@ -97,9 +95,8 @@ void CorrectL1XE30toZB::Terminate(){//{{{
             std::cout << "Denominator = " << denominator << std::endl;
         }else{
             std::cout << "L1XE30 Scale factor: " << i << " = " << f_mle << std::endl;
-            ((TH1D*)HLT_ZB_L1ZB_MET_Distributions_by_Mubin->At(i))->SetNormFactor( 1. );
-            ((TH1D*)HLT_ZB_L1XE30_Corrected_to_ZB_MET_Distribution->At(i))->SetNormFactor( 1. );
-            ((TH1D*)HLT_ZB_L1XE30_Corrected_to_ZB_MET_Distribution->At(i))->Scale( f_mle );
+            (l1xe30_corrected_zb_dist)->SetNormFactor( 1. );
+            (l1xe30_corrected_zb_dist)->Scale( f_mle );
         }
     }
     //}}}
