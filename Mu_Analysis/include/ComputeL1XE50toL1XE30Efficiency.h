@@ -11,12 +11,14 @@ public :
            Title.Form("HLT ZB L1XE30 MET Distribution for %s for %d < #mu < %d;CELL MET [GeV]" , Alg_Name.Data(), i*10 , (i+1)*10);
            TH1D* tmpHist = new TH1D( Name , Title , met_dist_nbins , gevLow , gevHigh );
            tmpHist->SetLineColor( Colors[i] );
+           tmpHist->SetLineWidth(lineWidth);
            HLT_ZB_L1XE30_MET_Distributions_by_Mubin->Add( tmpHist );
 
            EfficiencyName.Form("metL1XE50EfficiencyMubin%d", i);           
            EfficiencyTitle.Form("Efficiency of L1XE 50 As a Function of %s for %d < #mu < %d;CELL MET [GeV];Efficiency", Alg_Name.Data() , i*10,(i+1)*10);
            TEfficiency* tmpEff = new TEfficiency( EfficiencyName , EfficiencyTitle , efficiency_nbins , gevLow , gevHigh );
            tmpEff->SetLineColor( Colors[i] );
+           tmpEff->SetLineWidth(lineWidth);
            L1XE50_Efficiency_Objects->Add( tmpEff );
        }
    }
