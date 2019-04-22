@@ -11,6 +11,7 @@ public :
            tmpHist->SetLineColor( Colors[i] );
            tmpHist->SetLineWidth( lineWidth );
            HLT_ZB_L1XE30_Corrected_to_ZB_MET_Distribution->Add( tmpHist );
+       }
     }
    float L1XE = 30.0;
    ~CorrectL1XE30toZB() { }

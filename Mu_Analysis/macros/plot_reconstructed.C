@@ -113,12 +113,15 @@
         TCanvas* HLTnoalgL1XE30_canvas = new TCanvas("HLTnoalgL1XE30canv","Canvas with HLT noalg L1XE30 Distributions");
         gStyle->SetOptStat(0);
         HLTnoalgL1XE30_canvas->SetFillColor(42);
-        l1xe30_noalg_dist->SetNormFactor(1.);
         l1xe30_noalg_dist->SetLineColor( kMagenta );
         l1xe30_corrected_zb_dist->GetXaxis()->SetTitle(x_axis_label);
         l1xe30_corrected_zb_dist->GetYaxis()->SetTitle(y_axis_label);
-        l1xe30_corrected_zb_dist->Draw("P E1");
-        l1xe30_noalg_dist->Draw("P E1 SAME");
+        TH1D* l1xe30_corrected_zb_dist_clone = (TH1D*)l1xe30_corrected_zb_dist->Clone();
+        l1xe30_corrected_zb_dist_clone->SetNormFactor(1.);
+        l1xe30_corrected_zb_dist_clone->Draw("P E1");
+        TH1D* l1xe30_noalg_dist_clone = (TH1D*)l1xe30_noalg_dist->Clone();
+        l1xe30_noalg_dist_clone->SetNormFactor(1.);
+        l1xe30_noalg_dist_clone->Draw("P E1 SAME");
         TLegend* HLTnoalgL1XE30_Legend = new TLegend(0.48,0.7,0.9,0.9);
         HLTnoalgL1XE30_Legend->AddEntry( l1xe30_corrected_zb_dist );
         HLTnoalgL1XE30_Legend->AddEntry( l1xe30_noalg_dist);
@@ -131,11 +134,12 @@
         TCanvas* HLTnoalgL1XE50_canvas = new TCanvas("HLTnoalgL1XE50canv","Canvas with HLT noalg L1XE50 Distributions");
         HLTnoalgL1XE50_canvas->SetFillColor(42);
         gStyle->SetOptStat(0);
-        l1xe50_noalg_dist->SetNormFactor(1.);
         l1xe50_noalg_dist->SetLineColor( kMagenta );
         l1xe50_corrected_zb_dist->GetXaxis()->SetTitle(x_axis_label);
         l1xe50_corrected_zb_dist->GetYaxis()->SetTitle(y_axis_label);
-        l1xe50_corrected_zb_dist->Draw("P E1");
+        TH1D* l1xe50_noalg_dist_clone = (TH1D*)l1xe50_corrected_zb_dist->Clone();
+        l1xe50_noalg_dist_clone->SetNormFactor(1.);
+        l1xe50_corrected_zb_dist_clone->Draw("P E1");
         l1xe50_noalg_dist->Draw("P E1 SAME");
         TLegend* HLTnoalgL1XE50_Legend = new TLegend(0.48,0.7,0.9,0.9);
         HLTnoalgL1XE50_Legend->AddEntry( l1xe50_corrected_zb_dist );
@@ -169,7 +173,6 @@
         // PLOT RECONSTRUCTION{{{
         Reconstructed_MET_Distribution->SetLineColor( kBlack );
         reconstructed_distributions->Add( Reconstructed_MET_Distribution );
-        //Reconstructed_MET_Distribution->SetNormFactor(1.);
         TCanvas* reconstructed_canvas = new TCanvas("reconstructedCanvas","Canvas with Reconstructed MET Distribution");
         gStyle->SetOptStat(0);
         Reconstructed_MET_Distribution->Draw("P E1");
