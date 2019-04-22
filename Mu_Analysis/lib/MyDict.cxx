@@ -577,9 +577,6 @@ class __attribute__((annotate("$clingAutoload$../include/ComputeL1XE50toL1XE30Ef
     static const char* payloadCode = R"DICTPAYLOAD(
 #line 1 "MyDict dictionary payload"
 
-#ifndef G__VECTOR_HAS_CLASS_ITERATOR
-  #define G__VECTOR_HAS_CLASS_ITERATOR 1
-#endif
 
 #define _BACKWARD_BACKWARD_WARNING_H
 #include "../include/CorrectL1XE30toZB.h"
