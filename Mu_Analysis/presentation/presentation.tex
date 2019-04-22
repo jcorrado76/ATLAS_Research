@@ -1,8 +1,9 @@
 
 % without plots
-\documentclass[draft]{beamer}
+%\documentclass[draft]{beamer}
 % with plots
-%\documentclass[]{beamer}
+\documentclass[]{beamer}
+
 % Class options include: notes, notesonly, handout, trans,
 %                        hidesubsections, shadesubsections,
 %                        inrow, blue, red, grey, brown
@@ -11,6 +12,7 @@
 \usepackage{beamerthemesplit} 
 \usepackage{graphicx}
 \graphicspath{{../plots/}}
+\setbeamertemplate{headline}{}
 % Other themes include: beamerthemebars, beamerthemelined, 
 %                       beamerthemetree, beamerthemetreebars  
 
@@ -25,10 +27,11 @@
 \begin{frame}
   \titlepage
 \end{frame}
-
+\begin{frame}{Table of Contents}
+        \tableofcontents
+\end{frame}
 \section{Objective}
-\begin{frame}
-\frametitle{Objective}
+\begin{frame}{Objective}
 \begin{itemize}
         \item Determine CELL MET Distribution as a function of $\mu$
         \item Zerobias events run out of statistics above about 80 GeV
@@ -37,10 +40,8 @@
         \item Determine errors including statistical and those due to determination of efficiency.
 \end{itemize}
 \end{frame}
-
 \section{Method}
-\begin{frame}
-\frametitle{Method}
+\begin{frame}{Method}
 For each bin of actual number of interactions per bunch crossing (actint/InTimePileup):
 \begin{enumerate}
         \item Compute the Efficiency of L1XE 30 for \texttt{HLTzb\_L1ZB} events as a function of cell met
@@ -49,19 +50,15 @@ For each bin of actual number of interactions per bunch crossing (actint/InTimeP
         \item Obtain an unbiased (wtih respect to L1) CELL MET distribution from the \texttt{HLTnoalg\_L1XE50} data by multiplying by the prescale and dividing by both of the previously computed efficiencies.
 \end{enumerate}
 \end{frame}
-
 \section{Data Used}
-\begin{frame}
-  \frametitle{Data Used}   
+\begin{frame}{Data Used}
   \begin{itemize}
           \item Used 2015, 2016 and 2017 combined \texttt{HLTnoalg\_L1ZB}, \texttt{HLTnoalg\_L1XE30}, and \texttt{HLTnoalg\_L1XE50} data produced by Jonathan Burr dated 2017-11-17 from ZB and JETM10 trees
 		  \item Removed events from Runs 330203, 331975 and 334487. These had large MET events without jets and logbook says there were calorimeter noise problems in these runs
   \end{itemize}
 \end{frame}
-
 \section{Efficiency Fits}
-\begin{frame}
-		\frametitle{Efficiency Fits}
+\begin{frame}{Efficiency Fits}
 		\begin{itemize}
 				\item Assume the distribution of L1 MET, given the value of CELL MET, is gaussian. 
 				\item Fitted an error function to the efficiency to evaluate a continuous function when correcting the distribution of \texttt{HLTnoalg} data.
@@ -70,9 +67,7 @@ For each bin of actual number of interactions per bunch crossing (actint/InTimeP
 				\item Fit in actint bins of $0-10,\ldots, 60-70$.
 		\end{itemize}
 \end{frame}
-
 % PLOTS OF ALL EFFICIENCIES AND FITS TOGETHER
-\section{All Efficiencies and Fits}
 \begin{frame}
 		\framebox{\includegraphics[height=2.65in,width=4.25in]{L1XE30Efficiency_Curves}}
 \end{frame}
@@ -85,10 +80,8 @@ For each bin of actual number of interactions per bunch crossing (actint/InTimeP
 \begin{frame}
 		\framebox{\includegraphics[height=2.65in,width=4.25in]{L1XE50Efficiency_Fits}}
 \end{frame}
-
 \section{Performing Correction}
-\begin{frame}
-		\frametitle{Correcting the \texttt{HLTnoalg} Distribution}
+\begin{frame}{Correcting the \texttt{HLTnoalg} Distribution}
 		\begin{itemize}
 				\item After computing the efficiency curves for the cuts on L1, the curves were used to correct the HLTnoalg distributions that are biased with respect to L1 so that they replicate the unbiased distribution
 				\item In order to do this, it was necessary to multiply by the recorded prescale, and divide by the efficiency used to correct the data
@@ -98,11 +91,8 @@ For each bin of actual number of interactions per bunch crossing (actint/InTimeP
 				\end{itemize}
 		\end{itemize}
 \end{frame}
-
-
 \section{Error Propagation}
-\begin{frame}
-		\frametitle{Error Propagation}
+\begin{frame}{Error Propagation}
 		\begin{itemize}
 				\item The error in each efficiency value is determined by propagating the errors on the parameters of the respective fit function.
 				\item The reconstructed MET distribution includes both the error determined above, and the statistical error. 
@@ -111,24 +101,19 @@ For each bin of actual number of interactions per bunch crossing (actint/InTimeP
 				\item There is no error included to reflect the fact that the error function may not be a perfect model. Therefore, in final distribution, zerobias data is kept to as high an MET as possible and similarly for keeping \texttt{HLTnoalg\_L1XE30} versus \texttt{L1XE50
 	} \end{itemize}
 \end{frame}
-
 \begin{frame}
 		\framebox{\includegraphics[height=2.65in,width=4.25in]{hlt_noalg_l1xe30_plots/hlt_noalg_L1XE30_dist_mubin_3}}
 \end{frame}
 \begin{frame}
 		\framebox{\includegraphics[height=2.65in,width=4.25in]{hlt_noalg_l1xe50_plots/hlt_noalg_L1XE50_dist_mubin_3}}
 \end{frame}
-
-
 \section{Relative Normalization}
-\begin{frame}
-		\frametitle{Relative Normalization}
+\begin{frame}{Relative Normalization}
 		\begin{itemize}
 				\item Because the error bars are larger at low values of MET, it is not sufficient to normalize the entire curve to one. Instead, it was necessary to perform a relative overall normalization between the original zerobias distribution and the corrected curves in order to be able to compare the shapes more easily.
 				\item The relative normalization factor was computed by taking a weighted average of ratios computed in the region where the slopes look most parallel.
 		\end{itemize}
 \end{frame}
-
 \section{Reconstructed Distributions}
 \begin{frame}
 		\framebox{\includegraphics[height=2.65in,width=4.25in]{zerobias_distributions_corrected/zb_met_distributions_mubin_3}}
@@ -155,7 +140,6 @@ For each bin of actual number of interactions per bunch crossing (actint/InTimeP
 \begin{frame}
 		\framebox{\includegraphics[height=2.65in,width=4.25in]{reconstructed_distributions/reconstructed_distribution_mubin_6}}
 \end{frame}
-
 \begin{frame}
 \section{Appendix}
 \LARGE{Appendix}
