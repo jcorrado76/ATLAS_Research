@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2018.12.13)  22 APR 2019 15:16
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2018.12.13)  22 APR 2019 15:37
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -868,14 +868,14 @@ Overfull \hbox (170.65912pt too wide) has occurred while \output is active
 [6
 
 ]
-<../plots/L1XE30Efficiency_Curves.png, id=240, 1862.96pt x 970.62625pt>
+<../plots/L1XE30Efficiency_Curves.png, id=240, 2826.56pt x 1505.625pt>
 File: ../plots/L1XE30Efficiency_Curves.png Graphic file (type png)
 <use ../plots/L1XE30Efficiency_Curves.png>
 Package pdftex.def Info: ../plots/L1XE30Efficiency_Curves.png  used on input li
 ne 73.
-(pdftex.def)             Requested size: 307.14772pt x 191.51515pt.
+(pdftex.def)             Requested size: 307.12714pt x 191.51091pt.
 
-Overfull \hbox (6.65784pt too wide) in paragraph at lines 73--73
+Overfull \hbox (6.63725pt too wide) in paragraph at lines 73--73
 [][]  
  []
 
@@ -887,14 +887,14 @@ Overfull \hbox (170.65912pt too wide) has occurred while \output is active
 [7
 
  <../plots/L1XE30Efficiency_Curves.png>]
-<../plots/L1XE30Efficiency_Fits.png, id=269, 1862.96pt x 970.62625pt>
+<../plots/L1XE30Efficiency_Fits.png, id=269, 2826.56pt x 1505.625pt>
 File: ../plots/L1XE30Efficiency_Fits.png Graphic file (type png)
 <use ../plots/L1XE30Efficiency_Fits.png>
 Package pdftex.def Info: ../plots/L1XE30Efficiency_Fits.png  used on input line
  76.
-(pdftex.def)             Requested size: 307.14772pt x 191.51515pt.
+(pdftex.def)             Requested size: 307.12714pt x 191.51091pt.
 
-Overfull \hbox (6.65784pt too wide) in paragraph at lines 76--76
+Overfull \hbox (6.63725pt too wide) in paragraph at lines 76--76
 [][]  
  []
 
@@ -906,14 +906,14 @@ Overfull \hbox (170.65912pt too wide) has occurred while \output is active
 [8
 
  <../plots/L1XE30Efficiency_Fits.png>]
-<../plots/L1XE50Efficiency_Fits.png, id=296, 1862.96pt x 970.62625pt>
+<../plots/L1XE50Efficiency_Fits.png, id=296, 2826.56pt x 1505.625pt>
 File: ../plots/L1XE50Efficiency_Fits.png Graphic file (type png)
 <use ../plots/L1XE50Efficiency_Fits.png>
 Package pdftex.def Info: ../plots/L1XE50Efficiency_Fits.png  used on input line
  79.
-(pdftex.def)             Requested size: 307.14772pt x 191.51515pt.
+(pdftex.def)             Requested size: 307.12714pt x 191.51091pt.
 
-Overfull \hbox (6.65784pt too wide) in paragraph at lines 79--79
+Overfull \hbox (6.63725pt too wide) in paragraph at lines 79--79
 [][]  
  []
 
@@ -929,9 +929,9 @@ File: ../plots/L1XE50Efficiency_Fits.png Graphic file (type png)
 <use ../plots/L1XE50Efficiency_Fits.png>
 Package pdftex.def Info: ../plots/L1XE50Efficiency_Fits.png  used on input line
  82.
-(pdftex.def)             Requested size: 307.14772pt x 191.51515pt.
+(pdftex.def)             Requested size: 307.12714pt x 191.51091pt.
 
-Overfull \hbox (6.65784pt too wide) in paragraph at lines 82--82
+Overfull \hbox (6.63725pt too wide) in paragraph at lines 82--82
 [][]  
  []
 
@@ -1198,9 +1198,9 @@ File: ../plots/L1XE30Efficiency_Curves.png Graphic file (type png)
 <use ../plots/L1XE30Efficiency_Curves.png>
 Package pdftex.def Info: ../plots/L1XE30Efficiency_Curves.png  used on input li
 ne 151.
-(pdftex.def)             Requested size: 307.14772pt x 191.51515pt.
+(pdftex.def)             Requested size: 307.12714pt x 191.51091pt.
 
-Overfull \hbox (6.65784pt too wide) in paragraph at lines 151--151
+Overfull \hbox (6.63725pt too wide) in paragraph at lines 151--151
 [][]  
  []
 
@@ -1216,9 +1216,9 @@ File: ../plots/L1XE30Efficiency_Fits.png Graphic file (type png)
 <use ../plots/L1XE30Efficiency_Fits.png>
 Package pdftex.def Info: ../plots/L1XE30Efficiency_Fits.png  used on input line
  155.
-(pdftex.def)             Requested size: 307.14772pt x 191.51515pt.
+(pdftex.def)             Requested size: 307.12714pt x 191.51091pt.
 
-Overfull \hbox (6.65784pt too wide) in paragraph at lines 155--155
+Overfull \hbox (6.63725pt too wide) in paragraph at lines 155--155
 [][]  
  []
 
@@ -1230,14 +1230,14 @@ Overfull \hbox (170.65912pt too wide) has occurred while \output is active
 [26
 
 ]
-<../plots/L1XE50Efficiency_Curves.png, id=778, 1862.96pt x 970.62625pt>
+<../plots/L1XE50Efficiency_Curves.png, id=778, 2826.56pt x 1505.625pt>
 File: ../plots/L1XE50Efficiency_Curves.png Graphic file (type png)
 <use ../plots/L1XE50Efficiency_Curves.png>
 Package pdftex.def Info: ../plots/L1XE50Efficiency_Curves.png  used on input li
 ne 159.
-(pdftex.def)             Requested size: 307.14772pt x 191.51515pt.
+(pdftex.def)             Requested size: 307.12714pt x 191.51091pt.
 
-Overfull \hbox (6.65784pt too wide) in paragraph at lines 159--159
+Overfull \hbox (6.63725pt too wide) in paragraph at lines 159--159
 [][]  
  []
 
@@ -1253,9 +1253,9 @@ File: ../plots/L1XE50Efficiency_Fits.png Graphic file (type png)
 <use ../plots/L1XE50Efficiency_Fits.png>
 Package pdftex.def Info: ../plots/L1XE50Efficiency_Fits.png  used on input line
  163.
-(pdftex.def)             Requested size: 307.14772pt x 191.51515pt.
+(pdftex.def)             Requested size: 307.12714pt x 191.51091pt.
 
-Overfull \hbox (6.65784pt too wide) in paragraph at lines 163--163
+Overfull \hbox (6.63725pt too wide) in paragraph at lines 163--163
 [][]  
  []
 
@@ -1557,16 +1557,16 @@ Overfull \hbox (170.65912pt too wide) has occurred while \output is active
 [42
 
  <../plots/hlt_noalg_l1xe50_plots/hlt_noalg_L1XE50_dist_mubin_6.png>]
-<../plots/l1xe30_efficiencies/L1XE30Efficiency_mu_between_0_10.png, id=1214, 18
-62.96pt x 970.62625pt>
+<../plots/l1xe30_efficiencies/L1XE30Efficiency_mu_between_0_10.png, id=1214, 28
+26.56pt x 1505.625pt>
 File: ../plots/l1xe30_efficiencies/L1XE30Efficiency_mu_between_0_10.png Graphic
  file (type png)
 <use ../plots/l1xe30_efficiencies/L1XE30Efficiency_mu_between_0_10.png>
 Package pdftex.def Info: ../plots/l1xe30_efficiencies/L1XE30Efficiency_mu_betwe
 en_0_10.png  used on input line 226.
-(pdftex.def)             Requested size: 307.14772pt x 191.51515pt.
+(pdftex.def)             Requested size: 307.12714pt x 191.51091pt.
 
-Overfull \hbox (6.65784pt too wide) in paragraph at lines 226--226
+Overfull \hbox (6.63725pt too wide) in paragraph at lines 226--226
 [][]  
  []
 
@@ -1578,16 +1578,16 @@ Overfull \hbox (170.65912pt too wide) has occurred while \output is active
 [43
 
  <../plots/l1xe30_efficiencies/L1XE30Efficiency_mu_between_0_10.png>]
-<../plots/l1xe30_efficiencies/L1XE30Efficiency_mu_between_10_20.png, id=1243, 1
-862.96pt x 924.45375pt>
+<../plots/l1xe30_efficiencies/L1XE30Efficiency_mu_between_10_20.png, id=1243, 2
+826.56pt x 1443.3925pt>
 File: ../plots/l1xe30_efficiencies/L1XE30Efficiency_mu_between_10_20.png Graphi
 c file (type png)
 <use ../plots/l1xe30_efficiencies/L1XE30Efficiency_mu_between_10_20.png>
 Package pdftex.def Info: ../plots/l1xe30_efficiencies/L1XE30Efficiency_mu_betwe
 en_10_20.png  used on input line 230.
-(pdftex.def)             Requested size: 307.14772pt x 191.51729pt.
+(pdftex.def)             Requested size: 307.12714pt x 191.50188pt.
 
-Overfull \hbox (6.65784pt too wide) in paragraph at lines 230--230
+Overfull \hbox (6.63725pt too wide) in paragraph at lines 230--230
 [][]  
  []
 
@@ -1599,16 +1599,16 @@ Overfull \hbox (170.65912pt too wide) has occurred while \output is active
 [44
 
  <../plots/l1xe30_efficiencies/L1XE30Efficiency_mu_between_10_20.png>]
-<../plots/l1xe30_efficiencies/L1XE30Efficiency_mu_between_20_30.png, id=1270, 1
-862.96pt x 900.36375pt>
+<../plots/l1xe30_efficiencies/L1XE30Efficiency_mu_between_20_30.png, id=1270, 2
+826.56pt x 1411.2725pt>
 File: ../plots/l1xe30_efficiencies/L1XE30Efficiency_mu_between_20_30.png Graphi
 c file (type png)
 <use ../plots/l1xe30_efficiencies/L1XE30Efficiency_mu_between_20_30.png>
 Package pdftex.def Info: ../plots/l1xe30_efficiencies/L1XE30Efficiency_mu_betwe
 en_20_30.png  used on input line 234.
-(pdftex.def)             Requested size: 307.14772pt x 191.51367pt.
+(pdftex.def)             Requested size: 307.12714pt x 191.50414pt.
 
-Overfull \hbox (6.65784pt too wide) in paragraph at lines 234--234
+Overfull \hbox (6.63725pt too wide) in paragraph at lines 234--234
 [][]  
  []
 
@@ -1620,16 +1620,16 @@ Overfull \hbox (170.65912pt too wide) has occurred while \output is active
 [45
 
  <../plots/l1xe30_efficiencies/L1XE30Efficiency_mu_between_20_30.png>]
-<../plots/l1xe30_efficiencies/L1XE30Efficiency_mu_between_30_40.png, id=1297, 1
-862.96pt x 876.27374pt>
+<../plots/l1xe30_efficiencies/L1XE30Efficiency_mu_between_30_40.png, id=1297, 2
+826.56pt x 1379.1525pt>
 File: ../plots/l1xe30_efficiencies/L1XE30Efficiency_mu_between_30_40.png Graphi
 c file (type png)
 <use ../plots/l1xe30_efficiencies/L1XE30Efficiency_mu_between_30_40.png>
 Package pdftex.def Info: ../plots/l1xe30_efficiencies/L1XE30Efficiency_mu_betwe
 en_30_40.png  used on input line 238.
-(pdftex.def)             Requested size: 307.14772pt x 191.51059pt.
+(pdftex.def)             Requested size: 307.12714pt x 191.50172pt.
 
-Overfull \hbox (6.65784pt too wide) in paragraph at lines 238--238
+Overfull \hbox (6.63725pt too wide) in paragraph at lines 238--238
 [][]  
  []
 
@@ -1641,16 +1641,16 @@ Overfull \hbox (170.65912pt too wide) has occurred while \output is active
 [46
 
  <../plots/l1xe30_efficiencies/L1XE30Efficiency_mu_between_30_40.png>]
-<../plots/l1xe30_efficiencies/L1XE30Efficiency_mu_between_40_50.png, id=1324, 1
-862.96pt x 852.18375pt>
+<../plots/l1xe30_efficiencies/L1XE30Efficiency_mu_between_40_50.png, id=1324, 2
+826.56pt x 1347.0325pt>
 File: ../plots/l1xe30_efficiencies/L1XE30Efficiency_mu_between_40_50.png Graphi
 c file (type png)
 <use ../plots/l1xe30_efficiencies/L1XE30Efficiency_mu_between_40_50.png>
 Package pdftex.def Info: ../plots/l1xe30_efficiencies/L1XE30Efficiency_mu_betwe
 en_40_50.png  used on input line 242.
-(pdftex.def)             Requested size: 307.14772pt x 191.51201pt.
+(pdftex.def)             Requested size: 307.12714pt x 191.50194pt.
 
-Overfull \hbox (6.65784pt too wide) in paragraph at lines 242--242
+Overfull \hbox (6.63725pt too wide) in paragraph at lines 242--242
 [][]  
  []
 
@@ -1662,16 +1662,16 @@ Overfull \hbox (170.65912pt too wide) has occurred while \output is active
 [47
 
  <../plots/l1xe30_efficiencies/L1XE30Efficiency_mu_between_40_50.png>]
-<../plots/l1xe30_efficiencies/L1XE30Efficiency_mu_between_50_60.png, id=1352, 1
-862.96pt x 828.09375pt>
+<../plots/l1xe30_efficiencies/L1XE30Efficiency_mu_between_50_60.png, id=1352, 2
+826.56pt x 1314.9125pt>
 File: ../plots/l1xe30_efficiencies/L1XE30Efficiency_mu_between_50_60.png Graphi
 c file (type png)
 <use ../plots/l1xe30_efficiencies/L1XE30Efficiency_mu_between_50_60.png>
 Package pdftex.def Info: ../plots/l1xe30_efficiencies/L1XE30Efficiency_mu_betwe
 en_50_60.png  used on input line 246.
-(pdftex.def)             Requested size: 307.14772pt x 191.50632pt.
+(pdftex.def)             Requested size: 307.12714pt x 191.51015pt.
 
-Overfull \hbox (6.65784pt too wide) in paragraph at lines 246--246
+Overfull \hbox (6.63725pt too wide) in paragraph at lines 246--246
 [][]  
  []
 
@@ -1683,16 +1683,16 @@ Overfull \hbox (170.65912pt too wide) has occurred while \output is active
 [48
 
  <../plots/l1xe30_efficiencies/L1XE30Efficiency_mu_between_50_60.png>]
-<../plots/l1xe30_efficiencies/L1XE30Efficiency_mu_between_60_70.png, id=1379, 1
-862.96pt x 804.00375pt>
+<../plots/l1xe30_efficiencies/L1XE30Efficiency_mu_between_60_70.png, id=1379, 2
+826.56pt x 1282.7925pt>
 File: ../plots/l1xe30_efficiencies/L1XE30Efficiency_mu_between_60_70.png Graphi
 c file (type png)
 <use ../plots/l1xe30_efficiencies/L1XE30Efficiency_mu_between_60_70.png>
 Package pdftex.def Info: ../plots/l1xe30_efficiencies/L1XE30Efficiency_mu_betwe
 en_60_70.png  used on input line 250.
-(pdftex.def)             Requested size: 307.14772pt x 191.50494pt.
+(pdftex.def)             Requested size: 307.12714pt x 191.51018pt.
 
-Overfull \hbox (6.65784pt too wide) in paragraph at lines 250--250
+Overfull \hbox (6.63725pt too wide) in paragraph at lines 250--250
 [][]  
  []
 
@@ -1704,16 +1704,16 @@ Overfull \hbox (170.65912pt too wide) has occurred while \output is active
 [49
 
  <../plots/l1xe30_efficiencies/L1XE30Efficiency_mu_between_60_70.png>]
-<../plots/l1xe50_efficiencies/L1XE50Efficiency_mu_between_0_10.png, id=1407, 37
-90.16pt x 2054.67625pt>
+<../plots/l1xe50_efficiencies/L1XE50Efficiency_mu_between_0_10.png, id=1407, 28
+26.56pt x 1505.625pt>
 File: ../plots/l1xe50_efficiencies/L1XE50Efficiency_mu_between_0_10.png Graphic
  file (type png)
 <use ../plots/l1xe50_efficiencies/L1XE50Efficiency_mu_between_0_10.png>
 Package pdftex.def Info: ../plots/l1xe50_efficiencies/L1XE50Efficiency_mu_betwe
 en_0_10.png  used on input line 255.
-(pdftex.def)             Requested size: 307.09381pt x 191.49677pt.
+(pdftex.def)             Requested size: 307.12714pt x 191.51091pt.
 
-Overfull \hbox (6.60393pt too wide) in paragraph at lines 255--255
+Overfull \hbox (6.63725pt too wide) in paragraph at lines 255--255
 [][]  
  []
 
@@ -1725,16 +1725,16 @@ Overfull \hbox (170.65912pt too wide) has occurred while \output is active
 [50
 
  <../plots/l1xe50_efficiencies/L1XE50Efficiency_mu_between_0_10.png>]
-<../plots/l1xe50_efficiencies/L1XE50Efficiency_mu_between_10_20.png, id=1434, 3
-790.16pt x 2008.50375pt>
+<../plots/l1xe50_efficiencies/L1XE50Efficiency_mu_between_10_20.png, id=1434, 2
+826.56pt x 1443.3925pt>
 File: ../plots/l1xe50_efficiencies/L1XE50Efficiency_mu_between_10_20.png Graphi
 c file (type png)
 <use ../plots/l1xe50_efficiencies/L1XE50Efficiency_mu_between_10_20.png>
 Package pdftex.def Info: ../plots/l1xe50_efficiencies/L1XE50Efficiency_mu_betwe
 en_10_20.png  used on input line 259.
-(pdftex.def)             Requested size: 307.09381pt x 191.51472pt.
+(pdftex.def)             Requested size: 307.12714pt x 191.50188pt.
 
-Overfull \hbox (6.60393pt too wide) in paragraph at lines 259--259
+Overfull \hbox (6.63725pt too wide) in paragraph at lines 259--259
 [][]  
  []
 
@@ -1746,16 +1746,16 @@ Overfull \hbox (170.65912pt too wide) has occurred while \output is active
 [51
 
  <../plots/l1xe50_efficiencies/L1XE50Efficiency_mu_between_10_20.png>]
-<../plots/l1xe50_efficiencies/L1XE50Efficiency_mu_between_20_30.png, id=1462, 3
-790.16pt x 1984.41376pt>
+<../plots/l1xe50_efficiencies/L1XE50Efficiency_mu_between_20_30.png, id=1462, 2
+826.56pt x 1411.2725pt>
 File: ../plots/l1xe50_efficiencies/L1XE50Efficiency_mu_between_20_30.png Graphi
 c file (type png)
 <use ../plots/l1xe50_efficiencies/L1XE50Efficiency_mu_between_20_30.png>
 Package pdftex.def Info: ../plots/l1xe50_efficiencies/L1XE50Efficiency_mu_betwe
 en_20_30.png  used on input line 263.
-(pdftex.def)             Requested size: 307.09381pt x 191.48868pt.
+(pdftex.def)             Requested size: 307.12714pt x 191.50414pt.
 
-Overfull \hbox (6.60393pt too wide) in paragraph at lines 263--263
+Overfull \hbox (6.63725pt too wide) in paragraph at lines 263--263
 [][]  
  []
 
@@ -1767,16 +1767,16 @@ Overfull \hbox (170.65912pt too wide) has occurred while \output is active
 [52
 
  <../plots/l1xe50_efficiencies/L1XE50Efficiency_mu_between_20_30.png>]
-<../plots/l1xe50_efficiencies/L1XE50Efficiency_mu_between_30_40.png, id=1489, 3
-790.16pt x 1960.32375pt>
+<../plots/l1xe50_efficiencies/L1XE50Efficiency_mu_between_30_40.png, id=1489, 2
+826.56pt x 1379.1525pt>
 File: ../plots/l1xe50_efficiencies/L1XE50Efficiency_mu_between_30_40.png Graphi
 c file (type png)
 <use ../plots/l1xe50_efficiencies/L1XE50Efficiency_mu_between_30_40.png>
 Package pdftex.def Info: ../plots/l1xe50_efficiencies/L1XE50Efficiency_mu_betwe
 en_30_40.png  used on input line 267.
-(pdftex.def)             Requested size: 307.09381pt x 191.49722pt.
+(pdftex.def)             Requested size: 307.12714pt x 191.50172pt.
 
-Overfull \hbox (6.60393pt too wide) in paragraph at lines 267--267
+Overfull \hbox (6.63725pt too wide) in paragraph at lines 267--267
 [][]  
  []
 
@@ -1788,16 +1788,16 @@ Overfull \hbox (170.65912pt too wide) has occurred while \output is active
 [53
 
  <../plots/l1xe50_efficiencies/L1XE50Efficiency_mu_between_30_40.png>]
-<../plots/l1xe50_efficiencies/L1XE50Efficiency_mu_between_40_50.png, id=1516, 3
-790.16pt x 1936.23375pt>
+<../plots/l1xe50_efficiencies/L1XE50Efficiency_mu_between_40_50.png, id=1516, 2
+826.56pt x 1347.0325pt>
 File: ../plots/l1xe50_efficiencies/L1XE50Efficiency_mu_between_40_50.png Graphi
 c file (type png)
 <use ../plots/l1xe50_efficiencies/L1XE50Efficiency_mu_between_40_50.png>
 Package pdftex.def Info: ../plots/l1xe50_efficiencies/L1XE50Efficiency_mu_betwe
 en_40_50.png  used on input line 271.
-(pdftex.def)             Requested size: 307.09381pt x 191.5075pt.
+(pdftex.def)             Requested size: 307.12714pt x 191.50194pt.
 
-Overfull \hbox (6.60393pt too wide) in paragraph at lines 271--271
+Overfull \hbox (6.63725pt too wide) in paragraph at lines 271--271
 [][]  
  []
 
@@ -1809,16 +1809,16 @@ Overfull \hbox (170.65912pt too wide) has occurred while \output is active
 [54
 
  <../plots/l1xe50_efficiencies/L1XE50Efficiency_mu_between_40_50.png>]
-<../plots/l1xe50_efficiencies/L1XE50Efficiency_mu_between_50_60.png, id=1543, 3
-790.16pt x 1912.14375pt>
+<../plots/l1xe50_efficiencies/L1XE50Efficiency_mu_between_50_60.png, id=1543, 2
+826.56pt x 1314.9125pt>
 File: ../plots/l1xe50_efficiencies/L1XE50Efficiency_mu_between_50_60.png Graphi
 c file (type png)
 <use ../plots/l1xe50_efficiencies/L1XE50Efficiency_mu_between_50_60.png>
 Package pdftex.def Info: ../plots/l1xe50_efficiencies/L1XE50Efficiency_mu_betwe
 en_50_60.png  used on input line 275.
-(pdftex.def)             Requested size: 307.09381pt x 191.48816pt.
+(pdftex.def)             Requested size: 307.12714pt x 191.51015pt.
 
-Overfull \hbox (6.60393pt too wide) in paragraph at lines 275--275
+Overfull \hbox (6.63725pt too wide) in paragraph at lines 275--275
 [][]  
  []
 
@@ -1830,16 +1830,16 @@ Overfull \hbox (170.65912pt too wide) has occurred while \output is active
 [55
 
  <../plots/l1xe50_efficiencies/L1XE50Efficiency_mu_between_50_60.png>]
-<../plots/l1xe50_efficiencies/L1XE50Efficiency_mu_between_60_70.png, id=1571, 3
-790.16pt x 1888.05376pt>
+<../plots/l1xe50_efficiencies/L1XE50Efficiency_mu_between_60_70.png, id=1572, 2
+826.56pt x 1282.7925pt>
 File: ../plots/l1xe50_efficiencies/L1XE50Efficiency_mu_between_60_70.png Graphi
 c file (type png)
 <use ../plots/l1xe50_efficiencies/L1XE50Efficiency_mu_between_60_70.png>
 Package pdftex.def Info: ../plots/l1xe50_efficiencies/L1XE50Efficiency_mu_betwe
 en_60_70.png  used on input line 279.
-(pdftex.def)             Requested size: 307.09381pt x 191.4957pt.
+(pdftex.def)             Requested size: 307.12714pt x 191.51018pt.
 
-Overfull \hbox (6.60393pt too wide) in paragraph at lines 279--279
+Overfull \hbox (6.63725pt too wide) in paragraph at lines 279--279
 [][]  
  []
 
@@ -1852,7 +1852,7 @@ Overfull \hbox (170.65912pt too wide) has occurred while \output is active
 
  <../plots/l1xe50_efficiencies/L1XE50Efficiency_mu_between_60_70.png>]
 <../plots/zerobias_distributions_corrected/zb_met_distributions_mubin_0.png, id
-=1597, 2826.56pt x 1505.625pt>
+=1599, 2826.56pt x 1505.625pt>
 File: ../plots/zerobias_distributions_corrected/zb_met_distributions_mubin_0.pn
 g Graphic file (type png)
 <use ../plots/zerobias_distributions_corrected/zb_met_distributions_mubin_0.png
@@ -1874,7 +1874,7 @@ Overfull \hbox (170.65912pt too wide) has occurred while \output is active
 
  <../plots/zerobias_distributions_corrected/zb_met_distributions_mubin_0.png>]
 <../plots/zerobias_distributions_corrected/zb_met_distributions_mubin_1.png, id
-=1624, 2826.56pt x 1379.1525pt>
+=1626, 2826.56pt x 1379.1525pt>
 File: ../plots/zerobias_distributions_corrected/zb_met_distributions_mubin_1.pn
 g Graphic file (type png)
 <use ../plots/zerobias_distributions_corrected/zb_met_distributions_mubin_1.png
@@ -1896,7 +1896,7 @@ Overfull \hbox (170.65912pt too wide) has occurred while \output is active
 
  <../plots/zerobias_distributions_corrected/zb_met_distributions_mubin_1.png>]
 <../plots/zerobias_distributions_corrected/zb_met_distributions_mubin_2.png, id
-=1651, 2826.56pt x 1379.1525pt>
+=1653, 2826.56pt x 1379.1525pt>
 File: ../plots/zerobias_distributions_corrected/zb_met_distributions_mubin_2.pn
 g Graphic file (type png)
 <use ../plots/zerobias_distributions_corrected/zb_met_distributions_mubin_2.png
@@ -1938,7 +1938,7 @@ Overfull \hbox (170.65912pt too wide) has occurred while \output is active
 
 ]
 <../plots/zerobias_distributions_corrected/zb_met_distributions_mubin_4.png, id
-=1705, 2826.56pt x 1379.1525pt>
+=1707, 2826.56pt x 1379.1525pt>
 File: ../plots/zerobias_distributions_corrected/zb_met_distributions_mubin_4.pn
 g Graphic file (type png)
 <use ../plots/zerobias_distributions_corrected/zb_met_distributions_mubin_4.png
@@ -1960,7 +1960,7 @@ Overfull \hbox (170.65912pt too wide) has occurred while \output is active
 
  <../plots/zerobias_distributions_corrected/zb_met_distributions_mubin_4.png>]
 <../plots/zerobias_distributions_corrected/zb_met_distributions_mubin_5.png, id
-=1733, 2826.56pt x 1379.1525pt>
+=1735, 2826.56pt x 1379.1525pt>
 File: ../plots/zerobias_distributions_corrected/zb_met_distributions_mubin_5.pn
 g Graphic file (type png)
 <use ../plots/zerobias_distributions_corrected/zb_met_distributions_mubin_5.png
@@ -1982,7 +1982,7 @@ Overfull \hbox (170.65912pt too wide) has occurred while \output is active
 
  <../plots/zerobias_distributions_corrected/zb_met_distributions_mubin_5.png>]
 <../plots/zerobias_distributions_corrected/zb_met_distributions_mubin_6.png, id
-=1760, 2826.56pt x 1379.1525pt>
+=1762, 2826.56pt x 1379.1525pt>
 File: ../plots/zerobias_distributions_corrected/zb_met_distributions_mubin_6.pn
 g Graphic file (type png)
 <use ../plots/zerobias_distributions_corrected/zb_met_distributions_mubin_6.png
@@ -2161,10 +2161,10 @@ Package rerunfilecheck Info: File `presentation.out' has not changed.
 (rerunfilecheck)             Checksum: 1F17B04B01963C8EE477BC9A7068ACF4;449.
  ) 
 Here is how much of TeX's memory you used:
- 17376 strings out of 494847
- 338205 string characters out of 6179079
+ 17404 strings out of 494847
+ 338457 string characters out of 6179079
  386758 words of memory out of 5000000
- 20104 multiletter control sequences out of 15000+600000
+ 20132 multiletter control sequences out of 15000+600000
  17823 words of font info for 67 fonts, out of 8000000 for 9000
  59 hyphenation exceptions out of 8191
  48i,15n,51p,779b,559s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -2185,7 +2185,7 @@ mssbx10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmssi
 texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/share/texliv
 e/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb></usr/share/texlive/texm
 f-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb>
-Output written on presentation.pdf (70 pages, 2471519 bytes).
+Output written on presentation.pdf (70 pages, 2466609 bytes).
 PDF statistics:
  2066 PDF objects out of 2073 (max. 8388607)
  1903 compressed objects within 20 object streams

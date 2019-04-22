@@ -77,9 +77,15 @@
         corrected_canvas->Divide(1,2);
         // PAD 1
         corrected_canvas->cd(1);
-        l1xe50_corrected_zb_dist->Draw("P E1");
-        zb_dist->Draw("P E1 SAME");
-        l1xe30_corrected_zb_dist->Draw("P E1 SAME");
+        TH1D* zb_dist_clone = (TH1D*)zb_dist->Clone();
+        TH1D* l1xe30_corrected_zb_dist_clone = (TH1D*)l1xe30_corrected_zb_dist->Clone();
+        TH1D* l1xe50_corrected_zb_dist_clone = (TH1D*)l1xe50_corrected_zb_dist->Clone();
+        zb_dist_clone->SetNormFactor(1.);
+        l1xe30_corrected_zb_dist_clone->SetNormFactor(1.);
+        l1xe50_corrected_zb_dist_clone->SetNormFactor(1.);
+        l1xe50_corrected_zb_dist_clone->Draw("P E1");
+        zb_dist_clone->Draw("P E1 SAME");
+        l1xe30_corrected_zb_dist_clone->Draw("P E1 SAME");
         TLegend* correctedLegend = new TLegend(0.48,0.7,0.9,0.9);
         correctedLegend->AddEntry( zb_dist );
         correctedLegend->AddEntry( l1xe30_corrected_zb_dist );
@@ -94,7 +100,7 @@
         ((TF1*)l1xe50_efficiency_curve->GetListOfFunctions()->At(0))->SetLineColor(kRed);
         l1xe30_efficiency_curve->Draw();
         l1xe50_efficiency_curve->Draw("SAME");
-        TLegend* correctedLegend2 = new TLegend(0.48,0.7,0.9,0.9);
+        TLegend* correctedLegend2 = new TLegend(0.1,0.7,0.3,0.9);
         correctedLegend2->AddEntry( l1xe30_efficiency_curve );
         correctedLegend2->AddEntry( l1xe50_efficiency_curve );
         gPad->Update();
@@ -116,8 +122,6 @@
         l1xe30_noalg_dist->SetLineColor( kMagenta );
         l1xe30_corrected_zb_dist->GetXaxis()->SetTitle(x_axis_label);
         l1xe30_corrected_zb_dist->GetYaxis()->SetTitle(y_axis_label);
-        TH1D* l1xe30_corrected_zb_dist_clone = (TH1D*)l1xe30_corrected_zb_dist->Clone();
-        l1xe30_corrected_zb_dist_clone->SetNormFactor(1.);
         l1xe30_corrected_zb_dist_clone->Draw("P E1");
         TH1D* l1xe30_noalg_dist_clone = (TH1D*)l1xe30_noalg_dist->Clone();
         l1xe30_noalg_dist_clone->SetNormFactor(1.);
@@ -137,10 +141,8 @@
         l1xe50_noalg_dist->SetLineColor( kMagenta );
         l1xe50_corrected_zb_dist->GetXaxis()->SetTitle(x_axis_label);
         l1xe50_corrected_zb_dist->GetYaxis()->SetTitle(y_axis_label);
-        TH1D* l1xe50_corrected_zb_dist_clone = (TH1D*)l1xe50_corrected_zb_dist->Clone();
         TH1D* l1xe50_noalg_dist_clone = (TH1D*)l1xe50_noalg_dist->Clone();
         l1xe50_noalg_dist_clone->SetNormFactor(1.);
-        l1xe50_corrected_zb_dist_clone->SetNormFactor(1.);
         l1xe50_corrected_zb_dist_clone->Draw("P E1");
         l1xe50_noalg_dist_clone->Draw("P E1 SAME");
         TLegend* HLTnoalgL1XE50_Legend = new TLegend(0.48,0.7,0.9,0.9);
@@ -175,10 +177,12 @@
         // PLOT RECONSTRUCTION{{{
         Reconstructed_MET_Distribution->SetLineColor( kBlack );
         reconstructed_distributions->Add( Reconstructed_MET_Distribution );
+        TH1D* Reconstructed_MET_Distribution_clone = (TH1D*)Reconstructed_MET_Distribution->Clone();
+        Reconstructed_MET_Distribution_clone->SetNormFactor(1.);
         TCanvas* reconstructed_canvas = new TCanvas("reconstructedCanvas","Canvas with Reconstructed MET Distribution");
         gStyle->SetOptStat(0);
-        Reconstructed_MET_Distribution->Draw("P E1");
-        zb_dist->Draw("SAME P E1");
+        Reconstructed_MET_Distribution_clone->Draw("P E1");
+        zb_dist_clone->Draw("SAME P E1");
         TLegend* reconstructedLegend = new TLegend(0.48,0.7,0.9,0.9);
         reconstructedLegend->AddEntry( Reconstructed_MET_Distribution );
         reconstructedLegend->AddEntry( zb_dist );
