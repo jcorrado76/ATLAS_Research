@@ -176,6 +176,7 @@
         // }}}
         // PLOT RECONSTRUCTION{{{
         Reconstructed_MET_Distribution->SetLineColor( kBlack );
+        Reconstructed_MET_Distribution->SetLineWidth( 5 );
         reconstructed_distributions->Add( Reconstructed_MET_Distribution );
         TH1D* Reconstructed_MET_Distribution_clone = (TH1D*)Reconstructed_MET_Distribution->Clone();
         Reconstructed_MET_Distribution_clone->SetNormFactor(1.);

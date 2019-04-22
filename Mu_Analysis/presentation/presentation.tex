@@ -12,7 +12,15 @@
 \usepackage{beamerthemesplit} 
 \usepackage{graphicx}
 \graphicspath{{../plots/}}
+% get rid of current section appearing on top
 \setbeamertemplate{headline}{}
+% page number on bottom
+\addtobeamertemplate{navigation symbols}{}{%
+    \usebeamerfont{footline}%
+    \usebeamercolor[fg]{footline}%
+    \hspace{1em}%
+    \insertframenumber/\inserttotalframenumber
+}
 % Other themes include: beamerthemebars, beamerthemelined, 
 %                       beamerthemetree, beamerthemetreebars  
 
@@ -336,5 +344,7 @@ For each bin of actual number of interactions per bunch crossing (actint/InTimeP
         \framebox{\includegraphics[height=2.65in,width=4.25in]{reconstructed_distributions/reconstructed_distribution_mubin_6}}
 \end{frame}
 % TABLE OF FIT PARAMETERS
+\begin{frame}
 \input{../fit_pars_table}
+\end{frame}
 \end{document}
