@@ -137,10 +137,11 @@
         l1xe50_noalg_dist->SetLineColor( kMagenta );
         l1xe50_corrected_zb_dist->GetXaxis()->SetTitle(x_axis_label);
         l1xe50_corrected_zb_dist->GetYaxis()->SetTitle(y_axis_label);
-        TH1D* l1xe50_noalg_dist_clone = (TH1D*)l1xe50_corrected_zb_dist->Clone();
+        TH1D* l1xe50_corrected_zb_dist_clone = (TH1D*)l1xe50_corrected_zb_dist->Clone();
+        TH1D* l1xe50_noalg_dist_clone = (TH1D*)l1xe50_noalg_dist->Clone();
         l1xe50_noalg_dist_clone->SetNormFactor(1.);
         l1xe50_corrected_zb_dist_clone->Draw("P E1");
-        l1xe50_noalg_dist->Draw("P E1 SAME");
+        l1xe50_noalg_dist_clone->Draw("P E1 SAME");
         TLegend* HLTnoalgL1XE50_Legend = new TLegend(0.48,0.7,0.9,0.9);
         HLTnoalgL1XE50_Legend->AddEntry( l1xe50_corrected_zb_dist );
         HLTnoalgL1XE50_Legend->AddEntry( l1xe50_noalg_dist);
