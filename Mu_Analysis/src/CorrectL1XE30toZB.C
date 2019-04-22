@@ -95,7 +95,6 @@ void CorrectL1XE30toZB::Terminate(){//{{{
             std::cout << "Denominator = " << denominator << std::endl;
         }else{
             std::cout << "L1XE30 Scale factor: " << i << " = " << f_mle << std::endl;
-            (l1xe30_corrected_zb_dist)->SetNormFactor( 1. );
             (l1xe30_corrected_zb_dist)->Scale( f_mle );
         }
     }

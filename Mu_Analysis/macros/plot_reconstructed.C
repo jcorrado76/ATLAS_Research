@@ -149,7 +149,6 @@
         reconstructed_name.Form("reconstructed_dist_mubin%d",i);
         reconstructed_title.Form("Reconstructed Zero Bias Distribution for %d < #mu < %d" , i*10,(i+1)*10  );
         TH1D* Reconstructed_MET_Distribution = new TH1D(reconstructed_name, reconstructed_title, nbins , met_low , met_high );
-        Reconstructed_MET_Distribution->SetTitle(reconstructed_name);
         Reconstructed_MET_Distribution->GetXaxis()->SetTitle(x_axis_label);
         Reconstructed_MET_Distribution->GetYaxis()->SetTitle(y_axis_label);
         //}}}
@@ -170,7 +169,7 @@
         // PLOT RECONSTRUCTION{{{
         Reconstructed_MET_Distribution->SetLineColor( kBlack );
         reconstructed_distributions->Add( Reconstructed_MET_Distribution );
-        Reconstructed_MET_Distribution->SetNormFactor(1.);
+        //Reconstructed_MET_Distribution->SetNormFactor(1.);
         TCanvas* reconstructed_canvas = new TCanvas("reconstructedCanvas","Canvas with Reconstructed MET Distribution");
         gStyle->SetOptStat(0);
         Reconstructed_MET_Distribution->Draw("P E1");
