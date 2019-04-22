@@ -1,16 +1,16 @@
 {
     // OPEN FILE {{{
-    TFile* mu_analysis_file = TFile::Open("mu_analysis.root","READ");
+    TFile* mu_analysis_file = TFile::Open("mu_analysis.root","UPDATE");
     //}}}
     // INITIALIZE TOBJARRAYS {{{
     TObjArray* hlt_zb_l1_zb_distributions = 0;
     TObjArray* l1xe30_corrected_zb_distributions = 0;
     TObjArray* l1xe50_corrected_zb_distributions = 0;
-    TObjArray* reconstructed_distributions = 0;
     TObjArray* l1xe30_efficiency_objects = 0;
     TObjArray* l1xe50_efficiency_objects = 0;
     TObjArray* hlt_zb_l1xe30_met_distributions = 0;
     TObjArray* hlt_zb_l1xe50_met_distributions = 0;
+    TObjArray* reconstructed_distributions = new TObjArray();
     //}}}
     // GET TOBJARRAYS FROM FILE {{{
     mu_analysis_file->GetObject("hlt_zb_l1zb_met_distributions",hlt_zb_l1_zb_distributions);
@@ -38,9 +38,8 @@
     Float_t met_low = 0.0;
     Float_t met_high = 300.0;
 
-    TH1D* Reconstructed_MET_Distribution = new TH1D("reconst", "reconst" , nbins , met_low , met_high );
-
     TString reconstructed_name;
+    TString reconstructed_title;
     TString x_axis_label = "Cell Algorithm MET [GeV]";
     TString y_axis_label = "Fraction of events / 5 GeV";
 
@@ -147,7 +146,9 @@
         HLTnoalgL1XE50_canvas->Print(outFileName);
         //}}}
         // CREATE RECONSTRUCTED HISTOGRAM{{{
-        reconstructed_name.Form("Reconstructed Zero Bias Distribution for %d < #mu < %d" , i*10,(i+1)*10  );
+        reconstructed_name.Form("reconstructed_dist_mubin%d",i);
+        reconstructed_title.Form("Reconstructed Zero Bias Distribution for %d < #mu < %d" , i*10,(i+1)*10  );
+        TH1D* Reconstructed_MET_Distribution = new TH1D(reconstructed_name, reconstructed_title, nbins , met_low , met_high );
         Reconstructed_MET_Distribution->SetTitle(reconstructed_name);
         Reconstructed_MET_Distribution->GetXaxis()->SetTitle(x_axis_label);
         Reconstructed_MET_Distribution->GetYaxis()->SetTitle(y_axis_label);
@@ -168,8 +169,8 @@
         // }}}
         // PLOT RECONSTRUCTION{{{
         Reconstructed_MET_Distribution->SetLineColor( kBlack );
+        reconstructed_distributions->Add( Reconstructed_MET_Distribution );
         Reconstructed_MET_Distribution->SetNormFactor(1.);
-
         TCanvas* reconstructed_canvas = new TCanvas("reconstructedCanvas","Canvas with Reconstructed MET Distribution");
         gStyle->SetOptStat(0);
         Reconstructed_MET_Distribution->Draw("P E1");
@@ -181,5 +182,6 @@
         reconstructed_canvas->Print(outFileName);
         // }}}
     }
+    reconstructed_distributions->Write("reconstructed_distributions",TObject::kSingleKey | TObject::kWriteDelete);
     mu_analysis_file->Close()
 }
