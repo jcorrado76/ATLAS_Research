@@ -13,7 +13,7 @@ public :
            ((TH1D*)HLT_ZB_L1XE50_Corrected_to_ZB_MET_Distribution->At(i))->SetLineColor( Colors[i] );
 
            Name.Form("hlt_zb_l1xe50_met_dist_mubin%d" , i );
-           Title.Form("HLT ZB L1XE50 MET Distribution for %s for %d < #mu < %d;CELL MET [GeV];Efficiency" , Alg_Name.Data(), i*10,(i+1)*10);
+           Title.Form("HLT ZB L1XE50 MET Distribution for %s for %d < #mu < %d;CELL MET [GeV]" , Alg_Name.Data(), i*10,(i+1)*10);
            TH1D* tmpHist = new TH1D( Name , Title , met_dist_nbins , gevLow , gevHigh );
            tmpHist->SetLineColor( Colors[i] );
            HLT_ZB_L1XE50_MET_Distributions_by_Mubin->Add( tmpHist );

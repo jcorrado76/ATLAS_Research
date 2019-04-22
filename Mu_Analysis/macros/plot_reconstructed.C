@@ -174,8 +174,10 @@
         TCanvas* reconstructed_canvas = new TCanvas("reconstructedCanvas","Canvas with Reconstructed MET Distribution");
         gStyle->SetOptStat(0);
         Reconstructed_MET_Distribution->Draw("P E1");
+        zb_dist->Draw("SAME P E1");
         TLegend* reconstructedLegend = new TLegend(0.48,0.7,0.9,0.9);
         reconstructedLegend->AddEntry( Reconstructed_MET_Distribution );
+        reconstructedLegend->AddEntry( zb_dist );
         reconstructed_canvas->SetLogy();
         reconstructedLegend->Draw("SAME");
         outFileName.Form("plots/reconstructed_distributions/reconstructed_distribution_mubin_%d.png",i);

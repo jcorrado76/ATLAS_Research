@@ -7,7 +7,7 @@ public :
        for (int i = 0 ; i < Number_Mu_Bins; i++){
            // create good name, and good title
            Name.Form("hlt_zb_l1zb_met_dist_mubin%d" , i );
-           Title.Form("HLT ZB L1ZB MET Distribution for %s for %d < #mu < %d" , Alg_Name.Data(), i*10, (i+1)*10);
+           Title.Form("HLT ZB L1ZB MET Distribution for %s for %d < #mu < %d;CELL MET [GeV]" , Alg_Name.Data(), i*10, (i+1)*10);
            // initialize the histograms for HLT_ZB L1ZB distributions
            TH1D* tmpHist = new TH1D( Name , Title , met_dist_nbins , gevLow , gevHigh );
            // set the array line color
