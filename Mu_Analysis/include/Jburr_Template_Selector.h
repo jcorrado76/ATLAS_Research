@@ -60,7 +60,7 @@ public :
    Int_t lineWidth = 5;
 
    // left edge of interval to sample from for scale factors
-   Int_t Normalization_Bin_Number =        14;
+   Int_t Normalization_Bin_Number =        13;
 
    Double_t L1XE30Scale_Factors[Number_Mu_Bins][Number_Scale_Factor_Samples] =                  { 0.0 };
    Double_t L1XE30Scale_Factor_Errors[Number_Mu_Bins][Number_Scale_Factor_Samples] =                  { 0.0 };
