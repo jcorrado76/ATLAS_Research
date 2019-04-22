@@ -13,7 +13,7 @@
         TCanvas* l1xe50_eff_canv = new TCanvas(canvName);
         l1xe50_eff_canv->SetFillColor(42);
         TLegend* correctedLegend = new TLegend(0.48,0.2,0.9,0.4);
-        TPaveLabel *title = new TPaveLabel(0.2,0.9,0.8,0.95, "L1XE50 Efficiencies", "NDC");
+        TPaveLabel *title = new TPaveLabel(0.2,0.9,0.8,0.95, canvName , "NDC");
         gStyle->SetOptStat(0);
         gStyle->SetOptTitle(0);
         title->SetTextFont(72);

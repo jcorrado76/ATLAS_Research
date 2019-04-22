@@ -113,8 +113,11 @@
         //PLOT HLTnoalgL1XE30 DISTS{{{
         TCanvas* HLTnoalgL1XE30_canvas = new TCanvas("HLTnoalgL1XE30canv","Canvas with HLT noalg L1XE30 Distributions");
         gStyle->SetOptStat(0);
+        HLTnoalgL1XE30_canvas->SetFillColor(42);
         l1xe30_noalg_dist->SetNormFactor(1.);
         l1xe30_noalg_dist->SetLineColor( kMagenta );
+        l1xe30_corrected_zb_dist->GetXaxis()->SetTitle(x_axis_label);
+        l1xe30_corrected_zb_dist->GetYaxis()->SetTitle(y_axis_label);
         l1xe30_corrected_zb_dist->Draw("P E1");
         l1xe30_noalg_dist->Draw("P E1 SAME");
         TLegend* HLTnoalgL1XE30_Legend = new TLegend(0.48,0.7,0.9,0.9);
@@ -127,9 +130,12 @@
         //}}}
         //PLOT HLTnoalgL1XE50 DISTS{{{
         TCanvas* HLTnoalgL1XE50_canvas = new TCanvas("HLTnoalgL1XE50canv","Canvas with HLT noalg L1XE50 Distributions");
+        HLTnoalgL1XE50_canvas->SetFillColor(42);
         gStyle->SetOptStat(0);
         l1xe50_noalg_dist->SetNormFactor(1.);
         l1xe50_noalg_dist->SetLineColor( kMagenta );
+        l1xe50_corrected_zb_dist->GetXaxis()->SetTitle(x_axis_label);
+        l1xe50_corrected_zb_dist->GetYaxis()->SetTitle(y_axis_label);
         l1xe50_corrected_zb_dist->Draw("P E1");
         l1xe50_noalg_dist->Draw("P E1 SAME");
         TLegend* HLTnoalgL1XE50_Legend = new TLegend(0.48,0.7,0.9,0.9);
