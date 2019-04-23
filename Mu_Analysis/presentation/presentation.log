@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2018.12.13)  23 APR 2019 15:33
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2018.12.13)  23 APR 2019 15:35
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -927,7 +927,7 @@ Overfull \hbox (170.65912pt too wide) has occurred while \output is active
 [9
 
  <../plots/L1XE30Efficiency_Fits.png>]
-<../plots/L1XE50Efficiency_Curves.png, id=322, 2826.56pt x 1505.625pt>
+<../plots/L1XE50Efficiency_Curves.png, id=323, 2826.56pt x 1505.625pt>
 File: ../plots/L1XE50Efficiency_Curves.png Graphic file (type png)
 <use ../plots/L1XE50Efficiency_Curves.png>
 Package pdftex.def Info: ../plots/L1XE50Efficiency_Curves.png  used on input li
@@ -946,7 +946,7 @@ Overfull \hbox (170.65912pt too wide) has occurred while \output is active
 [10
 
  <../plots/L1XE50Efficiency_Curves.png>]
-<../plots/l1xe50_efficiencies/L1XE50Efficiency_mu_between_30_40.png, id=348, 28
+<../plots/l1xe50_efficiencies/L1XE50Efficiency_mu_between_30_40.png, id=350, 28
 26.56pt x 1379.1525pt>
 File: ../plots/l1xe50_efficiencies/L1XE50Efficiency_mu_between_30_40.png Graphi
 c file (type png)
@@ -967,7 +967,7 @@ Overfull \hbox (170.65912pt too wide) has occurred while \output is active
 [11
 
  <../plots/l1xe50_efficiencies/L1XE50Efficiency_mu_between_30_40.png>]
-<../plots/L1XE50Efficiency_Fits.png, id=375, 2826.56pt x 1505.625pt>
+<../plots/L1XE50Efficiency_Fits.png, id=377, 2826.56pt x 1505.625pt>
 File: ../plots/L1XE50Efficiency_Fits.png Graphic file (type png)
 <use ../plots/L1XE50Efficiency_Fits.png>
 Package pdftex.def Info: ../plots/L1XE50Efficiency_Fits.png  used on input line
@@ -1004,7 +1004,7 @@ Overfull \hbox (170.65912pt too wide) has occurred while \output is active
 [14
 
 ]
-<../plots/hlt_noalg_l1xe30_plots/hlt_noalg_L1XE30_dist_mubin_3.png, id=455, 282
+<../plots/hlt_noalg_l1xe30_plots/hlt_noalg_L1XE30_dist_mubin_3.png, id=457, 282
 6.56pt x 1379.1525pt>
 File: ../plots/hlt_noalg_l1xe30_plots/hlt_noalg_L1XE30_dist_mubin_3.png Graphic
  file (type png)
@@ -1025,7 +1025,7 @@ Overfull \hbox (170.65912pt too wide) has occurred while \output is active
 [15
 
  <../plots/hlt_noalg_l1xe30_plots/hlt_noalg_L1XE30_dist_mubin_3.png>]
-<../plots/hlt_noalg_l1xe50_plots/hlt_noalg_L1XE50_dist_mubin_3.png, id=482, 282
+<../plots/hlt_noalg_l1xe50_plots/hlt_noalg_L1XE50_dist_mubin_3.png, id=484, 282
 6.56pt x 1379.1525pt>
 File: ../plots/hlt_noalg_l1xe50_plots/hlt_noalg_L1XE50_dist_mubin_3.png Graphic
  file (type png)
@@ -1186,7 +1186,7 @@ Overfull \hbox (170.65912pt too wide) has occurred while \output is active
 
  <../plots/reconstructed_distributions/reconstructed_distribution_mubin_4.png>]
 <../plots/reconstructed_distributions/reconstructed_distribution_mubin_5.png, i
-d=699, 2826.56pt x 1379.1525pt>
+d=700, 2826.56pt x 1379.1525pt>
 File: ../plots/reconstructed_distributions/reconstructed_distribution_mubin_5.p
 ng Graphic file (type png)
 <use ../plots/reconstructed_distributions/reconstructed_distribution_mubin_5.pn
@@ -1208,7 +1208,7 @@ Overfull \hbox (170.65912pt too wide) has occurred while \output is active
 
  <../plots/reconstructed_distributions/reconstructed_distribution_mubin_5.png>]
 <../plots/reconstructed_distributions/reconstructed_distribution_mubin_6.png, i
-d=726, 2826.56pt x 1379.1525pt>
+d=727, 2826.56pt x 1379.1525pt>
 File: ../plots/reconstructed_distributions/reconstructed_distribution_mubin_6.p
 ng Graphic file (type png)
 <use ../plots/reconstructed_distributions/reconstructed_distribution_mubin_6.pn
@@ -2206,10 +2206,10 @@ Package rerunfilecheck Info: File `presentation.out' has not changed.
 (rerunfilecheck)             Checksum: 1F17B04B01963C8EE477BC9A7068ACF4;449.
  ) 
 Here is how much of TeX's memory you used:
- 17435 strings out of 494847
- 339046 string characters out of 6179079
+ 17439 strings out of 494847
+ 339082 string characters out of 6179079
  392804 words of memory out of 5000000
- 20157 multiletter control sequences out of 15000+600000
+ 20161 multiletter control sequences out of 15000+600000
  17823 words of font info for 67 fonts, out of 8000000 for 9000
  59 hyphenation exceptions out of 8191
  48i,15n,51p,779b,559s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -2230,7 +2230,7 @@ mssbx10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmssi
 texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/share/texliv
 e/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb></usr/share/texlive/texm
 f-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb>
-Output written on presentation.pdf (73 pages, 2481941 bytes).
+Output written on presentation.pdf (73 pages, 2482048 bytes).
 PDF statistics:
  2147 PDF objects out of 2487 (max. 8388607)
  1981 compressed objects within 20 object streams
