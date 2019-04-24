@@ -110,6 +110,8 @@ void CorrectL1XE50toZB::Terminate(){//{{{
             }else{
                 std::cout << "Something wrong with scale factor j = " << j << " in mubin i = " << i << 
                     ". skipping..." << std::endl;
+                std::cout << "L1XE50Scale_Factors[i][j] = " << L1XE50Scale_Factors[i][j] << 
+                    "L1XE50Scale_Factor_Errors[i][j] = " << L1XE50Scale_Factor_Errors[i][j] << std::endl;
             }
         }
         Double_t f_mle = numerator / denominator;

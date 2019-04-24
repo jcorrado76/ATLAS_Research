@@ -85,14 +85,16 @@ void CorrectL1XE30toZB::Terminate(){//{{{
             if (isnan(L1XE30Scale_Factors[i][j])){
                 std::cout << "Got Nan for L1XE30Scale Factor at i= " << i << " and j= " << j << std::endl;
             }
-            if ( !(isnan(L1XE30Scale_Factors[i][j])) && !(isnan(L1XE30Scale_Factor_Errors[i][j])) &&
-                    !(isnan(L1XE30Scale_Factor_Errors[i][j])) && !(L1XE30Scale_Factor_Errors[i][j]==0) ){
+            if ( !(isnan(L1XE30Scale_Factors[i][j])) && !(isnan(L1XE30Scale_Factor_Errors[i][j])) && 
+                    !(L1XE30Scale_Factor_Errors[i][j]==0) ){
                     // these errs are already squared
                     numerator = numerator + (L1XE30Scale_Factors[i][j] / L1XE30Scale_Factor_Errors[i][j]);                     
                     denominator = denominator + (1./L1XE30Scale_Factor_Errors[i][j]);
             }else{
                 std::cout << "Something wrong with scale factor j = " << j << " in mubin i = " << i << 
                     ". skipping..." << std::endl;
+                std::cout << "L1XE30Scale_Factors[i][j] = " << L1XE30Scale_Factors[i][j] << 
+                    "L1XE30Scale_Factor_Errors[i][j] = " << L1XE30Scale_Factor_Errors[i][j] << std::endl;
             }
         }
         Double_t f_mle = numerator / denominator;
