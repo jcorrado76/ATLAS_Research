@@ -80,7 +80,7 @@ void CorrectL1XE50toZB::Terminate(){//{{{
         l1xe50_corrected_zb_dist = ((TH1D*)(HLT_ZB_L1XE50_Corrected_to_ZB_MET_Distribution->At(i)));
         for (int j = 0 ; j < Number_Scale_Factor_Samples ; j++ ){
             // determine j dependence on samples
-            int bin_number = Normalization_Bin_Number + j * 1;
+            int bin_number = Normalization_Bin_Number[i] + j * 1;
             // compute f_i's, how to pick the samples determines j dependency of rhs here
             L1XE50Scale_Factors[i][j] = zb_dist->GetBinContent(bin_number) / 
                 l1xe50_corrected_zb_dist->GetBinContent(bin_number); // shift bin number by 1 for each sample; 5 GeV shift
@@ -94,7 +94,7 @@ void CorrectL1XE50toZB::Terminate(){//{{{
             if (isnan(L1XE50Scale_Factor_Errors[i][j])){
                 std::cout << "Got a nan for scale factor error in mu bin " << i << " and on scale factor " << j << std::endl;
                 std::cout << "The scale factor value: " << L1XE50Scale_Factors[i][j] << std::endl;
-                std::cout << "Normalization_Bin_Number: " << Normalization_Bin_Number << std::endl;
+                std::cout << "Normalization_Bin_Number: " << Normalization_Bin_Number[i] << std::endl;
                 std::cout << "Trying bin number: " << bin_number << " for j=" << j << std::endl;
                 std::cout << "L1XE50CorrectedToZBErrors[i][Normalization_Bin_Number]: " << L1XE50CorrectedToZBErrors[i][bin_number] << std::endl;
                 std::cout << "l1xe50_corrected_zb_dist->GetBinContent( bin_number ): " << l1xe50_corrected_zb_dist->GetBinContent(bin_number) << std::endl;

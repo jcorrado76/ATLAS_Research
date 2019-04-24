@@ -65,7 +65,7 @@ void CorrectL1XE30toZB::Terminate(){//{{{
         zb_dist = ((TH1D*)(HLT_ZB_L1ZB_MET_Distributions_by_Mubin->At(i)));
         l1xe30_corrected_zb_dist = ((TH1D*)(HLT_ZB_L1XE30_Corrected_to_ZB_MET_Distribution->At(i)));
         for (int j = 0 ; j < Number_Scale_Factor_Samples ; j++ ){
-            int bin_number = Normalization_Bin_Number + j * 1;
+            int bin_number = Normalization_Bin_Number[i] + j * 1;
             // compute f_i's, how to pick the samples determines j dependency of rhs here
             L1XE30Scale_Factors[i][j] = zb_dist->GetBinContent(bin_number) / 
                 l1xe30_corrected_zb_dist->GetBinContent(bin_number); // shift bin number by 1 for each sample; this corresponds to 5GeV
