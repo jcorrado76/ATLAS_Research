@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2018.12.13)  23 APR 2019 20:10
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2018.12.13)  23 APR 2019 20:50
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1005,13 +1005,13 @@ Overfull \hbox (170.65912pt too wide) has occurred while \output is active
 
 ]
 <../plots/hlt_noalg_l1xe30_plots/hlt_noalg_L1XE30_dist_mubin_3.png, id=457, 282
-6.56pt x 1379.1525pt>
+6.56pt x 1418.29875pt>
 File: ../plots/hlt_noalg_l1xe30_plots/hlt_noalg_L1XE30_dist_mubin_3.png Graphic
  file (type png)
 <use ../plots/hlt_noalg_l1xe30_plots/hlt_noalg_L1XE30_dist_mubin_3.png>
 Package pdftex.def Info: ../plots/hlt_noalg_l1xe30_plots/hlt_noalg_L1XE30_dist_
 mubin_3.png  used on input line 120.
-(pdftex.def)             Requested size: 307.12714pt x 191.50172pt.
+(pdftex.def)             Requested size: 307.12714pt x 191.50536pt.
 
 Overfull \hbox (6.63725pt too wide) in paragraph at lines 120--120
 [][]  
@@ -1026,13 +1026,13 @@ Overfull \hbox (170.65912pt too wide) has occurred while \output is active
 
  <../plots/hlt_noalg_l1xe30_plots/hlt_noalg_L1XE30_dist_mubin_3.png>]
 <../plots/hlt_noalg_l1xe50_plots/hlt_noalg_L1XE50_dist_mubin_3.png, id=484, 282
-6.56pt x 1379.1525pt>
+6.56pt x 1418.29875pt>
 File: ../plots/hlt_noalg_l1xe50_plots/hlt_noalg_L1XE50_dist_mubin_3.png Graphic
  file (type png)
 <use ../plots/hlt_noalg_l1xe50_plots/hlt_noalg_L1XE50_dist_mubin_3.png>
 Package pdftex.def Info: ../plots/hlt_noalg_l1xe50_plots/hlt_noalg_L1XE50_dist_
 mubin_3.png  used on input line 123.
-(pdftex.def)             Requested size: 307.12714pt x 191.50172pt.
+(pdftex.def)             Requested size: 307.12714pt x 191.50536pt.
 
 Overfull \hbox (6.63725pt too wide) in paragraph at lines 123--123
 [][]  
@@ -1054,14 +1054,14 @@ Overfull \hbox (170.65912pt too wide) has occurred while \output is active
 
 ]
 <../plots/zerobias_distributions_corrected/zb_met_distributions_mubin_3.png, id
-=535, 2826.56pt x 1379.1525pt>
+=535, 2826.56pt x 1418.29875pt>
 File: ../plots/zerobias_distributions_corrected/zb_met_distributions_mubin_3.pn
 g Graphic file (type png)
 <use ../plots/zerobias_distributions_corrected/zb_met_distributions_mubin_3.png
 >
 Package pdftex.def Info: ../plots/zerobias_distributions_corrected/zb_met_distr
 ibutions_mubin_3.png  used on input line 136.
-(pdftex.def)             Requested size: 307.12714pt x 191.50172pt.
+(pdftex.def)             Requested size: 307.12714pt x 191.50536pt.
 
 Overfull \hbox (6.63725pt too wide) in paragraph at lines 136--136
 [][]  
@@ -1076,14 +1076,14 @@ Overfull \hbox (170.65912pt too wide) has occurred while \output is active
 
  <../plots/zerobias_distributions_corrected/zb_met_distributions_mubin_3.png>]
 <../plots/reconstructed_distributions/reconstructed_distribution_mubin_0.png, i
-d=562, 2826.56pt x 1379.1525pt>
+d=562, 2826.56pt x 1418.29875pt>
 File: ../plots/reconstructed_distributions/reconstructed_distribution_mubin_0.p
 ng Graphic file (type png)
 <use ../plots/reconstructed_distributions/reconstructed_distribution_mubin_0.pn
 g>
 Package pdftex.def Info: ../plots/reconstructed_distributions/reconstructed_dis
 tribution_mubin_0.png  used on input line 140.
-(pdftex.def)             Requested size: 307.12714pt x 191.50172pt.
+(pdftex.def)             Requested size: 307.12714pt x 191.50536pt.
 
 Overfull \hbox (6.63725pt too wide) in paragraph at lines 140--140
 [][]  
@@ -1098,14 +1098,14 @@ Overfull \hbox (170.65912pt too wide) has occurred while \output is active
 
  <../plots/reconstructed_distributions/reconstructed_distribution_mubin_0.png>]
 <../plots/reconstructed_distributions/reconstructed_distribution_mubin_1.png, i
-d=591, 2826.56pt x 1379.1525pt>
+d=591, 2826.56pt x 1418.29875pt>
 File: ../plots/reconstructed_distributions/reconstructed_distribution_mubin_1.p
 ng Graphic file (type png)
 <use ../plots/reconstructed_distributions/reconstructed_distribution_mubin_1.pn
 g>
 Package pdftex.def Info: ../plots/reconstructed_distributions/reconstructed_dis
 tribution_mubin_1.png  used on input line 143.
-(pdftex.def)             Requested size: 307.12714pt x 191.50172pt.
+(pdftex.def)             Requested size: 307.12714pt x 191.50536pt.
 
 Overfull \hbox (6.63725pt too wide) in paragraph at lines 143--143
 [][]  
@@ -1120,14 +1120,14 @@ Overfull \hbox (170.65912pt too wide) has occurred while \output is active
 
  <../plots/reconstructed_distributions/reconstructed_distribution_mubin_1.png>]
 <../plots/reconstructed_distributions/reconstructed_distribution_mubin_2.png, i
-d=618, 2826.56pt x 1379.1525pt>
+d=618, 2826.56pt x 1418.29875pt>
 File: ../plots/reconstructed_distributions/reconstructed_distribution_mubin_2.p
 ng Graphic file (type png)
 <use ../plots/reconstructed_distributions/reconstructed_distribution_mubin_2.pn
 g>
 Package pdftex.def Info: ../plots/reconstructed_distributions/reconstructed_dis
 tribution_mubin_2.png  used on input line 146.
-(pdftex.def)             Requested size: 307.12714pt x 191.50172pt.
+(pdftex.def)             Requested size: 307.12714pt x 191.50536pt.
 
 Overfull \hbox (6.63725pt too wide) in paragraph at lines 146--146
 [][]  
@@ -1142,14 +1142,14 @@ Overfull \hbox (170.65912pt too wide) has occurred while \output is active
 
  <../plots/reconstructed_distributions/reconstructed_distribution_mubin_2.png>]
 <../plots/reconstructed_distributions/reconstructed_distribution_mubin_3.png, i
-d=645, 2826.56pt x 1379.1525pt>
+d=645, 2826.56pt x 1418.29875pt>
 File: ../plots/reconstructed_distributions/reconstructed_distribution_mubin_3.p
 ng Graphic file (type png)
 <use ../plots/reconstructed_distributions/reconstructed_distribution_mubin_3.pn
 g>
 Package pdftex.def Info: ../plots/reconstructed_distributions/reconstructed_dis
 tribution_mubin_3.png  used on input line 149.
-(pdftex.def)             Requested size: 307.12714pt x 191.50172pt.
+(pdftex.def)             Requested size: 307.12714pt x 191.50536pt.
 
 Overfull \hbox (6.63725pt too wide) in paragraph at lines 149--149
 [][]  
@@ -1164,14 +1164,14 @@ Overfull \hbox (170.65912pt too wide) has occurred while \output is active
 
  <../plots/reconstructed_distributions/reconstructed_distribution_mubin_3.png>]
 <../plots/reconstructed_distributions/reconstructed_distribution_mubin_4.png, i
-d=672, 2826.56pt x 1379.1525pt>
+d=672, 2826.56pt x 1418.29875pt>
 File: ../plots/reconstructed_distributions/reconstructed_distribution_mubin_4.p
 ng Graphic file (type png)
 <use ../plots/reconstructed_distributions/reconstructed_distribution_mubin_4.pn
 g>
 Package pdftex.def Info: ../plots/reconstructed_distributions/reconstructed_dis
 tribution_mubin_4.png  used on input line 152.
-(pdftex.def)             Requested size: 307.12714pt x 191.50172pt.
+(pdftex.def)             Requested size: 307.12714pt x 191.50536pt.
 
 Overfull \hbox (6.63725pt too wide) in paragraph at lines 152--152
 [][]  
@@ -1186,14 +1186,14 @@ Overfull \hbox (170.65912pt too wide) has occurred while \output is active
 
  <../plots/reconstructed_distributions/reconstructed_distribution_mubin_4.png>]
 <../plots/reconstructed_distributions/reconstructed_distribution_mubin_5.png, i
-d=700, 2826.56pt x 1379.1525pt>
+d=700, 2826.56pt x 1418.29875pt>
 File: ../plots/reconstructed_distributions/reconstructed_distribution_mubin_5.p
 ng Graphic file (type png)
 <use ../plots/reconstructed_distributions/reconstructed_distribution_mubin_5.pn
 g>
 Package pdftex.def Info: ../plots/reconstructed_distributions/reconstructed_dis
 tribution_mubin_5.png  used on input line 155.
-(pdftex.def)             Requested size: 307.12714pt x 191.50172pt.
+(pdftex.def)             Requested size: 307.12714pt x 191.50536pt.
 
 Overfull \hbox (6.63725pt too wide) in paragraph at lines 155--155
 [][]  
@@ -1208,14 +1208,14 @@ Overfull \hbox (170.65912pt too wide) has occurred while \output is active
 
  <../plots/reconstructed_distributions/reconstructed_distribution_mubin_5.png>]
 <../plots/reconstructed_distributions/reconstructed_distribution_mubin_6.png, i
-d=727, 2826.56pt x 1379.1525pt>
+d=727, 2826.56pt x 1418.29875pt>
 File: ../plots/reconstructed_distributions/reconstructed_distribution_mubin_6.p
 ng Graphic file (type png)
 <use ../plots/reconstructed_distributions/reconstructed_distribution_mubin_6.pn
 g>
 Package pdftex.def Info: ../plots/reconstructed_distributions/reconstructed_dis
 tribution_mubin_6.png  used on input line 158.
-(pdftex.def)             Requested size: 307.12714pt x 191.50172pt.
+(pdftex.def)             Requested size: 307.12714pt x 191.50536pt.
 
 Overfull \hbox (6.63725pt too wide) in paragraph at lines 158--158
 [][]  
@@ -1274,13 +1274,13 @@ Overfull \hbox (170.65912pt too wide) has occurred while \output is active
 
 ]
 <../plots/hlt_noalg_l1xe30_plots/hlt_noalg_L1XE30_dist_mubin_0.png, id=834, 282
-6.56pt x 1443.3925pt>
+6.56pt x 1466.47874pt>
 File: ../plots/hlt_noalg_l1xe30_plots/hlt_noalg_L1XE30_dist_mubin_0.png Graphic
  file (type png)
 <use ../plots/hlt_noalg_l1xe30_plots/hlt_noalg_L1XE30_dist_mubin_0.png>
 Package pdftex.def Info: ../plots/hlt_noalg_l1xe30_plots/hlt_noalg_L1XE30_dist_
 mubin_0.png  used on input line 176.
-(pdftex.def)             Requested size: 307.12714pt x 191.50188pt.
+(pdftex.def)             Requested size: 307.12714pt x 191.49924pt.
 
 Overfull \hbox (6.63725pt too wide) in paragraph at lines 176--176
 [][]  
@@ -1295,13 +1295,13 @@ Overfull \hbox (170.65912pt too wide) has occurred while \output is active
 
  <../plots/hlt_noalg_l1xe30_plots/hlt_noalg_L1XE30_dist_mubin_0.png>]
 <../plots/hlt_noalg_l1xe30_plots/hlt_noalg_L1XE30_dist_mubin_1.png, id=862, 282
-6.56pt x 1379.1525pt>
+6.56pt x 1418.29875pt>
 File: ../plots/hlt_noalg_l1xe30_plots/hlt_noalg_L1XE30_dist_mubin_1.png Graphic
  file (type png)
 <use ../plots/hlt_noalg_l1xe30_plots/hlt_noalg_L1XE30_dist_mubin_1.png>
 Package pdftex.def Info: ../plots/hlt_noalg_l1xe30_plots/hlt_noalg_L1XE30_dist_
 mubin_1.png  used on input line 180.
-(pdftex.def)             Requested size: 307.12714pt x 191.50172pt.
+(pdftex.def)             Requested size: 307.12714pt x 191.50536pt.
 
 Overfull \hbox (6.63725pt too wide) in paragraph at lines 180--180
 [][]  
@@ -1316,13 +1316,13 @@ Overfull \hbox (170.65912pt too wide) has occurred while \output is active
 
  <../plots/hlt_noalg_l1xe30_plots/hlt_noalg_L1XE30_dist_mubin_1.png>]
 <../plots/hlt_noalg_l1xe30_plots/hlt_noalg_L1XE30_dist_mubin_2.png, id=889, 282
-6.56pt x 1379.1525pt>
+6.56pt x 1418.29875pt>
 File: ../plots/hlt_noalg_l1xe30_plots/hlt_noalg_L1XE30_dist_mubin_2.png Graphic
  file (type png)
 <use ../plots/hlt_noalg_l1xe30_plots/hlt_noalg_L1XE30_dist_mubin_2.png>
 Package pdftex.def Info: ../plots/hlt_noalg_l1xe30_plots/hlt_noalg_L1XE30_dist_
 mubin_2.png  used on input line 184.
-(pdftex.def)             Requested size: 307.12714pt x 191.50172pt.
+(pdftex.def)             Requested size: 307.12714pt x 191.50536pt.
 
 Overfull \hbox (6.63725pt too wide) in paragraph at lines 184--184
 [][]  
@@ -1341,7 +1341,7 @@ File: ../plots/hlt_noalg_l1xe30_plots/hlt_noalg_L1XE30_dist_mubin_3.png Graphic
 <use ../plots/hlt_noalg_l1xe30_plots/hlt_noalg_L1XE30_dist_mubin_3.png>
 Package pdftex.def Info: ../plots/hlt_noalg_l1xe30_plots/hlt_noalg_L1XE30_dist_
 mubin_3.png  used on input line 188.
-(pdftex.def)             Requested size: 307.12714pt x 191.50172pt.
+(pdftex.def)             Requested size: 307.12714pt x 191.50536pt.
 
 Overfull \hbox (6.63725pt too wide) in paragraph at lines 188--188
 [][]  
@@ -1356,13 +1356,13 @@ Overfull \hbox (170.65912pt too wide) has occurred while \output is active
 
 ]
 <../plots/hlt_noalg_l1xe30_plots/hlt_noalg_L1XE30_dist_mubin_4.png, id=944, 282
-6.56pt x 1379.1525pt>
+6.56pt x 1418.29875pt>
 File: ../plots/hlt_noalg_l1xe30_plots/hlt_noalg_L1XE30_dist_mubin_4.png Graphic
  file (type png)
 <use ../plots/hlt_noalg_l1xe30_plots/hlt_noalg_L1XE30_dist_mubin_4.png>
 Package pdftex.def Info: ../plots/hlt_noalg_l1xe30_plots/hlt_noalg_L1XE30_dist_
 mubin_4.png  used on input line 192.
-(pdftex.def)             Requested size: 307.12714pt x 191.50172pt.
+(pdftex.def)             Requested size: 307.12714pt x 191.50536pt.
 
 Overfull \hbox (6.63725pt too wide) in paragraph at lines 192--192
 [][]  
@@ -1377,13 +1377,13 @@ Overfull \hbox (170.65912pt too wide) has occurred while \output is active
 
  <../plots/hlt_noalg_l1xe30_plots/hlt_noalg_L1XE30_dist_mubin_4.png>]
 <../plots/hlt_noalg_l1xe30_plots/hlt_noalg_L1XE30_dist_mubin_5.png, id=971, 282
-6.56pt x 1379.1525pt>
+6.56pt x 1418.29875pt>
 File: ../plots/hlt_noalg_l1xe30_plots/hlt_noalg_L1XE30_dist_mubin_5.png Graphic
  file (type png)
 <use ../plots/hlt_noalg_l1xe30_plots/hlt_noalg_L1XE30_dist_mubin_5.png>
 Package pdftex.def Info: ../plots/hlt_noalg_l1xe30_plots/hlt_noalg_L1XE30_dist_
 mubin_5.png  used on input line 196.
-(pdftex.def)             Requested size: 307.12714pt x 191.50172pt.
+(pdftex.def)             Requested size: 307.12714pt x 191.50536pt.
 
 Overfull \hbox (6.63725pt too wide) in paragraph at lines 196--196
 [][]  
@@ -1398,13 +1398,13 @@ Overfull \hbox (170.65912pt too wide) has occurred while \output is active
 
  <../plots/hlt_noalg_l1xe30_plots/hlt_noalg_L1XE30_dist_mubin_5.png>]
 <../plots/hlt_noalg_l1xe30_plots/hlt_noalg_L1XE30_dist_mubin_6.png, id=998, 282
-6.56pt x 1379.1525pt>
+6.56pt x 1418.29875pt>
 File: ../plots/hlt_noalg_l1xe30_plots/hlt_noalg_L1XE30_dist_mubin_6.png Graphic
  file (type png)
 <use ../plots/hlt_noalg_l1xe30_plots/hlt_noalg_L1XE30_dist_mubin_6.png>
 Package pdftex.def Info: ../plots/hlt_noalg_l1xe30_plots/hlt_noalg_L1XE30_dist_
 mubin_6.png  used on input line 200.
-(pdftex.def)             Requested size: 307.12714pt x 191.50172pt.
+(pdftex.def)             Requested size: 307.12714pt x 191.50536pt.
 
 Overfull \hbox (6.63725pt too wide) in paragraph at lines 200--200
 [][]  
@@ -1419,13 +1419,13 @@ Overfull \hbox (170.65912pt too wide) has occurred while \output is active
 
  <../plots/hlt_noalg_l1xe30_plots/hlt_noalg_L1XE30_dist_mubin_6.png>]
 <../plots/hlt_noalg_l1xe50_plots/hlt_noalg_L1XE50_dist_mubin_0.png, id=1026, 28
-26.56pt x 1411.2725pt>
+26.56pt x 1442.38875pt>
 File: ../plots/hlt_noalg_l1xe50_plots/hlt_noalg_L1XE50_dist_mubin_0.png Graphic
  file (type png)
 <use ../plots/hlt_noalg_l1xe50_plots/hlt_noalg_L1XE50_dist_mubin_0.png>
 Package pdftex.def Info: ../plots/hlt_noalg_l1xe50_plots/hlt_noalg_L1XE50_dist_
 mubin_0.png  used on input line 205.
-(pdftex.def)             Requested size: 307.12714pt x 191.50414pt.
+(pdftex.def)             Requested size: 307.12714pt x 191.50075pt.
 
 Overfull \hbox (6.63725pt too wide) in paragraph at lines 205--205
 [][]  
@@ -1440,13 +1440,13 @@ Overfull \hbox (170.65912pt too wide) has occurred while \output is active
 
  <../plots/hlt_noalg_l1xe50_plots/hlt_noalg_L1XE50_dist_mubin_0.png>]
 <../plots/hlt_noalg_l1xe50_plots/hlt_noalg_L1XE50_dist_mubin_1.png, id=1053, 28
-26.56pt x 1379.1525pt>
+26.56pt x 1418.29875pt>
 File: ../plots/hlt_noalg_l1xe50_plots/hlt_noalg_L1XE50_dist_mubin_1.png Graphic
  file (type png)
 <use ../plots/hlt_noalg_l1xe50_plots/hlt_noalg_L1XE50_dist_mubin_1.png>
 Package pdftex.def Info: ../plots/hlt_noalg_l1xe50_plots/hlt_noalg_L1XE50_dist_
 mubin_1.png  used on input line 209.
-(pdftex.def)             Requested size: 307.12714pt x 191.50172pt.
+(pdftex.def)             Requested size: 307.12714pt x 191.50536pt.
 
 Overfull \hbox (6.63725pt too wide) in paragraph at lines 209--209
 [][]  
@@ -1461,13 +1461,13 @@ Overfull \hbox (170.65912pt too wide) has occurred while \output is active
 
  <../plots/hlt_noalg_l1xe50_plots/hlt_noalg_L1XE50_dist_mubin_1.png>]
 <../plots/hlt_noalg_l1xe50_plots/hlt_noalg_L1XE50_dist_mubin_2.png, id=1081, 28
-26.56pt x 1379.1525pt>
+26.56pt x 1418.29875pt>
 File: ../plots/hlt_noalg_l1xe50_plots/hlt_noalg_L1XE50_dist_mubin_2.png Graphic
  file (type png)
 <use ../plots/hlt_noalg_l1xe50_plots/hlt_noalg_L1XE50_dist_mubin_2.png>
 Package pdftex.def Info: ../plots/hlt_noalg_l1xe50_plots/hlt_noalg_L1XE50_dist_
 mubin_2.png  used on input line 213.
-(pdftex.def)             Requested size: 307.12714pt x 191.50172pt.
+(pdftex.def)             Requested size: 307.12714pt x 191.50536pt.
 
 Overfull \hbox (6.63725pt too wide) in paragraph at lines 213--213
 [][]  
@@ -1486,7 +1486,7 @@ File: ../plots/hlt_noalg_l1xe50_plots/hlt_noalg_L1XE50_dist_mubin_3.png Graphic
 <use ../plots/hlt_noalg_l1xe50_plots/hlt_noalg_L1XE50_dist_mubin_3.png>
 Package pdftex.def Info: ../plots/hlt_noalg_l1xe50_plots/hlt_noalg_L1XE50_dist_
 mubin_3.png  used on input line 217.
-(pdftex.def)             Requested size: 307.12714pt x 191.50172pt.
+(pdftex.def)             Requested size: 307.12714pt x 191.50536pt.
 
 Overfull \hbox (6.63725pt too wide) in paragraph at lines 217--217
 [][]  
@@ -1501,13 +1501,13 @@ Overfull \hbox (170.65912pt too wide) has occurred while \output is active
 
 ]
 <../plots/hlt_noalg_l1xe50_plots/hlt_noalg_L1XE50_dist_mubin_4.png, id=1135, 28
-26.56pt x 1379.1525pt>
+26.56pt x 1418.29875pt>
 File: ../plots/hlt_noalg_l1xe50_plots/hlt_noalg_L1XE50_dist_mubin_4.png Graphic
  file (type png)
 <use ../plots/hlt_noalg_l1xe50_plots/hlt_noalg_L1XE50_dist_mubin_4.png>
 Package pdftex.def Info: ../plots/hlt_noalg_l1xe50_plots/hlt_noalg_L1XE50_dist_
 mubin_4.png  used on input line 221.
-(pdftex.def)             Requested size: 307.12714pt x 191.50172pt.
+(pdftex.def)             Requested size: 307.12714pt x 191.50536pt.
 
 Overfull \hbox (6.63725pt too wide) in paragraph at lines 221--221
 [][]  
@@ -1522,13 +1522,13 @@ Overfull \hbox (170.65912pt too wide) has occurred while \output is active
 
  <../plots/hlt_noalg_l1xe50_plots/hlt_noalg_L1XE50_dist_mubin_4.png>]
 <../plots/hlt_noalg_l1xe50_plots/hlt_noalg_L1XE50_dist_mubin_5.png, id=1162, 28
-26.56pt x 1379.1525pt>
+26.56pt x 1418.29875pt>
 File: ../plots/hlt_noalg_l1xe50_plots/hlt_noalg_L1XE50_dist_mubin_5.png Graphic
  file (type png)
 <use ../plots/hlt_noalg_l1xe50_plots/hlt_noalg_L1XE50_dist_mubin_5.png>
 Package pdftex.def Info: ../plots/hlt_noalg_l1xe50_plots/hlt_noalg_L1XE50_dist_
 mubin_5.png  used on input line 225.
-(pdftex.def)             Requested size: 307.12714pt x 191.50172pt.
+(pdftex.def)             Requested size: 307.12714pt x 191.50536pt.
 
 Overfull \hbox (6.63725pt too wide) in paragraph at lines 225--225
 [][]  
@@ -1543,13 +1543,13 @@ Overfull \hbox (170.65912pt too wide) has occurred while \output is active
 
  <../plots/hlt_noalg_l1xe50_plots/hlt_noalg_L1XE50_dist_mubin_5.png>]
 <../plots/hlt_noalg_l1xe50_plots/hlt_noalg_L1XE50_dist_mubin_6.png, id=1189, 28
-26.56pt x 1379.1525pt>
+26.56pt x 1418.29875pt>
 File: ../plots/hlt_noalg_l1xe50_plots/hlt_noalg_L1XE50_dist_mubin_6.png Graphic
  file (type png)
 <use ../plots/hlt_noalg_l1xe50_plots/hlt_noalg_L1XE50_dist_mubin_6.png>
 Package pdftex.def Info: ../plots/hlt_noalg_l1xe50_plots/hlt_noalg_L1XE50_dist_
 mubin_6.png  used on input line 229.
-(pdftex.def)             Requested size: 307.12714pt x 191.50172pt.
+(pdftex.def)             Requested size: 307.12714pt x 191.50536pt.
 
 Overfull \hbox (6.63725pt too wide) in paragraph at lines 229--229
 [][]  
@@ -1854,14 +1854,14 @@ Overfull \hbox (170.65912pt too wide) has occurred while \output is active
 
  <../plots/l1xe50_efficiencies/L1XE50Efficiency_mu_between_60_70.png>]
 <../plots/zerobias_distributions_corrected/zb_met_distributions_mubin_0.png, id
-=1599, 2826.56pt x 1505.625pt>
+=1599, 2826.56pt x 1512.65125pt>
 File: ../plots/zerobias_distributions_corrected/zb_met_distributions_mubin_0.pn
 g Graphic file (type png)
 <use ../plots/zerobias_distributions_corrected/zb_met_distributions_mubin_0.png
 >
 Package pdftex.def Info: ../plots/zerobias_distributions_corrected/zb_met_distr
 ibutions_mubin_0.png  used on input line 292.
-(pdftex.def)             Requested size: 307.12714pt x 191.51091pt.
+(pdftex.def)             Requested size: 307.12714pt x 191.50446pt.
 
 Overfull \hbox (6.63725pt too wide) in paragraph at lines 292--292
 [][]  
@@ -1876,14 +1876,14 @@ Overfull \hbox (170.65912pt too wide) has occurred while \output is active
 
  <../plots/zerobias_distributions_corrected/zb_met_distributions_mubin_0.png>]
 <../plots/zerobias_distributions_corrected/zb_met_distributions_mubin_1.png, id
-=1626, 2826.56pt x 1379.1525pt>
+=1626, 2826.56pt x 1418.29875pt>
 File: ../plots/zerobias_distributions_corrected/zb_met_distributions_mubin_1.pn
 g Graphic file (type png)
 <use ../plots/zerobias_distributions_corrected/zb_met_distributions_mubin_1.png
 >
 Package pdftex.def Info: ../plots/zerobias_distributions_corrected/zb_met_distr
 ibutions_mubin_1.png  used on input line 296.
-(pdftex.def)             Requested size: 307.12714pt x 191.50172pt.
+(pdftex.def)             Requested size: 307.12714pt x 191.50536pt.
 
 Overfull \hbox (6.63725pt too wide) in paragraph at lines 296--296
 [][]  
@@ -1898,14 +1898,14 @@ Overfull \hbox (170.65912pt too wide) has occurred while \output is active
 
  <../plots/zerobias_distributions_corrected/zb_met_distributions_mubin_1.png>]
 <../plots/zerobias_distributions_corrected/zb_met_distributions_mubin_2.png, id
-=1653, 2826.56pt x 1379.1525pt>
+=1653, 2826.56pt x 1418.29875pt>
 File: ../plots/zerobias_distributions_corrected/zb_met_distributions_mubin_2.pn
 g Graphic file (type png)
 <use ../plots/zerobias_distributions_corrected/zb_met_distributions_mubin_2.png
 >
 Package pdftex.def Info: ../plots/zerobias_distributions_corrected/zb_met_distr
 ibutions_mubin_2.png  used on input line 300.
-(pdftex.def)             Requested size: 307.12714pt x 191.50172pt.
+(pdftex.def)             Requested size: 307.12714pt x 191.50536pt.
 
 Overfull \hbox (6.63725pt too wide) in paragraph at lines 300--300
 [][]  
@@ -1925,7 +1925,7 @@ g Graphic file (type png)
 >
 Package pdftex.def Info: ../plots/zerobias_distributions_corrected/zb_met_distr
 ibutions_mubin_3.png  used on input line 304.
-(pdftex.def)             Requested size: 307.12714pt x 191.50172pt.
+(pdftex.def)             Requested size: 307.12714pt x 191.50536pt.
 
 Overfull \hbox (6.63725pt too wide) in paragraph at lines 304--304
 [][]  
@@ -1940,14 +1940,14 @@ Overfull \hbox (170.65912pt too wide) has occurred while \output is active
 
 ]
 <../plots/zerobias_distributions_corrected/zb_met_distributions_mubin_4.png, id
-=1707, 2826.56pt x 1379.1525pt>
+=1707, 2826.56pt x 1418.29875pt>
 File: ../plots/zerobias_distributions_corrected/zb_met_distributions_mubin_4.pn
 g Graphic file (type png)
 <use ../plots/zerobias_distributions_corrected/zb_met_distributions_mubin_4.png
 >
 Package pdftex.def Info: ../plots/zerobias_distributions_corrected/zb_met_distr
 ibutions_mubin_4.png  used on input line 308.
-(pdftex.def)             Requested size: 307.12714pt x 191.50172pt.
+(pdftex.def)             Requested size: 307.12714pt x 191.50536pt.
 
 Overfull \hbox (6.63725pt too wide) in paragraph at lines 308--308
 [][]  
@@ -1962,14 +1962,14 @@ Overfull \hbox (170.65912pt too wide) has occurred while \output is active
 
  <../plots/zerobias_distributions_corrected/zb_met_distributions_mubin_4.png>]
 <../plots/zerobias_distributions_corrected/zb_met_distributions_mubin_5.png, id
-=1735, 2826.56pt x 1379.1525pt>
+=1735, 2826.56pt x 1418.29875pt>
 File: ../plots/zerobias_distributions_corrected/zb_met_distributions_mubin_5.pn
 g Graphic file (type png)
 <use ../plots/zerobias_distributions_corrected/zb_met_distributions_mubin_5.png
 >
 Package pdftex.def Info: ../plots/zerobias_distributions_corrected/zb_met_distr
 ibutions_mubin_5.png  used on input line 312.
-(pdftex.def)             Requested size: 307.12714pt x 191.50172pt.
+(pdftex.def)             Requested size: 307.12714pt x 191.50536pt.
 
 Overfull \hbox (6.63725pt too wide) in paragraph at lines 312--312
 [][]  
@@ -1984,14 +1984,14 @@ Overfull \hbox (170.65912pt too wide) has occurred while \output is active
 
  <../plots/zerobias_distributions_corrected/zb_met_distributions_mubin_5.png>]
 <../plots/zerobias_distributions_corrected/zb_met_distributions_mubin_6.png, id
-=1762, 2826.56pt x 1379.1525pt>
+=1762, 2826.56pt x 1418.29875pt>
 File: ../plots/zerobias_distributions_corrected/zb_met_distributions_mubin_6.pn
 g Graphic file (type png)
 <use ../plots/zerobias_distributions_corrected/zb_met_distributions_mubin_6.png
 >
 Package pdftex.def Info: ../plots/zerobias_distributions_corrected/zb_met_distr
 ibutions_mubin_6.png  used on input line 316.
-(pdftex.def)             Requested size: 307.12714pt x 191.50172pt.
+(pdftex.def)             Requested size: 307.12714pt x 191.50536pt.
 
 Overfull \hbox (6.63725pt too wide) in paragraph at lines 316--316
 [][]  
@@ -2011,7 +2011,7 @@ ng Graphic file (type png)
 g>
 Package pdftex.def Info: ../plots/reconstructed_distributions/reconstructed_dis
 tribution_mubin_0.png  used on input line 321.
-(pdftex.def)             Requested size: 307.12714pt x 191.50172pt.
+(pdftex.def)             Requested size: 307.12714pt x 191.50536pt.
 
 Overfull \hbox (6.63725pt too wide) in paragraph at lines 321--321
 [][]  
@@ -2031,7 +2031,7 @@ ng Graphic file (type png)
 g>
 Package pdftex.def Info: ../plots/reconstructed_distributions/reconstructed_dis
 tribution_mubin_1.png  used on input line 325.
-(pdftex.def)             Requested size: 307.12714pt x 191.50172pt.
+(pdftex.def)             Requested size: 307.12714pt x 191.50536pt.
 
 Overfull \hbox (6.63725pt too wide) in paragraph at lines 325--325
 [][]  
@@ -2051,7 +2051,7 @@ ng Graphic file (type png)
 g>
 Package pdftex.def Info: ../plots/reconstructed_distributions/reconstructed_dis
 tribution_mubin_2.png  used on input line 329.
-(pdftex.def)             Requested size: 307.12714pt x 191.50172pt.
+(pdftex.def)             Requested size: 307.12714pt x 191.50536pt.
 
 Overfull \hbox (6.63725pt too wide) in paragraph at lines 329--329
 [][]  
@@ -2071,7 +2071,7 @@ ng Graphic file (type png)
 g>
 Package pdftex.def Info: ../plots/reconstructed_distributions/reconstructed_dis
 tribution_mubin_3.png  used on input line 333.
-(pdftex.def)             Requested size: 307.12714pt x 191.50172pt.
+(pdftex.def)             Requested size: 307.12714pt x 191.50536pt.
 
 Overfull \hbox (6.63725pt too wide) in paragraph at lines 333--333
 [][]  
@@ -2091,7 +2091,7 @@ ng Graphic file (type png)
 g>
 Package pdftex.def Info: ../plots/reconstructed_distributions/reconstructed_dis
 tribution_mubin_4.png  used on input line 337.
-(pdftex.def)             Requested size: 307.12714pt x 191.50172pt.
+(pdftex.def)             Requested size: 307.12714pt x 191.50536pt.
 
 Overfull \hbox (6.63725pt too wide) in paragraph at lines 337--337
 [][]  
@@ -2111,7 +2111,7 @@ ng Graphic file (type png)
 g>
 Package pdftex.def Info: ../plots/reconstructed_distributions/reconstructed_dis
 tribution_mubin_5.png  used on input line 341.
-(pdftex.def)             Requested size: 307.12714pt x 191.50172pt.
+(pdftex.def)             Requested size: 307.12714pt x 191.50536pt.
 
 Overfull \hbox (6.63725pt too wide) in paragraph at lines 341--341
 [][]  
@@ -2131,7 +2131,7 @@ ng Graphic file (type png)
 g>
 Package pdftex.def Info: ../plots/reconstructed_distributions/reconstructed_dis
 tribution_mubin_6.png  used on input line 345.
-(pdftex.def)             Requested size: 307.12714pt x 191.50172pt.
+(pdftex.def)             Requested size: 307.12714pt x 191.50536pt.
 
 Overfull \hbox (6.63725pt too wide) in paragraph at lines 345--345
 [][]  
@@ -2213,10 +2213,10 @@ Package rerunfilecheck Info: File `presentation.out' has not changed.
 (rerunfilecheck)             Checksum: 1F17B04B01963C8EE477BC9A7068ACF4;449.
  ) 
 Here is how much of TeX's memory you used:
- 17446 strings out of 494847
- 339256 string characters out of 6179079
+ 17448 strings out of 494847
+ 339274 string characters out of 6179079
  392804 words of memory out of 5000000
- 20166 multiletter control sequences out of 15000+600000
+ 20168 multiletter control sequences out of 15000+600000
  17823 words of font info for 67 fonts, out of 8000000 for 9000
  59 hyphenation exceptions out of 8191
  48i,15n,51p,779b,559s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -2237,7 +2237,7 @@ mssbx10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmssi
 texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/share/texliv
 e/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb></usr/share/texlive/texm
 f-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb>
-Output written on presentation.pdf (74 pages, 2485193 bytes).
+Output written on presentation.pdf (74 pages, 2528002 bytes).
 PDF statistics:
  2175 PDF objects out of 2487 (max. 8388607)
  2007 compressed objects within 21 object streams
