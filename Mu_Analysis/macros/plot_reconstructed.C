@@ -70,6 +70,9 @@
         zb_dist->SetLineColor( kBlue );
         l1xe30_corrected_zb_dist->SetLineColor( kGreen );
         l1xe50_corrected_zb_dist->SetLineColor( kRed );
+        l1xe50_corrected_zb_dist->GetXaxis()->SetTitle(x_axis_label);
+        l1xe50_corrected_zb_dist->GetYaxis()->SetTitle(y_axis_label);
+
         //}}}
         // PLOT MET DISTRIBUTIONS WITH EFFICIENCY CURVES {{{
         TCanvas* corrected_canvas = new TCanvas("correctedCanvas","Canvas with ZB Distributions");
@@ -120,8 +123,8 @@
         gStyle->SetOptStat(0);
         HLTnoalgL1XE30_canvas->SetFillColor(42);
         l1xe30_noalg_dist->SetLineColor( kMagenta );
-        l1xe30_corrected_zb_dist->GetXaxis()->SetTitle(x_axis_label);
-        l1xe30_corrected_zb_dist->GetYaxis()->SetTitle(y_axis_label);
+        l1xe30_corrected_zb_dist_clone->GetXaxis()->SetTitle(x_axis_label);
+        l1xe30_corrected_zb_dist_clone->GetYaxis()->SetTitle(y_axis_label);
         l1xe30_corrected_zb_dist_clone->Draw("P E1");
         TH1D* l1xe30_noalg_dist_clone = (TH1D*)l1xe30_noalg_dist->Clone();
         l1xe30_noalg_dist_clone->SetNormFactor(1.);
@@ -139,8 +142,8 @@
         HLTnoalgL1XE50_canvas->SetFillColor(42);
         gStyle->SetOptStat(0);
         l1xe50_noalg_dist->SetLineColor( kMagenta );
-        l1xe50_corrected_zb_dist->GetXaxis()->SetTitle(x_axis_label);
-        l1xe50_corrected_zb_dist->GetYaxis()->SetTitle(y_axis_label);
+        l1xe50_corrected_zb_dist_clone->GetXaxis()->SetTitle(x_axis_label);
+        l1xe50_corrected_zb_dist_clone->GetYaxis()->SetTitle(y_axis_label);
         TH1D* l1xe50_noalg_dist_clone = (TH1D*)l1xe50_noalg_dist->Clone();
         l1xe50_noalg_dist_clone->SetNormFactor(1.);
         l1xe50_corrected_zb_dist_clone->Draw("P E1");
