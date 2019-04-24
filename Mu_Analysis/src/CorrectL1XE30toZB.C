@@ -44,7 +44,6 @@ Bool_t CorrectL1XE30toZB::Process(Long64_t entry)//{{{
 void CorrectL1XE30toZB::Terminate(){//{{{
     // do errors correctly
     Double_t sumOfSquareDeviations = 0.0;
-    std::cout << "L1XE30 Corrected to ZB Errors: " << std::endl;
     for ( int i = 0 ; i < Number_Mu_Bins ; i++ ){
         for ( int j = 0 ; j < met_dist_nbins ; j++ ){
             if (L1XE30CorrectedToZBErrors[i][j] == 0 && ((TH1D*)HLT_ZB_L1XE30_Corrected_to_ZB_MET_Distribution->At(i))->GetBinContent( j ) != 0 ){
@@ -81,31 +80,21 @@ void CorrectL1XE30toZB::Terminate(){//{{{
         Double_t numerator = 0.0;
         Double_t denominator = 0.0;
         for (int j = 0 ; j < Number_Scale_Factor_Samples ; j++ ){
-            std::cout << "Scale factor: " << L1XE30Scale_Factors[i][j] << " Error: " << L1XE30Scale_Factor_Errors[i][j] << std::endl;
-            if (isnan(L1XE30Scale_Factors[i][j])){
-                std::cout << "Got Nan for L1XE30Scale Factor at i= " << i << " and j= " << j << std::endl;
-            }
             if ( !(isnan(L1XE30Scale_Factors[i][j])) && !(isnan(L1XE30Scale_Factor_Errors[i][j])) && 
                     !(L1XE30Scale_Factor_Errors[i][j]==0) ){
                     // these errs are already squared
                     numerator = numerator + (L1XE30Scale_Factors[i][j] / L1XE30Scale_Factor_Errors[i][j]);                     
                     denominator = denominator + (1./L1XE30Scale_Factor_Errors[i][j]);
             }else{
-                std::cout << "Something wrong with scale factor j = " << j << " in mubin i = " << i << 
+                std::cout << "\nSomething wrong with scale factor j = " << j << " in mubin i = " << i << 
                     ". skipping..." << std::endl;
                 std::cout << "L1XE30Scale_Factors[i][j] = " << L1XE30Scale_Factors[i][j] << 
-                    "L1XE30Scale_Factor_Errors[i][j] = " << L1XE30Scale_Factor_Errors[i][j] << std::endl;
+                    "\tL1XE30Scale_Factor_Errors[i][j] = " << L1XE30Scale_Factor_Errors[i][j] << "\n" << std::endl;
             }
         }
         Double_t f_mle = numerator / denominator;
-        if (isnan( f_mle )){
-            std::cout << "Got a NaN value for the scale factor: " << f_mle << std::endl;
-            std::cout << "Numerator = " << numerator << std::endl;
-            std::cout << "Denominator = " << denominator << std::endl;
-        }else{
-            std::cout << "L1XE30 Scale factor: " << i << " = " << f_mle << std::endl;
-            (l1xe30_corrected_zb_dist)->Scale( f_mle );
-        }
+        std::cout << "L1XE30 Scale factor: " << i << " = " << f_mle << std::endl;
+        (l1xe30_corrected_zb_dist)->Scale( f_mle );
     }
     //}}}
 }//}}}

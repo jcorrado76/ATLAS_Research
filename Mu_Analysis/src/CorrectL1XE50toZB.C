@@ -58,7 +58,6 @@ Bool_t CorrectL1XE50toZB::Process(Long64_t entry)//{{{
 void CorrectL1XE50toZB::Terminate(){//{{{
     // do errors correctly
     Double_t sumOfSquareDeviations = 0.0;
-    std::cout << "L1XE50 Corrected to ZB Errors: " << std::endl;
     for ( int i = 0 ; i < Number_Mu_Bins ; i++ ){
         for ( int j = 0 ; j < met_dist_nbins ; j++ ){
             //std::cout << L1XE50CorrectedToZBErrors[i][j] << " ";
@@ -91,14 +90,6 @@ void CorrectL1XE50toZB::Terminate(){//{{{
                   pow( zb_dist->GetBinError(bin_number) / 
                       zb_dist->GetBinContent(bin_number) ,2)
                   );
-            if (isnan(L1XE50Scale_Factor_Errors[i][j])){
-                std::cout << "Got a nan for scale factor error in mu bin " << i << " and on scale factor " << j << std::endl;
-                std::cout << "The scale factor value: " << L1XE50Scale_Factors[i][j] << std::endl;
-                std::cout << "Normalization_Bin_Number: " << Normalization_Bin_Number[i] << std::endl;
-                std::cout << "Trying bin number: " << bin_number << " for j=" << j << std::endl;
-                std::cout << "L1XE50CorrectedToZBErrors[i][Normalization_Bin_Number]: " << L1XE50CorrectedToZBErrors[i][bin_number] << std::endl;
-                std::cout << "l1xe50_corrected_zb_dist->GetBinContent( bin_number ): " << l1xe50_corrected_zb_dist->GetBinContent(bin_number) << std::endl;
-            }
         }
         // compute f_mle
         Double_t numerator = 0.0;
@@ -108,31 +99,15 @@ void CorrectL1XE50toZB::Terminate(){//{{{
                 numerator = numerator + (L1XE50Scale_Factors[i][j] / L1XE50Scale_Factor_Errors[i][j]); // these errs are already squared
                 denominator = denominator + (1./L1XE50Scale_Factor_Errors[i][j]);
             }else{
-                std::cout << "Something wrong with scale factor j = " << j << " in mubin i = " << i << 
+                std::cout << "\nSomething wrong with scale factor j = " << j << " in mubin i = " << i << 
                     ". skipping..." << std::endl;
                 std::cout << "L1XE50Scale_Factors[i][j] = " << L1XE50Scale_Factors[i][j] << 
-                    "L1XE50Scale_Factor_Errors[i][j] = " << L1XE50Scale_Factor_Errors[i][j] << std::endl;
+                    "\tL1XE50Scale_Factor_Errors[i][j] = " << L1XE50Scale_Factor_Errors[i][j] << "\n" << std::endl;
             }
         }
         Double_t f_mle = numerator / denominator;
-        if (isnan( f_mle )){
-            std::cout << "Got a NaN value for the mle scale factor in mubin " << i << ": " << f_mle << std::endl;
-            std::cout << "Numerator = " << numerator << std::endl;
-            std::cout << "Denominator = " << denominator << std::endl;
-            std::cout << "L1XE50 Scale Factors: " << std::endl;
-            for (int j = 0 ; j < Number_Scale_Factor_Samples ; j++ ){
-                std::cout << L1XE50Scale_Factors[i][j] << " ";
-            }
-            std::cout << std::endl;
-            std::cout << "L1XE50 Scale Factor Errors: " << std::endl;
-            for (int j = 0 ; j < Number_Scale_Factor_Samples ; j++ ){
-                std::cout << L1XE50Scale_Factor_Errors[i][j] << " ";
-            }
-            std::cout << std::endl;
-        }else{
-            std::cout << "L1XE50 Scale factor for mu bin " << i << " = " << f_mle << std::endl;
-            (l1xe50_corrected_zb_dist)->Scale( f_mle );
-        }
+        std::cout << "L1XE50 Scale factor: " << i << " = " << f_mle << std::endl;
+        (l1xe50_corrected_zb_dist)->Scale( f_mle );
     }
 }//}}}
 void CorrectL1XE50toZB::Write( TString fname ){//{{{
