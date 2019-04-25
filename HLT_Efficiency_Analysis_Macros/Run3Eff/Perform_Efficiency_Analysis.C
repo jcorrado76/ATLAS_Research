@@ -31,6 +31,7 @@ TFile* threeEfficiencies( const TString& AlgAName , const TString& AlgBName )
   TTree* myMuonTree = (TTree*)muonFile->Get("tree");
   Int_t muonNentries = myMuonTree->GetEntries();
   parameters->Set_MuonNentries( muonNentries );
+
   // open the zero bias tree 
   TString zerobiasFilePath = DATA_PATH + zerobiasFileName;
   TFile * zeroBiasFile = TFile::Open(zerobiasFilePath, "READ");
@@ -66,14 +67,12 @@ TFile* threeEfficiencies( const TString& AlgAName , const TString& AlgBName )
   zeroBiasTree->SetBranchAddress(AlgAName,&algAMET);
   zeroBiasTree->SetBranchAddress(AlgBName,&algBMET);
   //zeroBiasTree->SetBranchAddress("metl1",&metl1);
-/*
-  zeroBiasTree->SetBranchAddress("passnoalgL1XE10",&passnoalgL1XE10);
-  zeroBiasTree->SetBranchAddress("passnoalgL1XE30",&passnoalgL1XE30);
-  zeroBiasTree->SetBranchAddress("passnoalgL1XE40",&passnoalgL1XE40);
-  zeroBiasTree->SetBranchAddress("passnoalgL1XE45",&passnoalgL1XE45);
-  */
+  //zeroBiasTree->SetBranchAddress("passnoalgL1XE10",&passnoalgL1XE10);
+  //zeroBiasTree->SetBranchAddress("passnoalgL1XE30",&passnoalgL1XE30);
+  //zeroBiasTree->SetBranchAddress("passnoalgL1XE40",&passnoalgL1XE40);
+  //zeroBiasTree->SetBranchAddress("passnoalgL1XE45",&passnoalgL1XE45);
   zeroBiasTree->SetBranchAddress("actint",&zb_actint);
-  //}}}
+
   // set up muon tree branches to access
   myMuonTree->SetBranchAddress("passmu26med", &passmuon);
   myMuonTree->SetBranchAddress("passmu26varmed", &passmuvarmed);
@@ -103,18 +102,17 @@ TFile* threeEfficiencies( const TString& AlgAName , const TString& AlgBName )
   //IN DETERMINE THRESH I COMPUTE THRESHOLD AFTER ALSO CUTTING ON METL1 TO MAKE HISTOGRAMS
   Int_t numPassnoalgPassProcess1AlgA = 0;
 
-  // determine the threshold needed to keep the trigger rate for algA and algB kept together
+  // determine the threshold needed to keep the trigger rate for algA and algB separately
   Float_t returns = Efficiency_Lib::determineZeroBiasThresh( parameters, true );
 
-  // compute the threshold needed to keep trigger rate for algA and algB separately
+  // get the thresholds needed to keep trigger rate for algA and algB separately
   const Float_t AlgAIndividThresh = parameters->Get_IndividAlgAThresh();
   const Float_t AlgBIndividThresh = parameters->Get_IndividAlgBThresh();
 
-  std::cout << "Returned to threeEfficiencies.C" << std::endl; //{{{
+  std::cout << "Returned to threeEfficiencies.C" << std::endl; 
   std::cout << "AlgAThresh: " << AlgAIndividThresh << std::endl;
   std::cout << "AlgBThresh: " << AlgBIndividThresh << std::endl;
   std::cout << "Using METL1THRESH: " << metl1thresh << std::endl;
-  //}}}
 
   // zero bias total distribution for algA and algB
   NumbRndmProcess1 = 0 ;
@@ -134,31 +132,30 @@ TFile* threeEfficiencies( const TString& AlgAName , const TString& AlgBName )
       NumbRndmProcess1++;
 	  }
 	}
-  //}}}
 
   parameters->Set_NumPassNoAlgPassProcess1(NumbRndmProcess1);
 
-  //the individual fraction needed such that when both algs constrained to keep the same fraction individually,
-  //keep the proper amount when combined
+  // the individual fraction needed such that when both algs constrained to keep the same fraction individually,
+  // keep the proper amount when combined
 
   Float_t bisectionIndividFrac;
 
-  //start bisection timer
+  // start bisection timer
   threeEfficienciesBenchmark->Start("Bisection");
 
-  //run BISECTION
+  // run BISECTION
   Float_t number = Efficiency_Lib::bisection( parameters , algAMETHist, algBMETHist , zeroBiasTree );
 
   const Float_t CombinedThreshAlgA = parameters->Get_CombinedAlgAThresh();
   const Float_t CombinedThreshAlgB = parameters->Get_CombinedAlgBThresh();
 
-  //end bisection timer
+  // end bisection timer
   threeEfficienciesBenchmark->Show("Bisection");
 
-  //END ZEROBIAS TIMER
+  // END ZEROBIAS TIMER
   threeEfficienciesBenchmark->Show("ZeroBias Thresholds");
 
-  //Initialize TEfficiencies {{{
+  // initialize TEfficiencies
   TString astring = AlgAName + " > " + Form(" %.2f", AlgAIndividThresh );
   TString bstring = AlgBName + " > " + Form(" %.2f", AlgBIndividThresh );
   TString cstring = AlgAName+ " > " + Form(" %.2f", CombinedThreshAlgA) + " and " + AlgBName + " > " + Form(" %.2f", CombinedThreshAlgB);
@@ -168,7 +165,6 @@ TFile* threeEfficiencies( const TString& AlgAName , const TString& AlgBName )
   TEfficiency* Bteff = new TEfficiency(bstring , "Efficiency", muonNbins, metMin, metMax);
   TEfficiency* Cteff = new TEfficiency(cstring, "Efficiency", muonNbins, metMin, metMax);
   TEfficiency* Dteff = new TEfficiency(dstring, "Efficiency", muonNbins, metMin, metMax);//combined just L1 cut, 0 on others
-  //}}}
 
   threeEfficienciesBenchmark->Start("Fill TEfficiencies");
 
@@ -177,8 +173,10 @@ TFile* threeEfficiencies( const TString& AlgAName , const TString& AlgBName )
   Float_t muonMetl1 = 0;
   Float_t muonActint = 0;
 
-  std::cout << "Starting to fill TEfficiencies.." << std::endl;//{{{
+  std::cout << "Starting to fill TEfficiencies.." << std::endl;
 
+  // Refactor this into another TSelector that takes in the individ thresholds, actint cut, and returns
+  // efficiencies as initialize above {{{
   Int_t NumMuonPassProcess1WithActintCut = 0 ;
 
   Bool_t isMuon;
@@ -208,7 +206,6 @@ TFile* threeEfficiencies( const TString& AlgAName , const TString& AlgBName )
       }
   	}
   }
-  //}}}
 
   threeEfficienciesBenchmark->Show("Fill TEfficiencies");
 
@@ -220,10 +217,11 @@ TFile* threeEfficiencies( const TString& AlgAName , const TString& AlgBName )
 
   efficiencyCanvas->SetTitle(canvName);
 
-  Ateff->SetLineColor(kBlue);//{{{
+  Ateff->SetLineColor(kBlue);
   Cteff->SetLineColor(kRed);
   Bteff->SetLineColor(kGreen);
   Dteff->SetLineColor(kBlack);
+  //}}}
 
   Ateff->Draw();
   Bteff->Draw("same");
@@ -236,7 +234,6 @@ TFile* threeEfficiencies( const TString& AlgAName , const TString& AlgBName )
   legend->AddEntry(Cteff, cstring);
   legend->AddEntry(Dteff, dstring);
   legend->Draw();
-  //}}}
 
   //compute number muon events actually kept using external macro
   Int_t muonEventsCombined = Efficiency_Lib::determineMuonEventsKeptCombined( AlgAName , CombinedThreshAlgA , AlgBName , CombinedThreshAlgB , muonFilename , metl1thresh );

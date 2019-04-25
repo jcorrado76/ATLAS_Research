@@ -104,6 +104,7 @@ Float_t determineZeroBiasThresh( userInfo* parameters, const Bool_t verbose )//{
     threshTree->SetBranchAddress("passcleancuts", &cleanCutsFlag);
     threshTree->SetBranchAddress("recalbroke", &recalBrokeFlag);
 
+    // get total number of zerobias events to use for denominator in our computed trigger rate
     for (Int_t k = 0; k < passnoAlgNentries; k++)
 	{
 		threshTree->GetEntry(k);
