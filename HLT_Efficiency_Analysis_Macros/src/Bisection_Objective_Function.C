@@ -5,7 +5,11 @@
 
 void Bisection_Objective_Function::Begin(TTree * )
 {
-   TString option = GetOption();
+    TString option = GetOption();
+    TH1F *algACumulativeDistribution = (TH1F*) algAHist->GetCumulative(kFALSE);
+    TH1F *algBCumulativeDistribution = (TH1F*) algBHist->GetCumulative(kFALSE);
+    algAThreshold = computeThresh( algACumulativeDistribution , NumberEventsToKeep );
+    algBThreshold = computeThresh( algBCumulativeDistribution , NumberEventsToKeep );
 }
 
 void Bisection_Objective_Function::SlaveBegin(TTree * )
@@ -15,17 +19,19 @@ void Bisection_Objective_Function::SlaveBegin(TTree * )
 
 Bool_t Bisection_Objective_Function::Process(Long64_t entry)
 {
-   fReader.SetEntry(entry);
-   if ( AlgAPass() && AlgBPass() && PassL1() && PassActint() && IsPassnoAlgOrRndm() && IsClean() ){
-       NumberEventsKept++;
-   }
+    fReader.SetEntry(entry);
+    if ( IsPassnoAlgOrRndm() && PassL1() && PassActint() )
+    {
+        zerobias_events++;
+        if (AlgA* > algAThreshold && AlgB* > algBThreshold)
+        {
+            events_kept++;
+        }
+    }
    return kTRUE;
 }
 
-void Bisection_Objective_Function::SlaveTerminate()
-{
-}
-
+void Bisection_Objective_Function::SlaveTerminate(){}
 void Bisection_Objective_Function::Terminate()
 {
     std::cout << "Number of events kept when " << AlgAName << " > " << AlgAThreshold << " and " << 

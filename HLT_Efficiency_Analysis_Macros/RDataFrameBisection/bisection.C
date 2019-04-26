@@ -1,31 +1,21 @@
-#include "Efficiency_Library.h"
-#include "Bisection_Objective_Function.h"
-
-
-Float_t bisection( userInfo* parameters , TH1F* algAHist , TH1F* algBHist, TTree* passnoalgTree )
 {
-    // Get Parameters from UserInfo {{{
+    using namespace ROOT;
+    ROOT::EnableImplicitMT();
+    RDataFrame data("tree", "PhysicsMain.L1KFnoalgXEtriggers.2016.f731f758_m1659m1710.Run309759.48Runs.root");
+
     const Float_t trigger_rate                          = parameters->Get_Frac(); 
-    Float_t metl1thresh                         = parameters->Get_MetL1Thresh();
-    Float_t actintCut                           = parameters->Get_ActintCut();
-    Int_t epsilon                               = parameters->Get_Epsilon();
-    Float_t passrndmcut                         = parameters->Get_Passrndmcut();
-    // process 1 means ispassnoalg and is l1>50. if i were using zb events, it would just mean passed rndm
-    const Int_t Number_ZeroBias_Events      = parameters->Get_NumThreshPassProcess1();
-    const Float_t BinWidth                      = parameters->Get_BinWidth();
-    const Float_t passnoalgcut                  = parameters->Get_Passnoalgcut();
-    Int_t target = Number_ZeroBias_Events * trigger_rate;
-    //}}}
-    Bisection_Objective_Function* Bisection_Objective = new Bisection_Objective_Function();
-    // printing the number of entries in histograms 
-    std::cout << "Number_ZeroBias_Events: " << Number_ZeroBias_Events << std::endl;
-    std::cout << "algAHist nentries: " << algAHist->GetEntries() << std::endl;
-    std::cout << "algBHist nentries: " << algBHist->GetEntries() << std::endl;
-    // Compute Some Parameters and Initialize Variables {{{
+    const Float_t metl1thresh                           = parameters->Get_MetL1Thresh();
+    const Float_t actintCut                             = parameters->Get_ActintCut();
+    const Int_t epsilon                                 = parameters->Get_Epsilon();
+    const Float_t passrndmcut                           = parameters->Get_Passrndmcut();
+    const Int_t Number_ZeroBias_Events                  = parameters->Get_NumThreshPassProcess1();
+    const Float_t BinWidth                              = parameters->Get_BinWidth();
+    const Float_t passnoalgcut                          = parameters->Get_Passnoalgcut();
+    Int_t num_events_to_keep_at_trigger_rate = Number_ZeroBias_Events * trigger_rate;
     Float_t lwrbnd = 0.5 * trigger_rate;
     Float_t uprbnd = 0.13;
-    Float_t x1,x3; //thresholds of individual algorithms
-    Float_t FractionEventsKeptCombinedCutAtX1,FractionEventsKeptCombinedCutAtX2,FractionEventsKeptCombinedCutAtX3 = 0; //trigger_ratetions of events kept out of passrndm
+    Float_t x1,x3; 
+    Float_t FractionEventsKeptCombinedCutAtX1,FractionEventsKeptCombinedCutAtX2,FractionEventsKeptCombinedCutAtX3 = 0; 
     x1 = lwrbnd;
     x3 = uprbnd;
     Float_t initialGuess = ( x1 + x3 ) / 2.0;
@@ -36,40 +26,29 @@ Float_t bisection( userInfo* parameters , TH1F* algAHist , TH1F* algBHist, TTree
     std::cout << "Number zerobias events * x1: " << numKeepx1 << std::endl;
     std::cout << "Number zerobias events * x2: " << numKeepx2 << std::endl;
     std::cout << "Number zerobias events * x3: " << numKeepx3 << std::endl;
-    //}}}
     //compute the cumulative right hand sum hists{{{
     TH1F *algAMETtarget = (TH1F*) algAHist->GetCumulative(kFALSE);
     TH1F *algBMETtarget = (TH1F*) algBHist->GetCumulative(kFALSE);
     //}}}
-    //rename for clarity later on{{{
+    // set names of histograms{{{
     algAMETtarget->SetName(algAMETtarget->GetName() + (const TString)"A");
     algBMETtarget->SetName(algBMETtarget->GetName() + (const TString)"B");
     //}}}
-    //compute thresholds at boundaris to use
-    Float_t algAMETx1thresh,algAMETx2thresh,algAMETx3thresh,algBMETx1thresh,algBMETx2thresh, algBMETx3thresh;
-    //Display parameters of bisection {{{
-    std::cout << "Number Zero Bias Events: " << Number_ZeroBias_Events << std::endl;
-    std::cout << "Process2 No Actint Cut trigger_ratetion: " << trigger_rate << std::endl;
-    std::cout << "Number of ZeroBias Events to Keep at trigger rate: " << target << std::endl;
 
-    std::cout << "Entering bisection to determine individual fractions to keep trigger rate when combined" << std::endl;
-    std::cout << "Lower Bound: " << lwrbnd << std::endl;
-    std::cout << "Midpoint: " << (lwrbnd+uprbnd)/2. << std::endl;
-    std::cout << "Upper Bound: " << uprbnd << std::endl;
-    std::cout << "Epsilon: " << epsilon << std::endl;
-    //}}}
+    auto PassL1 = [](double x){ return x > metl1thresh; };
+    auto PassActint = [](double x){ return x > actintCut; };
+    auto IsPassnoAlgOrRndm = [](double x1 , x2 , x3 , x4 , x5 ){ return x1 > passnoalgcut || x2 > passnoalgcut ||
+    x3 > passnoalgcut || x4 > passnoalgcut || x5 > passrndmcut;};
 
-    passnoalgTree->SetBranchAddress("actint",&passnoalg_actint);
-    passnoalgTree->SetBranchAddress("passrndm",&passrndm);
-    passnoalgTree->SetBranchAddress("passcleancuts",&passcleancutsflag);
-    passnoalgTree->SetBranchAddress("recalbroke",&recalbrokeflag);
+    auto ZeroBiasData = data.Filter( PassL1, {"metl1"} )
+                               .Filter( PassActint, {"actint"} )
+                               .Filter( IsPassnoAlgOrRndm, {"passnoalgL1XE10","passnoalgL1XE30",
+                                       "passnoalgL1XE40","passnoalgL1XE45", "passrndm"} );
 
-    Bisection_Objective->Set_ActintCut( actintCut );
-    Bisection_Objective->SetL1Thresh( metl1thresh );
-
-    //compute trigger_ratetions kept at initial guesses{{{
-    // TODO: replace these RHS's with function evaluations to bisection objective that returns trigger rate
-    // then delete virtually everything above
+    auto algAHist = ZeroBiasData.Hist1D( algAName );
+    auto algBHist = ZeroBiasData.Hist1D( algBName );
+    auto number_zerobias_events = ZeroBiasData.Count();
+    
     Bisection_Objective->SetNumbToKeep( numKeepx1 );
     zb_tree->Process( Bisection_Objective );
     FractionEventsKeptCombinedCutAtX1 = Bisection_Objective->GetTriggerRate();
@@ -156,7 +135,7 @@ Float_t bisection( userInfo* parameters , TH1F* algAHist , TH1F* algBHist, TTree
         std::cout << "algAMETx2thresh: " << algAMETx2thresh << std::endl;
         std::cout << "algBMETx2thresh: " << algBMETx2thresh << std::endl;
         std::cout << "Trigger Rate at x2: " << FractionEventsKeptCombinedCutAtX2 << std::endl;
-        std::cout << "Condition: " << abs(target - number_events_kept_combined_at_x2) << " > " << epsilon << std::endl;
+        std::cout << "Condition: " << abs(num_events_to_keep_at_trigger_rate - number_events_kept_combined_at_x2) << " > " << epsilon << std::endl;
         outputArray[j+2] = FractionEventsKeptCombinedCutAtX2;
 
         algAThreshDiff = thresholdAarray[j+2] - thresholdAarray[j+1];
@@ -173,9 +152,9 @@ Float_t bisection( userInfo* parameters , TH1F* algAHist , TH1F* algBHist, TTree
 
 
 
-    }while ( abs( number_events_kept_combined_at_x2 - (target) ) > epsilon && (abs(algAThreshDiff) > BinWidth) && (abs(algBThreshDiff) > BinWidth) && ( j <= imax ) );
+    }while ( abs( number_events_kept_combined_at_x2 - (num_events_to_keep_at_trigger_rate) ) > epsilon && (abs(algAThreshDiff) > BinWidth) && (abs(algBThreshDiff) > BinWidth) && ( j <= imax ) );
 
-      if ( abs( number_events_kept_combined_at_x2 - (target) ) <= epsilon || abs(algAThreshDiff) <= BinWidth || abs(algBThreshDiff) <= BinWidth)
+      if ( abs( number_events_kept_combined_at_x2 - (num_events_to_keep_at_trigger_rate) ) <= epsilon || abs(algAThreshDiff) <= BinWidth || abs(algBThreshDiff) <= BinWidth)
       {
         std::cout << "A root at x = " <<  initialGuess << " was found to within one bin: " << BinWidth << " GeV"
                   << " in " << j << " iterations" << std::endl;
@@ -200,4 +179,20 @@ Float_t bisection( userInfo* parameters , TH1F* algAHist , TH1F* algBHist, TTree
     }
 
     return( initialGuess );
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }

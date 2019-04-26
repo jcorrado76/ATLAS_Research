@@ -1,8 +1,16 @@
 
-int Compute_Constraint_Solutions( const TString AlgAName, const TString AlgBName )
+void Compute_Constraint_Solutions( const TString AlgAName, const TString AlgBName )
 {
     /*
-     * This macro is going to take in the names of two algorithms, and return the pairs of points lying on the PPF curve. This will be the curve such that cutting at those thresholds on both of these algorithms together yields an acceptable value for the trigger rate.
+     * Inputs:
+     * AlgAName - (const TString) the name of algA
+     * AlgBName - (const TString) the name of algB
+     * Outputs:
+     * None
+     *
+     * This computes the solution space for the level curve f(ta,tb)=C for some C corresponding to the trigger
+     * rate. 
+     *
      */
 
     userInfo* parameters = new userInfo();
@@ -12,27 +20,38 @@ int Compute_Constraint_Solutions( const TString AlgAName, const TString AlgBName
     parameters->Read_Parameter_File("./parameters.txt");
     float FracAVals[100];
 
-    for (int i =0 ; i < 100;i++)
+    // fix the fraction kept by algA
+    for (int i = 0 ; i < 100 ; i++ )
     {
         FracAVals[i] = 0.0029 + ( i * 0.001271 );
     }
 
+    // determine fractions needed to be kepts by algB to keep the trigger rate
     float FracBVals[100];
 
-    const Float_t frac = parameters->Get_Frac();
+    // get the trigger rate
+    const Float_t trigger_rate = parameters->Get_Frac();
+    // get the L1 cut
     const Float_t metl1thresh = parameters->Get_MetL1Thresh();
+    // get the actint cut
     const Float_t actintCut = parameters->Get_ActintCut();
+    // get acceptible epsilon for bisection
     const Int_t epsilon = parameters->Get_Epsilon();
+    // get the passrndm cut (using it or not)
     const Float_t passrndmcut = parameters->Get_Passrndmcut();
+    // get binwidth for distributions
     const Float_t BinWidth = parameters->Get_BinWidth();
+    // get the passnoalg cut (using it or not)
     const Float_t passnoalgcut     = parameters->Get_Passnoalgcut();
-    const Int_t target = NumPassNoAlgPassedProcess1 * frac;
+    // convert trigger rate to a number of events
+    // TODO: might want to just do this all in fraction space, and compare final fraction to trigger rate
+    const Int_t target = NumPassNoAlgPassedProcess1 * trigger_rate;
 
     std::cout << "NumPassNoAlgPassedProcess1: " << NumPassNoAlgPassedProcess1 << std::endl;
     std::cout << "algAHist nentries: " << algAHist->GetEntries() << std::endl;
     std::cout << "algBHist nentries: " << algBHist->GetEntries() << std::endl;
 
-    Float_t lwrbnd = 0.5 * frac;
+    Float_t lwrbnd = 0.5 * trigger_rate;
     Float_t uprbnd = 0.13;
     Float_t x1,x3; //thresholds of individual algorithms
     Float_t Process2FracX1WithActintCut = 0;
@@ -80,7 +99,7 @@ int Compute_Constraint_Solutions( const TString AlgAName, const TString AlgBName
 
     //print the status
     std::cout << "numPassedProcess1WithActintCut: " << NumPassNoAlgPassedProcess1 << std::endl;
-    std::cout << "Process2 No Actint Cut Fraction: " << frac << std::endl;
+    std::cout << "Process2 No Actint Cut Fraction: " << trigger_rate << std::endl;
     std::cout << "Process 2 with Actint Cut Num to Keep: " << target << std::endl;
 
     std::cout << "Entering bisection to determine individual fractions" << std::endl;
@@ -179,7 +198,7 @@ int Compute_Constraint_Solutions( const TString AlgAName, const TString AlgBName
     do{
         j++;
         std::cout << "Inside iteration number: " << j << std::endl;
-        if ( (Process2FracX1WithActintCut-frac)*(Process2FracX2WithActintCut-frac) < 0 ) //root is in left half of interval
+        if ( (Process2FracX1WithActintCut-trigger_rate)*(Process2FracX2WithActintCut-trigger_rate) < 0 ) //root is in left half of interval
         {
           std::cout << "Root is to the left of " << initialGuess << std::endl;
           Process2FracX3WithActintCut = Process2FracX2WithActintCut;

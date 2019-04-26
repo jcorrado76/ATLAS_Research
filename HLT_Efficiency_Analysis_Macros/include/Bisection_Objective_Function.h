@@ -14,10 +14,15 @@ public :
    TTreeReader     fReader;  
    TTree          *fChain = 0;   
    TString AlgAName, AlgBName;
-   Float_t AlgAThreshold = 0.0;
-   Float_t AlgBThreshold, MetL1Threshold, ActintCut;
-   Int_t NumberEventsKept;
+   Int_t events_kept = 0;
+   Int_t zerobias_events = 0;
+   Int_t number_events_to_keep = 0;
+
+   Float_t AlgAThreshold, AlgBThreshold, MetL1Threshold, ActintCut;
    Float_t RndmCut = 0.5;
+
+   TH1F* algAHist = 0;
+   TH1F* algBHist = 0;
 
    // Readers to access the data (delete the ones you do not need){{{
    TTreeReaderValue<Float_t> AlgA = { fReader, AlgAName };
@@ -78,16 +83,19 @@ public :
    Bool_t AlgBPass(); 
    Bool_t PassL1();
 
-   Int_t GetNumbEventsKeptCombined() const { return NumberEventsKept; }
 
-   void SetAlgAName( TString name ){ AlgAName = name; }
-   void SetAlgBName( TString name ){ AlgBName = name; }
-   void SetAlgAThresh( Float_t thresh ){ AlgAThreshold = thresh; }
-   void SetAlgBThresh( Float_t thresh ){ AlgBThreshold = thresh; }
-   void SetL1Thresh( Float_t thresh ){ MetL1Threshold = thresh; }
-   void SetActintCut( Float_t thresh ){ ActintCut = thresh; }
-   void Clear(){ NumberEventsKept = 0; }
+    void SetAlgAName( TString name ){ AlgAName = name; }
+    void SetAlgBName( TString name ){ AlgBName = name; }
+    void Set_AlgAHist( const TH1F* algAHist ){ algAHist = algAHist }
+    void Set_AlgBHist( const TH1F* algBHist ){ algBHist = algBHist }
+    void SetAlgAThresh( const Float_t thresh ){ AlgAThreshold = thresh; }
+    void SetAlgBThresh( const Float_t thresh ){ AlgBThreshold = thresh; }
+    void SetL1Thresh( const Float_t thresh ){ MetL1Threshold = thresh; }
+    void SetActintCut( const Float_t thresh ){ ActintCut = thresh; }
+    void SetNumbToKeep( const Int_t num ){ number_events_to_keep = num; }
+    void Clear(){ events_kept = 0; }
 
+    float GetTriggerRate(){ return events_kept / zerobias_events; }
 
    ClassDef(Bisection_Objective_Function,0);
 };
