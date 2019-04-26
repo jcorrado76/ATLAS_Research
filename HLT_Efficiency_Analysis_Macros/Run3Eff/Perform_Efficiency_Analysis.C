@@ -1,178 +1,140 @@
 #include "Efficiency_Library.h"
 TFile* threeEfficiencies( const TString& AlgAName , const TString& AlgBName )
 {
-  // path to data
-  TString DATA_PATH = "../../ATLAS_DATA/" ;
-
-  // initialize the parameters object
-  userInfo* parameters = new userInfo();
-  parameters->Set_AlgAName(AlgAName);
-  parameters->Set_AlgBName(AlgBName);
-
-  // read parameters for HLT analysis
-  parameters->Read_Parameter_File("parameter_files/HLTAnalysisParameters.txt");
-
-  // get data filenames
-  TString zerobiasFileName = parameters->Get_ThreshFileName();
-  TString muonFilename = parameters->Get_MuonFileName();
-
-  // create a benchmark for timing the three efficiencies 
-  TBenchmark* threeEfficienciesBenchmark = new TBenchmark();
-
-  // start timing the computation of three efficiencies
-  threeEfficienciesBenchmark->Start("Three Efficiencies");
-
-  // open the muon file
-  const TString muonFilePath = DATA_PATH + muonFilename;
-  TFile * muonFile = TFile::Open(muonFilePath, "READ");
-  TTree* myMuonTree = (TTree*)muonFile->Get("tree");
-  Int_t muonNentries = myMuonTree->GetEntries();
-  parameters->Set_MuonNentries( muonNentries );
-
-  // open the zero bias tree 
-  TString zerobiasFilePath = DATA_PATH + zerobiasFileName;
-  TFile * zeroBiasFile = TFile::Open(zerobiasFilePath, "READ");
-  TTree* zeroBiasTree = (TTree*)zeroBiasFile->Get("tree");
-  Int_t zerobiasNentries = zeroBiasTree->GetEntries();
-  parameters->Set_PassnoalgNentries( zerobiasNentries );
-  
-  // get whether you want to use passnoalg or passrndm data
-  Float_t passnoalgcut = parameters->Get_Passnoalgcut();
-  Float_t passrndmcut = parameters->Get_Passrndmcut();
-
-  // get the l1 cut
-  Float_t metl1thresh = parameters->Get_MetL1Thresh();
-
-  // get the actint cut
-  Float_t actintCut = parameters->Get_ActintCut();
-
-  // set number of muon distribution bins
-  Int_t muonNbins = 200;
-  Int_t nbins = parameters->Get_Nbins();
-  Double_t metMin = parameters->Get_MetMin();
-  Double_t metMax = parameters->Get_MetMax();
-  Int_t NumbRndmProcess1 = 0; Int_t counter1 = 0; Int_t counter2 = 0; Int_t counter3 = 0;
-  Int_t passrndm, numPassMuon,passmuon,passmuvarmed,cleanCutsFlag,recalBrokeFlag;
-  Float_t algAMET,algBMET,metoffrecal,mexoffrecal,meyoffrecal,mexoffrecalmuon, zb_actint,
+    TString DATA_PATH = "../../ATLAS_DATA/" ;
+    userInfo* parameters = new userInfo();
+    parameters->Set_AlgAName(AlgAName);
+    parameters->Set_AlgBName(AlgBName);
+    parameters->Read_Parameter_File("parameter_files/HLTAnalysisParameters.txt");
+    TString zerobiasFileName = parameters->Get_ThreshFileName();
+    TBenchmark* threeEfficienciesBenchmark = new TBenchmark();
+    threeEfficienciesBenchmark->Start("Three Efficiencies");
+    // open zero bias tree {{{
+    TString zerobiasFilePath = DATA_PATH + zerobiasFileName;
+    TFile * zeroBiasFile = TFile::Open(zerobiasFilePath, "READ");
+    TTree* zeroBiasTree = (TTree*)zeroBiasFile->Get("tree");
+    Int_t zerobiasNentries = zeroBiasTree->GetEntries();
+    parameters->Set_PassnoalgNentries( zerobiasNentries );//}}}
+    // get cuts {{{
+    Float_t passnoalgcut = parameters->Get_Passnoalgcut();
+    Float_t passrndmcut = parameters->Get_Passrndmcut();
+    Float_t metl1thresh = parameters->Get_MetL1Thresh();
+    Float_t actintCut = parameters->Get_ActintCut();//}}}
+    Int_t nbins = parameters->Get_Nbins();
+    Double_t metMin = parameters->Get_MetMin();
+    Double_t metMax = parameters->Get_MetMax();
+    Int_t NumbRndmProcess1 = 0; Int_t counter1 = 0; Int_t counter2 = 0; Int_t counter3 = 0;
+    Int_t passrndm, numPassMuon,passmuon,passmuvarmed,cleanCutsFlag,recalBrokeFlag;
+    Float_t algAMET,algBMET,metoffrecal,mexoffrecal,meyoffrecal,mexoffrecalmuon, zb_actint,
       meyoffrecalmuon, metl1,metcell,metrefmuon,mexrefmuon,meyrefmuon,metoffrecalmuon;
-  Int_t passnoalgL1XE10,passnoalgL1XE30,passnoalgL1XE40,passnoalgL1XE45;
-  Float_t algAMETx1thresh,algBMETx1thresh;
-  Float_t algAMETx2thresh,algBMETx2thresh;
+    Int_t passnoalgL1XE10,passnoalgL1XE30,passnoalgL1XE40,passnoalgL1XE45;
+    Float_t algAMETx1thresh,algBMETx1thresh;
+    Float_t algAMETx2thresh,algBMETx2thresh;
+    // zerobias branches {{{
+    zeroBiasTree->SetBranchAddress("passrndm", &passrndm);
+    zeroBiasTree->SetBranchAddress(AlgAName,&algAMET);
+    zeroBiasTree->SetBranchAddress(AlgBName,&algBMET);
+    //zeroBiasTree->SetBranchAddress("metl1",&metl1);
+    //zeroBiasTree->SetBranchAddress("passnoalgL1XE10",&passnoalgL1XE10);
+    //zeroBiasTree->SetBranchAddress("passnoalgL1XE30",&passnoalgL1XE30);
+    //zeroBiasTree->SetBranchAddress("passnoalgL1XE40",&passnoalgL1XE40);
+    //zeroBiasTree->SetBranchAddress("passnoalgL1XE45",&passnoalgL1XE45);
+    zeroBiasTree->SetBranchAddress("actint",&zb_actint);//}}}
+    // individual zerobias histograms
+    TH1F *AlgAHist = new TH1F(AlgAName, "algA", nbins, metMin, metMax);
+    TH1F *AlgBHist = new TH1F(AlgBName, "algB", nbins, metMin, metMax);
 
-  // set up zerobias branches to access
-  zeroBiasTree->SetBranchAddress("passrndm", &passrndm);
-  zeroBiasTree->SetBranchAddress(AlgAName,&algAMET);
-  zeroBiasTree->SetBranchAddress(AlgBName,&algBMET);
-  //zeroBiasTree->SetBranchAddress("metl1",&metl1);
-  //zeroBiasTree->SetBranchAddress("passnoalgL1XE10",&passnoalgL1XE10);
-  //zeroBiasTree->SetBranchAddress("passnoalgL1XE30",&passnoalgL1XE30);
-  //zeroBiasTree->SetBranchAddress("passnoalgL1XE40",&passnoalgL1XE40);
-  //zeroBiasTree->SetBranchAddress("passnoalgL1XE45",&passnoalgL1XE45);
-  zeroBiasTree->SetBranchAddress("actint",&zb_actint);
+    //start efficiency timer 
+    threeEfficienciesBenchmark->Start("ZeroBias Thresholds");
 
-  // set up muon tree branches to access
-  myMuonTree->SetBranchAddress("passmu26med", &passmuon);
-  myMuonTree->SetBranchAddress("passmu26varmed", &passmuvarmed);
-  myMuonTree->SetBranchAddress("passcleancuts", &cleanCutsFlag);
-  myMuonTree->SetBranchAddress("recalbroke", &recalBrokeFlag);
-  myMuonTree->SetBranchAddress("metoffrecal", &metoffrecal);
-  myMuonTree->SetBranchAddress("mexoffrecal", &mexoffrecal);
-  myMuonTree->SetBranchAddress("meyoffrecal", &meyoffrecal);
-  myMuonTree->SetBranchAddress("metoffrecalmuon", &metoffrecalmuon);
-  myMuonTree->SetBranchAddress("mexoffrecalmuon", &mexoffrecalmuon);
-  myMuonTree->SetBranchAddress("meyoffrecalmuon", &meyoffrecalmuon);
-  myMuonTree->SetBranchAddress("metrefmuon", &metrefmuon);
-  myMuonTree->SetBranchAddress("mexrefmuon", &mexrefmuon);
-  myMuonTree->SetBranchAddress("meyrefmuon", &meyrefmuon);
-  myMuonTree->SetBranchAddress(AlgAName,&algAmuonMET);
-  myMuonTree->SetBranchAddress(AlgBName,&algBmuonMET);
-  //myMuonTree->SetBranchAddress("metl1",&muonMetl1);
-  myMuonTree->SetBranchAddress("actint", &muonActint);
+    //IN DETERMINE THRESH I COMPUTE THRESHOLD AFTER ALSO CUTTING ON METL1 TO MAKE HISTOGRAMS
+    Int_t numPassnoalgPassProcess1AlgA = 0;
 
-  // individual zerobias histograms
-  TH1F *algAMETHist = new TH1F(AlgAName, "algA", nbins, metMin, metMax);
-  TH1F *algBMETHist = new TH1F(AlgBName, "algB", nbins, metMin, metMax);
+    // determine the threshold needed to keep the trigger rate for algA and algB separately
+    Float_t returns = determineZeroBiasThresh( parameters, true );
 
-  //start efficiency timer 
-  threeEfficienciesBenchmark->Start("ZeroBias Thresholds");
+    // get the thresholds needed to keep trigger rate for algA and algB separately
+    const Float_t AlgAIndividThresh = parameters->Get_IndividAlgAThresh();
+    const Float_t AlgBIndividThresh = parameters->Get_IndividAlgBThresh();
 
-  //IN DETERMINE THRESH I COMPUTE THRESHOLD AFTER ALSO CUTTING ON METL1 TO MAKE HISTOGRAMS
-  Int_t numPassnoalgPassProcess1AlgA = 0;
-
-  // determine the threshold needed to keep the trigger rate for algA and algB separately
-  Float_t returns = determineZeroBiasThresh( parameters, true );
-
-  // get the thresholds needed to keep trigger rate for algA and algB separately
-  const Float_t AlgAIndividThresh = parameters->Get_IndividAlgAThresh();
-  const Float_t AlgBIndividThresh = parameters->Get_IndividAlgBThresh();
-
-  std::cout << "Returned to threeEfficiencies.C" << std::endl; 
-  std::cout << "AlgAThresh: " << AlgAIndividThresh << std::endl;
-  std::cout << "AlgBThresh: " << AlgBIndividThresh << std::endl;
-  std::cout << "Using METL1THRESH: " << metl1thresh << std::endl;
+    std::cout << "Returned to threeEfficiencies.C" << std::endl; 
+    std::cout << "AlgAThresh: " << AlgAIndividThresh << std::endl;
+    std::cout << "AlgBThresh: " << AlgBIndividThresh << std::endl;
+    std::cout << "Using METL1THRESH: " << metl1thresh << std::endl;
 
     // Compute ZeroBias Distribution and NumPassRndm {{{
-    NumbRndmProcess1 = 0 ;
+    NumberZeroBiasEvents = 0 ;
     for (Int_t k = 0; k < zerobiasNentries; k++)
     {
-    zeroBiasTree->GetEntry(k);
-    Bool_t isL1 = metl1 > metl1thresh;
-    Bool_t isactint = zb_actint > actintCut;
-    Bool_t isPassnoalg = passnoalgL1XE10 > passnoalgcut || passnoalgL1XE30 > passnoalgcut ||
-    passnoalgL1XE40 > passnoalgcut || passnoalgL1XE45 > passnoalgcut;
-    Bool_t isPassrndm = passrndm > passrndmcut;
-
-        if ( /*( isL1 ) && ( isactint ) && (isPassnoalg || */isPassrndm/*)*/)
+        zeroBiasTree->GetEntry(k);
+        Bool_t passl1 = metl1 > metl1thresh;
+        Bool_t passactint = zb_actint > actintCut;
+        Bool_t isClean = (cleanCutsFlag > 0.1) && (recalBrokeFlag < 0.1);
+        Bool_t isPassnoalg = passnoalgL1XE10 > passnoalgcut || passnoalgL1XE30 > passnoalgcut ||
+        passnoalgL1XE40 > passnoalgcut || passnoalgL1XE45 > passnoalgcut;
+        Bool_t isPassrndm = passrndm > passrndmcut;
+        if ( (isClean) && ( passl1 ) && ( passactint ) && ( isPassnoalg || isPassrndm ))
         {
-            algAMETHist->Fill(algAMET);
-            algBMETHist->Fill(algBMET);
-            NumbRndmProcess1++;
+            AlgAHist->Fill(algAMET);
+            AlgBHist->Fill(algBMET);
+            NumberZeroBiasEvents++;
         }
     }//}}}
+    parameters->Set_NumPassNoAlgPassProcess1(NumberZeroBiasEvents);
+    Float_t bisectionIndividFrac;
 
-  parameters->Set_NumPassNoAlgPassProcess1(NumbRndmProcess1);
+    // run BISECTION
+    Float_t number = bisection( parameters , AlgAHist, AlgBHist , zeroBiasTree );
+    const Float_t CombinedThreshAlgA = parameters->Get_CombinedAlgAThresh();
+    const Float_t CombinedThreshAlgB = parameters->Get_CombinedAlgBThresh();
 
-  Float_t bisectionIndividFrac;
+    // MUON STUFF NOW
+    // initialize TEfficiencies
+    TString astring = AlgAName + " > " + Form(" %.2f", AlgAIndividThresh );
+    TString bstring = AlgBName + " > " + Form(" %.2f", AlgBIndividThresh );
+    TString cstring = AlgAName+ " > " + Form(" %.2f", CombinedThreshAlgA) + " and " + 
+        AlgBName + " > " + Form(" %.2f", CombinedThreshAlgB);
+    TString dstring = (TString) "L1 > " + Form(" %.2f" , metl1thresh);
 
-  // start bisection timer
-  threeEfficienciesBenchmark->Start("Bisection");
+    TEfficiency* Ateff = new TEfficiency(astring , "Efficiency", muonNbins, metMin, metMax);
+    TEfficiency* Bteff = new TEfficiency(bstring , "Efficiency", muonNbins, metMin, metMax);
+    TEfficiency* Cteff = new TEfficiency(cstring, "Efficiency", muonNbins, metMin, metMax);
+    TEfficiency* Dteff = new TEfficiency(dstring, "Efficiency", muonNbins, metMin, metMax);
 
-  // run BISECTION
-  Float_t number = bisection( parameters , algAMETHist, algBMETHist , zeroBiasTree );
+    Float_t algAmuonMET = 0;
+    Float_t algBmuonMET = 0;
+    Float_t muonMetl1 = 0;
+    Float_t muonActint = 0;
 
-  const Float_t CombinedThreshAlgA = parameters->Get_CombinedAlgAThresh();
-  const Float_t CombinedThreshAlgB = parameters->Get_CombinedAlgBThresh();
+    std::cout << "Starting to fill TEfficiencies.." << std::endl;
 
-  // end bisection timer
-  threeEfficienciesBenchmark->Show("Bisection");
-
-  // END ZEROBIAS TIMER
-  threeEfficienciesBenchmark->Show("ZeroBias Thresholds");
-
-  // initialize TEfficiencies
-  TString astring = AlgAName + " > " + Form(" %.2f", AlgAIndividThresh );
-  TString bstring = AlgBName + " > " + Form(" %.2f", AlgBIndividThresh );
-  TString cstring = AlgAName+ " > " + Form(" %.2f", CombinedThreshAlgA) + " and " + AlgBName + " > " + Form(" %.2f", CombinedThreshAlgB);
-  TString dstring = (TString) "L1 > " + Form(" %.2f" , metl1thresh);
-
-  TEfficiency* Ateff = new TEfficiency(astring , "Efficiency", muonNbins, metMin, metMax);
-  TEfficiency* Bteff = new TEfficiency(bstring , "Efficiency", muonNbins, metMin, metMax);
-  TEfficiency* Cteff = new TEfficiency(cstring, "Efficiency", muonNbins, metMin, metMax);
-  TEfficiency* Dteff = new TEfficiency(dstring, "Efficiency", muonNbins, metMin, metMax);//combined just L1 cut, 0 on others
-
-  threeEfficienciesBenchmark->Start("Fill TEfficiencies");
-
-  Float_t algAmuonMET = 0;
-  Float_t algBmuonMET = 0;
-  Float_t muonMetl1 = 0;
-  Float_t muonActint = 0;
-
-  std::cout << "Starting to fill TEfficiencies.." << std::endl;
-
-    // Refactor this into another TSelector that takes in the individ thresholds, actint cut, and returns
-    // efficiencies as initialize above {{{
     Int_t NumMuonPassProcess1WithActintCut = 0 ;
+    Int_t muonNbins = 200;
+    TString muonFilename = parameters->Get_MuonFileName();
+    const TString muonFilePath = DATA_PATH + muonFilename;
+    TFile * muonFile = TFile::Open(muonFilePath, "READ");
+    TTree* myMuonTree = (TTree*)muonFile->Get("tree");
+    Int_t muonNentries = myMuonTree->GetEntries();
+    parameters->Set_MuonNentries( muonNentries );
 
+    // muon branches {{{
+    myMuonTree->SetBranchAddress("passmu26med", &passmuon);
+    myMuonTree->SetBranchAddress("passmu26varmed", &passmuvarmed);
+    myMuonTree->SetBranchAddress("passcleancuts", &cleanCutsFlag);
+    myMuonTree->SetBranchAddress("recalbroke", &recalBrokeFlag);
+    myMuonTree->SetBranchAddress("metoffrecal", &metoffrecal);
+    myMuonTree->SetBranchAddress("mexoffrecal", &mexoffrecal);
+    myMuonTree->SetBranchAddress("meyoffrecal", &meyoffrecal);
+    myMuonTree->SetBranchAddress("metoffrecalmuon", &metoffrecalmuon);
+    myMuonTree->SetBranchAddress("mexoffrecalmuon", &mexoffrecalmuon);
+    myMuonTree->SetBranchAddress("meyoffrecalmuon", &meyoffrecalmuon);
+    myMuonTree->SetBranchAddress("metrefmuon", &metrefmuon);
+    myMuonTree->SetBranchAddress("mexrefmuon", &mexrefmuon);
+    myMuonTree->SetBranchAddress("meyrefmuon", &meyrefmuon);
+    myMuonTree->SetBranchAddress(AlgAName,&algAmuonMET);
+    myMuonTree->SetBranchAddress(AlgBName,&algBmuonMET);
+    //myMuonTree->SetBranchAddress("metl1",&muonMetl1);
+    myMuonTree->SetBranchAddress("actint", &muonActint); //}}}
     Bool_t isMuon;
     Bool_t isClean;
     for (Int_t l = 0 ; l < muonNentries ; l++)
@@ -191,73 +153,72 @@ TFile* threeEfficiencies( const TString& AlgAName , const TString& AlgBName )
                         metoffrecalmuon,mexoffrecalmuon,meyoffrecalmuon) )
             {
                 Float_t metnomu = computeMetNoMu( mexoffrecal , meyoffrecal , mexoffrecalmuon , meyoffrecalmuon );
-                Ateff->Fill((algAmuonMET > AlgAIndividThresh ) && (muonMetl1 > metl1thresh) && ( muonActint > actintCut ), metnomu);
-                Bteff->Fill((algBmuonMET > AlgBIndividThresh ) && (muonMetl1 > metl1thresh)&& ( muonActint > actintCut ), metnomu);
+                Ateff->Fill((algAmuonMET > AlgAIndividThresh ) && (muonMetl1 > metl1thresh), metnomu);
+                Bteff->Fill((algBmuonMET > AlgBIndividThresh ) && (muonMetl1 > metl1thresh), metnomu);
                 Cteff->Fill(((algAmuonMET > CombinedThreshAlgA) && (algBmuonMET > CombinedThreshAlgB)
-                && ( muonActint > actintCut ) && (muonMetl1 > metl1thresh)), metnomu);
-                Dteff->Fill( muonMetl1 >= metl1thresh && ( muonActint > actintCut ), metnomu);
+                && (muonMetl1 > metl1thresh)), metnomu);
+                Dteff->Fill( muonMetl1 >= metl1thresh , metnomu);
             }
         }
     }
 
-  threeEfficienciesBenchmark->Show("Fill TEfficiencies");
+    threeEfficienciesBenchmark->Show("Fill TEfficiencies");
 
-  const TString canvName = AlgAName + " and " + AlgBName + " Combined Efficiency" + ";Offline Recalibrated MET w/o Muon term [GeV];Efficiency";
+    const TString canvName = AlgAName + " and " + AlgBName + " Combined Efficiency" + ";Offline Recalibrated MET w/o Muon term [GeV];Efficiency";
 
-  TCanvas* efficiencyCanvas = new TCanvas("Efficiency Canvas", "Efficiency Canvas");
+    TCanvas* efficiencyCanvas = new TCanvas("Efficiency Canvas", "Efficiency Canvas");
 
-  efficiencyCanvas->RangeAxis(0,0,500,1.0);
+    efficiencyCanvas->RangeAxis(0,0,500,1.0);
 
-  efficiencyCanvas->SetTitle(canvName);
+    efficiencyCanvas->SetTitle(canvName);
 
-  Ateff->SetLineColor(kBlue);
-  Cteff->SetLineColor(kRed);
-  Bteff->SetLineColor(kGreen);
-  Dteff->SetLineColor(kBlack);
-  //}}}
+    Ateff->SetLineColor(kBlue);
+    Cteff->SetLineColor(kRed);
+    Bteff->SetLineColor(kGreen);
+    Dteff->SetLineColor(kBlack);
+    //}}}
 
-  Ateff->Draw();
-  Bteff->Draw("same");
-  Cteff->Draw("same");
-  Dteff->Draw("same");
+    Ateff->Draw();
+    Bteff->Draw("same");
+    Cteff->Draw("same");
+    Dteff->Draw("same");
 
-  TLegend *legend = new TLegend(0.57,0.15,0.9, 0.4 ,"","NDC");
-  legend->AddEntry(Ateff, astring);
-  legend->AddEntry(Bteff, bstring);
-  legend->AddEntry(Cteff, cstring);
-  legend->AddEntry(Dteff, dstring);
-  legend->Draw();
+    TLegend *legend = new TLegend(0.57,0.15,0.9, 0.4 ,"","NDC");
+    legend->AddEntry(Ateff, astring);
+    legend->AddEntry(Bteff, bstring);
+    legend->AddEntry(Cteff, cstring);
+    legend->AddEntry(Dteff, dstring);
+    legend->Draw();
 
-  //compute number muon events actually kept using external macro
-  Int_t muonEventsCombined = determineMuonEventsKeptCombined( AlgAName , CombinedThreshAlgA , AlgBName , CombinedThreshAlgB , muonFilename , metl1thresh );
+    //compute number muon events actually kept using external macro
+    Int_t muonEventsCombined = determineMuonEventsKeptCombined( AlgAName , CombinedThreshAlgA , AlgBName , CombinedThreshAlgB , muonFilename , metl1thresh );
 
-  parameters->Set_NumPassNoAlgPassProcess1( NumbRndmProcess1 );
-  parameters->Set_NumMuonPassProcess1( NumMuonPassProcess1WithActintCut );
+    parameters->Set_NumPassNoAlgPassProcess1( NumbRndmProcess1 );
+    parameters->Set_NumMuonPassProcess1( NumMuonPassProcess1WithActintCut );
 
-  Int_t NumberMuonEventsProcess2CombinedActintCut = (Cteff->GetPassedHistogram())->GetEntries() ;
-  Int_t NumberMuonEventsProcess2AlgAActintCut = (Ateff->GetPassedHistogram())->GetEntries() ;
-  Int_t NumberMuonEventsProcess2AlgBActintCut = (Bteff->GetPassedHistogram())->GetEntries() ;
+    Int_t NumberMuonEventsProcess2CombinedActintCut = (Cteff->GetPassedHistogram())->GetEntries() ;
+    Int_t NumberMuonEventsProcess2AlgAActintCut = (Ateff->GetPassedHistogram())->GetEntries() ;
+    Int_t NumberMuonEventsProcess2AlgBActintCut = (Bteff->GetPassedHistogram())->GetEntries() ;
 
-  parameters->Set_NumMuonPassProcess2Combined( NumberMuonEventsProcess2CombinedActintCut);
-  parameters->Set_NumMuonPassProcess2AlgA( NumberMuonEventsProcess2AlgAActintCut);
-  parameters->Set_NumMuonPassProcess2AlgB( NumberMuonEventsProcess2AlgBActintCut);
+    parameters->Set_NumMuonPassProcess2Combined( NumberMuonEventsProcess2CombinedActintCut);
+    parameters->Set_NumMuonPassProcess2AlgA( NumberMuonEventsProcess2AlgAActintCut);
+    parameters->Set_NumMuonPassProcess2AlgB( NumberMuonEventsProcess2AlgBActintCut);
 
-  parameters->Set_NumPassNoAlgPassProcess2Combined( NumberMuonEventsProcess2CombinedActintCut);
-  //TODO: pass numPassnoalgPassProcess2AlgA from determinezerobiasthresh to set it here
-  //parameters->setNumPassNoAlgPassProcess2AlgA( numPassnoalgPassProcess2AlgA);
-  //parameters->setNumPassNoAlgPassProcess2AlgB( numPassnoalgPassProcess2AlgB);
+    parameters->Set_NumPassNoAlgPassProcess2Combined( NumberMuonEventsProcess2CombinedActintCut);
+    //TODO: pass numPassnoalgPassProcess2AlgA from determinezerobiasthresh to set it here
+    //parameters->setNumPassNoAlgPassProcess2AlgA( numPassnoalgPassProcess2AlgA);
+    //parameters->setNumPassNoAlgPassProcess2AlgB( numPassnoalgPassProcess2AlgB);
 
+    parameters->Set_NumMuonKeptCombinedAtThresh( muonEventsCombined );
+    parameters->Set_NumTotal((Ateff->GetTotalHistogram())->GetEntries());
 
-  parameters->Set_NumMuonKeptCombinedAtThresh( muonEventsCombined );
-  parameters->Set_NumTotal((Ateff->GetTotalHistogram())->GetEntries());
+    TString fileName = "./RootFiles/" + AlgAName + "_" + AlgBName + "Efficiencies.root";
+    //if file already exists, not opened
+    TFile* rootFile = new TFile(fileName,"CREATE");
 
-  TString fileName = "./RootFiles/" + AlgAName + "_" + AlgBName + "Efficiencies.root";
-  //if file already exists, not opened
-  TFile* rootFile = new TFile(fileName,"CREATE");
-
-  //TODO: add filehandling to use one root file for a given combination, and have it create subfolders within the root file to
-  //store different runs
-  if ( !( rootFile->IsOpen() ) )
+    //TODO: add filehandling to use one root file for a given combination, and have it create subfolders within the root file to
+    //store different runs
+    if ( !( rootFile->IsOpen() ) )
     {
       TString suffix = "";
       std::cout << "Unable to open file" << std::endl;
@@ -269,22 +230,22 @@ TFile* threeEfficiencies( const TString& AlgAName , const TString& AlgBName )
       rootFile->Open( fileName ,"RECREATE");
     }
 
-  std::cout << "Root file successfully opened" << std::endl;
+    std::cout << "Root file successfully opened" << std::endl;
 
-  efficiencyCanvas->Print("./Pictures/" + AlgAName + "_" + AlgBName + "_efficiencies.jpg");
-  Ateff->Write( AlgAName + " Efficiency" );
-  Bteff->Write( bstring );
-  Cteff->Write( cstring );
-  Dteff->Write( "METL1" );
-  efficiencyCanvas->Write("efficiencyCanvas");
+    efficiencyCanvas->Print("./Pictures/" + AlgAName + "_" + AlgBName + "_efficiencies.jpg");
+    Ateff->Write( AlgAName + " Efficiency" );
+    Bteff->Write( bstring );
+    Cteff->Write( cstring );
+    Dteff->Write( "METL1" );
+    efficiencyCanvas->Write("efficiencyCanvas");
 
-  parameters->Print();
-  parameters->Write("parameters");
+    parameters->Print();
+    parameters->Write("parameters");
 
-  Float_t realtime, cputime;
-  threeEfficienciesBenchmark->Summary(realtime ,cputime);
+    Float_t realtime, cputime;
+    threeEfficienciesBenchmark->Summary(realtime ,cputime);
 
-  rootFile->Close();
+    rootFile->Close();
 
-  return( rootFile );
-  }
+    return( rootFile );
+}

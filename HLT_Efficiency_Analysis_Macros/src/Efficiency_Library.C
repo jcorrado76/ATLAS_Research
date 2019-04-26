@@ -81,7 +81,7 @@ Float_t determineZeroBiasThresh( userInfo* parameters, const Bool_t verbose )//{
     }
     TH1F *AlgAHist = new TH1F(algAName, algAName, nbins, metMin, metMax);
     TH1F *AlgBHist = new TH1F(algBName, algBName, nbins, metMin, metMax);
-    //set branch address for zerobias branches
+    // zb branches {{{
 	threshTree->SetBranchAddress(algAName,&algAMET);
 	threshTree->SetBranchAddress(algBName,&algBMET);
     threshTree->SetBranchAddress("metl1",&metl1);
@@ -92,7 +92,7 @@ Float_t determineZeroBiasThresh( userInfo* parameters, const Bool_t verbose )//{
     threshTree->SetBranchAddress("actint",&actint);
     threshTree->SetBranchAddress("passrndm",&passrndm);
     threshTree->SetBranchAddress("passcleancuts", &cleanCutsFlag);
-    threshTree->SetBranchAddress("recalbroke", &recalBrokeFlag);
+    threshTree->SetBranchAddress("recalbroke", &recalBrokeFlag);//}}}
     // get total number of zerobias events to use for denominator in our computed trigger rate
     for (Int_t k = 0; k < passnoAlgNentries; k++)
 	{
@@ -109,50 +109,17 @@ Float_t determineZeroBiasThresh( userInfo* parameters, const Bool_t verbose )//{
 		    AlgBHist->Fill(algBMET);
 		}
     }
-    
-    //compute the threshold to keep appropriate fraction
     TH1F *AlgAtarget = (TH1F*) AlgAHist->GetCumulative(kFALSE);
     TH1F *AlgBtarget = (TH1F*) AlgBHist->GetCumulative(kFALSE);
 	Float_t AlgAThresh = computeThresh(AlgAtarget, numberEventsToKeep);
 	Float_t AlgBThresh = computeThresh(AlgBtarget, numberEventsToKeep);
-
     if (verbose){
         std::cout << algAName << " threshold: " << AlgAThresh << std::endl;
         std::cout << algBName << " threshold: " << AlgBThresh << std::endl;
         std::cout << "target number events to keep: " << numberEventsToKeep << std::endl;
     }
-
-    //determine number of events kept at determined threshold (gives idea of error due to binning)
-	for (Int_t l = 0 ; l < passnoAlgNentries ; l++)
-	{
-		threshTree->GetEntry(l);
-        Bool_t passl1 = metl1 > metL1Thresh ;
-        Bool_t isClean = (cleanCutsFlag > 0.1) && (recalBrokeFlag < 0.1);
-        Bool_t passactint = actint > actintCut;
-        Bool_t isPassnoalg = passnoalgL1XE10 > passnoalgcut || passnoalgL1XE30 > passnoalgcut ||
-        passnoalgL1XE40 > passnoalgcut || passnoalgL1XE45 > passnoalgcut;
-        Bool_t isPassrndm = passrndm > passrndmcut;
-
-
-		if ( (isClean ) && ( passl1 ) && ( passactint ) && ( isPassnoalg || isPassrndm ) )
-		{
-            if (algAMET > AlgAThresh){
-                numberEventsAlgAKept++;
-            }
-            if (algBMET > AlgBThresh){
-                numberEventsAlgBKept++;
-            }
-		}
-	}
-
-    if (verbose){
-        std::cout << "number of events " << algAName << " kept at threshold: " << numberEventsAlgAKept << std::endl;
-        std::cout << "number of events " << algBName << " kept at threshold: " << numberEventsAlgBKept << std::endl;
-    }
-
     parameters->Set_AlgAIndividThresh( AlgAThresh );
     parameters->Set_AlgBIndividThresh( AlgBThresh );
-
     threshFileHandle->Close();
 	return(0);
 }//}}}
