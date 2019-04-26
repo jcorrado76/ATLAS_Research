@@ -1,41 +1,38 @@
 #include "Efficiency_Library.h"
-Float_t computeMetNoMu( const Float_t mexoffrecal , const Float_t meyoffrecal , const Float_t mexoffrecalmuon , const Float_t meyoffrecalmuon )//{{{
+Float_t computeMetNoMu( const Float_t mexoffrecal , const Float_t meyoffrecal ,
+                        const Float_t mexoffrecalmuon , const Float_t meyoffrecalmuon )
 {
+    /*
+     * This function takes in these measurements from the calorimeter and returns metnomu
+     */
+
     Float_t metnomu = sqrt(((mexoffrecal - mexoffrecalmuon) * (mexoffrecal - mexoffrecalmuon)) +
-    ((meyoffrecal - meyoffrecalmuon)*(meyoffrecal - meyoffrecalmuon))); //compute metnomu
+    ((meyoffrecal - meyoffrecalmuon)*(meyoffrecal - meyoffrecalmuon))); 
     return (metnomu);
-}//}}}
-Bool_t passTransverseMassCut( const Float_t metoffrecal , const Float_t mexoffrecal  , const Float_t meyoffrecal ,//{{{
+}
+Bool_t passTransverseMassCut( const Float_t metoffrecal , const Float_t mexoffrecal  , const Float_t meyoffrecal ,
                               const Float_t metoffrecalmuon , const Float_t mexoffrecalmuon , const Float_t meyoffrecalmuon )
 {
+    /*
+     * This function takes in measurements from the calorimeter and determines if the transverse mass
+     * corresponds to that of a W boson
+     */
+
     Float_t wLowerbnd = 40.0;
     Float_t wUpperbnd = 100.0;
-    Float_t wValue = sqrt( 2.0 * metoffrecal * metoffrecalmuon * ( 1 + ( ( mexoffrecal * mexoffrecalmuon + meyoffrecal * meyoffrecalmuon ) /
+    Float_t wValue = sqrt( 2.0 * metoffrecal * metoffrecalmuon * ( 1 + 
+                ( ( mexoffrecal * mexoffrecalmuon + meyoffrecal * meyoffrecalmuon ) /
                            ( metoffrecal * metoffrecalmuon ) ) ) );
     return( (( wValue >= wLowerbnd ) && ( wValue <= wUpperbnd )) );
-}//}}}
-Float_t computeThresh(const TH1F* target, const Float_t numberEventsToKeep)//{{{
+}
+Float_t computeThresh(const TH1F* target, const Float_t numberEventsToKeep)
 {
     Int_t nbin = 0;
     /*
-    Double_t GetBinWithContent(Double_t c, Int_t binx, Int_t firstx = 0, Int_t lastx = 0, Double_t
-    maxdiff = 0) const
+     * Given the right hand cumulative sum histogram and the number of events to keep, find the MET threshold
+     * such that the number of events of MET higher than that threshold is equal to numberEventsToKeep
+     */
     
-    target is a right hand cumulative sum histogram
-    
-    compute first binx in the range [firstx,lastx] for which
-     diff = abs(bin_content-c) <= maxdiff
-     In case several bins in the specified range with diff=0 are found
-     the first bin found is returned in binx.
-     In case several bins in the specified range satisfy diff <=maxdiff
-     the bin with the smallest difference is returned in binx.
-     In all cases the function returns the smallest difference.
-
-     NOTE1: if firstx <= 0, firstx is set to bin 1
-            if (lastx < firstx then firstx is set to the number of bins
-            ie if firstx=0 and lastx=0 (default) the search is on all bins.
-     NOTE2: if maxdiff=0 (default), the first bin with content=c is returned.
- */
     Int_t numberOfBins = target->GetNbinsX();
     //THE PROBLEM WHERE RETURNED ZERO BIN WAS SOLVED BY LETTING TOLERANCE BE SOME LARGE NUMBER
     //THERE WAS NO BIN WHOSE VALUE WAS WITHIN THE PREVIOUS TOLERANCE OF THE numberEventsToKeep, SO
@@ -43,7 +40,7 @@ Float_t computeThresh(const TH1F* target, const Float_t numberEventsToKeep)//{{{
     target->GetBinWithContent( numberEventsToKeep , nbin , 5 , numberOfBins , 2000000 ); 
     Float_t thresh = (target->GetXaxis())->GetBinCenter(nbin);
     return(thresh);
-}//}}}
+}
 Float_t determineZeroBiasThresh( userInfo* parameters, const Bool_t verbose )//{{{
 {
     //this function determines thresh to keep proper trigger rate for process 2 on algs A and B
@@ -73,8 +70,6 @@ Float_t determineZeroBiasThresh( userInfo* parameters, const Bool_t verbose )//{
     Int_t numberEventsAlgBKept = 0;
     Int_t passnoalgL1XE10 , passnoalgL1XE30 , passnoalgL1XE40 , passnoalgL1XE45,passrndm;
     Int_t cleanCutsFlag, recalBrokeFlag;
-
-
     if (verbose){
         std::cout << "DETERMINETHRESH.C" << std::endl;
         std::cout << "using passnoalg datafile: " << threshFileName << std::endl;
@@ -84,26 +79,20 @@ Float_t determineZeroBiasThresh( userInfo* parameters, const Bool_t verbose )//{
         std::cout << "fraction of events to keep: " << frac << std::endl;
         std::cout << "passnoalg nentries: " << passnoAlgNentries << std::endl;
     }
-
-
     TH1F *AlgAHist = new TH1F(algAName, algAName, nbins, metMin, metMax);
     TH1F *AlgBHist = new TH1F(algBName, algBName, nbins, metMin, metMax);
-
     //set branch address for zerobias branches
 	threshTree->SetBranchAddress(algAName,&algAMET);
 	threshTree->SetBranchAddress(algBName,&algBMET);
-    
     threshTree->SetBranchAddress("metl1",&metl1);
     threshTree->SetBranchAddress("passnoalgL1XE10",&passnoalgL1XE10);
     threshTree->SetBranchAddress("passnoalgL1XE30",&passnoalgL1XE30);
     threshTree->SetBranchAddress("passnoalgL1XE40",&passnoalgL1XE40);
     threshTree->SetBranchAddress("passnoalgL1XE45",&passnoalgL1XE45);
-
     threshTree->SetBranchAddress("actint",&actint);
     threshTree->SetBranchAddress("passrndm",&passrndm);
     threshTree->SetBranchAddress("passcleancuts", &cleanCutsFlag);
     threshTree->SetBranchAddress("recalbroke", &recalBrokeFlag);
-
     // get total number of zerobias events to use for denominator in our computed trigger rate
     for (Int_t k = 0; k < passnoAlgNentries; k++)
 	{
@@ -114,21 +103,18 @@ Float_t determineZeroBiasThresh( userInfo* parameters, const Bool_t verbose )//{
         Bool_t isPassnoalg = passnoalgL1XE10 > passnoalgcut || passnoalgL1XE30 > passnoalgcut
         || passnoalgL1XE40 > passnoalgcut || passnoalgL1XE45 > passnoalgcut;
         Bool_t isPassrndm = passrndm > passrndmcut;
-
 		if ( (isClean) && ( passl1 ) && ( passactint ) && ( isPassnoalg || isPassrndm ))
 		{
 		    AlgAHist->Fill(algAMET);
 		    AlgBHist->Fill(algBMET);
 		}
     }
-
     
     //compute the threshold to keep appropriate fraction
     TH1F *AlgAtarget = (TH1F*) AlgAHist->GetCumulative(kFALSE);
     TH1F *AlgBtarget = (TH1F*) AlgBHist->GetCumulative(kFALSE);
 	Float_t AlgAThresh = computeThresh(AlgAtarget, numberEventsToKeep);
 	Float_t AlgBThresh = computeThresh(AlgBtarget, numberEventsToKeep);
-
 
     if (verbose){
         std::cout << algAName << " threshold: " << AlgAThresh << std::endl;
@@ -159,12 +145,10 @@ Float_t determineZeroBiasThresh( userInfo* parameters, const Bool_t verbose )//{
 		}
 	}
 
-
     if (verbose){
         std::cout << "number of events " << algAName << " kept at threshold: " << numberEventsAlgAKept << std::endl;
         std::cout << "number of events " << algBName << " kept at threshold: " << numberEventsAlgBKept << std::endl;
     }
-
 
     parameters->Set_AlgAIndividThresh( AlgAThresh );
     parameters->Set_AlgBIndividThresh( AlgBThresh );
@@ -176,9 +160,6 @@ Float_t determineMuonEventsKeptCombined( const TString& algA, const Float_t thre
                                          const TString& algB, Float_t threshB,
                                          const TString& muonFileName, const Float_t metl1thresh)
 {
-
-    //this function determines process2 for muon events on combined alg
-
 
     //TODO: proof lite this
     //display algs and thresholds

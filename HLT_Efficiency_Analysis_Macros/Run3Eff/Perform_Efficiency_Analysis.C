@@ -1,10 +1,7 @@
 #include "Efficiency_Library.h"
-
-
 TFile* threeEfficiencies( const TString& AlgAName , const TString& AlgBName )
 {
-
-  // define path to data
+  // path to data
   TString DATA_PATH = "../../ATLAS_DATA/" ;
 
   // initialize the parameters object
@@ -12,10 +9,10 @@ TFile* threeEfficiencies( const TString& AlgAName , const TString& AlgBName )
   parameters->Set_AlgAName(AlgAName);
   parameters->Set_AlgBName(AlgBName);
 
-  // read the parameter file for HLT analysis
+  // read parameters for HLT analysis
   parameters->Read_Parameter_File("parameter_files/HLTAnalysisParameters.txt");
 
-  // set data filenames
+  // get data filenames
   TString zerobiasFileName = parameters->Get_ThreshFileName();
   TString muonFilename = parameters->Get_MuonFileName();
 
@@ -103,7 +100,7 @@ TFile* threeEfficiencies( const TString& AlgAName , const TString& AlgBName )
   Int_t numPassnoalgPassProcess1AlgA = 0;
 
   // determine the threshold needed to keep the trigger rate for algA and algB separately
-  Float_t returns = Efficiency_Lib::determineZeroBiasThresh( parameters, true );
+  Float_t returns = determineZeroBiasThresh( parameters, true );
 
   // get the thresholds needed to keep trigger rate for algA and algB separately
   const Float_t AlgAIndividThresh = parameters->Get_IndividAlgAThresh();
@@ -114,29 +111,26 @@ TFile* threeEfficiencies( const TString& AlgAName , const TString& AlgBName )
   std::cout << "AlgBThresh: " << AlgBIndividThresh << std::endl;
   std::cout << "Using METL1THRESH: " << metl1thresh << std::endl;
 
-  // zero bias total distribution for algA and algB
-  NumbRndmProcess1 = 0 ;
-	for (Int_t k = 0; k < zerobiasNentries; k++)
-	{
-	  zeroBiasTree->GetEntry(k);
+    // Compute ZeroBias Distribution and NumPassRndm {{{
+    NumbRndmProcess1 = 0 ;
+    for (Int_t k = 0; k < zerobiasNentries; k++)
+    {
+    zeroBiasTree->GetEntry(k);
     Bool_t isL1 = metl1 > metl1thresh;
     Bool_t isactint = zb_actint > actintCut;
     Bool_t isPassnoalg = passnoalgL1XE10 > passnoalgcut || passnoalgL1XE30 > passnoalgcut ||
     passnoalgL1XE40 > passnoalgcut || passnoalgL1XE45 > passnoalgcut;
     Bool_t isPassrndm = passrndm > passrndmcut;
 
-	  if ( /*( isL1 ) && ( isactint ) && (isPassnoalg || */isPassrndm/*)*/)
-    {
-  		algAMETHist->Fill(algAMET);
-  		algBMETHist->Fill(algBMET);
-      NumbRndmProcess1++;
-	  }
-	}
+        if ( /*( isL1 ) && ( isactint ) && (isPassnoalg || */isPassrndm/*)*/)
+        {
+            algAMETHist->Fill(algAMET);
+            algBMETHist->Fill(algBMET);
+            NumbRndmProcess1++;
+        }
+    }//}}}
 
   parameters->Set_NumPassNoAlgPassProcess1(NumbRndmProcess1);
-
-  // the individual fraction needed such that when both algs constrained to keep the same fraction individually,
-  // keep the proper amount when combined
 
   Float_t bisectionIndividFrac;
 
@@ -144,7 +138,7 @@ TFile* threeEfficiencies( const TString& AlgAName , const TString& AlgBName )
   threeEfficienciesBenchmark->Start("Bisection");
 
   // run BISECTION
-  Float_t number = Efficiency_Lib::bisection( parameters , algAMETHist, algBMETHist , zeroBiasTree );
+  Float_t number = bisection( parameters , algAMETHist, algBMETHist , zeroBiasTree );
 
   const Float_t CombinedThreshAlgA = parameters->Get_CombinedAlgAThresh();
   const Float_t CombinedThreshAlgB = parameters->Get_CombinedAlgBThresh();
@@ -175,37 +169,36 @@ TFile* threeEfficiencies( const TString& AlgAName , const TString& AlgBName )
 
   std::cout << "Starting to fill TEfficiencies.." << std::endl;
 
-  // Refactor this into another TSelector that takes in the individ thresholds, actint cut, and returns
-  // efficiencies as initialize above {{{
-  Int_t NumMuonPassProcess1WithActintCut = 0 ;
+    // Refactor this into another TSelector that takes in the individ thresholds, actint cut, and returns
+    // efficiencies as initialize above {{{
+    Int_t NumMuonPassProcess1WithActintCut = 0 ;
 
-  Bool_t isMuon;
-  Bool_t isClean;
-  for (Int_t l = 0 ; l < muonNentries ; l++)
-  {
-    myMuonTree->GetEntry(l);
-    isMuon = (passmuvarmed > 0.1 || passmuon > 0.1);
-    isClean = (cleanCutsFlag > 0.1) && (recalBrokeFlag < 0.1);
-
-    if ( isMuon && isClean /*&& muonMetl1 > metl1thresh*/)
+    Bool_t isMuon;
+    Bool_t isClean;
+    for (Int_t l = 0 ; l < muonNentries ; l++)
     {
-      NumMuonPassProcess1WithActintCut++;
+        myMuonTree->GetEntry(l);
+        isMuon = (passmuvarmed > 0.1 || passmuon > 0.1);
+        isClean = (cleanCutsFlag > 0.1) && (recalBrokeFlag < 0.1);
+
+        if ( isMuon && isClean && ( muonActint > actintCut ))
+        {
+            if ( muonMetl1 > metl1thresh )
+            {
+              NumMuonPassProcess1WithActintCut++;
+            }
+            if ( passTransverseMassCut(metoffrecal,mexoffrecal,meyoffrecal,
+                        metoffrecalmuon,mexoffrecalmuon,meyoffrecalmuon) )
+            {
+                Float_t metnomu = computeMetNoMu( mexoffrecal , meyoffrecal , mexoffrecalmuon , meyoffrecalmuon );
+                Ateff->Fill((algAmuonMET > AlgAIndividThresh ) && (muonMetl1 > metl1thresh) && ( muonActint > actintCut ), metnomu);
+                Bteff->Fill((algBmuonMET > AlgBIndividThresh ) && (muonMetl1 > metl1thresh)&& ( muonActint > actintCut ), metnomu);
+                Cteff->Fill(((algAmuonMET > CombinedThreshAlgA) && (algBmuonMET > CombinedThreshAlgB)
+                && ( muonActint > actintCut ) && (muonMetl1 > metl1thresh)), metnomu);
+                Dteff->Fill( muonMetl1 >= metl1thresh && ( muonActint > actintCut ), metnomu);
+            }
+        }
     }
-
-    if ( isMuon && isClean && ( muonActint > actintCut ))
-  	{
-      if ( Efficiency_Lib::passTransverseMassCut(metoffrecal,mexoffrecal,meyoffrecal,metoffrecalmuon,mexoffrecalmuon,meyoffrecalmuon) )
-      {
-    	  Float_t metnomu = Efficiency_Lib::computeMetNoMu( mexoffrecal , meyoffrecal , mexoffrecalmuon , meyoffrecalmuon );
-
-        Ateff->Fill((algAmuonMET > AlgAIndividThresh ) /*&& (muonMetl1 > metl1thresh)*/ && ( muonActint > actintCut ), metnomu);
-    	  Bteff->Fill((algBmuonMET > AlgBIndividThresh ) /*&& (muonMetl1 > metl1thresh)*/&& ( muonActint > actintCut ), metnomu);
-    	  Cteff->Fill(((algAmuonMET > CombinedThreshAlgA) && (algBmuonMET > CombinedThreshAlgB)
-        && ( muonActint > actintCut )/*&& (muonMetl1 > metl1thresh)*/), metnomu);
-        Dteff->Fill(/*(muonMetl1 >= metl1thresh) &&*/ ( muonActint > actintCut ), metnomu);
-      }
-  	}
-  }
 
   threeEfficienciesBenchmark->Show("Fill TEfficiencies");
 
@@ -236,7 +229,7 @@ TFile* threeEfficiencies( const TString& AlgAName , const TString& AlgBName )
   legend->Draw();
 
   //compute number muon events actually kept using external macro
-  Int_t muonEventsCombined = Efficiency_Lib::determineMuonEventsKeptCombined( AlgAName , CombinedThreshAlgA , AlgBName , CombinedThreshAlgB , muonFilename , metl1thresh );
+  Int_t muonEventsCombined = determineMuonEventsKeptCombined( AlgAName , CombinedThreshAlgA , AlgBName , CombinedThreshAlgB , muonFilename , metl1thresh );
 
   parameters->Set_NumPassNoAlgPassProcess1( NumbRndmProcess1 );
   parameters->Set_NumMuonPassProcess1( NumMuonPassProcess1WithActintCut );

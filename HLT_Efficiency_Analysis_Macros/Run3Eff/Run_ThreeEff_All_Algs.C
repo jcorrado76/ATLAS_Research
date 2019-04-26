@@ -1,11 +1,6 @@
 #include "TString.h"
 #include "TROOT.h"
-
-//TODO: write some file handling code that generates a folder within TEfficienciesPics and time stamps it to keep everything
-//organized
-
-
-Int_t generateEfficiencies( const TString& folderName = "")
+void generateEfficiencies( const TString& folderName = "")
 {
     //TString algArray[6] = {"metcell","metmht","mettopocl","mettopoclps","mettopoclpuc","mettopoclem"};
     //TString algArray[6] = {"metl1","metcell","metmht","mettopocl","mettopoclps","mettopoclpuc"};
@@ -27,9 +22,4 @@ Int_t generateEfficiencies( const TString& folderName = "")
     gROOT->ProcessLine(".x threeEfficiencies.C(\"metl1kf\", \"metl1mht\")");
     gROOT->ProcessLine(".x threeEfficiencies.C(\"metl1kf\", \"metl1mhtkf\")");
     gROOT->ProcessLine(".x threeEfficiencies.C(\"metl1mht\", \"metl1mhtkf\")");
-
-
-
-  return(0);
-
 }
