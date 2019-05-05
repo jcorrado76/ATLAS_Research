@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2018.12.13)  2 MAY 2019 14:14
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2018.12.13)  2 MAY 2019 15:11
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
@@ -893,18 +893,18 @@ LaTeX Font Info:    Try loading font information for T1+lmtt on input line 4.
 
 (/usr/share/texmf/tex/latex/lm/t1lmtt.fd
 File: t1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
-))
+) [4])
 Overfull \hbox (7.23924pt too wide) in paragraph at lines 14--167
 \T1/lmr/m/n/10.95 For this project, we used the 2015, 2016 and 2017 com-bined \
 T1/lmtt/m/n/10.95 HLTnoalg_L1Z \T1/lmr/m/n/10.95 , \T1/lmtt/m/n/10.95 HLTnoalg_
 L1XE30
  []
 
-[4]
+[5]
 No file thesis.bbl.
 Appendix A.
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 188.
-[5
+[6
 
 
 ]
@@ -916,13 +916,13 @@ Package rerunfilecheck Info: File `thesis.out' has not changed.
 (rerunfilecheck)             Checksum: 615832B921AC039A0831B29B2FA0938F;1089.
  ) 
 Here is how much of TeX's memory you used:
- 11104 strings out of 494847
- 175768 string characters out of 6179079
+ 11105 strings out of 494847
+ 175774 string characters out of 6179079
  309668 words of memory out of 5000000
  14145 multiletter control sequences out of 15000+600000
  61455 words of font info for 54 fonts, out of 8000000 for 9000
  59 hyphenation exceptions out of 8191
- 44i,6n,35p,810b,396s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 44i,5n,35p,810b,412s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texmf/fonts/enc/dvips/lm/lm-ec.enc}{/usr/share/texmf/fonts/enc/dv
 ips/lm/lm-mathex.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-mathsy.enc}{/usr/s
 hare/texmf/fonts/enc/dvips/lm/lm-mathit.enc}{/usr/share/texmf/fonts/enc/dvips/l
@@ -934,10 +934,10 @@ usr/share/texmf/fonts/type1/public/lm/lmr10.pfb></usr/share/texmf/fonts/type1/p
 ublic/lm/lmr8.pfb></usr/share/texmf/fonts/type1/public/lm/lmsy10.pfb></usr/shar
 e/texmf/fonts/type1/public/lm/lmsy8.pfb></usr/share/texmf/fonts/type1/public/lm
 /lmtt10.pfb>
-Output written on thesis.pdf (13 pages, 178739 bytes).
+Output written on thesis.pdf (14 pages, 179704 bytes).
 PDF statistics:
- 229 PDF objects out of 1000 (max. 8388607)
- 201 compressed objects within 3 object streams
- 41 named destinations out of 1000 (max. 500000)
+ 233 PDF objects out of 1000 (max. 8388607)
+ 204 compressed objects within 3 object streams
+ 42 named destinations out of 1000 (max. 500000)
  153 words of extra memory for PDF output out of 10000 (max. 10000000)
 
