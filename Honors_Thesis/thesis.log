@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2018.12.13)  2 MAY 2019 15:11
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2018.12.13)  8 MAY 2019 16:50
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
@@ -912,8 +912,15 @@ Package atveryend Info: Empty hook `AfterLastShipout' on input line 188.
  (./thesis.aux)
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 188.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 188.
-Package rerunfilecheck Info: File `thesis.out' has not changed.
-(rerunfilecheck)             Checksum: 615832B921AC039A0831B29B2FA0938F;1089.
+
+
+Package rerunfilecheck Warning: File `thesis.out' has changed.
+(rerunfilecheck)                Rerun to get outlines right
+(rerunfilecheck)                or use package `bookmark'.
+
+Package rerunfilecheck Info: Checksums for `thesis.out':
+(rerunfilecheck)             Before: 615832B921AC039A0831B29B2FA0938F;1089
+(rerunfilecheck)             After:  E366B7308299C95F8FF03BD880680660;1126.
  ) 
 Here is how much of TeX's memory you used:
  11105 strings out of 494847
@@ -934,7 +941,7 @@ usr/share/texmf/fonts/type1/public/lm/lmr10.pfb></usr/share/texmf/fonts/type1/p
 ublic/lm/lmr8.pfb></usr/share/texmf/fonts/type1/public/lm/lmsy10.pfb></usr/shar
 e/texmf/fonts/type1/public/lm/lmsy8.pfb></usr/share/texmf/fonts/type1/public/lm
 /lmtt10.pfb>
-Output written on thesis.pdf (14 pages, 179704 bytes).
+Output written on thesis.pdf (14 pages, 179727 bytes).
 PDF statistics:
  233 PDF objects out of 1000 (max. 8388607)
  204 compressed objects within 3 object streams
