@@ -13,7 +13,9 @@
 \contentsline {section}{\numberline {1.5}Missing Transverse Momentum}{3}{section.1.5}
 \contentsline {section}{\numberline {1.6}Improving Efficiency Using Combined Algorithms}{3}{section.1.6}
 \contentsline {subsection}{\numberline {1.6.1}Transverse Mass Cut}{4}{subsection.1.6.1}
-\contentsline {section}{\numberline {1.7}Results}{4}{section.1.7}
-\contentsline {section}{\numberline {1.8}Reconstructing the MET Distribution}{4}{section.1.8}
-\contentsline {chapter}{Bibliography}{6}{section*.12}
-\contentsline {chapter}{Appendix \numberline {A}Code}{6}{Appendix.a.A}
+\contentsline {section}{\numberline {1.7}Results}{5}{section.1.7}
+\contentsline {subsection}{\numberline {1.7.1}Algorithms that did not do better combined}{5}{subsection.1.7.1}
+\contentsline {subsection}{\numberline {1.7.2}Algorithms that did do better combined}{6}{subsection.1.7.2}
+\contentsline {section}{\numberline {1.8}Reconstructing the MET Distribution}{7}{section.1.8}
+\contentsline {chapter}{Bibliography}{8}{section*.12}
+\contentsline {chapter}{Appendix \numberline {A}Code}{8}{Appendix.a.A}

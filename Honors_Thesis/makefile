@@ -1,4 +1,4 @@
-TEX = $(wildcard *.tex)
+TEX = $(wildcard sections/*.tex)
 
 
 thesis.pdf: $(TEX)
