@@ -162,12 +162,6 @@ public :
    TTreeReaderValue<Float_t> pufit_met = {fReader, "pufit.met"};
    TTreeReaderValue<Float_t> topocl_met = {fReader, "topocl.met"};
 
-   TTreeReaderValue<Float_t> L1_sumet = {fReader, "L1.sumet"};
-   TTreeReaderValue<Float_t> cell_sumet = {fReader, "cell.sumet"};
-   TTreeReaderValue<Float_t> mht_sumet = {fReader, "mht.sumet"};
-   TTreeReaderValue<Float_t> pufit_sumet = {fReader, "pufit.sumet"};
-   TTreeReaderValue<Float_t> topocl_sumet = {fReader, "topocl.sumet"};
-
    TTreeReaderValue<Bool_t> L1_XE50_passed = {fReader, "L1_XE50.passed"};
    TTreeReaderValue<Bool_t> L1_XE55_passed = {fReader, "L1_XE55.passed"};
    TTreeReaderValue<Bool_t> L1_XE60_passed = {fReader, "L1_XE60.passed"};
