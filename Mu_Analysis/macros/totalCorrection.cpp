@@ -7,6 +7,7 @@
     TChain* zb_chain = new TChain( "METTree" , "zb_chain" );
     TChain* jetm10_chain = new TChain( "METTree", "jetm10chain");
 
+    std::cout << "Initializing analysis objects..." << std::endl;
     // initialize analysis objects
     ComputeL1XE30toZBEfficiency* computeL1XE30toZBEfficiency = new ComputeL1XE30toZBEfficiency();
     CorrectL1XE30toZB* correctL1XE30ToZB = new CorrectL1XE30toZB();

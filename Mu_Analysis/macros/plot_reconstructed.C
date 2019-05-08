@@ -44,8 +44,10 @@
     TString y_axis_label = "Fraction of events / 5 GeV";
 
     // reconstruction thresholds
-    Int_t L1XE30BinThreshes[7] = {6,11,14,15,15,12,11}; 
-    Int_t L1XE50BinThreshes[7] = {20,20,20,20,16,18,18};
+    //Int_t L1XE30BinThreshes[7] = {6,11,14,15,15,12,11}; 
+    //Int_t L1XE50BinThreshes[7] = {20,20,20,20,16,18,18};
+    Int_t L1XE30BinThreshes[7] = {11,14,6, 6, 8,12,11}; 
+    Int_t L1XE50BinThreshes[7] = {25,24,13,11,10,18,18};
 
     TString outFileName = "";
     for (int i = 0; i <= hlt_zb_l1_zb_distributions->GetLast(); i++){
