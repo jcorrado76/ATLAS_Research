@@ -1,7 +1,7 @@
 TEX = $(wildcard sections/*.tex)
 
 
-thesis.pdf: $(TEX)
+thesis.pdf: thesis.tex $(TEX)
 	pdflatex -shell-escape thesis.tex
 
 clean:

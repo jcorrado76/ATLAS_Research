@@ -6,7 +6,7 @@ The maximum energy possible to accelerate the particles to in the LHC is directl
 In order to achieve the design energy of 7 TeV per proton, it was necessary to have a circumference of 27km, and to use some of the most powerful dipoles and radiofrequency cavities in existence. 
 Inside the pipes where the protons travel, a very strong vacuum is required, and so the pressure in some parts is over $10^{-9}Pa$. 
 The beams are made up of cylinder-like bunches. 
-Using these bunches, the expectde number of collisiosn is $10^{34}$ per $cm^2$ per second. 
+Using these bunches, the expected number of collisions is $10^{34}$ per $cm^2$ per second. 
 The time between bunches is about $25ns$, so in the entire circumference of the LHC, there are about $3550$ bunches.
 \section{ATLAS Experiment}
 \textbf{ATLAS (A Toroidal LHC ApparatuS)} is one of seven particle detector experiments constructed at the Large Hadron Collider, a particle accelerator at CERN. 
@@ -15,30 +15,19 @@ The amount of data collected for each event is around 1MB, which means that ther
 $$10^9Hz(1Mb)=1Pb/s$$
 of data produced. 
 Because this is significantly larger than any practical system can handle, there are \textbf{triggers} that are designed to reject uninteresting events and keep the interesting ones. 
-For ATLAS, the trigger system is deisgned to collect about 200 events epr second. 
+For ATLAS, the trigger system is designed to collect about 200 events per second. 
 This means that ATLAS collects about 4 petabytes of data per year. 
 There are $10^{11}$ protons in a bunch. 
 The proton-proton interaction cross section is approximately $100mB$.
 
 
-\section{Efficiency Curves}
-An efficiency curve illustrates the probability of an algorithm to classify the MET of an event as above or below a threshold value as a function of the MET as determined by another, ``true'' algorithm. 
-So we can ask, what is the efficiency of L1 $> 30$ as a function of CELL MET. What this is means is we are taking the MET as determined by CELL to be the true MET, and we want to know how well (what the probability is) L1 does at classifying events as having MET above or below $30$ at each value of the MET determined by CELL. 
-The way one would read a plot of this efficiency is to pick a value of CELL MET ( on the x-axis ) and ask ``of the number of events CELL determined had this MET, what fraction did L1 determine had MET greater than the threshold [30 GeV]''. 
-The fraction [of the total amount of events CELL determined was in that MET bin] that L1 determined was greater than the threshold would be the height of the efficiency curve at that value of CELL MET.
-A perfect efficiency curve would look like a step function centered at the threshold around which one is trying to classify the MET of events. 
-The fact that efficiency curves in reality do not look like step functions can be understood in terms of Type I and Type II error. 
-The step function for the efficiency curve would be centered on the threshold one is asking for the efficiency about. 
-The fact that the efficiency curve immediately to the left of the threshold is not zero means that, of the events CELL determined had MET lower than the threshold, L1 determined some fraction of those events had an MET higher than the threshold. 
-The fact that the efficiency curve immediately to the right of the threshold is not one means that, of the events CELL said had MET larger than the threshold, L1 said some fraction of those events had MET lower than the threshold. 
-In this case, the fraction of events L1 determined had an MET higher than the threshold, given that CELL said the MET was higher than the threshold, is less than one.
 \section{Trigger System}
 In particle physics, a trigger is a system that uses simple criteria to rapidly decide which events in a particle detector to keep when only a small fraction of the total can be recorded.
 The trigger system is necessary because of limitations in terms of data storage capacity and rates. 
 In general, the experiments typically search for ``interesting'' events (decays of rare particles) that occur at relatively low rates, so we need to have trigger systems that identify events that should be recorded for later analysis. 
 The Large Hadron Collider has an event rate of approximately 1 GHz. 
 The triggers are divided into levels so that each level selects the data that becomes an input for the next level, which has more time available and more information to make better decisions.
-There is the \textbf{Level-1 (L1)} system, which is based on custom eletronics, and the \textbf{High Level Trigger (HLT)} system, that relies on commercial processors. 
+There is the \textbf{Level-1 (L1)} system, which is based on custom electronics, and the \textbf{High Level Trigger (HLT)} system, that relies on commercial processors. 
 The L1 system uses only coarsely segmented data from the calorimeter and muon detectors, while holding all the high-resolution data in pipeline memories in the electronics.
 \section{Missing Transverse Momentum}
 The transverse momentum is defined to be the momentum in the transverse plane to the beam axis. 
@@ -47,3 +36,4 @@ As a result, we know we must conserve transverse momentum.
 The total transverse momentum is defined to be the vector sum of the transverse momenta of the particles produced in the beam pipe. 
 Missing transverse momentum is defined as the vector sum of the transverse momenta of all invisible particles.
 The missing transverse momentum can be understood as the amount by which produced particles are failing to obey conservation of the three-momentum.
+Therefore, by only using muon-triggered events that passed a W transverse mass cut enriches the W and therefore real MET content.
