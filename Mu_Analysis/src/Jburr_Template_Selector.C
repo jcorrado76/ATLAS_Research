@@ -29,6 +29,9 @@ Bool_t Jburr_Template_Selector::isHLT_zb_L1XE50(){ //{{{
     // return true if is hlt passnoalg and l1 xe50
     return (*L1_XE50_passed);
 } //}}}
+Bool_t Jburr_Template_Selector::isData151617(){//{{{
+    return (*RunNumber < 340000. );
+}//}}}
 Bool_t Jburr_Template_Selector::inMuRange( Float_t a , Float_t b ){ //{{{
     // return true if in local mu bin
     return ( *InTimePileup > a && *InTimePileup < b );

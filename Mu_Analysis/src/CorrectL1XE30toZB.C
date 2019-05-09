@@ -17,7 +17,7 @@ void CorrectL1XE30toZB::UpdateFitParameters(){//{{{
 Bool_t CorrectL1XE30toZB::Process(Long64_t entry)//{{{
 {
    fReader.SetLocalEntry(entry);
-    if ( isHLT_zb_L1XE30() && isGoodRun() ){
+    if ( isHLT_zb_L1XE30() && isGoodRun() && isData151617()){
         for ( int i = 0 ; i < Number_Mu_Bins ; i++ ) {
             if ( inMuRange( Mu_Values[i] , Mu_Values[i+1] )){
                 ((TH1D*)HLT_ZB_L1XE30_Corrected_to_ZB_MET_Distribution->At(i))->Fill( *cell_met , ComputeWeight( ((TF1*)L1XE30_Efficiency_Fit_Objects->At(i)) ) );

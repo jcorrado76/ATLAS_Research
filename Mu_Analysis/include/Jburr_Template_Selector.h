@@ -123,6 +123,7 @@ public :
    Bool_t isHLT_zb_L1ZB();
    Bool_t isHLT_zb_L1XE30();
    Bool_t isHLT_zb_L1XE50();
+   Bool_t isData151617();
    Bool_t inMuRange( Float_t , Float_t );
    // getters{{{
    TObjArray* Get_HLT_ZB_L1ZB_MET_Distributions_by_Mubin() const { return HLT_ZB_L1ZB_MET_Distributions_by_Mubin; }
