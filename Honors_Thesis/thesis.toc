@@ -3,20 +3,22 @@
 \contentsline {chapter}{Dedication}{iv}{section*.6}
 \contentsline {chapter}{Acknowledgements}{v}{section*.8}
 \contentsline {chapter}{Table of Contents}{vi}{section*.9}
-\contentsline {chapter}{List of Tables}{vii}{section*.10}
-\contentsline {chapter}{List of Figures}{viii}{section*.11}
+\contentsline {chapter}{List of Tables}{viii}{section*.10}
+\contentsline {chapter}{List of Figures}{ix}{section*.11}
 \contentsline {chapter}{\numberline {1}Introduction}{1}{chapter.1}
 \contentsline {section}{\numberline {1.1}The Large Hadron Collider}{1}{section.1.1}
 \contentsline {section}{\numberline {1.2}ATLAS Experiment}{1}{section.1.2}
 \contentsline {section}{\numberline {1.3}Trigger System}{2}{section.1.3}
 \contentsline {section}{\numberline {1.4}Missing Transverse Momentum}{2}{section.1.4}
 \contentsline {section}{\numberline {1.5}Efficiency Curves}{2}{section.1.5}
-\contentsline {section}{\numberline {1.6}Improving Efficiency Using Combined Algorithms}{3}{section.1.6}
-\contentsline {subsection}{\numberline {1.6.1}Transverse Mass Cut}{4}{subsection.1.6.1}
-\contentsline {section}{\numberline {1.7}Results}{5}{section.1.7}
-\contentsline {subsection}{\numberline {1.7.1}Algorithms that did not do better combined}{5}{subsection.1.7.1}
-\contentsline {subsection}{\numberline {1.7.2}Algorithms that did do better combined}{6}{subsection.1.7.2}
-\contentsline {subsection}{\numberline {1.7.3}Best Combined Algorithms and Best Individual Algorithms}{7}{subsection.1.7.3}
-\contentsline {section}{\numberline {1.8}Predicting the unbiased MET Distribution at Higher Luminosity}{8}{section.1.8}
-\contentsline {chapter}{Bibliography}{9}{section*.12}
-\contentsline {chapter}{Appendix \numberline {A}Code}{9}{Appendix.a.A}
+\contentsline {chapter}{\numberline {2}Improving Efficiency Using Combined Algorithms}{4}{chapter.2}
+\contentsline {subsection}{\numberline {2.0.1}Transverse Mass Cut}{5}{subsection.2.0.1}
+\contentsline {section}{\numberline {2.1}Results}{6}{section.2.1}
+\contentsline {subsection}{\numberline {2.1.1}Algorithms that did not do better combined}{6}{subsection.2.1.1}
+\contentsline {subsection}{\numberline {2.1.2}Algorithms that did do better combined}{7}{subsection.2.1.2}
+\contentsline {subsection}{\numberline {2.1.3}Best Combined Algorithms and Best Individual Algorithms}{8}{subsection.2.1.3}
+\contentsline {chapter}{\numberline {3}Predicting the unbiased MET Distribution at Higher Luminosity}{9}{chapter.3}
+\contentsline {section}{\numberline {3.1}Objective}{9}{section.3.1}
+\contentsline {section}{\numberline {3.2}Efficiency Fits}{10}{section.3.2}
+\contentsline {chapter}{Bibliography}{13}{section*.12}
+\contentsline {chapter}{Appendix \numberline {A}Code}{13}{Appendix.a.A}

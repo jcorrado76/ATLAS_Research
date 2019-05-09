@@ -37,3 +37,14 @@ The total transverse momentum is defined to be the vector sum of the transverse 
 Missing transverse momentum is defined as the vector sum of the transverse momenta of all invisible particles.
 The missing transverse momentum can be understood as the amount by which produced particles are failing to obey conservation of the three-momentum.
 Therefore, by only using muon-triggered events that passed a W transverse mass cut enriches the W and therefore real MET content.
+\section{Efficiency Curves}
+An efficiency curve illustrates the probability of an algorithm to classify the MET of an event as above or below a threshold value as a function of the MET as determined by another, ``true'' algorithm. 
+So we can ask, what is the efficiency of L1 $> 30$ as a function of CELL MET. What this is means is we are taking the MET as determined by CELL to be the true MET, and we want to know how well (what the probability is) L1 does at classifying events as having MET above or below $30$ at each value of the MET determined by CELL. 
+The way one would read a plot of this efficiency is to pick a value of CELL MET ( on the x-axis ) and ask ``of the number of events CELL determined had this MET, what fraction did L1 determine had MET greater than the threshold [30 GeV]''. 
+The fraction [of the total amount of events CELL determined was in that MET bin] that L1 determined was greater than the threshold would be the height of the efficiency curve at that value of CELL MET.
+A perfect efficiency curve would look like a step function centered at the threshold around which one is trying to classify the MET of events. 
+The fact that efficiency curves in reality do not look like step functions can be understood in terms of Type I and Type II error. 
+The step function for the efficiency curve would be centered on the threshold one is asking for the efficiency about. 
+The fact that the efficiency curve immediately to the left of the threshold is not zero means that, of the events CELL determined had MET lower than the threshold, L1 determined some fraction of those events had an MET higher than the threshold. 
+The fact that the efficiency curve immediately to the right of the threshold is not one means that, of the events CELL said had MET larger than the threshold, L1 said some fraction of those events had MET lower than the threshold. 
+In this case, the fraction of events L1 determined had an MET higher than the threshold, given that CELL said the MET was higher than the threshold, is less than one.
