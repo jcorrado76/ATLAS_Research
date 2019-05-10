@@ -10,47 +10,49 @@ In order to compute $C$, we used the fraction of passnoalg data that passed an L
 For our analysis, $C$ turned out to be $0.0059$.
 So we needed to solve the equation $f(\tau_{\alpha},\tau_{\beta})=0.0059$. 
 However, because the parameter space is two-dimensional, and the evaluation of $f$ takes a long time (fraction of events kept by both algorithms, and by each one individually), we introduced the constraint that the two individual fractions kept needed to be the same.
-\subsection{Transverse Mass Cut}
+\section{Transverse Mass Cut}
 In addition to the cuts on the various algorithms, we also needed to introduce a cut on the transverse mass that is detected to ensure we only keep events with a transverse mass close to that of the W boson ($80.379\pm 0.012 GeV/c^2$). 
 We compute the transverse mass using:
 $$m_{T}=\sqrt{2P_{\mu}P_{\nu}(1+\cos{(\phi)})}$$
-In addition to the aforementioned cuts, we also added a cut on the transverse mass for the range $40 \leq m_{T} \leq 100$. 
+In addition to the previously mentioned cuts, we also added a cut on the transverse mass for the range $40 \leq m_{T} \leq 100$. 
 \pagebreak
 \section{Results}
 \subsection{Algorithms that did not do better combined}
-\begin{figure}[h]
-        \centering
-        \includegraphics[scale=0.4]{cell_ps_efficiencies}
-        \caption{Efficiencies of METCELL and METTOPOCLPS}
-        %\label{fig:<+label+>}
-\end{figure}
+For most pairs of algorithms, we found that combining algorithms such that they keep the correct trigger rate did not yield any gain in efficiency. As in figure \ref{no_gain_efficiency}, we see that the red curve lies underneath the green curve. 
 \begin{figure}[h]
         \centering
         \includegraphics[scale=0.4]{topocl_puc_efficiencies}
         \caption{Efficiencies of METTOPOCL and METTOPOCLPUC}
-        %\label{fig:<+label+>}
+        \label{no_gain_efficiency}
 \end{figure}
 \clearpage
 \subsection{Algorithms that did do better combined}
 We found that we were able to achieve an increase in the overall efficiency for some of the pairs of algorithms considered. 
 \begin{figure}[h]
         \centering
-        \includegraphics[scale=0.4]{cell_puc_efficiencies}
-        \caption{Efficiencies of METCELL and METTOPOCLPUC}
-        %\label{fig:<+label+>}
+        \includegraphics[scale=0.4]{cell_mht_efficiencies}
+        \caption{Efficiencies of METCELL and METMHT}
 \end{figure}
 \begin{figure}[h]
         \centering
-        \includegraphics[scale=0.4]{mht_ps_efficiencies}
-        \caption{Efficiencies of METTOPOCL and METTOPOCLPUC}
-        %\label{fig:<+label+>}
+        \includegraphics[scale=0.4]{cell_topocl_efficiencies}
+        \caption{Efficiencies of METCELL and METTOPOCL}
+\end{figure}
+\begin{figure}[h]
+        \centering
+        \includegraphics[scale=0.4]{cell_ps_efficiencies}
+        \caption{Efficiencies of METCELL and METMHT}
+\end{figure}
+\begin{figure}[h]
+        \centering
+        \includegraphics[scale=0.4]{mht_puc_efficiencies}
+        \caption{Efficiencies of METCELL and METTOPOCL}
 \end{figure}
 \clearpage
 \subsection{Best Combined Algorithms and Best Individual Algorithms}
 \begin{figure}[h]
         \centering
         \includegraphics[scale=0.2]{7Efficiencies}
-        \caption{Efficiencies of METTOPOCL and METTOPOCLPUC}
-        %\label{fig:<+label+>}
+        \caption{Best Combined Efficiency Algorithms Versus Best Individual Algorithms}
 \end{figure}
 \clearpage
