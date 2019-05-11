@@ -29,6 +29,8 @@ public :
    Bool_t  Process(Long64_t entry);
    void    Terminate();
    ClassDef(ComputeL1XE30toZBEfficiency,0);
+   TTreeReaderValue<Float_t> HLT_noalg_zb_L1ZB_prescale = {fReader, "HLT_noalg_zb_L1ZB.prescale"};
+   TTreeReaderValue<Bool_t> HLT_noalg_zb_L1ZB_passed = {fReader, "HLT_noalg_zb_L1ZB.passed"};
 
    float L1XE = 30.0;
 };

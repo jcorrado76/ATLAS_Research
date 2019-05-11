@@ -13,7 +13,6 @@
     CorrectL1XE30toZB* correctL1XE30ToZB = new CorrectL1XE30toZB();
     ComputeL1XE50toL1XE30Efficiency* computeL1XE50toL1XE30Efficiency = new ComputeL1XE50toL1XE30Efficiency();
     CorrectL1XE50toZB* CorrectL1XE50DataAllWay = new CorrectL1XE50toZB();
-
     // add data files to tchains
     zb_chain->Add( zb_file_path );
     jetm10_chain->Add( physics_main_file_path );
