@@ -1,9 +1,10 @@
 \chapter{Predicting the unbiased MET Distribution at Higher Luminosity}
 \section{Objective}
-Our goal is to empirically reconstruct the unbiased CELL MET distribution using ZeroBias HLT noalg L1XE30 and HLT noalg L1XE50 data. 
-We want to use this data to determine the CELL MET distribution as a function of $\mu$.
-Because the ZeroBias events only allow us to go up to about $80$ GeV, we use the \texttt{HLTnoalg\_L1XExx} triggered events in order to extend to higher MET.
-We correct the \texttt{HLTnoalg\_L1XExx} data using the efficiency curves determined from lower threshold triggers.
+Our goal is to empirically reconstruct the unbiased CELL MET distribution using \texttt{HLT\_noalg\_L1ZB}, \texttt{HLT\_noalg\_L1XE30} and \texttt{HLT\_noalg\_L1XE50} data. By this data, I mean the events for which these triggers fired. The \texttt{HLT\_noalg\_L1XExx} triggers are triggers that fire randomly, but only select events that have L1 MET greater than xx. 
+As a result, the data selected by these triggers are biased with respect to L1 (except for the \texttt{HLT\_noalg\_L1ZB}). 
+However, we want to use this data to determine the CELL MET distribution as a function of $\mu$.
+Because the ZeroBias events only allow us to go up to about $80$ GeV, we use the \texttt{HLTnoalg\_L1XExx} triggered events in order to extend to higher MET. This is important because knowing the distribution of MET as determined by the CELL algorithm as a function of $\mu$ helps us to better understand the background rate of events and allows us to test models for this rate. This allows us to get a better handle on predicting what kind of rates of events we'll need to account for when designing the triggers and how the increasing luminosity could affect the efficiency of the trigger system.
+As a result of the bias with respect to L1, in order to get the unbiased distribution, we must correct the \texttt{HLTnoalg\_L1XExx} data using the efficiency curves determined from lower threshold triggers back to ZeroBias.
 While performing this correction, it was important to propagate the errors due to the determination in the efficiency, and those due to statistical uncertainties.
 Performing the reconstruction involved several steps:
 \begin{enumerate}

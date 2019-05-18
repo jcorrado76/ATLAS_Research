@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2018.12.13)  9 MAY 2019 22:28
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2018.12.13)  17 MAY 2019 19:57
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
@@ -858,23 +858,18 @@ Overfull \hbox (2.43332pt too wide) in paragraph at lines 134--134
 
 [2
 
-] (./sections/abstract.tex [3
+] (./sections/acknowledgements.tex [3
 
-]) (./sections/dedication.tex [4
-
-])
-(./sections/acknowledgements.tex [5
-
-]) (./thesis.toc [6])
+]) (./thesis.toc)
 \tf@toc=\write7
 \openout7 = `thesis.toc'.
 
- [7] (./thesis.lot)
+ [4] (./thesis.lot)
 \tf@lot=\write8
 \openout8 = `thesis.lot'.
 
 
-[8
+[5
 
 ] (./thesis.lof
 LaTeX Font Info:    Try loading font information for T1+lmtt on input line 10.
@@ -884,7 +879,7 @@ File: t1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
 \tf@lof=\write9
 \openout9 = `thesis.lof'.
 
- [9
+ [6
 
 ]
 (./sections/introduction.tex
@@ -898,45 +893,41 @@ Chapter 2.
 [4
 
 ] [5]
-
-LaTeX Warning: Reference `no_gain_efficiency' on page 6 undefined on input line
- 21.
-
-<./img/topocl_puc_efficiencies.png, id=231, 700.6175pt x 475.7775pt>
+<./img/topocl_puc_efficiencies.png, id=203, 700.6175pt x 475.7775pt>
 File: ./img/topocl_puc_efficiencies.png Graphic file (type png)
 <use ./img/topocl_puc_efficiencies.png>
 Package pdftex.def Info: ./img/topocl_puc_efficiencies.png  used on input line 
-24.
+28.
 (pdftex.def)             Requested size: 280.24203pt x 190.30762pt.
-[6pdfTeX warning (ext4): destination with the same identifier (name{figure.2.1}
-) has been already used, duplicate ignored
+ [6pdfTeX warning (ext4): destination with the same identifier (name{figure.2.1
+}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.28 \clearpage
+l.32 \clearpage
                 <./img/topocl_puc_efficiencies.png>]
-<./img/cell_mht_efficiencies.png, id=236, 700.6175pt x 475.7775pt>
+<./img/cell_mht_efficiencies.png, id=208, 700.6175pt x 475.7775pt>
 File: ./img/cell_mht_efficiencies.png Graphic file (type png)
 <use ./img/cell_mht_efficiencies.png>
-Package pdftex.def Info: ./img/cell_mht_efficiencies.png  used on input line 33
+Package pdftex.def Info: ./img/cell_mht_efficiencies.png  used on input line 37
 .
 (pdftex.def)             Requested size: 280.24203pt x 190.30762pt.
-<./img/cell_topocl_efficiencies.png, id=237, 700.6175pt x 475.7775pt>
+<./img/cell_topocl_efficiencies.png, id=209, 700.6175pt x 475.7775pt>
 File: ./img/cell_topocl_efficiencies.png Graphic file (type png)
 <use ./img/cell_topocl_efficiencies.png>
 Package pdftex.def Info: ./img/cell_topocl_efficiencies.png  used on input line
- 38.
+ 42.
 (pdftex.def)             Requested size: 280.24203pt x 190.30762pt.
-<./img/cell_ps_efficiencies.png, id=238, 700.6175pt x 475.7775pt>
+<./img/cell_ps_efficiencies.png, id=210, 700.6175pt x 475.7775pt>
 File: ./img/cell_ps_efficiencies.png Graphic file (type png)
 <use ./img/cell_ps_efficiencies.png>
-Package pdftex.def Info: ./img/cell_ps_efficiencies.png  used on input line 43.
+Package pdftex.def Info: ./img/cell_ps_efficiencies.png  used on input line 47.
 
 (pdftex.def)             Requested size: 280.24203pt x 190.30762pt.
-<./img/mht_puc_efficiencies.png, id=239, 700.6175pt x 475.7775pt>
+<./img/mht_puc_efficiencies.png, id=211, 700.6175pt x 475.7775pt>
 File: ./img/mht_puc_efficiencies.png Graphic file (type png)
 <use ./img/mht_puc_efficiencies.png>
-Package pdftex.def Info: ./img/mht_puc_efficiencies.png  used on input line 48.
+Package pdftex.def Info: ./img/mht_puc_efficiencies.png  used on input line 52.
 
 (pdftex.def)             Requested size: 280.24203pt x 190.30762pt.
 
@@ -953,32 +944,32 @@ has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.51 \clearpage
+l.55 \clearpage
                pdfTeX warning (ext4): destination with the same identifier (nam
 e{figure.2.3}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.51 \clearpage
+l.55 \clearpage
                 <./img/cell_mht_efficiencies.png> <./img/cell_topocl_efficienci
 es.png>] [8pdfTeX warning (ext4): destination with the same identifier (name{fi
 gure.2.4}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.51 \clearpage
+l.55 \clearpage
                pdfTeX warning (ext4): destination with the same identifier (nam
 e{figure.2.5}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.51 \clearpage
+l.55 \clearpage
                 <./img/cell_ps_efficiencies.png> <./img/mht_puc_efficiencies.pn
 g>]
-<./img/7Efficiencies.png, id=248, 1859.94875pt x 1033.8625pt>
+<./img/7Efficiencies.png, id=221, 1859.94875pt x 1033.8625pt>
 File: ./img/7Efficiencies.png Graphic file (type png)
 <use ./img/7Efficiencies.png>
-Package pdftex.def Info: ./img/7Efficiencies.png  used on input line 55.
+Package pdftex.def Info: ./img/7Efficiencies.png  used on input line 60.
 (pdftex.def)             Requested size: 371.98317pt x 206.76883pt.
  [9
 
@@ -987,45 +978,51 @@ has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.58 \clearpage
+l.63 \clearpage
                 <./img/7Efficiencies.png>]) (./sections/met_reconstruction.tex
 Chapter 3.
 
-Overfull \hbox (12.98798pt too wide) in paragraph at lines 15--17
-\T1/lmr/m/n/10.95 For this project, we used the 2015, 2016 and 2017 com-bined \
-T1/lmtt/m/n/10.95 HLTnoalg_L1ZB \T1/lmr/m/n/10.95 , \T1/lmtt/m/n/10.95 HLTnoalg
-_L1XE30
+Overfull \hbox (33.44301pt too wide) in paragraph at lines 3--10
+\T1/lmr/m/n/10.95 Our goal is to em-pir-i-cally re-con-struct the un-bi-ased CE
+LL MET dis-tri-bu-tion us-ing \T1/lmtt/m/n/10.95 HLT_noalg_L1ZB\T1/lmr/m/n/10.9
+5 ,
  []
 
 [10
 
 
 ]
-<./img/L1XE30Efficiency_Curves.png, id=262, 2826.56pt x 1505.625pt>
+Overfull \hbox (12.98798pt too wide) in paragraph at lines 16--18
+\T1/lmr/m/n/10.95 For this project, we used the 2015, 2016 and 2017 com-bined \
+T1/lmtt/m/n/10.95 HLTnoalg_L1ZB \T1/lmr/m/n/10.95 , \T1/lmtt/m/n/10.95 HLTnoalg
+_L1XE30
+ []
+
+<./img/L1XE30Efficiency_Curves.png, id=232, 2826.56pt x 1505.625pt>
 File: ./img/L1XE30Efficiency_Curves.png Graphic file (type png)
 <use ./img/L1XE30Efficiency_Curves.png>
 Package pdftex.def Info: ./img/L1XE30Efficiency_Curves.png  used on input line 
-43.
+44.
 (pdftex.def)             Requested size: 339.17256pt x 180.6672pt.
-<./img/L1XE30Efficiency_Fits.png, id=263, 2826.56pt x 1505.625pt>
+<./img/L1XE30Efficiency_Fits.png, id=233, 2826.56pt x 1505.625pt>
 File: ./img/L1XE30Efficiency_Fits.png Graphic file (type png)
 <use ./img/L1XE30Efficiency_Fits.png>
-Package pdftex.def Info: ./img/L1XE30Efficiency_Fits.png  used on input line 48
+Package pdftex.def Info: ./img/L1XE30Efficiency_Fits.png  used on input line 49
 .
 (pdftex.def)             Requested size: 423.96571pt x 225.834pt.
-<./img/L1XE50Efficiency_Curves.png, id=264, 2826.56pt x 1505.625pt>
+<./img/L1XE50Efficiency_Curves.png, id=234, 2826.56pt x 1505.625pt>
 File: ./img/L1XE50Efficiency_Curves.png Graphic file (type png)
 <use ./img/L1XE50Efficiency_Curves.png>
 Package pdftex.def Info: ./img/L1XE50Efficiency_Curves.png  used on input line 
-53.
+54.
 (pdftex.def)             Requested size: 423.96571pt x 225.834pt.
-<./img/L1XE50Efficiency_Fits.png, id=265, 2826.56pt x 1505.625pt>
+<./img/L1XE50Efficiency_Fits.png, id=235, 2826.56pt x 1505.625pt>
 File: ./img/L1XE50Efficiency_Fits.png Graphic file (type png)
 <use ./img/L1XE50Efficiency_Fits.png>
-Package pdftex.def Info: ./img/L1XE50Efficiency_Fits.png  used on input line 58
+Package pdftex.def Info: ./img/L1XE50Efficiency_Fits.png  used on input line 59
 .
 (pdftex.def)             Requested size: 423.96571pt x 225.834pt.
- [11]
+[11]
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
@@ -1037,66 +1034,57 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.61 \clearpage
+l.62 \clearpage
                pdfTeX warning (ext4): destination with the same identifier (nam
 e{figure.3.2}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.61 \clearpage
+l.62 \clearpage
                 <./img/L1XE30Efficiency_Curves.png> <./img/L1XE30Efficiency_Fit
 s.png>] [13pdfTeX warning (ext4): destination with the same identifier (name{fi
 gure.3.3}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.61 \clearpage
+l.62 \clearpage
                pdfTeX warning (ext4): destination with the same identifier (nam
 e{figure.3.4}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.61 \clearpage
+l.62 \clearpage
                 <./img/L1XE50Efficiency_Curves.png> <./img/L1XE50Efficiency_Fit
 s.png>] [14
 
 ]
-Overfull \hbox (1.12494pt too wide) in paragraph at lines 97--101
+Overfull \hbox (1.12494pt too wide) in paragraph at lines 98--102
 \T1/lmr/m/n/10.95 over-all rel-a-tive nor-mal-iza-tion be-tween the \T1/lmtt/m/
 n/10.95 HLT_noalg_L1XExx \T1/lmr/m/n/10.95 data and the \T1/lmtt/m/n/10.95 HLT_
 noalg_L1ZB
  []
 
 ) [15]
-No file thesis.bbl.
 Appendix A.
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 189.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 183.
 [16
 
-
 ]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 189.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 183.
  (./thesis.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 189.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 189.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 183.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 183.
 Package rerunfilecheck Info: File `thesis.out' has not changed.
-(rerunfilecheck)             Checksum: 3ACF3D2013CC386889CB8048A4324E9A;1671.
-
-
-LaTeX Warning: There were undefined references.
-
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
+(rerunfilecheck)             Checksum: 03164087A0DFF5CA5E026E64A857BB58;1543.
  ) 
 Here is how much of TeX's memory you used:
- 11215 strings out of 494847
- 178230 string characters out of 6179079
- 311670 words of memory out of 5000000
- 14197 multiletter control sequences out of 15000+600000
+ 11201 strings out of 494847
+ 178069 string characters out of 6179079
+ 311793 words of memory out of 5000000
+ 14195 multiletter control sequences out of 15000+600000
  67435 words of font info for 56 fonts, out of 8000000 for 9000
  59 hyphenation exceptions out of 8191
- 44i,11n,35p,810b,396s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 44i,11n,35p,810b,412s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texmf/fonts/enc/dvips/lm/lm-mathit.enc}{/usr/share/texmf/fonts/en
 c/dvips/lm/lm-rm.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-mathex.enc}{/usr/s
 hare/texmf/fonts/enc/dvips/lm/lm-mathsy.enc}{/usr/share/texmf/fonts/enc/dvips/l
@@ -1110,10 +1098,10 @@ ublic/lm/lmr10.pfb></usr/share/texmf/fonts/type1/public/lm/lmr6.pfb></usr/share
 msy10.pfb></usr/share/texmf/fonts/type1/public/lm/lmsy8.pfb></usr/share/texmf/f
 onts/type1/public/lm/lmtt10.pfb></usr/share/texlive/texmf-dist/fonts/type1/publ
 ic/amsfonts/symbols/msbm10.pfb>
-Output written on thesis.pdf (25 pages, 592324 bytes).
+Output written on thesis.pdf (22 pages, 597914 bytes).
 PDF statistics:
- 382 PDF objects out of 1000 (max. 8388607)
- 328 compressed objects within 4 object streams
- 85 named destinations out of 1000 (max. 500000)
- 259 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 352 PDF objects out of 1000 (max. 8388607)
+ 301 compressed objects within 4 object streams
+ 78 named destinations out of 1000 (max. 500000)
+ 235 words of extra memory for PDF output out of 10000 (max. 10000000)
 

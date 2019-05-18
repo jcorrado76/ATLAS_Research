@@ -1,26 +1,23 @@
 \BOOKMARK [0][-]{section*.1}{Approval}{}% 1
-\BOOKMARK [0][-]{section*.3}{Abstract}{}% 2
-\BOOKMARK [0][-]{section*.6}{Dedication}{}% 3
-\BOOKMARK [0][-]{section*.8}{Acknowledgements}{}% 4
-\BOOKMARK [0][-]{section*.9}{Table of Contents}{}% 5
-\BOOKMARK [0][-]{section*.10}{List of Tables}{}% 6
-\BOOKMARK [0][-]{section*.11}{List of Figures}{}% 7
-\BOOKMARK [0][-]{chapter.1}{Introduction}{}% 8
-\BOOKMARK [1][-]{section.1.1}{The Large Hadron Collider}{chapter.1}% 9
-\BOOKMARK [1][-]{section.1.2}{ATLAS Experiment}{chapter.1}% 10
-\BOOKMARK [1][-]{section.1.3}{Trigger System}{chapter.1}% 11
-\BOOKMARK [1][-]{section.1.4}{Missing Transverse Momentum}{chapter.1}% 12
-\BOOKMARK [1][-]{section.1.5}{Efficiency Curves}{chapter.1}% 13
-\BOOKMARK [0][-]{chapter.2}{Improving Efficiency Using Combined Algorithms}{}% 14
-\BOOKMARK [1][-]{section.2.1}{Transverse Mass Cut}{chapter.2}% 15
-\BOOKMARK [1][-]{section.2.2}{Results}{chapter.2}% 16
-\BOOKMARK [2][-]{subsection.2.2.1}{Algorithms that did not do better combined}{section.2.2}% 17
-\BOOKMARK [2][-]{subsection.2.2.2}{Algorithms that did do better combined}{section.2.2}% 18
-\BOOKMARK [2][-]{subsection.2.2.3}{Best Combined Algorithms and Best Individual Algorithms}{section.2.2}% 19
-\BOOKMARK [0][-]{chapter.3}{Predicting the unbiased MET Distribution at Higher Luminosity}{}% 20
-\BOOKMARK [1][-]{section.3.1}{Objective}{chapter.3}% 21
-\BOOKMARK [1][-]{section.3.2}{Efficiency Fits}{chapter.3}% 22
-\BOOKMARK [1][-]{section.3.3}{Error Propagation}{chapter.3}% 23
-\BOOKMARK [1][-]{section.3.4}{Relative Normalization}{chapter.3}% 24
-\BOOKMARK [0][-]{section*.12}{Bibliography}{}% 25
-\BOOKMARK [0][-]{Appendix.a.A}{Appendix Code}{}% 26
+\BOOKMARK [0][-]{section*.4}{Acknowledgements}{}% 2
+\BOOKMARK [0][-]{section*.5}{Table of Contents}{}% 3
+\BOOKMARK [0][-]{section*.6}{List of Tables}{}% 4
+\BOOKMARK [0][-]{section*.7}{List of Figures}{}% 5
+\BOOKMARK [0][-]{chapter.1}{Introduction}{}% 6
+\BOOKMARK [1][-]{section.1.1}{The Large Hadron Collider}{chapter.1}% 7
+\BOOKMARK [1][-]{section.1.2}{ATLAS Experiment}{chapter.1}% 8
+\BOOKMARK [1][-]{section.1.3}{Trigger System}{chapter.1}% 9
+\BOOKMARK [1][-]{section.1.4}{Missing Transverse Momentum}{chapter.1}% 10
+\BOOKMARK [1][-]{section.1.5}{Efficiency Curves}{chapter.1}% 11
+\BOOKMARK [0][-]{chapter.2}{Improving Efficiency Using Combined Algorithms}{}% 12
+\BOOKMARK [1][-]{section.2.1}{Signal Selection on Transverse Mass}{chapter.2}% 13
+\BOOKMARK [1][-]{section.2.2}{Results}{chapter.2}% 14
+\BOOKMARK [2][-]{subsection.2.2.1}{Algorithms that did not do better combined}{section.2.2}% 15
+\BOOKMARK [2][-]{subsection.2.2.2}{Algorithms that did do better combined}{section.2.2}% 16
+\BOOKMARK [2][-]{subsection.2.2.3}{Best Combined Algorithms and Best Individual Algorithms}{section.2.2}% 17
+\BOOKMARK [0][-]{chapter.3}{Predicting the unbiased MET Distribution at Higher Luminosity}{}% 18
+\BOOKMARK [1][-]{section.3.1}{Objective}{chapter.3}% 19
+\BOOKMARK [1][-]{section.3.2}{Efficiency Fits}{chapter.3}% 20
+\BOOKMARK [1][-]{section.3.3}{Error Propagation}{chapter.3}% 21
+\BOOKMARK [1][-]{section.3.4}{Relative Normalization}{chapter.3}% 22
+\BOOKMARK [0][-]{Appendix.a.A}{Appendix Code}{}% 23

@@ -6,21 +6,23 @@ The maximum energy possible to accelerate the particles to in the LHC is directl
 In order to achieve the design energy of 7 TeV per proton, it was necessary to have a circumference of 27km, and to use some of the most powerful dipoles and radiofrequency cavities in existence. 
 Inside the pipes where the protons travel, a very strong vacuum is required, and so the pressure in some parts is over $10^{-9}Pa$. 
 The beams are made up of cylinder-like bunches. 
-Using these bunches, the expected number of collisions is $10^{34}$ per $cm^2$ per second. 
-The time between bunches is about $25ns$, so in the entire circumference of the LHC, there are about $3550$ bunches.
+Using these bunches, the expected number of collisions is $10^{34}$ per $cm^2$ per second. If we take into account the cross section of the proton-proton interaction, roughly $100$mBarns ($1\textrm{Barn}=10^{-24}\textrm{cm}^{2}$), then the expected number of proton proton interactions is:
+\begin{align}
+10^{34}\textrm{cm}^{-2}\textrm{s}^{-1}(100\textrm{mBarns})\frac{1 \textrm{Barn}}{1000\textrm{mBarn}}\frac{10^{-24}\textrm{cm}^2}{1\textrm{Barn}}=10^{9}\textrm{s}^{-1}
+		\label{proton-proton collisions per second}
+\end{align}
+The time between bunches is about $25ns$, so in theory, there could be about $3550$ bunches in the entire circumference of the LHC, but in practice there are only usually a maximum of 2556 bunches in either direction when the LHC is filled.
 \section{ATLAS Experiment}
 \textbf{ATLAS (A Toroidal LHC ApparatuS)} is one of seven particle detector experiments constructed at the Large Hadron Collider, a particle accelerator at CERN. 
-When the LHC runs at full energy and intensity, about 600 million proton-proton collisions take place every second inside the ATLAS detector. 
+When the LHC runs at full energy and intensity, there are bunch crossings every 25 nanoseconds, which mean there are about 25 million proton-proton collisions taking place every second inside the ATLAS detector. 
 The amount of data collected for each event is around 1MB, which means that there is approximately:
-$$10^9Hz(1Mb)=1Pb/s$$
+$$25\times 10^6Hz(1Mb)=25Tb/s$$
 of data produced. 
 Because this is significantly larger than any practical system can handle, there are \textbf{triggers} that are designed to reject uninteresting events and keep the interesting ones. 
-For ATLAS, the trigger system is designed to collect about 200 events per second. 
+For ATLAS, the trigger system is designed to run at about 1kHz or 1000 events per second. 
 This means that ATLAS collects about 4 petabytes of data per year. 
 There are $10^{11}$ protons in a bunch. 
 The proton-proton interaction cross section is approximately $100mB$.
-
-
 \section{Trigger System}
 In particle physics, a trigger is a system that uses simple criteria to rapidly decide which events in a particle detector to keep when only a small fraction of the total can be recorded.
 The trigger system is necessary because of limitations in terms of data storage capacity and rates. 
@@ -32,7 +34,7 @@ The L1 system uses only coarsely segmented data from the calorimeter and muon de
 \section{Missing Transverse Momentum}
 The transverse momentum is defined to be the momentum in the transverse plane to the beam axis. 
 Because the protons in the beam pipe collide approximately head-on in opposite directions, we expect the produced particles to have approximately zero momentum. 
-As a result, we know we must conserve transverse momentum. 
+As a result, we know we must conserve transverse momentum. Longitudinal momentum is also conserved, but because it is very difficult to measure the momentum in the direction of the axis of the beam pipe, the detector is not able to measure it. 
 The total transverse momentum is defined to be the vector sum of the transverse momenta of the particles produced in the beam pipe. 
 Missing transverse momentum is defined as the vector sum of the transverse momenta of all invisible particles.
 The missing transverse momentum can be understood as the amount by which produced particles are failing to obey conservation of the three-momentum.

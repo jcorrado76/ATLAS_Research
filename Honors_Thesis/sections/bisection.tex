@@ -1,16 +1,20 @@
 \chapter{Improving Efficiency Using Combined Algorithms}
+For our project, we wanted to improve the efficiency of the algorithms in classifying the MET of a signal event as larger than some MET. The way we do this is by determining the thresholds needed to satisfy the trigger rate based on the fraction of background events kept by the trigger system, and then by using those thresholds to compute an efficiency for the same pair of algorithms to classify a signal event as larger than some value of MET.
+By signal events, we mean events for which the muon trigger fired, which correspond to events for which a muon was detected.
 In this assignment, we wanted to see if we could obtain an increase in efficiency by combining uncorrelated algorithms together subject to the constraint of the trigger rate. The issue is that there are many pairs of thresholds that when combine will keep the proper trigger rate. In the parameter space of all possible combinations of combined thresholds, we have two degrees of freedom in determining what the appropriate thresholds on a pair of algorithms should be. 
-In order to simplify the problem, I imposed the constraint that the two trigger rates for the algorithms had to be the same. Therefore, I removed a degree of freedom in the parameter space by constraining my solution space to pairs of thresholds that satisfy the trigger rate and lie on the line $y=x$. The monotonicty of the fraction of events kept as you change either of the thresholds on the algorithms guarantees that there will be a unique solution to both of these constraints on the parameter space. \\
+In order to simplify the problem, I imposed the constraint that the two trigger rates for the algorithms had to be the same. Therefore, I removed a degree of freedom in the parameter space by constraining my solution space to pairs of thresholds that satisfy the trigger rate and lie on the line $y=x$. The monotonicity of the fraction of events kept as you change either of the thresholds on the algorithms guarantees that there will be a unique solution to both of these constraints on the parameter space. \\
 Once we added the constraint of keeping the same fraction individually, the problem essentially became one-dimensional, and I used the popular bisection root-finding method in order to compute the solution to the optimal pair of thresholds. \\
 This consisted of guessing an individual fraction for each of the algorithms to keep, and then computing what the combined fraction of events kept was. We iterated this process until the combined fraction kept matched the trigger rate to within one bin.
 The level curve describing the set of pairs of thresholds such that the trigger rate constraint is satisfied is given by the constraint:
 $$f(\tau_{\alpha},\tau_{\beta})=C$$
 for some $C$. Here, $f$ is the function representing the fraction of events kept when the algorithms are used together at the same time. 
+This $C$ is determined by the fraction of background events that are kept by the trigger system. 
 In order to compute $C$, we used the fraction of passnoalg data that passed an L1 MET cut of $50$ GeV and a CELL MET cut of $100$ GeV. 
 For our analysis, $C$ turned out to be $0.0059$.
 So we needed to solve the equation $f(\tau_{\alpha},\tau_{\beta})=0.0059$. 
 However, because the parameter space is two-dimensional, and the evaluation of $f$ takes a long time (fraction of events kept by both algorithms, and by each one individually), we introduced the constraint that the two individual fractions kept needed to be the same.
-\section{Transverse Mass Cut}
+In summary, we use the background events in order to compute what the thresholds on the algorithms need to be in order to keep the trigger rate, and then we determine the efficiencies of this combination of algorithms at those thresholds from the signal events. 
+\section{Signal Selection on Transverse Mass}
 In addition to the cuts on the various algorithms, we also needed to introduce a cut on the transverse mass that is detected to ensure we only keep events with a transverse mass close to that of the W boson ($80.379\pm 0.012 GeV/c^2$). 
 We compute the transverse mass using:
 $$m_{T}=\sqrt{2P_{\mu}P_{\nu}(1+\cos{(\phi)})}$$
@@ -50,6 +54,7 @@ We found that we were able to achieve an increase in the overall efficiency for 
 \end{figure}
 \clearpage
 \subsection{Best Combined Algorithms and Best Individual Algorithms}
+During the summer of 2018, the pufit plus cell algorithm trigger was the main one that was actually used for the second part of Run 2.
 \begin{figure}[h]
         \centering
         \includegraphics[scale=0.2]{7Efficiencies}
