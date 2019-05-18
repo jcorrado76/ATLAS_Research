@@ -1,10 +1,10 @@
 \beamer@sectionintoc {1}{The LHC}{3}{0}{1}
-\beamer@sectionintoc {2}{Reconstructing the Unbiased CELL Distribution as function of $\mu $}{8}{0}{2}
-\beamer@sectionintoc {3}{Method}{9}{0}{3}
-\beamer@sectionintoc {4}{Data Used}{10}{0}{4}
-\beamer@sectionintoc {5}{Efficiency Fits}{11}{0}{5}
-\beamer@sectionintoc {6}{Performing Correction}{18}{0}{6}
-\beamer@sectionintoc {7}{Error Propagation}{19}{0}{7}
-\beamer@sectionintoc {8}{Relative Normalization}{22}{0}{8}
-\beamer@sectionintoc {9}{Reconstructed Distributions}{23}{0}{9}
-\beamer@sectionintoc {10}{Appendix}{31}{0}{10}
+\beamer@sectionintoc {2}{Reconstructing the Unbiased CELL Distribution as function of $\mu $}{10}{0}{2}
+\beamer@sectionintoc {3}{Method}{11}{0}{3}
+\beamer@sectionintoc {4}{Data Used}{12}{0}{4}
+\beamer@sectionintoc {5}{Efficiency Fits}{13}{0}{5}
+\beamer@sectionintoc {6}{Performing Correction}{20}{0}{6}
+\beamer@sectionintoc {7}{Error Propagation}{21}{0}{7}
+\beamer@sectionintoc {8}{Relative Normalization}{24}{0}{8}
+\beamer@sectionintoc {9}{Reconstructed Distributions}{25}{0}{9}
+\beamer@sectionintoc {10}{Appendix}{33}{0}{10}
