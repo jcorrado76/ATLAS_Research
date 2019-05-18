@@ -1,4 +1,4 @@
-\beamer@sectionintoc {1}{Objective}{3}{0}{1}
+\beamer@sectionintoc {1}{Reconstructing the Unbiased CELL Distribution as function of $\mu $}{3}{0}{1}
 \beamer@sectionintoc {2}{Method}{4}{0}{2}
 \beamer@sectionintoc {3}{Data Used}{5}{0}{3}
 \beamer@sectionintoc {4}{Efficiency Fits}{6}{0}{4}
