@@ -2,6 +2,7 @@
 % without plots
 %\documentclass[draft]{beamer}
 % with plots
+%\documentclass[]{beamer}
 \documentclass[draft]{beamer}
 
 % Class options include: notes, notesonly, handout, trans,
@@ -38,6 +39,42 @@
 \end{frame}
 \begin{frame}{Table of Contents}
         \tableofcontents
+\end{frame}
+\section{The LHC}
+\begin{frame}{The LHC}
+        \begin{itemize}
+                \item Circumference $27\textrm{km}$
+                \item Design energy of 7TeV per electron
+                \item Expected number of proton-proton collisions is $10^9\textrm{s}^{-1}$
+        \end{itemize}
+\end{frame}
+\begin{frame}{ATLAS}
+        \begin{itemize}
+                \item $1\textrm{Gb}\textrm{s}^{-1}$ is collected
+                \item Trigger system is designed to run at about 1kHz (retain this number of events per second)
+                \item Many events need to be rejected
+        \end{itemize}
+\end{frame}
+\begin{frame}{The Trigger System}
+        \begin{itemize}
+                \item A trigger is a system that uses simple criteria in order to rapidly decide which events to keep when only a small fraction are acceptable 
+                \item The triggers are divided into levels so that each level selects data that becomes and input for the next level which has more time and information to make better decisions
+                \item There is the \textbf{L1} level, which relies on custom electronics, and the \textbf{High Level Trigger} (HLT) system that relies on commercial processors.
+        \end{itemize}
+\end{frame}
+\begin{frame}{Missing Transverse Momentum}
+        \begin{itemize}
+                \item Momentum in the plane transverse to the beam pipe.
+                \item Transverse momentum is conserved (protons collided approximately head on)
+				\item Therefore, we use missing transverse momentum as a measure to see if interesting particles escaped the detector
+        \end{itemize}
+\end{frame}
+\begin{frame}{Efficiency}
+		\begin{itemize}
+				\item Efficiency is a measure of the classification accuracy of one algorithm, relative to another algorithm
+				\item We usually consider the efficiency of cutting on one of the algorithms, as a function of the value given by another algorithm
+				\item A perfect efficiency curve looks like a step function, centered on the value of the cut
+		\end{itemize}
 \end{frame}
 \section{Reconstructing the Unbiased CELL Distribution as function of $\mu$}
 \begin{frame}{Reconstructing the Unbiased CELL Distribution as function of $\mu$}

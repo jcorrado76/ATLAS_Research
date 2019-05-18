@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2018.12.13)  17 MAY 2019 20:14
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2018.12.13)  18 MAY 2019 17:24
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
@@ -966,10 +966,10 @@ e{figure.2.5}) has been already used, duplicate ignored
 l.55 \clearpage
                 <./img/cell_ps_efficiencies.png> <./img/mht_puc_efficiencies.pn
 g>]
-<./img/7Efficiencies.png, id=228, 1859.94875pt x 1033.8625pt>
+<./img/7Efficiencies.png, id=229, 1859.94875pt x 1033.8625pt>
 File: ./img/7Efficiencies.png Graphic file (type png)
 <use ./img/7Efficiencies.png>
-Package pdftex.def Info: ./img/7Efficiencies.png  used on input line 60.
+Package pdftex.def Info: ./img/7Efficiencies.png  used on input line 61.
 (pdftex.def)             Requested size: 371.98317pt x 206.76883pt.
  [9
 
@@ -978,7 +978,7 @@ has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.63 \clearpage
+l.65 \clearpage
                 <./img/7Efficiencies.png>]) (./sections/met_reconstruction.tex
 Chapter 3.
 
@@ -998,25 +998,25 @@ T1/lmtt/m/n/10.95 HLTnoalg_L1ZB \T1/lmr/m/n/10.95 , \T1/lmtt/m/n/10.95 HLTnoalg
 _L1XE30
  []
 
-<./img/L1XE30Efficiency_Curves.png, id=239, 2826.56pt x 1505.625pt>
+<./img/L1XE30Efficiency_Curves.png, id=240, 2826.56pt x 1505.625pt>
 File: ./img/L1XE30Efficiency_Curves.png Graphic file (type png)
 <use ./img/L1XE30Efficiency_Curves.png>
 Package pdftex.def Info: ./img/L1XE30Efficiency_Curves.png  used on input line 
 44.
 (pdftex.def)             Requested size: 339.17256pt x 180.6672pt.
-<./img/L1XE30Efficiency_Fits.png, id=240, 2826.56pt x 1505.625pt>
+<./img/L1XE30Efficiency_Fits.png, id=241, 2826.56pt x 1505.625pt>
 File: ./img/L1XE30Efficiency_Fits.png Graphic file (type png)
 <use ./img/L1XE30Efficiency_Fits.png>
 Package pdftex.def Info: ./img/L1XE30Efficiency_Fits.png  used on input line 49
 .
 (pdftex.def)             Requested size: 423.96571pt x 225.834pt.
-<./img/L1XE50Efficiency_Curves.png, id=241, 2826.56pt x 1505.625pt>
+<./img/L1XE50Efficiency_Curves.png, id=242, 2826.56pt x 1505.625pt>
 File: ./img/L1XE50Efficiency_Curves.png Graphic file (type png)
 <use ./img/L1XE50Efficiency_Curves.png>
 Package pdftex.def Info: ./img/L1XE50Efficiency_Curves.png  used on input line 
 54.
 (pdftex.def)             Requested size: 423.96571pt x 225.834pt.
-<./img/L1XE50Efficiency_Fits.png, id=242, 2826.56pt x 1505.625pt>
+<./img/L1XE50Efficiency_Fits.png, id=243, 2826.56pt x 1505.625pt>
 File: ./img/L1XE50Efficiency_Fits.png Graphic file (type png)
 <use ./img/L1XE50Efficiency_Fits.png>
 Package pdftex.def Info: ./img/L1XE50Efficiency_Fits.png  used on input line 59
@@ -1086,16 +1086,12 @@ Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 208.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 208.
 Package rerunfilecheck Info: File `thesis.out' has not changed.
 (rerunfilecheck)             Checksum: 20F5BD43A9F48E7B88D400F0C31375F6;1638.
-
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
  ) 
 Here is how much of TeX's memory you used:
- 11207 strings out of 494847
- 178153 string characters out of 6179079
- 311793 words of memory out of 5000000
- 14198 multiletter control sequences out of 15000+600000
+ 11208 strings out of 494847
+ 178168 string characters out of 6179079
+ 311935 words of memory out of 5000000
+ 14199 multiletter control sequences out of 15000+600000
  67435 words of font info for 56 fonts, out of 8000000 for 9000
  59 hyphenation exceptions out of 8191
  44i,11n,35p,810b,412s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -1112,10 +1108,10 @@ ublic/lm/lmr10.pfb></usr/share/texmf/fonts/type1/public/lm/lmr6.pfb></usr/share
 msy10.pfb></usr/share/texmf/fonts/type1/public/lm/lmsy8.pfb></usr/share/texmf/f
 onts/type1/public/lm/lmtt10.pfb></usr/share/texlive/texmf-dist/fonts/type1/publ
 ic/amsfonts/symbols/msbm10.pfb>
-Output written on thesis.pdf (23 pages, 600190 bytes).
+Output written on thesis.pdf (23 pages, 599343 bytes).
 PDF statistics:
- 364 PDF objects out of 1000 (max. 8388607)
- 312 compressed objects within 4 object streams
+ 365 PDF objects out of 1000 (max. 8388607)
+ 313 compressed objects within 4 object streams
  81 named destinations out of 1000 (max. 500000)
  243 words of extra memory for PDF output out of 10000 (max. 10000000)
 
