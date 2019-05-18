@@ -3,7 +3,7 @@ ClassImp(ComputeL1XE30toZBEfficiency);
 Bool_t ComputeL1XE30toZBEfficiency::Process(Long64_t entry)//{{{
 {
    fReader.SetLocalEntry(entry);
-   if ( isHLT_zb_L1ZB()  && isGoodRun() && isData151617() ){
+   if ( isHLT_zb_L1ZB()  && isGoodRun() ) {
        Float_t muLow, muHigh;
        for ( int i = 0; i < Number_Mu_Bins ; i++ ){
            muLow = Mu_Values[ i ];
