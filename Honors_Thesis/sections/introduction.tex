@@ -42,9 +42,22 @@ An efficiency curve illustrates the probability of an algorithm to classify the 
 So we can ask, what is the efficiency of L1 $> 30$ as a function of CELL MET. What this is means is we are taking the MET as determined by CELL to be the true MET, and we want to know how well (what the probability is) L1 does at classifying events as having MET above or below $30$ at each value of the MET determined by CELL. 
 The way one would read a plot of this efficiency is to pick a value of CELL MET ( on the x-axis ) and ask ``of the number of events CELL determined had this MET, what fraction did L1 determine had MET greater than the threshold [30 GeV]''. 
 The fraction [of the total amount of events CELL determined was in that MET bin] that L1 determined was greater than the threshold would be the height of the efficiency curve at that value of CELL MET.
-A perfect efficiency curve would look like a step function centered at the threshold around which one is trying to classify the MET of events. 
+A perfect efficiency curve would look like a step function centered at the threshold around which one is trying to classify the MET of events. Consider figure \ref{perfEff}. This is a plot of the efficiency of $L1>60 GeV$ as a function of L1 MET. It is a step function because if you take a point on the x axis lower than the threshold, you would expect there to be no events L1 said was greater than the threshold, thus yielding a zero efficiency. The same reasoning holds for points to the right of the threshold.
 The fact that efficiency curves in reality do not look like step functions can be understood in terms of Type I and Type II error. 
-The step function for the efficiency curve would be centered on the threshold one is asking for the efficiency about. 
+The step function for the efficiency curve would be centered on the threshold one is asking for the efficiency about. Consider figure \ref{imperfEff}. This is a plot of the efficiency of $L1>60 GeV$, as a function of CELL MET.
 The fact that the efficiency curve immediately to the left of the threshold is not zero means that, of the events CELL determined had MET lower than the threshold, L1 determined some fraction of those events had an MET higher than the threshold. 
 The fact that the efficiency curve immediately to the right of the threshold is not one means that, of the events CELL said had MET larger than the threshold, L1 said some fraction of those events had MET lower than the threshold. 
 In this case, the fraction of events L1 determined had an MET higher than the threshold, given that CELL said the MET was higher than the threshold, is less than one.
+\pagebreak
+\begin{figure}[h]
+        \centering
+        \includegraphics[scale=0.125]{perfectEfficiency}
+        \caption{An example of a perfect efficiency curve for $\textrm{L1}>60\textrm{GeV}$}
+        \label{perfEff}
+\end{figure}
+\begin{figure}[h]
+        \centering
+        \includegraphics[scale=0.125]{imperfectEfficiency}
+        \caption{An example of an imperfect efficiency curve for $\textrm{L1}>60\textrm{GeV}$}
+        \label{imperfEff}
+\end{figure}

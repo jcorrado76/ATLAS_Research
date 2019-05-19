@@ -1,15 +1,31 @@
 \addvspace {10\p@ }
+\contentsline {figure}{\numberline {1.1}{\ignorespaces An example of a perfect efficiency curve for $\textrm {L1}>60\textrm {GeV}$}}{4}{figure.1.1}
+\contentsline {figure}{\numberline {1.2}{\ignorespaces An example of an imperfect efficiency curve for $\textrm {L1}>60\textrm {GeV}$}}{4}{figure.1.2}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {2.1}{\ignorespaces Efficiencies of METTOPOCL and METTOPOCLPUC}}{6}{figure.2.1}
-\contentsline {figure}{\numberline {2.2}{\ignorespaces Efficiencies of METCELL and METMHT}}{7}{figure.2.2}
-\contentsline {figure}{\numberline {2.3}{\ignorespaces Efficiencies of METCELL and METTOPOCL}}{7}{figure.2.3}
-\contentsline {figure}{\numberline {2.4}{\ignorespaces Efficiencies of METCELL and METMHT}}{8}{figure.2.4}
-\contentsline {figure}{\numberline {2.5}{\ignorespaces Efficiencies of METCELL and METTOPOCL}}{8}{figure.2.5}
-\contentsline {figure}{\numberline {2.6}{\ignorespaces Best Combined Efficiency Algorithms Versus Best Individual Algorithms}}{9}{figure.2.6}
+\contentsline {figure}{\numberline {2.1}{\ignorespaces Efficiencies of METTOPOCL and METTOPOCLPUC}}{7}{figure.2.1}
+\contentsline {figure}{\numberline {2.2}{\ignorespaces Efficiencies of METCELL and METMHT}}{8}{figure.2.2}
+\contentsline {figure}{\numberline {2.3}{\ignorespaces Efficiencies of METCELL and METTOPOCL}}{8}{figure.2.3}
+\contentsline {figure}{\numberline {2.4}{\ignorespaces Efficiencies of METCELL and METMHT}}{9}{figure.2.4}
+\contentsline {figure}{\numberline {2.5}{\ignorespaces Efficiencies of METCELL and METTOPOCL}}{9}{figure.2.5}
+\contentsline {figure}{\numberline {2.6}{\ignorespaces Best Combined Efficiency Algorithms Versus Best Individual Algorithms}}{10}{figure.2.6}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {3.1}{\ignorespaces Efficiency Curves of L1$>30$ on the \texttt {HLT\_noalg\_L1ZB} data}}{12}{figure.3.1}
-\contentsline {figure}{\numberline {3.2}{\ignorespaces Efficiency Curves of L1$>30$ on the \texttt {HLT\_noalg\_L1ZB} data}}{12}{figure.3.2}
-\contentsline {figure}{\numberline {3.3}{\ignorespaces Efficiency Curves of L1$>50$ on the \texttt {HLT\_noalg\_L1XE30} data}}{13}{figure.3.3}
-\contentsline {figure}{\numberline {3.4}{\ignorespaces Efficiency Fits of L1$>50$ on the \texttt {HLT\_noalg\_L1XE30} data}}{13}{figure.3.4}
+\contentsline {figure}{\numberline {3.1}{\ignorespaces Efficiency Curves of L1$>30$ on the \texttt {HLT\_noalg\_L1ZB} data}}{13}{figure.3.1}
+\contentsline {figure}{\numberline {3.2}{\ignorespaces Efficiency Curves of L1$>30$ on the \texttt {HLT\_noalg\_L1ZB} data}}{13}{figure.3.2}
+\contentsline {figure}{\numberline {3.3}{\ignorespaces Efficiency Curves of L1$>50$ on the \texttt {HLT\_noalg\_L1XE30} data}}{14}{figure.3.3}
+\contentsline {figure}{\numberline {3.4}{\ignorespaces Efficiency Fits of L1$>50$ on the \texttt {HLT\_noalg\_L1XE30} data}}{14}{figure.3.4}
+\contentsline {figure}{\numberline {3.5}{\ignorespaces Reconstructed Zero Bias distribution for $\mu \in [0,10)$}}{17}{figure.3.5}
+\contentsline {figure}{\numberline {3.6}{\ignorespaces Corrected Distributions for $\mu \in [0,10)$}}{17}{figure.3.6}
+\contentsline {figure}{\numberline {3.7}{\ignorespaces Reconstructed Zero Bias distribution for $\mu \in [10,20)$}}{18}{figure.3.7}
+\contentsline {figure}{\numberline {3.8}{\ignorespaces Corrected Distributions for $\mu \in [10,20)$}}{18}{figure.3.8}
+\contentsline {figure}{\numberline {3.9}{\ignorespaces Reconstructed Zero Bias distribution for $\mu \in [20,30)$}}{19}{figure.3.9}
+\contentsline {figure}{\numberline {3.10}{\ignorespaces Corrected Distributions for $\mu \in [20,30)$}}{19}{figure.3.10}
+\contentsline {figure}{\numberline {3.11}{\ignorespaces Reconstructed Zero Bias distribution for $\mu \in [30,40)$}}{20}{figure.3.11}
+\contentsline {figure}{\numberline {3.12}{\ignorespaces Corrected Distributions for $\mu \in [30,40)$}}{20}{figure.3.12}
+\contentsline {figure}{\numberline {3.13}{\ignorespaces Reconstructed Zero Bias distribution for $\mu \in [40,50)$}}{21}{figure.3.13}
+\contentsline {figure}{\numberline {3.14}{\ignorespaces Corrected Distributions for $\mu \in [40,50)$}}{21}{figure.3.14}
+\contentsline {figure}{\numberline {3.15}{\ignorespaces Reconstructed Zero Bias distribution for $\mu \in [50,60)$}}{22}{figure.3.15}
+\contentsline {figure}{\numberline {3.16}{\ignorespaces Corrected Distributions for $\mu \in [50,60)$}}{22}{figure.3.16}
+\contentsline {figure}{\numberline {3.17}{\ignorespaces Reconstructed Zero Bias distribution for $\mu \in [60,70)$}}{23}{figure.3.17}
+\contentsline {figure}{\numberline {3.18}{\ignorespaces Corrected Distributions for $\mu \in [60,70)$}}{23}{figure.3.18}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
