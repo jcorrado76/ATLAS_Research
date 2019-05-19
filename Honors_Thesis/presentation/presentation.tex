@@ -13,7 +13,7 @@
 % Theme for beamer presentation.
 \usepackage{beamerthemesplit} 
 \usepackage{graphicx}
-\graphicspath{{../../Mu_Analysis/plots/}}
+\graphicspath{{../../Mu_Analysis/plots/}{../img/}}
 \usetheme{CambridgeUS}{}
 % get rid of current section appearing on top
 \setbeamertemplate{headline}{}
@@ -78,15 +78,42 @@
 		\end{itemize}
 \end{frame}
 \begin{frame}{Perfect Efficiency Curve}
-        Here is a plot of the efficiency of $\textrm{L1} > 60.0 \textm{GeV}$ as a function of L1 MET\\
+        Here is a plot of the efficiency of $\textrm{L1} > 60.0 \textrm{GeV}$ as a function of L1 MET\\
 		\framebox{\includegraphics[height=2.65in,width=4.25in]{perfectEfficiency}}
 \end{frame}
 \begin{frame}{Imperfect Efficiency Curve}
-        Here is a plot of the efficiency of $\textrm{L1} > 60.0 \textm{GeV}$ as a function of CELL MET\\
+        Here is a plot of the efficiency of $\textrm{L1} > 60.0 \textrm{GeV}$ as a function of CELL MET\\
 		\framebox{\includegraphics[height=2.65in,width=4.25in]{imperfectEfficiency}}
 \end{frame}
-\section{Reconstructing the Unbiased CELL Distribution as function of $\mu$}
-\begin{frame}{Reconstructing the Unbiased CELL Distribution as function of $\mu$}
+\section{Combined Efficiency}
+\begin{frame}
+\begin{itemize}
+        \item We would like to improve the efficiency of event selection by combining algorithms 
+        \item Combine two uncorrelated algorithms such that they keep the trigger rate when combined 
+		\item The trigger rate is determined by the fraction of background events that are kept by the trigger system
+		\item We computed the trigger rate to be the fraction of zerobias events that passed an L1 cut of 50 GeV and a CELL cut of 100 GeV
+\end{itemize}
+\end{frame}
+\begin{frame}{Bisection}
+		\begin{itemize}
+				\item In order to simplify the problem, we also constrained the algorithms to individually keep the same trigger rate when used alone
+				\item After doing this, our problem was essentially one-dimensional and we used a popular root-finding method (bisection) in order to find a solution, subject to the equal fraction constraint, of the equation:
+						\begin{align}
+								f(\tau_{\alpha},\tau_{\beta})=\textrm{trigger rate}
+						\end{align}
+		\end{itemize}
+\end{frame}
+\begin{frame}
+		\framebox{\includegraphics[height=2.65in,width=4.25in]{combined_constraint_plot}}
+\end{frame}
+\begin{frame}{Combined Efficiency}
+		\begin{itemize}
+				\item After solving the problem of figuring out what thresholds are needed to keep the trigger rate when the algorithms are used together, we then compute the efficiency of this new algorithm on signal events
+				\item 
+		\end{itemize}
+\end{frame}
+\section{Reconstructing the Unbiased CELL Distribution}
+\begin{frame}{Reconstructing the Unbiased CELL Distribution}
 \begin{itemize}
         \item Determine CELL MET Distribution as a function of $\mu$
         \item Zerobias events run out of statistics above about 80 GeV
