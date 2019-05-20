@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2018.12.13)  19 MAY 2019 17:23
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2018.12.13)  19 MAY 2019 19:53
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
@@ -917,42 +917,59 @@ ciency.png> <./img/imperfectEfficiency.png>]
 Chapter 2.
 [5
 
-] [6]
-<./img/topocl_puc_efficiencies.png, id=255, 700.6175pt x 475.7775pt>
+]
+
+LaTeX Warning: Reference `solution_space' on page 6 undefined on input line 15.
+
+
+<./img/combined_constraint_plot.png, id=248, 462.528pt x 346.896pt>
+File: ./img/combined_constraint_plot.png Graphic file (type png)
+<use ./img/combined_constraint_plot.png>
+Package pdftex.def Info: ./img/combined_constraint_plot.png  used on input line
+ 19.
+(pdftex.def)             Requested size: 185.0079pt x 138.75594pt.
+[6pdfTeX warning (ext4): destination with the same identifier (name{figure.2.1}
+) has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.30 \section
+             {Results} <./img/combined_constraint_plot.png>]
+<./img/topocl_puc_efficiencies.png, id=258, 700.6175pt x 475.7775pt>
 File: ./img/topocl_puc_efficiencies.png Graphic file (type png)
 <use ./img/topocl_puc_efficiencies.png>
 Package pdftex.def Info: ./img/topocl_puc_efficiencies.png  used on input line 
-28.
+35.
 (pdftex.def)             Requested size: 280.24203pt x 190.30762pt.
- [7pdfTeX warning (ext4): destination with the same identifier (name{figure.2.1
+ [7pdfTeX warning (ext4): destination with the same identifier (name{figure.2.2
 }) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.32 \clearpage
+l.39 \clearpage
                 <./img/topocl_puc_efficiencies.png>]
-<./img/cell_mht_efficiencies.png, id=261, 700.6175pt x 475.7775pt>
+<./img/cell_mht_efficiencies.png, id=264, 700.6175pt x 475.7775pt>
 File: ./img/cell_mht_efficiencies.png Graphic file (type png)
 <use ./img/cell_mht_efficiencies.png>
-Package pdftex.def Info: ./img/cell_mht_efficiencies.png  used on input line 37
+Package pdftex.def Info: ./img/cell_mht_efficiencies.png  used on input line 44
 .
 (pdftex.def)             Requested size: 280.24203pt x 190.30762pt.
-<./img/cell_topocl_efficiencies.png, id=262, 700.6175pt x 475.7775pt>
+<./img/cell_topocl_efficiencies.png, id=265, 700.6175pt x 475.7775pt>
 File: ./img/cell_topocl_efficiencies.png Graphic file (type png)
 <use ./img/cell_topocl_efficiencies.png>
 Package pdftex.def Info: ./img/cell_topocl_efficiencies.png  used on input line
- 42.
+ 49.
 (pdftex.def)             Requested size: 280.24203pt x 190.30762pt.
-<./img/cell_ps_efficiencies.png, id=263, 700.6175pt x 475.7775pt>
+<./img/cell_ps_efficiencies.png, id=266, 700.6175pt x 475.7775pt>
 File: ./img/cell_ps_efficiencies.png Graphic file (type png)
 <use ./img/cell_ps_efficiencies.png>
-Package pdftex.def Info: ./img/cell_ps_efficiencies.png  used on input line 47.
+Package pdftex.def Info: ./img/cell_ps_efficiencies.png  used on input line 54.
 
 (pdftex.def)             Requested size: 280.24203pt x 190.30762pt.
-<./img/mht_puc_efficiencies.png, id=264, 700.6175pt x 475.7775pt>
+<./img/mht_puc_efficiencies.png, id=267, 700.6175pt x 475.7775pt>
 File: ./img/mht_puc_efficiencies.png Graphic file (type png)
 <use ./img/mht_puc_efficiencies.png>
-Package pdftex.def Info: ./img/mht_puc_efficiencies.png  used on input line 52.
+Package pdftex.def Info: ./img/mht_puc_efficiencies.png  used on input line 59.
 
 (pdftex.def)             Requested size: 280.24203pt x 190.30762pt.
 
@@ -964,46 +981,46 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 
 [8
 
-pdfTeX warning (ext4): destination with the same identifier (name{figure.2.2}) 
+pdfTeX warning (ext4): destination with the same identifier (name{figure.2.3}) 
 has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.55 \clearpage
+l.62 \clearpage
                pdfTeX warning (ext4): destination with the same identifier (nam
-e{figure.2.3}) has been already used, duplicate ignored
+e{figure.2.4}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.55 \clearpage
+l.62 \clearpage
                 <./img/cell_mht_efficiencies.png> <./img/cell_topocl_efficienci
 es.png>] [9pdfTeX warning (ext4): destination with the same identifier (name{fi
-gure.2.4}) has been already used, duplicate ignored
+gure.2.5}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.55 \clearpage
+l.62 \clearpage
                pdfTeX warning (ext4): destination with the same identifier (nam
-e{figure.2.5}) has been already used, duplicate ignored
+e{figure.2.6}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.55 \clearpage
+l.62 \clearpage
                 <./img/cell_ps_efficiencies.png> <./img/mht_puc_efficiencies.pn
 g>]
-<./img/7Efficiencies.png, id=274, 1859.94875pt x 1033.8625pt>
+<./img/7Efficiencies.png, id=277, 1859.94875pt x 1033.8625pt>
 File: ./img/7Efficiencies.png Graphic file (type png)
 <use ./img/7Efficiencies.png>
-Package pdftex.def Info: ./img/7Efficiencies.png  used on input line 61.
+Package pdftex.def Info: ./img/7Efficiencies.png  used on input line 68.
 (pdftex.def)             Requested size: 371.98317pt x 206.76883pt.
  [10
 
-pdfTeX warning (ext4): destination with the same identifier (name{figure.2.6}) 
+pdfTeX warning (ext4): destination with the same identifier (name{figure.2.7}) 
 has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.65 \clearpage
+l.72 \clearpage
                 <./img/7Efficiencies.png>]) (./sections/met_reconstruction.tex
 Chapter 3.
 
@@ -1023,25 +1040,25 @@ T1/lmtt/m/n/10.95 HLTnoalg_L1ZB \T1/lmr/m/n/10.95 , \T1/lmtt/m/n/10.95 HLTnoalg
 _L1XE30
  []
 
-<./img/L1XE30Efficiency_Curves.png, id=285, 2826.56pt x 1505.625pt>
+<./img/L1XE30Efficiency_Curves.png, id=289, 2826.56pt x 1505.625pt>
 File: ./img/L1XE30Efficiency_Curves.png Graphic file (type png)
 <use ./img/L1XE30Efficiency_Curves.png>
 Package pdftex.def Info: ./img/L1XE30Efficiency_Curves.png  used on input line 
 44.
 (pdftex.def)             Requested size: 339.17256pt x 180.6672pt.
-<./img/L1XE30Efficiency_Fits.png, id=286, 2826.56pt x 1505.625pt>
+<./img/L1XE30Efficiency_Fits.png, id=290, 2826.56pt x 1505.625pt>
 File: ./img/L1XE30Efficiency_Fits.png Graphic file (type png)
 <use ./img/L1XE30Efficiency_Fits.png>
 Package pdftex.def Info: ./img/L1XE30Efficiency_Fits.png  used on input line 49
 .
 (pdftex.def)             Requested size: 423.96571pt x 225.834pt.
-<./img/L1XE50Efficiency_Curves.png, id=287, 2826.56pt x 1505.625pt>
+<./img/L1XE50Efficiency_Curves.png, id=291, 2826.56pt x 1505.625pt>
 File: ./img/L1XE50Efficiency_Curves.png Graphic file (type png)
 <use ./img/L1XE50Efficiency_Curves.png>
 Package pdftex.def Info: ./img/L1XE50Efficiency_Curves.png  used on input line 
 54.
 (pdftex.def)             Requested size: 423.96571pt x 225.834pt.
-<./img/L1XE50Efficiency_Fits.png, id=288, 2826.56pt x 1505.625pt>
+<./img/L1XE50Efficiency_Fits.png, id=292, 2826.56pt x 1505.625pt>
 File: ./img/L1XE50Efficiency_Fits.png Graphic file (type png)
 <use ./img/L1XE50Efficiency_Fits.png>
 Package pdftex.def Info: ./img/L1XE50Efficiency_Fits.png  used on input line 59
@@ -1089,92 +1106,92 @@ n/10.95 HLT_noalg_L1XExx \T1/lmr/m/n/10.95 data and the \T1/lmtt/m/n/10.95 HLT_
 noalg_L1ZB
  []
 
-<./img/reconstructed_distribution_mubin_0.png, id=322, 2826.56pt x 1379.1525pt>
+<./img/reconstructed_distribution_mubin_0.png, id=326, 2826.56pt x 1379.1525pt>
 
 File: ./img/reconstructed_distribution_mubin_0.png Graphic file (type png)
 <use ./img/reconstructed_distribution_mubin_0.png>
 Package pdftex.def Info: ./img/reconstructed_distribution_mubin_0.png  used on 
 input line 116.
 (pdftex.def)             Requested size: 282.67256pt x 137.92332pt.
-<./img/zb_met_distributions_mubin_0.png, id=323, 2826.56pt x 1505.625pt>
+<./img/zb_met_distributions_mubin_0.png, id=327, 2826.56pt x 1505.625pt>
 File: ./img/zb_met_distributions_mubin_0.png Graphic file (type png)
 <use ./img/zb_met_distributions_mubin_0.png>
 Package pdftex.def Info: ./img/zb_met_distributions_mubin_0.png  used on input 
 line 121.
 (pdftex.def)             Requested size: 282.67256pt x 150.57132pt.
-<./img/reconstructed_distribution_mubin_1.png, id=324, 2826.56pt x 1379.1525pt>
+<./img/reconstructed_distribution_mubin_1.png, id=328, 2826.56pt x 1379.1525pt>
 
 File: ./img/reconstructed_distribution_mubin_1.png Graphic file (type png)
 <use ./img/reconstructed_distribution_mubin_1.png>
 Package pdftex.def Info: ./img/reconstructed_distribution_mubin_1.png  used on 
 input line 126.
 (pdftex.def)             Requested size: 423.96571pt x 206.86395pt.
-<./img/zb_met_distributions_mubin_1.png, id=325, 2826.56pt x 1379.1525pt>
+<./img/zb_met_distributions_mubin_1.png, id=329, 2826.56pt x 1379.1525pt>
 File: ./img/zb_met_distributions_mubin_1.png Graphic file (type png)
 <use ./img/zb_met_distributions_mubin_1.png>
 Package pdftex.def Info: ./img/zb_met_distributions_mubin_1.png  used on input 
 line 131.
 (pdftex.def)             Requested size: 423.96571pt x 206.86395pt.
-<./img/reconstructed_distribution_mubin_2.png, id=326, 2826.56pt x 1379.1525pt>
+<./img/reconstructed_distribution_mubin_2.png, id=330, 2826.56pt x 1379.1525pt>
 
 File: ./img/reconstructed_distribution_mubin_2.png Graphic file (type png)
 <use ./img/reconstructed_distribution_mubin_2.png>
 Package pdftex.def Info: ./img/reconstructed_distribution_mubin_2.png  used on 
 input line 136.
 (pdftex.def)             Requested size: 423.96571pt x 206.86395pt.
-<./img/zb_met_distributions_mubin_2.png, id=327, 2826.56pt x 1379.1525pt>
+<./img/zb_met_distributions_mubin_2.png, id=331, 2826.56pt x 1379.1525pt>
 File: ./img/zb_met_distributions_mubin_2.png Graphic file (type png)
 <use ./img/zb_met_distributions_mubin_2.png>
 Package pdftex.def Info: ./img/zb_met_distributions_mubin_2.png  used on input 
 line 141.
 (pdftex.def)             Requested size: 423.96571pt x 206.86395pt.
-<./img/reconstructed_distribution_mubin_3.png, id=328, 2826.56pt x 1379.1525pt>
+<./img/reconstructed_distribution_mubin_3.png, id=332, 2826.56pt x 1379.1525pt>
 
 File: ./img/reconstructed_distribution_mubin_3.png Graphic file (type png)
 <use ./img/reconstructed_distribution_mubin_3.png>
 Package pdftex.def Info: ./img/reconstructed_distribution_mubin_3.png  used on 
 input line 146.
 (pdftex.def)             Requested size: 423.96571pt x 206.86395pt.
-<./img/zb_met_distributions_mubin_3.png, id=329, 2826.56pt x 1379.1525pt>
+<./img/zb_met_distributions_mubin_3.png, id=333, 2826.56pt x 1379.1525pt>
 File: ./img/zb_met_distributions_mubin_3.png Graphic file (type png)
 <use ./img/zb_met_distributions_mubin_3.png>
 Package pdftex.def Info: ./img/zb_met_distributions_mubin_3.png  used on input 
 line 151.
 (pdftex.def)             Requested size: 423.96571pt x 206.86395pt.
-<./img/reconstructed_distribution_mubin_4.png, id=330, 2826.56pt x 1379.1525pt>
+<./img/reconstructed_distribution_mubin_4.png, id=334, 2826.56pt x 1379.1525pt>
 
 File: ./img/reconstructed_distribution_mubin_4.png Graphic file (type png)
 <use ./img/reconstructed_distribution_mubin_4.png>
 Package pdftex.def Info: ./img/reconstructed_distribution_mubin_4.png  used on 
 input line 156.
 (pdftex.def)             Requested size: 423.96571pt x 206.86395pt.
-<./img/zb_met_distributions_mubin_4.png, id=331, 2826.56pt x 1379.1525pt>
+<./img/zb_met_distributions_mubin_4.png, id=335, 2826.56pt x 1379.1525pt>
 File: ./img/zb_met_distributions_mubin_4.png Graphic file (type png)
 <use ./img/zb_met_distributions_mubin_4.png>
 Package pdftex.def Info: ./img/zb_met_distributions_mubin_4.png  used on input 
 line 161.
 (pdftex.def)             Requested size: 423.96571pt x 206.86395pt.
-<./img/reconstructed_distribution_mubin_5.png, id=332, 2826.56pt x 1379.1525pt>
+<./img/reconstructed_distribution_mubin_5.png, id=336, 2826.56pt x 1379.1525pt>
 
 File: ./img/reconstructed_distribution_mubin_5.png Graphic file (type png)
 <use ./img/reconstructed_distribution_mubin_5.png>
 Package pdftex.def Info: ./img/reconstructed_distribution_mubin_5.png  used on 
 input line 166.
 (pdftex.def)             Requested size: 423.96571pt x 206.86395pt.
-<./img/zb_met_distributions_mubin_5.png, id=333, 2826.56pt x 1379.1525pt>
+<./img/zb_met_distributions_mubin_5.png, id=337, 2826.56pt x 1379.1525pt>
 File: ./img/zb_met_distributions_mubin_5.png Graphic file (type png)
 <use ./img/zb_met_distributions_mubin_5.png>
 Package pdftex.def Info: ./img/zb_met_distributions_mubin_5.png  used on input 
 line 171.
 (pdftex.def)             Requested size: 423.96571pt x 206.86395pt.
-<./img/reconstructed_distribution_mubin_6.png, id=334, 2826.56pt x 1379.1525pt>
+<./img/reconstructed_distribution_mubin_6.png, id=338, 2826.56pt x 1379.1525pt>
 
 File: ./img/reconstructed_distribution_mubin_6.png Graphic file (type png)
 <use ./img/reconstructed_distribution_mubin_6.png>
 Package pdftex.def Info: ./img/reconstructed_distribution_mubin_6.png  used on 
 input line 176.
 (pdftex.def)             Requested size: 423.96571pt x 206.86395pt.
-<./img/zb_met_distributions_mubin_6.png, id=335, 2826.56pt x 1379.1525pt>
+<./img/zb_met_distributions_mubin_6.png, id=339, 2826.56pt x 1379.1525pt>
 File: ./img/zb_met_distributions_mubin_6.png Graphic file (type png)
 <use ./img/zb_met_distributions_mubin_6.png>
 Package pdftex.def Info: ./img/zb_met_distributions_mubin_6.png  used on input 
@@ -1332,14 +1349,17 @@ Package rerunfilecheck Info: File `thesis.out' has not changed.
 (rerunfilecheck)             Checksum: B29EAD68FB8EDE3FB9C7EA887E5F9504;1692.
 
 
+LaTeX Warning: There were undefined references.
+
+
 LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
 
  ) 
 Here is how much of TeX's memory you used:
- 11316 strings out of 494847
- 181795 string characters out of 6179079
+ 11323 strings out of 494847
+ 182004 string characters out of 6179079
  317113 words of memory out of 5000000
- 14266 multiletter control sequences out of 15000+600000
+ 14271 multiletter control sequences out of 15000+600000
  67435 words of font info for 56 fonts, out of 8000000 for 9000
  59 hyphenation exceptions out of 8191
  44i,11n,35p,810b,412s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -1356,10 +1376,10 @@ ublic/lm/lmr10.pfb></usr/share/texmf/fonts/type1/public/lm/lmr6.pfb></usr/share
 msy10.pfb></usr/share/texmf/fonts/type1/public/lm/lmsy8.pfb></usr/share/texmf/f
 onts/type1/public/lm/lmtt10.pfb></usr/share/texlive/texmf-dist/fonts/type1/publ
 ic/amsfonts/symbols/msbm10.pfb>
-Output written on thesis.pdf (31 pages, 1479884 bytes).
+Output written on thesis.pdf (31 pages, 1510451 bytes).
 PDF statistics:
- 458 PDF objects out of 1000 (max. 8388607)
- 382 compressed objects within 4 object streams
- 106 named destinations out of 1000 (max. 500000)
- 331 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 462 PDF objects out of 1000 (max. 8388607)
+ 384 compressed objects within 4 object streams
+ 107 named destinations out of 1000 (max. 500000)
+ 336 words of extra memory for PDF output out of 10000 (max. 10000000)
 

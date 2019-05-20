@@ -2,10 +2,8 @@
 \beamer@sectionintoc {2}{Combined Efficiency}{10}{0}{2}
 \beamer@sectionintoc {3}{Reconstructing the Unbiased CELL Distribution}{14}{0}{3}
 \beamer@sectionintoc {4}{Method}{15}{0}{4}
-\beamer@sectionintoc {5}{Data Used}{16}{0}{5}
-\beamer@sectionintoc {6}{Efficiency Fits}{17}{0}{6}
-\beamer@sectionintoc {7}{Performing Correction}{24}{0}{7}
-\beamer@sectionintoc {8}{Error Propagation}{25}{0}{8}
-\beamer@sectionintoc {9}{Relative Normalization}{28}{0}{9}
-\beamer@sectionintoc {10}{Reconstructed Distributions}{29}{0}{10}
-\beamer@sectionintoc {11}{Appendix}{37}{0}{11}
+\beamer@sectionintoc {5}{Efficiency Fits}{17}{0}{5}
+\beamer@sectionintoc {6}{Performing Correction}{24}{0}{6}
+\beamer@sectionintoc {7}{Error Propagation}{25}{0}{7}
+\beamer@sectionintoc {8}{Reconstructed Distributions}{29}{0}{8}
+\beamer@sectionintoc {9}{Appendix}{37}{0}{9}

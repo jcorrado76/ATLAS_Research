@@ -12,8 +12,14 @@ This $C$ is determined by the fraction of background events that are kept by the
 In order to compute $C$, we used the fraction of passnoalg data that passed an L1 MET cut of $50$ GeV and a CELL MET cut of $100$ GeV. 
 For our analysis, $C$ turned out to be $0.0059$.
 So we needed to solve the equation $f(\tau_{\alpha},\tau_{\beta})=0.0059$. 
-However, because the parameter space is two-dimensional, and the evaluation of $f$ takes a long time (fraction of events kept by both algorithms, and by each one individually), we introduced the constraint that the two individual fractions kept needed to be the same.
+However, because the parameter space is two-dimensional, and the evaluation of $f$ takes a long time (fraction of events kept by both algorithms, and by each one individually), we introduced the constraint that the two individual fractions kept needed to be the same. The solution space for our problem is depicted in figure \ref{solution_space}
 In summary, we use the background events in order to compute what the thresholds on the algorithms need to be in order to keep the trigger rate, and then we determine the efficiencies of this combination of algorithms at those thresholds from the signal events. 
+\begin{figure}[h]
+        \centering
+        \includegraphics[scale=0.4]{combined_constraint_plot}
+        \caption{Solution to Bisection in Threshold Space}
+        \label{no_gain_efficiency}
+\end{figure}
 \section{Signal Selection on Transverse Mass}
 In addition to the cuts on the various algorithms, we also needed to introduce a cut on the transverse mass that is detected to ensure we only keep events with a transverse mass close to that of the W boson ($80.379\pm 0.012 GeV/c^2$). 
 We compute the transverse mass using:

@@ -109,7 +109,7 @@
 \begin{frame}{Combined Efficiency}
 		\begin{itemize}
 				\item After solving the problem of figuring out what thresholds are needed to keep the trigger rate when the algorithms are used together, we then compute the efficiency of this new algorithm on signal events
-				\item 
+				\item The signal events we used are those for which the muon trigger fired, indicating the production of muons
 		\end{itemize}
 \end{frame}
 \section{Reconstructing the Unbiased CELL Distribution}
@@ -132,7 +132,6 @@ For each bin of actual number of interactions per bunch crossing (actint/InTimeP
         \item Obtain an unbiased (with respect to L1) CELL MET distribution from the \texttt{HLTnoalg\_L1XE50} data by multiplying by the prescale and dividing by both of the previously computed efficiencies.
 \end{enumerate}
 \end{frame}
-\section{Data Used}
 \begin{frame}{Data Used}
   \begin{itemize}
           \item Used 2015, 2016 and 2017 combined \texttt{HLTnoalg\_L1ZB}, \texttt{HLTnoalg\_L1XE30}, and \texttt{HLTnoalg\_L1XE50} data produced by Jonathan Burr dated 2017-11-17 from ZB and JETM10 trees
@@ -195,7 +194,6 @@ For each bin of actual number of interactions per bunch crossing (actint/InTimeP
 \begin{frame}
 		\framebox{\includegraphics[height=2.65in,width=4.25in]{hlt_noalg_l1xe50_plots/hlt_noalg_L1XE50_dist_mubin_3}}
 \end{frame}
-\section{Relative Normalization}
 \begin{frame}{Relative Normalization}
 		\begin{itemize}
 				\item Because the error bars are larger at low values of MET, it is not sufficient to normalize the entire curve to one. Instead, it was necessary to perform a relative overall normalization between the original zerobias distribution and the corrected curves in order to be able to compare the shapes more easily.
