@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2018.12.13)  20 MAY 2019 00:05
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2018.12.13)  20 MAY 2019 00:12
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -2186,10 +2186,10 @@ Package rerunfilecheck Info: File `presentation.out' has not changed.
 (rerunfilecheck)             Checksum: F0F7A5821A0557A99B35756A22138F28;524.
  ) 
 Here is how much of TeX's memory you used:
- 17691 strings out of 494847
- 348283 string characters out of 6179079
- 394889 words of memory out of 5000000
- 20347 multiletter control sequences out of 15000+600000
+ 17693 strings out of 494847
+ 348301 string characters out of 6179079
+ 394926 words of memory out of 5000000
+ 20349 multiletter control sequences out of 15000+600000
  17115 words of font info for 64 fonts, out of 8000000 for 9000
  59 hyphenation exceptions out of 8191
  48i,15n,61p,779b,571s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -2209,7 +2209,7 @@ mssbx10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmssi
 /share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/
 texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/share/texliv
 e/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
-Output written on presentation.pdf (93 pages, 2867111 bytes).
+Output written on presentation.pdf (93 pages, 2867144 bytes).
 PDF statistics:
  2708 PDF objects out of 2984 (max. 8388607)
  2501 compressed objects within 26 object streams
