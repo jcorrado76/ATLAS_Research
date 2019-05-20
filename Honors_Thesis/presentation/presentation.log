@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2018.12.13)  19 MAY 2019 19:54
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2018.12.13)  19 MAY 2019 23:52
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -879,7 +879,7 @@ Overfull \hbox (198.90663pt too wide) has occurred while \output is active
 [7
 
 ]
-<../img/perfectEfficiency.png, id=272, 2826.56pt x 1443.3925pt>
+<../img/perfectEfficiency.png, id=278, 2826.56pt x 1443.3925pt>
 File: ../img/perfectEfficiency.png Graphic file (type png)
 <use ../img/perfectEfficiency.png>
 Package pdftex.def Info: ../img/perfectEfficiency.png  used on input line 83.
@@ -892,7 +892,7 @@ Overfull \hbox (198.90663pt too wide) has occurred while \output is active
 [8
 
  <../img/perfectEfficiency.png>]
-<../img/imperfectEfficiency.png, id=299, 2826.56pt x 1443.3925pt>
+<../img/imperfectEfficiency.png, id=305, 2826.56pt x 1443.3925pt>
 File: ../img/imperfectEfficiency.png Graphic file (type png)
 <use ../img/imperfectEfficiency.png>
 Package pdftex.def Info: ../img/imperfectEfficiency.png  used on input line 87.
@@ -920,7 +920,7 @@ Overfull \hbox (198.90663pt too wide) has occurred while \output is active
 [11
 
 ]
-<../img/combined_constraint_plot.png, id=381, 462.528pt x 346.896pt>
+<../img/combined_constraint_plot.png, id=387, 462.528pt x 346.896pt>
 File: ../img/combined_constraint_plot.png Graphic file (type png)
 <use ../img/combined_constraint_plot.png>
 Package pdftex.def Info: ../img/combined_constraint_plot.png  used on input lin
@@ -948,35 +948,54 @@ Overfull \hbox (198.90663pt too wide) has occurred while \output is active
 [14
 
 ]
+<../img/topocl_puc_efficiencies.png, id=468, 700.6175pt x 475.7775pt>
+File: ../img/topocl_puc_efficiencies.png Graphic file (type png)
+<use ../img/topocl_puc_efficiencies.png>
+Package pdftex.def Info: ../img/topocl_puc_efficiencies.png  used on input line
+ 125.
+(pdftex.def)             Requested size: 307.15015pt x 191.51274pt.
+
 Overfull \hbox (198.90663pt too wide) has occurred while \output is active
  [][][][]  
  []
 
 [15
 
-]
+ <../img/topocl_puc_efficiencies.png>]
+<../img/cell_mht_efficiencies.png, id=496, 700.6175pt x 475.7775pt>
+File: ../img/cell_mht_efficiencies.png Graphic file (type png)
+<use ../img/cell_mht_efficiencies.png>
+Package pdftex.def Info: ../img/cell_mht_efficiencies.png  used on input line 1
+28.
+(pdftex.def)             Requested size: 307.15015pt x 191.51274pt.
+
 Overfull \hbox (198.90663pt too wide) has occurred while \output is active
  [][][][]  
  []
 
 [16
 
-]
+ <../img/cell_mht_efficiencies.png>]
+<../img/cell_topocl_efficiencies.png, id=523, 700.6175pt x 475.7775pt>
+File: ../img/cell_topocl_efficiencies.png Graphic file (type png)
+<use ../img/cell_topocl_efficiencies.png>
+Package pdftex.def Info: ../img/cell_topocl_efficiencies.png  used on input lin
+e 131.
+(pdftex.def)             Requested size: 307.15015pt x 191.51274pt.
+
 Overfull \hbox (198.90663pt too wide) has occurred while \output is active
  [][][][]  
  []
 
 [17
 
-]
-<../../Mu_Analysis/plots/L1XE30Efficiency_Curves.png, id=544, 2826.56pt x 1505.
-625pt>
-File: ../../Mu_Analysis/plots/L1XE30Efficiency_Curves.png Graphic file (type pn
-g)
-<use ../../Mu_Analysis/plots/L1XE30Efficiency_Curves.png>
-Package pdftex.def Info: ../../Mu_Analysis/plots/L1XE30Efficiency_Curves.png  u
-sed on input line 154.
-(pdftex.def)             Requested size: 307.12714pt x 191.51091pt.
+ <../img/cell_topocl_efficiencies.png>]
+<../img/cell_ps_efficiencies.png, id=550, 700.6175pt x 475.7775pt>
+File: ../img/cell_ps_efficiencies.png Graphic file (type png)
+<use ../img/cell_ps_efficiencies.png>
+Package pdftex.def Info: ../img/cell_ps_efficiencies.png  used on input line 13
+4.
+(pdftex.def)             Requested size: 307.15015pt x 191.51274pt.
 
 Overfull \hbox (198.90663pt too wide) has occurred while \output is active
  [][][][]  
@@ -984,16 +1003,13 @@ Overfull \hbox (198.90663pt too wide) has occurred while \output is active
 
 [18
 
- <../../Mu_Analysis/plots/L1XE30Efficiency_Curves.png>]
-<../../Mu_Analysis/plots/l1xe30_efficiencies/L1XE30Efficiency_mu_between_30_40.
-png, id=571, 2826.56pt x 1379.1525pt>
-File: ../../Mu_Analysis/plots/l1xe30_efficiencies/L1XE30Efficiency_mu_between_3
-0_40.png Graphic file (type png)
-<use ../../Mu_Analysis/plots/l1xe30_efficiencies/L1XE30Efficiency_mu_between_30
-_40.png>
-Package pdftex.def Info: ../../Mu_Analysis/plots/l1xe30_efficiencies/L1XE30Effi
-ciency_mu_between_30_40.png  used on input line 157.
-(pdftex.def)             Requested size: 307.12714pt x 191.50172pt.
+ <../img/cell_ps_efficiencies.png>]
+<../img/mht_puc_efficiencies.png, id=577, 700.6175pt x 475.7775pt>
+File: ../img/mht_puc_efficiencies.png Graphic file (type png)
+<use ../img/mht_puc_efficiencies.png>
+Package pdftex.def Info: ../img/mht_puc_efficiencies.png  used on input line 13
+7.
+(pdftex.def)             Requested size: 307.15015pt x 191.51274pt.
 
 Overfull \hbox (198.90663pt too wide) has occurred while \output is active
  [][][][]  
@@ -1001,16 +1017,12 @@ Overfull \hbox (198.90663pt too wide) has occurred while \output is active
 
 [19
 
- <../../Mu_Analysis/plots/l1xe30_efficiencies/L1XE30Efficiency_mu_between_30_40
-.png>]
-<../../Mu_Analysis/plots/L1XE30Efficiency_Fits.png, id=600, 2826.56pt x 1505.62
-5pt>
-File: ../../Mu_Analysis/plots/L1XE30Efficiency_Fits.png Graphic file (type png)
-
-<use ../../Mu_Analysis/plots/L1XE30Efficiency_Fits.png>
-Package pdftex.def Info: ../../Mu_Analysis/plots/L1XE30Efficiency_Fits.png  use
-d on input line 160.
-(pdftex.def)             Requested size: 307.12714pt x 191.51091pt.
+ <../img/mht_puc_efficiencies.png>]
+<../img/7Efficiencies.png, id=605, 1859.94875pt x 1033.8625pt>
+File: ../img/7Efficiencies.png Graphic file (type png)
+<use ../img/7Efficiencies.png>
+Package pdftex.def Info: ../img/7Efficiencies.png  used on input line 140.
+(pdftex.def)             Requested size: 307.13373pt x 191.51398pt.
 
 Overfull \hbox (198.90663pt too wide) has occurred while \output is active
  [][][][]  
@@ -1018,62 +1030,140 @@ Overfull \hbox (198.90663pt too wide) has occurred while \output is active
 
 [20
 
- <../../Mu_Analysis/plots/L1XE30Efficiency_Fits.png>]
-<../../Mu_Analysis/plots/L1XE50Efficiency_Curves.png, id=627, 2826.56pt x 1505.
-625pt>
-File: ../../Mu_Analysis/plots/L1XE50Efficiency_Curves.png Graphic file (type pn
-g)
-<use ../../Mu_Analysis/plots/L1XE50Efficiency_Curves.png>
-Package pdftex.def Info: ../../Mu_Analysis/plots/L1XE50Efficiency_Curves.png  u
-sed on input line 163.
-(pdftex.def)             Requested size: 307.12714pt x 191.51091pt.
-
+ <../img/7Efficiencies.png>]
 Overfull \hbox (198.90663pt too wide) has occurred while \output is active
  [][][][]  
  []
 
 [21
 
- <../../Mu_Analysis/plots/L1XE50Efficiency_Curves.png>]
-<../../Mu_Analysis/plots/l1xe50_efficiencies/L1XE50Efficiency_mu_between_30_40.
-png, id=654, 2826.56pt x 1379.1525pt>
-File: ../../Mu_Analysis/plots/l1xe50_efficiencies/L1XE50Efficiency_mu_between_3
-0_40.png Graphic file (type png)
-<use ../../Mu_Analysis/plots/l1xe50_efficiencies/L1XE50Efficiency_mu_between_30
-_40.png>
-Package pdftex.def Info: ../../Mu_Analysis/plots/l1xe50_efficiencies/L1XE50Effi
-ciency_mu_between_30_40.png  used on input line 166.
-(pdftex.def)             Requested size: 307.12714pt x 191.50172pt.
-
+]
 Overfull \hbox (198.90663pt too wide) has occurred while \output is active
  [][][][]  
  []
 
 [22
 
- <../../Mu_Analysis/plots/l1xe50_efficiencies/L1XE50Efficiency_mu_between_30_40
-.png>]
-<../../Mu_Analysis/plots/L1XE50Efficiency_Fits.png, id=680, 2826.56pt x 1505.62
-5pt>
-File: ../../Mu_Analysis/plots/L1XE50Efficiency_Fits.png Graphic file (type png)
-
-<use ../../Mu_Analysis/plots/L1XE50Efficiency_Fits.png>
-Package pdftex.def Info: ../../Mu_Analysis/plots/L1XE50Efficiency_Fits.png  use
-d on input line 169.
-(pdftex.def)             Requested size: 307.12714pt x 191.51091pt.
-
+]
 Overfull \hbox (198.90663pt too wide) has occurred while \output is active
  [][][][]  
  []
 
 [23
 
- <../../Mu_Analysis/plots/L1XE50Efficiency_Fits.png>]
+]
 Overfull \hbox (198.90663pt too wide) has occurred while \output is active
  [][][][]  
  []
 
 [24
+
+]
+<../../Mu_Analysis/plots/L1XE30Efficiency_Curves.png, id=740, 2826.56pt x 1505.
+625pt>
+File: ../../Mu_Analysis/plots/L1XE30Efficiency_Curves.png Graphic file (type pn
+g)
+<use ../../Mu_Analysis/plots/L1XE30Efficiency_Curves.png>
+Package pdftex.def Info: ../../Mu_Analysis/plots/L1XE30Efficiency_Curves.png  u
+sed on input line 180.
+(pdftex.def)             Requested size: 307.12714pt x 191.51091pt.
+
+Overfull \hbox (198.90663pt too wide) has occurred while \output is active
+ [][][][]  
+ []
+
+[25
+
+ <../../Mu_Analysis/plots/L1XE30Efficiency_Curves.png>]
+<../../Mu_Analysis/plots/l1xe30_efficiencies/L1XE30Efficiency_mu_between_30_40.
+png, id=768, 2826.56pt x 1379.1525pt>
+File: ../../Mu_Analysis/plots/l1xe30_efficiencies/L1XE30Efficiency_mu_between_3
+0_40.png Graphic file (type png)
+<use ../../Mu_Analysis/plots/l1xe30_efficiencies/L1XE30Efficiency_mu_between_30
+_40.png>
+Package pdftex.def Info: ../../Mu_Analysis/plots/l1xe30_efficiencies/L1XE30Effi
+ciency_mu_between_30_40.png  used on input line 183.
+(pdftex.def)             Requested size: 307.12714pt x 191.50172pt.
+
+Overfull \hbox (198.90663pt too wide) has occurred while \output is active
+ [][][][]  
+ []
+
+[26
+
+ <../../Mu_Analysis/plots/l1xe30_efficiencies/L1XE30Efficiency_mu_between_30_40
+.png>]
+<../../Mu_Analysis/plots/L1XE30Efficiency_Fits.png, id=795, 2826.56pt x 1505.62
+5pt>
+File: ../../Mu_Analysis/plots/L1XE30Efficiency_Fits.png Graphic file (type png)
+
+<use ../../Mu_Analysis/plots/L1XE30Efficiency_Fits.png>
+Package pdftex.def Info: ../../Mu_Analysis/plots/L1XE30Efficiency_Fits.png  use
+d on input line 186.
+(pdftex.def)             Requested size: 307.12714pt x 191.51091pt.
+
+Overfull \hbox (198.90663pt too wide) has occurred while \output is active
+ [][][][]  
+ []
+
+[27
+
+ <../../Mu_Analysis/plots/L1XE30Efficiency_Fits.png>]
+<../../Mu_Analysis/plots/L1XE50Efficiency_Curves.png, id=823, 2826.56pt x 1505.
+625pt>
+File: ../../Mu_Analysis/plots/L1XE50Efficiency_Curves.png Graphic file (type pn
+g)
+<use ../../Mu_Analysis/plots/L1XE50Efficiency_Curves.png>
+Package pdftex.def Info: ../../Mu_Analysis/plots/L1XE50Efficiency_Curves.png  u
+sed on input line 189.
+(pdftex.def)             Requested size: 307.12714pt x 191.51091pt.
+
+Overfull \hbox (198.90663pt too wide) has occurred while \output is active
+ [][][][]  
+ []
+
+[28
+
+ <../../Mu_Analysis/plots/L1XE50Efficiency_Curves.png>]
+<../../Mu_Analysis/plots/l1xe50_efficiencies/L1XE50Efficiency_mu_between_30_40.
+png, id=850, 2826.56pt x 1379.1525pt>
+File: ../../Mu_Analysis/plots/l1xe50_efficiencies/L1XE50Efficiency_mu_between_3
+0_40.png Graphic file (type png)
+<use ../../Mu_Analysis/plots/l1xe50_efficiencies/L1XE50Efficiency_mu_between_30
+_40.png>
+Package pdftex.def Info: ../../Mu_Analysis/plots/l1xe50_efficiencies/L1XE50Effi
+ciency_mu_between_30_40.png  used on input line 192.
+(pdftex.def)             Requested size: 307.12714pt x 191.50172pt.
+
+Overfull \hbox (198.90663pt too wide) has occurred while \output is active
+ [][][][]  
+ []
+
+[29
+
+ <../../Mu_Analysis/plots/l1xe50_efficiencies/L1XE50Efficiency_mu_between_30_40
+.png>]
+<../../Mu_Analysis/plots/L1XE50Efficiency_Fits.png, id=876, 2826.56pt x 1505.62
+5pt>
+File: ../../Mu_Analysis/plots/L1XE50Efficiency_Fits.png Graphic file (type png)
+
+<use ../../Mu_Analysis/plots/L1XE50Efficiency_Fits.png>
+Package pdftex.def Info: ../../Mu_Analysis/plots/L1XE50Efficiency_Fits.png  use
+d on input line 195.
+(pdftex.def)             Requested size: 307.12714pt x 191.51091pt.
+
+Overfull \hbox (198.90663pt too wide) has occurred while \output is active
+ [][][][]  
+ []
+
+[30
+
+ <../../Mu_Analysis/plots/L1XE50Efficiency_Fits.png>]
+Overfull \hbox (198.90663pt too wide) has occurred while \output is active
+ [][][][]  
+ []
+
+[31
 
 ]
 Missing character: There is no â in font cmss10!
@@ -1084,132 +1174,17 @@ Overfull \hbox (198.90663pt too wide) has occurred while \output is active
  [][][][]  
  []
 
-[25
+[32
 
 ]
 <../../Mu_Analysis/plots/hlt_noalg_l1xe30_plots/hlt_noalg_L1XE30_dist_mubin_3.p
-ng, id=763, 2826.56pt x 1379.1525pt>
+ng, id=959, 2826.56pt x 1379.1525pt>
 File: ../../Mu_Analysis/plots/hlt_noalg_l1xe30_plots/hlt_noalg_L1XE30_dist_mubi
 n_3.png Graphic file (type png)
 <use ../../Mu_Analysis/plots/hlt_noalg_l1xe30_plots/hlt_noalg_L1XE30_dist_mubin
 _3.png>
 Package pdftex.def Info: ../../Mu_Analysis/plots/hlt_noalg_l1xe30_plots/hlt_noa
-lg_L1XE30_dist_mubin_3.png  used on input line 193.
-(pdftex.def)             Requested size: 307.12714pt x 191.50172pt.
-
-Overfull \hbox (198.90663pt too wide) has occurred while \output is active
- [][][][]  
- []
-
-[26
-
- <../../Mu_Analysis/plots/hlt_noalg_l1xe30_plots/hlt_noalg_L1XE30_dist_mubin_3.
-png>]
-<../../Mu_Analysis/plots/hlt_noalg_l1xe50_plots/hlt_noalg_L1XE50_dist_mubin_3.p
-ng, id=790, 2826.56pt x 1379.1525pt>
-File: ../../Mu_Analysis/plots/hlt_noalg_l1xe50_plots/hlt_noalg_L1XE50_dist_mubi
-n_3.png Graphic file (type png)
-<use ../../Mu_Analysis/plots/hlt_noalg_l1xe50_plots/hlt_noalg_L1XE50_dist_mubin
-_3.png>
-Package pdftex.def Info: ../../Mu_Analysis/plots/hlt_noalg_l1xe50_plots/hlt_noa
-lg_L1XE50_dist_mubin_3.png  used on input line 196.
-(pdftex.def)             Requested size: 307.12714pt x 191.50172pt.
-
-Overfull \hbox (198.90663pt too wide) has occurred while \output is active
- [][][][]  
- []
-
-[27
-
- <../../Mu_Analysis/plots/hlt_noalg_l1xe50_plots/hlt_noalg_L1XE50_dist_mubin_3.
-png>]
-Overfull \hbox (198.90663pt too wide) has occurred while \output is active
- [][][][]  
- []
-
-[28
-
-]
-<../../Mu_Analysis/plots/zerobias_distributions_corrected/zb_met_distributions_
-mubin_3.png, id=842, 2826.56pt x 1379.1525pt>
-File: ../../Mu_Analysis/plots/zerobias_distributions_corrected/zb_met_distribut
-ions_mubin_3.png Graphic file (type png)
-<use ../../Mu_Analysis/plots/zerobias_distributions_corrected/zb_met_distributi
-ons_mubin_3.png>
-Package pdftex.def Info: ../../Mu_Analysis/plots/zerobias_distributions_correct
-ed/zb_met_distributions_mubin_3.png  used on input line 208.
-(pdftex.def)             Requested size: 307.12714pt x 191.50172pt.
-
-Overfull \hbox (198.90663pt too wide) has occurred while \output is active
- [][][][]  
- []
-
-[29
-
- <../../Mu_Analysis/plots/zerobias_distributions_corrected/zb_met_distributions
-_mubin_3.png>]
-<../../Mu_Analysis/plots/reconstructed_distributions/reconstructed_distribution
-_mubin_0.png, id=869, 2826.56pt x 1379.1525pt>
-File: ../../Mu_Analysis/plots/reconstructed_distributions/reconstructed_distrib
-ution_mubin_0.png Graphic file (type png)
-<use ../../Mu_Analysis/plots/reconstructed_distributions/reconstructed_distribu
-tion_mubin_0.png>
-Package pdftex.def Info: ../../Mu_Analysis/plots/reconstructed_distributions/re
-constructed_distribution_mubin_0.png  used on input line 212.
-(pdftex.def)             Requested size: 307.12714pt x 191.50172pt.
-
-Overfull \hbox (198.90663pt too wide) has occurred while \output is active
- [][][][]  
- []
-
-[30
-
- <../../Mu_Analysis/plots/reconstructed_distributions/reconstructed_distributio
-n_mubin_0.png>]
-<../../Mu_Analysis/plots/reconstructed_distributions/reconstructed_distribution
-_mubin_1.png, id=896, 2826.56pt x 1379.1525pt>
-File: ../../Mu_Analysis/plots/reconstructed_distributions/reconstructed_distrib
-ution_mubin_1.png Graphic file (type png)
-<use ../../Mu_Analysis/plots/reconstructed_distributions/reconstructed_distribu
-tion_mubin_1.png>
-Package pdftex.def Info: ../../Mu_Analysis/plots/reconstructed_distributions/re
-constructed_distribution_mubin_1.png  used on input line 215.
-(pdftex.def)             Requested size: 307.12714pt x 191.50172pt.
-
-Overfull \hbox (198.90663pt too wide) has occurred while \output is active
- [][][][]  
- []
-
-[31
-
- <../../Mu_Analysis/plots/reconstructed_distributions/reconstructed_distributio
-n_mubin_1.png>]
-<../../Mu_Analysis/plots/reconstructed_distributions/reconstructed_distribution
-_mubin_2.png, id=925, 2826.56pt x 1379.1525pt>
-File: ../../Mu_Analysis/plots/reconstructed_distributions/reconstructed_distrib
-ution_mubin_2.png Graphic file (type png)
-<use ../../Mu_Analysis/plots/reconstructed_distributions/reconstructed_distribu
-tion_mubin_2.png>
-Package pdftex.def Info: ../../Mu_Analysis/plots/reconstructed_distributions/re
-constructed_distribution_mubin_2.png  used on input line 218.
-(pdftex.def)             Requested size: 307.12714pt x 191.50172pt.
-
-Overfull \hbox (198.90663pt too wide) has occurred while \output is active
- [][][][]  
- []
-
-[32
-
- <../../Mu_Analysis/plots/reconstructed_distributions/reconstructed_distributio
-n_mubin_2.png>]
-<../../Mu_Analysis/plots/reconstructed_distributions/reconstructed_distribution
-_mubin_3.png, id=952, 2826.56pt x 1379.1525pt>
-File: ../../Mu_Analysis/plots/reconstructed_distributions/reconstructed_distrib
-ution_mubin_3.png Graphic file (type png)
-<use ../../Mu_Analysis/plots/reconstructed_distributions/reconstructed_distribu
-tion_mubin_3.png>
-Package pdftex.def Info: ../../Mu_Analysis/plots/reconstructed_distributions/re
-constructed_distribution_mubin_3.png  used on input line 221.
+lg_L1XE30_dist_mubin_3.png  used on input line 219.
 (pdftex.def)             Requested size: 307.12714pt x 191.50172pt.
 
 Overfull \hbox (198.90663pt too wide) has occurred while \output is active
@@ -1218,16 +1193,16 @@ Overfull \hbox (198.90663pt too wide) has occurred while \output is active
 
 [33
 
- <../../Mu_Analysis/plots/reconstructed_distributions/reconstructed_distributio
-n_mubin_3.png>]
-<../../Mu_Analysis/plots/reconstructed_distributions/reconstructed_distribution
-_mubin_4.png, id=979, 2826.56pt x 1379.1525pt>
-File: ../../Mu_Analysis/plots/reconstructed_distributions/reconstructed_distrib
-ution_mubin_4.png Graphic file (type png)
-<use ../../Mu_Analysis/plots/reconstructed_distributions/reconstructed_distribu
-tion_mubin_4.png>
-Package pdftex.def Info: ../../Mu_Analysis/plots/reconstructed_distributions/re
-constructed_distribution_mubin_4.png  used on input line 224.
+ <../../Mu_Analysis/plots/hlt_noalg_l1xe30_plots/hlt_noalg_L1XE30_dist_mubin_3.
+png>]
+<../../Mu_Analysis/plots/hlt_noalg_l1xe50_plots/hlt_noalg_L1XE50_dist_mubin_3.p
+ng, id=986, 2826.56pt x 1379.1525pt>
+File: ../../Mu_Analysis/plots/hlt_noalg_l1xe50_plots/hlt_noalg_L1XE50_dist_mubi
+n_3.png Graphic file (type png)
+<use ../../Mu_Analysis/plots/hlt_noalg_l1xe50_plots/hlt_noalg_L1XE50_dist_mubin
+_3.png>
+Package pdftex.def Info: ../../Mu_Analysis/plots/hlt_noalg_l1xe50_plots/hlt_noa
+lg_L1XE50_dist_mubin_3.png  used on input line 222.
 (pdftex.def)             Requested size: 307.12714pt x 191.50172pt.
 
 Overfull \hbox (198.90663pt too wide) has occurred while \output is active
@@ -1236,34 +1211,23 @@ Overfull \hbox (198.90663pt too wide) has occurred while \output is active
 
 [34
 
- <../../Mu_Analysis/plots/reconstructed_distributions/reconstructed_distributio
-n_mubin_4.png>]
-<../../Mu_Analysis/plots/reconstructed_distributions/reconstructed_distribution
-_mubin_5.png, id=1006, 2826.56pt x 1379.1525pt>
-File: ../../Mu_Analysis/plots/reconstructed_distributions/reconstructed_distrib
-ution_mubin_5.png Graphic file (type png)
-<use ../../Mu_Analysis/plots/reconstructed_distributions/reconstructed_distribu
-tion_mubin_5.png>
-Package pdftex.def Info: ../../Mu_Analysis/plots/reconstructed_distributions/re
-constructed_distribution_mubin_5.png  used on input line 227.
-(pdftex.def)             Requested size: 307.12714pt x 191.50172pt.
-
+ <../../Mu_Analysis/plots/hlt_noalg_l1xe50_plots/hlt_noalg_L1XE50_dist_mubin_3.
+png>]
 Overfull \hbox (198.90663pt too wide) has occurred while \output is active
  [][][][]  
  []
 
 [35
 
- <../../Mu_Analysis/plots/reconstructed_distributions/reconstructed_distributio
-n_mubin_5.png>]
-<../../Mu_Analysis/plots/reconstructed_distributions/reconstructed_distribution
-_mubin_6.png, id=1034, 2826.56pt x 1379.1525pt>
-File: ../../Mu_Analysis/plots/reconstructed_distributions/reconstructed_distrib
-ution_mubin_6.png Graphic file (type png)
-<use ../../Mu_Analysis/plots/reconstructed_distributions/reconstructed_distribu
-tion_mubin_6.png>
-Package pdftex.def Info: ../../Mu_Analysis/plots/reconstructed_distributions/re
-constructed_distribution_mubin_6.png  used on input line 230.
+]
+<../../Mu_Analysis/plots/zerobias_distributions_corrected/zb_met_distributions_
+mubin_3.png, id=1038, 2826.56pt x 1379.1525pt>
+File: ../../Mu_Analysis/plots/zerobias_distributions_corrected/zb_met_distribut
+ions_mubin_3.png Graphic file (type png)
+<use ../../Mu_Analysis/plots/zerobias_distributions_corrected/zb_met_distributi
+ons_mubin_3.png>
+Package pdftex.def Info: ../../Mu_Analysis/plots/zerobias_distributions_correct
+ed/zb_met_distributions_mubin_3.png  used on input line 234.
 (pdftex.def)             Requested size: 307.12714pt x 191.50172pt.
 
 Overfull \hbox (198.90663pt too wide) has occurred while \output is active
@@ -1272,21 +1236,35 @@ Overfull \hbox (198.90663pt too wide) has occurred while \output is active
 
 [36
 
- <../../Mu_Analysis/plots/reconstructed_distributions/reconstructed_distributio
-n_mubin_6.png>]
+ <../../Mu_Analysis/plots/zerobias_distributions_corrected/zb_met_distributions
+_mubin_3.png>]
+<../../Mu_Analysis/plots/reconstructed_distributions/reconstructed_distribution
+_mubin_0.png, id=1065, 2826.56pt x 1379.1525pt>
+File: ../../Mu_Analysis/plots/reconstructed_distributions/reconstructed_distrib
+ution_mubin_0.png Graphic file (type png)
+<use ../../Mu_Analysis/plots/reconstructed_distributions/reconstructed_distribu
+tion_mubin_0.png>
+Package pdftex.def Info: ../../Mu_Analysis/plots/reconstructed_distributions/re
+constructed_distribution_mubin_0.png  used on input line 238.
+(pdftex.def)             Requested size: 307.12714pt x 191.50172pt.
+
 Overfull \hbox (198.90663pt too wide) has occurred while \output is active
  [][][][]  
  []
 
 [37
 
-]
-File: ../../Mu_Analysis/plots/L1XE30Efficiency_Curves.png Graphic file (type pn
-g)
-<use ../../Mu_Analysis/plots/L1XE30Efficiency_Curves.png>
-Package pdftex.def Info: ../../Mu_Analysis/plots/L1XE30Efficiency_Curves.png  u
-sed on input line 239.
-(pdftex.def)             Requested size: 307.12714pt x 191.51091pt.
+ <../../Mu_Analysis/plots/reconstructed_distributions/reconstructed_distributio
+n_mubin_0.png>]
+<../../Mu_Analysis/plots/reconstructed_distributions/reconstructed_distribution
+_mubin_1.png, id=1093, 2826.56pt x 1379.1525pt>
+File: ../../Mu_Analysis/plots/reconstructed_distributions/reconstructed_distrib
+ution_mubin_1.png Graphic file (type png)
+<use ../../Mu_Analysis/plots/reconstructed_distributions/reconstructed_distribu
+tion_mubin_1.png>
+Package pdftex.def Info: ../../Mu_Analysis/plots/reconstructed_distributions/re
+constructed_distribution_mubin_1.png  used on input line 241.
+(pdftex.def)             Requested size: 307.12714pt x 191.50172pt.
 
 Overfull \hbox (198.90663pt too wide) has occurred while \output is active
  [][][][]  
@@ -1294,13 +1272,17 @@ Overfull \hbox (198.90663pt too wide) has occurred while \output is active
 
 [38
 
-]
-File: ../../Mu_Analysis/plots/L1XE50Efficiency_Curves.png Graphic file (type pn
-g)
-<use ../../Mu_Analysis/plots/L1XE50Efficiency_Curves.png>
-Package pdftex.def Info: ../../Mu_Analysis/plots/L1XE50Efficiency_Curves.png  u
-sed on input line 243.
-(pdftex.def)             Requested size: 307.12714pt x 191.51091pt.
+ <../../Mu_Analysis/plots/reconstructed_distributions/reconstructed_distributio
+n_mubin_1.png>]
+<../../Mu_Analysis/plots/reconstructed_distributions/reconstructed_distribution
+_mubin_2.png, id=1120, 2826.56pt x 1379.1525pt>
+File: ../../Mu_Analysis/plots/reconstructed_distributions/reconstructed_distrib
+ution_mubin_2.png Graphic file (type png)
+<use ../../Mu_Analysis/plots/reconstructed_distributions/reconstructed_distribu
+tion_mubin_2.png>
+Package pdftex.def Info: ../../Mu_Analysis/plots/reconstructed_distributions/re
+constructed_distribution_mubin_2.png  used on input line 244.
+(pdftex.def)             Requested size: 307.12714pt x 191.50172pt.
 
 Overfull \hbox (198.90663pt too wide) has occurred while \output is active
  [][][][]  
@@ -1308,16 +1290,17 @@ Overfull \hbox (198.90663pt too wide) has occurred while \output is active
 
 [39
 
-]
-<../../Mu_Analysis/plots/hlt_noalg_l1xe30_plots/hlt_noalg_L1XE30_dist_mubin_0.p
-ng, id=1141, 2826.56pt x 1443.3925pt>
-File: ../../Mu_Analysis/plots/hlt_noalg_l1xe30_plots/hlt_noalg_L1XE30_dist_mubi
-n_0.png Graphic file (type png)
-<use ../../Mu_Analysis/plots/hlt_noalg_l1xe30_plots/hlt_noalg_L1XE30_dist_mubin
-_0.png>
-Package pdftex.def Info: ../../Mu_Analysis/plots/hlt_noalg_l1xe30_plots/hlt_noa
-lg_L1XE30_dist_mubin_0.png  used on input line 248.
-(pdftex.def)             Requested size: 307.12714pt x 191.50188pt.
+ <../../Mu_Analysis/plots/reconstructed_distributions/reconstructed_distributio
+n_mubin_2.png>]
+<../../Mu_Analysis/plots/reconstructed_distributions/reconstructed_distribution
+_mubin_3.png, id=1148, 2826.56pt x 1379.1525pt>
+File: ../../Mu_Analysis/plots/reconstructed_distributions/reconstructed_distrib
+ution_mubin_3.png Graphic file (type png)
+<use ../../Mu_Analysis/plots/reconstructed_distributions/reconstructed_distribu
+tion_mubin_3.png>
+Package pdftex.def Info: ../../Mu_Analysis/plots/reconstructed_distributions/re
+constructed_distribution_mubin_3.png  used on input line 247.
+(pdftex.def)             Requested size: 307.12714pt x 191.50172pt.
 
 Overfull \hbox (198.90663pt too wide) has occurred while \output is active
  [][][][]  
@@ -1325,16 +1308,16 @@ Overfull \hbox (198.90663pt too wide) has occurred while \output is active
 
 [40
 
- <../../Mu_Analysis/plots/hlt_noalg_l1xe30_plots/hlt_noalg_L1XE30_dist_mubin_0.
-png>]
-<../../Mu_Analysis/plots/hlt_noalg_l1xe30_plots/hlt_noalg_L1XE30_dist_mubin_1.p
-ng, id=1169, 2826.56pt x 1379.1525pt>
-File: ../../Mu_Analysis/plots/hlt_noalg_l1xe30_plots/hlt_noalg_L1XE30_dist_mubi
-n_1.png Graphic file (type png)
-<use ../../Mu_Analysis/plots/hlt_noalg_l1xe30_plots/hlt_noalg_L1XE30_dist_mubin
-_1.png>
-Package pdftex.def Info: ../../Mu_Analysis/plots/hlt_noalg_l1xe30_plots/hlt_noa
-lg_L1XE30_dist_mubin_1.png  used on input line 252.
+ <../../Mu_Analysis/plots/reconstructed_distributions/reconstructed_distributio
+n_mubin_3.png>]
+<../../Mu_Analysis/plots/reconstructed_distributions/reconstructed_distribution
+_mubin_4.png, id=1175, 2826.56pt x 1379.1525pt>
+File: ../../Mu_Analysis/plots/reconstructed_distributions/reconstructed_distrib
+ution_mubin_4.png Graphic file (type png)
+<use ../../Mu_Analysis/plots/reconstructed_distributions/reconstructed_distribu
+tion_mubin_4.png>
+Package pdftex.def Info: ../../Mu_Analysis/plots/reconstructed_distributions/re
+constructed_distribution_mubin_4.png  used on input line 250.
 (pdftex.def)             Requested size: 307.12714pt x 191.50172pt.
 
 Overfull \hbox (198.90663pt too wide) has occurred while \output is active
@@ -1343,16 +1326,16 @@ Overfull \hbox (198.90663pt too wide) has occurred while \output is active
 
 [41
 
- <../../Mu_Analysis/plots/hlt_noalg_l1xe30_plots/hlt_noalg_L1XE30_dist_mubin_1.
-png>]
-<../../Mu_Analysis/plots/hlt_noalg_l1xe30_plots/hlt_noalg_L1XE30_dist_mubin_2.p
-ng, id=1196, 2826.56pt x 1379.1525pt>
-File: ../../Mu_Analysis/plots/hlt_noalg_l1xe30_plots/hlt_noalg_L1XE30_dist_mubi
-n_2.png Graphic file (type png)
-<use ../../Mu_Analysis/plots/hlt_noalg_l1xe30_plots/hlt_noalg_L1XE30_dist_mubin
-_2.png>
-Package pdftex.def Info: ../../Mu_Analysis/plots/hlt_noalg_l1xe30_plots/hlt_noa
-lg_L1XE30_dist_mubin_2.png  used on input line 256.
+ <../../Mu_Analysis/plots/reconstructed_distributions/reconstructed_distributio
+n_mubin_4.png>]
+<../../Mu_Analysis/plots/reconstructed_distributions/reconstructed_distribution
+_mubin_5.png, id=1202, 2826.56pt x 1379.1525pt>
+File: ../../Mu_Analysis/plots/reconstructed_distributions/reconstructed_distrib
+ution_mubin_5.png Graphic file (type png)
+<use ../../Mu_Analysis/plots/reconstructed_distributions/reconstructed_distribu
+tion_mubin_5.png>
+Package pdftex.def Info: ../../Mu_Analysis/plots/reconstructed_distributions/re
+constructed_distribution_mubin_5.png  used on input line 253.
 (pdftex.def)             Requested size: 307.12714pt x 191.50172pt.
 
 Overfull \hbox (198.90663pt too wide) has occurred while \output is active
@@ -1361,14 +1344,16 @@ Overfull \hbox (198.90663pt too wide) has occurred while \output is active
 
 [42
 
- <../../Mu_Analysis/plots/hlt_noalg_l1xe30_plots/hlt_noalg_L1XE30_dist_mubin_2.
-png>]
-File: ../../Mu_Analysis/plots/hlt_noalg_l1xe30_plots/hlt_noalg_L1XE30_dist_mubi
-n_3.png Graphic file (type png)
-<use ../../Mu_Analysis/plots/hlt_noalg_l1xe30_plots/hlt_noalg_L1XE30_dist_mubin
-_3.png>
-Package pdftex.def Info: ../../Mu_Analysis/plots/hlt_noalg_l1xe30_plots/hlt_noa
-lg_L1XE30_dist_mubin_3.png  used on input line 260.
+ <../../Mu_Analysis/plots/reconstructed_distributions/reconstructed_distributio
+n_mubin_5.png>]
+<../../Mu_Analysis/plots/reconstructed_distributions/reconstructed_distribution
+_mubin_6.png, id=1229, 2826.56pt x 1379.1525pt>
+File: ../../Mu_Analysis/plots/reconstructed_distributions/reconstructed_distrib
+ution_mubin_6.png Graphic file (type png)
+<use ../../Mu_Analysis/plots/reconstructed_distributions/reconstructed_distribu
+tion_mubin_6.png>
+Package pdftex.def Info: ../../Mu_Analysis/plots/reconstructed_distributions/re
+constructed_distribution_mubin_6.png  used on input line 256.
 (pdftex.def)             Requested size: 307.12714pt x 191.50172pt.
 
 Overfull \hbox (198.90663pt too wide) has occurred while \output is active
@@ -1377,34 +1362,21 @@ Overfull \hbox (198.90663pt too wide) has occurred while \output is active
 
 [43
 
-]
-<../../Mu_Analysis/plots/hlt_noalg_l1xe30_plots/hlt_noalg_L1XE30_dist_mubin_4.p
-ng, id=1251, 2826.56pt x 1379.1525pt>
-File: ../../Mu_Analysis/plots/hlt_noalg_l1xe30_plots/hlt_noalg_L1XE30_dist_mubi
-n_4.png Graphic file (type png)
-<use ../../Mu_Analysis/plots/hlt_noalg_l1xe30_plots/hlt_noalg_L1XE30_dist_mubin
-_4.png>
-Package pdftex.def Info: ../../Mu_Analysis/plots/hlt_noalg_l1xe30_plots/hlt_noa
-lg_L1XE30_dist_mubin_4.png  used on input line 264.
-(pdftex.def)             Requested size: 307.12714pt x 191.50172pt.
-
+ <../../Mu_Analysis/plots/reconstructed_distributions/reconstructed_distributio
+n_mubin_6.png>]
 Overfull \hbox (198.90663pt too wide) has occurred while \output is active
  [][][][]  
  []
 
 [44
 
- <../../Mu_Analysis/plots/hlt_noalg_l1xe30_plots/hlt_noalg_L1XE30_dist_mubin_4.
-png>]
-<../../Mu_Analysis/plots/hlt_noalg_l1xe30_plots/hlt_noalg_L1XE30_dist_mubin_5.p
-ng, id=1278, 2826.56pt x 1379.1525pt>
-File: ../../Mu_Analysis/plots/hlt_noalg_l1xe30_plots/hlt_noalg_L1XE30_dist_mubi
-n_5.png Graphic file (type png)
-<use ../../Mu_Analysis/plots/hlt_noalg_l1xe30_plots/hlt_noalg_L1XE30_dist_mubin
-_5.png>
-Package pdftex.def Info: ../../Mu_Analysis/plots/hlt_noalg_l1xe30_plots/hlt_noa
-lg_L1XE30_dist_mubin_5.png  used on input line 268.
-(pdftex.def)             Requested size: 307.12714pt x 191.50172pt.
+]
+File: ../../Mu_Analysis/plots/L1XE30Efficiency_Curves.png Graphic file (type pn
+g)
+<use ../../Mu_Analysis/plots/L1XE30Efficiency_Curves.png>
+Package pdftex.def Info: ../../Mu_Analysis/plots/L1XE30Efficiency_Curves.png  u
+sed on input line 265.
+(pdftex.def)             Requested size: 307.12714pt x 191.51091pt.
 
 Overfull \hbox (198.90663pt too wide) has occurred while \output is active
  [][][][]  
@@ -1412,17 +1384,13 @@ Overfull \hbox (198.90663pt too wide) has occurred while \output is active
 
 [45
 
- <../../Mu_Analysis/plots/hlt_noalg_l1xe30_plots/hlt_noalg_L1XE30_dist_mubin_5.
-png>]
-<../../Mu_Analysis/plots/hlt_noalg_l1xe30_plots/hlt_noalg_L1XE30_dist_mubin_6.p
-ng, id=1305, 2826.56pt x 1379.1525pt>
-File: ../../Mu_Analysis/plots/hlt_noalg_l1xe30_plots/hlt_noalg_L1XE30_dist_mubi
-n_6.png Graphic file (type png)
-<use ../../Mu_Analysis/plots/hlt_noalg_l1xe30_plots/hlt_noalg_L1XE30_dist_mubin
-_6.png>
-Package pdftex.def Info: ../../Mu_Analysis/plots/hlt_noalg_l1xe30_plots/hlt_noa
-lg_L1XE30_dist_mubin_6.png  used on input line 272.
-(pdftex.def)             Requested size: 307.12714pt x 191.50172pt.
+]
+File: ../../Mu_Analysis/plots/L1XE50Efficiency_Curves.png Graphic file (type pn
+g)
+<use ../../Mu_Analysis/plots/L1XE50Efficiency_Curves.png>
+Package pdftex.def Info: ../../Mu_Analysis/plots/L1XE50Efficiency_Curves.png  u
+sed on input line 269.
+(pdftex.def)             Requested size: 307.12714pt x 191.51091pt.
 
 Overfull \hbox (198.90663pt too wide) has occurred while \output is active
  [][][][]  
@@ -1430,17 +1398,16 @@ Overfull \hbox (198.90663pt too wide) has occurred while \output is active
 
 [46
 
- <../../Mu_Analysis/plots/hlt_noalg_l1xe30_plots/hlt_noalg_L1XE30_dist_mubin_6.
-png>]
-<../../Mu_Analysis/plots/hlt_noalg_l1xe50_plots/hlt_noalg_L1XE50_dist_mubin_0.p
-ng, id=1332, 2826.56pt x 1411.2725pt>
-File: ../../Mu_Analysis/plots/hlt_noalg_l1xe50_plots/hlt_noalg_L1XE50_dist_mubi
+]
+<../../Mu_Analysis/plots/hlt_noalg_l1xe30_plots/hlt_noalg_L1XE30_dist_mubin_0.p
+ng, id=1336, 2826.56pt x 1443.3925pt>
+File: ../../Mu_Analysis/plots/hlt_noalg_l1xe30_plots/hlt_noalg_L1XE30_dist_mubi
 n_0.png Graphic file (type png)
-<use ../../Mu_Analysis/plots/hlt_noalg_l1xe50_plots/hlt_noalg_L1XE50_dist_mubin
+<use ../../Mu_Analysis/plots/hlt_noalg_l1xe30_plots/hlt_noalg_L1XE30_dist_mubin
 _0.png>
-Package pdftex.def Info: ../../Mu_Analysis/plots/hlt_noalg_l1xe50_plots/hlt_noa
-lg_L1XE50_dist_mubin_0.png  used on input line 277.
-(pdftex.def)             Requested size: 307.12714pt x 191.50414pt.
+Package pdftex.def Info: ../../Mu_Analysis/plots/hlt_noalg_l1xe30_plots/hlt_noa
+lg_L1XE30_dist_mubin_0.png  used on input line 274.
+(pdftex.def)             Requested size: 307.12714pt x 191.50188pt.
 
 Overfull \hbox (198.90663pt too wide) has occurred while \output is active
  [][][][]  
@@ -1448,16 +1415,16 @@ Overfull \hbox (198.90663pt too wide) has occurred while \output is active
 
 [47
 
- <../../Mu_Analysis/plots/hlt_noalg_l1xe50_plots/hlt_noalg_L1XE50_dist_mubin_0.
+ <../../Mu_Analysis/plots/hlt_noalg_l1xe30_plots/hlt_noalg_L1XE30_dist_mubin_0.
 png>]
-<../../Mu_Analysis/plots/hlt_noalg_l1xe50_plots/hlt_noalg_L1XE50_dist_mubin_1.p
-ng, id=1360, 2826.56pt x 1379.1525pt>
-File: ../../Mu_Analysis/plots/hlt_noalg_l1xe50_plots/hlt_noalg_L1XE50_dist_mubi
+<../../Mu_Analysis/plots/hlt_noalg_l1xe30_plots/hlt_noalg_L1XE30_dist_mubin_1.p
+ng, id=1365, 2826.56pt x 1379.1525pt>
+File: ../../Mu_Analysis/plots/hlt_noalg_l1xe30_plots/hlt_noalg_L1XE30_dist_mubi
 n_1.png Graphic file (type png)
-<use ../../Mu_Analysis/plots/hlt_noalg_l1xe50_plots/hlt_noalg_L1XE50_dist_mubin
+<use ../../Mu_Analysis/plots/hlt_noalg_l1xe30_plots/hlt_noalg_L1XE30_dist_mubin
 _1.png>
-Package pdftex.def Info: ../../Mu_Analysis/plots/hlt_noalg_l1xe50_plots/hlt_noa
-lg_L1XE50_dist_mubin_1.png  used on input line 281.
+Package pdftex.def Info: ../../Mu_Analysis/plots/hlt_noalg_l1xe30_plots/hlt_noa
+lg_L1XE30_dist_mubin_1.png  used on input line 278.
 (pdftex.def)             Requested size: 307.12714pt x 191.50172pt.
 
 Overfull \hbox (198.90663pt too wide) has occurred while \output is active
@@ -1466,16 +1433,16 @@ Overfull \hbox (198.90663pt too wide) has occurred while \output is active
 
 [48
 
- <../../Mu_Analysis/plots/hlt_noalg_l1xe50_plots/hlt_noalg_L1XE50_dist_mubin_1.
+ <../../Mu_Analysis/plots/hlt_noalg_l1xe30_plots/hlt_noalg_L1XE30_dist_mubin_1.
 png>]
-<../../Mu_Analysis/plots/hlt_noalg_l1xe50_plots/hlt_noalg_L1XE50_dist_mubin_2.p
-ng, id=1387, 2826.56pt x 1379.1525pt>
-File: ../../Mu_Analysis/plots/hlt_noalg_l1xe50_plots/hlt_noalg_L1XE50_dist_mubi
+<../../Mu_Analysis/plots/hlt_noalg_l1xe30_plots/hlt_noalg_L1XE30_dist_mubin_2.p
+ng, id=1392, 2826.56pt x 1379.1525pt>
+File: ../../Mu_Analysis/plots/hlt_noalg_l1xe30_plots/hlt_noalg_L1XE30_dist_mubi
 n_2.png Graphic file (type png)
-<use ../../Mu_Analysis/plots/hlt_noalg_l1xe50_plots/hlt_noalg_L1XE50_dist_mubin
+<use ../../Mu_Analysis/plots/hlt_noalg_l1xe30_plots/hlt_noalg_L1XE30_dist_mubin
 _2.png>
-Package pdftex.def Info: ../../Mu_Analysis/plots/hlt_noalg_l1xe50_plots/hlt_noa
-lg_L1XE50_dist_mubin_2.png  used on input line 285.
+Package pdftex.def Info: ../../Mu_Analysis/plots/hlt_noalg_l1xe30_plots/hlt_noa
+lg_L1XE30_dist_mubin_2.png  used on input line 282.
 (pdftex.def)             Requested size: 307.12714pt x 191.50172pt.
 
 Overfull \hbox (198.90663pt too wide) has occurred while \output is active
@@ -1484,14 +1451,14 @@ Overfull \hbox (198.90663pt too wide) has occurred while \output is active
 
 [49
 
- <../../Mu_Analysis/plots/hlt_noalg_l1xe50_plots/hlt_noalg_L1XE50_dist_mubin_2.
+ <../../Mu_Analysis/plots/hlt_noalg_l1xe30_plots/hlt_noalg_L1XE30_dist_mubin_2.
 png>]
-File: ../../Mu_Analysis/plots/hlt_noalg_l1xe50_plots/hlt_noalg_L1XE50_dist_mubi
+File: ../../Mu_Analysis/plots/hlt_noalg_l1xe30_plots/hlt_noalg_L1XE30_dist_mubi
 n_3.png Graphic file (type png)
-<use ../../Mu_Analysis/plots/hlt_noalg_l1xe50_plots/hlt_noalg_L1XE50_dist_mubin
+<use ../../Mu_Analysis/plots/hlt_noalg_l1xe30_plots/hlt_noalg_L1XE30_dist_mubin
 _3.png>
-Package pdftex.def Info: ../../Mu_Analysis/plots/hlt_noalg_l1xe50_plots/hlt_noa
-lg_L1XE50_dist_mubin_3.png  used on input line 289.
+Package pdftex.def Info: ../../Mu_Analysis/plots/hlt_noalg_l1xe30_plots/hlt_noa
+lg_L1XE30_dist_mubin_3.png  used on input line 286.
 (pdftex.def)             Requested size: 307.12714pt x 191.50172pt.
 
 Overfull \hbox (198.90663pt too wide) has occurred while \output is active
@@ -1501,14 +1468,14 @@ Overfull \hbox (198.90663pt too wide) has occurred while \output is active
 [50
 
 ]
-<../../Mu_Analysis/plots/hlt_noalg_l1xe50_plots/hlt_noalg_L1XE50_dist_mubin_4.p
-ng, id=1441, 2826.56pt x 1379.1525pt>
-File: ../../Mu_Analysis/plots/hlt_noalg_l1xe50_plots/hlt_noalg_L1XE50_dist_mubi
+<../../Mu_Analysis/plots/hlt_noalg_l1xe30_plots/hlt_noalg_L1XE30_dist_mubin_4.p
+ng, id=1446, 2826.56pt x 1379.1525pt>
+File: ../../Mu_Analysis/plots/hlt_noalg_l1xe30_plots/hlt_noalg_L1XE30_dist_mubi
 n_4.png Graphic file (type png)
-<use ../../Mu_Analysis/plots/hlt_noalg_l1xe50_plots/hlt_noalg_L1XE50_dist_mubin
+<use ../../Mu_Analysis/plots/hlt_noalg_l1xe30_plots/hlt_noalg_L1XE30_dist_mubin
 _4.png>
-Package pdftex.def Info: ../../Mu_Analysis/plots/hlt_noalg_l1xe50_plots/hlt_noa
-lg_L1XE50_dist_mubin_4.png  used on input line 293.
+Package pdftex.def Info: ../../Mu_Analysis/plots/hlt_noalg_l1xe30_plots/hlt_noa
+lg_L1XE30_dist_mubin_4.png  used on input line 290.
 (pdftex.def)             Requested size: 307.12714pt x 191.50172pt.
 
 Overfull \hbox (198.90663pt too wide) has occurred while \output is active
@@ -1517,16 +1484,16 @@ Overfull \hbox (198.90663pt too wide) has occurred while \output is active
 
 [51
 
- <../../Mu_Analysis/plots/hlt_noalg_l1xe50_plots/hlt_noalg_L1XE50_dist_mubin_4.
+ <../../Mu_Analysis/plots/hlt_noalg_l1xe30_plots/hlt_noalg_L1XE30_dist_mubin_4.
 png>]
-<../../Mu_Analysis/plots/hlt_noalg_l1xe50_plots/hlt_noalg_L1XE50_dist_mubin_5.p
-ng, id=1469, 2826.56pt x 1379.1525pt>
-File: ../../Mu_Analysis/plots/hlt_noalg_l1xe50_plots/hlt_noalg_L1XE50_dist_mubi
+<../../Mu_Analysis/plots/hlt_noalg_l1xe30_plots/hlt_noalg_L1XE30_dist_mubin_5.p
+ng, id=1474, 2826.56pt x 1379.1525pt>
+File: ../../Mu_Analysis/plots/hlt_noalg_l1xe30_plots/hlt_noalg_L1XE30_dist_mubi
 n_5.png Graphic file (type png)
-<use ../../Mu_Analysis/plots/hlt_noalg_l1xe50_plots/hlt_noalg_L1XE50_dist_mubin
+<use ../../Mu_Analysis/plots/hlt_noalg_l1xe30_plots/hlt_noalg_L1XE30_dist_mubin
 _5.png>
-Package pdftex.def Info: ../../Mu_Analysis/plots/hlt_noalg_l1xe50_plots/hlt_noa
-lg_L1XE50_dist_mubin_5.png  used on input line 297.
+Package pdftex.def Info: ../../Mu_Analysis/plots/hlt_noalg_l1xe30_plots/hlt_noa
+lg_L1XE30_dist_mubin_5.png  used on input line 294.
 (pdftex.def)             Requested size: 307.12714pt x 191.50172pt.
 
 Overfull \hbox (198.90663pt too wide) has occurred while \output is active
@@ -1535,16 +1502,16 @@ Overfull \hbox (198.90663pt too wide) has occurred while \output is active
 
 [52
 
- <../../Mu_Analysis/plots/hlt_noalg_l1xe50_plots/hlt_noalg_L1XE50_dist_mubin_5.
+ <../../Mu_Analysis/plots/hlt_noalg_l1xe30_plots/hlt_noalg_L1XE30_dist_mubin_5.
 png>]
-<../../Mu_Analysis/plots/hlt_noalg_l1xe50_plots/hlt_noalg_L1XE50_dist_mubin_6.p
-ng, id=1496, 2826.56pt x 1379.1525pt>
-File: ../../Mu_Analysis/plots/hlt_noalg_l1xe50_plots/hlt_noalg_L1XE50_dist_mubi
+<../../Mu_Analysis/plots/hlt_noalg_l1xe30_plots/hlt_noalg_L1XE30_dist_mubin_6.p
+ng, id=1501, 2826.56pt x 1379.1525pt>
+File: ../../Mu_Analysis/plots/hlt_noalg_l1xe30_plots/hlt_noalg_L1XE30_dist_mubi
 n_6.png Graphic file (type png)
-<use ../../Mu_Analysis/plots/hlt_noalg_l1xe50_plots/hlt_noalg_L1XE50_dist_mubin
+<use ../../Mu_Analysis/plots/hlt_noalg_l1xe30_plots/hlt_noalg_L1XE30_dist_mubin
 _6.png>
-Package pdftex.def Info: ../../Mu_Analysis/plots/hlt_noalg_l1xe50_plots/hlt_noa
-lg_L1XE50_dist_mubin_6.png  used on input line 301.
+Package pdftex.def Info: ../../Mu_Analysis/plots/hlt_noalg_l1xe30_plots/hlt_noa
+lg_L1XE30_dist_mubin_6.png  used on input line 298.
 (pdftex.def)             Requested size: 307.12714pt x 191.50172pt.
 
 Overfull \hbox (198.90663pt too wide) has occurred while \output is active
@@ -1553,17 +1520,17 @@ Overfull \hbox (198.90663pt too wide) has occurred while \output is active
 
 [53
 
- <../../Mu_Analysis/plots/hlt_noalg_l1xe50_plots/hlt_noalg_L1XE50_dist_mubin_6.
+ <../../Mu_Analysis/plots/hlt_noalg_l1xe30_plots/hlt_noalg_L1XE30_dist_mubin_6.
 png>]
-<../../Mu_Analysis/plots/l1xe30_efficiencies/L1XE30Efficiency_mu_between_0_10.p
-ng, id=1523, 2826.56pt x 1505.625pt>
-File: ../../Mu_Analysis/plots/l1xe30_efficiencies/L1XE30Efficiency_mu_between_0
-_10.png Graphic file (type png)
-<use ../../Mu_Analysis/plots/l1xe30_efficiencies/L1XE30Efficiency_mu_between_0_
-10.png>
-Package pdftex.def Info: ../../Mu_Analysis/plots/l1xe30_efficiencies/L1XE30Effi
-ciency_mu_between_0_10.png  used on input line 306.
-(pdftex.def)             Requested size: 307.12714pt x 191.51091pt.
+<../../Mu_Analysis/plots/hlt_noalg_l1xe50_plots/hlt_noalg_L1XE50_dist_mubin_0.p
+ng, id=1528, 2826.56pt x 1411.2725pt>
+File: ../../Mu_Analysis/plots/hlt_noalg_l1xe50_plots/hlt_noalg_L1XE50_dist_mubi
+n_0.png Graphic file (type png)
+<use ../../Mu_Analysis/plots/hlt_noalg_l1xe50_plots/hlt_noalg_L1XE50_dist_mubin
+_0.png>
+Package pdftex.def Info: ../../Mu_Analysis/plots/hlt_noalg_l1xe50_plots/hlt_noa
+lg_L1XE50_dist_mubin_0.png  used on input line 303.
+(pdftex.def)             Requested size: 307.12714pt x 191.50414pt.
 
 Overfull \hbox (198.90663pt too wide) has occurred while \output is active
  [][][][]  
@@ -1571,17 +1538,17 @@ Overfull \hbox (198.90663pt too wide) has occurred while \output is active
 
 [54
 
- <../../Mu_Analysis/plots/l1xe30_efficiencies/L1XE30Efficiency_mu_between_0_10.
+ <../../Mu_Analysis/plots/hlt_noalg_l1xe50_plots/hlt_noalg_L1XE50_dist_mubin_0.
 png>]
-<../../Mu_Analysis/plots/l1xe30_efficiencies/L1XE30Efficiency_mu_between_10_20.
-png, id=1550, 2826.56pt x 1443.3925pt>
-File: ../../Mu_Analysis/plots/l1xe30_efficiencies/L1XE30Efficiency_mu_between_1
-0_20.png Graphic file (type png)
-<use ../../Mu_Analysis/plots/l1xe30_efficiencies/L1XE30Efficiency_mu_between_10
-_20.png>
-Package pdftex.def Info: ../../Mu_Analysis/plots/l1xe30_efficiencies/L1XE30Effi
-ciency_mu_between_10_20.png  used on input line 310.
-(pdftex.def)             Requested size: 307.12714pt x 191.50188pt.
+<../../Mu_Analysis/plots/hlt_noalg_l1xe50_plots/hlt_noalg_L1XE50_dist_mubin_1.p
+ng, id=1555, 2826.56pt x 1379.1525pt>
+File: ../../Mu_Analysis/plots/hlt_noalg_l1xe50_plots/hlt_noalg_L1XE50_dist_mubi
+n_1.png Graphic file (type png)
+<use ../../Mu_Analysis/plots/hlt_noalg_l1xe50_plots/hlt_noalg_L1XE50_dist_mubin
+_1.png>
+Package pdftex.def Info: ../../Mu_Analysis/plots/hlt_noalg_l1xe50_plots/hlt_noa
+lg_L1XE50_dist_mubin_1.png  used on input line 307.
+(pdftex.def)             Requested size: 307.12714pt x 191.50172pt.
 
 Overfull \hbox (198.90663pt too wide) has occurred while \output is active
  [][][][]  
@@ -1589,17 +1556,17 @@ Overfull \hbox (198.90663pt too wide) has occurred while \output is active
 
 [55
 
- <../../Mu_Analysis/plots/l1xe30_efficiencies/L1XE30Efficiency_mu_between_10_20
-.png>]
-<../../Mu_Analysis/plots/l1xe30_efficiencies/L1XE30Efficiency_mu_between_20_30.
-png, id=1579, 2826.56pt x 1411.2725pt>
-File: ../../Mu_Analysis/plots/l1xe30_efficiencies/L1XE30Efficiency_mu_between_2
-0_30.png Graphic file (type png)
-<use ../../Mu_Analysis/plots/l1xe30_efficiencies/L1XE30Efficiency_mu_between_20
-_30.png>
-Package pdftex.def Info: ../../Mu_Analysis/plots/l1xe30_efficiencies/L1XE30Effi
-ciency_mu_between_20_30.png  used on input line 314.
-(pdftex.def)             Requested size: 307.12714pt x 191.50414pt.
+ <../../Mu_Analysis/plots/hlt_noalg_l1xe50_plots/hlt_noalg_L1XE50_dist_mubin_1.
+png>]
+<../../Mu_Analysis/plots/hlt_noalg_l1xe50_plots/hlt_noalg_L1XE50_dist_mubin_2.p
+ng, id=1584, 2826.56pt x 1379.1525pt>
+File: ../../Mu_Analysis/plots/hlt_noalg_l1xe50_plots/hlt_noalg_L1XE50_dist_mubi
+n_2.png Graphic file (type png)
+<use ../../Mu_Analysis/plots/hlt_noalg_l1xe50_plots/hlt_noalg_L1XE50_dist_mubin
+_2.png>
+Package pdftex.def Info: ../../Mu_Analysis/plots/hlt_noalg_l1xe50_plots/hlt_noa
+lg_L1XE50_dist_mubin_2.png  used on input line 311.
+(pdftex.def)             Requested size: 307.12714pt x 191.50172pt.
 
 Overfull \hbox (198.90663pt too wide) has occurred while \output is active
  [][][][]  
@@ -1607,14 +1574,14 @@ Overfull \hbox (198.90663pt too wide) has occurred while \output is active
 
 [56
 
- <../../Mu_Analysis/plots/l1xe30_efficiencies/L1XE30Efficiency_mu_between_20_30
-.png>]
-File: ../../Mu_Analysis/plots/l1xe30_efficiencies/L1XE30Efficiency_mu_between_3
-0_40.png Graphic file (type png)
-<use ../../Mu_Analysis/plots/l1xe30_efficiencies/L1XE30Efficiency_mu_between_30
-_40.png>
-Package pdftex.def Info: ../../Mu_Analysis/plots/l1xe30_efficiencies/L1XE30Effi
-ciency_mu_between_30_40.png  used on input line 318.
+ <../../Mu_Analysis/plots/hlt_noalg_l1xe50_plots/hlt_noalg_L1XE50_dist_mubin_2.
+png>]
+File: ../../Mu_Analysis/plots/hlt_noalg_l1xe50_plots/hlt_noalg_L1XE50_dist_mubi
+n_3.png Graphic file (type png)
+<use ../../Mu_Analysis/plots/hlt_noalg_l1xe50_plots/hlt_noalg_L1XE50_dist_mubin
+_3.png>
+Package pdftex.def Info: ../../Mu_Analysis/plots/hlt_noalg_l1xe50_plots/hlt_noa
+lg_L1XE50_dist_mubin_3.png  used on input line 315.
 (pdftex.def)             Requested size: 307.12714pt x 191.50172pt.
 
 Overfull \hbox (198.90663pt too wide) has occurred while \output is active
@@ -1624,15 +1591,15 @@ Overfull \hbox (198.90663pt too wide) has occurred while \output is active
 [57
 
 ]
-<../../Mu_Analysis/plots/l1xe30_efficiencies/L1XE30Efficiency_mu_between_40_50.
-png, id=1632, 2826.56pt x 1347.0325pt>
-File: ../../Mu_Analysis/plots/l1xe30_efficiencies/L1XE30Efficiency_mu_between_4
-0_50.png Graphic file (type png)
-<use ../../Mu_Analysis/plots/l1xe30_efficiencies/L1XE30Efficiency_mu_between_40
-_50.png>
-Package pdftex.def Info: ../../Mu_Analysis/plots/l1xe30_efficiencies/L1XE30Effi
-ciency_mu_between_40_50.png  used on input line 322.
-(pdftex.def)             Requested size: 307.12714pt x 191.50194pt.
+<../../Mu_Analysis/plots/hlt_noalg_l1xe50_plots/hlt_noalg_L1XE50_dist_mubin_4.p
+ng, id=1637, 2826.56pt x 1379.1525pt>
+File: ../../Mu_Analysis/plots/hlt_noalg_l1xe50_plots/hlt_noalg_L1XE50_dist_mubi
+n_4.png Graphic file (type png)
+<use ../../Mu_Analysis/plots/hlt_noalg_l1xe50_plots/hlt_noalg_L1XE50_dist_mubin
+_4.png>
+Package pdftex.def Info: ../../Mu_Analysis/plots/hlt_noalg_l1xe50_plots/hlt_noa
+lg_L1XE50_dist_mubin_4.png  used on input line 319.
+(pdftex.def)             Requested size: 307.12714pt x 191.50172pt.
 
 Overfull \hbox (198.90663pt too wide) has occurred while \output is active
  [][][][]  
@@ -1640,17 +1607,17 @@ Overfull \hbox (198.90663pt too wide) has occurred while \output is active
 
 [58
 
- <../../Mu_Analysis/plots/l1xe30_efficiencies/L1XE30Efficiency_mu_between_40_50
-.png>]
-<../../Mu_Analysis/plots/l1xe30_efficiencies/L1XE30Efficiency_mu_between_50_60.
-png, id=1659, 2826.56pt x 1314.9125pt>
-File: ../../Mu_Analysis/plots/l1xe30_efficiencies/L1XE30Efficiency_mu_between_5
-0_60.png Graphic file (type png)
-<use ../../Mu_Analysis/plots/l1xe30_efficiencies/L1XE30Efficiency_mu_between_50
-_60.png>
-Package pdftex.def Info: ../../Mu_Analysis/plots/l1xe30_efficiencies/L1XE30Effi
-ciency_mu_between_50_60.png  used on input line 326.
-(pdftex.def)             Requested size: 307.12714pt x 191.51015pt.
+ <../../Mu_Analysis/plots/hlt_noalg_l1xe50_plots/hlt_noalg_L1XE50_dist_mubin_4.
+png>]
+<../../Mu_Analysis/plots/hlt_noalg_l1xe50_plots/hlt_noalg_L1XE50_dist_mubin_5.p
+ng, id=1664, 2826.56pt x 1379.1525pt>
+File: ../../Mu_Analysis/plots/hlt_noalg_l1xe50_plots/hlt_noalg_L1XE50_dist_mubi
+n_5.png Graphic file (type png)
+<use ../../Mu_Analysis/plots/hlt_noalg_l1xe50_plots/hlt_noalg_L1XE50_dist_mubin
+_5.png>
+Package pdftex.def Info: ../../Mu_Analysis/plots/hlt_noalg_l1xe50_plots/hlt_noa
+lg_L1XE50_dist_mubin_5.png  used on input line 323.
+(pdftex.def)             Requested size: 307.12714pt x 191.50172pt.
 
 Overfull \hbox (198.90663pt too wide) has occurred while \output is active
  [][][][]  
@@ -1658,17 +1625,17 @@ Overfull \hbox (198.90663pt too wide) has occurred while \output is active
 
 [59
 
- <../../Mu_Analysis/plots/l1xe30_efficiencies/L1XE30Efficiency_mu_between_50_60
-.png>]
-<../../Mu_Analysis/plots/l1xe30_efficiencies/L1XE30Efficiency_mu_between_60_70.
-png, id=1687, 2826.56pt x 1282.7925pt>
-File: ../../Mu_Analysis/plots/l1xe30_efficiencies/L1XE30Efficiency_mu_between_6
-0_70.png Graphic file (type png)
-<use ../../Mu_Analysis/plots/l1xe30_efficiencies/L1XE30Efficiency_mu_between_60
-_70.png>
-Package pdftex.def Info: ../../Mu_Analysis/plots/l1xe30_efficiencies/L1XE30Effi
-ciency_mu_between_60_70.png  used on input line 330.
-(pdftex.def)             Requested size: 307.12714pt x 191.51018pt.
+ <../../Mu_Analysis/plots/hlt_noalg_l1xe50_plots/hlt_noalg_L1XE50_dist_mubin_5.
+png>]
+<../../Mu_Analysis/plots/hlt_noalg_l1xe50_plots/hlt_noalg_L1XE50_dist_mubin_6.p
+ng, id=1692, 2826.56pt x 1379.1525pt>
+File: ../../Mu_Analysis/plots/hlt_noalg_l1xe50_plots/hlt_noalg_L1XE50_dist_mubi
+n_6.png Graphic file (type png)
+<use ../../Mu_Analysis/plots/hlt_noalg_l1xe50_plots/hlt_noalg_L1XE50_dist_mubin
+_6.png>
+Package pdftex.def Info: ../../Mu_Analysis/plots/hlt_noalg_l1xe50_plots/hlt_noa
+lg_L1XE50_dist_mubin_6.png  used on input line 327.
+(pdftex.def)             Requested size: 307.12714pt x 191.50172pt.
 
 Overfull \hbox (198.90663pt too wide) has occurred while \output is active
  [][][][]  
@@ -1676,16 +1643,16 @@ Overfull \hbox (198.90663pt too wide) has occurred while \output is active
 
 [60
 
- <../../Mu_Analysis/plots/l1xe30_efficiencies/L1XE30Efficiency_mu_between_60_70
-.png>]
-<../../Mu_Analysis/plots/l1xe50_efficiencies/L1XE50Efficiency_mu_between_0_10.p
-ng, id=1714, 2826.56pt x 1505.625pt>
-File: ../../Mu_Analysis/plots/l1xe50_efficiencies/L1XE50Efficiency_mu_between_0
+ <../../Mu_Analysis/plots/hlt_noalg_l1xe50_plots/hlt_noalg_L1XE50_dist_mubin_6.
+png>]
+<../../Mu_Analysis/plots/l1xe30_efficiencies/L1XE30Efficiency_mu_between_0_10.p
+ng, id=1719, 2826.56pt x 1505.625pt>
+File: ../../Mu_Analysis/plots/l1xe30_efficiencies/L1XE30Efficiency_mu_between_0
 _10.png Graphic file (type png)
-<use ../../Mu_Analysis/plots/l1xe50_efficiencies/L1XE50Efficiency_mu_between_0_
+<use ../../Mu_Analysis/plots/l1xe30_efficiencies/L1XE30Efficiency_mu_between_0_
 10.png>
-Package pdftex.def Info: ../../Mu_Analysis/plots/l1xe50_efficiencies/L1XE50Effi
-ciency_mu_between_0_10.png  used on input line 335.
+Package pdftex.def Info: ../../Mu_Analysis/plots/l1xe30_efficiencies/L1XE30Effi
+ciency_mu_between_0_10.png  used on input line 332.
 (pdftex.def)             Requested size: 307.12714pt x 191.51091pt.
 
 Overfull \hbox (198.90663pt too wide) has occurred while \output is active
@@ -1694,16 +1661,16 @@ Overfull \hbox (198.90663pt too wide) has occurred while \output is active
 
 [61
 
- <../../Mu_Analysis/plots/l1xe50_efficiencies/L1XE50Efficiency_mu_between_0_10.
+ <../../Mu_Analysis/plots/l1xe30_efficiencies/L1XE30Efficiency_mu_between_0_10.
 png>]
-<../../Mu_Analysis/plots/l1xe50_efficiencies/L1XE50Efficiency_mu_between_10_20.
-png, id=1742, 2826.56pt x 1443.3925pt>
-File: ../../Mu_Analysis/plots/l1xe50_efficiencies/L1XE50Efficiency_mu_between_1
+<../../Mu_Analysis/plots/l1xe30_efficiencies/L1XE30Efficiency_mu_between_10_20.
+png, id=1747, 2826.56pt x 1443.3925pt>
+File: ../../Mu_Analysis/plots/l1xe30_efficiencies/L1XE30Efficiency_mu_between_1
 0_20.png Graphic file (type png)
-<use ../../Mu_Analysis/plots/l1xe50_efficiencies/L1XE50Efficiency_mu_between_10
+<use ../../Mu_Analysis/plots/l1xe30_efficiencies/L1XE30Efficiency_mu_between_10
 _20.png>
-Package pdftex.def Info: ../../Mu_Analysis/plots/l1xe50_efficiencies/L1XE50Effi
-ciency_mu_between_10_20.png  used on input line 339.
+Package pdftex.def Info: ../../Mu_Analysis/plots/l1xe30_efficiencies/L1XE30Effi
+ciency_mu_between_10_20.png  used on input line 336.
 (pdftex.def)             Requested size: 307.12714pt x 191.50188pt.
 
 Overfull \hbox (198.90663pt too wide) has occurred while \output is active
@@ -1712,16 +1679,16 @@ Overfull \hbox (198.90663pt too wide) has occurred while \output is active
 
 [62
 
- <../../Mu_Analysis/plots/l1xe50_efficiencies/L1XE50Efficiency_mu_between_10_20
+ <../../Mu_Analysis/plots/l1xe30_efficiencies/L1XE30Efficiency_mu_between_10_20
 .png>]
-<../../Mu_Analysis/plots/l1xe50_efficiencies/L1XE50Efficiency_mu_between_20_30.
-png, id=1769, 2826.56pt x 1411.2725pt>
-File: ../../Mu_Analysis/plots/l1xe50_efficiencies/L1XE50Efficiency_mu_between_2
+<../../Mu_Analysis/plots/l1xe30_efficiencies/L1XE30Efficiency_mu_between_20_30.
+png, id=1774, 2826.56pt x 1411.2725pt>
+File: ../../Mu_Analysis/plots/l1xe30_efficiencies/L1XE30Efficiency_mu_between_2
 0_30.png Graphic file (type png)
-<use ../../Mu_Analysis/plots/l1xe50_efficiencies/L1XE50Efficiency_mu_between_20
+<use ../../Mu_Analysis/plots/l1xe30_efficiencies/L1XE30Efficiency_mu_between_20
 _30.png>
-Package pdftex.def Info: ../../Mu_Analysis/plots/l1xe50_efficiencies/L1XE50Effi
-ciency_mu_between_20_30.png  used on input line 343.
+Package pdftex.def Info: ../../Mu_Analysis/plots/l1xe30_efficiencies/L1XE30Effi
+ciency_mu_between_20_30.png  used on input line 340.
 (pdftex.def)             Requested size: 307.12714pt x 191.50414pt.
 
 Overfull \hbox (198.90663pt too wide) has occurred while \output is active
@@ -1730,14 +1697,14 @@ Overfull \hbox (198.90663pt too wide) has occurred while \output is active
 
 [63
 
- <../../Mu_Analysis/plots/l1xe50_efficiencies/L1XE50Efficiency_mu_between_20_30
+ <../../Mu_Analysis/plots/l1xe30_efficiencies/L1XE30Efficiency_mu_between_20_30
 .png>]
-File: ../../Mu_Analysis/plots/l1xe50_efficiencies/L1XE50Efficiency_mu_between_3
+File: ../../Mu_Analysis/plots/l1xe30_efficiencies/L1XE30Efficiency_mu_between_3
 0_40.png Graphic file (type png)
-<use ../../Mu_Analysis/plots/l1xe50_efficiencies/L1XE50Efficiency_mu_between_30
+<use ../../Mu_Analysis/plots/l1xe30_efficiencies/L1XE30Efficiency_mu_between_30
 _40.png>
-Package pdftex.def Info: ../../Mu_Analysis/plots/l1xe50_efficiencies/L1XE50Effi
-ciency_mu_between_30_40.png  used on input line 347.
+Package pdftex.def Info: ../../Mu_Analysis/plots/l1xe30_efficiencies/L1XE30Effi
+ciency_mu_between_30_40.png  used on input line 344.
 (pdftex.def)             Requested size: 307.12714pt x 191.50172pt.
 
 Overfull \hbox (198.90663pt too wide) has occurred while \output is active
@@ -1747,14 +1714,14 @@ Overfull \hbox (198.90663pt too wide) has occurred while \output is active
 [64
 
 ]
-<../../Mu_Analysis/plots/l1xe50_efficiencies/L1XE50Efficiency_mu_between_40_50.
-png, id=1823, 2826.56pt x 1347.0325pt>
-File: ../../Mu_Analysis/plots/l1xe50_efficiencies/L1XE50Efficiency_mu_between_4
+<../../Mu_Analysis/plots/l1xe30_efficiencies/L1XE30Efficiency_mu_between_40_50.
+png, id=1828, 2826.56pt x 1347.0325pt>
+File: ../../Mu_Analysis/plots/l1xe30_efficiencies/L1XE30Efficiency_mu_between_4
 0_50.png Graphic file (type png)
-<use ../../Mu_Analysis/plots/l1xe50_efficiencies/L1XE50Efficiency_mu_between_40
+<use ../../Mu_Analysis/plots/l1xe30_efficiencies/L1XE30Efficiency_mu_between_40
 _50.png>
-Package pdftex.def Info: ../../Mu_Analysis/plots/l1xe50_efficiencies/L1XE50Effi
-ciency_mu_between_40_50.png  used on input line 351.
+Package pdftex.def Info: ../../Mu_Analysis/plots/l1xe30_efficiencies/L1XE30Effi
+ciency_mu_between_40_50.png  used on input line 348.
 (pdftex.def)             Requested size: 307.12714pt x 191.50194pt.
 
 Overfull \hbox (198.90663pt too wide) has occurred while \output is active
@@ -1763,16 +1730,16 @@ Overfull \hbox (198.90663pt too wide) has occurred while \output is active
 
 [65
 
- <../../Mu_Analysis/plots/l1xe50_efficiencies/L1XE50Efficiency_mu_between_40_50
+ <../../Mu_Analysis/plots/l1xe30_efficiencies/L1XE30Efficiency_mu_between_40_50
 .png>]
-<../../Mu_Analysis/plots/l1xe50_efficiencies/L1XE50Efficiency_mu_between_50_60.
-png, id=1850, 2826.56pt x 1314.9125pt>
-File: ../../Mu_Analysis/plots/l1xe50_efficiencies/L1XE50Efficiency_mu_between_5
+<../../Mu_Analysis/plots/l1xe30_efficiencies/L1XE30Efficiency_mu_between_50_60.
+png, id=1855, 2826.56pt x 1314.9125pt>
+File: ../../Mu_Analysis/plots/l1xe30_efficiencies/L1XE30Efficiency_mu_between_5
 0_60.png Graphic file (type png)
-<use ../../Mu_Analysis/plots/l1xe50_efficiencies/L1XE50Efficiency_mu_between_50
+<use ../../Mu_Analysis/plots/l1xe30_efficiencies/L1XE30Efficiency_mu_between_50
 _60.png>
-Package pdftex.def Info: ../../Mu_Analysis/plots/l1xe50_efficiencies/L1XE50Effi
-ciency_mu_between_50_60.png  used on input line 355.
+Package pdftex.def Info: ../../Mu_Analysis/plots/l1xe30_efficiencies/L1XE30Effi
+ciency_mu_between_50_60.png  used on input line 352.
 (pdftex.def)             Requested size: 307.12714pt x 191.51015pt.
 
 Overfull \hbox (198.90663pt too wide) has occurred while \output is active
@@ -1781,16 +1748,16 @@ Overfull \hbox (198.90663pt too wide) has occurred while \output is active
 
 [66
 
- <../../Mu_Analysis/plots/l1xe50_efficiencies/L1XE50Efficiency_mu_between_50_60
+ <../../Mu_Analysis/plots/l1xe30_efficiencies/L1XE30Efficiency_mu_between_50_60
 .png>]
-<../../Mu_Analysis/plots/l1xe50_efficiencies/L1XE50Efficiency_mu_between_60_70.
-png, id=1877, 2826.56pt x 1282.7925pt>
-File: ../../Mu_Analysis/plots/l1xe50_efficiencies/L1XE50Efficiency_mu_between_6
+<../../Mu_Analysis/plots/l1xe30_efficiencies/L1XE30Efficiency_mu_between_60_70.
+png, id=1882, 2826.56pt x 1282.7925pt>
+File: ../../Mu_Analysis/plots/l1xe30_efficiencies/L1XE30Efficiency_mu_between_6
 0_70.png Graphic file (type png)
-<use ../../Mu_Analysis/plots/l1xe50_efficiencies/L1XE50Efficiency_mu_between_60
+<use ../../Mu_Analysis/plots/l1xe30_efficiencies/L1XE30Efficiency_mu_between_60
 _70.png>
-Package pdftex.def Info: ../../Mu_Analysis/plots/l1xe50_efficiencies/L1XE50Effi
-ciency_mu_between_60_70.png  used on input line 359.
+Package pdftex.def Info: ../../Mu_Analysis/plots/l1xe30_efficiencies/L1XE30Effi
+ciency_mu_between_60_70.png  used on input line 356.
 (pdftex.def)             Requested size: 307.12714pt x 191.51018pt.
 
 Overfull \hbox (198.90663pt too wide) has occurred while \output is active
@@ -1799,16 +1766,16 @@ Overfull \hbox (198.90663pt too wide) has occurred while \output is active
 
 [67
 
- <../../Mu_Analysis/plots/l1xe50_efficiencies/L1XE50Efficiency_mu_between_60_70
+ <../../Mu_Analysis/plots/l1xe30_efficiencies/L1XE30Efficiency_mu_between_60_70
 .png>]
-<../../Mu_Analysis/plots/zerobias_distributions_corrected/zb_met_distributions_
-mubin_0.png, id=1906, 2826.56pt x 1505.625pt>
-File: ../../Mu_Analysis/plots/zerobias_distributions_corrected/zb_met_distribut
-ions_mubin_0.png Graphic file (type png)
-<use ../../Mu_Analysis/plots/zerobias_distributions_corrected/zb_met_distributi
-ons_mubin_0.png>
-Package pdftex.def Info: ../../Mu_Analysis/plots/zerobias_distributions_correct
-ed/zb_met_distributions_mubin_0.png  used on input line 364.
+<../../Mu_Analysis/plots/l1xe50_efficiencies/L1XE50Efficiency_mu_between_0_10.p
+ng, id=1911, 2826.56pt x 1505.625pt>
+File: ../../Mu_Analysis/plots/l1xe50_efficiencies/L1XE50Efficiency_mu_between_0
+_10.png Graphic file (type png)
+<use ../../Mu_Analysis/plots/l1xe50_efficiencies/L1XE50Efficiency_mu_between_0_
+10.png>
+Package pdftex.def Info: ../../Mu_Analysis/plots/l1xe50_efficiencies/L1XE50Effi
+ciency_mu_between_0_10.png  used on input line 361.
 (pdftex.def)             Requested size: 307.12714pt x 191.51091pt.
 
 Overfull \hbox (198.90663pt too wide) has occurred while \output is active
@@ -1817,17 +1784,17 @@ Overfull \hbox (198.90663pt too wide) has occurred while \output is active
 
 [68
 
- <../../Mu_Analysis/plots/zerobias_distributions_corrected/zb_met_distributions
-_mubin_0.png>]
-<../../Mu_Analysis/plots/zerobias_distributions_corrected/zb_met_distributions_
-mubin_1.png, id=1933, 2826.56pt x 1379.1525pt>
-File: ../../Mu_Analysis/plots/zerobias_distributions_corrected/zb_met_distribut
-ions_mubin_1.png Graphic file (type png)
-<use ../../Mu_Analysis/plots/zerobias_distributions_corrected/zb_met_distributi
-ons_mubin_1.png>
-Package pdftex.def Info: ../../Mu_Analysis/plots/zerobias_distributions_correct
-ed/zb_met_distributions_mubin_1.png  used on input line 368.
-(pdftex.def)             Requested size: 307.12714pt x 191.50172pt.
+ <../../Mu_Analysis/plots/l1xe50_efficiencies/L1XE50Efficiency_mu_between_0_10.
+png>]
+<../../Mu_Analysis/plots/l1xe50_efficiencies/L1XE50Efficiency_mu_between_10_20.
+png, id=1938, 2826.56pt x 1443.3925pt>
+File: ../../Mu_Analysis/plots/l1xe50_efficiencies/L1XE50Efficiency_mu_between_1
+0_20.png Graphic file (type png)
+<use ../../Mu_Analysis/plots/l1xe50_efficiencies/L1XE50Efficiency_mu_between_10
+_20.png>
+Package pdftex.def Info: ../../Mu_Analysis/plots/l1xe50_efficiencies/L1XE50Effi
+ciency_mu_between_10_20.png  used on input line 365.
+(pdftex.def)             Requested size: 307.12714pt x 191.50188pt.
 
 Overfull \hbox (198.90663pt too wide) has occurred while \output is active
  [][][][]  
@@ -1835,17 +1802,17 @@ Overfull \hbox (198.90663pt too wide) has occurred while \output is active
 
 [69
 
- <../../Mu_Analysis/plots/zerobias_distributions_corrected/zb_met_distributions
-_mubin_1.png>]
-<../../Mu_Analysis/plots/zerobias_distributions_corrected/zb_met_distributions_
-mubin_2.png, id=1960, 2826.56pt x 1379.1525pt>
-File: ../../Mu_Analysis/plots/zerobias_distributions_corrected/zb_met_distribut
-ions_mubin_2.png Graphic file (type png)
-<use ../../Mu_Analysis/plots/zerobias_distributions_corrected/zb_met_distributi
-ons_mubin_2.png>
-Package pdftex.def Info: ../../Mu_Analysis/plots/zerobias_distributions_correct
-ed/zb_met_distributions_mubin_2.png  used on input line 372.
-(pdftex.def)             Requested size: 307.12714pt x 191.50172pt.
+ <../../Mu_Analysis/plots/l1xe50_efficiencies/L1XE50Efficiency_mu_between_10_20
+.png>]
+<../../Mu_Analysis/plots/l1xe50_efficiencies/L1XE50Efficiency_mu_between_20_30.
+png, id=1965, 2826.56pt x 1411.2725pt>
+File: ../../Mu_Analysis/plots/l1xe50_efficiencies/L1XE50Efficiency_mu_between_2
+0_30.png Graphic file (type png)
+<use ../../Mu_Analysis/plots/l1xe50_efficiencies/L1XE50Efficiency_mu_between_20
+_30.png>
+Package pdftex.def Info: ../../Mu_Analysis/plots/l1xe50_efficiencies/L1XE50Effi
+ciency_mu_between_20_30.png  used on input line 369.
+(pdftex.def)             Requested size: 307.12714pt x 191.50414pt.
 
 Overfull \hbox (198.90663pt too wide) has occurred while \output is active
  [][][][]  
@@ -1853,14 +1820,14 @@ Overfull \hbox (198.90663pt too wide) has occurred while \output is active
 
 [70
 
- <../../Mu_Analysis/plots/zerobias_distributions_corrected/zb_met_distributions
-_mubin_2.png>]
-File: ../../Mu_Analysis/plots/zerobias_distributions_corrected/zb_met_distribut
-ions_mubin_3.png Graphic file (type png)
-<use ../../Mu_Analysis/plots/zerobias_distributions_corrected/zb_met_distributi
-ons_mubin_3.png>
-Package pdftex.def Info: ../../Mu_Analysis/plots/zerobias_distributions_correct
-ed/zb_met_distributions_mubin_3.png  used on input line 376.
+ <../../Mu_Analysis/plots/l1xe50_efficiencies/L1XE50Efficiency_mu_between_20_30
+.png>]
+File: ../../Mu_Analysis/plots/l1xe50_efficiencies/L1XE50Efficiency_mu_between_3
+0_40.png Graphic file (type png)
+<use ../../Mu_Analysis/plots/l1xe50_efficiencies/L1XE50Efficiency_mu_between_30
+_40.png>
+Package pdftex.def Info: ../../Mu_Analysis/plots/l1xe50_efficiencies/L1XE50Effi
+ciency_mu_between_30_40.png  used on input line 373.
 (pdftex.def)             Requested size: 307.12714pt x 191.50172pt.
 
 Overfull \hbox (198.90663pt too wide) has occurred while \output is active
@@ -1870,15 +1837,15 @@ Overfull \hbox (198.90663pt too wide) has occurred while \output is active
 [71
 
 ]
-<../../Mu_Analysis/plots/zerobias_distributions_corrected/zb_met_distributions_
-mubin_4.png, id=2014, 2826.56pt x 1379.1525pt>
-File: ../../Mu_Analysis/plots/zerobias_distributions_corrected/zb_met_distribut
-ions_mubin_4.png Graphic file (type png)
-<use ../../Mu_Analysis/plots/zerobias_distributions_corrected/zb_met_distributi
-ons_mubin_4.png>
-Package pdftex.def Info: ../../Mu_Analysis/plots/zerobias_distributions_correct
-ed/zb_met_distributions_mubin_4.png  used on input line 380.
-(pdftex.def)             Requested size: 307.12714pt x 191.50172pt.
+<../../Mu_Analysis/plots/l1xe50_efficiencies/L1XE50Efficiency_mu_between_40_50.
+png, id=2019, 2826.56pt x 1347.0325pt>
+File: ../../Mu_Analysis/plots/l1xe50_efficiencies/L1XE50Efficiency_mu_between_4
+0_50.png Graphic file (type png)
+<use ../../Mu_Analysis/plots/l1xe50_efficiencies/L1XE50Efficiency_mu_between_40
+_50.png>
+Package pdftex.def Info: ../../Mu_Analysis/plots/l1xe50_efficiencies/L1XE50Effi
+ciency_mu_between_40_50.png  used on input line 377.
+(pdftex.def)             Requested size: 307.12714pt x 191.50194pt.
 
 Overfull \hbox (198.90663pt too wide) has occurred while \output is active
  [][][][]  
@@ -1886,17 +1853,17 @@ Overfull \hbox (198.90663pt too wide) has occurred while \output is active
 
 [72
 
- <../../Mu_Analysis/plots/zerobias_distributions_corrected/zb_met_distributions
-_mubin_4.png>]
-<../../Mu_Analysis/plots/zerobias_distributions_corrected/zb_met_distributions_
-mubin_5.png, id=2041, 2826.56pt x 1379.1525pt>
-File: ../../Mu_Analysis/plots/zerobias_distributions_corrected/zb_met_distribut
-ions_mubin_5.png Graphic file (type png)
-<use ../../Mu_Analysis/plots/zerobias_distributions_corrected/zb_met_distributi
-ons_mubin_5.png>
-Package pdftex.def Info: ../../Mu_Analysis/plots/zerobias_distributions_correct
-ed/zb_met_distributions_mubin_5.png  used on input line 384.
-(pdftex.def)             Requested size: 307.12714pt x 191.50172pt.
+ <../../Mu_Analysis/plots/l1xe50_efficiencies/L1XE50Efficiency_mu_between_40_50
+.png>]
+<../../Mu_Analysis/plots/l1xe50_efficiencies/L1XE50Efficiency_mu_between_50_60.
+png, id=2046, 2826.56pt x 1314.9125pt>
+File: ../../Mu_Analysis/plots/l1xe50_efficiencies/L1XE50Efficiency_mu_between_5
+0_60.png Graphic file (type png)
+<use ../../Mu_Analysis/plots/l1xe50_efficiencies/L1XE50Efficiency_mu_between_50
+_60.png>
+Package pdftex.def Info: ../../Mu_Analysis/plots/l1xe50_efficiencies/L1XE50Effi
+ciency_mu_between_50_60.png  used on input line 381.
+(pdftex.def)             Requested size: 307.12714pt x 191.51015pt.
 
 Overfull \hbox (198.90663pt too wide) has occurred while \output is active
  [][][][]  
@@ -1904,17 +1871,17 @@ Overfull \hbox (198.90663pt too wide) has occurred while \output is active
 
 [73
 
- <../../Mu_Analysis/plots/zerobias_distributions_corrected/zb_met_distributions
-_mubin_5.png>]
-<../../Mu_Analysis/plots/zerobias_distributions_corrected/zb_met_distributions_
-mubin_6.png, id=2069, 2826.56pt x 1379.1525pt>
-File: ../../Mu_Analysis/plots/zerobias_distributions_corrected/zb_met_distribut
-ions_mubin_6.png Graphic file (type png)
-<use ../../Mu_Analysis/plots/zerobias_distributions_corrected/zb_met_distributi
-ons_mubin_6.png>
-Package pdftex.def Info: ../../Mu_Analysis/plots/zerobias_distributions_correct
-ed/zb_met_distributions_mubin_6.png  used on input line 388.
-(pdftex.def)             Requested size: 307.12714pt x 191.50172pt.
+ <../../Mu_Analysis/plots/l1xe50_efficiencies/L1XE50Efficiency_mu_between_50_60
+.png>]
+<../../Mu_Analysis/plots/l1xe50_efficiencies/L1XE50Efficiency_mu_between_60_70.
+png, id=2074, 2826.56pt x 1282.7925pt>
+File: ../../Mu_Analysis/plots/l1xe50_efficiencies/L1XE50Efficiency_mu_between_6
+0_70.png Graphic file (type png)
+<use ../../Mu_Analysis/plots/l1xe50_efficiencies/L1XE50Efficiency_mu_between_60
+_70.png>
+Package pdftex.def Info: ../../Mu_Analysis/plots/l1xe50_efficiencies/L1XE50Effi
+ciency_mu_between_60_70.png  used on input line 385.
+(pdftex.def)             Requested size: 307.12714pt x 191.51018pt.
 
 Overfull \hbox (198.90663pt too wide) has occurred while \output is active
  [][][][]  
@@ -1922,15 +1889,17 @@ Overfull \hbox (198.90663pt too wide) has occurred while \output is active
 
 [74
 
- <../../Mu_Analysis/plots/zerobias_distributions_corrected/zb_met_distributions
-_mubin_6.png>]
-File: ../../Mu_Analysis/plots/reconstructed_distributions/reconstructed_distrib
-ution_mubin_0.png Graphic file (type png)
-<use ../../Mu_Analysis/plots/reconstructed_distributions/reconstructed_distribu
-tion_mubin_0.png>
-Package pdftex.def Info: ../../Mu_Analysis/plots/reconstructed_distributions/re
-constructed_distribution_mubin_0.png  used on input line 393.
-(pdftex.def)             Requested size: 307.12714pt x 191.50172pt.
+ <../../Mu_Analysis/plots/l1xe50_efficiencies/L1XE50Efficiency_mu_between_60_70
+.png>]
+<../../Mu_Analysis/plots/zerobias_distributions_corrected/zb_met_distributions_
+mubin_0.png, id=2101, 2826.56pt x 1505.625pt>
+File: ../../Mu_Analysis/plots/zerobias_distributions_corrected/zb_met_distribut
+ions_mubin_0.png Graphic file (type png)
+<use ../../Mu_Analysis/plots/zerobias_distributions_corrected/zb_met_distributi
+ons_mubin_0.png>
+Package pdftex.def Info: ../../Mu_Analysis/plots/zerobias_distributions_correct
+ed/zb_met_distributions_mubin_0.png  used on input line 390.
+(pdftex.def)             Requested size: 307.12714pt x 191.51091pt.
 
 Overfull \hbox (198.90663pt too wide) has occurred while \output is active
  [][][][]  
@@ -1938,13 +1907,16 @@ Overfull \hbox (198.90663pt too wide) has occurred while \output is active
 
 [75
 
-]
-File: ../../Mu_Analysis/plots/reconstructed_distributions/reconstructed_distrib
-ution_mubin_1.png Graphic file (type png)
-<use ../../Mu_Analysis/plots/reconstructed_distributions/reconstructed_distribu
-tion_mubin_1.png>
-Package pdftex.def Info: ../../Mu_Analysis/plots/reconstructed_distributions/re
-constructed_distribution_mubin_1.png  used on input line 397.
+ <../../Mu_Analysis/plots/zerobias_distributions_corrected/zb_met_distributions
+_mubin_0.png>]
+<../../Mu_Analysis/plots/zerobias_distributions_corrected/zb_met_distributions_
+mubin_1.png, id=2129, 2826.56pt x 1379.1525pt>
+File: ../../Mu_Analysis/plots/zerobias_distributions_corrected/zb_met_distribut
+ions_mubin_1.png Graphic file (type png)
+<use ../../Mu_Analysis/plots/zerobias_distributions_corrected/zb_met_distributi
+ons_mubin_1.png>
+Package pdftex.def Info: ../../Mu_Analysis/plots/zerobias_distributions_correct
+ed/zb_met_distributions_mubin_1.png  used on input line 394.
 (pdftex.def)             Requested size: 307.12714pt x 191.50172pt.
 
 Overfull \hbox (198.90663pt too wide) has occurred while \output is active
@@ -1953,13 +1925,16 @@ Overfull \hbox (198.90663pt too wide) has occurred while \output is active
 
 [76
 
-]
-File: ../../Mu_Analysis/plots/reconstructed_distributions/reconstructed_distrib
-ution_mubin_2.png Graphic file (type png)
-<use ../../Mu_Analysis/plots/reconstructed_distributions/reconstructed_distribu
-tion_mubin_2.png>
-Package pdftex.def Info: ../../Mu_Analysis/plots/reconstructed_distributions/re
-constructed_distribution_mubin_2.png  used on input line 401.
+ <../../Mu_Analysis/plots/zerobias_distributions_corrected/zb_met_distributions
+_mubin_1.png>]
+<../../Mu_Analysis/plots/zerobias_distributions_corrected/zb_met_distributions_
+mubin_2.png, id=2156, 2826.56pt x 1379.1525pt>
+File: ../../Mu_Analysis/plots/zerobias_distributions_corrected/zb_met_distribut
+ions_mubin_2.png Graphic file (type png)
+<use ../../Mu_Analysis/plots/zerobias_distributions_corrected/zb_met_distributi
+ons_mubin_2.png>
+Package pdftex.def Info: ../../Mu_Analysis/plots/zerobias_distributions_correct
+ed/zb_met_distributions_mubin_2.png  used on input line 398.
 (pdftex.def)             Requested size: 307.12714pt x 191.50172pt.
 
 Overfull \hbox (198.90663pt too wide) has occurred while \output is active
@@ -1968,13 +1943,14 @@ Overfull \hbox (198.90663pt too wide) has occurred while \output is active
 
 [77
 
-]
-File: ../../Mu_Analysis/plots/reconstructed_distributions/reconstructed_distrib
-ution_mubin_3.png Graphic file (type png)
-<use ../../Mu_Analysis/plots/reconstructed_distributions/reconstructed_distribu
-tion_mubin_3.png>
-Package pdftex.def Info: ../../Mu_Analysis/plots/reconstructed_distributions/re
-constructed_distribution_mubin_3.png  used on input line 405.
+ <../../Mu_Analysis/plots/zerobias_distributions_corrected/zb_met_distributions
+_mubin_2.png>]
+File: ../../Mu_Analysis/plots/zerobias_distributions_corrected/zb_met_distribut
+ions_mubin_3.png Graphic file (type png)
+<use ../../Mu_Analysis/plots/zerobias_distributions_corrected/zb_met_distributi
+ons_mubin_3.png>
+Package pdftex.def Info: ../../Mu_Analysis/plots/zerobias_distributions_correct
+ed/zb_met_distributions_mubin_3.png  used on input line 402.
 (pdftex.def)             Requested size: 307.12714pt x 191.50172pt.
 
 Overfull \hbox (198.90663pt too wide) has occurred while \output is active
@@ -1984,12 +1960,14 @@ Overfull \hbox (198.90663pt too wide) has occurred while \output is active
 [78
 
 ]
-File: ../../Mu_Analysis/plots/reconstructed_distributions/reconstructed_distrib
-ution_mubin_4.png Graphic file (type png)
-<use ../../Mu_Analysis/plots/reconstructed_distributions/reconstructed_distribu
-tion_mubin_4.png>
-Package pdftex.def Info: ../../Mu_Analysis/plots/reconstructed_distributions/re
-constructed_distribution_mubin_4.png  used on input line 409.
+<../../Mu_Analysis/plots/zerobias_distributions_corrected/zb_met_distributions_
+mubin_4.png, id=2209, 2826.56pt x 1379.1525pt>
+File: ../../Mu_Analysis/plots/zerobias_distributions_corrected/zb_met_distribut
+ions_mubin_4.png Graphic file (type png)
+<use ../../Mu_Analysis/plots/zerobias_distributions_corrected/zb_met_distributi
+ons_mubin_4.png>
+Package pdftex.def Info: ../../Mu_Analysis/plots/zerobias_distributions_correct
+ed/zb_met_distributions_mubin_4.png  used on input line 406.
 (pdftex.def)             Requested size: 307.12714pt x 191.50172pt.
 
 Overfull \hbox (198.90663pt too wide) has occurred while \output is active
@@ -1998,13 +1976,16 @@ Overfull \hbox (198.90663pt too wide) has occurred while \output is active
 
 [79
 
-]
-File: ../../Mu_Analysis/plots/reconstructed_distributions/reconstructed_distrib
-ution_mubin_5.png Graphic file (type png)
-<use ../../Mu_Analysis/plots/reconstructed_distributions/reconstructed_distribu
-tion_mubin_5.png>
-Package pdftex.def Info: ../../Mu_Analysis/plots/reconstructed_distributions/re
-constructed_distribution_mubin_5.png  used on input line 413.
+ <../../Mu_Analysis/plots/zerobias_distributions_corrected/zb_met_distributions
+_mubin_4.png>]
+<../../Mu_Analysis/plots/zerobias_distributions_corrected/zb_met_distributions_
+mubin_5.png, id=2238, 2826.56pt x 1379.1525pt>
+File: ../../Mu_Analysis/plots/zerobias_distributions_corrected/zb_met_distribut
+ions_mubin_5.png Graphic file (type png)
+<use ../../Mu_Analysis/plots/zerobias_distributions_corrected/zb_met_distributi
+ons_mubin_5.png>
+Package pdftex.def Info: ../../Mu_Analysis/plots/zerobias_distributions_correct
+ed/zb_met_distributions_mubin_5.png  used on input line 410.
 (pdftex.def)             Requested size: 307.12714pt x 191.50172pt.
 
 Overfull \hbox (198.90663pt too wide) has occurred while \output is active
@@ -2013,13 +1994,16 @@ Overfull \hbox (198.90663pt too wide) has occurred while \output is active
 
 [80
 
-]
-File: ../../Mu_Analysis/plots/reconstructed_distributions/reconstructed_distrib
-ution_mubin_6.png Graphic file (type png)
-<use ../../Mu_Analysis/plots/reconstructed_distributions/reconstructed_distribu
-tion_mubin_6.png>
-Package pdftex.def Info: ../../Mu_Analysis/plots/reconstructed_distributions/re
-constructed_distribution_mubin_6.png  used on input line 417.
+ <../../Mu_Analysis/plots/zerobias_distributions_corrected/zb_met_distributions
+_mubin_5.png>]
+<../../Mu_Analysis/plots/zerobias_distributions_corrected/zb_met_distributions_
+mubin_6.png, id=2265, 2826.56pt x 1379.1525pt>
+File: ../../Mu_Analysis/plots/zerobias_distributions_corrected/zb_met_distribut
+ions_mubin_6.png Graphic file (type png)
+<use ../../Mu_Analysis/plots/zerobias_distributions_corrected/zb_met_distributi
+ons_mubin_6.png>
+Package pdftex.def Info: ../../Mu_Analysis/plots/zerobias_distributions_correct
+ed/zb_met_distributions_mubin_6.png  used on input line 414.
 (pdftex.def)             Requested size: 307.12714pt x 191.50172pt.
 
 Overfull \hbox (198.90663pt too wide) has occurred while \output is active
@@ -2028,7 +2012,16 @@ Overfull \hbox (198.90663pt too wide) has occurred while \output is active
 
 [81
 
-]
+ <../../Mu_Analysis/plots/zerobias_distributions_corrected/zb_met_distributions
+_mubin_6.png>]
+File: ../../Mu_Analysis/plots/reconstructed_distributions/reconstructed_distrib
+ution_mubin_0.png Graphic file (type png)
+<use ../../Mu_Analysis/plots/reconstructed_distributions/reconstructed_distribu
+tion_mubin_0.png>
+Package pdftex.def Info: ../../Mu_Analysis/plots/reconstructed_distributions/re
+constructed_distribution_mubin_0.png  used on input line 419.
+(pdftex.def)             Requested size: 307.12714pt x 191.50172pt.
+
 Overfull \hbox (198.90663pt too wide) has occurred while \output is active
  [][][][]  
  []
@@ -2036,12 +2029,13 @@ Overfull \hbox (198.90663pt too wide) has occurred while \output is active
 [82
 
 ]
-File: ../../Mu_Analysis/plots/L1XE30Efficiency_Fits.png Graphic file (type png)
-
-<use ../../Mu_Analysis/plots/L1XE30Efficiency_Fits.png>
-Package pdftex.def Info: ../../Mu_Analysis/plots/L1XE30Efficiency_Fits.png  use
-d on input line 424.
-(pdftex.def)             Requested size: 307.12714pt x 191.51091pt.
+File: ../../Mu_Analysis/plots/reconstructed_distributions/reconstructed_distrib
+ution_mubin_1.png Graphic file (type png)
+<use ../../Mu_Analysis/plots/reconstructed_distributions/reconstructed_distribu
+tion_mubin_1.png>
+Package pdftex.def Info: ../../Mu_Analysis/plots/reconstructed_distributions/re
+constructed_distribution_mubin_1.png  used on input line 423.
+(pdftex.def)             Requested size: 307.12714pt x 191.50172pt.
 
 Overfull \hbox (198.90663pt too wide) has occurred while \output is active
  [][][][]  
@@ -2050,12 +2044,13 @@ Overfull \hbox (198.90663pt too wide) has occurred while \output is active
 [83
 
 ]
-File: ../../Mu_Analysis/plots/L1XE50Efficiency_Fits.png Graphic file (type png)
-
-<use ../../Mu_Analysis/plots/L1XE50Efficiency_Fits.png>
-Package pdftex.def Info: ../../Mu_Analysis/plots/L1XE50Efficiency_Fits.png  use
-d on input line 428.
-(pdftex.def)             Requested size: 307.12714pt x 191.51091pt.
+File: ../../Mu_Analysis/plots/reconstructed_distributions/reconstructed_distrib
+ution_mubin_2.png Graphic file (type png)
+<use ../../Mu_Analysis/plots/reconstructed_distributions/reconstructed_distribu
+tion_mubin_2.png>
+Package pdftex.def Info: ../../Mu_Analysis/plots/reconstructed_distributions/re
+constructed_distribution_mubin_2.png  used on input line 427.
+(pdftex.def)             Requested size: 307.12714pt x 191.50172pt.
 
 Overfull \hbox (198.90663pt too wide) has occurred while \output is active
  [][][][]  
@@ -2063,12 +2058,107 @@ Overfull \hbox (198.90663pt too wide) has occurred while \output is active
 
 [84
 
-] (./fit_pars_table.tex)
+]
+File: ../../Mu_Analysis/plots/reconstructed_distributions/reconstructed_distrib
+ution_mubin_3.png Graphic file (type png)
+<use ../../Mu_Analysis/plots/reconstructed_distributions/reconstructed_distribu
+tion_mubin_3.png>
+Package pdftex.def Info: ../../Mu_Analysis/plots/reconstructed_distributions/re
+constructed_distribution_mubin_3.png  used on input line 431.
+(pdftex.def)             Requested size: 307.12714pt x 191.50172pt.
+
 Overfull \hbox (198.90663pt too wide) has occurred while \output is active
  [][][][]  
  []
 
 [85
+
+]
+File: ../../Mu_Analysis/plots/reconstructed_distributions/reconstructed_distrib
+ution_mubin_4.png Graphic file (type png)
+<use ../../Mu_Analysis/plots/reconstructed_distributions/reconstructed_distribu
+tion_mubin_4.png>
+Package pdftex.def Info: ../../Mu_Analysis/plots/reconstructed_distributions/re
+constructed_distribution_mubin_4.png  used on input line 435.
+(pdftex.def)             Requested size: 307.12714pt x 191.50172pt.
+
+Overfull \hbox (198.90663pt too wide) has occurred while \output is active
+ [][][][]  
+ []
+
+[86
+
+]
+File: ../../Mu_Analysis/plots/reconstructed_distributions/reconstructed_distrib
+ution_mubin_5.png Graphic file (type png)
+<use ../../Mu_Analysis/plots/reconstructed_distributions/reconstructed_distribu
+tion_mubin_5.png>
+Package pdftex.def Info: ../../Mu_Analysis/plots/reconstructed_distributions/re
+constructed_distribution_mubin_5.png  used on input line 439.
+(pdftex.def)             Requested size: 307.12714pt x 191.50172pt.
+
+Overfull \hbox (198.90663pt too wide) has occurred while \output is active
+ [][][][]  
+ []
+
+[87
+
+]
+File: ../../Mu_Analysis/plots/reconstructed_distributions/reconstructed_distrib
+ution_mubin_6.png Graphic file (type png)
+<use ../../Mu_Analysis/plots/reconstructed_distributions/reconstructed_distribu
+tion_mubin_6.png>
+Package pdftex.def Info: ../../Mu_Analysis/plots/reconstructed_distributions/re
+constructed_distribution_mubin_6.png  used on input line 443.
+(pdftex.def)             Requested size: 307.12714pt x 191.50172pt.
+
+Overfull \hbox (198.90663pt too wide) has occurred while \output is active
+ [][][][]  
+ []
+
+[88
+
+]
+Overfull \hbox (198.90663pt too wide) has occurred while \output is active
+ [][][][]  
+ []
+
+[89
+
+]
+File: ../../Mu_Analysis/plots/L1XE30Efficiency_Fits.png Graphic file (type png)
+
+<use ../../Mu_Analysis/plots/L1XE30Efficiency_Fits.png>
+Package pdftex.def Info: ../../Mu_Analysis/plots/L1XE30Efficiency_Fits.png  use
+d on input line 450.
+(pdftex.def)             Requested size: 307.12714pt x 191.51091pt.
+
+Overfull \hbox (198.90663pt too wide) has occurred while \output is active
+ [][][][]  
+ []
+
+[90
+
+]
+File: ../../Mu_Analysis/plots/L1XE50Efficiency_Fits.png Graphic file (type png)
+
+<use ../../Mu_Analysis/plots/L1XE50Efficiency_Fits.png>
+Package pdftex.def Info: ../../Mu_Analysis/plots/L1XE50Efficiency_Fits.png  use
+d on input line 454.
+(pdftex.def)             Requested size: 307.12714pt x 191.51091pt.
+
+Overfull \hbox (198.90663pt too wide) has occurred while \output is active
+ [][][][]  
+ []
+
+[91
+
+] (./fit_pars_table.tex)
+Overfull \hbox (198.90663pt too wide) has occurred while \output is active
+ [][][][]  
+ []
+
+[92
 
 ]
 \tf@nav=\write6
@@ -2080,19 +2170,19 @@ Overfull \hbox (198.90663pt too wide) has occurred while \output is active
 \tf@snm=\write8
 \openout8 = `presentation.snm'.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 433.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 433.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 459.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 459.
  (./presentation.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 433.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 433.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 459.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 459.
 Package rerunfilecheck Info: File `presentation.out' has not changed.
-(rerunfilecheck)             Checksum: 1B6D899383D15F4890AFD8957BC685A3;480.
+(rerunfilecheck)             Checksum: F0F7A5821A0557A99B35756A22138F28;524.
  ) 
 Here is how much of TeX's memory you used:
- 17626 strings out of 494847
- 346947 string characters out of 6179079
- 394590 words of memory out of 5000000
- 20305 multiletter control sequences out of 15000+600000
+ 17689 strings out of 494847
+ 348264 string characters out of 6179079
+ 394891 words of memory out of 5000000
+ 20347 multiletter control sequences out of 15000+600000
  17115 words of font info for 64 fonts, out of 8000000 for 9000
  59 hyphenation exceptions out of 8191
  48i,15n,61p,779b,571s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -2112,10 +2202,10 @@ mssbx10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmssi
 /share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/
 texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/share/texliv
 e/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
-Output written on presentation.pdf (85 pages, 2728224 bytes).
+Output written on presentation.pdf (92 pages, 2863901 bytes).
 PDF statistics:
- 2481 PDF objects out of 2487 (max. 8388607)
- 2291 compressed objects within 23 object streams
- 180 named destinations out of 1000 (max. 500000)
- 396 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 2681 PDF objects out of 2984 (max. 8388607)
+ 2476 compressed objects within 25 object streams
+ 195 named destinations out of 1000 (max. 500000)
+ 434 words of extra memory for PDF output out of 10000 (max. 10000000)
 
