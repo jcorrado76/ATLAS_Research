@@ -30,7 +30,7 @@
 \title{An Analysis of Missing Transverse Momentum Triggers for Improving Efficiency at the ATLAS Experiment at CERN}    
 \author{Joseph Corrado}                 % Enter your name between curly braces
 \institute{New York University}      % Enter your institute name between curly braces
-\date{4/24/2019}                    % Enter the date or \today between curly braces
+\date{5/20/2019}                    % Enter the date or \today between curly braces
 %Empirically Reconstruct the Unbiased MET Distribution Using ZeroBias HLT noalg L1XE30 and HLT noalg L1XE50 Data
 \begin{document}
 
@@ -45,7 +45,7 @@
 \begin{frame}{The LHC}
         \begin{itemize}
                 \item Circumference $27\textrm{km}$
-                \item Design energy of 7TeV per electron
+                \item Design energy of 7TeV per proton
                 \item Expected number of proton-proton collisions is $10^9\textrm{s}^{-1}$
         \end{itemize}
 \end{frame}
@@ -65,9 +65,18 @@
 \end{frame}
 \begin{frame}{Missing Transverse Momentum}
         \begin{itemize}
+				\item There is ``true'' missing transverse momentum, and missing transverse momentum due to the detector
                 \item Momentum in the plane transverse to the beam pipe.
                 \item Transverse momentum is conserved (protons collided approximately head on)
+				\item True missing transverse momentum is due to particles that escape the detector without being measured (neutrinos, super symmetric particles, etc.)
 				\item Therefore, we use missing transverse momentum as a measure to see if interesting particles escaped the detector
+        \end{itemize}
+\end{frame}
+\begin{frame}{Why Do We Want Efficient Triggers}
+        \begin{itemize}
+                \item We want to have a trigger that is efficient at picking events with true missing transverse momentum 
+				\item We know that neutrinos escape the detector and therefore are a source of true missing transverse momentum
+				\item Because a W boson is known to decay into a muon and a neutrino, we test how efficient our algorithms are at selecting events with true missing momentum on W boson decays. This is because we can measure muons in the detector, and we can roughly cut on a range of transverse mass that increases the probability of containing a W boson. The presence of an event with the correct transverse mass and a muon produced has a higher likelihood of containing a neutrino, which we can use to test efficiency of our algorithms
         \end{itemize}
 \end{frame}
 \begin{frame}{Efficiency}
@@ -109,7 +118,8 @@
 \begin{frame}{Combined Efficiency}
 		\begin{itemize}
 				\item After solving the problem of figuring out what thresholds are needed to keep the trigger rate when the algorithms are used together, we then compute the efficiency of this new algorithm on signal events
-				\item The signal events we used are those for which the muon trigger fired, indicating the production of muons
+				\item In order to determine efficiency, we use events known to produce true missing transverse momentum.
+				\item To select events known to produce true missing transverse momentum, we add a cut on the transverse mass for W bosons, and we require the muon trigger to fire (indicates the presence of a muon created)
 		\end{itemize}
 \end{frame}
 \section{Results}
