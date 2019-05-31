@@ -27,7 +27,8 @@ Bool_t Jburr_Template_Selector::isHLT_zb_L1XE30(){ //{{{
 } //}}}
 Bool_t Jburr_Template_Selector::isHLT_zb_L1XE50(){ //{{{
     // return true if is hlt passnoalg and l1 xe50
-    return (*L1_XE50_passed);
+    //return (*L1_XE50_passed);
+    return (*HLT_noalg_L1XE50_passed);
 } //}}}
 Bool_t Jburr_Template_Selector::isData151617(){//{{{
     return (*RunNumber < 340000. );
