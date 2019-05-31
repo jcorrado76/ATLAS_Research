@@ -15,7 +15,9 @@ void Jburr_Template_Selector::SlaveTerminate(){}
 void Jburr_Template_Selector::Init(TTree *tree){fReader.SetTree(tree);}
 Bool_t Jburr_Template_Selector::isGoodRun(){ //{{{
     // return true if the event is not any of the bad run numbers
-    return (*RunNumber != 330203 && *RunNumber != 331975 && *RunNumber != 334487);
+    // 330203, 331975, 334487, 357451, and 351671
+    return (*RunNumber != 330203 && *RunNumber != 331975 && *RunNumber != 334487
+            && *RunNumber != 357451 && *RunNumber != 351671);
 } // }}}
 Bool_t Jburr_Template_Selector::isHLT_zb_L1ZB(){ //{{{
     // return true if the event passed hlt noalg , l1 zb
