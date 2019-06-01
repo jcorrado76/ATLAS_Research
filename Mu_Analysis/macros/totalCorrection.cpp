@@ -1,7 +1,8 @@
 {
     //TString zb_file_path = "/home/joseph/DATA/ZB_jburr_15thru17_with_missing_et_significance.root";
     //TString physics_main_file_path = "/home/joseph/DATA/user_jburr_JETM10_151617.root";
-    TString zb_file_path = "/home/joseph/DATA/ZB_jburr_15thru17_with_missing_et_significance.root";
+    //TString zb_file_path = "/home/joseph/DATA/ZB_jburr_15thru17_with_missing_et_significance.root";
+    TString zb_file_path = "/home/joseph/DATA/group_trig_analysis/zb/*.root";
     TString physics_main_file_path = "/home/joseph/DATA/group_trig_analysis/jetm10/*.root";
     // initialize tchains
     TChain* zb_chain = new TChain( "METTree" , "zb_chain" );
